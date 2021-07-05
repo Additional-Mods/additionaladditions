@@ -1,0 +1,13 @@
+{
+  "type": "crafting_shapeless",
+  "ingredients": [
+    {"item": "minecraft:wheat"},
+    {"item": "minecraft:sweet_berries"},
+    {"item": "minecraft:sugar"},
+    {"item": "minecraft:egg"}
+  ],
+  "result": {
+    "item": "additionaladditions:berry_pie",
+    "count": 1
+  }
+}

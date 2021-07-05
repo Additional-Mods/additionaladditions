@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "S",
+    "I",
+    "C"
+  ],
+  "key": {
+    "C": {"item": "minecraft:crossbow"},
+    "I": {"item": "minecraft:iron_ingot"},
+    "S": {"item": "minecraft:spyglass"}
+  },
+  "result": {
+    "item": "additionaladditions:crossbow_with_spyglass",
+    "count": 1
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "id": "additionaladditions",
+  "version": "${version}",
+  "name": "Additional Additions",
+  "description": "",
+  "authors": [
+    "Dqu1J"
+  ],
+  "contact": {},
+  "license": "GNU GPLv3",
+  "environment": "*",
+  "entrypoints": {
+    "client": [
+      "dqu.additionaladditions.AdditionalAdditionsClient"
+    ],
+    "main": [
+      "dqu.additionaladditions.AdditionalAdditions"
+    ]
+  },
+  "mixins": [
+    "AdditionalAdditions.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.11.6",
+    "minecraft": "1.17",
+    "fabric": "*",
+    "java": ">=16"
+  }
+}

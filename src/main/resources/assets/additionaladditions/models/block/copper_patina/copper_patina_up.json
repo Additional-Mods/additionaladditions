@@ -1,0 +1,26 @@
+{
+    "ambientocclusion": false,
+    "textures": {
+        "particle": "additionaladditions:block/copper_patina_dot",
+        "line": "additionaladditions:block/copper_patina_line0",
+        "overlay": "additionaladditions:block/copper_patina_overlay"
+    },
+    "elements": [
+        {   "from": [ 0, 0, 0.25 ],
+            "to": [ 16, 16, 0.25 ],
+            "shade": false,
+            "faces": {
+                "south": { "uv": [ 0, 0, 16, 16 ], "texture": "#line", "tintindex": 0 },
+                "north": { "uv": [ 16, 0, 0, 16 ], "texture": "#line", "tintindex": 0 }
+            }
+        },
+        {   "from": [ 0, 0, 0.25 ],
+            "to": [ 16, 16, 0.25 ],
+            "shade": false,
+            "faces": {
+                "south": { "uv": [ 0, 0, 16, 16 ], "texture": "#overlay" },
+                "north": { "uv": [ 16, 0, 0, 16 ], "texture": "#overlay" }
+            }
+        }
+    ]
+}

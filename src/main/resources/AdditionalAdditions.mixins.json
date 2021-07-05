@@ -1,0 +1,18 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "dqu.additionaladditions.mixin",
+  "compatibilityLevel": "JAVA_16",
+  "mixins": [
+  ],
+  "client": [
+    "ClientPlayerEntityMixin",
+    "GameRendererMixin",
+    "RedstoneWireBlockMixin",
+    "AxeItemMixin",
+    "CrossbowItemMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "type": "minecraft:smithing",
+  "base": {"item": "minecraft:golden_boots"},
+  "addition": {"item": "minecraft:copper_ingot"},
+  "result": {"item": "additionaladditions:rose_gold_boots"}
+}

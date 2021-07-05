@@ -1,0 +1,6 @@
+{
+    "parent": "additionaladditions:block/copper_patina/copper_patina_side_alt",
+    "textures": {
+        "line": "block/redstone_dust_line1"
+    }
+}
