@@ -11,7 +11,6 @@ import net.minecraft.util.Identifier;
 public class AdditionalAdditionsClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
-        BlockRenderLayerMap.INSTANCE.putBlock(Registrar.COPPER_BARS, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(Registrar.COPPER_PATINA, RenderLayer.getCutout());
 
         FabricModelPredicateProviderRegistry.register(Registrar.CROSSBOW_WITH_SPYGLASS, new Identifier("pull"), (itemStack, clientWorld, livingEntity, worldSeed) -> {

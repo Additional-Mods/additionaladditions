@@ -437,15 +437,7 @@ public class CopperPatina extends Block {
     }
 
     private void addPoweredParticles(World world, Random random, BlockPos pos, Vec3d color, Direction direction, Direction direction2, float f, float g) {
-        float h = g - f;
-        if (random.nextFloat() < 0.2F * h) {
-            float i = 0.4375F;
-            float j = f + h * random.nextFloat();
-            double d = 0.5D + (double)(0.4375F * (float)direction.getOffsetX()) + (double)(j * (float)direction2.getOffsetX());
-            double e = 0.5D + (double)(0.4375F * (float)direction.getOffsetY()) + (double)(j * (float)direction2.getOffsetY());
-            double k = 0.5D + (double)(0.4375F * (float)direction.getOffsetZ()) + (double)(j * (float)direction2.getOffsetZ());
-            world.addParticle(new DustParticleEffect(new Vec3f(color), 1.0F), (double)pos.getX() + d, (double)pos.getY() + e, (double)pos.getZ() + k, 0.0D, 0.0D, 0.0D);
-        }
+        // Do not add powered particles
     }
 
     public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {

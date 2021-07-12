@@ -1,6 +1,5 @@
 package dqu.additionaladditions;
 
-import dqu.additionaladditions.block.Bars;
 import dqu.additionaladditions.block.CopperPatina;
 import dqu.additionaladditions.enchantment.PrecisionEnchantment;
 import dqu.additionaladditions.item.RoseGoldAxe;
@@ -27,7 +26,6 @@ public class Registrar {
             .food(new FoodComponent.Builder().hunger(8).saturationModifier(5f).build())
     );
     public static final WateringCan WATERING_CAN = new WateringCan(new FabricItemSettings().group(ItemGroup.MISC).maxCount(1).maxDamage(101));
-    public static final PaneBlock COPPER_BARS = new Bars(FabricBlockSettings.of(Material.METAL).strength(0.4f).breakByTool(FabricToolTags.PICKAXES).breakByHand(false).nonOpaque());
     public static final CopperPatina COPPER_PATINA = new CopperPatina(FabricBlockSettings.of(Material.CARPET));
     public static final CrossbowItem CROSSBOW_WITH_SPYGLASS = new CrossbowItem(new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1).maxDamage(350));
 
@@ -60,9 +58,6 @@ public class Registrar {
     }
 
     public static void registerBlocks() {
-        Registry.register(Registry.BLOCK, new Identifier(namespace, "copper_bars"), COPPER_BARS);
-        Registry.register(Registry.ITEM, new Identifier(namespace, "copper_bars"),
-                new BlockItem(COPPER_BARS, new FabricItemSettings().group(ItemGroup.DECORATIONS)));
         Registry.register(Registry.BLOCK, new Identifier(namespace, "copper_patina"), COPPER_PATINA);
         Registry.register(Registry.ITEM, new Identifier(namespace, "copper_patina"),
                 new BlockItem(COPPER_PATINA, new FabricItemSettings().group(ItemGroup.REDSTONE)));
