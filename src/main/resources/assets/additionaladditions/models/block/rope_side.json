@@ -1,0 +1,19 @@
+{
+	"credit": "Made with Blockbench",
+	"textures": {
+		"0": "additionaladditions:block/rope",
+		"particle": "additionaladditions:block/rope"
+	},
+	"elements": [
+		{
+			"from": [8, 8, 0],
+			"to": [9, 14, 6],
+			"faces": {
+				"north": {"uv": [4, 3, 5, 9], "texture": "#0"},
+				"east": {"uv": [6, 1, 0, 7], "texture": "#0"},
+				"south": {"uv": [2, 0, 3, 6], "texture": "#0"},
+				"west": {"uv": [0, 1, 6, 7], "texture": "#0"}
+			}
+		}
+	]
+}

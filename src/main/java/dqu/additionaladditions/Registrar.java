@@ -1,6 +1,7 @@
 package dqu.additionaladditions;
 
 import dqu.additionaladditions.block.CopperPatina;
+import dqu.additionaladditions.block.RopeBlock;
 import dqu.additionaladditions.enchantment.PrecisionEnchantment;
 import dqu.additionaladditions.item.RoseGoldAxe;
 import dqu.additionaladditions.item.RoseGoldHoe;
@@ -10,12 +11,11 @@ import dqu.additionaladditions.material.RoseGoldArmorMaterial;
 import dqu.additionaladditions.material.RoseGoldToolMaterial;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-import net.fabricmc.fabric.api.tool.attribute.v1.FabricToolTags;
 import net.minecraft.block.Material;
-import net.minecraft.block.PaneBlock;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.*;
+import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
@@ -28,6 +28,7 @@ public class Registrar {
     public static final WateringCan WATERING_CAN = new WateringCan(new FabricItemSettings().group(ItemGroup.MISC).maxCount(1).maxDamage(101));
     public static final CopperPatina COPPER_PATINA = new CopperPatina(FabricBlockSettings.of(Material.CARPET));
     public static final CrossbowItem CROSSBOW_WITH_SPYGLASS = new CrossbowItem(new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1).maxDamage(350));
+    public static final RopeBlock ROPE_BLOCK = new RopeBlock(FabricBlockSettings.of(Material.BAMBOO).noCollision().sounds(BlockSoundGroup.WOOL));
 
     public static final ArmorMaterial ROSE_GOLD_ARMOR_MATERIAL = new RoseGoldArmorMaterial();
     public static final Item ROSE_GOLD_HELMET = new ArmorItem(ROSE_GOLD_ARMOR_MATERIAL, EquipmentSlot.HEAD, new Item.Settings().group(ItemGroup.COMBAT));
@@ -61,6 +62,9 @@ public class Registrar {
         Registry.register(Registry.BLOCK, new Identifier(namespace, "copper_patina"), COPPER_PATINA);
         Registry.register(Registry.ITEM, new Identifier(namespace, "copper_patina"),
                 new BlockItem(COPPER_PATINA, new FabricItemSettings().group(ItemGroup.REDSTONE)));
+        Registry.register(Registry.BLOCK, new Identifier(namespace, "rope"), ROPE_BLOCK);
+        Registry.register(Registry.ITEM, new Identifier(namespace, "rope"),
+                new BlockItem(ROPE_BLOCK, new FabricItemSettings().group(ItemGroup.MISC)));
     }
 
     public static void registerOther() {
