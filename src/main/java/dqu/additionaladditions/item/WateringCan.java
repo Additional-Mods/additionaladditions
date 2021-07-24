@@ -24,41 +24,40 @@ public class WateringCan extends Item {
         this.getDefaultStack().setDamage(100);
     }
 
-    // Refilling
-    public TypedActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand) {
+    public void refill(World world, PlayerEntity player, Hand hand) {
         ItemStack stack = player.getStackInHand(hand);
+        if (!stack.isOf(this) || stack.getDamage() < 10) return;
         BlockHitResult blockHitResult = raycast(world, player, RaycastContext.FluidHandling.SOURCE_ONLY);
         if (blockHitResult.getType() == HitResult.Type.BLOCK) {
             BlockPos blockPos = blockHitResult.getBlockPos();
             if (world.canPlayerModifyAt(player, blockPos)) {
                 BlockState blockState = world.getBlockState(blockPos);
                 if (blockState.getBlock() instanceof FluidDrainable && blockState.getMaterial() == Material.WATER ) {
-                    stack.setDamage(0);
                     FluidDrainable fluid = (FluidDrainable) blockState.getBlock();
                     fluid.tryDrainFluid(world, blockPos, blockState);
                     fluid.getBucketFillSound().ifPresent((sound) -> {
                         player.playSound(sound, 1.0f, 1.0f);
                     });
                     player.swingHand(hand);
+                    stack.setDamage(0);
                 }
             }
         }
-        return TypedActionResult.pass(stack);
     }
 
     // Watering
     @Override
     public ActionResult useOnBlock(ItemUsageContext context) {
-        System.out.println("WATERING start");
-        World world = context.getWorld();
-        BlockPos pos = context.getBlockPos();
-        BlockState state = world.getBlockState(pos);
         ItemStack stack = context.getStack();
+        World world = context.getWorld();
 
         if (stack.getDamage() > 99) {
-            use(world, context.getPlayer(), context.getHand());
+            refill(world, context.getPlayer(), context.getHand());
             return ActionResult.FAIL;
         }
+
+        BlockPos pos = context.getBlockPos();
+        BlockState state = world.getBlockState(pos);
 
         if (state.getBlock() instanceof Fertilizable) {
             Fertilizable fertilizable = (Fertilizable) state.getBlock();

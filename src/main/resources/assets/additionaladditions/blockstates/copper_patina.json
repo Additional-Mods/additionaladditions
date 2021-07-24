@@ -87,7 +87,7 @@
         "south": "up"
       },
       "apply": {
-        "model": "minecraft:block/redstone_dust_up",
+        "model": "additionaladditions:block/copper_patina/copper_patina_up",
         "y": 180
       }
     },
@@ -96,7 +96,7 @@
         "west": "up"
       },
       "apply": {
-        "model": "minecraft:block/redstone_dust_up",
+        "model": "additionaladditions:block/copper_patina/copper_patina_up",
         "y": 270
       }
     }
