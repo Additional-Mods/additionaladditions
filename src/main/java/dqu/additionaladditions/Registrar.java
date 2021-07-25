@@ -3,20 +3,23 @@ package dqu.additionaladditions;
 import dqu.additionaladditions.block.CopperPatina;
 import dqu.additionaladditions.block.RopeBlock;
 import dqu.additionaladditions.enchantment.PrecisionEnchantment;
-import dqu.additionaladditions.item.RoseGoldAxe;
-import dqu.additionaladditions.item.RoseGoldHoe;
-import dqu.additionaladditions.item.RoseGoldPickaxe;
-import dqu.additionaladditions.item.WateringCan;
+import dqu.additionaladditions.item.*;
 import dqu.additionaladditions.material.RoseGoldArmorMaterial;
 import dqu.additionaladditions.material.RoseGoldToolMaterial;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.DispenserBlock;
 import net.minecraft.block.Material;
+import net.minecraft.block.dispenser.ItemDispenserBehavior;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.*;
 import net.minecraft.sound.BlockSoundGroup;
+import net.minecraft.state.property.Properties;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.BlockPointer;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.Registry;
 
 public class Registrar {
@@ -26,6 +29,7 @@ public class Registrar {
             .food(new FoodComponent.Builder().hunger(8).saturationModifier(5f).build())
     );
     public static final WateringCan WATERING_CAN = new WateringCan(new FabricItemSettings().group(ItemGroup.MISC).maxCount(1).maxDamage(101));
+    public static final Wrench WRENCH = new Wrench(new FabricItemSettings().group(ItemGroup.TOOLS).maxCount(1).maxDamage(256));
     public static final CopperPatina COPPER_PATINA = new CopperPatina(FabricBlockSettings.of(Material.CARPET));
     public static final CrossbowItem CROSSBOW_WITH_SPYGLASS = new CrossbowItem(new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1).maxDamage(350));
     public static final RopeBlock ROPE_BLOCK = new RopeBlock(FabricBlockSettings.of(Material.BAMBOO).noCollision().sounds(BlockSoundGroup.WOOL));
@@ -46,6 +50,7 @@ public class Registrar {
     public static void registerItems() {
         Registry.register(Registry.ITEM, new Identifier(namespace, "berry_pie"), BERRY_PIE);
         Registry.register(Registry.ITEM, new Identifier(namespace, "watering_can"), WATERING_CAN);
+        Registry.register(Registry.ITEM, new Identifier(namespace, "wrench"), WRENCH);
         Registry.register(Registry.ITEM, new Identifier(namespace, "crossbow_with_spyglass"), CROSSBOW_WITH_SPYGLASS);
         Registry.register(Registry.ITEM, new Identifier(namespace, "rose_gold_helmet"), ROSE_GOLD_HELMET);
         Registry.register(Registry.ITEM, new Identifier(namespace, "rose_gold_chestplate"), ROSE_GOLD_CHESTPLATE);
@@ -69,5 +74,18 @@ public class Registrar {
 
     public static void registerOther() {
         Registry.register(Registry.ENCHANTMENT, new Identifier(namespace, "precision"), ENCHANTMENT_PRECISION);
+        DispenserBlock.registerBehavior(WRENCH, new ItemDispenserBehavior() {
+            public ItemStack dispenseSilently(BlockPointer pointer, ItemStack stack) {
+                Wrench wrench = (Wrench) stack.getItem();
+
+                BlockState dstate = pointer.getBlockState();
+                BlockPos pos = pointer.getBlockPos().offset(dstate.get(Properties.FACING));
+                BlockState state = pointer.getWorld().getBlockState(pos);
+
+                wrench.dispenserUse(pointer.getWorld(), pos, state, stack);
+                return stack;
+            }
+        });
     }
+
 }
