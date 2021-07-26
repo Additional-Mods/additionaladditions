@@ -1,19 +1,25 @@
 package dqu.additionaladditions.item;
 
+import dqu.additionaladditions.AdditionalAdditions;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ChestBlock;
+import net.minecraft.block.HopperBlock;
 import net.minecraft.block.SlabBlock;
+import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.block.entity.HopperBlockEntity;
 import net.minecraft.block.enums.SlabType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 
 public class Wrench extends Item {
@@ -38,7 +44,23 @@ public class Wrench extends Item {
         }
 
         if (state.contains(Properties.HOPPER_FACING)) {
-            world.setBlockState(pos, state.cycle(Properties.HOPPER_FACING));
+            BlockState newstate = state.cycle(Properties.HOPPER_FACING);
+            world.setBlockState(pos, newstate);
+
+            if (AdditionalAdditions.lithiumInstalled && !world.isClient()) {
+                /*
+                * Lithium mod caches hopper's output and input inventories
+                * Which causes an issue where the hopper keeps transferring to the old location
+                * This replaces the block entity, which fixes that.
+                */
+                HopperBlockEntity hopperBlockEntity = (HopperBlockEntity) world.getBlockEntity(pos);
+                NbtCompound nbt = hopperBlockEntity.writeNbt(new NbtCompound());
+                world.removeBlockEntity(pos);
+                HopperBlockEntity blockEntity = new HopperBlockEntity(pos, newstate);
+                blockEntity.readNbt(nbt);
+                world.addBlockEntity(blockEntity);
+            }
+
             success(context.getStack(), world, pos, context.getPlayer(), context.getHand());
             return ActionResult.SUCCESS;
         }
@@ -77,7 +99,7 @@ public class Wrench extends Item {
     }
 
     public void dispenserUse(World world, BlockPos pos, BlockState state, ItemStack stack) {
-        if (state.getBlock() instanceof ChestBlock) return ActionResult.PASS;
+        if (state.getBlock() instanceof ChestBlock) return;
         if (state.contains(Properties.FACING)) {
             world.setBlockState(pos, state.cycle(Properties.FACING));
             success(stack, world, pos);
