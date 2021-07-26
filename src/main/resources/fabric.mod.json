@@ -3,12 +3,16 @@
   "id": "additionaladditions",
   "version": "${version}",
   "name": "Additional Additions",
-  "description": "",
+  "description": "Additional Additions is a mod that aims to add additional uses for Copper, Amethyst and Glow Ink Sacs as well as other useful additional additions to the game.",
   "authors": [
     "Dqu1J"
   ],
-  "contact": {},
+  "contact": {
+    "sources": "https://github.com/Dqu1J/additionaladditions",
+    "issues": "https://github.com/Dqu1J/additionaladditions/issues"
+  },
   "license": "GNU GPLv3",
+  "icon": "assets/additionaladditions/icon.png",
   "environment": "*",
   "entrypoints": {
     "client": [
