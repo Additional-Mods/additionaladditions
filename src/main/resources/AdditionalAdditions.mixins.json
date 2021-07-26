@@ -4,13 +4,13 @@
   "package": "dqu.additionaladditions.mixin",
   "compatibilityLevel": "JAVA_16",
   "mixins": [
+    "AxeItemMixin",
+    "CrossbowItemMixin",
+    "RedstoneWireBlockMixin"
   ],
   "client": [
     "ClientPlayerEntityMixin",
-    "GameRendererMixin",
-    "RedstoneWireBlockMixin",
-    "AxeItemMixin",
-    "CrossbowItemMixin"
+    "GameRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1
