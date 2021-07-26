@@ -1,6 +1,7 @@
 package dqu.additionaladditions.item;
 
 import net.minecraft.block.BlockState;
+import net.minecraft.block.ChestBlock;
 import net.minecraft.block.SlabBlock;
 import net.minecraft.block.enums.SlabType;
 import net.minecraft.entity.player.PlayerEntity;
@@ -28,6 +29,7 @@ public class Wrench extends Item {
 
         if (context.getPlayer() == null) return ActionResult.PASS;
         if (world.isClient()) return ActionResult.PASS;
+        if (state.getBlock() instanceof ChestBlock) return ActionResult.PASS;
 
         if (state.contains(Properties.FACING)) {
             world.setBlockState(pos, state.cycle(Properties.FACING));
@@ -75,6 +77,7 @@ public class Wrench extends Item {
     }
 
     public void dispenserUse(World world, BlockPos pos, BlockState state, ItemStack stack) {
+        if (state.getBlock() instanceof ChestBlock) return ActionResult.PASS;
         if (state.contains(Properties.FACING)) {
             world.setBlockState(pos, state.cycle(Properties.FACING));
             success(stack, world, pos);
@@ -123,7 +126,6 @@ public class Wrench extends Item {
                 player.sendToolBreakStatus(hand);
             }));
         }
-        world.playSound(null, pos, SoundEvents.ITEM_SPYGLASS_USE, SoundCategory.AMBIENT, 2.0F, 1.0F);
-    }
+        world.playSound(null, pos, SoundEvents.ITEM_SPYGLASS_USE, SoundCategory.AMBIENT, 2.0F, 1.0F); }
 
 }
