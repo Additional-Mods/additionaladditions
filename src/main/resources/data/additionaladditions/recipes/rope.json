@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " ",
+    "S",
+    "S"
+  ],
+  "key": {
+    "S": {"item": "minecraft:string"}
+  },
+  "result": {
+    "item": "additionaladditions:rope",
+    "count": 1
+  }
+}

@@ -1,9 +1,6 @@
 package dqu.additionaladditions.item;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Fertilizable;
-import net.minecraft.block.FluidDrainable;
-import net.minecraft.block.Material;
+import net.minecraft.block.*;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -59,11 +56,11 @@ public class WateringCan extends Item {
         BlockPos pos = context.getBlockPos();
         BlockState state = world.getBlockState(pos);
 
-        if (state.getBlock() instanceof Fertilizable) {
-            Fertilizable fertilizable = (Fertilizable) state.getBlock();
+        if (state.getBlock() instanceof Fertilizable fertilizable) {
             if (fertilizable.isFertilizable(world, pos, state, world.isClient())) {
                 if (!world.isClient()) {
                     if (fertilizable.canGrow(world, world.random, pos, state)) {
+                        if (state.getBlock() instanceof GrassBlock) return ActionResult.FAIL;
                         fertilizable.grow((ServerWorld) world, world.random, pos, state);
                     }
 
@@ -71,8 +68,6 @@ public class WateringCan extends Item {
                 }
                 return ActionResult.SUCCESS;
             }
-        } else {
-            use(world, context.getPlayer(), context.getHand());
         }
 
         return ActionResult.FAIL;
