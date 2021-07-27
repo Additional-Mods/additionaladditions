@@ -49,3 +49,5 @@ Additional Additions is a mod that aims to add additional uses for Copper, Ameth
 
 See more information on the [wiki](https://github.com/Dqu1J/additionaladditions/wiki)  
 [Discord](https://discord.gg/g5a7ZA62t3)  
+[Modrinth](https://modrinth.com/mod/addadd)  
+[CurseForge](https://www.curseforge.com/minecraft/mc-mods/additional-additions/)  
