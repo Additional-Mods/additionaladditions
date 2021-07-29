@@ -50,47 +50,57 @@ public class Registrar {
     public static final Enchantment ENCHANTMENT_PRECISION = new PrecisionEnchantment();
 
     public static void registerItems() {
-        Registry.register(Registry.ITEM, new Identifier(namespace, "berry_pie"), BERRY_PIE);
-        Registry.register(Registry.ITEM, new Identifier(namespace, "watering_can"), WATERING_CAN);
-        Registry.register(Registry.ITEM, new Identifier(namespace, "wrench"), WRENCH);
-        Registry.register(Registry.ITEM, new Identifier(namespace, "crossbow_with_spyglass"), CROSSBOW_WITH_SPYGLASS);
-        Registry.register(Registry.ITEM, new Identifier(namespace, "rose_gold_helmet"), ROSE_GOLD_HELMET);
-        Registry.register(Registry.ITEM, new Identifier(namespace, "rose_gold_chestplate"), ROSE_GOLD_CHESTPLATE);
-        Registry.register(Registry.ITEM, new Identifier(namespace, "rose_gold_leggings"), ROSE_GOLD_LEGGINGS);
-        Registry.register(Registry.ITEM, new Identifier(namespace, "rose_gold_boots"), ROSE_GOLD_BOOTS);
-        Registry.register(Registry.ITEM, new Identifier(namespace, "rose_gold_sword"), ROSE_GOLD_SWORD);
-        Registry.register(Registry.ITEM, new Identifier(namespace, "rose_gold_pickaxe"), ROSE_GOLD_PICKAXE);
-        Registry.register(Registry.ITEM, new Identifier(namespace, "rose_gold_axe"), ROSE_GOLD_AXE);
-        Registry.register(Registry.ITEM, new Identifier(namespace, "rose_gold_shovel"), ROSE_GOLD_SHOVEL);
-        Registry.register(Registry.ITEM, new Identifier(namespace, "rose_gold_hoe"), ROSE_GOLD_HOE);
+        if(Config.get("FoodItems")) Registry.register(Registry.ITEM, new Identifier(namespace, "berry_pie"), BERRY_PIE);
+        if(Config.get("WateringCan")) Registry.register(Registry.ITEM, new Identifier(namespace, "watering_can"), WATERING_CAN);
+        if(Config.get("Wrench")) Registry.register(Registry.ITEM, new Identifier(namespace, "wrench"), WRENCH);
+        if(Config.get("Crossbows")) Registry.register(Registry.ITEM, new Identifier(namespace, "crossbow_with_spyglass"), CROSSBOW_WITH_SPYGLASS);
+        if(Config.get("RoseGold")) {
+            Registry.register(Registry.ITEM, new Identifier(namespace, "rose_gold_helmet"), ROSE_GOLD_HELMET);
+            Registry.register(Registry.ITEM, new Identifier(namespace, "rose_gold_chestplate"), ROSE_GOLD_CHESTPLATE);
+            Registry.register(Registry.ITEM, new Identifier(namespace, "rose_gold_leggings"), ROSE_GOLD_LEGGINGS);
+            Registry.register(Registry.ITEM, new Identifier(namespace, "rose_gold_boots"), ROSE_GOLD_BOOTS);
+            Registry.register(Registry.ITEM, new Identifier(namespace, "rose_gold_sword"), ROSE_GOLD_SWORD);
+            Registry.register(Registry.ITEM, new Identifier(namespace, "rose_gold_pickaxe"), ROSE_GOLD_PICKAXE);
+            Registry.register(Registry.ITEM, new Identifier(namespace, "rose_gold_axe"), ROSE_GOLD_AXE);
+            Registry.register(Registry.ITEM, new Identifier(namespace, "rose_gold_shovel"), ROSE_GOLD_SHOVEL);
+            Registry.register(Registry.ITEM, new Identifier(namespace, "rose_gold_hoe"), ROSE_GOLD_HOE);
+        }
     }
 
     public static void registerBlocks() {
-        Registry.register(Registry.BLOCK, new Identifier(namespace, "copper_patina"), COPPER_PATINA);
-        Registry.register(Registry.ITEM, new Identifier(namespace, "copper_patina"),
-                new BlockItem(COPPER_PATINA, new FabricItemSettings().group(ItemGroup.REDSTONE)));
-        Registry.register(Registry.BLOCK, new Identifier(namespace, "rope"), ROPE_BLOCK);
-        Registry.register(Registry.ITEM, new Identifier(namespace, "rope"),
-                new BlockItem(ROPE_BLOCK, new FabricItemSettings().group(ItemGroup.MISC)));
-        Registry.register(Registry.BLOCK, new Identifier(namespace, "amethyst_lamp"), AMETHYST_LAMP);
-        Registry.register(Registry.ITEM, new Identifier(namespace, "amethyst_lamp"),
-                new BlockItem(AMETHYST_LAMP, new FabricItemSettings().group(ItemGroup.REDSTONE)));
+        if (Config.get("CopperPatina")) {
+            Registry.register(Registry.BLOCK, new Identifier(namespace, "copper_patina"), COPPER_PATINA);
+            Registry.register(Registry.ITEM, new Identifier(namespace, "copper_patina"),
+                    new BlockItem(COPPER_PATINA, new FabricItemSettings().group(ItemGroup.REDSTONE)));
+        }
+        if (Config.get("Ropes")) {
+            Registry.register(Registry.BLOCK, new Identifier(namespace, "rope"), ROPE_BLOCK);
+            Registry.register(Registry.ITEM, new Identifier(namespace, "rope"),
+                    new BlockItem(ROPE_BLOCK, new FabricItemSettings().group(ItemGroup.MISC)));
+        }
+        if (Config.get("AmethystLamp")) {
+            Registry.register(Registry.BLOCK, new Identifier(namespace, "amethyst_lamp"), AMETHYST_LAMP);
+            Registry.register(Registry.ITEM, new Identifier(namespace, "amethyst_lamp"),
+                    new BlockItem(AMETHYST_LAMP, new FabricItemSettings().group(ItemGroup.REDSTONE)));
+        }
     }
 
     public static void registerOther() {
-        Registry.register(Registry.ENCHANTMENT, new Identifier(namespace, "precision"), ENCHANTMENT_PRECISION);
-        DispenserBlock.registerBehavior(WRENCH, new ItemDispenserBehavior() {
-            public ItemStack dispenseSilently(BlockPointer pointer, ItemStack stack) {
-                Wrench wrench = (Wrench) stack.getItem();
+        if(Config.get("EnchantmentPrecision")) Registry.register(Registry.ENCHANTMENT, new Identifier(namespace, "precision"), ENCHANTMENT_PRECISION);
+        if(Config.get("Wrench")) {
+            DispenserBlock.registerBehavior(WRENCH, new ItemDispenserBehavior() {
+                public ItemStack dispenseSilently(BlockPointer pointer, ItemStack stack) {
+                    Wrench wrench = (Wrench) stack.getItem();
 
-                BlockState dstate = pointer.getBlockState();
-                BlockPos pos = pointer.getBlockPos().offset(dstate.get(Properties.FACING));
-                BlockState state = pointer.getWorld().getBlockState(pos);
+                    BlockState dstate = pointer.getBlockState();
+                    BlockPos pos = pointer.getBlockPos().offset(dstate.get(Properties.FACING));
+                    BlockState state = pointer.getWorld().getBlockState(pos);
 
-                wrench.dispenserUse(pointer.getWorld(), pos, state, stack);
-                return stack;
-            }
-        });
+                    wrench.dispenserUse(pointer.getWorld(), pos, state, stack);
+                    return stack;
+                }
+            });
+        }
     }
 
 }

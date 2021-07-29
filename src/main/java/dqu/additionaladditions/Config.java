@@ -1,0 +1,64 @@
+package dqu.additionaladditions;
+
+import com.google.common.io.Files;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
+import net.fabricmc.loader.api.FabricLoader;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.nio.charset.StandardCharsets;
+
+public class Config {
+    public static final int VERSION = 1;
+    private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
+    private static final String PATH = FabricLoader.getInstance().getConfigDir().resolve("additional-additions-config.json").toString();
+    private static final File DBFILE = new File(PATH);
+    private static JsonObject db = new JsonObject();
+
+    public static void load() {
+        if (!DBFILE.exists()) {
+            db.addProperty("version", VERSION);
+            db.addProperty("FoodItems", true);
+            db.addProperty("WateringCan", true);
+            db.addProperty("RoseGold", true);
+            db.addProperty("Ropes", true);
+            db.addProperty("EnchantmentPrecision", true);
+            db.addProperty("Wrench", true);
+            db.addProperty("CopperPatina", true);
+            db.addProperty("AmethystLamp", true);
+            db.addProperty("Crossbows", true);
+            save();
+        }
+
+        try {
+            BufferedReader bufferedReader = Files.newReader(DBFILE, StandardCharsets.UTF_8);
+            db = GSON.fromJson(bufferedReader, JsonObject.class);
+        } catch (Exception e) {
+            AdditionalAdditions.LOGGER.error(e.getMessage());
+            AdditionalAdditions.LOGGER.error("Unable to load configuration file!");
+        }
+    }
+
+    private static void save() {
+        try {
+            BufferedWriter bufferedWriter = Files.newWriter(DBFILE, StandardCharsets.UTF_8);
+            String json = GSON.toJson(db);
+            bufferedWriter.write(json);
+            bufferedWriter.close();
+        } catch (Exception e) {
+            AdditionalAdditions.LOGGER.error(e.getMessage());
+            AdditionalAdditions.LOGGER.error("Unable to save configuration file!");
+        }
+    }
+
+    public static boolean get(String key) {
+        if (!DBFILE.exists()) {
+            AdditionalAdditions.LOGGER.error("Unable to get key as file doesn't exist?!");
+            return false;
+        }
+        return db.get(key).getAsBoolean();
+    }
+}

@@ -2,8 +2,11 @@ package dqu.additionaladditions;
 
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.loader.api.FabricLoader;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class AdditionalAdditions implements ModInitializer {
+    public static final Logger LOGGER = LogManager.getLogger();
     public static boolean zoom = false;
     public static boolean lithiumInstalled = false;
 
@@ -11,6 +14,7 @@ public class AdditionalAdditions implements ModInitializer {
     public void onInitialize() {
         lithiumInstalled = FabricLoader.getInstance().isModLoaded("lithium");
 
+        Config.load();
         Registrar.registerBlocks();
         Registrar.registerItems();
         Registrar.registerOther();
