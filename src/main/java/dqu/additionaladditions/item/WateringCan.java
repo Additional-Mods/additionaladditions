@@ -4,72 +4,69 @@ import net.minecraft.block.*;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemUsageContext;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.ActionResult;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.RaycastContext;
 import net.minecraft.world.World;
 
 public class WateringCan extends Item {
     public WateringCan(Settings settings) {
         super(settings);
-        this.getDefaultStack().setDamage(100);
     }
 
-    public void refill(World world, PlayerEntity player, Hand hand) {
-        ItemStack stack = player.getStackInHand(hand);
-        if (!stack.isOf(this) || stack.getDamage() < 10) return;
-        BlockHitResult blockHitResult = raycast(world, player, RaycastContext.FluidHandling.SOURCE_ONLY);
-        if (blockHitResult.getType() == HitResult.Type.BLOCK) {
-            BlockPos blockPos = blockHitResult.getBlockPos();
-            if (world.canPlayerModifyAt(player, blockPos)) {
-                BlockState blockState = world.getBlockState(blockPos);
-                if (blockState.getBlock() instanceof FluidDrainable && blockState.getMaterial() == Material.WATER ) {
-                    FluidDrainable fluid = (FluidDrainable) blockState.getBlock();
-                    fluid.tryDrainFluid(world, blockPos, blockState);
-                    fluid.getBucketFillSound().ifPresent((sound) -> {
-                        player.playSound(sound, 1.0f, 1.0f);
-                    });
-                    player.swingHand(hand);
-                    stack.setDamage(0);
-                }
-            }
-        }
-    }
-
-    // Watering
     @Override
-    public ActionResult useOnBlock(ItemUsageContext context) {
-        ItemStack stack = context.getStack();
-        World world = context.getWorld();
-
-        if (stack.getDamage() > 99) {
-            refill(world, context.getPlayer(), context.getHand());
-            return ActionResult.FAIL;
-        }
-
-        BlockPos pos = context.getBlockPos();
+    public TypedActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand) {
+        ItemStack stack = player.getStackInHand(hand);
+        BlockHitResult hitResult = raycast(world, player, RaycastContext.FluidHandling.SOURCE_ONLY);
+        if (hitResult.getType() != HitResult.Type.BLOCK) return TypedActionResult.fail(stack);
+        BlockPos pos = hitResult.getBlockPos();
         BlockState state = world.getBlockState(pos);
 
-        if (state.getBlock() instanceof Fertilizable fertilizable) {
-            if (fertilizable.isFertilizable(world, pos, state, world.isClient())) {
-                if (!world.isClient()) {
-                    if (fertilizable.canGrow(world, world.random, pos, state)) {
-                        if (state.getBlock() instanceof GrassBlock) return ActionResult.FAIL;
+        if (state.getBlock() instanceof Fertilizable fertilizable && !(state.getBlock() instanceof GrassBlock)) {
+            if (stack.getDamage() > 0 || player.isCreative()) {
+                player.playSound(SoundEvents.ITEM_BONE_MEAL_USE, 1.0F, 1.5F);
+                if (world.isClient()) return TypedActionResult.success(stack);
+                if (fertilizable.canGrow(world, world.random, pos, state)) {
+                    if (world.random.nextFloat() < 0.25)
                         fertilizable.grow((ServerWorld) world, world.random, pos, state);
-                    }
-
-                    stack.setDamage(stack.getDamage() + 10);
+                    stack.setDamage(stack.getDamage()-10);
+                    return TypedActionResult.success(stack);
                 }
-                return ActionResult.SUCCESS;
             }
         }
 
-        return ActionResult.FAIL;
+        if (state.getBlock() instanceof FluidDrainable fluid && state.getMaterial() == Material.WATER) {
+            if (stack.getDamage() == 100) return TypedActionResult.fail(stack);
+            fluid.getBucketFillSound().ifPresent((sound) -> player.playSound(sound, 1.0F, 1.0F));
+            if (!world.isClient()) {
+                stack.setDamage(100);
+                fluid.tryDrainFluid(world, pos, state);
+                player.swingHand(hand);
+            }
+            return TypedActionResult.success(stack);
+        }
+
+        return TypedActionResult.fail(stack);
+    }
+
+    @Override
+    public boolean isItemBarVisible(ItemStack stack) {
+        return true;
+    }
+
+    @Override
+    public int getItemBarColor(ItemStack stack) {
+        return MathHelper.packRgb(65, 135, 235);
+    }
+
+    @Override
+    public int getItemBarStep(ItemStack stack) {
+        return Math.min(Math.round(13 * stack.getDamage() / 100.0F), 13);
     }
 }
