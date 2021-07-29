@@ -1,10 +1,11 @@
-# Additional Additions
+# ![](https://i.imgur.com/PoIwJqg.png)
 Additional Additions is a mod that aims to add additional uses for Copper, Amethyst and Glow Ink Sacs as well as other useful additional additions to the game.
 
 ## What's added:
 <details>
   <summary>Click to expand</summary>
   
+
   ### Ropes
   Use them to climb upwards and downwards with ease.
   
@@ -36,18 +37,29 @@ Additional Additions is a mod that aims to add additional uses for Copper, Ameth
   ### Watering Can
   Water your crops to make them grow faster!
   
-  ![](https://i.imgur.com/igbOQY0.png)
+  ![](https://i.imgur.com/KfNjB2V.png)
   
   ### Sweet Berry Pie
   A new food item made from sweet berries!
   
   ![](https://i.imgur.com/4dilxy5.png)
+
+  ### Amethyst Lamp
+  Doesn't light up the area, but prevents mob spawning in a radius of 8 blocks!
+
+  ![](https://i.imgur.com/vL8bwek.png)
   
   ### ...coming more!
   
 </details>
 
+<br>
+
+### Crafting recipes, and more:
 See more information on the [wiki](https://github.com/Dqu1J/additionaladditions/wiki)  
-[Discord](https://discord.gg/g5a7ZA62t3)  
-[Modrinth](https://modrinth.com/mod/addadd)  
-[CurseForge](https://www.curseforge.com/minecraft/mc-mods/additional-additions/)  
+<br>
+### Configuration
+Configuration file is located in the `config` folder. It is named `additional-additions-config.json`.
+Turn off and on any features you want!
+<br>
+### Get support on our Discord server.
