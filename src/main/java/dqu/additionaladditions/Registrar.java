@@ -11,6 +11,7 @@ import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.DispenserBlock;
 import net.minecraft.block.Material;
+import net.minecraft.block.RedstoneLampBlock;
 import net.minecraft.block.dispenser.ItemDispenserBehavior;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.EquipmentSlot;
@@ -33,6 +34,7 @@ public class Registrar {
     public static final CopperPatina COPPER_PATINA = new CopperPatina(FabricBlockSettings.of(Material.CARPET));
     public static final CrossbowItem CROSSBOW_WITH_SPYGLASS = new CrossbowItem(new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1).maxDamage(350));
     public static final RopeBlock ROPE_BLOCK = new RopeBlock(FabricBlockSettings.of(Material.BAMBOO).noCollision().sounds(BlockSoundGroup.WOOL));
+    public static final RedstoneLampBlock AMETHYST_LAMP = new RedstoneLampBlock(FabricBlockSettings.of(Material.REDSTONE_LAMP).sounds(BlockSoundGroup.GLASS));
 
     public static final ArmorMaterial ROSE_GOLD_ARMOR_MATERIAL = new RoseGoldArmorMaterial();
     public static final Item ROSE_GOLD_HELMET = new ArmorItem(ROSE_GOLD_ARMOR_MATERIAL, EquipmentSlot.HEAD, new Item.Settings().group(ItemGroup.COMBAT));
@@ -70,6 +72,9 @@ public class Registrar {
         Registry.register(Registry.BLOCK, new Identifier(namespace, "rope"), ROPE_BLOCK);
         Registry.register(Registry.ITEM, new Identifier(namespace, "rope"),
                 new BlockItem(ROPE_BLOCK, new FabricItemSettings().group(ItemGroup.MISC)));
+        Registry.register(Registry.BLOCK, new Identifier(namespace, "amethyst_lamp"), AMETHYST_LAMP);
+        Registry.register(Registry.ITEM, new Identifier(namespace, "amethyst_lamp"),
+                new BlockItem(AMETHYST_LAMP, new FabricItemSettings().group(ItemGroup.REDSTONE)));
     }
 
     public static void registerOther() {

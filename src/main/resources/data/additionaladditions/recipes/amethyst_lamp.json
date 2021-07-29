@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " A ",
+    "ALA",
+    " L "
+  ],
+  "key": {
+    "A": {"item": "minecraft:amethyst_shard"},
+    "L": {"item": "minecraft:redstone_lamp"}
+  },
+  "result": {
+    "item": "additionaladditions:amethyst_lamp",
+    "count": 1
+  }
+}

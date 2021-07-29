@@ -6,7 +6,8 @@
   "mixins": [
     "AxeItemMixin",
     "CrossbowItemMixin",
-    "RedstoneWireBlockMixin"
+    "RedstoneWireBlockMixin",
+    "MobEntityMixin"
   ],
   "client": [
     "ClientPlayerEntityMixin",

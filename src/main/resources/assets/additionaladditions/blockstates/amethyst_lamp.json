@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "lit=false": {
+      "model": "additionaladditions:block/amethyst_lamp"
+    },
+    "lit=true": {
+      "model": "additionaladditions:block/amethyst_lamp_on"
+    }
+  }
+}
