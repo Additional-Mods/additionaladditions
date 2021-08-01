@@ -32,7 +32,7 @@ public class Registrar {
     public static final Item FRIED_EGG = new Item(new FabricItemSettings().group(ItemGroup.FOOD)
             .food(new FoodComponent.Builder().hunger(6).saturationModifier(5.2f).build())
     );
-    public static final WateringCan WATERING_CAN = new WateringCan(new FabricItemSettings().group(ItemGroup.MISC).maxCount(1).maxDamage(101));
+    public static final WateringCan WATERING_CAN = new WateringCan(new FabricItemSettings().group(ItemGroup.TOOLS).maxCount(1).maxDamage(101));
     public static final Wrench WRENCH = new Wrench(new FabricItemSettings().group(ItemGroup.TOOLS).maxCount(1).maxDamage(256));
     public static final CopperPatina COPPER_PATINA = new CopperPatina(FabricBlockSettings.of(Material.CARPET).noCollision().sounds(BlockSoundGroup.TUFF));
     public static final CrossbowItem CROSSBOW_WITH_SPYGLASS = new CrossbowItem(new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1).maxDamage(350));
