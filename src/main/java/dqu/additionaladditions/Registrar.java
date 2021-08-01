@@ -27,7 +27,10 @@ public class Registrar {
     public static final String namespace = "additionaladditions";
 
     public static final Item BERRY_PIE = new Item(new FabricItemSettings().group(ItemGroup.FOOD)
-            .food(new FoodComponent.Builder().hunger(8).saturationModifier(5f).build())
+            .food(new FoodComponent.Builder().hunger(8).saturationModifier(4.8f).build())
+    );
+    public static final Item FRIED_EGG = new Item(new FabricItemSettings().group(ItemGroup.FOOD)
+            .food(new FoodComponent.Builder().hunger(6).saturationModifier(5.2f).build())
     );
     public static final WateringCan WATERING_CAN = new WateringCan(new FabricItemSettings().group(ItemGroup.MISC).maxCount(1).maxDamage(101));
     public static final Wrench WRENCH = new Wrench(new FabricItemSettings().group(ItemGroup.TOOLS).maxCount(1).maxDamage(256));
@@ -50,10 +53,13 @@ public class Registrar {
     public static final Enchantment ENCHANTMENT_PRECISION = new PrecisionEnchantment();
 
     public static void registerItems() {
-        if(Config.get("FoodItems")) Registry.register(Registry.ITEM, new Identifier(namespace, "berry_pie"), BERRY_PIE);
         if(Config.get("WateringCan")) Registry.register(Registry.ITEM, new Identifier(namespace, "watering_can"), WATERING_CAN);
         if(Config.get("Wrench")) Registry.register(Registry.ITEM, new Identifier(namespace, "wrench"), WRENCH);
         if(Config.get("Crossbows")) Registry.register(Registry.ITEM, new Identifier(namespace, "crossbow_with_spyglass"), CROSSBOW_WITH_SPYGLASS);
+        if(Config.get("FoodItems")) {
+            Registry.register(Registry.ITEM, new Identifier(namespace, "berry_pie"), BERRY_PIE);
+            Registry.register(Registry.ITEM, new Identifier(namespace, "fried_egg"), FRIED_EGG);
+        }
         if(Config.get("RoseGold")) {
             Registry.register(Registry.ITEM, new Identifier(namespace, "rose_gold_helmet"), ROSE_GOLD_HELMET);
             Registry.register(Registry.ITEM, new Identifier(namespace, "rose_gold_chestplate"), ROSE_GOLD_CHESTPLATE);
