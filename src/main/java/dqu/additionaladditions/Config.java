@@ -31,6 +31,7 @@ public class Config {
             db.addProperty("AmethystLamp", true);
             db.addProperty("Crossbows", true);
             db.addProperty("TridentShard", true);
+            db.addProperty("GlowStick", true);
             save();
         }
 
@@ -68,6 +69,7 @@ public class Config {
     private static void convert(int version) {
         if (version == 1) {
             db.addProperty("TridentShard", true);
+            db.addProperty("GlowStick", true);
             db.addProperty("version", 2);
         }
         AdditionalAdditions.LOGGER.info("[Additional Additions] Converted old database.");

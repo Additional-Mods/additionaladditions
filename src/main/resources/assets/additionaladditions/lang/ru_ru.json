@@ -14,8 +14,11 @@
   "item.additionaladditions.wrench": "Гаечный Ключ",
   "item.additionaladditions.fried_egg": "Жареное Яйцо",
   "item.additionaladditions.trident_shard": "Осколок Трезубца",
+  "item.additionaladditions.glow_stick": "Светящаяся Палочка",
+  "block.additionaladditions.glow_stick": "Светящаяся Палочка",
   "block.additionaladditions.copper_patina": "Медная Патина",
   "block.additionaladditions.rope": "Верёвка",
   "block.additionaladditions.amethyst_lamp": "Аметистовая Лампа",
-  "enchantment.additionaladditions.precision": "Меткость"
+  "enchantment.additionaladditions.precision": "Меткость",
+  "entity.additionaladditions.glow_stick": "Светящаяся Палочка"
 }

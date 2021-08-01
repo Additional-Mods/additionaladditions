@@ -1,8 +1,10 @@
 package dqu.additionaladditions;
 
 import dqu.additionaladditions.block.CopperPatina;
+import dqu.additionaladditions.block.GlowStickBlock;
 import dqu.additionaladditions.block.RopeBlock;
 import dqu.additionaladditions.enchantment.PrecisionEnchantment;
+import dqu.additionaladditions.entity.GlowStickEntity;
 import dqu.additionaladditions.item.*;
 import dqu.additionaladditions.material.RoseGoldArmorMaterial;
 import dqu.additionaladditions.material.RoseGoldToolMaterial;
@@ -10,14 +12,17 @@ import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.loot.v1.FabricLootPoolBuilder;
 import net.fabricmc.fabric.api.loot.v1.event.LootTableLoadingCallback;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
+import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.DispenserBlock;
 import net.minecraft.block.Material;
 import net.minecraft.block.RedstoneLampBlock;
 import net.minecraft.block.dispenser.ItemDispenserBehavior;
 import net.minecraft.enchantment.Enchantment;
+import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.entity.SpawnGroup;
 import net.minecraft.item.*;
 import net.minecraft.loot.condition.RandomChanceLootCondition;
 import net.minecraft.loot.entry.ItemEntry;
@@ -58,6 +63,12 @@ public class Registrar {
     public static final Item ROSE_GOLD_HOE = new RoseGoldHoe(RoseGoldToolMaterial.MATERIAL, 0, -1.8F, new Item.Settings().group(ItemGroup.TOOLS));
     public static final Item ROSE_GOLD_SHOVEL = new ShovelItem(RoseGoldToolMaterial.MATERIAL, 1, -2.4F, new Item.Settings().group(ItemGroup.TOOLS));
 
+    public static final EntityType<GlowStickEntity> GLOW_STICK_ENTITY_ENTITY_TYPE = FabricEntityTypeBuilder.<GlowStickEntity>create(SpawnGroup.MISC, GlowStickEntity::new)
+            .dimensions(EntityDimensions.fixed(0.25f, 0.25f))
+            .trackRangeBlocks(4).trackedUpdateRate(10).build();
+    public static final GlowStickItem GLOW_STICK_ITEM = new GlowStickItem(new FabricItemSettings().group(ItemGroup.MISC));
+    public static final GlowStickBlock GLOW_STICK_BLOCK = new GlowStickBlock(FabricBlockSettings.of(Material.CARPET).noCollision().luminance(12).breakInstantly().dropsNothing());
+
     public static final Enchantment ENCHANTMENT_PRECISION = new PrecisionEnchantment();
 
     public static void registerItems() {
@@ -65,6 +76,7 @@ public class Registrar {
         if(Config.get("Wrench")) Registry.register(Registry.ITEM, new Identifier(namespace, "wrench"), WRENCH);
         if(Config.get("Crossbows")) Registry.register(Registry.ITEM, new Identifier(namespace, "crossbow_with_spyglass"), CROSSBOW_WITH_SPYGLASS);
         if(Config.get("TridentShard")) Registry.register(Registry.ITEM, new Identifier(namespace, "trident_shard"), TRIDENT_SHARD);
+        if(Config.get("GlowStick")) Registry.register(Registry.ITEM, new Identifier(namespace, "glow_stick"), GLOW_STICK_ITEM);
         if(Config.get("FoodItems")) {
             Registry.register(Registry.ITEM, new Identifier(namespace, "berry_pie"), BERRY_PIE);
             Registry.register(Registry.ITEM, new Identifier(namespace, "fried_egg"), FRIED_EGG);
@@ -83,6 +95,7 @@ public class Registrar {
     }
 
     public static void registerBlocks() {
+        if(Config.get("GlowStick")) Registry.register(Registry.BLOCK, new Identifier(namespace, "glow_stick"), GLOW_STICK_BLOCK);
         if (Config.get("CopperPatina")) {
             Registry.register(Registry.BLOCK, new Identifier(namespace, "copper_patina"), COPPER_PATINA);
             Registry.register(Registry.ITEM, new Identifier(namespace, "copper_patina"),
@@ -102,6 +115,7 @@ public class Registrar {
 
     public static void registerOther() {
         if(Config.get("EnchantmentPrecision")) Registry.register(Registry.ENCHANTMENT, new Identifier(namespace, "precision"), ENCHANTMENT_PRECISION);
+        if(Config.get("GlowStick")) Registry.register(Registry.ENTITY_TYPE, new Identifier(namespace, "glow_stick"), GLOW_STICK_ENTITY_ENTITY_TYPE);
         if(Config.get("Wrench")) {
             DispenserBlock.registerBehavior(WRENCH, new ItemDispenserBehavior() {
                 public ItemStack dispenseSilently(BlockPointer pointer, ItemStack stack) {

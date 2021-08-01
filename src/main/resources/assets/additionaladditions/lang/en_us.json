@@ -14,8 +14,11 @@
   "item.additionaladditions.wrench": "Wrench",
   "item.additionaladditions.fried_egg": "Fried Egg",
   "item.additionaladditions.trident_shard": "Trident Shard",
+  "item.additionaladditions.glow_stick": "Glow Stick",
+  "block.additionaladditions.glow_stick": "Glow Stick",
   "block.additionaladditions.copper_patina": "Copper Patina",
   "block.additionaladditions.rope": "Rope",
   "block.additionaladditions.amethyst_lamp": "Amethyst Lamp",
-  "enchantment.additionaladditions.precision": "Precision"
+  "enchantment.additionaladditions.precision": "Precision",
+  "entity.additionaladditions.glow_stick": "Glow Stick"
 }
