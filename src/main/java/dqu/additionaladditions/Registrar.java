@@ -7,6 +7,8 @@ import dqu.additionaladditions.item.*;
 import dqu.additionaladditions.material.RoseGoldArmorMaterial;
 import dqu.additionaladditions.material.RoseGoldToolMaterial;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
+import net.fabricmc.fabric.api.loot.v1.FabricLootPoolBuilder;
+import net.fabricmc.fabric.api.loot.v1.event.LootTableLoadingCallback;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.DispenserBlock;
@@ -14,8 +16,12 @@ import net.minecraft.block.Material;
 import net.minecraft.block.RedstoneLampBlock;
 import net.minecraft.block.dispenser.ItemDispenserBehavior;
 import net.minecraft.enchantment.Enchantment;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.*;
+import net.minecraft.loot.condition.RandomChanceLootCondition;
+import net.minecraft.loot.entry.ItemEntry;
+import net.minecraft.loot.provider.number.ConstantLootNumberProvider;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.Identifier;
@@ -25,6 +31,7 @@ import net.minecraft.util.registry.Registry;
 
 public class Registrar {
     public static final String namespace = "additionaladditions";
+    private static final Identifier ELDER_GUARDIAN_LOOT_TABLE_ID = EntityType.ELDER_GUARDIAN.getLootTableId();
 
     public static final Item BERRY_PIE = new Item(new FabricItemSettings().group(ItemGroup.FOOD)
             .food(new FoodComponent.Builder().hunger(8).saturationModifier(4.8f).build())
@@ -38,6 +45,7 @@ public class Registrar {
     public static final CrossbowItem CROSSBOW_WITH_SPYGLASS = new CrossbowItem(new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1).maxDamage(350));
     public static final RopeBlock ROPE_BLOCK = new RopeBlock(FabricBlockSettings.of(Material.BAMBOO).noCollision().sounds(BlockSoundGroup.WOOL));
     public static final RedstoneLampBlock AMETHYST_LAMP = new RedstoneLampBlock(FabricBlockSettings.of(Material.REDSTONE_LAMP).sounds(BlockSoundGroup.GLASS));
+    public static final Item TRIDENT_SHARD = new Item(new FabricItemSettings().group(ItemGroup.MATERIALS));
 
     public static final ArmorMaterial ROSE_GOLD_ARMOR_MATERIAL = new RoseGoldArmorMaterial();
     public static final Item ROSE_GOLD_HELMET = new ArmorItem(ROSE_GOLD_ARMOR_MATERIAL, EquipmentSlot.HEAD, new Item.Settings().group(ItemGroup.COMBAT));
@@ -56,6 +64,7 @@ public class Registrar {
         if(Config.get("WateringCan")) Registry.register(Registry.ITEM, new Identifier(namespace, "watering_can"), WATERING_CAN);
         if(Config.get("Wrench")) Registry.register(Registry.ITEM, new Identifier(namespace, "wrench"), WRENCH);
         if(Config.get("Crossbows")) Registry.register(Registry.ITEM, new Identifier(namespace, "crossbow_with_spyglass"), CROSSBOW_WITH_SPYGLASS);
+        if(Config.get("TridentShard")) Registry.register(Registry.ITEM, new Identifier(namespace, "trident_shard"), TRIDENT_SHARD);
         if(Config.get("FoodItems")) {
             Registry.register(Registry.ITEM, new Identifier(namespace, "berry_pie"), BERRY_PIE);
             Registry.register(Registry.ITEM, new Identifier(namespace, "fried_egg"), FRIED_EGG);
@@ -106,6 +115,17 @@ public class Registrar {
                     return stack;
                 }
             });
+        }
+        if (Config.get("TridentShard")) {
+            LootTableLoadingCallback.EVENT.register(((resourceManager, lootManager, id, table, setter) -> {
+                if (ELDER_GUARDIAN_LOOT_TABLE_ID.equals(id)) {
+                    FabricLootPoolBuilder poolBuilder = FabricLootPoolBuilder.builder()
+                            .rolls(ConstantLootNumberProvider.create(1f))
+                            .with(ItemEntry.builder(TRIDENT_SHARD))
+                            .conditionally(RandomChanceLootCondition.builder(0.33f));
+                    table.pool(poolBuilder);
+                }
+            }));
         }
     }
 

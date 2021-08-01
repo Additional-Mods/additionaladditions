@@ -12,7 +12,7 @@ import java.io.File;
 import java.nio.charset.StandardCharsets;
 
 public class Config {
-    public static final int VERSION = 1;
+    public static final int VERSION = 2;
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
     private static final String PATH = FabricLoader.getInstance().getConfigDir().resolve("additional-additions-config.json").toString();
     private static final File DBFILE = new File(PATH);
@@ -30,6 +30,7 @@ public class Config {
             db.addProperty("CopperPatina", true);
             db.addProperty("AmethystLamp", true);
             db.addProperty("Crossbows", true);
+            db.addProperty("TridentShard", true);
             save();
         }
 
@@ -38,8 +39,10 @@ public class Config {
             db = GSON.fromJson(bufferedReader, JsonObject.class);
         } catch (Exception e) {
             AdditionalAdditions.LOGGER.error(e.getMessage());
-            AdditionalAdditions.LOGGER.error("Unable to load configuration file!");
+            AdditionalAdditions.LOGGER.error("[Additional Additions] Unable to load configuration file!");
         }
+
+        if (db.get("version").getAsInt() != VERSION) convert(db.get("version").getAsInt());
     }
 
     private static void save() {
@@ -50,15 +53,23 @@ public class Config {
             bufferedWriter.close();
         } catch (Exception e) {
             AdditionalAdditions.LOGGER.error(e.getMessage());
-            AdditionalAdditions.LOGGER.error("Unable to save configuration file!");
+            AdditionalAdditions.LOGGER.error("[Additional Additions] Unable to save configuration file!");
         }
     }
 
     public static boolean get(String key) {
         if (!DBFILE.exists()) {
-            AdditionalAdditions.LOGGER.error("Unable to get key as file doesn't exist?!");
+            AdditionalAdditions.LOGGER.error("[Additional Additions] Unable to get key as file doesn't exist?!");
             return false;
         }
         return db.get(key).getAsBoolean();
+    }
+
+    private static void convert(int version) {
+        if (version == 1) {
+            db.addProperty("TridentShard", true);
+            db.addProperty("version", 2);
+        }
+        AdditionalAdditions.LOGGER.info("[Additional Additions] Converted old database.");
     }
 }
