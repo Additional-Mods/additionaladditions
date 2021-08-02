@@ -72,6 +72,7 @@ public class Config {
             db.addProperty("GlowStick", true);
             db.addProperty("version", 2);
         }
-        AdditionalAdditions.LOGGER.info("[Additional Additions] Converted old database.");
+        AdditionalAdditions.LOGGER.info("[Additional Additions] Converted outdated config.");
+        save();
     }
 }
