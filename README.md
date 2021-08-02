@@ -19,7 +19,7 @@ Additional Additions is a mod that aims to add additional uses for Copper, Ameth
   ### Wrench
   Rotate the blocks! You can put it into a Dispenser to rotate blocks automatically.
   
-  ![](https://i.imgur.com/ChONE2w.png)
+  ![](https://i.imgur.com/U8lCGJ4.png)
   
   ### Rose Gold
   A new alloy of Gold and Copper. Upgrade Golden items on a Smithing Table with a Copper Ingot to get those!
@@ -35,19 +35,29 @@ Additional Additions is a mod that aims to add additional uses for Copper, Ameth
   A new Crossbow enchantment, increasing it's accuracy.
   
   ### Watering Can
-  Water your crops to make them grow faster!
+  New Food Items, including Sweet Berry Pie, Fried Egg, and Honeyed Apple!
   
   ![](https://i.imgur.com/KfNjB2V.png)
   
-  ### Sweet Berry Pie
+  ### New Foods
   A new food item made from sweet berries!
   
-  ![](https://i.imgur.com/4dilxy5.png)
+  ![](https://i.imgur.com/cXUpedX.png)
 
   ### Amethyst Lamp
   Doesn't light up the area, but prevents mob spawning in a radius of 8 blocks!
 
   ![](https://i.imgur.com/vL8bwek.png)
+
+  ### Trident Shard
+  Craft a Trident using them, dropped from Elder Guardians
+
+  ![](https://i.imgur.com/PjSyqas.png)
+
+  ### Glow Stick
+  Throw them to light up the area
+
+  ![](https://i.imgur.com/1Xti4Yj.png)
   
   ### ...coming more!
   
@@ -62,4 +72,5 @@ See more information on the [wiki](https://github.com/Dqu1J/additionaladditions/
 Configuration file is located in the `config` folder. It is named `additional-additions-config.json`.
 Turn off and on any features you want!
 <br>
-### Get support on our Discord server.
+
+### [Discord](https://discord.com/invite/g5a7ZA62t3) [Modrinth](https://modrinth.com/mod/addadd) [CurseForge](https://www.curseforge.com/minecraft/mc-mods/additional-additions)
