@@ -35,12 +35,12 @@ Additional Additions is a mod that aims to add additional uses for Copper, Ameth
   A new Crossbow enchantment, increasing it's accuracy.
   
   ### Watering Can
-  New Food Items, including Sweet Berry Pie, Fried Egg, and Honeyed Apple!
+  Water your crops to make them grow faster
   
   ![](https://i.imgur.com/KfNjB2V.png)
   
   ### New Foods
-  A new food item made from sweet berries!
+  New Food Items, including Sweet Berry Pie, Fried Egg, and Honeyed Apple!
   
   ![](https://i.imgur.com/cXUpedX.png)
 
@@ -71,6 +71,8 @@ See more information on the [wiki](https://github.com/Dqu1J/additionaladditions/
 ### Configuration
 Configuration file is located in the `config` folder. It is named `additional-additions-config.json`.
 Turn off and on any features you want!
+### Credits
+Most of the textures made by: [Avila27](https://www.curseforge.com/members/avila27/)
 <br>
 
 ### [Discord](https://discord.com/invite/g5a7ZA62t3) [Modrinth](https://modrinth.com/mod/addadd) [CurseForge](https://www.curseforge.com/minecraft/mc-mods/additional-additions)
