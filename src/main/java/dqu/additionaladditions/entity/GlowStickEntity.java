@@ -2,6 +2,7 @@ package dqu.additionaladditions.entity;
 
 import dqu.additionaladditions.AdditionalAdditions;
 import dqu.additionaladditions.Registrar;
+import dqu.additionaladditions.block.GlowStickBlock;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.LivingEntity;
@@ -42,7 +43,8 @@ public class GlowStickEntity extends ThrownItemEntity {
             this.remove(RemovalReason.DISCARDED);
             BlockPos pos = new BlockPos(this.getX(), this.getY(), this.getZ());
             if (this.world.getBlockState(pos).isAir()) {
-                this.world.setBlockState(pos, Registrar.GLOW_STICK_BLOCK.getDefaultState());
+                this.world.setBlockState(pos, Registrar.GLOW_STICK_BLOCK.getDefaultState()
+                    .with(GlowStickBlock.FLIPPED, world.getRandom().nextBoolean()));
             } else {
                 ItemStack stack = new ItemStack(Registrar.GLOW_STICK_ITEM, 1);
                 ItemEntity entity = new ItemEntity(this.world, this.getX(), this.getY(), this.getZ(), stack);

@@ -1,7 +1,11 @@
 {
   "variants": {
-    "": {
+    "flipped=false": {
       "model": "additionaladditions:block/glow_stick"
+    },
+    "flipped=true": {
+      "model": "additionaladditions:block/glow_stick",
+      "y": 270
     }
   }
 }

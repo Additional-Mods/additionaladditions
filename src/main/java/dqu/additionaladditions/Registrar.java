@@ -47,7 +47,7 @@ public class Registrar {
     public static final Item HONEYED_APPLE = new Item(new FabricItemSettings().group(ItemGroup.FOOD)
             .food(new FoodComponent.Builder().hunger(8).saturationModifier(12.8f).build())
     );
-    
+
     public static final WateringCan WATERING_CAN = new WateringCan(new FabricItemSettings().group(ItemGroup.TOOLS).maxCount(1).maxDamage(101));
     public static final Wrench WRENCH = new Wrench(new FabricItemSettings().group(ItemGroup.TOOLS).maxCount(1).maxDamage(256));
     public static final CopperPatina COPPER_PATINA = new CopperPatina(FabricBlockSettings.of(Material.CARPET).noCollision().sounds(BlockSoundGroup.TUFF));
