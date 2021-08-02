@@ -38,12 +38,16 @@ public class Registrar {
     public static final String namespace = "additionaladditions";
     private static final Identifier ELDER_GUARDIAN_LOOT_TABLE_ID = EntityType.ELDER_GUARDIAN.getLootTableId();
 
-    public static final Item BERRY_PIE = new Item(new FabricItemSettings().group(ItemGroup.FOOD)
-            .food(new FoodComponent.Builder().hunger(8).saturationModifier(4.8f).build())
-    );
     public static final Item FRIED_EGG = new Item(new FabricItemSettings().group(ItemGroup.FOOD)
             .food(new FoodComponent.Builder().hunger(6).saturationModifier(5.2f).build())
     );
+    public static final Item BERRY_PIE = new Item(new FabricItemSettings().group(ItemGroup.FOOD)
+            .food(new FoodComponent.Builder().hunger(8).saturationModifier(4.8f).build())
+    );
+    public static final Item HONEYED_APPLE = new Item(new FabricItemSettings().group(ItemGroup.FOOD)
+            .food(new FoodComponent.Builder().hunger(8).saturationModifier(12.8f).build())
+    );
+    
     public static final WateringCan WATERING_CAN = new WateringCan(new FabricItemSettings().group(ItemGroup.TOOLS).maxCount(1).maxDamage(101));
     public static final Wrench WRENCH = new Wrench(new FabricItemSettings().group(ItemGroup.TOOLS).maxCount(1).maxDamage(256));
     public static final CopperPatina COPPER_PATINA = new CopperPatina(FabricBlockSettings.of(Material.CARPET).noCollision().sounds(BlockSoundGroup.TUFF));
@@ -80,6 +84,7 @@ public class Registrar {
         if(Config.get("FoodItems")) {
             Registry.register(Registry.ITEM, new Identifier(namespace, "berry_pie"), BERRY_PIE);
             Registry.register(Registry.ITEM, new Identifier(namespace, "fried_egg"), FRIED_EGG);
+            Registry.register(Registry.ITEM, new Identifier(namespace, "honeyed_apple"), HONEYED_APPLE);
         }
         if(Config.get("RoseGold")) {
             Registry.register(Registry.ITEM, new Identifier(namespace, "rose_gold_helmet"), ROSE_GOLD_HELMET);
