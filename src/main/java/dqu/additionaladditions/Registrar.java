@@ -24,9 +24,13 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.item.*;
+import net.minecraft.loot.LootTables;
+import net.minecraft.loot.condition.LootConditionTypes;
 import net.minecraft.loot.condition.RandomChanceLootCondition;
 import net.minecraft.loot.entry.ItemEntry;
 import net.minecraft.loot.provider.number.ConstantLootNumberProvider;
+import net.minecraft.loot.provider.number.LootNumberProviderTypes;
+import net.minecraft.loot.provider.number.UniformLootNumberProvider;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.Identifier;
@@ -37,6 +41,9 @@ import net.minecraft.util.registry.Registry;
 public class Registrar {
     public static final String namespace = "additionaladditions";
     private static final Identifier ELDER_GUARDIAN_LOOT_TABLE_ID = EntityType.ELDER_GUARDIAN.getLootTableId();
+    private static final Identifier MINESHAFT_CHEST_LOOT_TABLE_ID = LootTables.ABANDONED_MINESHAFT_CHEST;
+    private static final Identifier DUNGEON_CHEST_LOOT_TABLE_ID = LootTables.SIMPLE_DUNGEON_CHEST;
+    private static final Identifier STRONGHOLD_CHEST_LOOT_TABLE_ID = LootTables.STRONGHOLD_CORRIDOR_CHEST;
 
     public static final Item FRIED_EGG = new Item(new FabricItemSettings().group(ItemGroup.FOOD)
             .food(new FoodComponent.Builder().hunger(6).saturationModifier(5.2f).build())
@@ -71,7 +78,7 @@ public class Registrar {
             .dimensions(EntityDimensions.fixed(0.25f, 0.25f))
             .trackRangeBlocks(4).trackedUpdateRate(10).build();
     public static final GlowStickItem GLOW_STICK_ITEM = new GlowStickItem(new FabricItemSettings().group(ItemGroup.MISC));
-    public static final GlowStickBlock GLOW_STICK_BLOCK = new GlowStickBlock(FabricBlockSettings.of(Material.CARPET).noCollision().luminance(12).breakInstantly().dropsNothing());
+    public static final GlowStickBlock GLOW_STICK_BLOCK = new GlowStickBlock(FabricBlockSettings.of(Material.CARPET).noCollision().luminance(12).breakInstantly());
 
     public static final Enchantment ENCHANTMENT_PRECISION = new PrecisionEnchantment();
 
@@ -135,17 +142,23 @@ public class Registrar {
                 }
             });
         }
-        if (Config.get("TridentShard")) {
-            LootTableLoadingCallback.EVENT.register(((resourceManager, lootManager, id, table, setter) -> {
-                if (ELDER_GUARDIAN_LOOT_TABLE_ID.equals(id)) {
+        LootTableLoadingCallback.EVENT.register(((resourceManager, lootManager, id, table, setter) -> {
+            if (ELDER_GUARDIAN_LOOT_TABLE_ID.equals(id) && Config.get("TridentShard")) {
+                FabricLootPoolBuilder poolBuilder = FabricLootPoolBuilder.builder()
+                        .rolls(ConstantLootNumberProvider.create(1f))
+                        .with(ItemEntry.builder(TRIDENT_SHARD))
+                        .conditionally(RandomChanceLootCondition.builder(0.33f));
+                table.pool(poolBuilder);
+            }
+            if (DUNGEON_CHEST_LOOT_TABLE_ID.equals(id) || MINESHAFT_CHEST_LOOT_TABLE_ID.equals(id) || STRONGHOLD_CHEST_LOOT_TABLE_ID.equals(id)) {
+                if (Config.get("GlowStick")) {
                     FabricLootPoolBuilder poolBuilder = FabricLootPoolBuilder.builder()
-                            .rolls(ConstantLootNumberProvider.create(1f))
-                            .with(ItemEntry.builder(TRIDENT_SHARD))
-                            .conditionally(RandomChanceLootCondition.builder(0.33f));
+                            .rolls(UniformLootNumberProvider.create(0, 16))
+                            .with(ItemEntry.builder(GLOW_STICK_ITEM));
                     table.pool(poolBuilder);
                 }
-            }));
-        }
+            }
+        }));
     }
 
 }
