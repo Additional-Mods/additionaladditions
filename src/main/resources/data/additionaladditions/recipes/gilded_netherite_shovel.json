@@ -1,0 +1,6 @@
+{
+  "type": "minecraft:smithing",
+  "base": {"item": "minecraft:netherite_shovel"},
+  "addition": {"item": "minecraft:gold_ingot"},
+  "result": {"item": "additionaladditions:gilded_netherite_shovel"}
+}

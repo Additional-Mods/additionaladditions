@@ -1,0 +1,6 @@
+{
+  "type": "minecraft:smithing",
+  "base": {"item": "minecraft:netherite_axe"},
+  "addition": {"item": "minecraft:gold_ingot"},
+  "result": {"item": "additionaladditions:gilded_netherite_axe"}
+}

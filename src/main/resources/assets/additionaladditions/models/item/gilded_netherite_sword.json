@@ -1,0 +1,6 @@
+{
+  "parent": "item/handheld",
+  "textures": {
+    "layer0": "additionaladditions:item/gilded_netherite_sword"
+  }
+}
