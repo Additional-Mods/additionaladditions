@@ -68,11 +68,11 @@ public class Registrar {
     public static final Item ROSE_GOLD_CHESTPLATE = new ArmorItem(ROSE_GOLD_ARMOR_MATERIAL, EquipmentSlot.CHEST, new Item.Settings().group(ItemGroup.COMBAT));
     public static final Item ROSE_GOLD_LEGGINGS = new ArmorItem(ROSE_GOLD_ARMOR_MATERIAL, EquipmentSlot.LEGS, new Item.Settings().group(ItemGroup.COMBAT));
     public static final Item ROSE_GOLD_BOOTS = new ArmorItem(ROSE_GOLD_ARMOR_MATERIAL, EquipmentSlot.FEET, new Item.Settings().group(ItemGroup.COMBAT));
-    public static final Item ROSE_GOLD_SWORD = new SwordItem(RoseGoldToolMaterial.MATERIAL, 3, -2.4F, new Item.Settings().group(ItemGroup.COMBAT));
-    public static final Item ROSE_GOLD_PICKAXE = new RoseGoldPickaxe(RoseGoldToolMaterial.MATERIAL, 1, -2.4F, new Item.Settings().group(ItemGroup.TOOLS));
+    public static final Item ROSE_GOLD_SWORD = new SwordItem(RoseGoldToolMaterial.MATERIAL, 4, -2.4F, new Item.Settings().group(ItemGroup.COMBAT));
+    public static final Item ROSE_GOLD_PICKAXE = new RoseGoldPickaxe(RoseGoldToolMaterial.MATERIAL, 1, -2.8F, new Item.Settings().group(ItemGroup.TOOLS));
     public static final Item ROSE_GOLD_AXE = new RoseGoldAxe(RoseGoldToolMaterial.MATERIAL, 6, -3.1F, new Item.Settings().group(ItemGroup.TOOLS));
-    public static final Item ROSE_GOLD_HOE = new RoseGoldHoe(RoseGoldToolMaterial.MATERIAL, 0, -1.8F, new Item.Settings().group(ItemGroup.TOOLS));
-    public static final Item ROSE_GOLD_SHOVEL = new ShovelItem(RoseGoldToolMaterial.MATERIAL, 1, -2.4F, new Item.Settings().group(ItemGroup.TOOLS));
+    public static final Item ROSE_GOLD_HOE = new RoseGoldHoe(RoseGoldToolMaterial.MATERIAL, -2, -1F, new Item.Settings().group(ItemGroup.TOOLS));
+    public static final Item ROSE_GOLD_SHOVEL = new ShovelItem(RoseGoldToolMaterial.MATERIAL, 1.5F, -3F, new Item.Settings().group(ItemGroup.TOOLS));
 
     public static final EntityType<GlowStickEntity> GLOW_STICK_ENTITY_ENTITY_TYPE = FabricEntityTypeBuilder.<GlowStickEntity>create(SpawnGroup.MISC, GlowStickEntity::new)
             .dimensions(EntityDimensions.fixed(0.25f, 0.25f))

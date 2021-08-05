@@ -19,7 +19,7 @@ public class RoseGoldToolMaterial implements ToolMaterial {
 
     @Override
     public float getAttackDamage() {
-        return 3.0F;
+        return 2.0F;
     }
 
     @Override
