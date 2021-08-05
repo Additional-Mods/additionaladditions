@@ -43,7 +43,7 @@ public class RoseGoldArmorMaterial implements ArmorMaterial {
 
     @Override
     public float getKnockbackResistance() {
-        return 0.05F;
+        return 0F;
     }
 
     @Override
