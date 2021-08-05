@@ -9,7 +9,7 @@ import net.minecraft.sound.SoundEvents;
 
 public class RoseGoldArmorMaterial implements ArmorMaterial {
     private static final int[] BASE_DURABILITY = {264, 384, 360, 312};
-    private static final int[] PROTECTION_VALUES = {2, 7, 6, 2};
+    private static final int[] PROTECTION_VALUES = {2, 6, 7, 2};
 
     @Override
     public int getDurability(EquipmentSlot slot) {
