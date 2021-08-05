@@ -5,14 +5,12 @@ name: Java CI with Gradle
 
 on:
   push:
-    branches: [ main ]
     paths-ignore:
       - '.github/**'
       - '**.md'
       - '.gitignore'
       - 'LICENSE'
   pull_request:
-    branches: [ main ]
     paths-ignore:
       - '.github/**'
       - '**.md'
