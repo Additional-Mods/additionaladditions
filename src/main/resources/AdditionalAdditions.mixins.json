@@ -4,11 +4,12 @@
   "package": "dqu.additionaladditions.mixin",
   "compatibilityLevel": "JAVA_16",
   "mixins": [
+    "ArmorItemMixin",
     "AxeItemMixin",
     "CrossbowItemMixin",
-    "RedstoneWireBlockMixin",
     "MobEntityMixin",
-    "PiglinBrainMixin"
+    "PiglinBrainMixin",
+    "RedstoneWireBlockMixin"
   ],
   "client": [
     "ClientPlayerEntityMixin",
