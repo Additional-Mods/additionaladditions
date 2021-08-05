@@ -71,11 +71,11 @@ public class Registrar {
     public static final Item ROSE_GOLD_CHESTPLATE = new ArmorItem(ROSE_GOLD_ARMOR_MATERIAL, EquipmentSlot.CHEST, new Item.Settings().group(ItemGroup.COMBAT));
     public static final Item ROSE_GOLD_LEGGINGS = new ArmorItem(ROSE_GOLD_ARMOR_MATERIAL, EquipmentSlot.LEGS, new Item.Settings().group(ItemGroup.COMBAT));
     public static final Item ROSE_GOLD_BOOTS = new ArmorItem(ROSE_GOLD_ARMOR_MATERIAL, EquipmentSlot.FEET, new Item.Settings().group(ItemGroup.COMBAT));
-    public static final Item ROSE_GOLD_SWORD = new SwordItem(RoseGoldToolMaterial.MATERIAL, 3, -2.4F, new Item.Settings().group(ItemGroup.COMBAT));
-    public static final Item ROSE_GOLD_PICKAXE = new AdditionalPickaxeItem(RoseGoldToolMaterial.MATERIAL, 1, -2.4F, new Item.Settings().group(ItemGroup.TOOLS));
+    public static final Item ROSE_GOLD_SWORD = new SwordItem(RoseGoldToolMaterial.MATERIAL, 4, -2.4F, new Item.Settings().group(ItemGroup.COMBAT));
+    public static final Item ROSE_GOLD_PICKAXE = new AdditionalPickaxeItem(RoseGoldToolMaterial.MATERIAL, 1, -2.8F, new Item.Settings().group(ItemGroup.TOOLS));
     public static final Item ROSE_GOLD_AXE = new AdditionalAxeItem(RoseGoldToolMaterial.MATERIAL, 6, -3.1F, new Item.Settings().group(ItemGroup.TOOLS));
-    public static final Item ROSE_GOLD_HOE = new AdditionalHoeItem(RoseGoldToolMaterial.MATERIAL, 0, -1.2F, new Item.Settings().group(ItemGroup.TOOLS));
-    public static final Item ROSE_GOLD_SHOVEL = new ShovelItem(RoseGoldToolMaterial.MATERIAL, 1, -3F, new Item.Settings().group(ItemGroup.TOOLS));
+    public static final Item ROSE_GOLD_HOE = new AdditionalHoeItem(RoseGoldToolMaterial.MATERIAL, -2, -1F, new Item.Settings().group(ItemGroup.TOOLS));
+    public static final Item ROSE_GOLD_SHOVEL = new ShovelItem(RoseGoldToolMaterial.MATERIAL, 1.5F, -3F, new Item.Settings().group(ItemGroup.TOOLS));
 
     public static final ArmorMaterial GILDED_NETHERITE_ARMOR_MATERIAL = new GildedNetheriteArmorMaterial();
     public static final Item GILDED_NETHERITE_HELMET = new ArmorItem(GILDED_NETHERITE_ARMOR_MATERIAL, EquipmentSlot.HEAD, new Item.Settings().group(ItemGroup.COMBAT).fireproof());

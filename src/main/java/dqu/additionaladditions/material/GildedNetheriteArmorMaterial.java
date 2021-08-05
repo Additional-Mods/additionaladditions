@@ -48,6 +48,6 @@ public class GildedNetheriteArmorMaterial implements ArmorMaterial {
 
     @Override
     public int getEnchantability() {
-        return 16;
+        return 17;
     }
 }
