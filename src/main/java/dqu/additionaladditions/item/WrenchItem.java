@@ -19,8 +19,8 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class Wrench extends Item {
-    public Wrench(Settings settings) {
+public class WrenchItem extends Item {
+    public WrenchItem(Settings settings) {
         super(settings);
     }
 

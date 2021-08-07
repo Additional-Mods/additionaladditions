@@ -15,8 +15,8 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.RaycastContext;
 import net.minecraft.world.World;
 
-public class WateringCan extends Item {
-    public WateringCan(Settings settings) {
+public class WateringCanItem extends Item {
+    public WateringCanItem(Settings settings) {
         super(settings);
     }
 

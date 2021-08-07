@@ -42,7 +42,7 @@ import net.minecraft.world.WorldView;
 import org.jetbrains.annotations.Nullable;
 
 // Modified RedstoneWireBlock
-public class CopperPatina extends Block {
+public class CopperPatinaBlock extends Block {
     public static final EnumProperty<WireConnection> WIRE_CONNECTION_NORTH;
     public static final EnumProperty<WireConnection> WIRE_CONNECTION_EAST;
     public static final EnumProperty<WireConnection> WIRE_CONNECTION_SOUTH;
@@ -63,7 +63,7 @@ public class CopperPatina extends Block {
     private final BlockState dotState;
     private boolean wiresGivePower = true;
 
-    public CopperPatina(Settings settings) {
+    public CopperPatinaBlock(Settings settings) {
         super(settings);
         this.setDefaultState((BlockState)((BlockState)((BlockState)((BlockState)((BlockState)((BlockState)this.stateManager.getDefaultState()).with(WIRE_CONNECTION_NORTH, WireConnection.NONE)).with(WIRE_CONNECTION_EAST, WireConnection.NONE)).with(WIRE_CONNECTION_SOUTH, WireConnection.NONE)).with(WIRE_CONNECTION_WEST, WireConnection.NONE)).with(POWER, 0));
         this.dotState = (BlockState)((BlockState)((BlockState)((BlockState)this.getDefaultState().with(WIRE_CONNECTION_NORTH, WireConnection.SIDE)).with(WIRE_CONNECTION_EAST, WireConnection.SIDE)).with(WIRE_CONNECTION_SOUTH, WireConnection.SIDE)).with(WIRE_CONNECTION_WEST, WireConnection.SIDE);

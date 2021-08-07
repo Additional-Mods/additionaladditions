@@ -1,6 +1,6 @@
 package dqu.additionaladditions;
 
-import dqu.additionaladditions.block.CopperPatina;
+import dqu.additionaladditions.block.CopperPatinaBlock;
 import dqu.additionaladditions.block.GlowStickBlock;
 import dqu.additionaladditions.block.RopeBlock;
 import dqu.additionaladditions.enchantment.PrecisionEnchantment;
@@ -58,9 +58,9 @@ public class Registrar {
             .food(new FoodComponent.Builder().hunger(8).saturationModifier(12.8f).build())
     );
 
-    public static final WateringCan WATERING_CAN = new WateringCan(new FabricItemSettings().group(ItemGroup.TOOLS).maxCount(1).maxDamage(101));
-    public static final Wrench WRENCH = new Wrench(new FabricItemSettings().group(ItemGroup.TOOLS).maxCount(1).maxDamage(256));
-    public static final CopperPatina COPPER_PATINA = new CopperPatina(FabricBlockSettings.of(Material.CARPET).noCollision().sounds(BlockSoundGroup.TUFF));
+    public static final WateringCanItem WATERING_CAN = new WateringCanItem(new FabricItemSettings().group(ItemGroup.TOOLS).maxCount(1).maxDamage(101));
+    public static final WrenchItem WRENCH_ITEM = new WrenchItem(new FabricItemSettings().group(ItemGroup.TOOLS).maxCount(1).maxDamage(256));
+    public static final CopperPatinaBlock COPPER_PATINA = new CopperPatinaBlock(FabricBlockSettings.of(Material.CARPET).noCollision().sounds(BlockSoundGroup.TUFF));
     public static final CrossbowItem CROSSBOW_WITH_SPYGLASS = new CrossbowItem(new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1).maxDamage(350));
     public static final RopeBlock ROPE_BLOCK = new RopeBlock(FabricBlockSettings.of(Material.BAMBOO).noCollision().sounds(BlockSoundGroup.WOOL));
     public static final RedstoneLampBlock AMETHYST_LAMP = new RedstoneLampBlock(FabricBlockSettings.of(Material.REDSTONE_LAMP).sounds(BlockSoundGroup.GLASS));
@@ -98,7 +98,7 @@ public class Registrar {
 
     public static void registerItems() {
         if(Config.get("WateringCan")) Registry.register(Registry.ITEM, new Identifier(namespace, "watering_can"), WATERING_CAN);
-        if(Config.get("Wrench")) Registry.register(Registry.ITEM, new Identifier(namespace, "wrench"), WRENCH);
+        if(Config.get("Wrench")) Registry.register(Registry.ITEM, new Identifier(namespace, "wrench"), WRENCH_ITEM);
         if(Config.get("Crossbows")) Registry.register(Registry.ITEM, new Identifier(namespace, "crossbow_with_spyglass"), CROSSBOW_WITH_SPYGLASS);
         if(Config.get("TridentShard")) Registry.register(Registry.ITEM, new Identifier(namespace, "trident_shard"), TRIDENT_SHARD);
         if(Config.get("GlowStick")) Registry.register(Registry.ITEM, new Identifier(namespace, "glow_stick"), GLOW_STICK_ITEM);
@@ -107,6 +107,7 @@ public class Registrar {
             Registry.register(Registry.ITEM, new Identifier(namespace, "fried_egg"), FRIED_EGG);
             Registry.register(Registry.ITEM, new Identifier(namespace, "honeyed_apple"), HONEYED_APPLE);
         }
+
         if(Config.get("RoseGold")) {
             Registry.register(Registry.ITEM, new Identifier(namespace, "rose_gold_helmet"), ROSE_GOLD_HELMET);
             Registry.register(Registry.ITEM, new Identifier(namespace, "rose_gold_chestplate"), ROSE_GOLD_CHESTPLATE);
@@ -154,9 +155,9 @@ public class Registrar {
         if(Config.get("EnchantmentPrecision")) Registry.register(Registry.ENCHANTMENT, new Identifier(namespace, "precision"), ENCHANTMENT_PRECISION);
         if(Config.get("GlowStick")) Registry.register(Registry.ENTITY_TYPE, new Identifier(namespace, "glow_stick"), GLOW_STICK_ENTITY_ENTITY_TYPE);
         if(Config.get("Wrench")) {
-            DispenserBlock.registerBehavior(WRENCH, new ItemDispenserBehavior() {
+            DispenserBlock.registerBehavior(WRENCH_ITEM, new ItemDispenserBehavior() {
                 public ItemStack dispenseSilently(BlockPointer pointer, ItemStack stack) {
-                    Wrench wrench = (Wrench) stack.getItem();
+                    WrenchItem wrench = (WrenchItem) stack.getItem();
 
                     BlockState dstate = pointer.getBlockState();
                     BlockPos pos = pointer.getBlockPos().offset(dstate.get(Properties.FACING));
