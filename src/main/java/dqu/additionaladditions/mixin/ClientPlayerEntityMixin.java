@@ -1,7 +1,7 @@
 package dqu.additionaladditions.mixin;
 
 import dqu.additionaladditions.AdditionalAdditions;
-import dqu.additionaladditions.Registrar;
+import dqu.additionaladditions.item.ItemRegistry;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -19,7 +19,7 @@ public class ClientPlayerEntityMixin {
         PlayerEntity player = (PlayerEntity) (Object) this;
         if (!player.getEntityWorld().isClient()) return;
         ItemStack stack = player.getMainHandStack();
-        if (stack.isOf(Registrar.CROSSBOW_WITH_SPYGLASS)) {
+        if (stack.isOf(ItemRegistry.CROSSBOW_WITH_SPYGLASS)) {
             boolean sneaking = player.isInSneakingPose();
             if (sneaking && sneaking != AdditionalAdditions.zoom) {
                 player.playSound(SoundEvents.ITEM_SPYGLASS_USE, 1.0F, 1.0F);

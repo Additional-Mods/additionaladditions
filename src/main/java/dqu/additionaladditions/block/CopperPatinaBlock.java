@@ -9,12 +9,10 @@ import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 
-import dqu.additionaladditions.Registrar;
 import net.minecraft.block.*;
 import net.minecraft.block.enums.WireConnection;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.particle.DustParticleEffect;
 import net.minecraft.state.StateManager.Builder;
 import net.minecraft.state.property.EnumProperty;
 import net.minecraft.state.property.IntProperty;
@@ -30,7 +28,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.util.math.Vec3f;
 import net.minecraft.util.math.BlockPos.Mutable;
 import net.minecraft.util.math.Direction.Type;
 import net.minecraft.util.shape.VoxelShape;
@@ -305,7 +302,7 @@ public class CopperPatinaBlock extends Block {
     }
 
     private int increasePower(BlockState state) {
-        return state.isOf(Registrar.COPPER_PATINA) ? (Integer) state.get(POWER) : 0;
+        return state.isOf(BlockRegistry.COPPER_PATINA) ? (Integer) state.get(POWER) : 0;
     }
 
     private void updateNeighbors(World world, BlockPos pos) {
@@ -413,7 +410,7 @@ public class CopperPatinaBlock extends Block {
     }
 
     protected static boolean connectsTo(BlockState state, @Nullable Direction dir) {
-        if (state.isOf(Registrar.COPPER_PATINA)) {
+        if (state.isOf(BlockRegistry.COPPER_PATINA)) {
             return true;
         } else if (state.isOf(Blocks.REDSTONE_WIRE)) {
             return false;

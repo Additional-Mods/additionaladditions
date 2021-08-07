@@ -2,7 +2,7 @@ package dqu.additionaladditions.mixin;
 
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
-import dqu.additionaladditions.Registrar;
+import dqu.additionaladditions.material.MaterialRegistry;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
@@ -29,7 +29,7 @@ public abstract class ArmorItemMixin {
     @Inject(method = "<init>", at = @At(value = "RETURN"))
     private void constructor(ArmorMaterial material, EquipmentSlot slot, Item.Settings settings, CallbackInfo ci) {
         UUID uUID = MODIFIERS[slot.getEntitySlotId()];
-        if (material == Registrar.GILDED_NETHERITE_ARMOR_MATERIAL) {
+        if (material == MaterialRegistry.GILDED_NETHERITE_ARMOR_MATERIAL) {
             ImmutableMultimap.Builder<EntityAttribute, EntityAttributeModifier> builder = ImmutableMultimap.builder();
 
             this.attributeModifiers.forEach(builder::put);

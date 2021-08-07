@@ -1,6 +1,6 @@
 package dqu.additionaladditions.block;
 
-import dqu.additionaladditions.Registrar;
+import dqu.additionaladditions.item.ItemRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.FallingBlock;
@@ -44,6 +44,6 @@ public class GlowStickBlock extends FallingBlock {
 
     @Override
     public Item asItem() {
-        return Registrar.GLOW_STICK_ITEM;
+        return ItemRegistry.GLOW_STICK_ITEM;
     }
 }

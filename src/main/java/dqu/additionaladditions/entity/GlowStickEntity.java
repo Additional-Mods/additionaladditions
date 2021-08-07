@@ -1,7 +1,8 @@
 package dqu.additionaladditions.entity;
 
-import dqu.additionaladditions.Registrar;
+import dqu.additionaladditions.block.BlockRegistry;
 import dqu.additionaladditions.block.GlowStickBlock;
+import dqu.additionaladditions.item.ItemRegistry;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.LivingEntity;
@@ -18,16 +19,16 @@ public class GlowStickEntity extends ThrownItemEntity {
     }
 
     public GlowStickEntity(World world, LivingEntity owner) {
-        super(Registrar.GLOW_STICK_ENTITY_ENTITY_TYPE, owner, world);
+        super(EntityRegistry.GLOW_STICK_ENTITY_ENTITY_TYPE, owner, world);
     }
 
     public GlowStickEntity(World world, double x, double y, double z) {
-        super(Registrar.GLOW_STICK_ENTITY_ENTITY_TYPE, x, y, z, world);
+        super(EntityRegistry.GLOW_STICK_ENTITY_ENTITY_TYPE, x, y, z, world);
     }
 
     @Override
     protected Item getDefaultItem() {
-        return Registrar.GLOW_STICK_ITEM;
+        return ItemRegistry.GLOW_STICK_ITEM;
     }
 
     protected void onCollision(HitResult hitResult) {
@@ -36,10 +37,10 @@ public class GlowStickEntity extends ThrownItemEntity {
             this.remove(RemovalReason.DISCARDED);
             BlockPos pos = new BlockPos(this.getX(), this.getY(), this.getZ());
             if (this.world.getBlockState(pos).isAir()) {
-                this.world.setBlockState(pos, Registrar.GLOW_STICK_BLOCK.getDefaultState()
+                this.world.setBlockState(pos, BlockRegistry.GLOW_STICK_BLOCK.getDefaultState()
                     .with(GlowStickBlock.FLIPPED, world.getRandom().nextBoolean()));
             } else {
-                ItemStack stack = new ItemStack(Registrar.GLOW_STICK_ITEM, 1);
+                ItemStack stack = new ItemStack(ItemRegistry.GLOW_STICK_ITEM, 1);
                 ItemEntity entity = new ItemEntity(this.world, this.getX(), this.getY(), this.getZ(), stack);
                 this.world.spawnEntity(entity);
             }

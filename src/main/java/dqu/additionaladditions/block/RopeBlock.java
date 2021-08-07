@@ -1,6 +1,5 @@
 package dqu.additionaladditions.block;
 
-import dqu.additionaladditions.Registrar;
 import net.minecraft.block.*;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -133,10 +132,10 @@ public class RopeBlock extends Block {
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         if (!state.isOf(this)) return ActionResult.PASS;
-        if (!player.getMainHandStack().isOf(Item.fromBlock(Registrar.ROPE_BLOCK))) return ActionResult.PASS;
+        if (!player.getMainHandStack().isOf(Item.fromBlock(BlockRegistry.ROPE_BLOCK))) return ActionResult.PASS;
         BlockPos down = pos.offset(Direction.DOWN);
         BlockState statedown = world.getBlockState(down);
-        if (statedown.isOf(Registrar.ROPE_BLOCK)) {
+        if (statedown.isOf(BlockRegistry.ROPE_BLOCK)) {
             return statedown.getBlock().onUse(statedown, world, down, player, hand, hit);
         } else if (statedown.isAir() && !world.isOutOfHeightLimit(down.getY())) {
             world.setBlockState(down, state);

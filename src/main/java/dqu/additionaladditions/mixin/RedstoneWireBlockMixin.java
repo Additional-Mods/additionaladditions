@@ -1,6 +1,6 @@
 package dqu.additionaladditions.mixin;
 
-import dqu.additionaladditions.Registrar;
+import dqu.additionaladditions.block.BlockRegistry;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.RedstoneWireBlock;
 import net.minecraft.util.math.BlockPos;
@@ -16,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class RedstoneWireBlockMixin {
     @Inject(method = "connectsTo(Lnet/minecraft/block/BlockState;Lnet/minecraft/util/math/Direction;)Z", at = @At("RETURN"), cancellable = true)
     private static void connectsTo(BlockState state, Direction dir, CallbackInfoReturnable<Boolean> callbackInfo) {
-        if (state.isOf(Registrar.COPPER_PATINA)) {
+        if (state.isOf(BlockRegistry.COPPER_PATINA)) {
             callbackInfo.setReturnValue(false);
         }
     }
@@ -32,7 +32,7 @@ public class RedstoneWireBlockMixin {
             BlockPos offsetted = pos.offset(direction);
             BlockState state = world.getBlockState(offsetted);
             int j = 0;
-            if (!state.isOf(Registrar.COPPER_PATINA)) {
+            if (!state.isOf(BlockRegistry.COPPER_PATINA)) {
                 j = world.getEmittedRedstonePower(offsetted, direction);
             }
             if (j >= 15) {

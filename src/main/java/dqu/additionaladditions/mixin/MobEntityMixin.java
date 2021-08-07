@@ -1,6 +1,6 @@
 package dqu.additionaladditions.mixin;
 
-import dqu.additionaladditions.Registrar;
+import dqu.additionaladditions.block.BlockRegistry;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.mob.MobEntity;
@@ -32,7 +32,7 @@ public abstract class MobEntityMixin extends LivingEntity {
     public boolean isLampNearby(int x, int y, int z, int r) {
         Iterable<BlockPos> poses = BlockPos.iterate(x-r, y-r, z-r, x+r, y+r, z+r);
         for (BlockPos pos : poses) {
-            if (world.getBlockState(pos).isOf(Registrar.AMETHYST_LAMP)) {
+            if (world.getBlockState(pos).isOf(BlockRegistry.AMETHYST_LAMP)) {
                 if (world.getBlockState(pos).get(Properties.LIT)) return true;
             }
         }
