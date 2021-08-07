@@ -1,9 +1,11 @@
 package dqu.additionaladditions.block;
 
+import dqu.additionaladditions.Registrar;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.FallingBlock;
 import net.minecraft.block.ShapeContext;
+import net.minecraft.item.Item;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.util.math.BlockPos;
@@ -38,5 +40,10 @@ public class GlowStickBlock extends FallingBlock {
     @Override
     public VoxelShape getRaycastShape(BlockState state, BlockView world, BlockPos pos) {
         return shape;
+    }
+
+    @Override
+    public Item asItem() {
+        return Registrar.GLOW_STICK_ITEM;
     }
 }
