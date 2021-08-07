@@ -1,6 +1,5 @@
 package dqu.additionaladditions.entity;
 
-import dqu.additionaladditions.AdditionalAdditions;
 import dqu.additionaladditions.Registrar;
 import dqu.additionaladditions.block.GlowStickBlock;
 import net.minecraft.entity.EntityType;
@@ -9,7 +8,6 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.projectile.thrown.ThrownItemEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.network.Packet;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -30,11 +28,6 @@ public class GlowStickEntity extends ThrownItemEntity {
     @Override
     protected Item getDefaultItem() {
         return Registrar.GLOW_STICK_ITEM;
-    }
-
-    @Override
-    public Packet createSpawnPacket() {
-        return EntitySpawnPacket.create(this, AdditionalAdditions.PacketID);
     }
 
     protected void onCollision(HitResult hitResult) {

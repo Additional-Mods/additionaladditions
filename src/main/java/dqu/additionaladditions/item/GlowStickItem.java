@@ -20,12 +20,11 @@ public class GlowStickItem extends Item {
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         ItemStack itemStack = user.getStackInHand(hand);
-		user.getItemCooldownManager().set(this, 2);
-        if (!world.isClient) {
+        if (!world.isClient()) {
             GlowStickEntity glowStickEntity = new GlowStickEntity(world, user);
             glowStickEntity.setItem(itemStack);
             glowStickEntity.setProperties(user, user.getPitch(), user.getYaw(), 0.0F, 1.5F, 0F);
-            world.spawnEntity(glowStickEntity); // spawns entity
+            world.spawnEntity(glowStickEntity);
         }
 
         user.incrementStat(Stats.USED.getOrCreateStat(this));

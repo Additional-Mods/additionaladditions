@@ -9,6 +9,7 @@ import org.apache.logging.log4j.Logger;
 public class AdditionalAdditions implements ModInitializer {
     public static final Identifier PacketID = new Identifier(Registrar.namespace, "spawn_packet");
     public static final Logger LOGGER = LogManager.getLogger();
+    public static final String namespace = "additionaladditions";
     public static boolean zoom = false;
     public static boolean lithiumInstalled = false;
 
