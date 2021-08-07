@@ -16,27 +16,13 @@ public class Config {
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
     private static final String PATH = FabricLoader.getInstance().getConfigDir().resolve("additional-additions-config.json").toString();
     private static final File DBFILE = new File(PATH);
+    private static final String[] defaultProperties = {"FoodItems", "WateringCan", "RoseGold", "Ropes", "EnchantmentPrecision", "EnchantmentSpeed", "Wrench", "CopperPatina", "AmethystLamp", "Crossbows", "TridentShard", "GlowStick", "GildedNetherite", "DepthMeter", "Potions", "MysteryBag"};
     private static JsonObject db = new JsonObject();
 
     public static void load() {
         if (!DBFILE.exists()) {
             db.addProperty("version", VERSION);
-            db.addProperty("FoodItems", true);
-            db.addProperty("WateringCan", true);
-            db.addProperty("RoseGold", true);
-            db.addProperty("Ropes", true);
-            db.addProperty("EnchantmentPrecision", true);
-            db.addProperty("EnchantmentSpeed", true);
-            db.addProperty("Wrench", true);
-            db.addProperty("CopperPatina", true);
-            db.addProperty("AmethystLamp", true);
-            db.addProperty("Crossbows", true);
-            db.addProperty("TridentShard", true);
-            db.addProperty("GlowStick", true);
-            db.addProperty("GildedNetherite", true);
-            db.addProperty("DepthMeter", true);
-            db.addProperty("Potions", true);
-            db.addProperty("MysteryBag", true);
+            for (String property : defaultProperties) db.addProperty(property, true);
             save();
         }
 
@@ -76,7 +62,7 @@ public class Config {
             case 1 -> {
                 db.addProperty("TridentShard", true);
                 db.addProperty("GlowStick", true);
-                db.addProperty("version", 2);
+                db.addProperty("version", version + 1);
             }
             case 2 -> {
                 db.addProperty("MysteryBag", true);
@@ -84,11 +70,11 @@ public class Config {
                 db.addProperty("GildedNetherite", true);
                 db.addProperty("DepthMeter", true);
                 db.addProperty("EnchantmentSpeed", true);
-                db.addProperty("version", 3);
+                db.addProperty("version", version + 1);
             }
         }
         AdditionalAdditions.LOGGER.info("[Additional Additions] Converted outdated config.");
         save();
-        if (version+1 < VERSION) convert(version+1);
+        if (version + 1 < VERSION) convert(version + 1);
     }
 }
