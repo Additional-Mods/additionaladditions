@@ -5,6 +5,7 @@ import dqu.additionaladditions.Config;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.loot.v1.FabricLootPoolBuilder;
 import net.fabricmc.fabric.api.loot.v1.event.LootTableLoadingCallback;
+import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.DispenserBlock;
 import net.minecraft.block.dispenser.ItemDispenserBehavior;
@@ -92,6 +93,7 @@ public class ItemRegistry {
                 }
             });
         }
+        CompostingChanceRegistry.INSTANCE.add(Items.ROTTEN_FLESH, 0.33F);
     }
 
     public static void registerAll() {
