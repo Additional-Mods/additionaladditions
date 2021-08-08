@@ -1,7 +1,10 @@
-package dqu.additionaladditions.item;
+package dqu.additionaladditions.registry;
 
 import dqu.additionaladditions.AdditionalAdditions;
 import dqu.additionaladditions.Config;
+import dqu.additionaladditions.item.GlowStickItem;
+import dqu.additionaladditions.item.WateringCanItem;
+import dqu.additionaladditions.item.WrenchItem;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.loot.v1.FabricLootPoolBuilder;
 import net.fabricmc.fabric.api.loot.v1.event.LootTableLoadingCallback;
@@ -22,7 +25,7 @@ import net.minecraft.util.math.BlockPointer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.Registry;
 
-public class ItemRegistry {
+public class AdditionalItems {
     private static final Identifier ELDER_GUARDIAN_LOOT_TABLE_ID = EntityType.ELDER_GUARDIAN.getLootTableId();
     private static final Identifier MINESHAFT_CHEST_LOOT_TABLE_ID = LootTables.ABANDONED_MINESHAFT_CHEST;
     private static final Identifier DUNGEON_CHEST_LOOT_TABLE_ID = LootTables.SIMPLE_DUNGEON_CHEST;

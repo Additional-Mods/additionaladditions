@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 
+import dqu.additionaladditions.registry.AdditionalBlocks;
 import net.minecraft.block.*;
 import net.minecraft.block.enums.WireConnection;
 import net.minecraft.entity.player.PlayerEntity;
@@ -302,7 +303,7 @@ public class CopperPatinaBlock extends Block {
     }
 
     private int increasePower(BlockState state) {
-        return state.isOf(BlockRegistry.COPPER_PATINA) ? (Integer) state.get(POWER) : 0;
+        return state.isOf(AdditionalBlocks.COPPER_PATINA) ? (Integer) state.get(POWER) : 0;
     }
 
     private void updateNeighbors(World world, BlockPos pos) {
@@ -410,7 +411,7 @@ public class CopperPatinaBlock extends Block {
     }
 
     protected static boolean connectsTo(BlockState state, @Nullable Direction dir) {
-        if (state.isOf(BlockRegistry.COPPER_PATINA)) {
+        if (state.isOf(AdditionalBlocks.COPPER_PATINA)) {
             return true;
         } else if (state.isOf(Blocks.REDSTONE_WIRE)) {
             return false;

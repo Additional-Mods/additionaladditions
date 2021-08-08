@@ -1,7 +1,10 @@
-package dqu.additionaladditions.block;
+package dqu.additionaladditions.registry;
 
 import dqu.additionaladditions.AdditionalAdditions;
 import dqu.additionaladditions.Config;
+import dqu.additionaladditions.block.CopperPatinaBlock;
+import dqu.additionaladditions.block.GlowStickBlock;
+import dqu.additionaladditions.block.RopeBlock;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Material;
@@ -12,7 +15,7 @@ import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
-public class BlockRegistry {
+public class AdditionalBlocks {
     public static final RopeBlock ROPE_BLOCK = new RopeBlock(FabricBlockSettings.of(Material.BAMBOO).noCollision().sounds(BlockSoundGroup.WOOL));
     public static final RedstoneLampBlock AMETHYST_LAMP = new RedstoneLampBlock(FabricBlockSettings.of(Material.REDSTONE_LAMP).sounds(BlockSoundGroup.GLASS));
     public static final CopperPatinaBlock COPPER_PATINA = new CopperPatinaBlock(FabricBlockSettings.of(Material.CARPET).noCollision().sounds(BlockSoundGroup.TUFF));

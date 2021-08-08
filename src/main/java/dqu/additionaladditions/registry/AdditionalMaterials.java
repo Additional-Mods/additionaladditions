@@ -1,16 +1,20 @@
-package dqu.additionaladditions.material;
+package dqu.additionaladditions.registry;
 
 import dqu.additionaladditions.AdditionalAdditions;
 import dqu.additionaladditions.Config;
 import dqu.additionaladditions.item.AdditionalAxeItem;
 import dqu.additionaladditions.item.AdditionalHoeItem;
 import dqu.additionaladditions.item.AdditionalPickaxeItem;
+import dqu.additionaladditions.material.GildedNetheriteArmorMaterial;
+import dqu.additionaladditions.material.GildedNetheriteToolMaterial;
+import dqu.additionaladditions.material.RoseGoldArmorMaterial;
+import dqu.additionaladditions.material.RoseGoldToolMaterial;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.*;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
-public class MaterialRegistry {
+public class AdditionalMaterials {
     public static final ArmorMaterial ROSE_GOLD_ARMOR_MATERIAL = new RoseGoldArmorMaterial();
     public static final Item ROSE_GOLD_HELMET = new ArmorItem(ROSE_GOLD_ARMOR_MATERIAL, EquipmentSlot.HEAD, new Item.Settings().group(ItemGroup.COMBAT));
     public static final Item ROSE_GOLD_CHESTPLATE = new ArmorItem(ROSE_GOLD_ARMOR_MATERIAL, EquipmentSlot.CHEST, new Item.Settings().group(ItemGroup.COMBAT));

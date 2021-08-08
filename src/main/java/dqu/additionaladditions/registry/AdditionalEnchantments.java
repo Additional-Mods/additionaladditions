@@ -1,12 +1,13 @@
-package dqu.additionaladditions.enchantment;
+package dqu.additionaladditions.registry;
 
 import dqu.additionaladditions.AdditionalAdditions;
 import dqu.additionaladditions.Config;
+import dqu.additionaladditions.enchantment.PrecisionEnchantment;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
-public class EnchantmentRegistry {
+public class AdditionalEnchantments {
     public static final Enchantment ENCHANTMENT_PRECISION = new PrecisionEnchantment();
 
     public static void registerAll() {

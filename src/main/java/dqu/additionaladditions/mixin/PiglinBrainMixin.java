@@ -1,6 +1,6 @@
 package dqu.additionaladditions.mixin;
 
-import dqu.additionaladditions.material.MaterialRegistry;
+import dqu.additionaladditions.registry.AdditionalMaterials;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.mob.PiglinBrain;
 import net.minecraft.item.ArmorItem;
@@ -18,7 +18,7 @@ import java.util.Iterator;
 public class PiglinBrainMixin {
     @Inject(method = "wearsGoldArmor(Lnet/minecraft/entity/LivingEntity;)Z", at = @At(value = "INVOKE_ASSIGN", target = "Lnet/minecraft/item/ItemStack;getItem()Lnet/minecraft/item/Item;"), cancellable = true, locals = LocalCapture.CAPTURE_FAILHARD)
     private static void wearsGoldArmor(LivingEntity entity, CallbackInfoReturnable<Boolean> cir, Iterable<ItemStack> iterable, Iterator iterator, ItemStack stack, Item item) {
-        if (item instanceof ArmorItem && ((ArmorItem) item).getMaterial() == MaterialRegistry.GILDED_NETHERITE_ARMOR_MATERIAL) {
+        if (item instanceof ArmorItem && ((ArmorItem) item).getMaterial() == AdditionalMaterials.GILDED_NETHERITE_ARMOR_MATERIAL) {
             cir.setReturnValue(true);
         }
     }
