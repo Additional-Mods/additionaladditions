@@ -93,7 +93,8 @@ public class ItemRegistry {
                 }
             });
         }
-        CompostingChanceRegistry.INSTANCE.add(Items.ROTTEN_FLESH, 0.33F);
+        if (Config.get("CompostableRottenFlesh"))
+            CompostingChanceRegistry.INSTANCE.add(Items.ROTTEN_FLESH, 0.33F);
     }
 
     public static void registerAll() {

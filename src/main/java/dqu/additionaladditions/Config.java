@@ -16,7 +16,8 @@ public class Config {
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
     private static final String PATH = FabricLoader.getInstance().getConfigDir().resolve("additional-additions-config.json").toString();
     private static final File DBFILE = new File(PATH);
-    private static final String[] defaultProperties = {"FoodItems", "WateringCan", "RoseGold", "Ropes", "EnchantmentPrecision", "EnchantmentSpeed", "Wrench", "CopperPatina", "AmethystLamp", "Crossbows", "TridentShard", "GlowStick", "GildedNetherite", "DepthMeter", "Potions", "MysteryBag"};
+    private static final String[] defaultProperties = {"FoodItems", "WateringCan", "RoseGold", "Ropes", "EnchantmentPrecision", "EnchantmentSpeed", "Wrench", "CopperPatina", "AmethystLamp", "Crossbows", "TridentShard", "GlowStick", "GildedNetherite", "DepthMeter", "Potions", "MysteryBag",
+    "CompostableRottenFlesh"};
     private static JsonObject db = new JsonObject();
 
     public static void load() {
@@ -70,6 +71,7 @@ public class Config {
                 db.addProperty("GildedNetherite", true);
                 db.addProperty("DepthMeter", true);
                 db.addProperty("EnchantmentSpeed", true);
+                db.addProperty("CompostableRottenFlesh", true);
                 db.addProperty("version", version + 1);
             }
         }
