@@ -1,10 +1,6 @@
 package dqu.additionaladditions;
 
-import dqu.additionaladditions.registry.AdditionalBlocks;
-import dqu.additionaladditions.registry.AdditionalEnchantments;
-import dqu.additionaladditions.registry.AdditionalEntities;
-import dqu.additionaladditions.registry.AdditionalItems;
-import dqu.additionaladditions.registry.AdditionalMaterials;
+import dqu.additionaladditions.registry.*;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.loader.api.FabricLoader;
 import org.apache.logging.log4j.LogManager;
@@ -20,6 +16,7 @@ public class AdditionalAdditions implements ModInitializer {
     public void onInitialize() {
         lithiumInstalled = FabricLoader.getInstance().isModLoaded("lithium");
 
+        Config.init();
         Config.load();
         AdditionalItems.registerAll();
         AdditionalBlocks.registerAll();
