@@ -1,0 +1,32 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "additionaladditions:item/depth_meter_2"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "angle": 0
+      },
+      "model": "additionaladditions:item/depth_meter_0"
+    },
+    {
+      "predicate": {
+        "angle": 0.1
+      },
+      "model": "additionaladditions:item/depth_meter_1"
+    },
+    {
+      "predicate": {
+        "angle": 0.2
+      },
+      "model": "additionaladditions:item/depth_meter_2"
+    },
+    {
+      "predicate": {
+        "angle": 0.3
+      },
+      "model": "additionaladditions:item/depth_meter_3"
+    }
+  ]
+}

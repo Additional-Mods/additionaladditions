@@ -13,7 +13,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(ClientPlayerEntity.class)
 public class ClientPlayerEntityMixin {
-
     @Inject(method = "isSneaking", at = @At("HEAD"))
     private void checkSneakZoom(CallbackInfoReturnable<Boolean> cir) {
         PlayerEntity player = (PlayerEntity) (Object) this;

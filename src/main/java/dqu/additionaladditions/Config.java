@@ -17,8 +17,8 @@ public class Config {
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
     private static final String PATH = FabricLoader.getInstance().getConfigDir().resolve("additional-additions-config.json").toString();
     private static final File DBFILE = new File(PATH);
+    private static final HashMap<String, Integer> properties = new HashMap<>();
     private static JsonObject db = new JsonObject();
-    private static HashMap<String, Integer> properties = new HashMap<>();
 
     private static String format(String message) {
         return String.format("[%s] %s", AdditionalAdditions.namespace, message);

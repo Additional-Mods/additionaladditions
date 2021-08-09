@@ -46,6 +46,7 @@ public class AdditionalItems {
     public static final CrossbowItem CROSSBOW_WITH_SPYGLASS = new CrossbowItem(new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1).maxDamage(350));
     public static final Item TRIDENT_SHARD = new Item(new FabricItemSettings().group(ItemGroup.MATERIALS));
     public static final GlowStickItem GLOW_STICK_ITEM = new GlowStickItem(new FabricItemSettings().group(ItemGroup.MISC));
+    public static final Item DEPTH_METER_ITEM = new Item(new FabricItemSettings().group(ItemGroup.TOOLS));
 
     private static void registerItems() {
         if(Config.get("WateringCan")) Registry.register(Registry.ITEM, new Identifier(AdditionalAdditions.namespace, "watering_can"), WATERING_CAN);
@@ -53,6 +54,7 @@ public class AdditionalItems {
         if(Config.get("Crossbows")) Registry.register(Registry.ITEM, new Identifier(AdditionalAdditions.namespace, "crossbow_with_spyglass"), CROSSBOW_WITH_SPYGLASS);
         if(Config.get("TridentShard")) Registry.register(Registry.ITEM, new Identifier(AdditionalAdditions.namespace, "trident_shard"), TRIDENT_SHARD);
         if(Config.get("GlowStick")) Registry.register(Registry.ITEM, new Identifier(AdditionalAdditions.namespace, "glow_stick"), GLOW_STICK_ITEM);
+        if(Config.get("DepthMeter")) Registry.register(Registry.ITEM, new Identifier(AdditionalAdditions.namespace, "depth_meter"), DEPTH_METER_ITEM);
     }
 
     private static void registerFoods() {
@@ -75,6 +77,13 @@ public class AdditionalItems {
                     FabricLootPoolBuilder poolBuilder = FabricLootPoolBuilder.builder()
                             .rolls(UniformLootNumberProvider.create(0, 16))
                             .with(ItemEntry.builder(GLOW_STICK_ITEM));
+                    table.pool(poolBuilder);
+                }
+                if (Config.get("DepthMeter")) {
+                    FabricLootPoolBuilder poolBuilder = FabricLootPoolBuilder.builder()
+                            .rolls(ConstantLootNumberProvider.create(1))
+                            .conditionally(RandomChanceLootCondition.builder(0.1f))
+                            .with(ItemEntry.builder(DEPTH_METER_ITEM));
                     table.pool(poolBuilder);
                 }
             }

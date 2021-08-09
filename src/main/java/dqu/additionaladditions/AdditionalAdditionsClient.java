@@ -14,6 +14,7 @@ import net.minecraft.client.render.entity.FlyingItemEntityRenderer;
 import net.minecraft.item.CrossbowItem;
 import net.minecraft.item.Items;
 import net.minecraft.util.Identifier;
+import net.minecraft.world.World;
 
 @Environment(EnvType.CLIENT)
 public class AdditionalAdditionsClient implements ClientModInitializer {
@@ -41,6 +42,15 @@ public class AdditionalAdditionsClient implements ClientModInitializer {
 
         FabricModelPredicateProviderRegistry.register(AdditionalItems.CROSSBOW_WITH_SPYGLASS, new Identifier("firework"), (itemStack, clientWorld, livingEntity, worldSeed) -> {
             return CrossbowItem.hasProjectile(itemStack, Items.FIREWORK_ROCKET) ? 1.0F : 0.0F;
+        });
+
+        FabricModelPredicateProviderRegistry.register(AdditionalItems.DEPTH_METER_ITEM, new Identifier("angle"), (itemStack, clientWorld, livingEntity, worldSeed) -> {
+            if (livingEntity == null) return 0.2f;
+            int height = livingEntity.world.getTopY() - livingEntity.world.getBottomY();
+            double playerY = livingEntity.getY() - livingEntity.world.getBottomY();
+            double quarter = height / 4d;
+            int value = (int) (playerY / quarter);
+            return (value < 0) ? 0 : (Math.min(value, 3) / 10f);
         });
     }
 }
