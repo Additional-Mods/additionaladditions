@@ -31,5 +31,6 @@
   "block.additionaladditions.rope": "Rope",
   "block.additionaladditions.amethyst_lamp": "Amethyst Lamp",
   "enchantment.additionaladditions.precision": "Precision",
+  "enchantment.additionaladditions.speed": "Speed",
   "entity.additionaladditions.glow_stick": "Glow Stick"
 }

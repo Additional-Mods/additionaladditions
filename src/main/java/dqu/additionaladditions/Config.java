@@ -41,7 +41,7 @@ public class Config {
         properties.put("GildedNetherite", 3);
         properties.put("DepthMeter", 3);
         properties.put("Potions", 3);
-        properties.put("MysteryBag", 3);
+        properties.put("MysteriousBundle", 3);
         properties.put("CompostableRottenFlesh", 3);
     }
 

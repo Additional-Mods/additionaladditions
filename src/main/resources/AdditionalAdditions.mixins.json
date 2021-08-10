@@ -7,6 +7,7 @@
     "ArmorItemMixin",
     "AxeItemMixin",
     "CrossbowItemMixin",
+    "LivingEntityMixin",
     "MobEntityMixin",
     "PiglinBrainMixin",
     "RedstoneWireBlockMixin"
