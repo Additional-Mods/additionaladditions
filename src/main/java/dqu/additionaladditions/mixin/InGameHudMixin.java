@@ -20,9 +20,7 @@ public abstract class InGameHudMixin {
 
     @Redirect(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/network/ClientPlayerEntity;isUsingSpyglass()Z"))
     private boolean spyglassOverlay(ClientPlayerEntity clientPlayerEntity) {
-        boolean isZooming = AdditionalAdditions.zoom || clientPlayerEntity.isUsingSpyglass();
-        if (!clientPlayerEntity.isUsingSpyglass()) this.client.options.smoothCameraEnabled = isZooming;
-        return isZooming;
+        return AdditionalAdditions.zoom || clientPlayerEntity.isUsingSpyglass();
     }
 
     @Inject(method = "render", at = @At("TAIL"))
