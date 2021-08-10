@@ -29,7 +29,7 @@ public class GildedNetheriteToolMaterial implements ToolMaterial {
 
     @Override
     public int getEnchantability() {
-        return 16;
+        return 24;
     }
 
     @Override
