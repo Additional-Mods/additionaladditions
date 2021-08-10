@@ -10,7 +10,8 @@
     "LivingEntityMixin",
     "MobEntityMixin",
     "PiglinBrainMixin",
-    "RedstoneWireBlockMixin"
+    "RedstoneWireBlockMixin",
+    "WanderingTraderEntityMixin"
   ],
   "client": [
     "ClientPlayerEntityMixin",

@@ -3,6 +3,7 @@ package dqu.additionaladditions.registry;
 import dqu.additionaladditions.AdditionalAdditions;
 import dqu.additionaladditions.Config;
 import dqu.additionaladditions.item.GlowStickItem;
+import dqu.additionaladditions.item.MysteriousBundleItem;
 import dqu.additionaladditions.item.WateringCanItem;
 import dqu.additionaladditions.item.WrenchItem;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
@@ -47,6 +48,7 @@ public class AdditionalItems {
     public static final Item TRIDENT_SHARD = new Item(new FabricItemSettings().group(ItemGroup.MATERIALS));
     public static final GlowStickItem GLOW_STICK_ITEM = new GlowStickItem(new FabricItemSettings().group(ItemGroup.MISC));
     public static final Item DEPTH_METER_ITEM = new Item(new FabricItemSettings().group(ItemGroup.TOOLS));
+    public static final MysteriousBundleItem MYSTERIOUS_BUNDLE_ITEM = new MysteriousBundleItem(new FabricItemSettings().group(ItemGroup.MISC).maxCount(1));
 
     private static void registerItems() {
         if(Config.get("WateringCan")) Registry.register(Registry.ITEM, new Identifier(AdditionalAdditions.namespace, "watering_can"), WATERING_CAN);
@@ -55,6 +57,7 @@ public class AdditionalItems {
         if(Config.get("TridentShard")) Registry.register(Registry.ITEM, new Identifier(AdditionalAdditions.namespace, "trident_shard"), TRIDENT_SHARD);
         if(Config.get("GlowStick")) Registry.register(Registry.ITEM, new Identifier(AdditionalAdditions.namespace, "glow_stick"), GLOW_STICK_ITEM);
         if(Config.get("DepthMeter")) Registry.register(Registry.ITEM, new Identifier(AdditionalAdditions.namespace, "depth_meter"), DEPTH_METER_ITEM);
+        if(Config.get("MysteriousBundle")) Registry.register(Registry.ITEM, new Identifier(AdditionalAdditions.namespace, "mysterious_bundle"), MYSTERIOUS_BUNDLE_ITEM);
     }
 
     private static void registerFoods() {
