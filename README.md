@@ -34,8 +34,11 @@ Additional Additions is a mod that aims to add additional uses for Copper, Ameth
   ### Precision
   A new Crossbow enchantment, increasing it's accuracy.
   
+  ### Speed
+  A new Boots enchantment, making the player faster!
+  
   ### Watering Can
-  Water your crops to make them grow faster
+  Water your crops to make them grow faster!
   
   ![](https://i.imgur.com/KfNjB2V.png)
   
@@ -58,6 +61,27 @@ Additional Additions is a mod that aims to add additional uses for Copper, Ameth
   Throw them to light up the area
 
   ![](https://i.imgur.com/1Xti4Yj.png)
+
+  ### Mysterious Bag
+  Buy it from a Wandering Trader, open it and get random items!
+
+  ![](https://i.imgur.com/cLzI3Yy.png)
+
+  ### Gilded Netherite
+  Upgrade your Netherite items with Golden ingots. Higher enchantability, and piglins won't attack you!
+
+  ![](https://i.imgur.com/9qdg1Q8.png)
+
+  ### New Potions
+  Now you can craft Potion of Glow, and Potion of Haste!
+
+  ### Depth Meter
+  Measure your depth!
+
+  ![](https://i.imgur.com/M3zggk8.png)
+
+  ### Compostable Rotten Flesh
+  Recycle it!
   
   ### ...coming more!
   
@@ -74,5 +98,5 @@ Turn off and on any features you want!
 ### Credits
 Most of the textures made by: [Avila27](https://www.curseforge.com/members/avila27/)
 <br>
-
+### Get support on our Discord server.
 ### [Discord](https://discord.com/invite/g5a7ZA62t3) [Modrinth](https://modrinth.com/mod/addadd) [CurseForge](https://www.curseforge.com/minecraft/mc-mods/additional-additions)
