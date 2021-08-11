@@ -24,5 +24,6 @@ public class AdditionalAdditions implements ModInitializer {
         AdditionalEnchantments.registerAll();
         AdditionalMaterials.registerAll();
         AdditionalPotions.registerAll();
+        AdditionalMusicDiscs.registerAll();
     }
 }

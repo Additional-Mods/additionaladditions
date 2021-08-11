@@ -13,7 +13,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 
 public class Config {
-    public static final int VERSION = 3;
+    public static final int VERSION = 4;
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
     private static final String PATH = FabricLoader.getInstance().getConfigDir().resolve("additional-additions-config.json").toString();
     private static final File DBFILE = new File(PATH);
@@ -43,6 +43,7 @@ public class Config {
         properties.put("Potions", 3);
         properties.put("MysteriousBundle", 3);
         properties.put("CompostableRottenFlesh", 3);
+        properties.put("MusicDiscs", 4);
     }
 
     public static void load() {

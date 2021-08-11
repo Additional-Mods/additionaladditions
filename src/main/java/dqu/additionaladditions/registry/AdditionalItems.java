@@ -93,6 +93,17 @@ public class AdditionalItems {
                     table.pool(poolBuilder);
                 }
             }
+            if (DUNGEON_CHEST_LOOT_TABLE_ID.equals(id) || MANSION_CHEST_LOOT_TABLE_ID.equals(id)) {
+                if (Config.get("MusicDiscs")) {
+                    FabricLootPoolBuilder poolBuilder = FabricLootPoolBuilder.builder()
+                            .rolls(ConstantLootNumberProvider.create(1))
+                            .conditionally(RandomChanceLootCondition.builder(0.25f))
+                            .with(ItemEntry.builder(AdditionalMusicDiscs.MUSIC_DISC_1206))
+                            .with(ItemEntry.builder(AdditionalMusicDiscs.MUSIC_DISC_2305))
+                            .with(ItemEntry.builder(AdditionalMusicDiscs.MUSIC_DISC_3107));
+                    table.pool(poolBuilder);
+                }
+            }
         }));
     }
 

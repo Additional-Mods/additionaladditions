@@ -1,0 +1,26 @@
+{
+  "2305": {
+    "sounds": [
+      {
+        "name": "additionaladditions:records/2305",
+        "stream": true
+      }
+    ]
+  },
+  "3107": {
+    "sounds": [
+      {
+        "name": "additionaladditions:records/3107",
+        "stream": true
+      }
+    ]
+  },
+  "1206": {
+    "sounds": [
+      {
+        "name": "additionaladditions:records/1206",
+        "stream": true
+      }
+    ]
+  }
+}
