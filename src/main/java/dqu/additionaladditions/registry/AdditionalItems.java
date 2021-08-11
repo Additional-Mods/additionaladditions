@@ -22,6 +22,7 @@ import net.minecraft.loot.provider.number.ConstantLootNumberProvider;
 import net.minecraft.loot.provider.number.UniformLootNumberProvider;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.Rarity;
 import net.minecraft.util.math.BlockPointer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.Registry;
@@ -31,15 +32,17 @@ public class AdditionalItems {
     private static final Identifier MINESHAFT_CHEST_LOOT_TABLE_ID = LootTables.ABANDONED_MINESHAFT_CHEST;
     private static final Identifier DUNGEON_CHEST_LOOT_TABLE_ID = LootTables.SIMPLE_DUNGEON_CHEST;
     private static final Identifier STRONGHOLD_CHEST_LOOT_TABLE_ID = LootTables.STRONGHOLD_CORRIDOR_CHEST;
+    private static final Identifier MANSION_CHEST_LOOT_TABLE_ID = LootTables.WOODLAND_MANSION_CHEST;
 
+    // saturation = hunger * saturationModifier
     public static final Item FRIED_EGG = new Item(new FabricItemSettings().group(ItemGroup.FOOD)
-            .food(new FoodComponent.Builder().hunger(6).saturationModifier(5.2f).build())
+            .food(new FoodComponent.Builder().hunger(6).saturationModifier(0.8666f).build())
     );
     public static final Item BERRY_PIE = new Item(new FabricItemSettings().group(ItemGroup.FOOD)
-            .food(new FoodComponent.Builder().hunger(8).saturationModifier(4.8f).build())
+            .food(new FoodComponent.Builder().hunger(8).saturationModifier(0.6f).build())
     );
     public static final Item HONEYED_APPLE = new Item(new FabricItemSettings().group(ItemGroup.FOOD)
-            .food(new FoodComponent.Builder().hunger(8).saturationModifier(12.8f).build())
+            .food(new FoodComponent.Builder().hunger(8).saturationModifier(1.6f).build())
     );
 
     public static final WateringCanItem WATERING_CAN = new WateringCanItem(new FabricItemSettings().group(ItemGroup.TOOLS).maxCount(1).maxDamage(101));
@@ -48,7 +51,7 @@ public class AdditionalItems {
     public static final Item TRIDENT_SHARD = new Item(new FabricItemSettings().group(ItemGroup.MATERIALS));
     public static final GlowStickItem GLOW_STICK_ITEM = new GlowStickItem(new FabricItemSettings().group(ItemGroup.MISC));
     public static final Item DEPTH_METER_ITEM = new Item(new FabricItemSettings().group(ItemGroup.TOOLS));
-    public static final MysteriousBundleItem MYSTERIOUS_BUNDLE_ITEM = new MysteriousBundleItem(new FabricItemSettings().group(ItemGroup.MISC).maxCount(1));
+    public static final MysteriousBundleItem MYSTERIOUS_BUNDLE_ITEM = new MysteriousBundleItem(new FabricItemSettings().group(ItemGroup.MISC).maxCount(1).rarity(Rarity.RARE));
 
     private static void registerItems() {
         if(Config.get("WateringCan")) Registry.register(Registry.ITEM, new Identifier(AdditionalAdditions.namespace, "watering_can"), WATERING_CAN);
