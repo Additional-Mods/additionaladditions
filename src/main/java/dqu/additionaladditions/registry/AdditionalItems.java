@@ -98,9 +98,9 @@ public class AdditionalItems {
                     FabricLootPoolBuilder poolBuilder = FabricLootPoolBuilder.builder()
                             .rolls(ConstantLootNumberProvider.create(1))
                             .conditionally(RandomChanceLootCondition.builder(0.25f))
-                            .with(ItemEntry.builder(AdditionalMusicDiscs.MUSIC_DISC_1206))
-                            .with(ItemEntry.builder(AdditionalMusicDiscs.MUSIC_DISC_2305))
-                            .with(ItemEntry.builder(AdditionalMusicDiscs.MUSIC_DISC_3107));
+                            .with(ItemEntry.builder(AdditionalMusicDiscs.MUSIC_DISC_0308))
+                            .with(ItemEntry.builder(AdditionalMusicDiscs.MUSIC_DISC_1007))
+                            .with(ItemEntry.builder(AdditionalMusicDiscs.MUSIC_DISC_1507));
                     table.pool(poolBuilder);
                 }
             }
