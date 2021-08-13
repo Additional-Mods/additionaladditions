@@ -83,6 +83,9 @@ Additional Additions is a mod that aims to add additional uses for Copper, Ameth
   ### Compostable Rotten Flesh
   Recycle it!
   
+  ### Music Discs!
+  Listen to 3 new music discs
+  
   ### ...coming more!
   
 </details>
@@ -96,7 +99,8 @@ See more information on the [wiki](https://github.com/Dqu1J/additionaladditions/
 Configuration file is located in the `config` folder. It is named `additional-additions-config.json`.
 Turn off and on any features you want!
 ### Credits
-Most of the textures made by: [Avila27](https://www.curseforge.com/members/avila27/)
+Most of the textures made by: [Avila27](https://www.curseforge.com/members/avila27/)  
+Music Discs made by: [adoghr](https://www.youtube.com/channel/UCg39EifZ8wUEUZPWhGjslNg)
 <br>
 ### Get support on our Discord server.
 ### [Discord](https://discord.com/invite/g5a7ZA62t3) [Modrinth](https://modrinth.com/mod/addadd) [CurseForge](https://www.curseforge.com/minecraft/mc-mods/additional-additions)
