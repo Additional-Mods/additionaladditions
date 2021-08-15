@@ -2,7 +2,7 @@
   "replace": false,
   "required": false,
   "values": [
-    "additionaladditions:rose_gold_sword",
-    "additionaladditions:gilded_netherite_sword"
+    {"id": "additionaladditions:rose_gold_sword", "required": false},
+    {"id": "additionaladditions:gilded_netherite_sword", "required": false}
   ]
 }

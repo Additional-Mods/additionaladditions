@@ -2,7 +2,7 @@
   "replace": false,
   "required": false,
   "values": [
-    "additionaladditions:rose_gold_shovel",
-    "additionaladditions:gilded_netherite_shovel"
+    {"id": "additionaladditions:rose_gold_shovel", "required": false},
+    {"id": "additionaladditions:gilded_netherite_shovel", "required": false}
   ]
 }
