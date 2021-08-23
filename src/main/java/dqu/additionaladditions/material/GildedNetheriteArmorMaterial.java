@@ -8,7 +8,7 @@ import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 
 public class GildedNetheriteArmorMaterial implements ArmorMaterial {
-    private static final int[] BASE_DURABILITY = {405, 590, 553, 479};
+    private static final int[] BASE_DURABILITY = {481, 555, 592, 407};
     private static final int[] PROTECTION_VALUES = {3, 6, 8, 3};
 
     @Override
