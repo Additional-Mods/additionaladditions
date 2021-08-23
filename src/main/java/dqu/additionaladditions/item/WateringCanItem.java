@@ -2,11 +2,15 @@ package dqu.additionaladditions.item;
 
 import dqu.additionaladditions.Config;
 import net.minecraft.block.*;
+import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvents;
+import net.minecraft.text.Text;
+import net.minecraft.text.TranslatableText;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.hit.BlockHitResult;
@@ -15,6 +19,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.RaycastContext;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
 
 public class WateringCanItem extends Item {
     public WateringCanItem(Settings settings) {
@@ -70,5 +77,12 @@ public class WateringCanItem extends Item {
     @Override
     public int getItemBarStep(ItemStack stack) {
         return Config.get("WateringCan") ? Math.min(Math.round(13 * stack.getDamage() / 100.0F), 13) : 13;
+    }
+
+    @Override
+    public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
+        int water = (int) (stack.getDamage() * 0.1);
+        String tooltipText = String.format(": %s / 10", water);
+        tooltip.add(new TranslatableText("block.minecraft.water").append(tooltipText).formatted(Formatting.AQUA) );
     }
 }
