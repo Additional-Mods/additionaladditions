@@ -38,27 +38,24 @@ public class AdditionalMaterials {
     public static final Item GILDED_NETHERITE_SHOVEL = new ShovelItem(GildedNetheriteToolMaterial.MATERIAL, 3.5F, -3F, new Item.Settings().group(ItemGroup.TOOLS).fireproof());
 
     public static void registerAll() {
-        if(Config.get("RoseGold")) {
-            Registry.register(Registry.ITEM, new Identifier(AdditionalAdditions.namespace, "rose_gold_helmet"), ROSE_GOLD_HELMET);
-            Registry.register(Registry.ITEM, new Identifier(AdditionalAdditions.namespace, "rose_gold_chestplate"), ROSE_GOLD_CHESTPLATE);
-            Registry.register(Registry.ITEM, new Identifier(AdditionalAdditions.namespace, "rose_gold_leggings"), ROSE_GOLD_LEGGINGS);
-            Registry.register(Registry.ITEM, new Identifier(AdditionalAdditions.namespace, "rose_gold_boots"), ROSE_GOLD_BOOTS);
-            Registry.register(Registry.ITEM, new Identifier(AdditionalAdditions.namespace, "rose_gold_sword"), ROSE_GOLD_SWORD);
-            Registry.register(Registry.ITEM, new Identifier(AdditionalAdditions.namespace, "rose_gold_pickaxe"), ROSE_GOLD_PICKAXE);
-            Registry.register(Registry.ITEM, new Identifier(AdditionalAdditions.namespace, "rose_gold_axe"), ROSE_GOLD_AXE);
-            Registry.register(Registry.ITEM, new Identifier(AdditionalAdditions.namespace, "rose_gold_shovel"), ROSE_GOLD_SHOVEL);
-            Registry.register(Registry.ITEM, new Identifier(AdditionalAdditions.namespace, "rose_gold_hoe"), ROSE_GOLD_HOE);
-        }
-        if(Config.get("GildedNetherite")) {
-            Registry.register(Registry.ITEM, new Identifier(AdditionalAdditions.namespace, "gilded_netherite_helmet"), GILDED_NETHERITE_HELMET);
-            Registry.register(Registry.ITEM, new Identifier(AdditionalAdditions.namespace, "gilded_netherite_chestplate"), GILDED_NETHERITE_CHESTPLATE);
-            Registry.register(Registry.ITEM, new Identifier(AdditionalAdditions.namespace, "gilded_netherite_leggings"), GILDED_NETHERITE_LEGGINGS);
-            Registry.register(Registry.ITEM, new Identifier(AdditionalAdditions.namespace, "gilded_netherite_boots"), GILDED_NETHERITE_BOOTS);
-            Registry.register(Registry.ITEM, new Identifier(AdditionalAdditions.namespace, "gilded_netherite_sword"), GILDED_NETHERITE_SWORD);
-            Registry.register(Registry.ITEM, new Identifier(AdditionalAdditions.namespace, "gilded_netherite_pickaxe"), GILDED_NETHERITE_PICKAXE);
-            Registry.register(Registry.ITEM, new Identifier(AdditionalAdditions.namespace, "gilded_netherite_axe"), GILDED_NETHERITE_AXE);
-            Registry.register(Registry.ITEM, new Identifier(AdditionalAdditions.namespace, "gilded_netherite_shovel"), GILDED_NETHERITE_SHOVEL);
-            Registry.register(Registry.ITEM, new Identifier(AdditionalAdditions.namespace, "gilded_netherite_hoe"), GILDED_NETHERITE_HOE);
-        }
+        Registry.register(Registry.ITEM, new Identifier(AdditionalAdditions.namespace, "rose_gold_helmet"), ROSE_GOLD_HELMET);
+        Registry.register(Registry.ITEM, new Identifier(AdditionalAdditions.namespace, "rose_gold_chestplate"), ROSE_GOLD_CHESTPLATE);
+        Registry.register(Registry.ITEM, new Identifier(AdditionalAdditions.namespace, "rose_gold_leggings"), ROSE_GOLD_LEGGINGS);
+        Registry.register(Registry.ITEM, new Identifier(AdditionalAdditions.namespace, "rose_gold_boots"), ROSE_GOLD_BOOTS);
+        Registry.register(Registry.ITEM, new Identifier(AdditionalAdditions.namespace, "rose_gold_sword"), ROSE_GOLD_SWORD);
+        Registry.register(Registry.ITEM, new Identifier(AdditionalAdditions.namespace, "rose_gold_pickaxe"), ROSE_GOLD_PICKAXE);
+        Registry.register(Registry.ITEM, new Identifier(AdditionalAdditions.namespace, "rose_gold_axe"), ROSE_GOLD_AXE);
+        Registry.register(Registry.ITEM, new Identifier(AdditionalAdditions.namespace, "rose_gold_shovel"), ROSE_GOLD_SHOVEL);
+        Registry.register(Registry.ITEM, new Identifier(AdditionalAdditions.namespace, "rose_gold_hoe"), ROSE_GOLD_HOE);
+
+        Registry.register(Registry.ITEM, new Identifier(AdditionalAdditions.namespace, "gilded_netherite_helmet"), GILDED_NETHERITE_HELMET);
+        Registry.register(Registry.ITEM, new Identifier(AdditionalAdditions.namespace, "gilded_netherite_chestplate"), GILDED_NETHERITE_CHESTPLATE);
+        Registry.register(Registry.ITEM, new Identifier(AdditionalAdditions.namespace, "gilded_netherite_leggings"), GILDED_NETHERITE_LEGGINGS);
+        Registry.register(Registry.ITEM, new Identifier(AdditionalAdditions.namespace, "gilded_netherite_boots"), GILDED_NETHERITE_BOOTS);
+        Registry.register(Registry.ITEM, new Identifier(AdditionalAdditions.namespace, "gilded_netherite_sword"), GILDED_NETHERITE_SWORD);
+        Registry.register(Registry.ITEM, new Identifier(AdditionalAdditions.namespace, "gilded_netherite_pickaxe"), GILDED_NETHERITE_PICKAXE);
+        Registry.register(Registry.ITEM, new Identifier(AdditionalAdditions.namespace, "gilded_netherite_axe"), GILDED_NETHERITE_AXE);
+        Registry.register(Registry.ITEM, new Identifier(AdditionalAdditions.namespace, "gilded_netherite_shovel"), GILDED_NETHERITE_SHOVEL);
+        Registry.register(Registry.ITEM, new Identifier(AdditionalAdditions.namespace, "gilded_netherite_hoe"), GILDED_NETHERITE_HOE);
     }
 }

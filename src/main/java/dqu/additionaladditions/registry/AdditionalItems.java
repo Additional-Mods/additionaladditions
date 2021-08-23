@@ -54,13 +54,13 @@ public class AdditionalItems {
     public static final MysteriousBundleItem MYSTERIOUS_BUNDLE_ITEM = new MysteriousBundleItem(new FabricItemSettings().group(ItemGroup.MISC).maxCount(1).rarity(Rarity.RARE));
 
     private static void registerItems() {
-        if(Config.get("WateringCan")) Registry.register(Registry.ITEM, new Identifier(AdditionalAdditions.namespace, "watering_can"), WATERING_CAN);
-        if(Config.get("Wrench")) Registry.register(Registry.ITEM, new Identifier(AdditionalAdditions.namespace, "wrench"), WRENCH_ITEM);
-        if(Config.get("Crossbows")) Registry.register(Registry.ITEM, new Identifier(AdditionalAdditions.namespace, "crossbow_with_spyglass"), CROSSBOW_WITH_SPYGLASS);
-        if(Config.get("TridentShard")) Registry.register(Registry.ITEM, new Identifier(AdditionalAdditions.namespace, "trident_shard"), TRIDENT_SHARD);
-        if(Config.get("GlowStick")) Registry.register(Registry.ITEM, new Identifier(AdditionalAdditions.namespace, "glow_stick"), GLOW_STICK_ITEM);
-        if(Config.get("DepthMeter")) Registry.register(Registry.ITEM, new Identifier(AdditionalAdditions.namespace, "depth_meter"), DEPTH_METER_ITEM);
-        if(Config.get("MysteriousBundle")) Registry.register(Registry.ITEM, new Identifier(AdditionalAdditions.namespace, "mysterious_bundle"), MYSTERIOUS_BUNDLE_ITEM);
+        Registry.register(Registry.ITEM, new Identifier(AdditionalAdditions.namespace, "watering_can"), WATERING_CAN);
+        Registry.register(Registry.ITEM, new Identifier(AdditionalAdditions.namespace, "wrench"), WRENCH_ITEM);
+        Registry.register(Registry.ITEM, new Identifier(AdditionalAdditions.namespace, "crossbow_with_spyglass"), CROSSBOW_WITH_SPYGLASS);
+        Registry.register(Registry.ITEM, new Identifier(AdditionalAdditions.namespace, "trident_shard"), TRIDENT_SHARD);
+        Registry.register(Registry.ITEM, new Identifier(AdditionalAdditions.namespace, "glow_stick"), GLOW_STICK_ITEM);
+        Registry.register(Registry.ITEM, new Identifier(AdditionalAdditions.namespace, "depth_meter"), DEPTH_METER_ITEM);
+        Registry.register(Registry.ITEM, new Identifier(AdditionalAdditions.namespace, "mysterious_bundle"), MYSTERIOUS_BUNDLE_ITEM);
     }
 
     private static void registerFoods() {
@@ -128,7 +128,7 @@ public class AdditionalItems {
 
     public static void registerAll() {
         registerItems();
-        if (Config.get("FoodItems")) registerFoods();
+        registerFoods();
         registerLootTables();
         registerOther();
     }

@@ -1,5 +1,6 @@
 package dqu.additionaladditions.item;
 
+import dqu.additionaladditions.Config;
 import net.minecraft.block.*;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -23,6 +24,7 @@ public class WateringCanItem extends Item {
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand) {
         ItemStack stack = player.getStackInHand(hand);
+        if (!Config.get("WateringCan")) { return TypedActionResult.fail(stack); }
         BlockHitResult hitResult = raycast(world, player, RaycastContext.FluidHandling.SOURCE_ONLY);
         if (hitResult.getType() != HitResult.Type.BLOCK) return TypedActionResult.fail(stack);
         BlockPos pos = hitResult.getBlockPos();
@@ -62,11 +64,11 @@ public class WateringCanItem extends Item {
 
     @Override
     public int getItemBarColor(ItemStack stack) {
-        return MathHelper.packRgb(65, 135, 235);
+        return Config.get("WateringCan") ? MathHelper.packRgb(65, 135, 235) : MathHelper.packRgb(235, 135, 65);
     }
 
     @Override
     public int getItemBarStep(ItemStack stack) {
-        return Math.min(Math.round(13 * stack.getDamage() / 100.0F), 13);
+        return Config.get("WateringCan") ? Math.min(Math.round(13 * stack.getDamage() / 100.0F), 13) : 13;
     }
 }

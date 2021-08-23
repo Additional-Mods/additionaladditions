@@ -18,6 +18,7 @@ public class Config {
     private static final String PATH = FabricLoader.getInstance().getConfigDir().resolve("additional-additions-config.json").toString();
     private static final File DBFILE = new File(PATH);
     private static final HashMap<String, Integer> properties = new HashMap<>();
+    public static boolean initialized = false;
     private static JsonObject db = new JsonObject();
 
     private static String format(String message) {
@@ -26,6 +27,7 @@ public class Config {
 
     public static void init() {
         // First value is the key name, second value is the config version where key was added.
+        initialized = true;
         properties.put("FoodItems", 1);
         properties.put("WateringCan", 1);
         properties.put("RoseGold", 1);
@@ -80,6 +82,10 @@ public class Config {
         if (!DBFILE.exists()) {
             AdditionalAdditions.LOGGER.error(format("Unable to get key as file doesn't exist!"));
             return false;
+        }
+        if (!initialized) {
+            init();
+            load();
         }
         return db.get(key).getAsBoolean();
     }

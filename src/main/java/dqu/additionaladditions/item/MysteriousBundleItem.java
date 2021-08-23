@@ -1,6 +1,7 @@
 package dqu.additionaladditions.item;
 
 import dqu.additionaladditions.AdditionalAdditions;
+import dqu.additionaladditions.Config;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -24,6 +25,7 @@ public class MysteriousBundleItem extends Item {
 
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
+        if (!Config.get("GlowSticks")) { return TypedActionResult.fail(user.getStackInHand(hand)); }
         if (world.isClient()) return TypedActionResult.success(user.getStackInHand(hand));
         Identifier lootTableID = new Identifier(AdditionalAdditions.namespace, "mysterious_bundle");
         LootContext lootContext = (new LootContext.Builder((ServerWorld) world)).random(world.random).build(LootContextTypes.EMPTY);

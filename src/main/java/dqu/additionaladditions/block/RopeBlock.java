@@ -1,5 +1,6 @@
 package dqu.additionaladditions.block;
 
+import dqu.additionaladditions.Config;
 import dqu.additionaladditions.registry.AdditionalBlocks;
 import net.minecraft.block.*;
 import net.minecraft.entity.player.PlayerEntity;
@@ -47,6 +48,7 @@ public class RopeBlock extends Block {
 
     @Override
     public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
+        if (!Config.get("Ropes")) return false;
         BlockState up = world.getBlockState(pos.offset(Direction.UP));
         if(up.isOf(this) || up.isSideSolidFullSquare(world, pos.offset(Direction.UP), Direction.DOWN)) return true;
 

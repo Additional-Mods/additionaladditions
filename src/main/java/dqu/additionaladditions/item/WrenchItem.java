@@ -1,6 +1,8 @@
 package dqu.additionaladditions.item;
 
 import dqu.additionaladditions.AdditionalAdditions;
+import dqu.additionaladditions.Config;
+import net.minecraft.block.BedBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ChestBlock;
 import net.minecraft.block.SlabBlock;
@@ -16,6 +18,7 @@ import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
+import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -26,13 +29,14 @@ public class WrenchItem extends Item {
 
     @Override
     public ActionResult useOnBlock(ItemUsageContext context) {
+        if (!Config.get("Wrench")) { return ActionResult.FAIL; }
         World world = context.getWorld();
         BlockPos pos = context.getBlockPos();
         BlockState state = world.getBlockState(pos);
 
         if (context.getPlayer() == null) return ActionResult.PASS;
         if (world.isClient()) return ActionResult.PASS;
-        if (state.getBlock() instanceof ChestBlock) return ActionResult.PASS;
+        if (state.getBlock() instanceof ChestBlock || state.getBlock() instanceof BedBlock) return ActionResult.PASS;
 
         if (state.contains(Properties.FACING)) {
             world.setBlockState(pos, state.cycle(Properties.FACING));

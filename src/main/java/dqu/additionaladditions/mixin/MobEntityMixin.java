@@ -1,5 +1,6 @@
 package dqu.additionaladditions.mixin;
 
+import dqu.additionaladditions.Config;
 import dqu.additionaladditions.registry.AdditionalBlocks;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -23,6 +24,7 @@ public abstract class MobEntityMixin extends LivingEntity {
 
     @Inject(method = "checkDespawn", at = @At("TAIL"))
     public void checkDespawn(CallbackInfo ci) {
+        if (!Config.get("AmethystLamp")) return;
         if (this.age > 0 || !isDisallowedInPeaceful()) return;
         if (isLampNearby((int)this.getX(), (int)this.getY(), (int)this.getZ(), 8)) {
             this.discard();

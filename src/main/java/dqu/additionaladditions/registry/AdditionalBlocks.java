@@ -22,21 +22,15 @@ public class AdditionalBlocks {
     public static final GlowStickBlock GLOW_STICK_BLOCK = new GlowStickBlock(FabricBlockSettings.of(Material.CARPET).noCollision().luminance(12).breakInstantly());
 
     public static void registerAll() {
-        if(Config.get("GlowStick")) Registry.register(Registry.BLOCK, new Identifier(AdditionalAdditions.namespace, "glow_stick"), GLOW_STICK_BLOCK);
-        if (Config.get("CopperPatina")) {
-            Registry.register(Registry.BLOCK, new Identifier(AdditionalAdditions.namespace, "copper_patina"), COPPER_PATINA);
-            Registry.register(Registry.ITEM, new Identifier(AdditionalAdditions.namespace, "copper_patina"),
-                    new BlockItem(COPPER_PATINA, new FabricItemSettings().group(ItemGroup.REDSTONE)));
-        }
-        if (Config.get("Ropes")) {
-            Registry.register(Registry.BLOCK, new Identifier(AdditionalAdditions.namespace, "rope"), ROPE_BLOCK);
-            Registry.register(Registry.ITEM, new Identifier(AdditionalAdditions.namespace, "rope"),
-                    new BlockItem(ROPE_BLOCK, new FabricItemSettings().group(ItemGroup.MISC)));
-        }
-        if (Config.get("AmethystLamp")) {
-            Registry.register(Registry.BLOCK, new Identifier(AdditionalAdditions.namespace, "amethyst_lamp"), AMETHYST_LAMP);
-            Registry.register(Registry.ITEM, new Identifier(AdditionalAdditions.namespace, "amethyst_lamp"),
-                    new BlockItem(AMETHYST_LAMP, new FabricItemSettings().group(ItemGroup.REDSTONE)));
-        }
+        Registry.register(Registry.BLOCK, new Identifier(AdditionalAdditions.namespace, "glow_stick"), GLOW_STICK_BLOCK);
+        Registry.register(Registry.BLOCK, new Identifier(AdditionalAdditions.namespace, "copper_patina"), COPPER_PATINA);
+        Registry.register(Registry.ITEM, new Identifier(AdditionalAdditions.namespace, "copper_patina"),
+                new BlockItem(COPPER_PATINA, new FabricItemSettings().group(ItemGroup.REDSTONE)));
+        Registry.register(Registry.BLOCK, new Identifier(AdditionalAdditions.namespace, "rope"), ROPE_BLOCK);
+        Registry.register(Registry.ITEM, new Identifier(AdditionalAdditions.namespace, "rope"),
+                new BlockItem(ROPE_BLOCK, new FabricItemSettings().group(ItemGroup.MISC)));
+        Registry.register(Registry.BLOCK, new Identifier(AdditionalAdditions.namespace, "amethyst_lamp"), AMETHYST_LAMP);
+        Registry.register(Registry.ITEM, new Identifier(AdditionalAdditions.namespace, "amethyst_lamp"),
+                new BlockItem(AMETHYST_LAMP, new FabricItemSettings().group(ItemGroup.REDSTONE)));
     }
 }

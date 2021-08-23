@@ -37,7 +37,6 @@ public class AdditionalMusicDiscs {
     }
 
     public static void registerAll() {
-        if(!Config.get("MusicDiscs")) return;
         registerSoundEvents();
         registerDiscs();
     }

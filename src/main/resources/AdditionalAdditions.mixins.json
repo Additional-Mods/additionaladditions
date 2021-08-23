@@ -11,6 +11,7 @@
     "LivingEntityMixin",
     "MobEntityMixin",
     "PiglinBrainMixin",
+    "RecipeManagerMixin",
     "RedstoneWireBlockMixin",
     "WanderingTraderEntityMixin"
   ],

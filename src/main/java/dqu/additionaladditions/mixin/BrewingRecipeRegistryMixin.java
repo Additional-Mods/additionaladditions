@@ -1,5 +1,6 @@
 package dqu.additionaladditions.mixin;
 
+import dqu.additionaladditions.Config;
 import dqu.additionaladditions.registry.AdditionalPotions;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
@@ -18,6 +19,12 @@ public abstract class BrewingRecipeRegistryMixin {
 
     @Inject(method = "registerDefaults", at = @At("TAIL"))
     private static void registerPotions(CallbackInfo ci) {
+        if (!Config.initialized) {
+            Config.init();
+            Config.load();
+        }
+
+        if (!Config.get("Potions")) return;
         registerPotionRecipe(Potions.AWKWARD, Items.GLOW_INK_SAC, AdditionalPotions.GLOW_POTION);
         registerPotionRecipe(Potions.AWKWARD, Items.AMETHYST_SHARD, AdditionalPotions.HASTE_POTION);
         registerPotionRecipe(AdditionalPotions.GLOW_POTION, Items.REDSTONE, AdditionalPotions.LONG_GLOW_POTION);

@@ -16,7 +16,6 @@ public class AdditionalPotions {
     public static final Potion STRONG_HASTE_POTION = new Potion(new StatusEffectInstance(StatusEffects.HASTE, 1600, 1));
 
     public static void registerAll() {
-        if (!Config.get("Potions")) return;
         Registry.register(Registry.POTION, new Identifier(AdditionalAdditions.namespace, "glow_potion"), GLOW_POTION);
         Registry.register(Registry.POTION, new Identifier(AdditionalAdditions.namespace, "long_glow_potion"), LONG_GLOW_POTION);
         Registry.register(Registry.POTION, new Identifier(AdditionalAdditions.namespace, "haste_potion"), HASTE_POTION);

@@ -1,5 +1,6 @@
 package dqu.additionaladditions.mixin;
 
+import dqu.additionaladditions.Config;
 import dqu.additionaladditions.registry.AdditionalBlocks;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.ItemEntity;
@@ -22,6 +23,7 @@ import java.util.Optional;
 public class AxeItemMixin {
     @Inject(method = "useOnBlock", at = @At(value = "FIELD", target = "Lnet/minecraft/sound/SoundEvents;ITEM_AXE_SCRAPE:Lnet/minecraft/sound/SoundEvent;"), locals = LocalCapture.CAPTURE_FAILSOFT)
     private void spawnCopperPatina(ItemUsageContext iuc, CallbackInfoReturnable<ActionResult> callbackInfo, World world, BlockPos blockPos, PlayerEntity playerEntity, BlockState blockState, Optional optional, Optional optional2, Optional optional3, ItemStack itemStack, Optional optional4) {
+        if (!Config.get("CopperPatina")) return;
         ItemStack stack = new ItemStack(AdditionalBlocks.COPPER_PATINA);
         ItemEntity itemEntity = new ItemEntity(world, blockPos.getX(), blockPos.getY(), blockPos.getZ(), stack);
         world.spawnEntity(itemEntity);

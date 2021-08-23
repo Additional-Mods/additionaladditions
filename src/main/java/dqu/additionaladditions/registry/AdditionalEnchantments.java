@@ -13,9 +13,7 @@ public class AdditionalEnchantments {
     public static final Enchantment ENCHANTMENT_SPEED = new SpeedEnchantment();
 
     public static void registerAll() {
-        if (Config.get("EnchantmentPrecision"))
-            Registry.register(Registry.ENCHANTMENT, new Identifier(AdditionalAdditions.namespace, "precision"), ENCHANTMENT_PRECISION);
-        if (Config.get("EnchantmentSpeed"))
-            Registry.register(Registry.ENCHANTMENT, new Identifier(AdditionalAdditions.namespace, "speed"), ENCHANTMENT_SPEED);
+        Registry.register(Registry.ENCHANTMENT, new Identifier(AdditionalAdditions.namespace, "precision"), ENCHANTMENT_PRECISION);
+        Registry.register(Registry.ENCHANTMENT, new Identifier(AdditionalAdditions.namespace, "speed"), ENCHANTMENT_SPEED);
     }
 }
