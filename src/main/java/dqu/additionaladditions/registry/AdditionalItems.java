@@ -18,6 +18,7 @@ import net.minecraft.item.*;
 import net.minecraft.loot.LootTables;
 import net.minecraft.loot.condition.RandomChanceLootCondition;
 import net.minecraft.loot.entry.ItemEntry;
+import net.minecraft.loot.function.SetCountLootFunction;
 import net.minecraft.loot.provider.number.ConstantLootNumberProvider;
 import net.minecraft.loot.provider.number.UniformLootNumberProvider;
 import net.minecraft.state.property.Properties;
@@ -81,8 +82,16 @@ public class AdditionalItems {
             if (DUNGEON_CHEST_LOOT_TABLE_ID.equals(id) || MINESHAFT_CHEST_LOOT_TABLE_ID.equals(id) || STRONGHOLD_CHEST_LOOT_TABLE_ID.equals(id)) {
                 if (Config.get("GlowStick")) {
                     FabricLootPoolBuilder poolBuilder = FabricLootPoolBuilder.builder()
-                            .rolls(UniformLootNumberProvider.create(0, 16))
+                            .rolls(UniformLootNumberProvider.create(0, 4))
+                            .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1, 4)))
                             .with(ItemEntry.builder(GLOW_STICK_ITEM));
+                    table.pool(poolBuilder);
+                }
+                if (Config.get("Ropes")) {
+                    FabricLootPoolBuilder poolBuilder = FabricLootPoolBuilder.builder()
+                            .rolls(UniformLootNumberProvider.create(1, 4))
+                            .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1, 8)))
+                            .with(ItemEntry.builder(AdditionalBlocks.ROPE_BLOCK.asItem()));
                     table.pool(poolBuilder);
                 }
                 if (Config.get("DepthMeter")) {
