@@ -30,5 +30,12 @@
     "minecraft": "1.17.x",
     "fabric": "*",
     "java": ">=16"
+  },
+  "custom": {
+    "modmenu": {
+      "links": {
+        "modmenu.discord": "https://discord.com/invite/g5a7ZA62t3"
+      }
+    }
   }
 }
