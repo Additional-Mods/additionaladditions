@@ -1,7 +1,6 @@
 package dqu.additionaladditions.registry;
 
 import dqu.additionaladditions.AdditionalAdditions;
-import dqu.additionaladditions.Config;
 import dqu.additionaladditions.entity.GlowStickEntity;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.minecraft.entity.EntityDimensions;

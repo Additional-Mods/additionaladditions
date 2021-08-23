@@ -1,6 +1,6 @@
 package dqu.additionaladditions.item;
 
-import dqu.additionaladditions.Config;
+import dqu.additionaladditions.config.Config;
 import net.minecraft.block.*;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.player.PlayerEntity;

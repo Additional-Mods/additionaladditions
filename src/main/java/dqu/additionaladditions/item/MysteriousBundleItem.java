@@ -1,14 +1,13 @@
 package dqu.additionaladditions.item;
 
 import dqu.additionaladditions.AdditionalAdditions;
-import dqu.additionaladditions.Config;
+import dqu.additionaladditions.config.Config;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.loot.LootTable;
 import net.minecraft.loot.context.LootContext;
-import net.minecraft.loot.context.LootContextParameters;
 import net.minecraft.loot.context.LootContextTypes;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Hand;

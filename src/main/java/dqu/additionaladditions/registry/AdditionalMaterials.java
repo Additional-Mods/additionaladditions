@@ -1,7 +1,6 @@
 package dqu.additionaladditions.registry;
 
 import dqu.additionaladditions.AdditionalAdditions;
-import dqu.additionaladditions.Config;
 import dqu.additionaladditions.item.AdditionalAxeItem;
 import dqu.additionaladditions.item.AdditionalHoeItem;
 import dqu.additionaladditions.item.AdditionalPickaxeItem;

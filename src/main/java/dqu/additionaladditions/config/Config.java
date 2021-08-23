@@ -1,9 +1,10 @@
-package dqu.additionaladditions;
+package dqu.additionaladditions.config;
 
 import com.google.common.io.Files;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
+import dqu.additionaladditions.AdditionalAdditions;
 import net.fabricmc.loader.api.FabricLoader;
 
 import java.io.BufferedReader;
@@ -17,7 +18,7 @@ public class Config {
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
     private static final String PATH = FabricLoader.getInstance().getConfigDir().resolve("additional-additions-config.json").toString();
     private static final File DBFILE = new File(PATH);
-    private static final HashMap<String, Integer> properties = new HashMap<>();
+    protected static final HashMap<String, Integer> properties = new HashMap<>();
     public static boolean initialized = false;
     private static JsonObject db = new JsonObject();
 
@@ -88,6 +89,19 @@ public class Config {
             load();
         }
         return db.get(key).getAsBoolean();
+    }
+
+    protected static void set(String key, boolean value) {
+        if (!DBFILE.exists()) {
+            AdditionalAdditions.LOGGER.error(format("Unable to get key as file doesn't exist!"));
+            return;
+        }
+        if (!initialized) {
+            init();
+            load();
+        }
+        db.addProperty(key, value);
+        save();
     }
 
     private static void convert(int version) {

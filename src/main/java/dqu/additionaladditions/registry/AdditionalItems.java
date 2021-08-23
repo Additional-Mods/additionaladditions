@@ -1,7 +1,7 @@
 package dqu.additionaladditions.registry;
 
 import dqu.additionaladditions.AdditionalAdditions;
-import dqu.additionaladditions.Config;
+import dqu.additionaladditions.config.Config;
 import dqu.additionaladditions.item.GlowStickItem;
 import dqu.additionaladditions.item.MysteriousBundleItem;
 import dqu.additionaladditions.item.WateringCanItem;

@@ -1,6 +1,6 @@
 package dqu.additionaladditions.mixin;
 
-import dqu.additionaladditions.Config;
+import dqu.additionaladditions.config.Config;
 import dqu.additionaladditions.registry.AdditionalPotions;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;

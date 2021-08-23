@@ -1,6 +1,6 @@
 package dqu.additionaladditions.mixin;
 
-import dqu.additionaladditions.Config;
+import dqu.additionaladditions.config.Config;
 import dqu.additionaladditions.registry.AdditionalBlocks;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;

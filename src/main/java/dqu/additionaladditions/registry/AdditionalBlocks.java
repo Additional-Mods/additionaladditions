@@ -1,7 +1,6 @@
 package dqu.additionaladditions.registry;
 
 import dqu.additionaladditions.AdditionalAdditions;
-import dqu.additionaladditions.Config;
 import dqu.additionaladditions.block.CopperPatinaBlock;
 import dqu.additionaladditions.block.GlowStickBlock;
 import dqu.additionaladditions.block.RopeBlock;

@@ -1,7 +1,7 @@
 package dqu.additionaladditions.mixin;
 
 import dqu.additionaladditions.AdditionalAdditions;
-import dqu.additionaladditions.Config;
+import dqu.additionaladditions.config.Config;
 import dqu.additionaladditions.registry.AdditionalItems;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.entity.player.PlayerEntity;

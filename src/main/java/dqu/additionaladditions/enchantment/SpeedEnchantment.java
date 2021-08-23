@@ -1,6 +1,6 @@
 package dqu.additionaladditions.enchantment;
 
-import dqu.additionaladditions.Config;
+import dqu.additionaladditions.config.Config;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentTarget;
 import net.minecraft.enchantment.Enchantments;

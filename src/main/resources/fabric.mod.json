@@ -20,6 +20,9 @@
     ],
     "main": [
       "dqu.additionaladditions.AdditionalAdditions"
+    ],
+    "modmenu": [
+      "dqu.additionaladditions.config.ModMenuImpl"
     ]
   },
   "mixins": [

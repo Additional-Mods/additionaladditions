@@ -1,7 +1,6 @@
 package dqu.additionaladditions.registry;
 
 import dqu.additionaladditions.AdditionalAdditions;
-import dqu.additionaladditions.Config;
 import dqu.additionaladditions.enchantment.PrecisionEnchantment;
 import dqu.additionaladditions.enchantment.SpeedEnchantment;
 import net.minecraft.enchantment.Enchantment;

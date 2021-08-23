@@ -9,7 +9,7 @@ import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 
-import dqu.additionaladditions.Config;
+import dqu.additionaladditions.config.Config;
 import dqu.additionaladditions.registry.AdditionalBlocks;
 import net.minecraft.block.*;
 import net.minecraft.block.enums.WireConnection;

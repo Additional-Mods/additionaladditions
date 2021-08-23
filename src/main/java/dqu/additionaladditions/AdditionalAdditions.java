@@ -1,5 +1,6 @@
 package dqu.additionaladditions;
 
+import dqu.additionaladditions.config.Config;
 import dqu.additionaladditions.registry.*;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.loader.api.FabricLoader;

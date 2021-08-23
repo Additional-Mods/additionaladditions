@@ -60,5 +60,7 @@
   "item.minecraft.tipped_arrow.effect.long_glow_potion": "Стрела Свечения",
   "item.minecraft.tipped_arrow.effect.haste_potion": "Стрела Спешки",
   "item.minecraft.tipped_arrow.effect.long_haste_potion": "Стрела Спешки",
-  "item.minecraft.tipped_arrow.effect.strong_haste_potion": "Стрела Спешки"
+  "item.minecraft.tipped_arrow.effect.strong_haste_potion": "Стрела Спешки",
+
+  "additionaladditions.gui.config.restart": "Перезапустите игру чтобы применить изменения"
 }

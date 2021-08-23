@@ -1,6 +1,6 @@
 package dqu.additionaladditions.block;
 
-import dqu.additionaladditions.Config;
+import dqu.additionaladditions.config.Config;
 import dqu.additionaladditions.registry.AdditionalBlocks;
 import net.minecraft.block.*;
 import net.minecraft.entity.player.PlayerEntity;

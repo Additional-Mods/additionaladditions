@@ -2,7 +2,7 @@ package dqu.additionaladditions.mixin;
 
 import com.google.gson.JsonElement;
 import dqu.additionaladditions.AdditionalAdditions;
-import dqu.additionaladditions.Config;
+import dqu.additionaladditions.config.Config;
 import net.minecraft.recipe.RecipeManager;
 import net.minecraft.resource.ResourceManager;
 import net.minecraft.util.Identifier;

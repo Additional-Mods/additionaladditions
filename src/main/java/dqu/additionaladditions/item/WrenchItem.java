@@ -1,7 +1,7 @@
 package dqu.additionaladditions.item;
 
 import dqu.additionaladditions.AdditionalAdditions;
-import dqu.additionaladditions.Config;
+import dqu.additionaladditions.config.Config;
 import net.minecraft.block.BedBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ChestBlock;
@@ -18,7 +18,6 @@ import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
-import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
