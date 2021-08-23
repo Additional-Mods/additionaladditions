@@ -11,7 +11,7 @@
     "sources": "https://github.com/Dqu1J/additionaladditions",
     "issues": "https://github.com/Dqu1J/additionaladditions/issues"
   },
-  "license": "GNU GPLv3",
+  "license": "LGPL-3.0-only",
   "icon": "assets/additionaladditions/icon.png",
   "environment": "*",
   "entrypoints": {
