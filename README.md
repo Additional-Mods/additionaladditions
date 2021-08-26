@@ -100,7 +100,7 @@ Configuration file is located in the `config` folder. It is named `additional-ad
 Turn off and on any features you want!
 ### Credits
 Most of the textures made by: [Avila27](https://www.curseforge.com/members/avila27/)  
-Music Discs made by: [adoghr](https://www.youtube.com/channel/UCg39EifZ8wUEUZPWhGjslNg)
+Music Discs made by: [adoghr](https://www.youtube.com/channel/UCg39EifZ8wUEUZPWhGjslNg)  
 Korean Translations made by: [aresociety](https://github.com/aresociety)
 <br>
 ### Get support on our Discord server.
