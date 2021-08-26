@@ -21,10 +21,11 @@ public abstract class MobEntityMixin extends LivingEntity {
     protected MobEntityMixin(EntityType<? extends LivingEntity> entityType, World world) {
         super(entityType, world);
     }
+    private final static boolean isFeatureEnabled = Config.get("AmethystLamp");
 
     @Inject(method = "checkDespawn", at = @At("TAIL"))
     public void checkDespawn(CallbackInfo ci) {
-        if (!Config.get("AmethystLamp")) return;
+        if (!isFeatureEnabled) return;
         if (this.age > 0 || !isDisallowedInPeaceful()) return;
         if (isLampNearby((int)this.getX(), (int)this.getY(), (int)this.getZ(), 8)) {
             this.discard();

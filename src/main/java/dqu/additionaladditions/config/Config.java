@@ -80,10 +80,6 @@ public class Config {
     }
 
     public static boolean get(String key) {
-        if (!DBFILE.exists()) {
-            AdditionalAdditions.LOGGER.error(format("Unable to get key as file doesn't exist!"));
-            return false;
-        }
         if (!initialized) {
             init();
             load();
