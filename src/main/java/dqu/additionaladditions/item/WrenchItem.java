@@ -85,14 +85,13 @@ public class WrenchItem extends Item {
 
         if (state.getBlock() instanceof SlabBlock) {
             world.setBlockState(pos, state.cycle(Properties.SLAB_TYPE));
-            BlockState news = null;
-            if (state.get(Properties.SLAB_TYPE) == SlabType.BOTTOM) news = state.with(Properties.SLAB_TYPE, SlabType.TOP);
-            if (state.get(Properties.SLAB_TYPE) == SlabType.TOP) news = state.with(Properties.SLAB_TYPE, SlabType.BOTTOM);
-            if (news != null) {
-                world.setBlockState(pos, news);
-                success(context.getStack(), world, pos, context.getPlayer(), context.getHand());
-                return ActionResult.SUCCESS;
-            }
+            BlockState newState = state;
+            if (state.get(Properties.SLAB_TYPE).equals(SlabType.DOUBLE)) return ActionResult.PASS;
+            if (state.get(Properties.SLAB_TYPE).equals(SlabType.BOTTOM)) newState = state.with(Properties.SLAB_TYPE, SlabType.TOP);
+            if (state.get(Properties.SLAB_TYPE).equals(SlabType.TOP)) newState = state.with(Properties.SLAB_TYPE, SlabType.BOTTOM);
+            world.setBlockState(pos, newState);
+            success(context.getStack(), world, pos, context.getPlayer(), context.getHand());
+            return ActionResult.SUCCESS;
         }
 
         return ActionResult.PASS;
