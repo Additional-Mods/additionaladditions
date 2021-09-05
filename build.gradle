@@ -58,6 +58,10 @@ java {
 	withSourcesJar()
 }
 
+minecraft {
+	accessWidener =  file("src/main/resources/additionaladditions.accesswidener")
+}
+
 jar {
 	from("LICENSE") {
 		rename { "${it}_${project.archivesBaseName}"}
