@@ -32,6 +32,7 @@ public class GameRendererMixin {
         double fov = callbackInfo.getReturnValue();
         double fovMultiplier = MathHelper.lerp(tickDelta, lastMultiplier, multiplier);
         double zoomedFov = fov * fovMultiplier;
-        callbackInfo.setReturnValue(zoomedFov);
+        if (Math.abs(fov-zoomedFov) > 0.5)
+            callbackInfo.setReturnValue(zoomedFov);
     }
 }
