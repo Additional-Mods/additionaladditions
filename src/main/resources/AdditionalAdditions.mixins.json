@@ -8,6 +8,7 @@
     "AxeItemMixin",
     "BrewingRecipeRegistryMixin",
     "CrossbowItemMixin",
+    "InstrumentMixin",
     "LivingEntityMixin",
     "MobEntityMixin",
     "PiglinBrainMixin",
@@ -18,10 +19,10 @@
   "client": [
     "ClientPlayerEntityMixin",
     "GameRendererMixin",
+    "HeldItemRendererMixin",
     "InGameHudMixin",
     "MouseMixin",
-    "PlayerEntityRendererMixin",
-    "HeldItemRendererMixin"
+    "PlayerEntityRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1
