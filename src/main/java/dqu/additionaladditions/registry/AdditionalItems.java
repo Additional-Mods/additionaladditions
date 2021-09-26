@@ -34,6 +34,7 @@ public class AdditionalItems {
     private static final Identifier DUNGEON_CHEST_LOOT_TABLE_ID = LootTables.SIMPLE_DUNGEON_CHEST;
     private static final Identifier STRONGHOLD_CHEST_LOOT_TABLE_ID = LootTables.STRONGHOLD_CORRIDOR_CHEST;
     private static final Identifier MANSION_CHEST_LOOT_TABLE_ID = LootTables.WOODLAND_MANSION_CHEST;
+    private static final Identifier SHIPWRECK_SUPPLY_CHEST_LOOT_TABLE_ID = LootTables.SHIPWRECK_SUPPLY_CHEST;
 
     // saturation = hunger * saturationModifier
     public static final Item FRIED_EGG = new Item(new FabricItemSettings().group(ItemGroup.FOOD)
@@ -112,6 +113,13 @@ public class AdditionalItems {
                             .with(ItemEntry.builder(AdditionalMusicDiscs.MUSIC_DISC_1507));
                     table.pool(poolBuilder);
                 }
+            }
+            if (SHIPWRECK_SUPPLY_CHEST_LOOT_TABLE_ID.equals(id) && Config.get("ShipwreckSpyglassLoot")) {
+                FabricLootPoolBuilder poolBuilder = FabricLootPoolBuilder.builder()
+                        .rolls(ConstantLootNumberProvider.create(1))
+                        .conditionally(RandomChanceLootCondition.builder(0.5f))
+                        .with(ItemEntry.builder(Items.SPYGLASS));
+                table.pool(poolBuilder);
             }
         }));
     }

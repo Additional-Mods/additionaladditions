@@ -48,6 +48,7 @@ public class Config {
         properties.put("CompostableRottenFlesh", 3);
         properties.put("MusicDiscs", 4);
         properties.put("NoteBlockAmethystSounds", 5);
+        properties.put("ShipwreckSpyglassLoot", 5);
     }
 
     public static void load() {
