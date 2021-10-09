@@ -19,8 +19,8 @@ public class ConfigGui extends LightweightGuiDescription {
         WGridPanel root = (WGridPanel) rootPanel;
         WBox box = new WBox(Axis.VERTICAL);
 
-        WLabel label = new WLabel(SCREEN_TITLE).setHorizontalAlignment(HorizontalAlignment.CENTER).setVerticalAlignment(VerticalAlignment.CENTER);
-        root.add(label, 0, 0, 16, 3);
+        WLabel label = new WLabel(SCREEN_TITLE).setHorizontalAlignment(HorizontalAlignment.CENTER);
+        root.add(label, 0, 0, 16, 2);
 
         for (String key : Config.properties.keySet()) {
             WToggleButton button = new WToggleButton(new LiteralText(key));
@@ -29,7 +29,7 @@ public class ConfigGui extends LightweightGuiDescription {
             box.add(button);
         }
 
-        root.add(new WScrollPanel(box), 0, 2, 16, 10);
+        root.add(new WScrollPanel(box), 0, 1, 16, 10);
 
         WButton doneButton = new WButton(OPTION_DONE);
         doneButton.setOnClick(() -> MinecraftClient.getInstance().openScreen(new CottonScreen(new ConfirmGui())));
