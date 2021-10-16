@@ -10,6 +10,8 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.projectile.thrown.ThrownItemEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -40,6 +42,7 @@ public class GlowStickEntity extends ThrownItemEntity {
             if (this.world.getBlockState(pos).isAir()) {
                 this.world.setBlockState(pos, AdditionalBlocks.GLOW_STICK_BLOCK.getDefaultState()
                     .with(GlowStickBlock.FLIPPED, world.getRandom().nextBoolean()));
+                this.world.playSound(null, pos.getX(), pos.getY(), pos.getZ(), SoundEvents.BLOCK_GLASS_PLACE, SoundCategory.BLOCKS, 1.0f, 1.0f);
             } else {
                 ItemStack stack = new ItemStack(AdditionalItems.GLOW_STICK_ITEM, 1);
                 ItemEntity entity = new ItemEntity(this.world, this.getX(), this.getY(), this.getZ(), stack);
