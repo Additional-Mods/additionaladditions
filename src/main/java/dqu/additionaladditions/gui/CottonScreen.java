@@ -1,4 +1,4 @@
-package dqu.additionaladditions.config;
+package dqu.additionaladditions.gui;
 
 import io.github.cottonmc.cotton.gui.GuiDescription;
 import io.github.cottonmc.cotton.gui.client.CottonClientScreen;

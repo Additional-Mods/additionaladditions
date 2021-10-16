@@ -1,10 +1,10 @@
-package dqu.additionaladditions.config;
+package dqu.additionaladditions.gui;
 
+import dqu.additionaladditions.config.Config;
 import io.github.cottonmc.cotton.gui.client.LightweightGuiDescription;
 import io.github.cottonmc.cotton.gui.widget.*;
 import io.github.cottonmc.cotton.gui.widget.data.Axis;
 import io.github.cottonmc.cotton.gui.widget.data.HorizontalAlignment;
-import io.github.cottonmc.cotton.gui.widget.data.VerticalAlignment;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;

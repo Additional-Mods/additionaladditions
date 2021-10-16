@@ -2,6 +2,9 @@ package dqu.additionaladditions.config;
 
 import com.terraformersmc.modmenu.api.ConfigScreenFactory;
 import com.terraformersmc.modmenu.api.ModMenuApi;
+import dqu.additionaladditions.gui.ConfigGui;
+import dqu.additionaladditions.gui.ConfirmGui;
+import dqu.additionaladditions.gui.CottonScreen;
 
 public class ModMenuImpl implements ModMenuApi {
     @Override

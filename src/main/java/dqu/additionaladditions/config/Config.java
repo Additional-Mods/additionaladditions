@@ -18,7 +18,7 @@ public class Config {
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
     private static final String PATH = FabricLoader.getInstance().getConfigDir().resolve("additional-additions-config.json").toString();
     private static final File DBFILE = new File(PATH);
-    protected static final HashMap<String, Integer> properties = new HashMap<>();
+    public static final HashMap<String, Integer> properties = new HashMap<>();
     public static boolean initialized = false;
     private static JsonObject db = new JsonObject();
 
@@ -89,7 +89,7 @@ public class Config {
         return db.get(key).getAsBoolean();
     }
 
-    protected static void set(String key, boolean value) {
+    public static void set(String key, boolean value) {
         if (!initialized) {
             init();
             load();
