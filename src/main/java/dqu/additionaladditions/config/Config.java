@@ -49,6 +49,7 @@ public class Config {
         properties.put("MusicDiscs", 4);
         properties.put("NoteBlockAmethystSounds", 5);
         properties.put("ShipwreckSpyglassLoot", 5);
+        properties.put("PocketJukebox", 5);
     }
 
     public static void load() {
@@ -100,7 +101,7 @@ public class Config {
 
     private static void convert(int version) {
         for (String property : properties.keySet()) {
-            if (properties.get(property) > version) {
+            if (properties.get(property) > version || db.get(property) == null) {
                 db.addProperty(property, true);
             }
         }

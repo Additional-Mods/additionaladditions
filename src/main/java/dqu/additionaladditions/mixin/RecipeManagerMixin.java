@@ -35,6 +35,7 @@ public class RecipeManagerMixin {
                     case "copper_patina" -> { if (!Config.get("CopperPatina")) toRemove.add(identifier); }
                     case "amethyst_lamp" -> { if (!Config.get("AmethystLamp")) toRemove.add(identifier); }
                     case "honeyed_apple", "berry_pie" -> { if (!Config.get("FoodItems")) toRemove.add(identifier); }
+                    case "pocket_jukebox" -> { if (!Config.get("PocketJukebox")) toRemove.add(identifier); }
                     default -> {
                         if (identifier.getPath().startsWith("gilded_netherite")) { if (!Config.get("GildedNetherite")) toRemove.add(identifier); }
                         if (identifier.getPath().startsWith("rose_gold")) { if (!Config.get("RoseGold")) toRemove.add(identifier); }

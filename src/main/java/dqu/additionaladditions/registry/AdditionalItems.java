@@ -2,10 +2,7 @@ package dqu.additionaladditions.registry;
 
 import dqu.additionaladditions.AdditionalAdditions;
 import dqu.additionaladditions.config.Config;
-import dqu.additionaladditions.item.GlowStickItem;
-import dqu.additionaladditions.item.MysteriousBundleItem;
-import dqu.additionaladditions.item.WateringCanItem;
-import dqu.additionaladditions.item.WrenchItem;
+import dqu.additionaladditions.item.*;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.loot.v1.FabricLootPoolBuilder;
 import net.fabricmc.fabric.api.loot.v1.event.LootTableLoadingCallback;
@@ -55,6 +52,8 @@ public class AdditionalItems {
     public static final Item DEPTH_METER_ITEM = new Item(new FabricItemSettings().group(ItemGroup.TOOLS));
     public static final MysteriousBundleItem MYSTERIOUS_BUNDLE_ITEM = new MysteriousBundleItem(new FabricItemSettings().group(ItemGroup.MISC).maxCount(1).rarity(Rarity.RARE));
 
+    public static final PocketJukeboxItem POCKET_JUKEBOX_ITEM = new PocketJukeboxItem(new FabricItemSettings().group(ItemGroup.MISC).maxCount(1));
+
     private static void registerItems() {
         Registry.register(Registry.ITEM, new Identifier(AdditionalAdditions.namespace, "watering_can"), WATERING_CAN);
         Registry.register(Registry.ITEM, new Identifier(AdditionalAdditions.namespace, "wrench"), WRENCH_ITEM);
@@ -63,6 +62,7 @@ public class AdditionalItems {
         Registry.register(Registry.ITEM, new Identifier(AdditionalAdditions.namespace, "glow_stick"), GLOW_STICK_ITEM);
         Registry.register(Registry.ITEM, new Identifier(AdditionalAdditions.namespace, "depth_meter"), DEPTH_METER_ITEM);
         Registry.register(Registry.ITEM, new Identifier(AdditionalAdditions.namespace, "mysterious_bundle"), MYSTERIOUS_BUNDLE_ITEM);
+        Registry.register(Registry.ITEM, new Identifier(AdditionalAdditions.namespace, "pocket_jukebox"), POCKET_JUKEBOX_ITEM);
     }
 
     private static void registerFoods() {
