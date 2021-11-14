@@ -32,24 +32,26 @@ public class PocketJukeboxItem extends Item {
         } else return null;
     }
 
-    private static ItemStack nbtRemoveDisc(ItemStack stack) {
+    private static void nbtRemoveDisc(ItemStack stack) {
         String disc = nbtGetDisc(stack);
-        if (disc == null) return stack;
+        if (disc == null) return;
 
         NbtCompound tag = stack.getOrCreateTag();
         tag.remove("musicdisc");
         stack.writeNbt(tag);
-        return stack;
     }
 
-    private static ItemStack nbtPutDisc(ItemStack stack, String disc) {
+    private static void nbtPutDisc(ItemStack stack, String disc) {
         String currentDisc = nbtGetDisc(stack);
-        if (currentDisc != null) return null;
+        if (currentDisc != null) return;
 
         NbtCompound tag = stack.getOrCreateTag();
         tag.putString("musicdisc", disc);
         stack.writeNbt(tag);
-        return stack;
+    }
+
+    public static boolean hasDisc(ItemStack stack) {
+        return (nbtGetDisc(stack) != null);
     }
 
     @Override

@@ -2,5 +2,19 @@
   "parent": "item/generated",
   "textures": {
     "layer0": "additionaladditions:item/pocket_jukebox"
-  }
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "disc": 0
+      },
+      "model": "additionaladditions:item/pocket_jukebox_0"
+    },
+    {
+      "predicate": {
+        "disc": 1
+      },
+      "model": "additionaladditions:item/pocket_jukebox_1"
+    }
+  ]
 }

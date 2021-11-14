@@ -1,5 +1,6 @@
 package dqu.additionaladditions;
 
+import dqu.additionaladditions.item.PocketJukeboxItem;
 import dqu.additionaladditions.registry.AdditionalBlocks;
 import dqu.additionaladditions.registry.AdditionalEntities;
 import dqu.additionaladditions.registry.AdditionalItems;
@@ -43,6 +44,10 @@ public class AdditionalAdditionsClient implements ClientModInitializer {
         FabricModelPredicateProviderRegistry.register(AdditionalItems.CROSSBOW_WITH_SPYGLASS, new Identifier("firework"), (itemStack, clientWorld, livingEntity, worldSeed) -> {
             return CrossbowItem.hasProjectile(itemStack, Items.FIREWORK_ROCKET) ? 1.0F : 0.0F;
         });
+
+        FabricModelPredicateProviderRegistry.register(AdditionalItems.POCKET_JUKEBOX_ITEM, new Identifier("disc"), ((itemStack, clientWorld, livingEntity, worldSeed) -> {
+            return PocketJukeboxItem.hasDisc(itemStack) ? 1.0F : 0.0F;
+        }));
 
         FabricModelPredicateProviderRegistry.register(AdditionalItems.DEPTH_METER_ITEM, new Identifier("angle"), (itemStack, clientWorld, livingEntity, worldSeed) -> {
             if (livingEntity == null) return 0.2f;
