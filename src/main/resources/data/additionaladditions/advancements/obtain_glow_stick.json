@@ -21,7 +21,7 @@
       "conditions": {
         "items": [
           {
-            "itesm": ["additionaladditions:glow_stick"]
+            "items": ["additionaladditions:glow_stick"]
           }
         ]
       }
