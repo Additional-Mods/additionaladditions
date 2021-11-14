@@ -1,5 +1,5 @@
 {
-  "parent": "minecraft:story/obtain_armor",
+  "parent": "minecraft:nether/netherite_armor",
   "display": {
     "title": {
       "translate": "additionaladditions.advancements.obtain_gilded_netherite"
