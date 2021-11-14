@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "C C",
+    "CSC",
+    "CRC"
+  ],
+  "key": {
+    "S": {"item": "minecraft:stick"},
+    "R": {"item": "minecraft:redstone"},
+    "C": {"item": "minecraft:copper_ingot"}
+  },
+  "result": {
+    "item": "minecraft:powered_rail",
+    "count": 6
+  }
+}
