@@ -26,6 +26,14 @@ public class WrenchItem extends Item {
         super(settings);
     }
 
+    private boolean tryPlacing(BlockPos pos, BlockState state, World world) {
+        if (state.canPlaceAt(world, pos)) {
+            world.setBlockState(pos, state);
+            return true;
+        }
+        return false;
+    }
+
     @Override
     public ActionResult useOnBlock(ItemUsageContext context) {
         if (!Config.get("Wrench")) { return ActionResult.FAIL; }
@@ -38,9 +46,10 @@ public class WrenchItem extends Item {
         if (state.getBlock() instanceof ChestBlock || state.getBlock() instanceof BedBlock) return ActionResult.PASS;
 
         if (state.contains(Properties.FACING)) {
-            world.setBlockState(pos, state.cycle(Properties.FACING));
-            success(context.getStack(), world, pos, context.getPlayer(), context.getHand());
-            return ActionResult.SUCCESS;
+            if (tryPlacing(pos, state.cycle(Properties.FACING), world)) {
+                success(context.getStack(), world, pos, context.getPlayer(), context.getHand());
+                return ActionResult.SUCCESS;
+            }
         }
 
         if (state.contains(Properties.HOPPER_FACING)) {
@@ -66,25 +75,27 @@ public class WrenchItem extends Item {
         }
 
         if (state.contains(Properties.HORIZONTAL_FACING)) {
-            world.setBlockState(pos, state.cycle(Properties.HORIZONTAL_FACING));
-            success(context.getStack(), world, pos, context.getPlayer(), context.getHand());
-            return ActionResult.SUCCESS;
+            if (tryPlacing(pos, state.cycle(Properties.HORIZONTAL_FACING), world)) {
+                success(context.getStack(), world, pos, context.getPlayer(), context.getHand());
+                return ActionResult.SUCCESS;
+            }
         }
 
         if (state.contains(Properties.AXIS)) {
-            world.setBlockState(pos, state.cycle(Properties.AXIS));
-            success(context.getStack(), world, pos, context.getPlayer(), context.getHand());
-            return ActionResult.SUCCESS;
+            if (tryPlacing(pos, state.cycle(Properties.AXIS), world)) {
+                success(context.getStack(), world, pos, context.getPlayer(), context.getHand());
+                return ActionResult.SUCCESS;
+            }
         }
 
         if (state.contains(Properties.HORIZONTAL_AXIS)) {
-            world.setBlockState(pos, state.cycle(Properties.HORIZONTAL_AXIS));
-            success(context.getStack(), world, pos, context.getPlayer(), context.getHand());
-            return ActionResult.SUCCESS;
+            if (tryPlacing(pos, state.cycle(Properties.HORIZONTAL_AXIS), world)) {
+                success(context.getStack(), world, pos, context.getPlayer(), context.getHand());
+                return ActionResult.SUCCESS;
+            }
         }
 
         if (state.getBlock() instanceof SlabBlock) {
-            world.setBlockState(pos, state.cycle(Properties.SLAB_TYPE));
             BlockState newState = state;
             if (state.get(Properties.SLAB_TYPE).equals(SlabType.DOUBLE)) return ActionResult.PASS;
             if (state.get(Properties.SLAB_TYPE).equals(SlabType.BOTTOM)) newState = state.with(Properties.SLAB_TYPE, SlabType.TOP);
@@ -100,26 +111,44 @@ public class WrenchItem extends Item {
     public void dispenserUse(World world, BlockPos pos, BlockState state, ItemStack stack) {
         if (state.getBlock() instanceof ChestBlock) return;
         if (state.contains(Properties.FACING)) {
-            world.setBlockState(pos, state.cycle(Properties.FACING));
-            success(stack, world, pos);
-            return;
+            if (tryPlacing(pos, state.cycle(Properties.FACING), world)) {
+                success(stack, world, pos);
+            }
         }
         if (state.contains(Properties.HOPPER_FACING)) {
-            world.setBlockState(pos, state.cycle(Properties.HOPPER_FACING));
+            BlockState newstate = state.cycle(Properties.HOPPER_FACING);
+            world.setBlockState(pos, newstate);
+
+            if (AdditionalAdditions.lithiumInstalled && !world.isClient()) {
+                /*
+                 * Lithium mod caches hopper's output and input inventories
+                 * Which causes an issue where the hopper keeps transferring to the old location
+                 * This replaces the block entity, which fixes that.
+                 */
+                HopperBlockEntity hopperBlockEntity = (HopperBlockEntity) world.getBlockEntity(pos);
+                NbtCompound nbt = hopperBlockEntity.writeNbt(new NbtCompound());
+                world.removeBlockEntity(pos);
+                HopperBlockEntity blockEntity = new HopperBlockEntity(pos, newstate);
+                blockEntity.readNbt(nbt);
+                world.addBlockEntity(blockEntity);
+            }
+
             success(stack, world, pos);
-            return;
         }
         if (state.contains(Properties.HORIZONTAL_FACING)) {
-            world.setBlockState(pos, state.cycle(Properties.HORIZONTAL_FACING));
-            success(stack, world, pos);
+            if (tryPlacing(pos, state.cycle(Properties.HORIZONTAL_FACING), world)) {
+                success(stack, world, pos);
+            }
         }
         if (state.contains(Properties.AXIS)) {
-            world.setBlockState(pos, state.cycle(Properties.AXIS));
-            success(stack, world, pos);
+            if (tryPlacing(pos, state.cycle(Properties.AXIS), world)) {
+                success(stack, world, pos);
+            }
         }
         if (state.contains(Properties.HORIZONTAL_AXIS)) {
-            world.setBlockState(pos, state.cycle(Properties.HORIZONTAL_AXIS));
-            success(stack, world, pos);
+            if (tryPlacing(pos, state.cycle(Properties.HORIZONTAL_AXIS), world)) {
+                success(stack, world, pos);
+            }
         }
 
         if (state.getBlock() instanceof SlabBlock) {
