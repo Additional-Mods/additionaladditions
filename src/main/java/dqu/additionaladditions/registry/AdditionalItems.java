@@ -46,7 +46,7 @@ public class AdditionalItems {
             .food(new FoodComponent.Builder().hunger(8).saturationModifier(1.6f).build())
     );
     public static final Item CHICKEN_NUGGET = new Item(new FabricItemSettings().group(ItemGroup.FOOD)
-            .food(new FoodComponent.Builder().hunger(6).saturationModifier(0.9f).meat().snack().build())
+            .food(new FoodComponent.Builder().hunger(6).saturationModifier(0.9f).meat().build())
     );
 
     public static final WateringCanItem WATERING_CAN = new WateringCanItem(new FabricItemSettings().group(ItemGroup.TOOLS).maxCount(1).maxDamage(101));
