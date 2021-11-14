@@ -69,6 +69,7 @@ public class Config {
         }
 
         if (db.get("version").getAsInt() != VERSION) convert(db.get("version").getAsInt());
+        repair();
     }
 
     private static void save() {
@@ -109,6 +110,20 @@ public class Config {
         db.addProperty("version", VERSION);
 
         AdditionalAdditions.LOGGER.info(format("Converted outdated config."));
+        save();
+    }
+
+    private static void repair() {
+        int repaired = 0;
+        for (String property : properties.keySet()) {
+            if (db.get(property) == null) {
+                db.addProperty(property, true);
+                repaired++;
+            }
+        }
+        if (repaired > 0) {
+            AdditionalAdditions.LOGGER.info(format("Repaired " + repaired + " config properties"));
+        }
         save();
     }
 }
