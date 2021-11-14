@@ -50,6 +50,7 @@ public class Config {
         properties.put("NoteBlockAmethystSounds", 5);
         properties.put("ShipwreckSpyglassLoot", 5);
         properties.put("PocketJukebox", 5);
+        properties.put("ChickenNugget", 5);
     }
 
     public static void load() {

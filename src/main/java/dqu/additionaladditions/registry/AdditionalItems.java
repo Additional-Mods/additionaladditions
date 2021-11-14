@@ -27,6 +27,8 @@ import net.minecraft.util.registry.Registry;
 
 public class AdditionalItems {
     private static final Identifier ELDER_GUARDIAN_LOOT_TABLE_ID = EntityType.ELDER_GUARDIAN.getLootTableId();
+    private static final Identifier ZOMBIE_LOOT_TABLE_ID = EntityType.ZOMBIE.getLootTableId();
+    private static final Identifier CREEPER_LOOT_TABLE_ID = EntityType.CREEPER.getLootTableId();
     private static final Identifier MINESHAFT_CHEST_LOOT_TABLE_ID = LootTables.ABANDONED_MINESHAFT_CHEST;
     private static final Identifier DUNGEON_CHEST_LOOT_TABLE_ID = LootTables.SIMPLE_DUNGEON_CHEST;
     private static final Identifier STRONGHOLD_CHEST_LOOT_TABLE_ID = LootTables.STRONGHOLD_CORRIDOR_CHEST;
@@ -42,6 +44,9 @@ public class AdditionalItems {
     );
     public static final Item HONEYED_APPLE = new Item(new FabricItemSettings().group(ItemGroup.FOOD)
             .food(new FoodComponent.Builder().hunger(8).saturationModifier(1.6f).build())
+    );
+    public static final Item CHICKEN_NUGGET = new Item(new FabricItemSettings().group(ItemGroup.FOOD)
+            .food(new FoodComponent.Builder().hunger(6).saturationModifier(0.9f).meat().snack().build())
     );
 
     public static final WateringCanItem WATERING_CAN = new WateringCanItem(new FabricItemSettings().group(ItemGroup.TOOLS).maxCount(1).maxDamage(101));
@@ -69,6 +74,7 @@ public class AdditionalItems {
         Registry.register(Registry.ITEM, new Identifier(AdditionalAdditions.namespace, "berry_pie"), BERRY_PIE);
         Registry.register(Registry.ITEM, new Identifier(AdditionalAdditions.namespace, "fried_egg"), FRIED_EGG);
         Registry.register(Registry.ITEM, new Identifier(AdditionalAdditions.namespace, "honeyed_apple"), HONEYED_APPLE);
+        Registry.register(Registry.ITEM, new Identifier(AdditionalAdditions.namespace, "chicken_nugget"), CHICKEN_NUGGET);
     }
 
     private static void registerLootTables() {
@@ -120,6 +126,15 @@ public class AdditionalItems {
                         .conditionally(RandomChanceLootCondition.builder(0.5f))
                         .with(ItemEntry.builder(Items.SPYGLASS));
                 table.pool(poolBuilder);
+            }
+            if (ZOMBIE_LOOT_TABLE_ID.equals(id) || CREEPER_LOOT_TABLE_ID.equals(id)) {
+                if (Config.get("ChickenNugget")) {
+                    FabricLootPoolBuilder poolBuilder = FabricLootPoolBuilder.builder()
+                            .rolls(ConstantLootNumberProvider.create(1))
+                            .conditionally(RandomChanceLootCondition.builder(0.025f))
+                            .with(ItemEntry.builder(CHICKEN_NUGGET));
+                    table.pool(poolBuilder);
+                }
             }
         }));
     }
