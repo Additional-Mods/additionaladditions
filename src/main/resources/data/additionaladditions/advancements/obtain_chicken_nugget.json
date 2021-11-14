@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:adventure/root",
+  "display": {
+    "title": {
+      "translate": "additionaladditions.advancements.obtain_chicken_nugget"
+    },
+    "description": {
+      "translate": "additionaladditions.advancements.obtain_chicken_nugget.desc"
+    },
+    "icon": {
+      "item": "additionaladditions:chicken_nugget"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": true
+  },
+  "criteria": {
+    "obtain": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["additionaladditions:chicken_nugget"]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "obtain"
+    ]
+  ]
+}

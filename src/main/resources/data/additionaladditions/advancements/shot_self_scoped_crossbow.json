@@ -1,0 +1,50 @@
+{
+  "parent": "additionaladditions:obtain_scoped_crossbow",
+  "display": {
+    "title": {
+      "translate": "additionaladditions.advancements.shot_self_scoped_crossbow"
+    },
+    "description": {
+      "translate": "additionaladditions.advancements.shot_self_scoped_crossbow.desc"
+    },
+    "icon": {
+      "item": "additionaladditions:crossbow_with_spyglass"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "mainhand": {
+      "trigger": "minecraft:entity_hurt_player",
+      "conditions": {
+        "damage": {
+          "blocked": false,
+          "type": {
+            "is_projectile": true
+          },
+          "source_entity": {
+            "type": "minecraft:player",
+            "distance": {
+              "absolute": {
+                "min": 0,
+                "max": 1
+              }
+            },
+            "equipment": {
+              "mainhand": {
+                "items": ["additionaladditions:crossbow_with_spyglass"]
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "requirements": [
+    [
+      "mainhand"
+    ]
+  ]
+}

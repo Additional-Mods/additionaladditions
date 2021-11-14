@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:adventure/trade",
+  "display": {
+    "title": {
+      "translate": "additionaladditions.advancements.obtain_mysterious_bundle"
+    },
+    "description": {
+      "translate": "additionaladditions.advancements.obtain_mysterious_bundle.desc"
+    },
+    "icon": {
+      "item": "additionaladditions:mysterious_bundle"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "obtain": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["additionaladditions:mysterious_bundle"]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "obtain"
+    ]
+  ]
+}

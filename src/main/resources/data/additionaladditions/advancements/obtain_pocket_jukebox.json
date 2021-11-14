@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:adventure/root",
+  "display": {
+    "title": {
+      "translate": "additionaladditions.advancements.obtain_pocket_jukebox"
+    },
+    "description": {
+      "translate": "additionaladditions.advancements.obtain_pocket_jukebox.desc"
+    },
+    "icon": {
+      "item": "additionaladditions:pocket_jukebox"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "obtain": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["additionaladditions:pocket_jukebox"]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "obtain"
+    ]
+  ]
+}

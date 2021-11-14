@@ -1,0 +1,55 @@
+{
+  "parent": "minecraft:adventure/root",
+  "display": {
+    "title": {
+      "translate": "additionaladditions.advancements.obtain_adoghr_disc"
+    },
+    "description": {
+      "translate": "additionaladditions.advancements.obtain_adoghr_disc.desc"
+    },
+    "icon": {
+      "item": "additionaladditions:music_disc_0308"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": false,
+    "hidden": false
+  },
+  "criteria": {
+    "0308": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["additionaladditions:music_disc_0308"]
+          }
+        ]
+      }
+    },
+    "1007": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["additionaladditions:music_disc_1007"]
+          }
+        ]
+      }
+    },
+    "1507": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["additionaladditions:music_disc_1507"]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "0308", "1007", "1507"
+    ]
+  ]
+}
