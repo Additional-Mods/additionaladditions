@@ -2,13 +2,13 @@
   "parent": "minecraft:story/obtain_armor",
   "display": {
     "title": {
-      "translate": "additionaladditions.advancements.obtain_rose_gold"
+      "translate": "additionaladditions.advancements.obtain_gilded_netherite"
     },
     "description": {
-      "translate": "additionaladditions.advancements.obtain_rose_gold.desc"
+      "translate": "additionaladditions.advancements.obtain_gilded_netherite.desc"
     },
     "icon": {
-      "item": "additionaladditions:rose_gold_chestplate"
+      "item": "additionaladditions:gilded_netherite_chestplate"
     },
     "frame": "task",
     "show_toast": true,
@@ -21,7 +21,7 @@
       "conditions": {
         "items": [
           {
-            "items": ["additionaladditions:rose_gold_helmet"]
+            "items": ["additionaladditions:gilded_netherite_helmet"]
           }
         ]
       }
@@ -31,7 +31,7 @@
       "conditions": {
         "items": [
           {
-            "items": ["additionaladditions:rose_gold_chestplate"]
+            "items": ["additionaladditions:gilded_netherite_chestplate"]
           }
         ]
       }
@@ -41,7 +41,7 @@
       "conditions": {
         "items": [
           {
-            "items": ["additionaladditions:rose_gold_leggings"]
+            "items": ["additionaladditions:gilded_netherite_leggings"]
           }
         ]
       }
@@ -51,7 +51,7 @@
       "conditions": {
         "items": [
           {
-            "items": ["additionaladditions:rose_gold_boots"]
+            "items": ["additionaladditions:gilded_netherite_boots"]
           }
         ]
       }
