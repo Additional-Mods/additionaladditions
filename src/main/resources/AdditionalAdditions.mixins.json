@@ -14,7 +14,8 @@
     "PiglinBrainMixin",
     "RecipeManagerMixin",
     "RedstoneWireBlockMixin",
-    "WanderingTraderEntityMixin"
+    "WanderingTraderEntityMixin",
+    "ServerAdvancementLoaderMixin"
   ],
   "client": [
     "ClientPlayerEntityMixin",
