@@ -52,6 +52,7 @@ public class Config {
         properties.put("PocketJukebox", 5);
         properties.put("ChickenNugget", 5);
         properties.put("PoweredRailsCopperRecipe", 5);
+        properties.put("GoldRing", 5);
     }
 
     public static void load() {

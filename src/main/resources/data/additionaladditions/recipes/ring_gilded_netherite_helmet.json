@@ -1,0 +1,6 @@
+{
+  "type": "minecraft:smithing",
+  "base": {"item": "minecraft:netherite_helmet"},
+  "addition": {"item": "additionaladditions:gold_ring"},
+  "result": {"item": "additionaladditions:gilded_netherite_helmet"}
+}

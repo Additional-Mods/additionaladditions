@@ -29,6 +29,7 @@ public class AdditionalItems {
     private static final Identifier ELDER_GUARDIAN_LOOT_TABLE_ID = EntityType.ELDER_GUARDIAN.getLootTableId();
     private static final Identifier ZOMBIE_LOOT_TABLE_ID = EntityType.ZOMBIE.getLootTableId();
     private static final Identifier CREEPER_LOOT_TABLE_ID = EntityType.CREEPER.getLootTableId();
+    private static final Identifier PIGLIN_BARTERING_LOOT_TABLE_ID = LootTables.PIGLIN_BARTERING_GAMEPLAY;
     private static final Identifier MINESHAFT_CHEST_LOOT_TABLE_ID = LootTables.ABANDONED_MINESHAFT_CHEST;
     private static final Identifier DUNGEON_CHEST_LOOT_TABLE_ID = LootTables.SIMPLE_DUNGEON_CHEST;
     private static final Identifier STRONGHOLD_CHEST_LOOT_TABLE_ID = LootTables.STRONGHOLD_CORRIDOR_CHEST;
@@ -54,9 +55,9 @@ public class AdditionalItems {
     public static final CrossbowItem CROSSBOW_WITH_SPYGLASS = new CrossbowItem(new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1).maxDamage(350));
     public static final Item TRIDENT_SHARD = new Item(new FabricItemSettings().group(ItemGroup.MATERIALS));
     public static final GlowStickItem GLOW_STICK_ITEM = new GlowStickItem(new FabricItemSettings().group(ItemGroup.MISC));
-    public static final Item DEPTH_METER_ITEM = new Item(new FabricItemSettings().group(ItemGroup.TOOLS));
+    public static final Item DEPTH_METER_ITEM = new Item(new FabricItemSettings().group(ItemGroup.TOOLS).maxCount(1));
     public static final MysteriousBundleItem MYSTERIOUS_BUNDLE_ITEM = new MysteriousBundleItem(new FabricItemSettings().group(ItemGroup.MISC).maxCount(1).rarity(Rarity.RARE));
-
+    public static final Item GOLD_RING = new Item(new FabricItemSettings().group(ItemGroup.MATERIALS).maxCount(1));
     public static final PocketJukeboxItem POCKET_JUKEBOX_ITEM = new PocketJukeboxItem(new FabricItemSettings().group(ItemGroup.MISC).maxCount(1));
 
     private static void registerItems() {
@@ -68,6 +69,7 @@ public class AdditionalItems {
         Registry.register(Registry.ITEM, new Identifier(AdditionalAdditions.namespace, "depth_meter"), DEPTH_METER_ITEM);
         Registry.register(Registry.ITEM, new Identifier(AdditionalAdditions.namespace, "mysterious_bundle"), MYSTERIOUS_BUNDLE_ITEM);
         Registry.register(Registry.ITEM, new Identifier(AdditionalAdditions.namespace, "pocket_jukebox"), POCKET_JUKEBOX_ITEM);
+        Registry.register(Registry.ITEM, new Identifier(AdditionalAdditions.namespace, "gold_ring"), GOLD_RING);
     }
 
     private static void registerFoods() {
@@ -135,6 +137,13 @@ public class AdditionalItems {
                             .with(ItemEntry.builder(CHICKEN_NUGGET));
                     table.pool(poolBuilder);
                 }
+            }
+            if (PIGLIN_BARTERING_LOOT_TABLE_ID.equals(id) && Config.get("GoldRing")) {
+                    FabricLootPoolBuilder poolBuilder = FabricLootPoolBuilder.builder()
+                            .rolls(ConstantLootNumberProvider.create(1))
+                            .conditionally(RandomChanceLootCondition.builder(0.015f))
+                            .with(ItemEntry.builder(GOLD_RING));
+                    table.pool(poolBuilder);
             }
         }));
     }

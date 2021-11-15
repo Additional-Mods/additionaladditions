@@ -38,9 +38,16 @@ public class RecipeManagerMixin {
                     case "pocket_jukebox" -> { if (!Config.get("PocketJukebox")) toRemove.add(identifier); }
                     case "powered_rails" -> { if (!Config.get("PoweredRailsCopperRecipe")) toRemove.add(identifier); }
                     default -> {
-                        if (identifier.getPath().startsWith("gilded_netherite")) { if (!Config.get("GildedNetherite")) toRemove.add(identifier); }
                         if (identifier.getPath().startsWith("rose_gold")) { if (!Config.get("RoseGold")) toRemove.add(identifier); }
                         if (identifier.getPath().startsWith("fried_egg")) { if (!Config.get("FoodItems")) toRemove.add(identifier); }
+                        if (identifier.getPath().startsWith("gilded_netherite")) {
+                            if (!Config.get("GildedNetherite")) toRemove.add(identifier);
+                            if (Config.get("GoldRing")) toRemove.add(identifier);
+                        }
+                        if (identifier.getPath().startsWith("ring_gilded_netherite")) {
+                            if (!Config.get("GildedNetherite")) toRemove.add(identifier);
+                            if (!Config.get("GoldRing")) toRemove.add(identifier);
+                        }
                     }
                 }
             }
