@@ -39,7 +39,7 @@ public class InstrumentMixin {
     private static void addCustomInstrument(CallbackInfo ci) {
         var variants = new ArrayList<>(Arrays.asList(field_12652));
         var last = variants.get(variants.size() - 1);
-        var amethyst = newInstrument("AMETHYST", last.ordinal()+1, "amethyst", SoundEvents.BLOCK_AMETHYST_BLOCK_STEP);
+        var amethyst = newInstrument("AMETHYST", last.ordinal()+1, "amethyst", SoundEvents.BLOCK_AMETHYST_CLUSTER_PLACE);
         AdditionalInstrument.AMETHYST = amethyst;
         variants.add(amethyst);
         field_12652 = variants.toArray(new Instrument[0]);
