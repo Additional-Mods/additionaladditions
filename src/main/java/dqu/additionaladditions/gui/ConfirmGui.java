@@ -22,7 +22,7 @@ public class ConfirmGui extends LightweightGuiDescription {
         WLabel title = new WLabel(SCREEN_TITLE).setHorizontalAlignment(HorizontalAlignment.CENTER);
         WLabel description = new WLabel(DESCRIPTION).setHorizontalAlignment(HorizontalAlignment.CENTER);
         WButton button = new WButton(OPTION_DONE).setAlignment(HorizontalAlignment.CENTER);
-        button.setOnClick(() -> MinecraftClient.getInstance().openScreen(null));
+        button.setOnClick(() -> MinecraftClient.getInstance().setScreen(null));
 
         root.add(title, 0, 0, 16, 3);
         root.add(description, 0, 2, 16, 3);

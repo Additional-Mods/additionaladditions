@@ -22,7 +22,7 @@ public class GlowStickItem extends Item {
         if (!world.isClient()) {
             GlowStickEntity glowStickEntity = new GlowStickEntity(world, user);
             glowStickEntity.setItem(itemStack);
-            glowStickEntity.setProperties(user, user.getPitch(), user.getYaw(), 0.0F, 1.5F, 0F);
+            glowStickEntity.setVelocity(user, user.getPitch(), user.getYaw(), 0.0F, 1.5F, 0F);
             world.spawnEntity(glowStickEntity);
         }
 

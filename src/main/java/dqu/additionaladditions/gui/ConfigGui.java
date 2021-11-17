@@ -32,7 +32,7 @@ public class ConfigGui extends LightweightGuiDescription {
         root.add(new WScrollPanel(box), 0, 1, 16, 10);
 
         WButton doneButton = new WButton(OPTION_DONE);
-        doneButton.setOnClick(() -> MinecraftClient.getInstance().openScreen(new CottonScreen(new ConfirmGui())));
+        doneButton.setOnClick(() -> MinecraftClient.getInstance().setScreen(new CottonScreen(new ConfirmGui())));
         root.add(doneButton, 0, 12, 8, 3);
 
         root.validate(this);

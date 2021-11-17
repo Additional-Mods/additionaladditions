@@ -11,7 +11,7 @@ public class ModMenuImpl implements ModMenuApi {
     public ConfigScreenFactory<?> getModConfigScreenFactory() {
         return screen -> new CottonScreen(new ConfigGui()) {
             public void onClose() {
-                this.client.openScreen(new CottonScreen(new ConfirmGui()));
+                this.client.setScreen(new CottonScreen(new ConfirmGui()));
             }
         };
     }

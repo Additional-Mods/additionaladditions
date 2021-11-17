@@ -63,7 +63,7 @@ public class WrenchItem extends Item {
                 * This replaces the block entity, which fixes that.
                 */
                 HopperBlockEntity hopperBlockEntity = (HopperBlockEntity) world.getBlockEntity(pos);
-                NbtCompound nbt = hopperBlockEntity.writeNbt(new NbtCompound());
+                NbtCompound nbt = hopperBlockEntity.createNbt();
                 world.removeBlockEntity(pos);
                 HopperBlockEntity blockEntity = new HopperBlockEntity(pos, newstate);
                 blockEntity.readNbt(nbt);
@@ -126,7 +126,7 @@ public class WrenchItem extends Item {
                  * This replaces the block entity, which fixes that.
                  */
                 HopperBlockEntity hopperBlockEntity = (HopperBlockEntity) world.getBlockEntity(pos);
-                NbtCompound nbt = hopperBlockEntity.writeNbt(new NbtCompound());
+                NbtCompound nbt = hopperBlockEntity.createNbt();
                 world.removeBlockEntity(pos);
                 HopperBlockEntity blockEntity = new HopperBlockEntity(pos, newstate);
                 blockEntity.readNbt(nbt);

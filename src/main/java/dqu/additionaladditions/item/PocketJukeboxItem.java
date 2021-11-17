@@ -26,7 +26,7 @@ public class PocketJukeboxItem extends Item {
     }
 
     private static String nbtGetDisc(ItemStack stack) {
-        NbtCompound tag = stack.getOrCreateTag();
+        NbtCompound tag = stack.getOrCreateNbt();
         if (tag.contains("musicdisc")) {
             return tag.get("musicdisc").asString();
         } else return null;
@@ -36,7 +36,7 @@ public class PocketJukeboxItem extends Item {
         String disc = nbtGetDisc(stack);
         if (disc == null) return;
 
-        NbtCompound tag = stack.getOrCreateTag();
+        NbtCompound tag = stack.getOrCreateNbt();
         tag.remove("musicdisc");
         stack.writeNbt(tag);
     }
@@ -45,7 +45,7 @@ public class PocketJukeboxItem extends Item {
         String currentDisc = nbtGetDisc(stack);
         if (currentDisc != null) return;
 
-        NbtCompound tag = stack.getOrCreateTag();
+        NbtCompound tag = stack.getOrCreateNbt();
         tag.putString("musicdisc", disc);
         stack.writeNbt(tag);
     }

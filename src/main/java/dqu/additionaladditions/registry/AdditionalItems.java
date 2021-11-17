@@ -155,7 +155,7 @@ public class AdditionalItems {
                     WrenchItem wrench = (WrenchItem) stack.getItem();
 
                     BlockState dstate = pointer.getBlockState();
-                    BlockPos pos = pointer.getBlockPos().offset(dstate.get(Properties.FACING));
+                    BlockPos pos = pointer.getPos().offset(dstate.get(Properties.FACING));
                     BlockState state = pointer.getWorld().getBlockState(pos);
 
                     wrench.dispenserUse(pointer.getWorld(), pos, state, stack);

@@ -22,6 +22,7 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
+import net.minecraft.world.tick.OrderedTick;
 
 import java.util.Random;
 
@@ -83,7 +84,7 @@ public class RopeBlock extends Block {
     @Override
     public void onBlockAdded(BlockState state, World world, BlockPos pos, BlockState oldState, boolean notify) {
         if (!world.isClient()) {
-            world.getBlockTickScheduler().schedule(pos, this, 1);
+            world.getBlockTickScheduler().scheduleTick(OrderedTick.create(this, pos, 1));
         }
     }
 
@@ -127,7 +128,7 @@ public class RopeBlock extends Block {
     @Override
     public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
         if (!world.isClient()) {
-            world.getBlockTickScheduler().schedule(pos, this, 1);
+            world.getBlockTickScheduler().scheduleTick(OrderedTick.create(this, pos, 1));
         }
         return state;
     }

@@ -30,10 +30,10 @@
     "AdditionalAdditions.mixins.json"
   ],
   "depends": {
-    "fabricloader": ">=0.11.6",
-    "minecraft": "1.17.x",
+    "fabricloader": ">=0.12.5",
+    "minecraft": "1.18-beta.2",
     "fabric": "*",
-    "java": ">=16"
+    "java": ">=17"
   },
   "custom": {
     "modmenu": {
