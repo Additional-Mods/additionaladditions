@@ -84,7 +84,7 @@ public class RopeBlock extends Block {
     @Override
     public void onBlockAdded(BlockState state, World world, BlockPos pos, BlockState oldState, boolean notify) {
         if (!world.isClient()) {
-            world.getBlockTickScheduler().scheduleTick(OrderedTick.create(this, pos, 1));
+            world.getBlockTickScheduler().scheduleTick(OrderedTick.create(this, pos));
         }
     }
 
@@ -128,7 +128,7 @@ public class RopeBlock extends Block {
     @Override
     public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
         if (!world.isClient()) {
-            world.getBlockTickScheduler().scheduleTick(OrderedTick.create(this, pos, 1));
+            world.getBlockTickScheduler().scheduleTick(OrderedTick.create(this, pos));
         }
         return state;
     }
