@@ -6,7 +6,6 @@
   "mixins": [
     "ArmorItemMixin",
     "AxeItemMixin",
-    "BrewingRecipeRegistryMixin",
     "CrossbowItemMixin",
     "InstrumentMixin",
     "LivingEntityMixin",
