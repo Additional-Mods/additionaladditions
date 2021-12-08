@@ -50,4 +50,9 @@ public class RoseGoldArmorMaterial implements ArmorMaterial {
     public int getEnchantability() {
         return 17;
     }
+
+    @Override
+    public String toString() {
+        return "ROSE_GOLD";
+    }
 }

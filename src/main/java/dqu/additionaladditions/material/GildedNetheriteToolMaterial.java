@@ -36,4 +36,9 @@ public class GildedNetheriteToolMaterial implements ToolMaterial {
     public Ingredient getRepairIngredient() {
         return Ingredient.ofItems(Items.NETHERITE_INGOT);
     }
+
+    @Override
+    public String toString() {
+        return "GILDED_NETHERITE";
+    }
 }

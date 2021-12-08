@@ -36,4 +36,9 @@ public class RoseGoldToolMaterial implements ToolMaterial {
     public Ingredient getRepairIngredient() {
         return Ingredient.ofItems(Items.COPPER_INGOT);
     }
+
+    @Override
+    public String toString() {
+        return "ROSE_GOLD";
+    }
 }
