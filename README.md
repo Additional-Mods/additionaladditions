@@ -11,9 +11,10 @@ See more information on the [wiki](https://github.com/Dqu1J/additionaladditions/
 Configuration file is located in the `config` folder. It is named `additional-additions-config.json`.
 Turn off and on any features you want!
 ### Credits
-Most of the textures made by: [Avila27](https://www.curseforge.com/members/avila27/)  
-Music Discs made by: [adoghr](https://www.youtube.com/channel/UCg39EifZ8wUEUZPWhGjslNg)  
-Korean Translations made by: [aresociety](https://github.com/aresociety)
+Textures: Me, MorganFreeguy | MF#1861, [Avila27](https://www.curseforge.com/members/avila27)
+Music Discs: [adoghr](https://www.youtube.com/channel/UCg39EifZ8wUEUZPWhGjslNg)  
+Korean Translations: [aresociety](https://github.com/aresociety)
+Chinese Translations: [zrll12](https://github.com/zrll12), [wdnmdyaya](https://www.curseforge.com/members/wdnmdyaya)
 <br>
 ### Get support on our Discord server.
 ### [Discord](https://discord.com/invite/g5a7ZA62t3) [Modrinth](https://modrinth.com/mod/addadd) [CurseForge](https://www.curseforge.com/minecraft/mc-mods/additional-additions)
