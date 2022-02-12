@@ -1,6 +1,7 @@
 package dqu.additionaladditions.item;
 
 import dqu.additionaladditions.config.Config;
+import dqu.additionaladditions.config.value.ConfigValues;
 import dqu.additionaladditions.entity.GlowStickEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -18,7 +19,7 @@ public class GlowStickItem extends Item {
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         ItemStack itemStack = user.getStackInHand(hand);
-        if (!Config.get("GlowStick")) { return TypedActionResult.fail(itemStack); }
+        if (!Config.getBool(ConfigValues.GLOW_STICK)) { return TypedActionResult.fail(itemStack); }
         if (!world.isClient()) {
             GlowStickEntity glowStickEntity = new GlowStickEntity(world, user);
             glowStickEntity.setItem(itemStack);

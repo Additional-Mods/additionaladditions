@@ -2,6 +2,7 @@ package dqu.additionaladditions.mixin;
 
 import dqu.additionaladditions.AdditionalAdditions;
 import dqu.additionaladditions.config.Config;
+import dqu.additionaladditions.config.value.ConfigValues;
 import dqu.additionaladditions.registry.AdditionalItems;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.hud.InGameHud;
@@ -26,7 +27,7 @@ public abstract class InGameHudMixin {
 
     @Inject(method = "render", at = @At("TAIL"))
     private void depthMeterMessage(CallbackInfo ci) {
-        if (!Config.get("DepthMeter")) return;
+        if (!Config.getBool(ConfigValues.DEPTH_METER)) return;
         if (client.player.isHolding(AdditionalItems.DEPTH_METER_ITEM)) {
             String level = String.valueOf((int)client.player.getY());
             client.player.sendMessage(new LiteralText(level), true);

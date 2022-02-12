@@ -2,6 +2,7 @@ package dqu.additionaladditions.mixin;
 
 import dqu.additionaladditions.AdditionalAdditions;
 import dqu.additionaladditions.config.Config;
+import dqu.additionaladditions.config.value.ConfigValues;
 import dqu.additionaladditions.registry.AdditionalItems;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -16,7 +17,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class ClientPlayerEntityMixin {
     @Inject(method = "isSneaking", at = @At("HEAD"))
     private void checkSneakZoom(CallbackInfoReturnable<Boolean> cir) {
-        if (!Config.get("Crossbows")) return;
+        if (!Config.getBool(ConfigValues.CROSSBOWS)) return;
         PlayerEntity player = (PlayerEntity) (Object) this;
         if (!player.getEntityWorld().isClient()) return;
         ItemStack stack = player.getMainHandStack();

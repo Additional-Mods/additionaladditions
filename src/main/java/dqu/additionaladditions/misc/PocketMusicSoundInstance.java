@@ -1,6 +1,7 @@
 package dqu.additionaladditions.misc;
 
 import dqu.additionaladditions.config.Config;
+import dqu.additionaladditions.config.value.ConfigValues;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
@@ -29,7 +30,7 @@ public class PocketMusicSoundInstance extends MovingSoundInstance {
 
     @Override
     public void tick() {
-        if (this.playerEntity.isDead() || !this.playerEntity.getInventory().contains(stack) || !Config.get("PocketJukebox")) {
+        if (this.playerEntity.isDead() || !this.playerEntity.getInventory().contains(stack) || !Config.getBool(ConfigValues.POCKET_JUKEBOX)) {
             this.setDone();
         } else {
             this.x = this.playerEntity.getX();

@@ -2,6 +2,7 @@ package dqu.additionaladditions.item;
 
 import dqu.additionaladditions.AdditionalAdditions;
 import dqu.additionaladditions.config.Config;
+import dqu.additionaladditions.config.value.ConfigValues;
 import net.minecraft.block.BedBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ChestBlock;
@@ -36,7 +37,7 @@ public class WrenchItem extends Item {
 
     @Override
     public ActionResult useOnBlock(ItemUsageContext context) {
-        if (!Config.get("Wrench")) { return ActionResult.FAIL; }
+        if (!Config.getBool(ConfigValues.WRENCH)) { return ActionResult.FAIL; }
         World world = context.getWorld();
         BlockPos pos = context.getBlockPos();
         BlockState state = world.getBlockState(pos);

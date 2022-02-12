@@ -16,9 +16,7 @@ public class AdditionalAdditions implements ModInitializer {
     @Override
     public void onInitialize() {
         lithiumInstalled = FabricLoader.getInstance().isModLoaded("lithium");
-
         if (!Config.initialized) {
-            Config.init();
             Config.load();
         }
         AdditionalItems.registerAll();

@@ -3,6 +3,7 @@ package dqu.additionaladditions.mixin;
 import com.google.gson.JsonElement;
 import dqu.additionaladditions.AdditionalAdditions;
 import dqu.additionaladditions.config.Config;
+import dqu.additionaladditions.config.value.ConfigValues;
 import net.minecraft.recipe.RecipeManager;
 import net.minecraft.resource.ResourceManager;
 import net.minecraft.util.Identifier;
@@ -24,29 +25,33 @@ public class RecipeManagerMixin {
             Identifier identifier = iterator.next().getKey();
             if (identifier.getNamespace().equals(AdditionalAdditions.namespace)) {
                 switch (identifier.getPath()) {
-                    case "watering_can" -> { if (!Config.get("WateringCan")) toRemove.add(identifier); }
-                    case "wrench" -> { if (!Config.get("Wrench")) toRemove.add(identifier); }
-                    case "crossbow_with_spyglass" -> { if (!Config.get("Crossbows")) toRemove.add(identifier); }
-                    case "glow_stick" -> { if (!Config.get("GlowStick")) toRemove.add(identifier); }
-                    case "depth_meter" -> { if (!Config.get("DepthMeter")) toRemove.add(identifier); }
-                    case "mysterious_bundle" -> { if (!Config.get("MysteriousBundle")) toRemove.add(identifier); }
-                    case "trident" -> { if (!Config.get("TridentShard")) toRemove.add(identifier); }
-                    case "rope" -> { if (!Config.get("Ropes")) toRemove.add(identifier); }
-                    case "copper_patina" -> { if (!Config.get("CopperPatina")) toRemove.add(identifier); }
-                    case "amethyst_lamp" -> { if (!Config.get("AmethystLamp")) toRemove.add(identifier); }
-                    case "honeyed_apple", "berry_pie" -> { if (!Config.get("FoodItems")) toRemove.add(identifier); }
-                    case "pocket_jukebox" -> { if (!Config.get("PocketJukebox")) toRemove.add(identifier); }
-                    case "powered_rails" -> { if (!Config.get("PoweredRailsCopperRecipe")) toRemove.add(identifier); }
+                    case "watering_can" -> { if (!Config.getBool(ConfigValues.WATERING_CAN)) toRemove.add(identifier); }
+                    case "wrench" -> { if (!Config.getBool(ConfigValues.WRENCH)) toRemove.add(identifier); }
+                    case "crossbow_with_spyglass" -> { if (!Config.getBool(ConfigValues.CROSSBOWS)) toRemove.add(identifier); }
+                    case "glow_stick" -> { if (!Config.getBool(ConfigValues.GLOW_STICK)) toRemove.add(identifier); }
+                    case "depth_meter" -> { if (!Config.getBool(ConfigValues.DEPTH_METER)) toRemove.add(identifier); }
+                    case "mysterious_bundle" -> { if (!Config.getBool(ConfigValues.MYSTERIOUS_BUNDLE)) toRemove.add(identifier); }
+                    case "trident" -> { if (!Config.getBool(ConfigValues.TRIDENT_SHARD)) toRemove.add(identifier); }
+                    case "rope" -> { if (!Config.getBool(ConfigValues.ROPES)) toRemove.add(identifier); }
+                    case "copper_patina" -> { if (!Config.getBool(ConfigValues.COPPER_PATINA)) toRemove.add(identifier); }
+                    case "amethyst_lamp" -> { if (!Config.getBool(ConfigValues.AMETHYST_LAMP)) toRemove.add(identifier); }
+                    case "honeyed_apple", "berry_pie" -> { if (!Config.getBool(ConfigValues.FOOD)) toRemove.add(identifier); }
+                    case "pocket_jukebox" -> { if (!Config.getBool(ConfigValues.POCKET_JUKEBOX)) toRemove.add(identifier); }
+                    case "powered_rails" -> { if (!Config.getBool(ConfigValues.POWERED_RAILS_COPPER_RECIPE)) toRemove.add(identifier); }
                     default -> {
-                        if (identifier.getPath().startsWith("rose_gold")) { if (!Config.get("RoseGold")) toRemove.add(identifier); }
-                        if (identifier.getPath().startsWith("fried_egg")) { if (!Config.get("FoodItems")) toRemove.add(identifier); }
+                        if (identifier.getPath().startsWith("rose_gold")) {
+                            if (!Config.getBool(ConfigValues.ROSE_GOLD)) toRemove.add(identifier);
+                        }
+                        if (identifier.getPath().startsWith("fried_egg")) {
+                            if (!Config.getBool(ConfigValues.FOOD)) toRemove.add(identifier);
+                        }
                         if (identifier.getPath().startsWith("gilded_netherite")) {
-                            if (!Config.get("GildedNetherite")) toRemove.add(identifier);
-                            if (Config.get("GoldRing")) toRemove.add(identifier);
+                            if (!Config.getBool(ConfigValues.GILDED_NETHERITE)) toRemove.add(identifier);
+                            if (Config.getBool(ConfigValues.GOLD_RING)) toRemove.add(identifier);
                         }
                         if (identifier.getPath().startsWith("ring_gilded_netherite")) {
-                            if (!Config.get("GildedNetherite")) toRemove.add(identifier);
-                            if (!Config.get("GoldRing")) toRemove.add(identifier);
+                            if (!Config.getBool(ConfigValues.GILDED_NETHERITE)) toRemove.add(identifier);
+                            if (!Config.getBool(ConfigValues.GOLD_RING)) toRemove.add(identifier);
                         }
                     }
                 }

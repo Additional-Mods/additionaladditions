@@ -2,6 +2,7 @@ package dqu.additionaladditions.registry;
 
 import dqu.additionaladditions.AdditionalAdditions;
 import dqu.additionaladditions.config.Config;
+import dqu.additionaladditions.config.value.ConfigValues;
 import dqu.additionaladditions.item.*;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.loot.v1.FabricLootPoolBuilder;
@@ -81,7 +82,7 @@ public class AdditionalItems {
 
     private static void registerLootTables() {
         LootTableLoadingCallback.EVENT.register(((resourceManager, lootManager, id, table, setter) -> {
-            if (ELDER_GUARDIAN_LOOT_TABLE_ID.equals(id) && Config.get("TridentShard")) {
+            if (ELDER_GUARDIAN_LOOT_TABLE_ID.equals(id) && Config.getBool(ConfigValues.TRIDENT_SHARD)) {
                 FabricLootPoolBuilder poolBuilder = FabricLootPoolBuilder.builder()
                         .rolls(ConstantLootNumberProvider.create(1f))
                         .with(ItemEntry.builder(TRIDENT_SHARD))
@@ -89,21 +90,21 @@ public class AdditionalItems {
                 table.pool(poolBuilder);
             }
             if (DUNGEON_CHEST_LOOT_TABLE_ID.equals(id) || MINESHAFT_CHEST_LOOT_TABLE_ID.equals(id) || STRONGHOLD_CHEST_LOOT_TABLE_ID.equals(id)) {
-                if (Config.get("GlowStick")) {
+                if (Config.getBool(ConfigValues.GLOW_STICK)) {
                     FabricLootPoolBuilder poolBuilder = FabricLootPoolBuilder.builder()
                             .rolls(UniformLootNumberProvider.create(0, 4))
                             .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1, 4)))
                             .with(ItemEntry.builder(GLOW_STICK_ITEM));
                     table.pool(poolBuilder);
                 }
-                if (Config.get("Ropes")) {
+                if (Config.getBool(ConfigValues.ROPES)) {
                     FabricLootPoolBuilder poolBuilder = FabricLootPoolBuilder.builder()
                             .rolls(UniformLootNumberProvider.create(1, 4))
                             .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1, 8)))
                             .with(ItemEntry.builder(AdditionalBlocks.ROPE_BLOCK.asItem()));
                     table.pool(poolBuilder);
                 }
-                if (Config.get("DepthMeter")) {
+                if (Config.getBool(ConfigValues.DEPTH_METER)) {
                     FabricLootPoolBuilder poolBuilder = FabricLootPoolBuilder.builder()
                             .rolls(ConstantLootNumberProvider.create(1))
                             .conditionally(RandomChanceLootCondition.builder(0.1f))
@@ -112,7 +113,7 @@ public class AdditionalItems {
                 }
             }
             if (DUNGEON_CHEST_LOOT_TABLE_ID.equals(id) || MANSION_CHEST_LOOT_TABLE_ID.equals(id)) {
-                if (Config.get("MusicDiscs")) {
+                if (Config.getBool(ConfigValues.MUSIC_DISCS)) {
                     FabricLootPoolBuilder poolBuilder = FabricLootPoolBuilder.builder()
                             .rolls(ConstantLootNumberProvider.create(1))
                             .conditionally(RandomChanceLootCondition.builder(0.25f))
@@ -122,7 +123,7 @@ public class AdditionalItems {
                     table.pool(poolBuilder);
                 }
             }
-            if (SHIPWRECK_SUPPLY_CHEST_LOOT_TABLE_ID.equals(id) && Config.get("ShipwreckSpyglassLoot")) {
+            if (SHIPWRECK_SUPPLY_CHEST_LOOT_TABLE_ID.equals(id) && Config.getBool(ConfigValues.SHIPWRECK_SPYGLASS_LOOT)) {
                 FabricLootPoolBuilder poolBuilder = FabricLootPoolBuilder.builder()
                         .rolls(ConstantLootNumberProvider.create(1))
                         .conditionally(RandomChanceLootCondition.builder(0.5f))
@@ -130,7 +131,7 @@ public class AdditionalItems {
                 table.pool(poolBuilder);
             }
             if (ZOMBIE_LOOT_TABLE_ID.equals(id) || CREEPER_LOOT_TABLE_ID.equals(id)) {
-                if (Config.get("ChickenNugget")) {
+                if (Config.getBool(ConfigValues.CHICKEN_NUGGET)) {
                     FabricLootPoolBuilder poolBuilder = FabricLootPoolBuilder.builder()
                             .rolls(ConstantLootNumberProvider.create(1))
                             .conditionally(RandomChanceLootCondition.builder(0.025f))
@@ -138,7 +139,7 @@ public class AdditionalItems {
                     table.pool(poolBuilder);
                 }
             }
-            if (PIGLIN_BARTERING_LOOT_TABLE_ID.equals(id) && Config.get("GoldRing")) {
+            if (PIGLIN_BARTERING_LOOT_TABLE_ID.equals(id) && Config.getBool(ConfigValues.GOLD_RING)) {
                     FabricLootPoolBuilder poolBuilder = FabricLootPoolBuilder.builder()
                             .rolls(ConstantLootNumberProvider.create(1))
                             .conditionally(RandomChanceLootCondition.builder(0.015f))
@@ -149,7 +150,7 @@ public class AdditionalItems {
     }
 
     private static void registerOther() {
-        if(Config.get("Wrench")) {
+        if(Config.getBool(ConfigValues.WRENCH)) {
             DispenserBlock.registerBehavior(WRENCH_ITEM, new ItemDispenserBehavior() {
                 public ItemStack dispenseSilently(BlockPointer pointer, ItemStack stack) {
                     WrenchItem wrench = (WrenchItem) stack.getItem();
@@ -163,7 +164,7 @@ public class AdditionalItems {
                 }
             });
         }
-        if (Config.get("CompostableRottenFlesh"))
+        if (Config.getBool(ConfigValues.COMPOSTABLE_ROTTEN_FLESH))
             CompostingChanceRegistry.INSTANCE.add(Items.ROTTEN_FLESH, 0.33F);
     }
 

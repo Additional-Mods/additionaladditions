@@ -1,6 +1,7 @@
 package dqu.additionaladditions.enchantment;
 
 import dqu.additionaladditions.config.Config;
+import dqu.additionaladditions.config.value.ConfigValues;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentTarget;
 import net.minecraft.enchantment.Enchantments;
@@ -18,7 +19,7 @@ public class SpeedEnchantment extends Enchantment {
 
     @Override
     protected boolean canAccept(Enchantment other) {
-        if (other == Enchantments.SOUL_SPEED && Config.get("EnchantmentSpeed")) return false;
+        if (other == Enchantments.SOUL_SPEED && Config.getBool(ConfigValues.ENCHANTMENT_SPEED)) return false;
         return super.canAccept(other);
     }
 }

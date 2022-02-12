@@ -1,6 +1,7 @@
 package dqu.additionaladditions.mixin;
 
 import dqu.additionaladditions.config.Config;
+import dqu.additionaladditions.config.value.ConfigValues;
 import dqu.additionaladditions.misc.AdditionalInstrument;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -47,7 +48,7 @@ public class InstrumentMixin {
 
     @Inject(method = "fromBlockState", at = @At("RETURN"), cancellable = true)
     private static void amethystInstrument(BlockState state, CallbackInfoReturnable<Instrument> cir) {
-        if (state.isOf(Blocks.AMETHYST_BLOCK) && Config.get("NoteBlockAmethystSounds"))
+        if (state.isOf(Blocks.AMETHYST_BLOCK) && Config.getBool(ConfigValues.NOTE_BLOCK_AMETHYST_SOUNDS))
             cir.setReturnValue(AdditionalInstrument.AMETHYST);
     }
 }

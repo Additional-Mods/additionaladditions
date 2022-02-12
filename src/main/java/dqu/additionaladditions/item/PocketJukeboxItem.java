@@ -1,6 +1,7 @@
 package dqu.additionaladditions.item;
 
 import dqu.additionaladditions.config.Config;
+import dqu.additionaladditions.config.value.ConfigValues;
 import dqu.additionaladditions.misc.PocketMusicSoundInstance;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.player.PlayerEntity;
@@ -56,7 +57,7 @@ public class PocketJukeboxItem extends Item {
 
     @Override
     public boolean onClicked(ItemStack stack, ItemStack otherStack, Slot slot, ClickType clickType, PlayerEntity player, StackReference cursorStackReference) {
-        if (!Config.get("PocketJukebox")) return false;
+        if (!Config.getBool(ConfigValues.POCKET_JUKEBOX)) return false;
         if (clickType != ClickType.RIGHT) return false;
         World world = player.world;
 

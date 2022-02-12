@@ -1,6 +1,9 @@
 package dqu.additionaladditions.gui;
 
 import dqu.additionaladditions.config.Config;
+import dqu.additionaladditions.config.value.ConfigValue;
+import dqu.additionaladditions.config.value.ConfigValueType;
+import dqu.additionaladditions.config.value.ConfigValues;
 import io.github.cottonmc.cotton.gui.client.LightweightGuiDescription;
 import io.github.cottonmc.cotton.gui.widget.*;
 import io.github.cottonmc.cotton.gui.widget.data.Axis;
@@ -22,10 +25,11 @@ public class ConfigGui extends LightweightGuiDescription {
         WLabel label = new WLabel(SCREEN_TITLE).setHorizontalAlignment(HorizontalAlignment.CENTER);
         root.add(label, 0, 0, 16, 2);
 
-        for (String key : Config.properties.keySet()) {
-            WToggleButton button = new WToggleButton(new LiteralText(key));
-            button.setToggle(Config.get(key));
-            button.setOnToggle(on -> Config.set(key, on));
+        for (ConfigValues value : ConfigValues.values()) {
+            if (value.getType() != ConfigValueType.BOOLEAN) continue;
+            WToggleButton button = new WToggleButton(new LiteralText(value.getValue()));
+            button.setToggle(Config.getBool(value));
+            button.setOnToggle(on -> Config.set(value, on));
             box.add(button);
         }
 

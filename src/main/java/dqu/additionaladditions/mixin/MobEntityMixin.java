@@ -1,6 +1,7 @@
 package dqu.additionaladditions.mixin;
 
 import dqu.additionaladditions.config.Config;
+import dqu.additionaladditions.config.value.ConfigValues;
 import dqu.additionaladditions.registry.AdditionalBlocks;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -21,7 +22,7 @@ public abstract class MobEntityMixin extends LivingEntity {
     protected MobEntityMixin(EntityType<? extends LivingEntity> entityType, World world) {
         super(entityType, world);
     }
-    private final static boolean isFeatureEnabled = Config.get("AmethystLamp");
+    private final static boolean isFeatureEnabled = Config.getBool(ConfigValues.AMETHYST_LAMP);
 
     @Inject(method = "checkDespawn", at = @At("TAIL"))
     public void checkDespawn(CallbackInfo ci) {

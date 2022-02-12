@@ -1,6 +1,7 @@
 package dqu.additionaladditions.mixin;
 
 import dqu.additionaladditions.config.Config;
+import dqu.additionaladditions.config.value.ConfigValues;
 import dqu.additionaladditions.registry.AdditionalItems;
 import net.minecraft.entity.passive.WanderingTraderEntity;
 import net.minecraft.item.ItemStack;
@@ -19,7 +20,7 @@ public class WanderingTraderEntityMixin {
     private void addWanderingTraderTrades(CallbackInfo ci) {
         TradeOfferList tradeOfferList = ((WanderingTraderEntity) (Object) this).getOffers();
         World world = ((WanderingTraderEntity) (Object) this).world;
-        if (world.getRandom().nextDouble() < 0.5D && Config.get("MysteriousBundle")) {
+        if (world.getRandom().nextDouble() < 0.5D && Config.getBool(ConfigValues.MYSTERIOUS_BUNDLE)) {
             tradeOfferList.add(new TradeOffer(new ItemStack(Items.EMERALD, 6), new ItemStack(AdditionalItems.MYSTERIOUS_BUNDLE_ITEM, 1), 6, 6, 0.5f));
         }
     }

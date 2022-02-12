@@ -10,6 +10,7 @@ import java.util.Random;
 import java.util.Set;
 
 import dqu.additionaladditions.config.Config;
+import dqu.additionaladditions.config.value.ConfigValues;
 import dqu.additionaladditions.registry.AdditionalBlocks;
 import net.minecraft.block.*;
 import net.minecraft.block.enums.WireConnection;
@@ -218,7 +219,8 @@ public class CopperPatinaBlock extends Block {
     }
 
     public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
-        if (!Config.get("CopperPatina")) return false;
+        if (!Config.getBool(ConfigValues.COPPER_PATINA)) return false;
+
         BlockPos blockPos = pos.down();
         BlockState blockState = world.getBlockState(blockPos);
         return this.canRunOnTop(world, blockPos, blockState);
@@ -230,7 +232,7 @@ public class CopperPatinaBlock extends Block {
 
     private void update(World world, BlockPos pos, BlockState state) {
         int i = this.getReceivedRedstonePower(world, pos);
-        if (!Config.get("CopperPatina")) i = 0;
+        if (!Config.getBool(ConfigValues.COPPER_PATINA)) i = 0;
         if ((Integer)state.get(POWER) != i) {
             if (world.getBlockState(pos) == state) {
                 world.setBlockState(pos, (BlockState)state.with(POWER, i), 2);
