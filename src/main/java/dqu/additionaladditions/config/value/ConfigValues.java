@@ -24,7 +24,8 @@ public enum ConfigValues {
     POCKET_JUKEBOX("PocketJukebox", 5, new BooleanConfigValue(true)),
     CHICKEN_NUGGET("ChickenNugget", 5, new BooleanConfigValue(true)),
     POWERED_RAILS_COPPER_RECIPE("PoweredRailsCopperRecipe", 5, new BooleanConfigValue(true)),
-    GOLD_RING("GoldRing", 5, new BooleanConfigValue(true));
+    GOLD_RING("GoldRing", 5, new BooleanConfigValue(true)),
+    PLAYER_GLOW("PlayerGlow", 6, new BooleanConfigValue(true));
 
     private final String value;
     private final int version;
