@@ -166,9 +166,12 @@ public class Config {
 
     private static void convert(int version) {
         for (ConfigValues value : ConfigValues.values()) {
-            if (value.getProperty().key().equals(ConfigValues.FOOD.getProperty().key())) {
-                if (version < 6) {
-                    db.remove(value.getProperty().key());
+            if (version < 6) {
+                if (value.getProperty().key().equals("FoodItems")) {
+                    db.remove("FoodItems");
+                }
+                else if (value.getProperty().key().equals("Potions")) {
+                    db.remove("Potions");
                 }
             }
         }

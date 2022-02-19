@@ -6,16 +6,17 @@
   "mixins": [
     "ArmorItemMixin",
     "AxeItemMixin",
+    "BrewingRecipeRegistryMixin",
     "CrossbowItemMixin",
     "InstrumentMixin",
     "LivingEntityMixin",
     "MobEntityMixin",
     "PiglinBrainMixin",
+    "PlayerEntityMixin",
     "RecipeManagerMixin",
     "RedstoneWireBlockMixin",
-    "WanderingTraderEntityMixin",
     "ServerAdvancementLoaderMixin",
-    "PlayerEntityMixin"
+    "WanderingTraderEntityMixin"
   ],
   "client": [
     "ClientPlayerEntityMixin",
