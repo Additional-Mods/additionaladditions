@@ -160,7 +160,7 @@ public class Config {
     private static void convert(int version) {
         for (ConfigValues value : ConfigValues.values()) {
             if (value.getVersion() > version || db.get(value.getProperty().key()) == null) {
-                db.addProperty(value.getProperty().key(), true);
+                addPropertyTo(db, value.getProperty());
             }
         }
         db.addProperty("version", VERSION);
@@ -173,7 +173,7 @@ public class Config {
         int repaired = 0;
         for (ConfigValues value : ConfigValues.values()) {
             if (db.get(value.getProperty().key()) == null) {
-                db.addProperty(value.getProperty().key(), true);
+                addPropertyTo(db, value.getProperty());
                 repaired++;
             }
         }
