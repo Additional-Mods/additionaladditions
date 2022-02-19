@@ -16,6 +16,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Objects;
 
+@SuppressWarnings("unchecked")
 public class Config {
     public static final int VERSION = 6;
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
