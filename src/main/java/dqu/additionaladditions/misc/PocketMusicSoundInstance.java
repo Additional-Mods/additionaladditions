@@ -2,6 +2,7 @@ package dqu.additionaladditions.misc;
 
 import dqu.additionaladditions.config.Config;
 import dqu.additionaladditions.config.ConfigValues;
+import dqu.additionaladditions.registry.AdditionalItems;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
@@ -30,7 +31,11 @@ public class PocketMusicSoundInstance extends MovingSoundInstance {
 
     @Override
     public void tick() {
-        if (this.playerEntity.isDead() || !this.playerEntity.getInventory().contains(stack) || !Config.getBool(ConfigValues.POCKET_JUKEBOX)) {
+        ItemStack cursor = this.playerEntity.currentScreenHandler.getCursorStack();
+        if (cursor == null) cursor = ItemStack.EMPTY;
+        boolean hasDisc = ItemStack.areEqual(cursor, stack) || this.playerEntity.getInventory().contains(stack);
+
+        if (this.playerEntity.isDead() || !hasDisc || !Config.getBool(ConfigValues.POCKET_JUKEBOX)) {
             this.setDone();
         } else {
             this.x = this.playerEntity.getX();
