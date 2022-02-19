@@ -2,7 +2,7 @@ package dqu.additionaladditions.item;
 
 import dqu.additionaladditions.AdditionalAdditions;
 import dqu.additionaladditions.config.Config;
-import dqu.additionaladditions.config.value.ConfigValues;
+import dqu.additionaladditions.config.ConfigValues;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;

@@ -1,7 +1,7 @@
 package dqu.additionaladditions.mixin;
 
 import dqu.additionaladditions.config.Config;
-import dqu.additionaladditions.config.value.ConfigValues;
+import dqu.additionaladditions.config.ConfigValues;
 import dqu.additionaladditions.misc.AdditionalInstrument;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;

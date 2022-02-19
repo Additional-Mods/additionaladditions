@@ -1,7 +1,7 @@
 package dqu.additionaladditions.mixin;
 
 import dqu.additionaladditions.config.Config;
-import dqu.additionaladditions.config.value.ConfigValues;
+import dqu.additionaladditions.config.ConfigValues;
 import dqu.additionaladditions.registry.AdditionalItems;
 import net.minecraft.entity.passive.WanderingTraderEntity;
 import net.minecraft.item.ItemStack;

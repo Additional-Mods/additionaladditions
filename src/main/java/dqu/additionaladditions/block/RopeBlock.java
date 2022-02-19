@@ -1,7 +1,7 @@
 package dqu.additionaladditions.block;
 
 import dqu.additionaladditions.config.Config;
-import dqu.additionaladditions.config.value.ConfigValues;
+import dqu.additionaladditions.config.ConfigValues;
 import dqu.additionaladditions.registry.AdditionalBlocks;
 import net.minecraft.block.*;
 import net.minecraft.entity.player.PlayerEntity;

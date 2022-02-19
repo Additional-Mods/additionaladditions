@@ -5,16 +5,18 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import dqu.additionaladditions.AdditionalAdditions;
-import dqu.additionaladditions.config.value.ConfigValues;
+import dqu.additionaladditions.config.value.ConfigValueType;
+import dqu.additionaladditions.config.value.ListConfigValue;
 import net.fabricmc.loader.api.FabricLoader;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.nio.charset.StandardCharsets;
+import java.util.List;
 
 public class Config {
-    public static final int VERSION = 5;
+    public static final int VERSION = 6;
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
     private static final String PATH = FabricLoader.getInstance().getConfigDir().resolve("additional-additions-config.json").toString();
     private static final File DBFILE = new File(PATH);
@@ -25,14 +27,26 @@ public class Config {
         return String.format("[%s] %s", AdditionalAdditions.namespace, message);
     }
 
+    private static void addPropertyTo(JsonObject object, ConfigProperty property) {
+        switch (property.value().getType()) {
+            case BOOLEAN -> object.addProperty(property.key(), (Boolean) property.value().getValue());
+            case STRING -> object.addProperty(property.key(), (String) property.value().getValue());
+            case INTEGER -> object.addProperty(property.key(), (Integer) property.value().getValue());
+            case LIST -> {
+                JsonObject newObject = new JsonObject();
+                for (ConfigProperty i : (List<ConfigProperty>) property.value().getValue()) {
+                    addPropertyTo(newObject, i);
+                }
+                object.add(property.key(), newObject);
+            }
+        }
+    }
+
     public static void load() {
         if (!DBFILE.exists()) {
             db.addProperty("version", VERSION);
             for (ConfigValues value : ConfigValues.values()) {
-                switch (value.getType()) {
-                    case BOOLEAN -> db.addProperty(value.getValue(), (Boolean) value.getConfigValue().getValue());
-                    case STRING -> db.addProperty(value.getValue(), (String) value.getConfigValue().getValue());
-                }
+                addPropertyTo(db, value.getProperty());
             }
 
             save();
@@ -68,6 +82,10 @@ public class Config {
         return Boolean.TRUE.equals(get(value));
     }
 
+    public static boolean getBool(ConfigValues value, String key) {
+        return Boolean.TRUE.equals(get(value, key));
+    }
+
     public static <T> T get(ConfigValues value) {
         if (!initialized) {
             load();
@@ -75,10 +93,13 @@ public class Config {
 
         switch (value.getType()) {
             case STRING -> {
-                return (T) getString(value);
+                return (T) db.get(value.getProperty().key()).getAsString();
             }
             case BOOLEAN -> {
-                return (T) getBoolean(value);
+                return (T) (Boolean) db.get(value.getProperty().key()).getAsBoolean();
+            }
+            case INTEGER -> {
+                return (T) (Integer) db.get(value.getProperty().key()).getAsInt();
             }
             default -> {
                 return null;
@@ -86,12 +107,35 @@ public class Config {
         }
     }
 
-    private static Boolean getBoolean(ConfigValues value) {
-        return db.get(value.getValue()).getAsBoolean();
-    }
+    public static <T> T get(ConfigValues value, String key) {
+        if (!initialized) {
+            load();
+        }
 
-    private static String getString(ConfigValues value) {
-        return db.get(value.getValue()).getAsString();
+        if (value.getType() == ConfigValueType.LIST) {
+            ListConfigValue configValue = (ListConfigValue) value.getProperty().value();
+            JsonObject object = db.get(value.getProperty().key()).getAsJsonObject();
+            ConfigProperty keyProperty = configValue.get(key);
+            switch (keyProperty.value().getType()) {
+                case STRING -> {
+                    return (T) object.get(key).getAsString();
+                }
+                case BOOLEAN -> {
+                    return (T) (Boolean) object.get(key).getAsBoolean();
+                }
+                case INTEGER -> {
+                    return (T) (Integer) object.get(key).getAsInt();
+                }
+                case LIST -> {
+                    throw new IllegalArgumentException("Cannot create lists inside lists!");
+                }
+                default -> {
+                    return null;
+                }
+            }
+        }
+
+        return null;
     }
 
     public static void set(ConfigValues value, Object property) {
@@ -102,11 +146,11 @@ public class Config {
         switch (value.getType()) {
             case STRING -> {
                 if (property instanceof String)
-                    db.addProperty(value.getValue(), (String) property);
+                    db.addProperty(value.getProperty().key(), (String) property);
             }
             case BOOLEAN -> {
                 if (property instanceof Boolean)
-                    db.addProperty(value.getValue(), (Boolean) property);
+                    db.addProperty(value.getProperty().key(), (Boolean) property);
             }
         }
 
@@ -115,8 +159,8 @@ public class Config {
 
     private static void convert(int version) {
         for (ConfigValues value : ConfigValues.values()) {
-            if (value.getVersion() > version || db.get(value.getValue()) == null) {
-                db.addProperty(value.getValue(), true);
+            if (value.getVersion() > version || db.get(value.getProperty().key()) == null) {
+                db.addProperty(value.getProperty().key(), true);
             }
         }
         db.addProperty("version", VERSION);
@@ -128,8 +172,8 @@ public class Config {
     private static void repair() {
         int repaired = 0;
         for (ConfigValues value : ConfigValues.values()) {
-            if (db.get(value.getValue()) == null) {
-                db.addProperty(value.getValue(), true);
+            if (db.get(value.getProperty().key()) == null) {
+                db.addProperty(value.getProperty().key(), true);
                 repaired++;
             }
         }

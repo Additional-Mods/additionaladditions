@@ -1,7 +1,7 @@
 package dqu.additionaladditions.mixin;
 
 import dqu.additionaladditions.config.Config;
-import dqu.additionaladditions.config.value.ConfigValues;
+import dqu.additionaladditions.config.ConfigValues;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
@@ -25,8 +25,10 @@ public abstract class PlayerEntityMixin extends LivingEntity {
 
     @Inject(method = "eatFood", at = @At("HEAD"))
     protected void injectInEatFoodMethod(World world, ItemStack stack, CallbackInfoReturnable<ItemStack> cir) {
-        if(stack.getItem().equals(Items.GLOW_BERRIES) && Config.getBool(ConfigValues.PLAYER_GLOW)){
-            this.addStatusEffect(new StatusEffectInstance(StatusEffects.GLOWING, 5*20, 0, true, false));
+        if(stack.getItem().equals(Items.GLOW_BERRIES) && Config.getBool(ConfigValues.GLOW_BERRY_GLOW, "enabled")) {
+            Integer duration = Config.get(ConfigValues.GLOW_BERRY_GLOW, "duration");
+            if (duration == null) return;
+            this.addStatusEffect(new StatusEffectInstance(StatusEffects.GLOWING, duration*20, 0, true, false));
         }
     }
 }

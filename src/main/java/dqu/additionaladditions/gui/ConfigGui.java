@@ -1,9 +1,8 @@
 package dqu.additionaladditions.gui;
 
 import dqu.additionaladditions.config.Config;
-import dqu.additionaladditions.config.value.ConfigValue;
 import dqu.additionaladditions.config.value.ConfigValueType;
-import dqu.additionaladditions.config.value.ConfigValues;
+import dqu.additionaladditions.config.ConfigValues;
 import io.github.cottonmc.cotton.gui.client.LightweightGuiDescription;
 import io.github.cottonmc.cotton.gui.widget.*;
 import io.github.cottonmc.cotton.gui.widget.data.Axis;
@@ -26,11 +25,15 @@ public class ConfigGui extends LightweightGuiDescription {
         root.add(label, 0, 0, 16, 2);
 
         for (ConfigValues value : ConfigValues.values()) {
-            if (value.getType() != ConfigValueType.BOOLEAN) continue;
-            WToggleButton button = new WToggleButton(new LiteralText(value.getValue()));
-            button.setToggle(Config.getBool(value));
-            button.setOnToggle(on -> Config.set(value, on));
-            box.add(button);
+            if (value.getType() == ConfigValueType.BOOLEAN) {
+                WToggleButton button = new WToggleButton(new LiteralText(value.getProperty().key()));
+                button.setToggle(Config.getBool(value));
+                button.setOnToggle(on -> Config.set(value, on));
+                box.add(button);
+            } else {
+                WLabel text = new WLabel(new LiteralText(value.getProperty().key() + " | Unable to manage ingame. Edit in file instead."));
+                box.add(text);
+            }
         }
 
         root.add(new WScrollPanel(box), 0, 1, 16, 10);
