@@ -86,5 +86,6 @@
   "additionaladditions.advancements.use_watering_can": "Water it can",
   "additionaladditions.advancements.use_watering_can.desc": "Obtain and use the Watering Can to fertilize your crops",
 
-  "additionaladditions.gui.config.restart": "Restart the game to apply the changes"
+  "additionaladditions.gui.config.restart": "Restart the game to apply the changes",
+  "additionaladditions.gui.pocket_jukebox.tooltip": "Secondary Click with a Music Disc to play"
 }

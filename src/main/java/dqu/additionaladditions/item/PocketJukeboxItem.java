@@ -11,9 +11,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.MusicDiscItem;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.screen.slot.Slot;
+import net.minecraft.text.Style;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.ClickType;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
@@ -104,9 +106,12 @@ public class PocketJukeboxItem extends Item {
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
         String disc = nbtGetDisc(stack);
-        if (disc == null) return;
-        Item discItem = Registry.ITEM.get(new Identifier(disc));
-        String description = discItem.getTranslationKey() + ".desc";
-        tooltip.add(new TranslatableText(description));
+        if (disc == null) {
+            tooltip.add(new TranslatableText("additionaladditions.gui.pocket_jukebox.tooltip").setStyle(Style.EMPTY.withColor(Formatting.GRAY)));
+        } else {
+            Item discItem = Registry.ITEM.get(new Identifier(disc));
+            String description = discItem.getTranslationKey() + ".desc";
+            tooltip.add(new TranslatableText(description));
+        }
     }
 }

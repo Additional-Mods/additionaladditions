@@ -86,5 +86,6 @@
   "additionaladditions.advancements.use_watering_can": "Посадила огірочки...",
   "additionaladditions.advancements.use_watering_can.desc": "Використайте Лійку щоб удобрювати рослини",
 
-  "additionaladditions.gui.config.restart": "Перезапустіть гру щоб застосувати зміни"
+  "additionaladditions.gui.config.restart": "Перезапустіть гру щоб застосувати зміни",
+  "additionaladditions.gui.pocket_jukebox.tooltip": "Secondary Click with a Music Disc to play"
 }

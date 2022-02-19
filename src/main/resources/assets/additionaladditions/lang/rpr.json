@@ -86,5 +86,6 @@
   "additionaladditions.advancements.use_watering_can": "Лей ка",
   "additionaladditions.advancements.use_watering_can.desc": "Используйте Лейку чтобы удобрять растенія",
 
-  "additionaladditions.gui.config.restart": "Перезапустите игру чтобы примѣнить измѣненія"
+  "additionaladditions.gui.config.restart": "Перезапустите игру чтобы примѣнить измѣненія",
+  "additionaladditions.gui.pocket_jukebox.tooltip": "Secondary Click with a Music Disc to play"
 }
