@@ -6,7 +6,11 @@ import dqu.additionaladditions.config.value.IntegerConfigValue;
 import dqu.additionaladditions.config.value.ListConfigValue;
 
 public enum ConfigValues {
-    FOOD(1, new ConfigProperty("FoodItems", new BooleanConfigValue(true))),
+    FOOD(1, new ConfigProperty("FoodItems", new ListConfigValue()
+            .put(new ConfigProperty("FriedEgg", new BooleanConfigValue(true)))
+            .put(new ConfigProperty("BerryPie", new BooleanConfigValue(true)))
+            .put(new ConfigProperty("HoneyedApple", new BooleanConfigValue(true)))
+    )),
     WATERING_CAN(1, new ConfigProperty("WateringCan", new BooleanConfigValue(true))),
     ROSE_GOLD( 1, new ConfigProperty("RoseGold", new BooleanConfigValue(true))),
     ROPES(1, new ConfigProperty("Ropes", new BooleanConfigValue(true))),

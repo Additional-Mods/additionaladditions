@@ -14,6 +14,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
+import java.util.Objects;
 
 public class Config {
     public static final int VERSION = 6;
@@ -152,6 +153,11 @@ public class Config {
                 if (property instanceof Boolean)
                     db.addProperty(value.getProperty().key(), (Boolean) property);
             }
+            case INTEGER -> {
+                if (property instanceof Integer) {
+                    db.addProperty(value.getProperty().key(), (Integer) property);
+                }
+            }
         }
 
         save();
@@ -159,8 +165,10 @@ public class Config {
 
     private static void convert(int version) {
         for (ConfigValues value : ConfigValues.values()) {
-            if (value.getVersion() > version || db.get(value.getProperty().key()) == null) {
-                addPropertyTo(db, value.getProperty());
+            if (value.getProperty().key().equals(ConfigValues.FOOD.getProperty().key())) {
+                if (version < 6) {
+                    db.remove(value.getProperty().key());
+                }
             }
         }
         db.addProperty("version", VERSION);
@@ -180,6 +188,7 @@ public class Config {
         if (repaired > 0) {
             AdditionalAdditions.LOGGER.info(format("Repaired " + repaired + " config properties"));
         }
+
         save();
     }
 }

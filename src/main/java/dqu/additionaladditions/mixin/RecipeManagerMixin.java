@@ -35,7 +35,8 @@ public class RecipeManagerMixin {
                     case "rope" -> { if (!Config.getBool(ConfigValues.ROPES)) toRemove.add(identifier); }
                     case "copper_patina" -> { if (!Config.getBool(ConfigValues.COPPER_PATINA)) toRemove.add(identifier); }
                     case "amethyst_lamp" -> { if (!Config.getBool(ConfigValues.AMETHYST_LAMP)) toRemove.add(identifier); }
-                    case "honeyed_apple", "berry_pie" -> { if (!Config.getBool(ConfigValues.FOOD)) toRemove.add(identifier); }
+                    case "berry_pie" -> { if (!Config.getBool(ConfigValues.FOOD, "BerryPie")) toRemove.add(identifier); }
+                    case "honeyed_apple" -> { if (!Config.getBool(ConfigValues.FOOD, "HoneyedApple")) toRemove.add(identifier); }
                     case "pocket_jukebox" -> { if (!Config.getBool(ConfigValues.POCKET_JUKEBOX)) toRemove.add(identifier); }
                     case "powered_rails" -> { if (!Config.getBool(ConfigValues.POWERED_RAILS_COPPER_RECIPE)) toRemove.add(identifier); }
                     default -> {
@@ -43,7 +44,7 @@ public class RecipeManagerMixin {
                             if (!Config.getBool(ConfigValues.ROSE_GOLD)) toRemove.add(identifier);
                         }
                         if (identifier.getPath().startsWith("fried_egg")) {
-                            if (!Config.getBool(ConfigValues.FOOD)) toRemove.add(identifier);
+                            if (!Config.getBool(ConfigValues.FOOD, "FriedEgg")) toRemove.add(identifier);
                         }
                         if (identifier.getPath().startsWith("gilded_netherite")) {
                             if (!Config.getBool(ConfigValues.GILDED_NETHERITE)) toRemove.add(identifier);
