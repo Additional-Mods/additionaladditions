@@ -56,7 +56,7 @@ public class AdditionalItems {
     public static final CrossbowItem CROSSBOW_WITH_SPYGLASS = new CrossbowItem(new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1).maxDamage(350));
     public static final Item TRIDENT_SHARD = new Item(new FabricItemSettings().group(ItemGroup.MATERIALS));
     public static final GlowStickItem GLOW_STICK_ITEM = new GlowStickItem(new FabricItemSettings().group(ItemGroup.MISC));
-    public static final Item DEPTH_METER_ITEM = new Item(new FabricItemSettings().group(ItemGroup.TOOLS));
+    public static final DepthMeterItem DEPTH_METER_ITEM = new DepthMeterItem(new FabricItemSettings().group(ItemGroup.TOOLS));
     public static final MysteriousBundleItem MYSTERIOUS_BUNDLE_ITEM = new MysteriousBundleItem(new FabricItemSettings().group(ItemGroup.MISC).maxCount(1).rarity(Rarity.RARE));
     public static final Item GOLD_RING = new Item(new FabricItemSettings().group(ItemGroup.MATERIALS).maxCount(1));
     public static final PocketJukeboxItem POCKET_JUKEBOX_ITEM = new PocketJukeboxItem(new FabricItemSettings().group(ItemGroup.MISC).maxCount(1));
