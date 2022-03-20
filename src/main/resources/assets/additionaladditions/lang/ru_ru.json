@@ -44,6 +44,8 @@
   "enchantment.additionaladditions.speed": "Скорость",
   "entity.additionaladditions.glow_stick": "Светящаяся Палочка",
 
+  "depth_meter.elevation": "Altitude: %s",
+
   "item.minecraft.potion.effect.haste_potion": "Зелье Спешки",
   "item.minecraft.potion.effect.long_haste_potion": "Зелье Спешки",
   "item.minecraft.potion.effect.strong_haste_potion": "Зелье Спешки",

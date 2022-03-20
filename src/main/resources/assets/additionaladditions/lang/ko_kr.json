@@ -44,6 +44,8 @@
   "enchantment.additionaladditions.speed": "신속",
   "entity.additionaladditions.glow_stick": "발광 막대기",
 
+  "depth_meter.elevation": "Altitude: %s",
+
   "item.minecraft.potion.effect.haste_potion": "성급한의 포션",
   "item.minecraft.potion.effect.long_haste_potion": "성급한의 포션",
   "item.minecraft.potion.effect.strong_haste_potion": "성급한의 포션",

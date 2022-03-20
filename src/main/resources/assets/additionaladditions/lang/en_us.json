@@ -44,7 +44,7 @@
   "enchantment.additionaladditions.speed": "Speed",
   "entity.additionaladditions.glow_stick": "Glow Stick",
 
-  "depth_meter.elevation": "Current Elevation: %s",
+  "depth_meter.elevation": "Altitude: %s",
 
   "item.minecraft.potion.effect.haste_potion": "Potion of Haste",
   "item.minecraft.potion.effect.long_haste_potion": "Potion of Haste",
