@@ -50,12 +50,12 @@ public class AdditionalAdditionsClient implements ClientModInitializer {
         }));
 
         FabricModelPredicateProviderRegistry.register(AdditionalItems.DEPTH_METER_ITEM, new Identifier("angle"), (itemStack, clientWorld, livingEntity, worldSeed) -> {
-            if (livingEntity == null) return 0.2f;
-            int height = livingEntity.world.getTopY() - livingEntity.world.getBottomY();
-            double playerY = livingEntity.getY() - livingEntity.world.getBottomY();
-            double quarter = height / 4d;
-            int value = (int) (playerY / quarter);
-            return (value < 0) ? 0 : (Math.min(value, 3) / 10f);
+            World world = livingEntity.world;
+            int worldHeight = world.getSeaLevel() - world.getBottomY();
+            if (livingEntity == null || worldHeight == 0) return 0.5F;
+            int meterHeight = livingEntity.getBlockY() - world.getBottomY();
+            float heightRatio = meterHeight / (float) worldHeight;
+            return heightRatio > 1.0F ? 1.0F / heightRatio : heightRatio;
         });
     }
 }
