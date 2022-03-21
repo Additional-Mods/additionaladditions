@@ -41,7 +41,9 @@
   "block.additionaladditions.rope": "Rope",
   "block.additionaladditions.amethyst_lamp": "Amethyst Lamp",
   "enchantment.additionaladditions.precision": "Precision",
+  "enchantment.additionaladditions.precision.desc": "Improves crossbow accuracy.",
   "enchantment.additionaladditions.speed": "Speed",
+  "enchantment.additionaladditions.speed.desc": "Increases movement speed.", 
   "entity.additionaladditions.glow_stick": "Glow Stick",
 
   "depth_meter.elevation": "Altitude: %s",
