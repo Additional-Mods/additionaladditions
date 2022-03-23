@@ -173,12 +173,14 @@ public class Config {
                 else if (value.getProperty().key().equals("Potions")) {
                     db.remove("Potions");
                 }
+                else if (value.getProperty().key().equals("DepthMeter")) {
+                    db.remove("DepthMeter");
+                }
             }
         }
         db.addProperty("version", VERSION);
 
         AdditionalAdditions.LOGGER.info(format("Converted outdated config."));
-        save();
     }
 
     private static void repair() {

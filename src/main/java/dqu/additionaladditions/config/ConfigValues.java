@@ -22,7 +22,10 @@ public enum ConfigValues {
     TRIDENT_SHARD(2, new ConfigProperty("TridentShard")),
     GLOW_STICK(2, new ConfigProperty("GlowStick")),
     GILDED_NETHERITE(3, new ConfigProperty("GildedNetherite")),
-    DEPTH_METER(3, new ConfigProperty("DepthMeter")),
+    DEPTH_METER(3, new ConfigProperty("DepthMeter", new ListConfigValue()
+            .put(new ConfigProperty("enabled"))
+            .put(new ConfigProperty("displayElevationAlways", ConfigValueType.FALSE))
+    )),
     MYSTERIOUS_BUNDLE(3, new ConfigProperty("MysteriousBundle")),
     COMPOSTABLE_ROTTEN_FLESH(3, new ConfigProperty("CompostableRottenFlesh")),
     MUSIC_DISCS(4, new ConfigProperty("MusicDiscs")),
@@ -35,8 +38,7 @@ public enum ConfigValues {
     GLOW_BERRY_GLOW(6, new ConfigProperty("GlowBerryEatGlow", new ListConfigValue()
             .put(new ConfigProperty("enabled"))
             .put(new ConfigProperty("duration", new IntegerConfigValue(5)))
-    )),
-    HASTE_POTIONS(6, new ConfigProperty("HastePotions"));
+    ));
 
     private final int version;
     private final ConfigProperty configProperty;

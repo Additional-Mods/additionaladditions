@@ -1,5 +1,7 @@
 package dqu.additionaladditions.item;
 
+import dqu.additionaladditions.config.Config;
+import dqu.additionaladditions.config.ConfigValues;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -15,8 +17,16 @@ public class DepthMeterItem extends Item {
 
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
-        ItemStack itemStack = user.getStackInHand(hand);
-        user.sendMessage(new TranslatableText("depth_meter.elevation", user.getBlockY()), true);
-        return TypedActionResult.success(itemStack, world.isClient());
+        if (!Config.getBool(ConfigValues.DEPTH_METER, "enabled")) {
+            return super.use(world, user, hand);
+        }
+
+        if (!Config.getBool(ConfigValues.DEPTH_METER, "displayElevationAlways")) {
+            ItemStack itemStack = user.getStackInHand(hand);
+            user.sendMessage(new TranslatableText("depth_meter.elevation", user.getBlockY()), true);
+            return TypedActionResult.success(itemStack, world.isClient());
+        }
+
+        return super.use(world, user, hand);
     }
 }

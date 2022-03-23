@@ -26,7 +26,6 @@ public abstract class BrewingRecipeRegistryMixin {
             Config.load();
         }
 
-        if (!Config.getBool(ConfigValues.HASTE_POTIONS)) return;
         registerPotionRecipe(Potions.SWIFTNESS, Items.AMETHYST_SHARD, AdditionalPotions.HASTE_POTION);
         registerPotionRecipe(AdditionalPotions.HASTE_POTION, Items.REDSTONE, AdditionalPotions.LONG_HASTE_POTION);
         registerPotionRecipe(AdditionalPotions.HASTE_POTION, Items.GLOWSTONE_DUST, AdditionalPotions.STRONG_HASTE_POTION);
