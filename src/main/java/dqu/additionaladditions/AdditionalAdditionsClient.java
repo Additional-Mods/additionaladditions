@@ -52,10 +52,23 @@ public class AdditionalAdditionsClient implements ClientModInitializer {
         FabricModelPredicateProviderRegistry.register(AdditionalItems.DEPTH_METER_ITEM, new Identifier("angle"), (itemStack, clientWorld, livingEntity, worldSeed) -> {
             if (livingEntity == null) return 0.3125F;
             World world = livingEntity.world;
-            int seaHeight = world.getSeaLevel() - world.getBottomY();
-            int height = livingEntity.getBlockY() - world.getBottomY();
-            float heightRatio = height / (float) seaHeight;
-            return heightRatio > 1.0F ? 1.0F / heightRatio : heightRatio;
+            if (world == null) return 0.3125F;
+
+            float sea = world.getSeaLevel();
+            float height = livingEntity.getBlockY();
+            float top = world.getTopY();
+            float bottom = world.getBottomY();
+
+            if (height > top) return 0;
+            if (height < bottom) return 1;
+
+            if (height >= sea) {
+                double val = (height / (2 * (sea - top))) + 0.25 - ((sea + top) / (4 * (sea - top)));
+                return (float) val;
+            } else {
+                double val = (height / (2 * (bottom - sea))) + 0.75 - ((bottom + sea) / (4 * (bottom - sea)));
+                return (float) val;
+            }
         });
     }
 }
