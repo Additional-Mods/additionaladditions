@@ -38,7 +38,8 @@ public enum ConfigValues {
     GLOW_BERRY_GLOW(6, new ConfigProperty("GlowBerryEatGlow", new ListConfigValue()
             .put(new ConfigProperty("enabled"))
             .put(new ConfigProperty("duration", new IntegerConfigValue(5)))
-    ));
+    )),
+    HASTE_POTIONS(6, new ConfigProperty("HastePotions"));
 
     private final int version;
     private final ConfigProperty configProperty;

@@ -1,6 +1,7 @@
 package dqu.additionaladditions.mixin;
 
 import dqu.additionaladditions.config.Config;
+import dqu.additionaladditions.config.ConfigValues;
 import dqu.additionaladditions.registry.AdditionalPotions;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
@@ -24,10 +25,9 @@ public abstract class PotionBrewingMixin {
             Config.load();
         }
 
+        if (!Config.getBool(ConfigValues.HASTE_POTIONS)) return;
         addMix(Potions.SWIFTNESS, Items.AMETHYST_SHARD, AdditionalPotions.HASTE_POTION);
         addMix(AdditionalPotions.HASTE_POTION, Items.REDSTONE, AdditionalPotions.LONG_HASTE_POTION);
         addMix(AdditionalPotions.HASTE_POTION, Items.GLOWSTONE_DUST, AdditionalPotions.STRONG_HASTE_POTION);
-        addMix(Potions.STRONG_SWIFTNESS, Items.AMETHYST_SHARD, AdditionalPotions.STRONG_HASTE_POTION);
-        addMix(Potions.LONG_WEAKNESS, Items.AMETHYST_SHARD, AdditionalPotions.LONG_GLOW_POTION);
     }
 }

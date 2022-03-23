@@ -15,10 +15,12 @@ public class AdditionalPotions {
     public static final Potion STRONG_HASTE_POTION = new Potion(new MobEffectInstance(MobEffects.DIG_SPEED, 1600, 1));
 
     public static void registerAll() {
-        Registry.register(Registry.POTION, new ResourceLocation(AdditionalAdditions.namespace, "glow_potion"), GLOW_POTION);
-        Registry.register(Registry.POTION, new ResourceLocation(AdditionalAdditions.namespace, "long_glow_potion"), LONG_GLOW_POTION);
         Registry.register(Registry.POTION, new ResourceLocation(AdditionalAdditions.namespace, "haste_potion"), HASTE_POTION);
         Registry.register(Registry.POTION, new ResourceLocation(AdditionalAdditions.namespace, "long_haste_potion"), LONG_HASTE_POTION);
         Registry.register(Registry.POTION, new ResourceLocation(AdditionalAdditions.namespace, "strong_haste_potion"), STRONG_HASTE_POTION);
+
+        // pre 3.0.1 compatibility
+        Registry.register(Registry.POTION, new ResourceLocation(AdditionalAdditions.namespace, "glow_potion"), GLOW_POTION);
+        Registry.register(Registry.POTION, new ResourceLocation(AdditionalAdditions.namespace, "long_glow_potion"), LONG_GLOW_POTION);
     }
 }
