@@ -2,14 +2,14 @@ package dqu.additionaladditions.enchantment;
 
 import dqu.additionaladditions.config.Config;
 import dqu.additionaladditions.config.ConfigValues;
-import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.EnchantmentTarget;
-import net.minecraft.enchantment.Enchantments;
-import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.EnchantmentCategory;
+import net.minecraft.world.item.enchantment.Enchantments;
 
 public class SpeedEnchantment extends Enchantment {
     public SpeedEnchantment() {
-        super(Rarity.UNCOMMON, EnchantmentTarget.ARMOR_FEET, new EquipmentSlot[] {EquipmentSlot.FEET});
+        super(Rarity.UNCOMMON, EnchantmentCategory.ARMOR_FEET, new EquipmentSlot[] {EquipmentSlot.FEET});
     }
 
     @Override
@@ -18,10 +18,10 @@ public class SpeedEnchantment extends Enchantment {
     }
 
     @Override
-    protected boolean canAccept(Enchantment other) {
+    protected boolean checkCompatibility(Enchantment other) {
         if (Config.getBool(ConfigValues.ENCHANTMENT_SPEED)) return false;
         if (other == Enchantments.SOUL_SPEED || other == Enchantments.FROST_WALKER || other == Enchantments.DEPTH_STRIDER)
             return false;
-        return super.canAccept(other);
+        return super.checkCompatibility(other);
     }
 }

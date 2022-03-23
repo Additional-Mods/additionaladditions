@@ -3,29 +3,29 @@ package dqu.additionaladditions.entity;
 import dqu.additionaladditions.registry.AdditionalBlocks;
 import dqu.additionaladditions.block.GlowStickBlock;
 import dqu.additionaladditions.registry.AdditionalItems;
+import net.minecraft.core.BlockPos;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.HitResult;
 import dqu.additionaladditions.registry.AdditionalEntities;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.ItemEntity;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.projectile.thrown.ThrownItemEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.util.hit.HitResult;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
 
-public class GlowStickEntity extends ThrownItemEntity {
-    public GlowStickEntity(EntityType<? extends ThrownItemEntity> entityType, World world) {
+public class GlowStickEntity extends ThrowableItemProjectile {
+    public GlowStickEntity(EntityType<? extends ThrowableItemProjectile> entityType, Level world) {
         super(entityType, world);
     }
 
-    public GlowStickEntity(World world, LivingEntity owner) {
+    public GlowStickEntity(Level world, LivingEntity owner) {
         super(AdditionalEntities.GLOW_STICK_ENTITY_ENTITY_TYPE, owner, world);
     }
 
-    public GlowStickEntity(World world, double x, double y, double z) {
+    public GlowStickEntity(Level world, double x, double y, double z) {
         super(AdditionalEntities.GLOW_STICK_ENTITY_ENTITY_TYPE, x, y, z, world);
     }
 
@@ -34,19 +34,19 @@ public class GlowStickEntity extends ThrownItemEntity {
         return AdditionalItems.GLOW_STICK_ITEM;
     }
 
-    protected void onCollision(HitResult hitResult) {
-        super.onCollision(hitResult);
-        if (!this.world.isClient()) {
+    protected void onHit(HitResult hitResult) {
+        super.onHit(hitResult);
+        if (!this.level.isClientSide()) {
             this.remove(RemovalReason.DISCARDED);
             BlockPos pos = new BlockPos(this.getX(), this.getY(), this.getZ());
-            if (this.world.getBlockState(pos).isAir()) {
-                this.world.setBlockState(pos, AdditionalBlocks.GLOW_STICK_BLOCK.getDefaultState()
-                    .with(GlowStickBlock.FLIPPED, world.getRandom().nextBoolean()));
-                this.world.playSound(null, pos.getX(), pos.getY(), pos.getZ(), SoundEvents.BLOCK_GLASS_PLACE, SoundCategory.BLOCKS, 1.0f, 1.0f);
+            if (this.level.getBlockState(pos).isAir()) {
+                this.level.setBlockAndUpdate(pos, AdditionalBlocks.GLOW_STICK_BLOCK.defaultBlockState()
+                    .setValue(GlowStickBlock.FLIPPED, level.getRandom().nextBoolean()));
+                this.level.playSound(null, pos.getX(), pos.getY(), pos.getZ(), SoundEvents.GLASS_PLACE, SoundSource.BLOCKS, 1.0f, 1.0f);
             } else {
                 ItemStack stack = new ItemStack(AdditionalItems.GLOW_STICK_ITEM, 1);
-                ItemEntity entity = new ItemEntity(this.world, this.getX(), this.getY(), this.getZ(), stack);
-                this.world.spawnEntity(entity);
+                ItemEntity entity = new ItemEntity(this.level, this.getX(), this.getY(), this.getZ(), stack);
+                this.level.addFreshEntity(entity);
             }
         }
     }

@@ -1,40 +1,40 @@
 package dqu.additionaladditions.material;
 
-import net.minecraft.item.Items;
-import net.minecraft.item.ToolMaterial;
-import net.minecraft.recipe.Ingredient;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.Tier;
+import net.minecraft.world.item.crafting.Ingredient;
 
-public class GildedNetheriteToolMaterial implements ToolMaterial {
+public class GildedNetheriteToolMaterial implements Tier {
     public static final GildedNetheriteToolMaterial MATERIAL = new GildedNetheriteToolMaterial();
 
     @Override
-    public int getDurability() {
+    public int getUses() {
         return 2000;
     }
 
     @Override
-    public float getMiningSpeedMultiplier() {
+    public float getSpeed() {
         return 9.0F;
     }
 
     @Override
-    public float getAttackDamage() {
+    public float getAttackDamageBonus() {
         return 2.0F;
     }
 
     @Override
-    public int getMiningLevel() {
+    public int getLevel() {
         return 4;
     }
 
     @Override
-    public int getEnchantability() {
+    public int getEnchantmentValue() {
         return 24;
     }
 
     @Override
     public Ingredient getRepairIngredient() {
-        return Ingredient.ofItems(Items.NETHERITE_INGOT);
+        return Ingredient.of(Items.NETHERITE_INGOT);
     }
 
     @Override

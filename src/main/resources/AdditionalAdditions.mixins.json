@@ -6,25 +6,25 @@
   "mixins": [
     "ArmorItemMixin",
     "AxeItemMixin",
-    "BrewingRecipeRegistryMixin",
+    "PotionBrewingMixin",
     "CrossbowItemMixin",
-    "InstrumentMixin",
+    "NoteBlockInstrumentMixin",
     "LivingEntityMixin",
-    "MobEntityMixin",
-    "PiglinBrainMixin",
-    "PlayerEntityMixin",
+    "MobMixin",
+    "PiglinAiMixin",
+    "PlayerMixin",
     "RecipeManagerMixin",
     "RedstoneWireBlockMixin",
-    "ServerAdvancementLoaderMixin",
-    "WanderingTraderEntityMixin"
+    "ServerAdvancementManagerMixin",
+    "WanderingTraderMixin"
   ],
   "client": [
-    "ClientPlayerEntityMixin",
+    "LocalPlayerMixin",
     "GameRendererMixin",
-    "HeldItemRendererMixin",
-    "InGameHudMixin",
-    "MouseMixin",
-    "PlayerEntityRendererMixin"
+    "ItemInHandRendererMixin",
+    "GuiMixin",
+    "MouseHandlerMixin",
+    "PlayerRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1

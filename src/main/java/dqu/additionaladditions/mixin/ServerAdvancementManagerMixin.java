@@ -4,10 +4,6 @@ import com.google.gson.JsonElement;
 import dqu.additionaladditions.AdditionalAdditions;
 import dqu.additionaladditions.config.Config;
 import dqu.additionaladditions.config.ConfigValues;
-import net.minecraft.resource.ResourceManager;
-import net.minecraft.server.ServerAdvancementLoader;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.profiler.Profiler;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -16,15 +12,19 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.ServerAdvancementManager;
+import net.minecraft.server.packs.resources.ResourceManager;
+import net.minecraft.util.profiling.ProfilerFiller;
 
-@Mixin(ServerAdvancementLoader.class)
-public class ServerAdvancementLoaderMixin {
+@Mixin(ServerAdvancementManager.class)
+public class ServerAdvancementManagerMixin {
     @Inject(method = "apply", at = @At("HEAD"))
-    private void removeAdvancements(Map<Identifier, JsonElement> map, ResourceManager resourceManager, Profiler profiler, CallbackInfo ci) {
-        HashSet<Identifier> toRemove = new HashSet<>();
-        Iterator<Map.Entry<Identifier, JsonElement>> iterator = map.entrySet().iterator();
+    private void removeAdvancements(Map<ResourceLocation, JsonElement> map, ResourceManager resourceManager, ProfilerFiller profiler, CallbackInfo ci) {
+        HashSet<ResourceLocation> toRemove = new HashSet<>();
+        Iterator<Map.Entry<ResourceLocation, JsonElement>> iterator = map.entrySet().iterator();
         while (iterator.hasNext()) {
-            Identifier identifier = iterator.next().getKey();
+            ResourceLocation identifier = iterator.next().getKey();
             if (identifier.getNamespace().equals(AdditionalAdditions.namespace)) {
                 switch (identifier.getPath()) {
                     case "obtain_adoghr_disc" -> { if (!Config.getBool(ConfigValues.MUSIC_DISCS)) toRemove.add(identifier); }
@@ -39,7 +39,7 @@ public class ServerAdvancementLoaderMixin {
             }
         }
 
-        for (Identifier identifier : toRemove) {
+        for (ResourceLocation identifier : toRemove) {
             map.remove(identifier);
         }
     }

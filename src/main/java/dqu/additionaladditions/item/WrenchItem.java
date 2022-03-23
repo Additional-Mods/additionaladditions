@@ -3,180 +3,180 @@ package dqu.additionaladditions.item;
 import dqu.additionaladditions.AdditionalAdditions;
 import dqu.additionaladditions.config.Config;
 import dqu.additionaladditions.config.ConfigValues;
-import net.minecraft.block.BedBlock;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.ChestBlock;
-import net.minecraft.block.SlabBlock;
-import net.minecraft.block.entity.HopperBlockEntity;
-import net.minecraft.block.enums.SlabType;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemUsageContext;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.state.property.Properties;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.BedBlock;
+import net.minecraft.world.level.block.ChestBlock;
+import net.minecraft.world.level.block.SlabBlock;
+import net.minecraft.world.level.block.entity.HopperBlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.SlabType;
 
 public class WrenchItem extends Item {
-    public WrenchItem(Settings settings) {
+    public WrenchItem(Properties settings) {
         super(settings);
     }
 
-    private boolean tryPlacing(BlockPos pos, BlockState state, World world) {
-        if (state.canPlaceAt(world, pos)) {
-            world.setBlockState(pos, state);
+    private boolean tryPlacing(BlockPos pos, BlockState state, Level world) {
+        if (state.canSurvive(world, pos)) {
+            world.setBlockAndUpdate(pos, state);
             return true;
         }
         return false;
     }
 
     @Override
-    public ActionResult useOnBlock(ItemUsageContext context) {
-        if (!Config.getBool(ConfigValues.WRENCH)) { return ActionResult.FAIL; }
-        World world = context.getWorld();
-        BlockPos pos = context.getBlockPos();
+    public InteractionResult useOn(UseOnContext context) {
+        if (!Config.getBool(ConfigValues.WRENCH)) { return InteractionResult.FAIL; }
+        Level world = context.getLevel();
+        BlockPos pos = context.getClickedPos();
         BlockState state = world.getBlockState(pos);
 
-        if (context.getPlayer() == null) return ActionResult.PASS;
-        if (world.isClient()) return ActionResult.PASS;
-        if (state.getBlock() instanceof ChestBlock || state.getBlock() instanceof BedBlock) return ActionResult.PASS;
+        if (context.getPlayer() == null) return InteractionResult.PASS;
+        if (world.isClientSide()) return InteractionResult.PASS;
+        if (state.getBlock() instanceof ChestBlock || state.getBlock() instanceof BedBlock) return InteractionResult.PASS;
 
-        if (state.contains(Properties.FACING)) {
-            if (tryPlacing(pos, state.cycle(Properties.FACING), world)) {
-                success(context.getStack(), world, pos, context.getPlayer(), context.getHand());
-                return ActionResult.SUCCESS;
+        if (state.hasProperty(BlockStateProperties.FACING)) {
+            if (tryPlacing(pos, state.cycle(BlockStateProperties.FACING), world)) {
+                success(context.getItemInHand(), world, pos, context.getPlayer(), context.getHand());
+                return InteractionResult.SUCCESS;
             }
         }
 
-        if (state.contains(Properties.HOPPER_FACING)) {
-            BlockState newstate = state.cycle(Properties.HOPPER_FACING);
-            world.setBlockState(pos, newstate);
+        if (state.hasProperty(BlockStateProperties.FACING_HOPPER)) {
+            BlockState newstate = state.cycle(BlockStateProperties.FACING_HOPPER);
+            world.setBlockAndUpdate(pos, newstate);
 
-            if (AdditionalAdditions.lithiumInstalled && !world.isClient()) {
+            if (AdditionalAdditions.lithiumInstalled && !world.isClientSide()) {
                 /*
                 * Lithium mod caches hopper's output and input inventories
                 * Which causes an issue where the hopper keeps transferring to the old location
                 * This replaces the block entity, which fixes that.
                 */
                 HopperBlockEntity hopperBlockEntity = (HopperBlockEntity) world.getBlockEntity(pos);
-                NbtCompound nbt = hopperBlockEntity.createNbt();
+                CompoundTag nbt = hopperBlockEntity.saveWithoutMetadata();
                 world.removeBlockEntity(pos);
                 HopperBlockEntity blockEntity = new HopperBlockEntity(pos, newstate);
-                blockEntity.readNbt(nbt);
-                world.addBlockEntity(blockEntity);
+                blockEntity.load(nbt);
+                world.setBlockEntity(blockEntity);
             }
 
-            success(context.getStack(), world, pos, context.getPlayer(), context.getHand());
-            return ActionResult.SUCCESS;
+            success(context.getItemInHand(), world, pos, context.getPlayer(), context.getHand());
+            return InteractionResult.SUCCESS;
         }
 
-        if (state.contains(Properties.HORIZONTAL_FACING)) {
-            if (tryPlacing(pos, state.cycle(Properties.HORIZONTAL_FACING), world)) {
-                success(context.getStack(), world, pos, context.getPlayer(), context.getHand());
-                return ActionResult.SUCCESS;
-            }
-        }
-
-        if (state.contains(Properties.AXIS)) {
-            if (tryPlacing(pos, state.cycle(Properties.AXIS), world)) {
-                success(context.getStack(), world, pos, context.getPlayer(), context.getHand());
-                return ActionResult.SUCCESS;
+        if (state.hasProperty(BlockStateProperties.HORIZONTAL_FACING)) {
+            if (tryPlacing(pos, state.cycle(BlockStateProperties.HORIZONTAL_FACING), world)) {
+                success(context.getItemInHand(), world, pos, context.getPlayer(), context.getHand());
+                return InteractionResult.SUCCESS;
             }
         }
 
-        if (state.contains(Properties.HORIZONTAL_AXIS)) {
-            if (tryPlacing(pos, state.cycle(Properties.HORIZONTAL_AXIS), world)) {
-                success(context.getStack(), world, pos, context.getPlayer(), context.getHand());
-                return ActionResult.SUCCESS;
+        if (state.hasProperty(BlockStateProperties.AXIS)) {
+            if (tryPlacing(pos, state.cycle(BlockStateProperties.AXIS), world)) {
+                success(context.getItemInHand(), world, pos, context.getPlayer(), context.getHand());
+                return InteractionResult.SUCCESS;
+            }
+        }
+
+        if (state.hasProperty(BlockStateProperties.HORIZONTAL_AXIS)) {
+            if (tryPlacing(pos, state.cycle(BlockStateProperties.HORIZONTAL_AXIS), world)) {
+                success(context.getItemInHand(), world, pos, context.getPlayer(), context.getHand());
+                return InteractionResult.SUCCESS;
             }
         }
 
         if (state.getBlock() instanceof SlabBlock) {
             BlockState newState = state;
-            if (state.get(Properties.SLAB_TYPE).equals(SlabType.DOUBLE)) return ActionResult.PASS;
-            if (state.get(Properties.SLAB_TYPE).equals(SlabType.BOTTOM)) newState = state.with(Properties.SLAB_TYPE, SlabType.TOP);
-            if (state.get(Properties.SLAB_TYPE).equals(SlabType.TOP)) newState = state.with(Properties.SLAB_TYPE, SlabType.BOTTOM);
-            world.setBlockState(pos, newState);
-            success(context.getStack(), world, pos, context.getPlayer(), context.getHand());
-            return ActionResult.SUCCESS;
+            if (state.getValue(BlockStateProperties.SLAB_TYPE).equals(SlabType.DOUBLE)) return InteractionResult.PASS;
+            if (state.getValue(BlockStateProperties.SLAB_TYPE).equals(SlabType.BOTTOM)) newState = state.setValue(BlockStateProperties.SLAB_TYPE, SlabType.TOP);
+            if (state.getValue(BlockStateProperties.SLAB_TYPE).equals(SlabType.TOP)) newState = state.setValue(BlockStateProperties.SLAB_TYPE, SlabType.BOTTOM);
+            world.setBlockAndUpdate(pos, newState);
+            success(context.getItemInHand(), world, pos, context.getPlayer(), context.getHand());
+            return InteractionResult.SUCCESS;
         }
 
-        return ActionResult.PASS;
+        return InteractionResult.PASS;
     }
 
-    public void dispenserUse(World world, BlockPos pos, BlockState state, ItemStack stack) {
+    public void dispenserUse(Level world, BlockPos pos, BlockState state, ItemStack stack) {
         if (state.getBlock() instanceof ChestBlock) return;
-        if (state.contains(Properties.FACING)) {
-            if (tryPlacing(pos, state.cycle(Properties.FACING), world)) {
+        if (state.hasProperty(BlockStateProperties.FACING)) {
+            if (tryPlacing(pos, state.cycle(BlockStateProperties.FACING), world)) {
                 success(stack, world, pos);
             }
         }
-        if (state.contains(Properties.HOPPER_FACING)) {
-            BlockState newstate = state.cycle(Properties.HOPPER_FACING);
-            world.setBlockState(pos, newstate);
+        if (state.hasProperty(BlockStateProperties.FACING_HOPPER)) {
+            BlockState newstate = state.cycle(BlockStateProperties.FACING_HOPPER);
+            world.setBlockAndUpdate(pos, newstate);
 
-            if (AdditionalAdditions.lithiumInstalled && !world.isClient()) {
+            if (AdditionalAdditions.lithiumInstalled && !world.isClientSide()) {
                 /*
                  * Lithium mod caches hopper's output and input inventories
                  * Which causes an issue where the hopper keeps transferring to the old location
                  * This replaces the block entity, which fixes that.
                  */
                 HopperBlockEntity hopperBlockEntity = (HopperBlockEntity) world.getBlockEntity(pos);
-                NbtCompound nbt = hopperBlockEntity.createNbt();
+                CompoundTag nbt = hopperBlockEntity.saveWithoutMetadata();
                 world.removeBlockEntity(pos);
                 HopperBlockEntity blockEntity = new HopperBlockEntity(pos, newstate);
-                blockEntity.readNbt(nbt);
-                world.addBlockEntity(blockEntity);
+                blockEntity.load(nbt);
+                world.setBlockEntity(blockEntity);
             }
 
             success(stack, world, pos);
         }
-        if (state.contains(Properties.HORIZONTAL_FACING)) {
-            if (tryPlacing(pos, state.cycle(Properties.HORIZONTAL_FACING), world)) {
+        if (state.hasProperty(BlockStateProperties.HORIZONTAL_FACING)) {
+            if (tryPlacing(pos, state.cycle(BlockStateProperties.HORIZONTAL_FACING), world)) {
                 success(stack, world, pos);
             }
         }
-        if (state.contains(Properties.AXIS)) {
-            if (tryPlacing(pos, state.cycle(Properties.AXIS), world)) {
+        if (state.hasProperty(BlockStateProperties.AXIS)) {
+            if (tryPlacing(pos, state.cycle(BlockStateProperties.AXIS), world)) {
                 success(stack, world, pos);
             }
         }
-        if (state.contains(Properties.HORIZONTAL_AXIS)) {
-            if (tryPlacing(pos, state.cycle(Properties.HORIZONTAL_AXIS), world)) {
+        if (state.hasProperty(BlockStateProperties.HORIZONTAL_AXIS)) {
+            if (tryPlacing(pos, state.cycle(BlockStateProperties.HORIZONTAL_AXIS), world)) {
                 success(stack, world, pos);
             }
         }
 
         if (state.getBlock() instanceof SlabBlock) {
-            world.setBlockState(pos, state.cycle(Properties.SLAB_TYPE));
+            world.setBlockAndUpdate(pos, state.cycle(BlockStateProperties.SLAB_TYPE));
             BlockState news = null;
-            if (state.get(Properties.SLAB_TYPE) == SlabType.BOTTOM) news = state.with(Properties.SLAB_TYPE, SlabType.TOP);
-            if (state.get(Properties.SLAB_TYPE) == SlabType.TOP) news = state.with(Properties.SLAB_TYPE, SlabType.BOTTOM);
+            if (state.getValue(BlockStateProperties.SLAB_TYPE) == SlabType.BOTTOM) news = state.setValue(BlockStateProperties.SLAB_TYPE, SlabType.TOP);
+            if (state.getValue(BlockStateProperties.SLAB_TYPE) == SlabType.TOP) news = state.setValue(BlockStateProperties.SLAB_TYPE, SlabType.BOTTOM);
             if (news != null) {
-                world.setBlockState(pos, news);
+                world.setBlockAndUpdate(pos, news);
                 success(stack, world, pos);
             }
         }
     }
 
-    public void success(ItemStack stack, World world, BlockPos pos) {
-        if (world.isClient()) return;
-        if (stack.damage(1, world.random, null)) stack.decrement(1);
-        world.playSound(null, pos, SoundEvents.ITEM_SPYGLASS_USE, SoundCategory.AMBIENT, 2.0F, 1.0F);
+    public void success(ItemStack stack, Level world, BlockPos pos) {
+        if (world.isClientSide()) return;
+        if (stack.hurt(1, world.random, null)) stack.shrink(1);
+        world.playSound(null, pos, SoundEvents.SPYGLASS_USE, SoundSource.AMBIENT, 2.0F, 1.0F);
     }
 
-    public void success(ItemStack stack, World world, BlockPos pos, PlayerEntity player, Hand hand) {
-        if (world.isClient()) return;
+    public void success(ItemStack stack, Level world, BlockPos pos, Player player, InteractionHand hand) {
+        if (world.isClientSide()) return;
         if (!player.isCreative()) {
-            stack.damage(1, player, (PlayerEntity -> {
-                player.sendToolBreakStatus(hand);
+            stack.hurtAndBreak(1, player, (PlayerEntity -> {
+                player.broadcastBreakEvent(hand);
             }));
         }
-        world.playSound(null, pos, SoundEvents.ITEM_SPYGLASS_USE, SoundCategory.AMBIENT, 2.0F, 1.0F); }
+        world.playSound(null, pos, SoundEvents.SPYGLASS_USE, SoundSource.AMBIENT, 2.0F, 1.0F); }
 
 }

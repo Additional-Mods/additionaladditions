@@ -1,10 +1,10 @@
 package dqu.additionaladditions.item;
 
-import net.minecraft.item.PickaxeItem;
-import net.minecraft.item.ToolMaterial;
+import net.minecraft.world.item.PickaxeItem;
+import net.minecraft.world.item.Tier;
 
 public class AdditionalPickaxeItem extends PickaxeItem {
-    public AdditionalPickaxeItem(ToolMaterial material, int attackDamage, float attackSpeed, Settings settings) {
+    public AdditionalPickaxeItem(Tier material, int attackDamage, float attackSpeed, Properties settings) {
         super(material, attackDamage, attackSpeed, settings);
     }
 }

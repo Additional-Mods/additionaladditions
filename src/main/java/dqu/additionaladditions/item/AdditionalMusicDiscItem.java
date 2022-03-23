@@ -1,10 +1,10 @@
 package dqu.additionaladditions.item;
 
-import net.minecraft.item.MusicDiscItem;
-import net.minecraft.sound.SoundEvent;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.world.item.RecordItem;
 
-public class AdditionalMusicDiscItem extends MusicDiscItem {
-    public AdditionalMusicDiscItem(int comparatorOutput, SoundEvent sound, Settings settings) {
+public class AdditionalMusicDiscItem extends RecordItem {
+    public AdditionalMusicDiscItem(int comparatorOutput, SoundEvent sound, Properties settings) {
         super(comparatorOutput, sound, settings);
     }
 }

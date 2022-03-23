@@ -1,11 +1,11 @@
 package dqu.additionaladditions.misc;
 
-import net.minecraft.block.enums.Instrument;
+import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 
 public class AdditionalInstrument {
     static {
-        Instrument.values();
+        NoteBlockInstrument.values();
     }
 
-    public static Instrument AMETHYST;
+    public static NoteBlockInstrument AMETHYST;
 }

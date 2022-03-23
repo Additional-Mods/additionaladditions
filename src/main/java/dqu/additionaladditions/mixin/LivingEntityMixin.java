@@ -3,15 +3,6 @@ package dqu.additionaladditions.mixin;
 import dqu.additionaladditions.config.Config;
 import dqu.additionaladditions.config.ConfigValues;
 import dqu.additionaladditions.registry.AdditionalEnchantments;
-import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.attribute.EntityAttribute;
-import net.minecraft.entity.attribute.EntityAttributeInstance;
-import net.minecraft.entity.attribute.EntityAttributeModifier;
-import net.minecraft.entity.attribute.EntityAttributes;
-import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -21,26 +12,35 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.UUID;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.AttributeInstance;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.level.Level;
 
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin extends Entity {
-    public LivingEntityMixin(EntityType<?> type, World world) {
+    public LivingEntityMixin(EntityType<?> type, Level world) {
         super(type, world);
     }
 
-    @Shadow @Nullable public abstract EntityAttributeInstance getAttributeInstance(EntityAttribute attribute);
-    @Shadow @Final private static UUID SOUL_SPEED_BOOST_ID;
+    @Shadow @Nullable public abstract AttributeInstance getAttribute(Attribute attribute);
+    @Shadow @Final private static UUID SPEED_MODIFIER_SOUL_SPEED_UUID;
 
-    @Inject(method = "addSoulSpeedBoostIfNeeded", at = @At("HEAD"))
+    @Inject(method = "tryAddSoulSpeed", at = @At("HEAD"))
     private void applySpeedBoost(CallbackInfo ci) {
         if (!Config.getBool(ConfigValues.ENCHANTMENT_PRECISION)) return;
-        int i = EnchantmentHelper.getEquipmentLevel(AdditionalEnchantments.ENCHANTMENT_SPEED, ((LivingEntity) (Object) this));
+        int i = EnchantmentHelper.getEnchantmentLevel(AdditionalEnchantments.ENCHANTMENT_SPEED, ((LivingEntity) (Object) this));
         if (i > 0) {
-            if (getLandingBlockState().isAir()) return;
-            EntityAttributeInstance entityAttributeInstance = getAttributeInstance(EntityAttributes.GENERIC_MOVEMENT_SPEED);
+            if (getBlockStateOn().isAir()) return;
+            AttributeInstance entityAttributeInstance = getAttribute(Attributes.MOVEMENT_SPEED);
             if (entityAttributeInstance == null) return;
-            EntityAttributeModifier modifier = new EntityAttributeModifier(SOUL_SPEED_BOOST_ID, "Soul speed boost", (i*7d)/1000d, EntityAttributeModifier.Operation.ADDITION);
-            entityAttributeInstance.addTemporaryModifier(modifier);
+            AttributeModifier modifier = new AttributeModifier(SPEED_MODIFIER_SOUL_SPEED_UUID, "Soul speed boost", (i*7d)/1000d, AttributeModifier.Operation.ADDITION);
+            entityAttributeInstance.addTransientModifier(modifier);
         }
     }
 }

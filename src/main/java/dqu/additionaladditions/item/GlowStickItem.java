@@ -3,35 +3,35 @@ package dqu.additionaladditions.item;
 import dqu.additionaladditions.config.Config;
 import dqu.additionaladditions.config.ConfigValues;
 import dqu.additionaladditions.entity.GlowStickEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.stat.Stats;
-import net.minecraft.util.Hand;
-import net.minecraft.util.TypedActionResult;
-import net.minecraft.world.World;
+import net.minecraft.stats.Stats;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 
 public class GlowStickItem extends Item {
-    public GlowStickItem(Settings settings) {
+    public GlowStickItem(Properties settings) {
         super(settings);
     }
 
     @Override
-    public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
-        ItemStack itemStack = user.getStackInHand(hand);
-        if (!Config.getBool(ConfigValues.GLOW_STICK)) { return TypedActionResult.fail(itemStack); }
-        if (!world.isClient()) {
+    public InteractionResultHolder<ItemStack> use(Level world, Player user, InteractionHand hand) {
+        ItemStack itemStack = user.getItemInHand(hand);
+        if (!Config.getBool(ConfigValues.GLOW_STICK)) { return InteractionResultHolder.fail(itemStack); }
+        if (!world.isClientSide()) {
             GlowStickEntity glowStickEntity = new GlowStickEntity(world, user);
             glowStickEntity.setItem(itemStack);
-            glowStickEntity.setVelocity(user, user.getPitch(), user.getYaw(), 0.0F, 1.5F, 0F);
-            world.spawnEntity(glowStickEntity);
+            glowStickEntity.shootFromRotation(user, user.getXRot(), user.getYRot(), 0.0F, 1.5F, 0F);
+            world.addFreshEntity(glowStickEntity);
         }
 
-        user.incrementStat(Stats.USED.getOrCreateStat(this));
+        user.awardStat(Stats.ITEM_USED.get(this));
         if (!user.isCreative()) {
-            itemStack.decrement(1);
+            itemStack.shrink(1);
         }
 
-        return TypedActionResult.success(itemStack, world.isClient());
+        return InteractionResultHolder.sidedSuccess(itemStack, world.isClientSide());
     }
 }

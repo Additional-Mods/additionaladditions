@@ -4,25 +4,25 @@ import com.google.gson.JsonElement;
 import dqu.additionaladditions.AdditionalAdditions;
 import dqu.additionaladditions.config.Config;
 import dqu.additionaladditions.config.ConfigValues;
-import net.minecraft.recipe.RecipeManager;
-import net.minecraft.resource.ResourceManager;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.profiler.Profiler;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.*;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.packs.resources.ResourceManager;
+import net.minecraft.util.profiling.ProfilerFiller;
+import net.minecraft.world.item.crafting.RecipeManager;
 
 @Mixin(RecipeManager.class)
 public class RecipeManagerMixin {
     @Inject(method = "apply", at = @At("HEAD"))
-    private void removeRecipes(Map<Identifier, JsonElement> map, ResourceManager resourceManager, Profiler profiler, CallbackInfo ci) {
-        HashSet<Identifier> toRemove = new HashSet<>();
-        Iterator<Map.Entry<Identifier, JsonElement>> iterator = map.entrySet().iterator();
+    private void removeRecipes(Map<ResourceLocation, JsonElement> map, ResourceManager resourceManager, ProfilerFiller profiler, CallbackInfo ci) {
+        HashSet<ResourceLocation> toRemove = new HashSet<>();
+        Iterator<Map.Entry<ResourceLocation, JsonElement>> iterator = map.entrySet().iterator();
         while (iterator.hasNext()) {
-            Identifier identifier = iterator.next().getKey();
+            ResourceLocation identifier = iterator.next().getKey();
             if (identifier.getNamespace().equals(AdditionalAdditions.namespace)) {
                 switch (identifier.getPath()) {
                     case "watering_can" -> { if (!Config.getBool(ConfigValues.WATERING_CAN)) toRemove.add(identifier); }
@@ -59,7 +59,7 @@ public class RecipeManagerMixin {
             }
         }
 
-        for (Identifier identifier : toRemove) {
+        for (ResourceLocation identifier : toRemove) {
             map.remove(identifier);
         }
     }

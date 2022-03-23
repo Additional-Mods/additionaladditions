@@ -3,45 +3,46 @@ package dqu.additionaladditions.block;
 import dqu.additionaladditions.config.Config;
 import dqu.additionaladditions.config.ConfigValues;
 import dqu.additionaladditions.registry.AdditionalBlocks;
-import net.minecraft.block.*;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.state.StateManager;
-import net.minecraft.state.property.BooleanProperty;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
-import net.minecraft.util.hit.BlockHitResult;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.util.shape.VoxelShapes;
-import net.minecraft.world.BlockView;
-import net.minecraft.world.World;
-import net.minecraft.world.WorldAccess;
-import net.minecraft.world.WorldView;
-import net.minecraft.world.tick.OrderedTick;
-
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraft.world.ticks.ScheduledTick;
 import java.util.Random;
 
 /** @noinspection deprecation*/
 public class RopeBlock extends Block {
-    public static final VoxelShape shape = Block.createCuboidShape(6, 0, 6,10, 16, 10);
-    public static final BooleanProperty NORTH = BooleanProperty.of("north");
-    public static final BooleanProperty SOUTH = BooleanProperty.of("south");
-    public static final BooleanProperty WEST = BooleanProperty.of("west");
-    public static final BooleanProperty EAST = BooleanProperty.of("east");
+    public static final VoxelShape shape = Block.box(6, 0, 6,10, 16, 10);
+    public static final BooleanProperty NORTH = BooleanProperty.create("north");
+    public static final BooleanProperty SOUTH = BooleanProperty.create("south");
+    public static final BooleanProperty WEST = BooleanProperty.create("west");
+    public static final BooleanProperty EAST = BooleanProperty.create("east");
 
-    public RopeBlock(Settings settings) {
+    public RopeBlock(Properties settings) {
         super(settings);
-        setDefaultState(getStateManager().getDefaultState().with(NORTH, false).with(SOUTH, false).with(EAST, false).with(WEST, false));
+        registerDefaultState(getStateDefinition().any().setValue(NORTH, false).setValue(SOUTH, false).setValue(EAST, false).setValue(WEST, false));
     }
 
     @Override
-    protected void appendProperties(StateManager.Builder<Block, BlockState> stateManager) {
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> stateManager) {
         stateManager.add(NORTH);
         stateManager.add(EAST);
         stateManager.add(SOUTH);
@@ -49,57 +50,57 @@ public class RopeBlock extends Block {
     }
 
     @Override
-    public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
+    public boolean canSurvive(BlockState state, LevelReader world, BlockPos pos) {
         if (!Config.getBool(ConfigValues.ROPES)) return false;
-        BlockState up = world.getBlockState(pos.offset(Direction.UP));
-        if(up.isOf(this) || up.isSideSolidFullSquare(world, pos.offset(Direction.UP), Direction.DOWN)) return true;
+        BlockState up = world.getBlockState(pos.relative(Direction.UP));
+        if(up.is(this) || up.isFaceSturdy(world, pos.relative(Direction.UP), Direction.DOWN)) return true;
 
-        BlockState north = world.getBlockState(pos.offset(Direction.NORTH));
-        BlockState east = world.getBlockState(pos.offset(Direction.EAST));
-        BlockState south = world.getBlockState(pos.offset(Direction.SOUTH));
-        BlockState west = world.getBlockState(pos.offset(Direction.WEST));
+        BlockState north = world.getBlockState(pos.relative(Direction.NORTH));
+        BlockState east = world.getBlockState(pos.relative(Direction.EAST));
+        BlockState south = world.getBlockState(pos.relative(Direction.SOUTH));
+        BlockState west = world.getBlockState(pos.relative(Direction.WEST));
 
-        if(north.isSideSolidFullSquare(world, pos.offset(Direction.NORTH), Direction.SOUTH)) return true;
-        if(east.isSideSolidFullSquare(world, pos.offset(Direction.EAST), Direction.WEST)) return true;
-        if(south.isSideSolidFullSquare(world, pos.offset(Direction.SOUTH), Direction.NORTH)) return true;
-        if(west.isSideSolidFullSquare(world, pos.offset(Direction.WEST), Direction.EAST)) return true;
+        if(north.isFaceSturdy(world, pos.relative(Direction.NORTH), Direction.SOUTH)) return true;
+        if(east.isFaceSturdy(world, pos.relative(Direction.EAST), Direction.WEST)) return true;
+        if(south.isFaceSturdy(world, pos.relative(Direction.SOUTH), Direction.NORTH)) return true;
+        if(west.isFaceSturdy(world, pos.relative(Direction.WEST), Direction.EAST)) return true;
 
         return false;
     }
 
     @Override
-    public VoxelShape getCollisionShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        return VoxelShapes.empty();
+    public VoxelShape getCollisionShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
+        return Shapes.empty();
     }
 
     @Override
-    public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
+    public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
         return shape;
     }
 
     @Override
-    public VoxelShape getRaycastShape(BlockState state, BlockView world, BlockPos pos) {
+    public VoxelShape getInteractionShape(BlockState state, BlockGetter world, BlockPos pos) {
         return shape;
     }
 
     @Override
-    public void onBlockAdded(BlockState state, World world, BlockPos pos, BlockState oldState, boolean notify) {
-        if (!world.isClient()) {
-            world.getBlockTickScheduler().scheduleTick(OrderedTick.create(this, pos));
+    public void onPlace(BlockState state, Level world, BlockPos pos, BlockState oldState, boolean notify) {
+        if (!world.isClientSide()) {
+            world.getBlockTicks().schedule(ScheduledTick.probe(this, pos));
         }
     }
 
     @Override
-    public boolean canReplace(BlockState state, ItemPlacementContext context) {
+    public boolean canBeReplaced(BlockState state, BlockPlaceContext context) {
         return false;
     }
 
     @Override
-    public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-        BlockPos npos = pos.offset(Direction.NORTH);
-        BlockPos epos = pos.offset(Direction.EAST);
-        BlockPos spos = pos.offset(Direction.SOUTH);
-        BlockPos wpos = pos.offset(Direction.WEST);
+    public void tick(BlockState state, ServerLevel world, BlockPos pos, Random random) {
+        BlockPos npos = pos.relative(Direction.NORTH);
+        BlockPos epos = pos.relative(Direction.EAST);
+        BlockPos spos = pos.relative(Direction.SOUTH);
+        BlockPos wpos = pos.relative(Direction.WEST);
 
         BlockState north = world.getBlockState(npos);
         BlockState east = world.getBlockState(epos);
@@ -111,44 +112,44 @@ public class RopeBlock extends Block {
         boolean s = false;
         boolean w = false;
 
-        if (north.isSideSolidFullSquare(world, npos, Direction.SOUTH)) n = true;
-        if (east.isSideSolidFullSquare(world, epos, Direction.WEST)) e = true;
-        if (south.isSideSolidFullSquare(world, spos, Direction.NORTH)) s = true;
-        if (west.isSideSolidFullSquare(world, wpos, Direction.EAST)) w = true;
+        if (north.isFaceSturdy(world, npos, Direction.SOUTH)) n = true;
+        if (east.isFaceSturdy(world, epos, Direction.WEST)) e = true;
+        if (south.isFaceSturdy(world, spos, Direction.NORTH)) s = true;
+        if (west.isFaceSturdy(world, wpos, Direction.EAST)) w = true;
 
-        world.setBlockState(pos, state.with(NORTH, n).with(EAST, e).with(SOUTH, s).with(WEST, w));
+        world.setBlockAndUpdate(pos, state.setValue(NORTH, n).setValue(EAST, e).setValue(SOUTH, s).setValue(WEST, w));
 
-        BlockPos up = pos.offset(Direction.UP);
+        BlockPos up = pos.relative(Direction.UP);
         BlockState bup = world.getBlockState(up);
 
-        if (!world.getBlockState(up).isOf(this) && (!n && !e && !s && !w) && !bup.isSideSolidFullSquare(world, up, Direction.DOWN)) {
-            world.breakBlock(pos, true);
+        if (!world.getBlockState(up).is(this) && (!n && !e && !s && !w) && !bup.isFaceSturdy(world, up, Direction.DOWN)) {
+            world.destroyBlock(pos, true);
         }
     }
 
     @Override
-    public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
-        if (!world.isClient()) {
-            world.getBlockTickScheduler().scheduleTick(OrderedTick.create(this, pos));
+    public BlockState updateShape(BlockState state, Direction direction, BlockState neighborState, LevelAccessor world, BlockPos pos, BlockPos neighborPos) {
+        if (!world.isClientSide()) {
+            world.getBlockTicks().schedule(ScheduledTick.probe(this, pos));
         }
         return state;
     }
 
     @Override
-    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-        if (!state.isOf(this)) return ActionResult.PASS;
-        if (!player.getMainHandStack().isOf(Item.fromBlock(AdditionalBlocks.ROPE_BLOCK))) return ActionResult.PASS;
-        BlockPos down = pos.offset(Direction.DOWN);
+    public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+        if (!state.is(this)) return InteractionResult.PASS;
+        if (!player.getMainHandItem().is(Item.byBlock(AdditionalBlocks.ROPE_BLOCK))) return InteractionResult.PASS;
+        BlockPos down = pos.relative(Direction.DOWN);
         BlockState statedown = world.getBlockState(down);
-        if (statedown.isOf(AdditionalBlocks.ROPE_BLOCK)) {
-            return statedown.getBlock().onUse(statedown, world, down, player, hand, hit);
-        } else if (statedown.isAir() && !world.isOutOfHeightLimit(down.getY())) {
-            world.setBlockState(down, state);
-            world.playSound(null, pos.getX(), pos.getY(), pos.getZ(), SoundEvents.BLOCK_WOOL_PLACE, SoundCategory.BLOCKS, 1.0F, 1.0F);
-            if (!player.isCreative()) player.getMainHandStack().decrement(1);
-            return ActionResult.SUCCESS;
+        if (statedown.is(AdditionalBlocks.ROPE_BLOCK)) {
+            return statedown.getBlock().use(statedown, world, down, player, hand, hit);
+        } else if (statedown.isAir() && !world.isOutsideBuildHeight(down.getY())) {
+            world.setBlockAndUpdate(down, state);
+            world.playSound(null, pos.getX(), pos.getY(), pos.getZ(), SoundEvents.WOOL_PLACE, SoundSource.BLOCKS, 1.0F, 1.0F);
+            if (!player.isCreative()) player.getMainHandItem().shrink(1);
+            return InteractionResult.SUCCESS;
         }
-        return ActionResult.PASS;
+        return InteractionResult.PASS;
     }
 
 }

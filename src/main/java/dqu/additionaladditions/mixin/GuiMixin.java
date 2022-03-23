@@ -4,10 +4,10 @@ import dqu.additionaladditions.AdditionalAdditions;
 import dqu.additionaladditions.config.Config;
 import dqu.additionaladditions.config.ConfigValues;
 import dqu.additionaladditions.registry.AdditionalItems;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.hud.InGameHud;
-import net.minecraft.client.network.ClientPlayerEntity;
-import net.minecraft.text.TranslatableText;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Gui;
+import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.network.chat.TranslatableComponent;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -16,22 +16,22 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(InGameHud.class)
-public abstract class InGameHudMixin {
-    @Shadow @Final private MinecraftClient client;
+@Mixin(Gui.class)
+public abstract class GuiMixin {
+    @Shadow @Final private Minecraft minecraft;
 
-    @Redirect(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/network/ClientPlayerEntity;isUsingSpyglass()Z"))
-    private boolean spyglassOverlay(ClientPlayerEntity clientPlayerEntity) {
-        return AdditionalAdditions.zoom || clientPlayerEntity.isUsingSpyglass();
+    @Redirect(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/player/LocalPlayer;isScoping()Z"))
+    private boolean spyglassOverlay(LocalPlayer clientPlayerEntity) {
+        return AdditionalAdditions.zoom || clientPlayerEntity.isScoping();
     }
 
     @Inject(method = "render", at = @At("TAIL"))
     private void depthMeterMessage(CallbackInfo ci) {
         if (!Config.getBool(ConfigValues.DEPTH_METER, "enabled")) return;
-        if (client.player.isHolding(AdditionalItems.DEPTH_METER_ITEM)) {
+        if (minecraft.player.isHolding(AdditionalItems.DEPTH_METER_ITEM)) {
             if (Config.getBool(ConfigValues.DEPTH_METER, "displayElevationAlways")) {
-                String level = String.valueOf((int) client.player.getY());
-                client.player.sendMessage(new TranslatableText("depth_meter.elevation", level), true);
+                String level = String.valueOf((int) minecraft.player.getY());
+                minecraft.player.displayClientMessage(new TranslatableComponent("depth_meter.elevation", level), true);
             }
         }
     }

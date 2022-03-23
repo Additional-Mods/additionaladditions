@@ -1,10 +1,10 @@
 package dqu.additionaladditions.item;
 
-import net.minecraft.item.AxeItem;
-import net.minecraft.item.ToolMaterial;
+import net.minecraft.world.item.AxeItem;
+import net.minecraft.world.item.Tier;
 
 public class AdditionalAxeItem extends AxeItem {
-    public AdditionalAxeItem(ToolMaterial material, int attackDamage, float attackSpeed, Settings settings) {
+    public AdditionalAxeItem(Tier material, int attackDamage, float attackSpeed, Properties settings) {
         super(material, attackDamage, attackSpeed, settings);
     }
 }
