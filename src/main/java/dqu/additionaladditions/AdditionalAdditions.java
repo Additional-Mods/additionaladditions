@@ -4,12 +4,12 @@ import dqu.additionaladditions.config.Config;
 import dqu.additionaladditions.registry.*;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.loader.api.FabricLoader;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class AdditionalAdditions implements ModInitializer {
-    public static final Logger LOGGER = LogManager.getLogger();
     public static final String namespace = "additionaladditions";
+    public static final Logger LOGGER = LoggerFactory.getLogger(namespace);
     public static boolean zoom = false;
     public static boolean lithiumInstalled = false;
 
