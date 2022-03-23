@@ -41,7 +41,9 @@
   "block.additionaladditions.rope": "Веревка",
   "block.additionaladditions.amethyst_lamp": "Аметистовый Фонарь",
   "enchantment.additionaladditions.precision": "Мѣткость",
+  "enchantment.additionaladditions.precision.desc": "Improves crossbow accuracy.",
   "enchantment.additionaladditions.speed": "Рѣзвость",
+  "enchantment.additionaladditions.speed.desc": "Increases movement speed.",
   "entity.additionaladditions.glow_stick": "Свѣтящаяся Палочка",
 
   "depth_meter.elevation": "Altitude: %s",

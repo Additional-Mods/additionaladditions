@@ -41,7 +41,9 @@
   "block.additionaladditions.rope": "밧줄",
   "block.additionaladditions.amethyst_lamp": "자수정 전등",
   "enchantment.additionaladditions.precision": "정도",
+  "enchantment.additionaladditions.precision.desc": "Improves crossbow accuracy.",
   "enchantment.additionaladditions.speed": "신속",
+  "enchantment.additionaladditions.speed.desc": "Increases movement speed.",
   "entity.additionaladditions.glow_stick": "발광 막대기",
 
   "depth_meter.elevation": "Altitude: %s",

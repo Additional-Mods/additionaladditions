@@ -41,7 +41,9 @@
   "block.additionaladditions.rope": "Мотузка",
   "block.additionaladditions.amethyst_lamp": "Аметистовий Ліхтар",
   "enchantment.additionaladditions.precision": "Влучність",
+  "enchantment.additionaladditions.precision.desc": "Improves crossbow accuracy.",
   "enchantment.additionaladditions.speed": "Швидкість",
+  "enchantment.additionaladditions.speed.desc": "Increases movement speed.",
   "entity.additionaladditions.glow_stick": "Неонова Паличка",
 
   "depth_meter.elevation": "Altitude: %s",
