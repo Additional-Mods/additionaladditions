@@ -5,7 +5,6 @@ import dqu.additionaladditions.config.Config;
 import dqu.additionaladditions.config.ConfigValues;
 import dqu.additionaladditions.item.*;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
-import net.fabricmc.fabric.api.loot.v1.FabricLootPoolBuilder;
 import net.fabricmc.fabric.api.loot.v1.event.LootTableLoadingCallback;
 import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
 import net.minecraft.core.BlockPos;
@@ -15,16 +14,12 @@ import net.minecraft.core.dispenser.DefaultDispenseItemBehavior;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.food.FoodProperties;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.CrossbowItem;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.Rarity;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.DispenserBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.storage.loot.BuiltInLootTables;
+import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceCondition;
@@ -88,67 +83,75 @@ public class AdditionalItems {
     private static void registerLootTables() {
         LootTableLoadingCallback.EVENT.register(((resourceManager, lootManager, id, table, setter) -> {
             if (ELDER_GUARDIAN_LOOT_TABLE_ID.equals(id) && Config.getBool(ConfigValues.TRIDENT_SHARD)) {
-                FabricLootPoolBuilder poolBuilder = FabricLootPoolBuilder.builder()
+                LootPool poolBuilder = LootPool.lootPool()
                         .setRolls(ConstantValue.exactly(1f))
                         .add(LootItem.lootTableItem(TRIDENT_SHARD))
-                        .when(LootItemRandomChanceCondition.randomChance(0.33f));
+                        .when(LootItemRandomChanceCondition.randomChance(0.33f))
+                        .build();
                 table.withPool(poolBuilder);
             }
             if (DUNGEON_CHEST_LOOT_TABLE_ID.equals(id) || MINESHAFT_CHEST_LOOT_TABLE_ID.equals(id) || STRONGHOLD_CHEST_LOOT_TABLE_ID.equals(id)) {
                 if (Config.getBool(ConfigValues.GLOW_STICK)) {
-                    FabricLootPoolBuilder poolBuilder = FabricLootPoolBuilder.builder()
+                    LootPool poolBuilder = LootPool.lootPool()
                             .setRolls(UniformGenerator.between(0, 4))
                             .apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 4)))
-                            .add(LootItem.lootTableItem(GLOW_STICK_ITEM));
+                            .add(LootItem.lootTableItem(GLOW_STICK_ITEM))
+                            .build();
                     table.withPool(poolBuilder);
                 }
                 if (Config.getBool(ConfigValues.ROPES)) {
-                    FabricLootPoolBuilder poolBuilder = FabricLootPoolBuilder.builder()
+                    LootPool poolBuilder = LootPool.lootPool()
                             .setRolls(UniformGenerator.between(1, 4))
                             .apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 8)))
-                            .add(LootItem.lootTableItem(AdditionalBlocks.ROPE_BLOCK.asItem()));
+                            .add(LootItem.lootTableItem(AdditionalBlocks.ROPE_BLOCK.asItem()))
+                            .build();
                     table.withPool(poolBuilder);
                 }
                 if (Config.getBool(ConfigValues.DEPTH_METER)) {
-                    FabricLootPoolBuilder poolBuilder = FabricLootPoolBuilder.builder()
+                    LootPool poolBuilder = LootPool.lootPool()
                             .setRolls(ConstantValue.exactly(1))
                             .when(LootItemRandomChanceCondition.randomChance(0.1f))
-                            .add(LootItem.lootTableItem(DEPTH_METER_ITEM));
+                            .add(LootItem.lootTableItem(DEPTH_METER_ITEM))
+                            .build();
                     table.withPool(poolBuilder);
                 }
             }
             if (DUNGEON_CHEST_LOOT_TABLE_ID.equals(id) || MANSION_CHEST_LOOT_TABLE_ID.equals(id)) {
                 if (Config.getBool(ConfigValues.MUSIC_DISCS)) {
-                    FabricLootPoolBuilder poolBuilder = FabricLootPoolBuilder.builder()
+                    LootPool poolBuilder = LootPool.lootPool()
                             .setRolls(ConstantValue.exactly(1))
                             .when(LootItemRandomChanceCondition.randomChance(0.25f))
                             .add(LootItem.lootTableItem(AdditionalMusicDiscs.MUSIC_DISC_0308))
                             .add(LootItem.lootTableItem(AdditionalMusicDiscs.MUSIC_DISC_1007))
-                            .add(LootItem.lootTableItem(AdditionalMusicDiscs.MUSIC_DISC_1507));
+                            .add(LootItem.lootTableItem(AdditionalMusicDiscs.MUSIC_DISC_1507))
+                            .build();
                     table.withPool(poolBuilder);
                 }
             }
             if (SHIPWRECK_SUPPLY_CHEST_LOOT_TABLE_ID.equals(id) && Config.getBool(ConfigValues.SHIPWRECK_SPYGLASS_LOOT)) {
-                FabricLootPoolBuilder poolBuilder = FabricLootPoolBuilder.builder()
+                LootPool poolBuilder = LootPool.lootPool()
                         .setRolls(ConstantValue.exactly(1))
                         .when(LootItemRandomChanceCondition.randomChance(0.5f))
-                        .add(LootItem.lootTableItem(Items.SPYGLASS));
+                        .add(LootItem.lootTableItem(Items.SPYGLASS))
+                        .build();
                 table.withPool(poolBuilder);
             }
             if (ZOMBIE_LOOT_TABLE_ID.equals(id) || CREEPER_LOOT_TABLE_ID.equals(id)) {
                 if (Config.getBool(ConfigValues.CHICKEN_NUGGET)) {
-                    FabricLootPoolBuilder poolBuilder = FabricLootPoolBuilder.builder()
+                    LootPool poolBuilder = LootPool.lootPool()
                             .setRolls(ConstantValue.exactly(1))
                             .when(LootItemRandomChanceCondition.randomChance(0.025f))
-                            .add(LootItem.lootTableItem(CHICKEN_NUGGET));
+                            .add(LootItem.lootTableItem(CHICKEN_NUGGET))
+                            .build();
                     table.withPool(poolBuilder);
                 }
             }
             if (PIGLIN_BARTERING_LOOT_TABLE_ID.equals(id) && Config.getBool(ConfigValues.GOLD_RING)) {
-                    FabricLootPoolBuilder poolBuilder = FabricLootPoolBuilder.builder()
+                LootPool poolBuilder = LootPool.lootPool()
                             .setRolls(ConstantValue.exactly(1))
                             .when(LootItemRandomChanceCondition.randomChance(0.015f))
-                            .add(LootItem.lootTableItem(GOLD_RING));
+                            .add(LootItem.lootTableItem(GOLD_RING))
+                            .build();
                     table.withPool(poolBuilder);
             }
         }));
@@ -176,7 +179,7 @@ public class AdditionalItems {
     public static void registerAll() {
         registerItems();
         registerFoods();
-//        registerLootTables();
+        registerLootTables();
         registerOther();
     }
 }
