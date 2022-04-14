@@ -18,6 +18,10 @@ repositories {
 		name = "CottonMC"
 		url = "https://server.bbkr.space/artifactory/libs-release"
 	}
+	maven {
+		name = "Gegy"
+		url = "https://maven.gegy.dev"
+	}
 }
 
 dependencies {
@@ -34,6 +38,9 @@ dependencies {
 
 	// LibGui
 	modImplementation include("io.github.cottonmc:LibGui:${project.libgui_version}")
+
+	// LambDynamicLights
+	modImplementation "dev.lambdaurora:lambdynamiclights:${project.lambdynamiclights_version}"
 
 	// PSA: Some older mods, compiled on Loom 0.2.1, might have outdated Maven POMs.
 	// You may need to force-disable transitiveness on them.

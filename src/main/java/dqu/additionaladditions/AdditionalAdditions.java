@@ -1,5 +1,6 @@
 package dqu.additionaladditions;
 
+import dev.lambdaurora.lambdynlights.api.DynamicLightHandlers;
 import dqu.additionaladditions.config.Config;
 import dqu.additionaladditions.registry.*;
 import net.fabricmc.api.ModInitializer;
@@ -26,5 +27,8 @@ public class AdditionalAdditions implements ModInitializer {
         AdditionalMaterials.registerAll();
         AdditionalPotions.registerAll();
         AdditionalMusicDiscs.registerAll();
+
+        // LambDynamicLights integration
+        DynamicLightHandlers.registerDynamicLightHandler(AdditionalEntities.GLOW_STICK_ENTITY_ENTITY_TYPE, entity -> 12);
     }
 }
