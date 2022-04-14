@@ -85,74 +85,74 @@ public class AdditionalItems {
         Registry.register(Registry.ITEM, new ResourceLocation(AdditionalAdditions.namespace, "chicken_nugget"), CHICKEN_NUGGET);
     }
 
-//    private static void registerLootTables() {
-//        LootTableLoadingCallback.EVENT.register(((resourceManager, lootManager, id, table, setter) -> {
-//            if (ELDER_GUARDIAN_LOOT_TABLE_ID.equals(id) && Config.getBool(ConfigValues.TRIDENT_SHARD)) {
-//                FabricLootPoolBuilder poolBuilder = FabricLootPoolBuilder.builder()
-//                        .setRolls(ConstantValue.exactly(1f))
-//                        .add(LootItem.lootTableItem(TRIDENT_SHARD))
-//                        .when(LootItemRandomChanceCondition.randomChance(0.33f));
-//                table.withPool(poolBuilder);
-//            }
-//            if (DUNGEON_CHEST_LOOT_TABLE_ID.equals(id) || MINESHAFT_CHEST_LOOT_TABLE_ID.equals(id) || STRONGHOLD_CHEST_LOOT_TABLE_ID.equals(id)) {
-//                if (Config.getBool(ConfigValues.GLOW_STICK)) {
-//                    FabricLootPoolBuilder poolBuilder = FabricLootPoolBuilder.builder()
-//                            .setRolls(UniformGenerator.between(0, 4))
-//                            .apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 4)))
-//                            .add(LootItem.lootTableItem(GLOW_STICK_ITEM));
-//                    table.withPool(poolBuilder);
-//                }
-//                if (Config.getBool(ConfigValues.ROPES)) {
-//                    FabricLootPoolBuilder poolBuilder = FabricLootPoolBuilder.builder()
-//                            .setRolls(UniformGenerator.between(1, 4))
-//                            .apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 8)))
-//                            .add(LootItem.lootTableItem(AdditionalBlocks.ROPE_BLOCK.asItem()));
-//                    table.withPool(poolBuilder);
-//                }
-//                if (Config.getBool(ConfigValues.DEPTH_METER)) {
-//                    FabricLootPoolBuilder poolBuilder = FabricLootPoolBuilder.builder()
-//                            .setRolls(ConstantValue.exactly(1))
-//                            .when(LootItemRandomChanceCondition.randomChance(0.1f))
-//                            .add(LootItem.lootTableItem(DEPTH_METER_ITEM));
-//                    table.withPool(poolBuilder);
-//                }
-//            }
-//            if (DUNGEON_CHEST_LOOT_TABLE_ID.equals(id) || MANSION_CHEST_LOOT_TABLE_ID.equals(id)) {
-//                if (Config.getBool(ConfigValues.MUSIC_DISCS)) {
-//                    FabricLootPoolBuilder poolBuilder = FabricLootPoolBuilder.builder()
-//                            .setRolls(ConstantValue.exactly(1))
-//                            .when(LootItemRandomChanceCondition.randomChance(0.25f))
-//                            .add(LootItem.lootTableItem(AdditionalMusicDiscs.MUSIC_DISC_0308))
-//                            .add(LootItem.lootTableItem(AdditionalMusicDiscs.MUSIC_DISC_1007))
-//                            .add(LootItem.lootTableItem(AdditionalMusicDiscs.MUSIC_DISC_1507));
-//                    table.withPool(poolBuilder);
-//                }
-//            }
-//            if (SHIPWRECK_SUPPLY_CHEST_LOOT_TABLE_ID.equals(id) && Config.getBool(ConfigValues.SHIPWRECK_SPYGLASS_LOOT)) {
-//                FabricLootPoolBuilder poolBuilder = FabricLootPoolBuilder.builder()
-//                        .setRolls(ConstantValue.exactly(1))
-//                        .when(LootItemRandomChanceCondition.randomChance(0.5f))
-//                        .add(LootItem.lootTableItem(Items.SPYGLASS));
-//                table.withPool(poolBuilder);
-//            }
-//            if (ZOMBIE_LOOT_TABLE_ID.equals(id) || CREEPER_LOOT_TABLE_ID.equals(id)) {
-//                if (Config.getBool(ConfigValues.CHICKEN_NUGGET)) {
-//                    FabricLootPoolBuilder poolBuilder = FabricLootPoolBuilder.builder()
-//                            .setRolls(ConstantValue.exactly(1))
-//                            .when(LootItemRandomChanceCondition.randomChance(0.025f))
-//                            .add(LootItem.lootTableItem(CHICKEN_NUGGET));
-//                    table.withPool(poolBuilder);
-//                }
-//            }
-//            if (PIGLIN_BARTERING_LOOT_TABLE_ID.equals(id) && Config.getBool(ConfigValues.GOLD_RING)) {
-//                    FabricLootPoolBuilder poolBuilder = FabricLootPoolBuilder.builder()
-//                            .setRolls(ConstantValue.exactly(1))
-//                            .when(LootItemRandomChanceCondition.randomChance(0.015f))
-//                            .add(LootItem.lootTableItem(GOLD_RING));
-//                    table.withPool(poolBuilder);
-//            }
-//        }));
-//    }
+    private static void registerLootTables() {
+        LootTableLoadingCallback.EVENT.register(((resourceManager, lootManager, id, table, setter) -> {
+            if (ELDER_GUARDIAN_LOOT_TABLE_ID.equals(id) && Config.getBool(ConfigValues.TRIDENT_SHARD)) {
+                FabricLootPoolBuilder poolBuilder = FabricLootPoolBuilder.builder()
+                        .setRolls(ConstantValue.exactly(1f))
+                        .add(LootItem.lootTableItem(TRIDENT_SHARD))
+                        .when(LootItemRandomChanceCondition.randomChance(0.33f));
+                table.withPool(poolBuilder);
+            }
+            if (DUNGEON_CHEST_LOOT_TABLE_ID.equals(id) || MINESHAFT_CHEST_LOOT_TABLE_ID.equals(id) || STRONGHOLD_CHEST_LOOT_TABLE_ID.equals(id)) {
+                if (Config.getBool(ConfigValues.GLOW_STICK)) {
+                    FabricLootPoolBuilder poolBuilder = FabricLootPoolBuilder.builder()
+                            .setRolls(UniformGenerator.between(0, 4))
+                            .apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 4)))
+                            .add(LootItem.lootTableItem(GLOW_STICK_ITEM));
+                    table.withPool(poolBuilder);
+                }
+                if (Config.getBool(ConfigValues.ROPES)) {
+                    FabricLootPoolBuilder poolBuilder = FabricLootPoolBuilder.builder()
+                            .setRolls(UniformGenerator.between(1, 4))
+                            .apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 8)))
+                            .add(LootItem.lootTableItem(AdditionalBlocks.ROPE_BLOCK.asItem()));
+                    table.withPool(poolBuilder);
+                }
+                if (Config.getBool(ConfigValues.DEPTH_METER)) {
+                    FabricLootPoolBuilder poolBuilder = FabricLootPoolBuilder.builder()
+                            .setRolls(ConstantValue.exactly(1))
+                            .when(LootItemRandomChanceCondition.randomChance(0.1f))
+                            .add(LootItem.lootTableItem(DEPTH_METER_ITEM));
+                    table.withPool(poolBuilder);
+                }
+            }
+            if (DUNGEON_CHEST_LOOT_TABLE_ID.equals(id) || MANSION_CHEST_LOOT_TABLE_ID.equals(id)) {
+                if (Config.getBool(ConfigValues.MUSIC_DISCS)) {
+                    FabricLootPoolBuilder poolBuilder = FabricLootPoolBuilder.builder()
+                            .setRolls(ConstantValue.exactly(1))
+                            .when(LootItemRandomChanceCondition.randomChance(0.25f))
+                            .add(LootItem.lootTableItem(AdditionalMusicDiscs.MUSIC_DISC_0308))
+                            .add(LootItem.lootTableItem(AdditionalMusicDiscs.MUSIC_DISC_1007))
+                            .add(LootItem.lootTableItem(AdditionalMusicDiscs.MUSIC_DISC_1507));
+                    table.withPool(poolBuilder);
+                }
+            }
+            if (SHIPWRECK_SUPPLY_CHEST_LOOT_TABLE_ID.equals(id) && Config.getBool(ConfigValues.SHIPWRECK_SPYGLASS_LOOT)) {
+                FabricLootPoolBuilder poolBuilder = FabricLootPoolBuilder.builder()
+                        .setRolls(ConstantValue.exactly(1))
+                        .when(LootItemRandomChanceCondition.randomChance(0.5f))
+                        .add(LootItem.lootTableItem(Items.SPYGLASS));
+                table.withPool(poolBuilder);
+            }
+            if (ZOMBIE_LOOT_TABLE_ID.equals(id) || CREEPER_LOOT_TABLE_ID.equals(id)) {
+                if (Config.getBool(ConfigValues.CHICKEN_NUGGET)) {
+                    FabricLootPoolBuilder poolBuilder = FabricLootPoolBuilder.builder()
+                            .setRolls(ConstantValue.exactly(1))
+                            .when(LootItemRandomChanceCondition.randomChance(0.025f))
+                            .add(LootItem.lootTableItem(CHICKEN_NUGGET));
+                    table.withPool(poolBuilder);
+                }
+            }
+            if (PIGLIN_BARTERING_LOOT_TABLE_ID.equals(id) && Config.getBool(ConfigValues.GOLD_RING)) {
+                    FabricLootPoolBuilder poolBuilder = FabricLootPoolBuilder.builder()
+                            .setRolls(ConstantValue.exactly(1))
+                            .when(LootItemRandomChanceCondition.randomChance(0.015f))
+                            .add(LootItem.lootTableItem(GOLD_RING));
+                    table.withPool(poolBuilder);
+            }
+        }));
+    }
 
     private static void registerOther() {
         if(Config.getBool(ConfigValues.WRENCH)) {
