@@ -10,6 +10,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 public class RoseGoldArmorMaterial implements ArmorMaterial {
     private static final int[] BASE_DURABILITY = {264, 384, 360, 312};
     private static final int[] PROTECTION_VALUES = {2, 6, 7, 2};
+    public static final String NAME = "rose_gold";
 
     @Override
     public int getDurabilityForSlot(EquipmentSlot slot) {
@@ -33,7 +34,7 @@ public class RoseGoldArmorMaterial implements ArmorMaterial {
 
     @Override
     public String getName() {
-        return "rose_gold";
+        return NAME;
     }
 
     @Override
@@ -53,6 +54,6 @@ public class RoseGoldArmorMaterial implements ArmorMaterial {
 
     @Override
     public String toString() {
-        return "ROSE_GOLD";
+        return NAME.toUpperCase();
     }
 }
