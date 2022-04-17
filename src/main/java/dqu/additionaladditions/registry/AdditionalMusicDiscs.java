@@ -19,9 +19,9 @@ public class AdditionalMusicDiscs {
     public static final SoundEvent SOUND_EVENT_1007 = new SoundEvent(IDENTIFIER_1007);
     public static final SoundEvent SOUND_EVENT_1507 = new SoundEvent(IDENTIFIER_1507);
 
-    public static final RecordItem MUSIC_DISC_0308 = new AdditionalMusicDiscItem(5, SOUND_EVENT_0308, new Item.Properties().tab(CreativeModeTab.TAB_MISC).stacksTo(1).rarity(Rarity.RARE));
-    public static final RecordItem MUSIC_DISC_1007 = new AdditionalMusicDiscItem(7, SOUND_EVENT_1007, new Item.Properties().tab(CreativeModeTab.TAB_MISC).stacksTo(1).rarity(Rarity.RARE));
-    public static final RecordItem MUSIC_DISC_1507 = new AdditionalMusicDiscItem(6, SOUND_EVENT_1507, new Item.Properties().tab(CreativeModeTab.TAB_MISC).stacksTo(1).rarity(Rarity.RARE));
+    public static final RecordItem MUSIC_DISC_0308 = new AdditionalMusicDiscItem(15, SOUND_EVENT_0308, new Item.Properties().tab(CreativeModeTab.TAB_MISC).stacksTo(1).rarity(Rarity.RARE));
+    public static final RecordItem MUSIC_DISC_1007 = new AdditionalMusicDiscItem(15, SOUND_EVENT_1007, new Item.Properties().tab(CreativeModeTab.TAB_MISC).stacksTo(1).rarity(Rarity.RARE));
+    public static final RecordItem MUSIC_DISC_1507 = new AdditionalMusicDiscItem(15, SOUND_EVENT_1507, new Item.Properties().tab(CreativeModeTab.TAB_MISC).stacksTo(1).rarity(Rarity.RARE));
 
     private static void registerSoundEvents() {
         Registry.register(Registry.SOUND_EVENT, IDENTIFIER_0308, SOUND_EVENT_0308);
