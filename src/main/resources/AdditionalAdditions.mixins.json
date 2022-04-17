@@ -6,23 +6,24 @@
   "mixins": [
     "ArmorItemMixin",
     "AxeItemMixin",
-    "PotionBrewingMixin",
     "CrossbowItemMixin",
-    "NoteBlockInstrumentMixin",
+    "ItemMixin",
     "LivingEntityMixin",
     "MobMixin",
+    "NoteBlockInstrumentMixin",
     "PiglinAiMixin",
     "PlayerMixin",
+    "PotionBrewingMixin",
     "RecipeManagerMixin",
     "RedstoneWireBlockMixin",
     "ServerAdvancementManagerMixin",
     "WanderingTraderMixin"
   ],
   "client": [
-    "LocalPlayerMixin",
     "GameRendererMixin",
-    "ItemInHandRendererMixin",
     "GuiMixin",
+    "ItemInHandRendererMixin",
+    "LocalPlayerMixin",
     "MouseHandlerMixin",
     "PlayerRendererMixin"
   ],
