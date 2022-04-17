@@ -29,6 +29,8 @@ public class AdditionalAdditions implements ModInitializer {
         AdditionalMusicDiscs.registerAll();
 
         // LambDynamicLights integration
-        DynamicLightHandlers.registerDynamicLightHandler(AdditionalEntities.GLOW_STICK_ENTITY_ENTITY_TYPE, entity -> 12);
+        if (FabricLoader.getInstance().isModLoaded("lambdynlights")) {
+            DynamicLightHandlers.registerDynamicLightHandler(AdditionalEntities.GLOW_STICK_ENTITY_ENTITY_TYPE, entity -> 12);
+        }
     }
 }
