@@ -3,6 +3,7 @@ package dqu.additionaladditions.registry;
 import dqu.additionaladditions.AdditionalAdditions;
 import dqu.additionaladditions.block.CopperPatinaBlock;
 import dqu.additionaladditions.block.GlowStickBlock;
+import dqu.additionaladditions.block.PatinaBlock;
 import dqu.additionaladditions.block.RopeBlock;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
@@ -10,6 +11,7 @@ import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.RedstoneLampBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.material.Material;
@@ -19,6 +21,7 @@ public class AdditionalBlocks {
     public static final RedstoneLampBlock AMETHYST_LAMP = new RedstoneLampBlock(FabricBlockSettings.of(Material.BUILDABLE_GLASS).sound(SoundType.GLASS).strength(0.3f));
     public static final CopperPatinaBlock COPPER_PATINA = new CopperPatinaBlock(FabricBlockSettings.of(Material.CLOTH_DECORATION).noCollission().sound(SoundType.TUFF));
     public static final GlowStickBlock GLOW_STICK_BLOCK = new GlowStickBlock(FabricBlockSettings.of(Material.CLOTH_DECORATION).noCollission().lightLevel((state) -> 12).instabreak());
+    public static final PatinaBlock PATINA_BLOCK = new PatinaBlock(FabricBlockSettings.of(Material.SAND).sound(SoundType.ROOTED_DIRT));
 
     public static void registerAll() {
         Registry.register(Registry.BLOCK, new ResourceLocation(AdditionalAdditions.namespace, "glow_stick"), GLOW_STICK_BLOCK);
@@ -31,5 +34,9 @@ public class AdditionalBlocks {
         Registry.register(Registry.BLOCK, new ResourceLocation(AdditionalAdditions.namespace, "amethyst_lamp"), AMETHYST_LAMP);
         Registry.register(Registry.ITEM, new ResourceLocation(AdditionalAdditions.namespace, "amethyst_lamp"),
                 new BlockItem(AMETHYST_LAMP, new FabricItemSettings().tab(CreativeModeTab.TAB_REDSTONE)));
+        Registry.register(Registry.BLOCK, new ResourceLocation(AdditionalAdditions.namespace, "patina_block"), PATINA_BLOCK);
+        Registry.register(Registry.ITEM, new ResourceLocation(AdditionalAdditions.namespace, "patina_block"),
+                new BlockItem(PATINA_BLOCK, new FabricItemSettings().tab(CreativeModeTab.TAB_BUILDING_BLOCKS)));
+        Registry.BLOCK.getKey(Blocks.SAND);
     }
 }
