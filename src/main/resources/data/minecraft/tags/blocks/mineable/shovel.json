@@ -1,0 +1,6 @@
+{
+  "replace": false,
+  "values": [
+    {"id": "additionaladditions:patina_block", "required": false}
+  ]
+}

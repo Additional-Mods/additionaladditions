@@ -17,11 +17,11 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.material.Material;
 
 public class AdditionalBlocks {
-    public static final RopeBlock ROPE_BLOCK = new RopeBlock(FabricBlockSettings.of(Material.BAMBOO).noCollission().sound(SoundType.WOOL));
+    public static final RopeBlock ROPE_BLOCK = new RopeBlock(FabricBlockSettings.of(Material.BAMBOO).noCollission().sound(SoundType.WOOL).instabreak());
     public static final RedstoneLampBlock AMETHYST_LAMP = new RedstoneLampBlock(FabricBlockSettings.of(Material.BUILDABLE_GLASS).sound(SoundType.GLASS).strength(0.3f));
-    public static final CopperPatinaBlock COPPER_PATINA = new CopperPatinaBlock(FabricBlockSettings.of(Material.CLOTH_DECORATION).noCollission().sound(SoundType.TUFF));
+    public static final CopperPatinaBlock COPPER_PATINA = new CopperPatinaBlock(FabricBlockSettings.of(Material.CLOTH_DECORATION).noCollission().sound(SoundType.TUFF).instabreak());
     public static final GlowStickBlock GLOW_STICK_BLOCK = new GlowStickBlock(FabricBlockSettings.of(Material.CLOTH_DECORATION).noCollission().lightLevel((state) -> 12).instabreak());
-    public static final PatinaBlock PATINA_BLOCK = new PatinaBlock(FabricBlockSettings.of(Material.SAND).sound(SoundType.ROOTED_DIRT));
+    public static final PatinaBlock PATINA_BLOCK = new PatinaBlock(FabricBlockSettings.of(Material.SAND).sound(SoundType.ROOTED_DIRT).strength(0.5f));
 
     public static void registerAll() {
         Registry.register(Registry.BLOCK, new ResourceLocation(AdditionalAdditions.namespace, "glow_stick"), GLOW_STICK_BLOCK);
