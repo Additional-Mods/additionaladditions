@@ -28,6 +28,7 @@ public abstract class MobMixin extends LivingEntity {
     public void checkDespawn(CallbackInfo ci) {
         if (!isFeatureEnabled) return;
         if (this.tickCount > 0 || !shouldDespawnInPeaceful()) return;
+
         PoiManager poiManager = ((ServerLevel)level).getPoiManager();
         long count = poiManager.getCountInRange(
                 (poiType) -> poiType == AdditionalBlocks.AMETHYST_LAMP_POI,
@@ -36,7 +37,7 @@ public abstract class MobMixin extends LivingEntity {
                 PoiManager.Occupancy.ANY
         );
 
-        if (count > 0) {
+        if (count > 0 && getRandom().nextBoolean()) {
             this.discard();
         }
     }
