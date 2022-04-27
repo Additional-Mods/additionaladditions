@@ -7,10 +7,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import dqu.additionaladditions.AdditionalAdditions;
 import dqu.additionaladditions.config.ConfigProperty;
-import dqu.additionaladditions.config.value.BooleanConfigValue;
-import dqu.additionaladditions.config.value.IntegerConfigValue;
-import dqu.additionaladditions.config.value.ListConfigValue;
-import dqu.additionaladditions.config.value.StringConfigValue;
+import dqu.additionaladditions.config.value.*;
 import net.fabricmc.fabric.api.resource.IdentifiableResourceReloadListener;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
@@ -65,15 +62,15 @@ public class BehaviourManager extends SimpleJsonResourceReloadListener implement
             String key = entry.getKey();
             JsonElement value = entry.getValue();
 
-            if (key.startsWith("s_")) {
-                properties.add(new ConfigProperty(key.substring(2), new StringConfigValue(value.getAsString())));
-            } else if (key.startsWith("b_")) {
-                properties.add(new ConfigProperty(key.substring(2), new BooleanConfigValue(value.getAsBoolean())));
-            } else if (key.startsWith("i_")) {
-                properties.add(new ConfigProperty(key.substring(2), new IntegerConfigValue(value.getAsInt())));
-            } else {
-                AdditionalAdditions.LOGGER.warn("[{}] Unknown property: {} in behaviour {}", AdditionalAdditions.namespace, key, resourceLocation);
-            }
+            BehaviourValues.getByName(key).ifPresentOrElse(behaviour -> {
+                switch (behaviour.getType()) {
+                    case STRING -> properties.add(new ConfigProperty(key, new StringConfigValue(value.getAsString())));
+                    case BOOLEAN -> properties.add(new ConfigProperty(key, new BooleanConfigValue(value.getAsBoolean())));
+                    case INTEGER -> properties.add(new ConfigProperty(key, new IntegerConfigValue(value.getAsInt())));
+                    case FLOAT -> properties.add(new ConfigProperty(key, new FloatConfigValue(value.getAsFloat())));
+                    default -> AdditionalAdditions.LOGGER.warn("[{}] Incorrect property: {} in behaviour {}. This shouldn't happen, please report.", AdditionalAdditions.namespace, key, resourceLocation.getPath());
+                }
+            }, () -> AdditionalAdditions.LOGGER.warn("[{}] Unknown property: {} in behaviour {}.", AdditionalAdditions.namespace, key, resourceLocation.getPath()));
         }
 
         return properties;
@@ -83,10 +80,29 @@ public class BehaviourManager extends SimpleJsonResourceReloadListener implement
         return this.behaviours.get(new ResourceLocation(AdditionalAdditions.namespace, name));
     }
 
-    public <T> T getBehaviourValue(String name, String key) {
-        ConfigProperty property = this.behaviours.get(new ResourceLocation(AdditionalAdditions.namespace, name));
+    public ConfigProperty getBehaviour(Behaviours behaviour) {
+        return this.behaviours.get(new ResourceLocation(AdditionalAdditions.namespace, behaviour.name()));
+    }
+
+    public <T> T getBehaviourValue(String name, BehaviourValues values) {
+        ConfigProperty property = getBehaviour(name);
+        if (property == null) return null;
         ListConfigValue list = (ListConfigValue) property.value();
-        return (T) list.get(key).value().getValue();
+        String key = values.getName();
+        if (list.get(key) == null || list.get(key).value() == null) {
+            ListConfigValue value = Behaviours.getByName(name);
+            if (value == null || value.get(key) == null || value.get(key).value() == null) {
+                return null;
+            } else {
+                return (T) value.get(key).value().getValue();
+            }
+        } else {
+            return (T) list.get(key).value().getValue();
+        }
+    }
+
+    public <T> T getBehaviourValue(Behaviours behaviour, BehaviourValues values) {
+        return getBehaviourValue(behaviour.name(), values);
     }
 
     public Map<ResourceLocation, ConfigProperty> getBehaviours() {

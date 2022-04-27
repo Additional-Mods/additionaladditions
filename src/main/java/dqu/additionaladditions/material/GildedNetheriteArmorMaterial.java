@@ -17,23 +17,6 @@ public class GildedNetheriteArmorMaterial implements ArmorMaterial {
 
     @Override
     public int getDurabilityForSlot(EquipmentSlot slot) {
-        System.out.println(BehaviourManager.didLoad);
-        if (BehaviourManager.didLoad) {
-            switch (slot) {
-                case HEAD -> {
-                    return (int) BehaviourManager.INSTANCE.getBehaviourValue("gilded_netherite/helmet", "durability");
-                }
-                case CHEST -> {
-                    return (int) BehaviourManager.INSTANCE.getBehaviourValue("gilded_netherite/chestplate", "durability");
-                }
-                case LEGS -> {
-                    return (int) BehaviourManager.INSTANCE.getBehaviourValue("gilded_netherite/leggings", "durability");
-                }
-                case FEET -> {
-                    return (int) BehaviourManager.INSTANCE.getBehaviourValue("gilded_netherite/boots", "durability");
-                }
-            }
-        }
         return BASE_DURABILITY[slot.getIndex()];
     }
 

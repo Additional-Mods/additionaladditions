@@ -7,7 +7,7 @@
     "ArmorItemMixin",
     "AxeItemMixin",
     "CrossbowItemMixin",
-    "ItemMixin",
+    "behaviour.ItemMixin",
     "LivingEntityMixin",
     "MobMixin",
     "NoteBlockInstrumentMixin",
