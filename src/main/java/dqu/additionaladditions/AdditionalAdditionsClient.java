@@ -8,7 +8,7 @@ import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
-import net.fabricmc.fabric.api.client.rendereregistry.v1.EntityRendererRegistry;
+import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.client.model.FabricModelPredicateProviderRegistry;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
@@ -25,7 +25,7 @@ public class AdditionalAdditionsClient implements ClientModInitializer {
         BlockRenderLayerMap.INSTANCE.putBlock(AdditionalBlocks.ROPE_BLOCK, RenderType.cutout());
         BlockRenderLayerMap.INSTANCE.putBlock(AdditionalBlocks.GLOW_STICK_BLOCK, RenderType.cutout());
 
-        EntityRendererRegistry.INSTANCE.register(AdditionalEntities.GLOW_STICK_ENTITY_ENTITY_TYPE, ThrownItemRenderer::new);
+        EntityRendererRegistry.register(AdditionalEntities.GLOW_STICK_ENTITY_ENTITY_TYPE, ThrownItemRenderer::new);
 
         FabricModelPredicateProviderRegistry.register(AdditionalItems.CROSSBOW_WITH_SPYGLASS, new ResourceLocation("pull"), (itemStack, clientWorld, livingEntity, worldSeed) -> {
             if (livingEntity == null) return 0.0F;
