@@ -7,7 +7,8 @@ import java.util.Optional;
 public enum BehaviourValues {
     DURABILITY (ConfigValueType.INTEGER),
     DEFENSE (ConfigValueType.INTEGER),
-    TOUGHNESS (ConfigValueType.INTEGER),
+    TOUGHNESS (ConfigValueType.FLOAT),
+    KNOCKBACK_RESISTANCE (ConfigValueType.FLOAT),
     DAMAGE (ConfigValueType.FLOAT),
     MINING_SPEED (ConfigValueType.FLOAT);
 

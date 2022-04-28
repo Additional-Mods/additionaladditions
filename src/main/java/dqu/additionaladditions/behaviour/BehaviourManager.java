@@ -20,7 +20,7 @@ public class BehaviourManager extends SimpleJsonResourceReloadListener implement
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
     private Map<ResourceLocation, ConfigProperty> behaviours = ImmutableMap.of();
     public static BehaviourManager INSTANCE;
-    public static boolean didLoad = false;
+    public static int loads;
 
     public BehaviourManager() {
         super(GSON, "behaviour");
@@ -52,7 +52,7 @@ public class BehaviourManager extends SimpleJsonResourceReloadListener implement
 
         this.behaviours = ImmutableMap.copyOf(hashMap);
         AdditionalAdditions.LOGGER.info("[{}] Loaded {} behaviours", AdditionalAdditions.namespace, this.behaviours.size());
-        didLoad = true;
+        loads++;
     }
 
     private static List<ConfigProperty> loadBehaviour(ResourceLocation resourceLocation, JsonElement jsonElement) {

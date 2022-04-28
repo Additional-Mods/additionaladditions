@@ -16,7 +16,6 @@
     "RedstoneWireBlockMixin",
     "ServerAdvancementManagerMixin",
     "WanderingTraderMixin",
-    "behaviour.ArmorItemMixin",
     "behaviour.DiggerItemMixin",
     "behaviour.ItemMixin",
     "behaviour.SwordItemMixin"
