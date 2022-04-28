@@ -24,4 +24,14 @@ public class SpeedEnchantment extends Enchantment {
             return false;
         return super.checkCompatibility(other);
     }
+
+    @Override
+    public boolean isDiscoverable() {
+        return Config.getBool(ConfigValues.ENCHANTMENT_PRECISION);
+    }
+
+    @Override
+    public boolean isTradeable() {
+        return Config.getBool(ConfigValues.ENCHANTMENT_PRECISION);
+    }
 }

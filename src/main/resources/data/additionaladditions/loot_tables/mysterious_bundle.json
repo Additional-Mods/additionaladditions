@@ -110,7 +110,7 @@
         {
           "type": "minecraft:item",
           "weight": 3,
-          "name": "additionaladditions:depth_meter"
+          "name": "minecraft:spyglass"
         },
         {
           "type": "minecraft:item",
