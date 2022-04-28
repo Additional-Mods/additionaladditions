@@ -25,17 +25,14 @@ public class AdditionalArmorItem extends ArmorItem {
     }
 
     private void rebuildModifiers(EquipmentSlot slot) {
-        System.out.println("Rebuilding modifiers...");
         ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
         UUID uuid = ARMOR_MODIFIER_UUID_PER_SLOT[slot.getIndex()];
-        AdditionalAdditions.LOGGER.info("{} Statistics: {} Defense, {} Toughness, {} Knockback Resistance", material.getName() + "/" + slotIndexToName(getSlot().getIndex()), getDefense(), getToughness(), getKnockbackResistance());
         builder.put(Attributes.ARMOR, new AttributeModifier(uuid , "Armor modifier", getDefense(), AttributeModifier.Operation.ADDITION));
         builder.put(Attributes.ARMOR_TOUGHNESS, new AttributeModifier(uuid , "Armor toughness", getToughness(), AttributeModifier.Operation.ADDITION));
         if (getKnockbackResistance() > 0) {
             builder.put(Attributes.KNOCKBACK_RESISTANCE, new AttributeModifier(uuid, "Armor knockback resistance", getKnockbackResistance(), AttributeModifier.Operation.ADDITION));
         }
         this.modifiers = builder.build();
-        System.out.println("Rebuilt modifiers!");
     }
 
     private void rebuildModifiersIfNeeded() {
