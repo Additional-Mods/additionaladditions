@@ -1,6 +1,7 @@
 package dqu.additionaladditions.registry;
 
 import dqu.additionaladditions.AdditionalAdditions;
+import dqu.additionaladditions.item.AdditionalArmorItem;
 import dqu.additionaladditions.item.AdditionalAxeItem;
 import dqu.additionaladditions.item.AdditionalHoeItem;
 import dqu.additionaladditions.item.AdditionalPickaxeItem;
@@ -8,7 +9,6 @@ import dqu.additionaladditions.material.*;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;

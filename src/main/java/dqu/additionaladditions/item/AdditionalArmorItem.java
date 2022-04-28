@@ -1,4 +1,4 @@
-package dqu.additionaladditions.material;
+package dqu.additionaladditions.item;
 
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
