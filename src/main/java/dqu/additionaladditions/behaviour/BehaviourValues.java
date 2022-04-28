@@ -5,7 +5,11 @@ import dqu.additionaladditions.config.value.ConfigValueType;
 import java.util.Optional;
 
 public enum BehaviourValues {
-    DURABILITY (ConfigValueType.INTEGER);
+    DURABILITY (ConfigValueType.INTEGER),
+    DEFENSE (ConfigValueType.INTEGER),
+    TOUGHNESS (ConfigValueType.INTEGER),
+    DAMAGE (ConfigValueType.FLOAT),
+    MINING_SPEED (ConfigValueType.FLOAT);
 
     private final ConfigValueType type;
 

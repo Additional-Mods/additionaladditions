@@ -1,6 +1,7 @@
 package dqu.additionaladditions.material;
 
 import dqu.additionaladditions.behaviour.BehaviourManager;
+import dqu.additionaladditions.behaviour.BehaviourValues;
 import dqu.additionaladditions.config.value.ListConfigValue;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.minecraft.sounds.SoundEvent;

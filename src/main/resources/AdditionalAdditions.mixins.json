@@ -4,10 +4,8 @@
   "package": "dqu.additionaladditions.mixin",
   "compatibilityLevel": "JAVA_16",
   "mixins": [
-    "ArmorItemMixin",
     "AxeItemMixin",
     "CrossbowItemMixin",
-    "behaviour.ItemMixin",
     "LivingEntityMixin",
     "MobMixin",
     "NoteBlockInstrumentMixin",
@@ -17,7 +15,11 @@
     "RecipeManagerMixin",
     "RedstoneWireBlockMixin",
     "ServerAdvancementManagerMixin",
-    "WanderingTraderMixin"
+    "WanderingTraderMixin",
+    "behaviour.ArmorItemMixin",
+    "behaviour.DiggerItemMixin",
+    "behaviour.ItemMixin",
+    "behaviour.SwordItemMixin"
   ],
   "client": [
     "GameRendererMixin",

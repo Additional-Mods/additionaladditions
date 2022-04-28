@@ -80,29 +80,16 @@ public class BehaviourManager extends SimpleJsonResourceReloadListener implement
         return this.behaviours.get(new ResourceLocation(AdditionalAdditions.namespace, name));
     }
 
-    public ConfigProperty getBehaviour(Behaviours behaviour) {
-        return this.behaviours.get(new ResourceLocation(AdditionalAdditions.namespace, behaviour.name()));
-    }
-
     public <T> T getBehaviourValue(String name, BehaviourValues values) {
         ConfigProperty property = getBehaviour(name);
         if (property == null) return null;
         ListConfigValue list = (ListConfigValue) property.value();
         String key = values.getName();
         if (list.get(key) == null || list.get(key).value() == null) {
-            ListConfigValue value = Behaviours.getByName(name);
-            if (value == null || value.get(key) == null || value.get(key).value() == null) {
-                return null;
-            } else {
-                return (T) value.get(key).value().getValue();
-            }
+            return null;
         } else {
             return (T) list.get(key).value().getValue();
         }
-    }
-
-    public <T> T getBehaviourValue(Behaviours behaviour, BehaviourValues values) {
-        return getBehaviourValue(behaviour.name(), values);
     }
 
     public Map<ResourceLocation, ConfigProperty> getBehaviours() {
