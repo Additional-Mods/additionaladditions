@@ -9,7 +9,8 @@ public enum BehaviourValues {
     DEFENSE (ConfigValueType.INTEGER),
     TOUGHNESS (ConfigValueType.FLOAT),
     KNOCKBACK_RESISTANCE (ConfigValueType.FLOAT),
-    DAMAGE (ConfigValueType.FLOAT),
+    ATTACK_DAMAGE (ConfigValueType.FLOAT),
+    ATTACK_SPEED (ConfigValueType.FLOAT),
     MINING_SPEED (ConfigValueType.FLOAT);
 
     private final ConfigValueType type;

@@ -16,9 +16,7 @@
     "RedstoneWireBlockMixin",
     "ServerAdvancementManagerMixin",
     "WanderingTraderMixin",
-    "behaviour.DiggerItemMixin",
     "behaviour.ItemMixin",
-    "behaviour.SwordItemMixin"
   ],
   "client": [
     "GameRendererMixin",
