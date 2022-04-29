@@ -10,18 +10,18 @@ import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.PickaxeItem;
+import net.minecraft.world.item.ShovelItem;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.level.block.state.BlockState;
 
-public class AdditionalPickaxeItem extends PickaxeItem {
+public class AdditionalShovelItem extends ShovelItem {
     private Multimap<Attribute, AttributeModifier> modifiers = null;
     private int previousLoads = BehaviourManager.loads;
     private final float attackSpeed;
 
-    public AdditionalPickaxeItem(Tier material, int attackDamage, float attackSpeed, Properties settings) {
-        super(material, attackDamage, attackSpeed, settings);
-        this.attackSpeed = attackSpeed;
+    public AdditionalShovelItem(Tier tier, float f, float g, Properties properties) {
+        super(tier, f, g, properties);
+        attackSpeed = g;
     }
 
     private void rebuildModifiers() {
@@ -50,23 +50,23 @@ public class AdditionalPickaxeItem extends PickaxeItem {
 
     @Override
     public float getDestroySpeed(ItemStack itemStack, BlockState blockState) {
-        return blockState.is(BlockTags.MINEABLE_WITH_PICKAXE) ? getMiningSpeed() : super.getDestroySpeed(itemStack, blockState);
+        return blockState.is(BlockTags.MINEABLE_WITH_SHOVEL) ? getMiningSpeed() : super.getDestroySpeed(itemStack, blockState);
     }
 
     public float getDamage() {
-        String path = getTier().toString().toLowerCase() + "/pickaxe";
+        String path = getTier().toString().toLowerCase() + "/shovel";
         Float damage = BehaviourManager.INSTANCE.getBehaviourValue(path, BehaviourValues.ATTACK_DAMAGE);
         return (damage == null) ? super.getAttackDamage() : damage;
     }
 
     public float getAttackSpeed() {
-        String path = getTier().toString().toLowerCase() + "/pickaxe";
+        String path = getTier().toString().toLowerCase() + "/shovel";
         Float speed = BehaviourManager.INSTANCE.getBehaviourValue(path, BehaviourValues.ATTACK_SPEED);
         return (speed == null) ? attackSpeed : speed;
     }
 
     public float getMiningSpeed() {
-        String path = getTier().toString().toLowerCase() + "/pickaxe";
+        String path = getTier().toString().toLowerCase() + "/shovel";
         Float speed = BehaviourManager.INSTANCE.getBehaviourValue(path, BehaviourValues.MINING_SPEED);
         return (speed == null) ? this.speed : speed;
     }

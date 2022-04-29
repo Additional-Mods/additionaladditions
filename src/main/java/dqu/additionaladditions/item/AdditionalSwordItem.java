@@ -4,30 +4,27 @@ import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
 import dqu.additionaladditions.behaviour.BehaviourManager;
 import dqu.additionaladditions.behaviour.BehaviourValues;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.PickaxeItem;
+import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.Tier;
-import net.minecraft.world.level.block.state.BlockState;
 
-public class AdditionalPickaxeItem extends PickaxeItem {
+public class AdditionalSwordItem extends SwordItem {
     private Multimap<Attribute, AttributeModifier> modifiers = null;
     private int previousLoads = BehaviourManager.loads;
     private final float attackSpeed;
 
-    public AdditionalPickaxeItem(Tier material, int attackDamage, float attackSpeed, Properties settings) {
-        super(material, attackDamage, attackSpeed, settings);
-        this.attackSpeed = attackSpeed;
+    public AdditionalSwordItem(Tier tier, int i, float f, Properties properties) {
+        super(tier, i, f, properties);
+        attackSpeed = f;
     }
 
     private void rebuildModifiers() {
         ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
-        builder.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_UUID , "Tool modifier", getDamage(), AttributeModifier.Operation.ADDITION));
-        builder.put(Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_UUID , "Tool modifier", getAttackSpeed(), AttributeModifier.Operation.ADDITION));
+        builder.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_UUID , "Weapon modifier", getDamage(), AttributeModifier.Operation.ADDITION));
+        builder.put(Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_UUID , "Weapon modifier", getAttackSpeed(), AttributeModifier.Operation.ADDITION));
         this.modifiers = builder.build();
     }
 
@@ -49,25 +46,15 @@ public class AdditionalPickaxeItem extends PickaxeItem {
     }
 
     @Override
-    public float getDestroySpeed(ItemStack itemStack, BlockState blockState) {
-        return blockState.is(BlockTags.MINEABLE_WITH_PICKAXE) ? getMiningSpeed() : super.getDestroySpeed(itemStack, blockState);
-    }
-
     public float getDamage() {
-        String path = getTier().toString().toLowerCase() + "/pickaxe";
+        String path = getTier().toString().toLowerCase() + "/sword";
         Float damage = BehaviourManager.INSTANCE.getBehaviourValue(path, BehaviourValues.ATTACK_DAMAGE);
-        return (damage == null) ? super.getAttackDamage() : damage;
+        return (damage == null) ? super.getDamage() : damage;
     }
 
     public float getAttackSpeed() {
-        String path = getTier().toString().toLowerCase() + "/pickaxe";
+        String path = getTier().toString().toLowerCase() + "/sword";
         Float speed = BehaviourManager.INSTANCE.getBehaviourValue(path, BehaviourValues.ATTACK_SPEED);
         return (speed == null) ? attackSpeed : speed;
-    }
-
-    public float getMiningSpeed() {
-        String path = getTier().toString().toLowerCase() + "/pickaxe";
-        Float speed = BehaviourManager.INSTANCE.getBehaviourValue(path, BehaviourValues.MINING_SPEED);
-        return (speed == null) ? this.speed : speed;
     }
 }
