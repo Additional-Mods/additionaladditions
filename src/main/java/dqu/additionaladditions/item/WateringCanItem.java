@@ -6,7 +6,8 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.contents.TranslatableContents;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
@@ -105,6 +106,6 @@ public class WateringCanItem extends Item {
     public void appendHoverText(ItemStack stack, @Nullable Level world, List<Component> tooltip, TooltipFlag context) {
         int water = (int) (stack.getDamageValue() * 0.1);
         String tooltipText = String.format(": %s / 10", water);
-        tooltip.add(new TranslatableComponent("block.minecraft.water").append(tooltipText).withStyle(ChatFormatting.AQUA) );
+        tooltip.add(MutableComponent.create(new TranslatableContents("block.minecraft.water")).append(tooltipText).withStyle(ChatFormatting.AQUA) );
     }
 }
