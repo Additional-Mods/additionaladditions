@@ -36,8 +36,8 @@ dependencies {
 	// ModMenu API
 	modImplementation "com.terraformersmc:modmenu:${project.modmenu_version}"
 
-	// LibGui
-	modImplementation include("io.github.cottonmc:LibGui:${project.libgui_version}")
+	// LibGui TODO: LibGui Integration Also Broken! No in-game config :<
+//	modImplementation include("io.github.cottonmc:LibGui:${project.libgui_version}")
 
 	// LambDynamicLights TODO: LambDynamicLights not yet compatible with 1.19
 //	modImplementation "dev.lambdaurora:lambdynamiclights:${project.lambdynamiclights_version}"
