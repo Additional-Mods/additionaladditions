@@ -15,11 +15,9 @@ public class AdditionalAdditions implements ModInitializer {
     public static final String namespace = "additionaladditions";
     public static final Logger LOGGER = LoggerFactory.getLogger(namespace);
     public static boolean zoom = false;
-    public static boolean lithiumInstalled = false;
 
     @Override
     public void onInitialize() {
-        lithiumInstalled = FabricLoader.getInstance().isModLoaded("lithium");
         if (!Config.initialized) {
             Config.load();
         }
