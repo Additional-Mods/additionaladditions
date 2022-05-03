@@ -33,7 +33,7 @@ public class WrenchItem extends Item {
     }
 
     private boolean tryPlacing(BlockPos pos, BlockState state, Level world, ItemStack stack, Optional<Player> player, Optional<InteractionHand> hand) {
-        if (state.canSurvive(world, pos)) {
+        if (state.canSurvive(world, pos) && state.getBlock().defaultDestroyTime() >= 0) {
             world.setBlockAndUpdate(pos, state);
 
             if (world.isClientSide()) {
