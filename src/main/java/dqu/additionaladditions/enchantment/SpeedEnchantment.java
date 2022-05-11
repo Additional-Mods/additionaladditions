@@ -6,6 +6,7 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentCategory;
 import net.minecraft.world.item.enchantment.Enchantments;
+import org.jetbrains.annotations.NotNull;
 
 public class SpeedEnchantment extends Enchantment {
     public SpeedEnchantment() {
@@ -18,8 +19,8 @@ public class SpeedEnchantment extends Enchantment {
     }
 
     @Override
-    protected boolean checkCompatibility(Enchantment other) {
-        if (Config.getBool(ConfigValues.ENCHANTMENT_SPEED)) return false;
+    protected boolean checkCompatibility(@NotNull Enchantment other) {
+        if (!Config.getBool(ConfigValues.ENCHANTMENT_SPEED)) return false;
         if (other == Enchantments.SOUL_SPEED || other == Enchantments.FROST_WALKER || other == Enchantments.DEPTH_STRIDER)
             return false;
         return super.checkCompatibility(other);
