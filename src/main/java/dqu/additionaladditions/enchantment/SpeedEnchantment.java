@@ -28,11 +28,11 @@ public class SpeedEnchantment extends Enchantment {
 
     @Override
     public boolean isDiscoverable() {
-        return Config.getBool(ConfigValues.ENCHANTMENT_PRECISION);
+        return Config.getBool(ConfigValues.ENCHANTMENT_SPEED);
     }
 
     @Override
     public boolean isTradeable() {
-        return Config.getBool(ConfigValues.ENCHANTMENT_PRECISION);
+        return Config.getBool(ConfigValues.ENCHANTMENT_SPEED);
     }
 }
