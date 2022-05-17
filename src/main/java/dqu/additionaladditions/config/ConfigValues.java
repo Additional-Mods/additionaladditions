@@ -1,6 +1,7 @@
 package dqu.additionaladditions.config;
 
 import dqu.additionaladditions.config.value.ConfigValueType;
+import dqu.additionaladditions.config.value.FloatConfigValue;
 import dqu.additionaladditions.config.value.IntegerConfigValue;
 import dqu.additionaladditions.config.value.ListConfigValue;
 
@@ -17,7 +18,10 @@ public enum ConfigValues {
     ENCHANTMENT_SPEED(3, new ConfigProperty("EnchantmentSpeed")),
     WRENCH(1, new ConfigProperty("Wrench")),
     COPPER_PATINA(1, new ConfigProperty("CopperPatina")),
-    AMETHYST_LAMP(1, new ConfigProperty("AmethystLamp")),
+    AMETHYST_LAMP(1, new ConfigProperty("AmethystLamp", new ListConfigValue()
+            .put(new ConfigProperty("enabled"))
+            .put(new ConfigProperty("despawnChance", new FloatConfigValue(0.5f)))
+    )),
     CROSSBOWS(1, new ConfigProperty("Crossbows")),
     TRIDENT_SHARD(2, new ConfigProperty("TridentShard")),
     GLOW_STICK(2, new ConfigProperty("GlowStick")),

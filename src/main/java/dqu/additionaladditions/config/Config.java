@@ -14,11 +14,10 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
-import java.util.Objects;
 
 @SuppressWarnings("unchecked")
 public class Config {
-    public static final int VERSION = 6;
+    public static final int VERSION = 7;
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
     private static final String PATH = FabricLoader.getInstance().getConfigDir().resolve("additional-additions-config.json").toString();
     private static final File DBFILE = new File(PATH);
@@ -34,12 +33,16 @@ public class Config {
             case BOOLEAN -> object.addProperty(property.key(), (Boolean) property.value().getValue());
             case STRING -> object.addProperty(property.key(), (String) property.value().getValue());
             case INTEGER -> object.addProperty(property.key(), (Integer) property.value().getValue());
+            case FLOAT -> object.addProperty(property.key(), (Float) property.value().getValue());
             case LIST -> {
                 JsonObject newObject = new JsonObject();
                 for (ConfigProperty i : (List<ConfigProperty>) property.value().getValue()) {
                     addPropertyTo(newObject, i);
                 }
                 object.add(property.key(), newObject);
+            }
+            default -> {
+                throw new IllegalArgumentException("Unsupported config value type: " + property.value().getType());
             }
         }
     }
@@ -103,6 +106,9 @@ public class Config {
             case INTEGER -> {
                 return (T) (Integer) db.get(value.getProperty().key()).getAsInt();
             }
+            case FLOAT -> {
+                return (T) (Float) db.get(value.getProperty().key()).getAsFloat();
+            }
             default -> {
                 return null;
             }
@@ -128,8 +134,11 @@ public class Config {
                 case INTEGER -> {
                     return (T) (Integer) object.get(key).getAsInt();
                 }
+                case FLOAT -> {
+                    return (T) (Float) object.get(key).getAsFloat();
+                }
                 case LIST -> {
-                    throw new IllegalArgumentException("Cannot create lists inside lists!");
+                    throw new IllegalArgumentException("Cannot put lists inside lists!");
                 }
                 default -> {
                     return null;
@@ -159,6 +168,11 @@ public class Config {
                     db.addProperty(value.getProperty().key(), (Integer) property);
                 }
             }
+            case FLOAT -> {
+                if (property instanceof Float) {
+                    db.addProperty(value.getProperty().key(), (Float) property);
+                }
+            }
         }
 
         save();
@@ -167,14 +181,16 @@ public class Config {
     private static void convert(int version) {
         for (ConfigValues value : ConfigValues.values()) {
             if (version < 6) {
-                if (value.getProperty().key().equals("FoodItems")) {
-                    db.remove("FoodItems");
+                switch (value.getProperty().key()) {
+                    case "FoodItems" -> db.remove("FoodItems");
+                    case "Potions" -> db.remove("Potions");
+                    case "DepthMeter" -> db.remove("DepthMeter");
                 }
-                else if (value.getProperty().key().equals("Potions")) {
-                    db.remove("Potions");
-                }
-                else if (value.getProperty().key().equals("DepthMeter")) {
-                    db.remove("DepthMeter");
+            }
+
+            if (version < 7) {
+                if (value.getProperty().key().equals("AmethystLamp")) {
+                    db.remove("AmethystLamp");
                 }
             }
         }

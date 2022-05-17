@@ -34,7 +34,7 @@ public class RecipeManagerMixin {
                     case "trident" -> { if (!Config.getBool(ConfigValues.TRIDENT_SHARD)) toRemove.add(identifier); }
                     case "rope" -> { if (!Config.getBool(ConfigValues.ROPES)) toRemove.add(identifier); }
                     case "copper_patina" -> { if (!Config.getBool(ConfigValues.COPPER_PATINA)) toRemove.add(identifier); }
-                    case "amethyst_lamp" -> { if (!Config.getBool(ConfigValues.AMETHYST_LAMP)) toRemove.add(identifier); }
+                    case "amethyst_lamp" -> { if (!Config.getBool(ConfigValues.AMETHYST_LAMP, "enabled")) toRemove.add(identifier); }
                     case "berry_pie" -> { if (!Config.getBool(ConfigValues.FOOD, "BerryPie")) toRemove.add(identifier); }
                     case "honeyed_apple" -> { if (!Config.getBool(ConfigValues.FOOD, "HoneyedApple")) toRemove.add(identifier); }
                     case "pocket_jukebox" -> { if (!Config.getBool(ConfigValues.POCKET_JUKEBOX)) toRemove.add(identifier); }
