@@ -42,12 +42,12 @@
   "block.additionaladditions.amethyst_lamp": "Аметистовый Фонарь",
   "block.additionaladditions.patina_block": "Блок Патины",
   "enchantment.additionaladditions.precision": "Меткость",
-  "enchantment.additionaladditions.precision.desc": "Improves crossbow accuracy.",
+  "enchantment.additionaladditions.precision.desc": "Улучшает точность арбалета.",
   "enchantment.additionaladditions.speed": "Скорость",
-  "enchantment.additionaladditions.speed.desc": "Increases movement speed.",
+  "enchantment.additionaladditions.speed.desc": "Увеличивает скорость передвижения.",
   "entity.additionaladditions.glow_stick": "Светящаяся Палочка",
 
-  "depth_meter.elevation": "Altitude: %s",
+  "depth_meter.elevation": "Высота: %s",
 
   "item.minecraft.potion.effect.haste_potion": "Зелье Спешки",
   "item.minecraft.potion.effect.long_haste_potion": "Зелье Спешки",

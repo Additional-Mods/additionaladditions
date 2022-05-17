@@ -3,6 +3,7 @@ package dqu.additionaladditions.config;
 import com.google.common.io.Files;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import dqu.additionaladditions.AdditionalAdditions;
 import dqu.additionaladditions.config.value.ConfigValueType;
@@ -13,12 +14,13 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
+import java.util.Map;
 
 @SuppressWarnings("unchecked")
 public class Config {
-    public static final int VERSION = 6;
+    public static final int VERSION = 7;
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
     private static final String PATH = FabricLoader.getInstance().getConfigDir().resolve("additional-additions-config.json").toString();
     private static final File DBFILE = new File(PATH);
@@ -34,12 +36,16 @@ public class Config {
             case BOOLEAN -> object.addProperty(property.key(), (Boolean) property.value().getValue());
             case STRING -> object.addProperty(property.key(), (String) property.value().getValue());
             case INTEGER -> object.addProperty(property.key(), (Integer) property.value().getValue());
+            case FLOAT -> object.addProperty(property.key(), (Float) property.value().getValue());
             case LIST -> {
                 JsonObject newObject = new JsonObject();
                 for (ConfigProperty i : (List<ConfigProperty>) property.value().getValue()) {
                     addPropertyTo(newObject, i);
                 }
                 object.add(property.key(), newObject);
+            }
+            default -> {
+                throw new IllegalArgumentException("Unsupported config value type: " + property.value().getType());
             }
         }
     }
@@ -62,7 +68,9 @@ public class Config {
             AdditionalAdditions.LOGGER.error(format("Unable to load configuration file!"));
         }
 
-        if (db.get("version").getAsInt() != VERSION) convert(db.get("version").getAsInt());
+        if (db.get("version").getAsInt() != VERSION) {
+            convert(db.get("version").getAsInt());
+        }
         repair();
 
         initialized = true;
@@ -103,6 +111,9 @@ public class Config {
             case INTEGER -> {
                 return (T) (Integer) db.get(value.getProperty().key()).getAsInt();
             }
+            case FLOAT -> {
+                return (T) (Float) db.get(value.getProperty().key()).getAsFloat();
+            }
             default -> {
                 return null;
             }
@@ -128,8 +139,11 @@ public class Config {
                 case INTEGER -> {
                     return (T) (Integer) object.get(key).getAsInt();
                 }
+                case FLOAT -> {
+                    return (T) (Float) object.get(key).getAsFloat();
+                }
                 case LIST -> {
-                    throw new IllegalArgumentException("Cannot create lists inside lists!");
+                    throw new IllegalArgumentException("Cannot put lists inside lists!");
                 }
                 default -> {
                     return null;
@@ -159,6 +173,11 @@ public class Config {
                     db.addProperty(value.getProperty().key(), (Integer) property);
                 }
             }
+            case FLOAT -> {
+                if (property instanceof Float) {
+                    db.addProperty(value.getProperty().key(), (Float) property);
+                }
+            }
         }
 
         save();
@@ -166,16 +185,9 @@ public class Config {
 
     private static void convert(int version) {
         for (ConfigValues value : ConfigValues.values()) {
-            if (version < 6) {
-                if (value.getProperty().key().equals("FoodItems")) {
-                    db.remove("FoodItems");
-                }
-                else if (value.getProperty().key().equals("Potions")) {
-                    db.remove("Potions");
-                }
-                else if (value.getProperty().key().equals("DepthMeter")) {
-                    db.remove("DepthMeter");
-                }
+            if (value.getVersion() >= version) {
+                // Reset the property to the default value if it is outdated
+                db.remove(value.getProperty().key());
             }
         }
         db.addProperty("version", VERSION);
@@ -185,12 +197,26 @@ public class Config {
 
     private static void repair() {
         int repaired = 0;
+        ArrayList<String> toRemove = new ArrayList<>();
+
+        for (Map.Entry<String, JsonElement> entry : db.entrySet()) {
+            // Remove all properties that are not in the enum
+            if (ConfigValues.getByName(entry.getKey()) == null && !entry.getKey().equals("version")) {
+                toRemove.add(entry.getKey());
+                repaired++;
+            }
+        }
+
+        toRemove.forEach(db::remove);
+
         for (ConfigValues value : ConfigValues.values()) {
             if (db.get(value.getProperty().key()) == null) {
+                // Reset the property if it doesn't exist
                 addPropertyTo(db, value.getProperty());
                 repaired++;
             }
         }
+
         if (repaired > 0) {
             AdditionalAdditions.LOGGER.info(format("Repaired " + repaired + " config properties"));
         }

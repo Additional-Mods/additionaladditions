@@ -33,14 +33,26 @@ public abstract class LivingEntityMixin extends Entity {
 
     @Inject(method = "tryAddSoulSpeed", at = @At("HEAD"))
     private void applySpeedBoost(CallbackInfo ci) {
-        if (!Config.getBool(ConfigValues.ENCHANTMENT_SPEED)) return;
+        if (!Config.getBool(ConfigValues.ENCHANTMENT_PRECISION)) {
+            return;
+        }
+
         int i = EnchantmentHelper.getEnchantmentLevel(AdditionalEnchantments.ENCHANTMENT_SPEED, ((LivingEntity) (Object) this));
         if (i > 0) {
-            if (getBlockStateOn().isAir()) return;
+            if (getBlockStateOn().isAir()) {
+                return;
+            }
+
             AttributeInstance entityAttributeInstance = getAttribute(Attributes.MOVEMENT_SPEED);
-            if (entityAttributeInstance == null) return;
+            if (entityAttributeInstance == null) {
+                return;
+            }
+
             AttributeModifier modifier = new AttributeModifier(SPEED_MODIFIER_SOUL_SPEED_UUID, "Soul speed boost", (i*7d)/1000d, AttributeModifier.Operation.ADDITION);
-            if (entityAttributeInstance.hasModifier(modifier)) return; // Needed to prevent a crash from applying the effect multiple times
+            if (entityAttributeInstance.hasModifier(modifier)) {
+                return;
+            }
+
             entityAttributeInstance.addTransientModifier(modifier);
         }
     }

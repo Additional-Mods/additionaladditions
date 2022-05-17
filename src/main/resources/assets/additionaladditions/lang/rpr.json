@@ -40,14 +40,14 @@
   "block.additionaladditions.copper_patina": "Мѣдная Патина",
   "block.additionaladditions.rope": "Веревка",
   "block.additionaladditions.amethyst_lamp": "Аметистовый Фонарь",
-  "block.additionaladditions.patina_block": "Patina Block",
+  "block.additionaladditions.patina_block": "Блокъ Патины",
   "enchantment.additionaladditions.precision": "Мѣткость",
-  "enchantment.additionaladditions.precision.desc": "Improves crossbow accuracy.",
+  "enchantment.additionaladditions.precision.desc": "Улучшаетъ точность арбалета.",
   "enchantment.additionaladditions.speed": "Рѣзвость",
-  "enchantment.additionaladditions.speed.desc": "Increases movement speed.",
+  "enchantment.additionaladditions.speed.desc": "Увеличиваетъ скорость передвиженія.",
   "entity.additionaladditions.glow_stick": "Свѣтящаяся Палочка",
 
-  "depth_meter.elevation": "Altitude: %s",
+  "depth_meter.elevation": "Высота: %s",
 
   "item.minecraft.potion.effect.haste_potion": "Снадобье Спѣшки",
   "item.minecraft.potion.effect.long_haste_potion": "Снадобье Спѣшки",
@@ -84,5 +84,5 @@
   "additionaladditions.advancements.use_watering_can.desc": "Используйте Лейку чтобы удобрять растенія",
 
   "additionaladditions.gui.config.restart": "Перезапустите игру чтобы примѣнить измѣненія",
-  "additionaladditions.gui.pocket_jukebox.tooltip": "Secondary Click with a Music Disc to play"
+  "additionaladditions.gui.pocket_jukebox.tooltip": "Вторичный Кликъ пластинкой чтобы играть"
 }
