@@ -3,6 +3,7 @@ package dqu.additionaladditions.config;
 import com.google.common.io.Files;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import dqu.additionaladditions.AdditionalAdditions;
 import dqu.additionaladditions.config.value.ConfigValueType;
@@ -13,7 +14,9 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @SuppressWarnings("unchecked")
 public class Config {
@@ -65,7 +68,9 @@ public class Config {
             AdditionalAdditions.LOGGER.error(format("Unable to load configuration file!"));
         }
 
-        if (db.get("version").getAsInt() != VERSION) convert(db.get("version").getAsInt());
+        if (db.get("version").getAsInt() != VERSION) {
+            convert(db.get("version").getAsInt());
+        }
         repair();
 
         initialized = true;
@@ -180,18 +185,9 @@ public class Config {
 
     private static void convert(int version) {
         for (ConfigValues value : ConfigValues.values()) {
-            if (version < 6) {
-                switch (value.getProperty().key()) {
-                    case "FoodItems" -> db.remove("FoodItems");
-                    case "Potions" -> db.remove("Potions");
-                    case "DepthMeter" -> db.remove("DepthMeter");
-                }
-            }
-
-            if (version < 7) {
-                if (value.getProperty().key().equals("AmethystLamp")) {
-                    db.remove("AmethystLamp");
-                }
+            if (value.getVersion() >= version) {
+                // Reset the property to the default value if it is outdated
+                db.remove(value.getProperty().key());
             }
         }
         db.addProperty("version", VERSION);
@@ -201,12 +197,26 @@ public class Config {
 
     private static void repair() {
         int repaired = 0;
+        ArrayList<String> toRemove = new ArrayList<>();
+
+        for (Map.Entry<String, JsonElement> entry : db.entrySet()) {
+            // Remove all properties that are not in the enum
+            if (ConfigValues.getByName(entry.getKey()) == null && !entry.getKey().equals("version")) {
+                toRemove.add(entry.getKey());
+                repaired++;
+            }
+        }
+
+        toRemove.forEach(db::remove);
+
         for (ConfigValues value : ConfigValues.values()) {
             if (db.get(value.getProperty().key()) == null) {
+                // Reset the property if it doesn't exist
                 addPropertyTo(db, value.getProperty());
                 repaired++;
             }
         }
+
         if (repaired > 0) {
             AdditionalAdditions.LOGGER.info(format("Repaired " + repaired + " config properties"));
         }

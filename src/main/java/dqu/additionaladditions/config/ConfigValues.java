@@ -6,39 +6,40 @@ import dqu.additionaladditions.config.value.IntegerConfigValue;
 import dqu.additionaladditions.config.value.ListConfigValue;
 
 public enum ConfigValues {
-    FOOD(1, new ConfigProperty("FoodItems", new ListConfigValue()
+    // Version is the version the property was last changed in
+    FOOD(6, new ConfigProperty("FoodItems", new ListConfigValue()
             .put(new ConfigProperty("FriedEgg"))
             .put(new ConfigProperty("BerryPie"))
             .put(new ConfigProperty("HoneyedApple"))
     )),
-    WATERING_CAN(1, new ConfigProperty("WateringCan")),
-    ROSE_GOLD( 1, new ConfigProperty("RoseGold")),
-    ROPES(1, new ConfigProperty("Ropes")),
-    ENCHANTMENT_PRECISION(1, new ConfigProperty("EnchantmentPrecision")),
-    ENCHANTMENT_SPEED(3, new ConfigProperty("EnchantmentSpeed")),
-    WRENCH(1, new ConfigProperty("Wrench")),
-    COPPER_PATINA(1, new ConfigProperty("CopperPatina")),
-    AMETHYST_LAMP(1, new ConfigProperty("AmethystLamp", new ListConfigValue()
+    WATERING_CAN(6, new ConfigProperty("WateringCan")),
+    ROSE_GOLD( 6, new ConfigProperty("RoseGold")),
+    ROPES(6, new ConfigProperty("Ropes")),
+    ENCHANTMENT_PRECISION(6, new ConfigProperty("EnchantmentPrecision")),
+    ENCHANTMENT_SPEED(6, new ConfigProperty("EnchantmentSpeed")),
+    WRENCH(6, new ConfigProperty("Wrench")),
+    COPPER_PATINA(6, new ConfigProperty("CopperPatina")),
+    AMETHYST_LAMP(7, new ConfigProperty("AmethystLamp", new ListConfigValue()
             .put(new ConfigProperty("enabled"))
             .put(new ConfigProperty("despawnChance", new FloatConfigValue(0.5f)))
     )),
-    CROSSBOWS(1, new ConfigProperty("Crossbows")),
-    TRIDENT_SHARD(2, new ConfigProperty("TridentShard")),
-    GLOW_STICK(2, new ConfigProperty("GlowStick")),
-    GILDED_NETHERITE(3, new ConfigProperty("GildedNetherite")),
-    DEPTH_METER(3, new ConfigProperty("DepthMeter", new ListConfigValue()
+    CROSSBOWS(6, new ConfigProperty("Crossbows")),
+    TRIDENT_SHARD(6, new ConfigProperty("TridentShard")),
+    GLOW_STICK(6, new ConfigProperty("GlowStick")),
+    GILDED_NETHERITE(6, new ConfigProperty("GildedNetherite")),
+    DEPTH_METER(6, new ConfigProperty("DepthMeter", new ListConfigValue()
             .put(new ConfigProperty("enabled"))
             .put(new ConfigProperty("displayElevationAlways", ConfigValueType.FALSE))
     )),
-    MYSTERIOUS_BUNDLE(3, new ConfigProperty("MysteriousBundle")),
-    COMPOSTABLE_ROTTEN_FLESH(3, new ConfigProperty("CompostableRottenFlesh")),
-    MUSIC_DISCS(4, new ConfigProperty("MusicDiscs")),
-    NOTE_BLOCK_AMETHYST_SOUNDS(5, new ConfigProperty("NoteBlockAmethystSounds")),
-    SHIPWRECK_SPYGLASS_LOOT(5, new ConfigProperty("ShipwreckSpyglassLoot")),
-    POCKET_JUKEBOX(5, new ConfigProperty("PocketJukebox")),
-    CHICKEN_NUGGET(5, new ConfigProperty("ChickenNugget")),
-    POWERED_RAILS_COPPER_RECIPE(5, new ConfigProperty("PoweredRailsCopperRecipe")),
-    GOLD_RING(5, new ConfigProperty("GoldRing")),
+    MYSTERIOUS_BUNDLE(6, new ConfigProperty("MysteriousBundle")),
+    COMPOSTABLE_ROTTEN_FLESH(6, new ConfigProperty("CompostableRottenFlesh")),
+    MUSIC_DISCS(6, new ConfigProperty("MusicDiscs")),
+    NOTE_BLOCK_AMETHYST_SOUNDS(6, new ConfigProperty("NoteBlockAmethystSounds")),
+    SHIPWRECK_SPYGLASS_LOOT(6, new ConfigProperty("ShipwreckSpyglassLoot")),
+    POCKET_JUKEBOX(6, new ConfigProperty("PocketJukebox")),
+    CHICKEN_NUGGET(6, new ConfigProperty("ChickenNugget")),
+    POWERED_RAILS_COPPER_RECIPE(6, new ConfigProperty("PoweredRailsCopperRecipe")),
+    GOLD_RING(6, new ConfigProperty("GoldRing")),
     GLOW_BERRY_GLOW(6, new ConfigProperty("GlowBerryEatGlow", new ListConfigValue()
             .put(new ConfigProperty("enabled"))
             .put(new ConfigProperty("duration", new IntegerConfigValue(5)))
@@ -64,5 +65,14 @@ public enum ConfigValues {
 
     public ConfigValueType getType() {
         return configProperty.value().getType();
+    }
+
+    public static ConfigValues getByName(String name) {
+        for (ConfigValues value : values()) {
+            if (value.getProperty().key().equals(name)) {
+                return value;
+            }
+        }
+        return null;
     }
 }
