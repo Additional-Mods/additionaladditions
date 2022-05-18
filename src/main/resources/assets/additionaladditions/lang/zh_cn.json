@@ -40,14 +40,14 @@
   "block.additionaladditions.copper_patina": "铜锈",
   "block.additionaladditions.rope": "绳子",
   "block.additionaladditions.amethyst_lamp": "紫水晶灯",
-  "block.additionaladditions.patina_block": "Patina Block",
+  "block.additionaladditions.patina_block": "铜锈块",
   "enchantment.additionaladditions.precision": "精确",
-  "enchantment.additionaladditions.precision.desc": "Improves crossbow accuracy.",
+  "enchantment.additionaladditions.precision.desc": "提升弩的精确性",
   "enchantment.additionaladditions.speed": "加速",
-  "enchantment.additionaladditions.speed.desc": "Increases movement speed.",
+  "enchantment.additionaladditions.speed.desc": "提高移动速度",
   "entity.additionaladditions.glow_stick": "荧光棒",
 
-  "depth_meter.elevation": "Altitude: %s",
+  "depth_meter.elevation": "高度: %s",
 
   "item.minecraft.potion.effect.haste_potion": "急迫药水",
   "item.minecraft.potion.effect.long_haste_potion": "急迫药水",
@@ -84,5 +84,5 @@
   "additionaladditions.advancements.use_watering_can.desc": "使用水壶来加速植物的成长",
 
   "additionaladditions.gui.config.restart": "重启游戏来应用更新",
-  "additionaladditions.gui.pocket_jukebox.tooltip": "Secondary Click with a Music Disc to play"
+  "additionaladditions.gui.pocket_jukebox.tooltip": "用音乐唱片双击来播放"
 }
