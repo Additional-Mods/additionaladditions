@@ -33,7 +33,7 @@ public abstract class LivingEntityMixin extends Entity {
 
     @Inject(method = "tryAddSoulSpeed", at = @At("HEAD"))
     private void applySpeedBoost(CallbackInfo ci) {
-        if (!Config.getBool(ConfigValues.ENCHANTMENT_PRECISION)) {
+        if (!Config.getBool(ConfigValues.ENCHANTMENT_SPEED)) {
             return;
         }
 
