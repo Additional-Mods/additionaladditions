@@ -185,7 +185,7 @@ public class Config {
 
     private static void convert(int version) {
         for (ConfigValues value : ConfigValues.values()) {
-            if (value.getVersion() >= version) {
+            if (value.getVersion() > version) {
                 // Reset the property to the default value if it is outdated
                 db.remove(value.getProperty().key());
             }
