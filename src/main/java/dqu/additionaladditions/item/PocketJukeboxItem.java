@@ -41,7 +41,7 @@ public class PocketJukeboxItem extends Item {
 
         CompoundTag tag = stack.getOrCreateTag();
         tag.remove("musicdisc");
-        stack.save(tag);
+        stack.setTag(tag);
     }
 
     private static void nbtPutDisc(ItemStack stack, String disc) {
@@ -50,7 +50,7 @@ public class PocketJukeboxItem extends Item {
 
         CompoundTag tag = stack.getOrCreateTag();
         tag.putString("musicdisc", disc);
-        stack.save(tag);
+        stack.setTag(tag);
     }
 
     public static boolean hasDisc(ItemStack stack) {
