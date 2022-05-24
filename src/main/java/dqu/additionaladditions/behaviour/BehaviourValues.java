@@ -2,6 +2,7 @@ package dqu.additionaladditions.behaviour;
 
 import dqu.additionaladditions.config.value.ConfigValueType;
 
+import java.util.Locale;
 import java.util.Optional;
 
 public enum BehaviourValues {
@@ -24,7 +25,7 @@ public enum BehaviourValues {
     }
 
     public String getName() {
-        return name().toLowerCase();
+        return name().toLowerCase(Locale.ROOT);
     }
 
     public static Optional<BehaviourValues> getByName(String name) {
