@@ -7,6 +7,8 @@ import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 
+import java.util.Locale;
+
 public class RoseGoldArmorMaterial implements ArmorMaterial {
     private static final int[] BASE_DURABILITY = {264, 384, 360, 312};
     private static final int[] PROTECTION_VALUES = {2, 6, 7, 2};
@@ -54,6 +56,6 @@ public class RoseGoldArmorMaterial implements ArmorMaterial {
 
     @Override
     public String toString() {
-        return NAME.toUpperCase();
+        return NAME.toUpperCase(Locale.ROOT);
     }
 }

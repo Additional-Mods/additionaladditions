@@ -14,6 +14,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.level.block.state.BlockState;
 
+import java.util.Locale;
+
 public class AdditionalHoeItem extends HoeItem {
     private Multimap<Attribute, AttributeModifier> modifiers = null;
     private int previousLoads = BehaviourManager.loads;
@@ -54,19 +56,19 @@ public class AdditionalHoeItem extends HoeItem {
     }
 
     public float getDamage() {
-        String path = getTier().toString().toLowerCase() + "/hoe";
+        String path = getTier().toString().toLowerCase(Locale.ROOT) + "/hoe";
         Float damage = BehaviourManager.INSTANCE.getBehaviourValue(path, BehaviourValues.ATTACK_DAMAGE);
         return (damage == null) ? super.getAttackDamage() : damage;
     }
 
     public float getAttackSpeed() {
-        String path = getTier().toString().toLowerCase() + "/hoe";
+        String path = getTier().toString().toLowerCase(Locale.ROOT) + "/hoe";
         Float speed = BehaviourManager.INSTANCE.getBehaviourValue(path, BehaviourValues.ATTACK_SPEED);
         return (speed == null) ? attackSpeed : speed;
     }
 
     public float getMiningSpeed() {
-        String path = getTier().toString().toLowerCase() + "/hoe";
+        String path = getTier().toString().toLowerCase(Locale.ROOT) + "/hoe";
         Float speed = BehaviourManager.INSTANCE.getBehaviourValue(path, BehaviourValues.MINING_SPEED);
         return (speed == null) ? this.speed : speed;
     }

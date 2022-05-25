@@ -11,6 +11,8 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.Tier;
 
+import java.util.Locale;
+
 public class AdditionalSwordItem extends SwordItem {
     private Multimap<Attribute, AttributeModifier> modifiers = null;
     private int previousLoads = BehaviourManager.loads;
@@ -47,13 +49,13 @@ public class AdditionalSwordItem extends SwordItem {
 
     @Override
     public float getDamage() {
-        String path = getTier().toString().toLowerCase() + "/sword";
+        String path = getTier().toString().toLowerCase(Locale.ROOT) + "/sword";
         Float damage = BehaviourManager.INSTANCE.getBehaviourValue(path, BehaviourValues.ATTACK_DAMAGE);
         return (damage == null) ? super.getDamage() : damage;
     }
 
     public float getAttackSpeed() {
-        String path = getTier().toString().toLowerCase() + "/sword";
+        String path = getTier().toString().toLowerCase(Locale.ROOT) + "/sword";
         Float speed = BehaviourManager.INSTANCE.getBehaviourValue(path, BehaviourValues.ATTACK_SPEED);
         return (speed == null) ? attackSpeed : speed;
     }
