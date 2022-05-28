@@ -84,5 +84,5 @@
   "additionaladditions.advancements.use_watering_can.desc": "使用水壶来加速植物的成长",
 
   "additionaladditions.gui.config.restart": "重启游戏来应用更新",
-  "additionaladditions.gui.pocket_jukebox.tooltip": "用音乐唱片双击来播放"
+  "additionaladditions.gui.pocket_jukebox.tooltip": "用音乐唱片右击来播放"
 }
