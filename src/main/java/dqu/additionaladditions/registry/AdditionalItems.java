@@ -134,7 +134,7 @@ public class AdditionalItems {
                 if (Config.getBool(ConfigValues.CHICKEN_NUGGET)) {
                     LootPool.Builder poolBuilder = LootPool.lootPool()
                             .setRolls(ConstantValue.exactly(1))
-                            .when(LootItemRandomChanceCondition.randomChance(0.025f))
+                            .when(LootItemRandomChanceCondition.randomChance(0.0125f))
                             .add(LootItem.lootTableItem(CHICKEN_NUGGET));
                     table.withPool(poolBuilder);
                 }
