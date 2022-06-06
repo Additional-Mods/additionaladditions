@@ -2,7 +2,8 @@ package dqu.additionaladditions.item;
 
 import dqu.additionaladditions.config.Config;
 import dqu.additionaladditions.config.ConfigValues;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.contents.TranslatableContents;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
@@ -23,7 +24,7 @@ public class DepthMeterItem extends Item {
 
         if (!Config.getBool(ConfigValues.DEPTH_METER, "displayElevationAlways")) {
             ItemStack itemStack = user.getItemInHand(hand);
-            user.displayClientMessage(new TranslatableComponent("depth_meter.elevation", user.getBlockY()), true);
+            user.displayClientMessage(MutableComponent.create(new TranslatableContents("depth_meter.elevation", user.getBlockY())), true);
             return InteractionResultHolder.sidedSuccess(itemStack, world.isClientSide());
         }
 

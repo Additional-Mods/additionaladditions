@@ -3,6 +3,8 @@ package dqu.additionaladditions.item;
 import dqu.additionaladditions.config.Config;
 import dqu.additionaladditions.config.ConfigValues;
 import dqu.additionaladditions.misc.PocketMusicSoundInstance;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.contents.TranslatableContents;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -11,7 +13,6 @@ import net.minecraft.core.Registry;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.SlotAccess;
 import net.minecraft.world.entity.player.Player;
@@ -107,11 +108,11 @@ public class PocketJukeboxItem extends Item {
     public void appendHoverText(ItemStack stack, @Nullable Level world, List<Component> tooltip, TooltipFlag context) {
         String disc = nbtGetDisc(stack);
         if (disc == null) {
-            tooltip.add(new TranslatableComponent("additionaladditions.gui.pocket_jukebox.tooltip").setStyle(Style.EMPTY.withColor(ChatFormatting.GRAY)));
+            tooltip.add(MutableComponent.create(new TranslatableContents("additionaladditions.gui.pocket_jukebox.tooltip")).setStyle(Style.EMPTY.withColor(ChatFormatting.GRAY)));
         } else {
             Item discItem = Registry.ITEM.get(new ResourceLocation(disc));
             String description = discItem.getDescriptionId() + ".desc";
-            tooltip.add(new TranslatableComponent(description));
+            tooltip.add(MutableComponent.create(new TranslatableContents(description)));
         }
     }
 }

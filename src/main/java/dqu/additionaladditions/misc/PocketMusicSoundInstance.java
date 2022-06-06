@@ -9,6 +9,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.sounds.AbstractTickableSoundInstance;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 
@@ -19,7 +20,7 @@ public class PocketMusicSoundInstance extends AbstractTickableSoundInstance {
     public static PocketMusicSoundInstance instance;
 
     public PocketMusicSoundInstance(SoundEvent soundEvent, Player playerEntity, ItemStack stack, boolean repeat, float volume) {
-        super(soundEvent, SoundSource.RECORDS);
+        super(soundEvent, SoundSource.RECORDS, RandomSource.create());
         this.playerEntity = playerEntity;
         this.stack = stack;
         this.looping = repeat;

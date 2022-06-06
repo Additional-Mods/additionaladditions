@@ -1,6 +1,6 @@
 package dqu.additionaladditions;
 
-import dev.lambdaurora.lambdynlights.api.DynamicLightHandlers;
+//import dev.lambdaurora.lambdynlights.api.DynamicLightHandlers;
 import dqu.additionaladditions.behaviour.BehaviourManager;
 import dqu.additionaladditions.config.Config;
 import dqu.additionaladditions.registry.*;
@@ -32,9 +32,9 @@ public class AdditionalAdditions implements ModInitializer {
         AdditionalPotions.registerAll();
         AdditionalMusicDiscs.registerAll();
 
-        // LambDynamicLights integration
-        if (FabricLoader.getInstance().isModLoaded("lambdynlights")) {
-            DynamicLightHandlers.registerDynamicLightHandler(AdditionalEntities.GLOW_STICK_ENTITY_ENTITY_TYPE, entity -> 12);
-        }
+        // TODO: LambDynamicLights integration
+//        if (FabricLoader.getInstance().isModLoaded("lambdynlights")) {
+//            DynamicLightHandlers.registerDynamicLightHandler(AdditionalEntities.GLOW_STICK_ENTITY_ENTITY_TYPE, entity -> 12);
+//        }
     }
 }

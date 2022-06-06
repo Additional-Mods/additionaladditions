@@ -24,17 +24,14 @@
     ],
     "main": [
       "dqu.additionaladditions.AdditionalAdditions"
-    ],
-    "modmenu": [
-      "dqu.additionaladditions.config.ModMenuImpl"
     ]
   },
   "mixins": [
     "AdditionalAdditions.mixins.json"
   ],
   "depends": {
-    "fabricloader": ">=0.12.5",
-    "minecraft": "=1.18.2",
+    "fabricloader": ">=0.14.4",
+    "minecraft": ">=1.19-alpha",
     "fabric": "*",
     "java": ">=17"
   },

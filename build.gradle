@@ -1,5 +1,6 @@
 plugins {
 	id 'fabric-loom' version '0.11-SNAPSHOT'
+	id 'io.github.juuxel.loom-quiltflower' version '1.7.1'
 	id 'maven-publish'
 }
 
@@ -36,11 +37,11 @@ dependencies {
 	// ModMenu API
 	modImplementation "com.terraformersmc:modmenu:${project.modmenu_version}"
 
-	// LibGui
-	modImplementation include("io.github.cottonmc:LibGui:${project.libgui_version}")
+	// LibGui TODO: LibGui Integration Also Broken! No in-game config :<
+//	modImplementation include("io.github.cottonmc:LibGui:${project.libgui_version}")
 
-	// LambDynamicLights
-	modImplementation "dev.lambdaurora:lambdynamiclights:${project.lambdynamiclights_version}"
+	// LambDynamicLights TODO: LambDynamicLights not yet compatible with 1.19
+//	modImplementation "dev.lambdaurora:lambdynamiclights:${project.lambdynamiclights_version}"
 
 	// PSA: Some older mods, compiled on Loom 0.2.1, might have outdated Maven POMs.
 	// You may need to force-disable transitiveness on them.
