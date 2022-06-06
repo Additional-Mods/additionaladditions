@@ -28,6 +28,7 @@ public class AdditionalBlocks {
     public static final PatinaBlock PATINA_BLOCK = new PatinaBlock(FabricBlockSettings.of(Material.SAND).sound(SoundType.ROOTED_DIRT).strength(0.5f));
 
     public static PoiType AMETHYST_LAMP_POI;
+    public static ResourceLocation AMETHYST_LAMP_POI_RL = new ResourceLocation(AdditionalAdditions.namespace, "amethyst_lamp_poi");
 
     public static void registerAll() {
         Registry.register(Registry.BLOCK, new ResourceLocation(AdditionalAdditions.namespace, "glow_stick"), GLOW_STICK_BLOCK);
@@ -45,7 +46,7 @@ public class AdditionalBlocks {
                 new BlockItem(PATINA_BLOCK, new FabricItemSettings().tab(CreativeModeTab.TAB_BUILDING_BLOCKS)));
 
         AMETHYST_LAMP_POI = PointOfInterestHelper.register(
-            new ResourceLocation(AdditionalAdditions.namespace, "amethyst_lamp_poi"),
+            AMETHYST_LAMP_POI_RL,
             0, 8,
             ImmutableSet.copyOf(
                     AdditionalBlocks.AMETHYST_LAMP.getStateDefinition().getPossibleStates().stream().filter(state -> state.getValue(BlockStateProperties.LIT)).toList()

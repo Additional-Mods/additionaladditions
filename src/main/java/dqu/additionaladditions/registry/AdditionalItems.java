@@ -5,7 +5,7 @@ import dqu.additionaladditions.config.Config;
 import dqu.additionaladditions.config.ConfigValues;
 import dqu.additionaladditions.item.*;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
-import net.fabricmc.fabric.api.loot.v1.event.LootTableLoadingCallback;
+import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
 import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockSource;
@@ -81,77 +81,69 @@ public class AdditionalItems {
     }
 
     private static void registerLootTables() {
-        LootTableLoadingCallback.EVENT.register(((resourceManager, lootManager, id, table, setter) -> {
+        LootTableEvents.MODIFY.register(((resourceManager, lootManager, id, table, setter) -> {
             if (ELDER_GUARDIAN_LOOT_TABLE_ID.equals(id) && Config.getBool(ConfigValues.TRIDENT_SHARD)) {
-                LootPool poolBuilder = LootPool.lootPool()
+                LootPool.Builder poolBuilder = LootPool.lootPool()
                         .setRolls(ConstantValue.exactly(1f))
                         .add(LootItem.lootTableItem(TRIDENT_SHARD))
-                        .when(LootItemRandomChanceCondition.randomChance(0.33f))
-                        .build();
+                        .when(LootItemRandomChanceCondition.randomChance(0.33f));
                 table.withPool(poolBuilder);
             }
             if (DUNGEON_CHEST_LOOT_TABLE_ID.equals(id) || MINESHAFT_CHEST_LOOT_TABLE_ID.equals(id) || STRONGHOLD_CHEST_LOOT_TABLE_ID.equals(id)) {
                 if (Config.getBool(ConfigValues.GLOW_STICK)) {
-                    LootPool poolBuilder = LootPool.lootPool()
+                    LootPool.Builder poolBuilder = LootPool.lootPool()
                             .setRolls(UniformGenerator.between(0, 4))
                             .apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 4)))
-                            .add(LootItem.lootTableItem(GLOW_STICK_ITEM))
-                            .build();
+                            .add(LootItem.lootTableItem(GLOW_STICK_ITEM));
                     table.withPool(poolBuilder);
                 }
                 if (Config.getBool(ConfigValues.ROPES)) {
-                    LootPool poolBuilder = LootPool.lootPool()
+                    LootPool.Builder poolBuilder = LootPool.lootPool()
                             .setRolls(UniformGenerator.between(1, 4))
                             .apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 8)))
-                            .add(LootItem.lootTableItem(AdditionalBlocks.ROPE_BLOCK.asItem()))
-                            .build();
+                            .add(LootItem.lootTableItem(AdditionalBlocks.ROPE_BLOCK.asItem()));
                     table.withPool(poolBuilder);
                 }
                 if (Config.getBool(ConfigValues.DEPTH_METER)) {
-                    LootPool poolBuilder = LootPool.lootPool()
+                    LootPool.Builder poolBuilder = LootPool.lootPool()
                             .setRolls(ConstantValue.exactly(1))
                             .when(LootItemRandomChanceCondition.randomChance(0.1f))
-                            .add(LootItem.lootTableItem(DEPTH_METER_ITEM))
-                            .build();
+                            .add(LootItem.lootTableItem(DEPTH_METER_ITEM));
                     table.withPool(poolBuilder);
                 }
             }
             if (DUNGEON_CHEST_LOOT_TABLE_ID.equals(id) || MANSION_CHEST_LOOT_TABLE_ID.equals(id)) {
                 if (Config.getBool(ConfigValues.MUSIC_DISCS)) {
-                    LootPool poolBuilder = LootPool.lootPool()
+                    LootPool.Builder poolBuilder = LootPool.lootPool()
                             .setRolls(ConstantValue.exactly(1))
                             .when(LootItemRandomChanceCondition.randomChance(0.25f))
                             .add(LootItem.lootTableItem(AdditionalMusicDiscs.MUSIC_DISC_0308))
                             .add(LootItem.lootTableItem(AdditionalMusicDiscs.MUSIC_DISC_1007))
-                            .add(LootItem.lootTableItem(AdditionalMusicDiscs.MUSIC_DISC_1507))
-                            .build();
+                            .add(LootItem.lootTableItem(AdditionalMusicDiscs.MUSIC_DISC_1507));
                     table.withPool(poolBuilder);
                 }
             }
             if (SHIPWRECK_SUPPLY_CHEST_LOOT_TABLE_ID.equals(id) && Config.getBool(ConfigValues.SHIPWRECK_SPYGLASS_LOOT)) {
-                LootPool poolBuilder = LootPool.lootPool()
+                LootPool.Builder poolBuilder = LootPool.lootPool()
                         .setRolls(ConstantValue.exactly(1))
                         .when(LootItemRandomChanceCondition.randomChance(0.5f))
-                        .add(LootItem.lootTableItem(Items.SPYGLASS))
-                        .build();
+                        .add(LootItem.lootTableItem(Items.SPYGLASS));
                 table.withPool(poolBuilder);
             }
             if (ZOMBIE_LOOT_TABLE_ID.equals(id) || CREEPER_LOOT_TABLE_ID.equals(id)) {
                 if (Config.getBool(ConfigValues.CHICKEN_NUGGET)) {
-                    LootPool poolBuilder = LootPool.lootPool()
+                    LootPool.Builder poolBuilder = LootPool.lootPool()
                             .setRolls(ConstantValue.exactly(1))
                             .when(LootItemRandomChanceCondition.randomChance(0.025f))
-                            .add(LootItem.lootTableItem(CHICKEN_NUGGET))
-                            .build();
+                            .add(LootItem.lootTableItem(CHICKEN_NUGGET));
                     table.withPool(poolBuilder);
                 }
             }
             if (PIGLIN_BARTERING_LOOT_TABLE_ID.equals(id) && Config.getBool(ConfigValues.GOLD_RING)) {
-                LootPool poolBuilder = LootPool.lootPool()
+                LootPool.Builder poolBuilder = LootPool.lootPool()
                             .setRolls(ConstantValue.exactly(1))
                             .when(LootItemRandomChanceCondition.randomChance(0.015f))
-                            .add(LootItem.lootTableItem(GOLD_RING))
-                            .build();
+                            .add(LootItem.lootTableItem(GOLD_RING));
                     table.withPool(poolBuilder);
             }
         }));

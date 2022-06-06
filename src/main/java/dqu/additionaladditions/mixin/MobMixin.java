@@ -31,10 +31,10 @@ public abstract class MobMixin extends LivingEntity {
 
         PoiManager poiManager = ((ServerLevel)level).getPoiManager();
         long count = poiManager.getCountInRange(
-                (poiType) -> poiType == AdditionalBlocks.AMETHYST_LAMP_POI,
-                blockPosition(),
-                8,
-                PoiManager.Occupancy.ANY
+                (poiType) -> {
+                    return poiType.is(AdditionalBlocks.AMETHYST_LAMP_POI_RL);
+                },
+                blockPosition(), 8, PoiManager.Occupancy.ANY
         );
 
         Float chance = Config.get(ConfigValues.AMETHYST_LAMP, "despawnChance");
