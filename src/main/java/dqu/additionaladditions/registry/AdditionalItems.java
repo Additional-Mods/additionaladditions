@@ -22,7 +22,9 @@ import net.minecraft.world.level.storage.loot.BuiltInLootTables;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
+import net.minecraft.world.level.storage.loot.predicates.LootItemKilledByPlayerCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceCondition;
+import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceWithLootingCondition;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 
@@ -81,6 +83,8 @@ public class AdditionalItems {
     }
 
     private static void registerLootTables() {
+        //TODO: This method is a mess. I'm sorry.
+
         LootTableEvents.MODIFY.register(((resourceManager, lootManager, id, table, setter) -> {
             if (ELDER_GUARDIAN_LOOT_TABLE_ID.equals(id) && Config.getBool(ConfigValues.TRIDENT_SHARD)) {
                 LootPool.Builder poolBuilder = LootPool.lootPool()
@@ -134,7 +138,8 @@ public class AdditionalItems {
                 if (Config.getBool(ConfigValues.CHICKEN_NUGGET)) {
                     LootPool.Builder poolBuilder = LootPool.lootPool()
                             .setRolls(ConstantValue.exactly(1))
-                            .when(LootItemRandomChanceCondition.randomChance(0.0125f))
+                            .when(LootItemKilledByPlayerCondition.killedByPlayer())
+                            .when(LootItemRandomChanceWithLootingCondition.randomChanceAndLootingBoost(0.025f, 0.01f))
                             .add(LootItem.lootTableItem(CHICKEN_NUGGET));
                     table.withPool(poolBuilder);
                 }
