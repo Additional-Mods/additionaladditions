@@ -25,7 +25,7 @@ public class Config {
     private static final String PATH = FabricLoader.getInstance().getConfigDir().resolve("additional-additions-config.json").toString();
     private static final File DBFILE = new File(PATH);
     public static boolean initialized = false;
-    private static JsonObject db = new JsonObject();
+    private static JsonObject db;
 
     private static String format(String message) {
         return String.format("[%s] %s", AdditionalAdditions.namespace, message);
@@ -52,28 +52,37 @@ public class Config {
 
     public static void load() {
         if (!DBFILE.exists()) {
-            db.addProperty("version", VERSION);
-            for (ConfigValues value : ConfigValues.values()) {
-                addPropertyTo(db, value.getProperty());
-            }
-
-            save();
+            createConfig();
         }
 
         try {
             BufferedReader bufferedReader = Files.newReader(DBFILE, StandardCharsets.UTF_8);
             db = GSON.fromJson(bufferedReader, JsonObject.class);
         } catch (Exception e) {
-            AdditionalAdditions.LOGGER.error(e.getMessage());
-            AdditionalAdditions.LOGGER.error(format("Unable to load configuration file!"));
+            AdditionalAdditions.LOGGER.error(format("Unable to load configuration file!"), e);
         }
 
-        if (db.get("version").getAsInt() != VERSION) {
-            convert(db.get("version").getAsInt());
+        try {
+            if (db.get("version").getAsInt() != VERSION) {
+                convert(db.get("version").getAsInt());
+            }
+        } catch (Exception e) {
+            AdditionalAdditions.LOGGER.error(format("Configuration file is damaged!"), e);
+            createConfig(); // try to overwrite the damaged config
         }
+
         repair();
 
         initialized = true;
+    }
+
+    private static void createConfig() {
+        db = new JsonObject();
+        db.addProperty("version", VERSION);
+        for (ConfigValues value : ConfigValues.values()) {
+            addPropertyTo(db, value.getProperty());
+        }
+        save();
     }
 
     private static void save() {
@@ -83,8 +92,7 @@ public class Config {
             bufferedWriter.write(json);
             bufferedWriter.close();
         } catch (Exception e) {
-            AdditionalAdditions.LOGGER.error(e.getMessage());
-            AdditionalAdditions.LOGGER.error(format("Unable to save configuration file!"));
+            AdditionalAdditions.LOGGER.error(format("Unable to save configuration file!"), e);
         }
     }
 
