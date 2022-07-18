@@ -27,19 +27,26 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraft.world.ticks.ScheduledTick;
-import java.util.Random;
 
 /** @noinspection deprecation*/
 public class RopeBlock extends Block {
     public static final VoxelShape shape = Block.box(6, 0, 6,10, 16, 10);
+
     public static final BooleanProperty NORTH = BooleanProperty.create("north");
     public static final BooleanProperty SOUTH = BooleanProperty.create("south");
     public static final BooleanProperty WEST = BooleanProperty.create("west");
     public static final BooleanProperty EAST = BooleanProperty.create("east");
+    public static final BooleanProperty UP = BooleanProperty.create("up");
 
     public RopeBlock(Properties settings) {
         super(settings);
-        registerDefaultState(getStateDefinition().any().setValue(NORTH, false).setValue(SOUTH, false).setValue(EAST, false).setValue(WEST, false));
+        registerDefaultState(getStateDefinition().any()
+                .setValue(NORTH, false)
+                .setValue(SOUTH, false)
+                .setValue(EAST, false)
+                .setValue(WEST, false)
+                .setValue(UP, false)
+        );
     }
 
     @Override
@@ -48,12 +55,15 @@ public class RopeBlock extends Block {
         stateManager.add(EAST);
         stateManager.add(SOUTH);
         stateManager.add(WEST);
+        stateManager.add(UP);
     }
 
     @Override
     public boolean canSurvive(BlockState state, LevelReader world, BlockPos pos) {
         if (!Config.getBool(ConfigValues.ROPES)) return false;
+
         BlockState up = world.getBlockState(pos.relative(Direction.UP));
+
         if(up.is(this) || up.isFaceSturdy(world, pos.relative(Direction.UP), Direction.DOWN)) return true;
 
         BlockState north = world.getBlockState(pos.relative(Direction.NORTH));
@@ -96,35 +106,48 @@ public class RopeBlock extends Block {
         return false;
     }
 
+    /*
+     * If there is a rope above, don't connect to the side blocks
+     * If there is no rope above, but it were earlier, break
+     * If there is no rope above, and it wasn't here earlier, try connecting to nearby solid blocks
+     * And if none of the nearby blocks are solid, break
+     */
     @Override
     public void tick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random) {
-        BlockPos npos = pos.relative(Direction.NORTH);
-        BlockPos epos = pos.relative(Direction.EAST);
-        BlockPos spos = pos.relative(Direction.SOUTH);
-        BlockPos wpos = pos.relative(Direction.WEST);
-
-        BlockState north = world.getBlockState(npos);
-        BlockState east = world.getBlockState(epos);
-        BlockState south = world.getBlockState(spos);
-        BlockState west = world.getBlockState(wpos);
+        BlockPos up = pos.relative(Direction.UP);
+        BlockState bup = world.getBlockState(up);
 
         boolean n = false;
         boolean e = false;
         boolean s = false;
         boolean w = false;
+        boolean u = state.getValue(UP); // We need the old up value too
 
-        if (north.isFaceSturdy(world, npos, Direction.SOUTH)) n = true;
-        if (east.isFaceSturdy(world, epos, Direction.WEST)) e = true;
-        if (south.isFaceSturdy(world, spos, Direction.NORTH)) s = true;
-        if (west.isFaceSturdy(world, wpos, Direction.EAST)) w = true;
+        if (bup.is(this)) {
+            u = true;
+        } else if (u) {
+            u = false;
+        } else {
+            BlockPos npos = pos.relative(Direction.NORTH);
+            BlockPos epos = pos.relative(Direction.EAST);
+            BlockPos spos = pos.relative(Direction.SOUTH);
+            BlockPos wpos = pos.relative(Direction.WEST);
 
-        world.setBlockAndUpdate(pos, state.setValue(NORTH, n).setValue(EAST, e).setValue(SOUTH, s).setValue(WEST, w));
+            BlockState north = world.getBlockState(npos);
+            BlockState east = world.getBlockState(epos);
+            BlockState south = world.getBlockState(spos);
+            BlockState west = world.getBlockState(wpos);
 
-        BlockPos up = pos.relative(Direction.UP);
-        BlockState bup = world.getBlockState(up);
+            if (north.isFaceSturdy(world, npos, Direction.SOUTH)) n = true;
+            if (east.isFaceSturdy(world, epos, Direction.WEST)) e = true;
+            if (south.isFaceSturdy(world, spos, Direction.NORTH)) s = true;
+            if (west.isFaceSturdy(world, wpos, Direction.EAST)) w = true;
+        }
 
-        if (!world.getBlockState(up).is(this) && (!n && !e && !s && !w) && !bup.isFaceSturdy(world, up, Direction.DOWN)) {
+        if (!bup.is(this) && (!n && !e && !s && !w) && !bup.isFaceSturdy(world, up, Direction.DOWN) && !u) {
             world.destroyBlock(pos, true);
+        } else {
+            world.setBlockAndUpdate(pos, state.setValue(NORTH, n).setValue(EAST, e).setValue(SOUTH, s).setValue(WEST, w).setValue(UP, u));
         }
     }
 
@@ -138,10 +161,17 @@ public class RopeBlock extends Block {
 
     @Override
     public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-        if (!state.is(this)) return InteractionResult.PASS;
-        if (!player.getMainHandItem().is(Item.byBlock(AdditionalBlocks.ROPE_BLOCK))) return InteractionResult.PASS;
+        if (!state.is(this)) {
+            return InteractionResult.PASS;
+        }
+
+        if (!player.getMainHandItem().is(Item.byBlock(AdditionalBlocks.ROPE_BLOCK))) {
+            return InteractionResult.PASS;
+        }
+
         BlockPos down = pos.relative(Direction.DOWN);
         BlockState statedown = world.getBlockState(down);
+
         if (statedown.is(AdditionalBlocks.ROPE_BLOCK)) {
             return statedown.getBlock().use(statedown, world, down, player, hand, hit);
         } else if (statedown.isAir() && !world.isOutsideBuildHeight(down.getY())) {
@@ -150,6 +180,7 @@ public class RopeBlock extends Block {
             if (!player.isCreative()) player.getMainHandItem().shrink(1);
             return InteractionResult.SUCCESS;
         }
+
         return InteractionResult.PASS;
     }
 
