@@ -29,7 +29,7 @@ public class RecipeManagerMixin {
                     case "wrench" -> { if (!Config.getBool(ConfigValues.WRENCH)) toRemove.add(identifier); }
                     case "crossbow_with_spyglass" -> { if (!Config.getBool(ConfigValues.CROSSBOWS)) toRemove.add(identifier); }
                     case "glow_stick" -> { if (!Config.getBool(ConfigValues.GLOW_STICK)) toRemove.add(identifier); }
-                    case "depth_meter" -> { if (!Config.getBool(ConfigValues.DEPTH_METER)) toRemove.add(identifier); }
+                    case "depth_meter" -> { if (!Config.getBool(ConfigValues.DEPTH_METER, "enabled")) toRemove.add(identifier); }
                     case "mysterious_bundle" -> { if (!Config.getBool(ConfigValues.MYSTERIOUS_BUNDLE)) toRemove.add(identifier); }
                     case "trident" -> { if (!Config.getBool(ConfigValues.TRIDENT_SHARD)) toRemove.add(identifier); }
                     case "rope" -> { if (!Config.getBool(ConfigValues.ROPES)) toRemove.add(identifier); }
