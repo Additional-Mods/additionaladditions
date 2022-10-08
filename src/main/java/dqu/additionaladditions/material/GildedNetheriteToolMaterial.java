@@ -9,12 +9,12 @@ public class GildedNetheriteToolMaterial implements Tier {
 
     @Override
     public int getUses() {
-        return 2000;
+        return 2031;
     }
 
     @Override
     public float getSpeed() {
-        return 9.0F;
+        return 10.0F;
     }
 
     @Override
@@ -29,7 +29,7 @@ public class GildedNetheriteToolMaterial implements Tier {
 
     @Override
     public int getEnchantmentValue() {
-        return 24;
+        return 20;
     }
 
     @Override
