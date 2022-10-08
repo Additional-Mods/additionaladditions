@@ -1,6 +1,6 @@
 {
   "type": "minecraft:smithing",
-  "base": {"item": "minecraft:golden_leggings"},
-  "addition": {"item": "minecraft:copper_ingot"},
+  "base": {"item": "minecraft:iron_leggings"},
+  "addition": {"item": "additionaladditions:rose_gold_alloy"},
   "result": {"item": "additionaladditions:rose_gold_leggings"}
 }

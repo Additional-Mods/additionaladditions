@@ -1,6 +1,6 @@
 {
   "type": "minecraft:smithing",
-  "base": {"item": "minecraft:golden_sword"},
-  "addition": {"item": "minecraft:copper_ingot"},
+  "base": {"item": "minecraft:iron_sword"},
+  "addition": {"item": "additionaladditions:rose_gold_alloy"},
   "result": {"item": "additionaladditions:rose_gold_sword"}
 }

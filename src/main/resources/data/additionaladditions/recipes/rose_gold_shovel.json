@@ -1,6 +1,6 @@
 {
   "type": "minecraft:smithing",
-  "base": {"item": "minecraft:golden_shovel"},
-  "addition": {"item": "minecraft:copper_ingot"},
+  "base": {"item": "minecraft:iron_shovel"},
+  "addition": {"item": "additionaladditions:rose_gold_alloy"},
   "result": {"item": "additionaladditions:rose_gold_shovel"}
 }

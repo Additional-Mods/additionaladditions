@@ -1,6 +1,6 @@
 {
   "type": "minecraft:smithing",
-  "base": {"item": "minecraft:golden_hoe"},
-  "addition": {"item": "minecraft:copper_ingot"},
+  "base": {"item": "minecraft:iron_hoe"},
+  "addition": {"item": "additionaladditions:rose_gold_alloy"},
   "result": {"item": "additionaladditions:rose_gold_hoe"}
 }

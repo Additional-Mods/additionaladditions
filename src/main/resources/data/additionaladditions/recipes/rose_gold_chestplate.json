@@ -1,6 +1,6 @@
 {
   "type": "minecraft:smithing",
-  "base": {"item": "minecraft:golden_chestplate"},
-  "addition": {"item": "minecraft:copper_ingot"},
+  "base": {"item": "minecraft:iron_chestplate"},
+  "addition": {"item": "additionaladditions:rose_gold_alloy"},
   "result": {"item": "additionaladditions:rose_gold_chestplate"}
 }

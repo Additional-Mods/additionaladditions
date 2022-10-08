@@ -62,6 +62,7 @@ public class AdditionalItems {
     public static final MysteriousBundleItem MYSTERIOUS_BUNDLE_ITEM = new MysteriousBundleItem(new FabricItemSettings().tab(CreativeModeTab.TAB_MISC).stacksTo(1).rarity(Rarity.RARE));
     public static final Item GOLD_RING = new Item(new FabricItemSettings().tab(CreativeModeTab.TAB_MATERIALS).stacksTo(1));
     public static final PocketJukeboxItem POCKET_JUKEBOX_ITEM = new PocketJukeboxItem(new FabricItemSettings().tab(CreativeModeTab.TAB_MISC).stacksTo(1));
+    public static final Item ROSE_GOLD_ALLOY = new Item(new FabricItemSettings().tab(CreativeModeTab.TAB_MATERIALS));
 
     private static void registerItems() {
         Registry.register(Registry.ITEM, new ResourceLocation(AdditionalAdditions.namespace, "watering_can"), WATERING_CAN);
@@ -73,6 +74,7 @@ public class AdditionalItems {
         Registry.register(Registry.ITEM, new ResourceLocation(AdditionalAdditions.namespace, "mysterious_bundle"), MYSTERIOUS_BUNDLE_ITEM);
         Registry.register(Registry.ITEM, new ResourceLocation(AdditionalAdditions.namespace, "pocket_jukebox"), POCKET_JUKEBOX_ITEM);
         Registry.register(Registry.ITEM, new ResourceLocation(AdditionalAdditions.namespace, "gold_ring"), GOLD_RING);
+        Registry.register(Registry.ITEM, new ResourceLocation(AdditionalAdditions.namespace, "rose_gold_alloy"), ROSE_GOLD_ALLOY);
     }
 
     private static void registerFoods() {
