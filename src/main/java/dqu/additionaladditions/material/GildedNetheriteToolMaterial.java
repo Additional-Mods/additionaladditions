@@ -9,7 +9,7 @@ public class GildedNetheriteToolMaterial implements Tier {
 
     @Override
     public int getUses() {
-        return 2031;
+        return 2234;
     }
 
     @Override
@@ -19,7 +19,7 @@ public class GildedNetheriteToolMaterial implements Tier {
 
     @Override
     public float getAttackDamageBonus() {
-        return 2.0F;
+        return 2.5F;
     }
 
     @Override

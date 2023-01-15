@@ -14,7 +14,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 import java.util.Locale;
 
 public class GildedNetheriteArmorMaterial implements ArmorMaterial {
-    private static final int[] BASE_DURABILITY = {481, 555, 592, 407};
+    private static final int[] BASE_DURABILITY = {529, 610, 651, 447};
     private static final int[] PROTECTION_VALUES = {3, 6, 8, 3};
     public static final String NAME = "gilded_netherite";
 
@@ -45,7 +45,7 @@ public class GildedNetheriteArmorMaterial implements ArmorMaterial {
 
     @Override
     public float getToughness() {
-        return 2.5F;
+        return 3.5F;
     }
 
     @Override
