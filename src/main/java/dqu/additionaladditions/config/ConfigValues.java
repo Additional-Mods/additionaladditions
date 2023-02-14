@@ -44,8 +44,7 @@ public enum ConfigValues {
             .put(new ConfigProperty("enabled"))
             .put(new ConfigProperty("duration", new IntegerConfigValue(5)))
     )),
-    HASTE_POTIONS(6, new ConfigProperty("HastePotions")),
-    BUNDLE_RECIPE(6, new ConfigProperty("BundleRecipe"));
+    HASTE_POTIONS(6, new ConfigProperty("HastePotions"));
 
     private final int version;
     private final ConfigProperty configProperty;
