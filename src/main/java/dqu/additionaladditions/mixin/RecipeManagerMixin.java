@@ -47,11 +47,11 @@ public class RecipeManagerMixin {
                             if (!Config.getBool(ConfigValues.FOOD, "FriedEgg")) toRemove.add(identifier);
                         }
                         if (identifier.getPath().startsWith("gilded_netherite")) {
-                            if (!Config.getBool(ConfigValues.GILDED_NETHERITE)) toRemove.add(identifier);
+                            if (!Config.getBool(ConfigValues.GILDED_NETHERITE, "enabled")) toRemove.add(identifier);
                             if (Config.getBool(ConfigValues.GOLD_RING)) toRemove.add(identifier);
                         }
                         if (identifier.getPath().startsWith("ring_gilded_netherite")) {
-                            if (!Config.getBool(ConfigValues.GILDED_NETHERITE)) toRemove.add(identifier);
+                            if (!Config.getBool(ConfigValues.GILDED_NETHERITE, "enabled")) toRemove.add(identifier);
                             if (!Config.getBool(ConfigValues.GOLD_RING)) toRemove.add(identifier);
                         }
                     }

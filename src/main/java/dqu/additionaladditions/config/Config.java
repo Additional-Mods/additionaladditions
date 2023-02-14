@@ -20,7 +20,7 @@ import java.util.Map;
 
 @SuppressWarnings("unchecked")
 public class Config {
-    public static final int VERSION = 7;
+    public static final int VERSION = 8;
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
     private static final String PATH = FabricLoader.getInstance().getConfigDir().resolve("additional-additions-config.json").toString();
     private static final File DBFILE = new File(PATH);
