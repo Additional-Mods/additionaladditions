@@ -6,6 +6,7 @@ import dqu.additionaladditions.behaviour.BehaviourValues;
 import dqu.additionaladditions.material.GildedNetheriteArmorMaterial;
 import dqu.additionaladditions.material.RoseGoldArmorMaterial;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import org.spongepowered.asm.mixin.Mixin;
@@ -17,7 +18,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class ItemMixin {
     @Inject(method = "getMaxDamage", at = @At("RETURN"), cancellable = true)
     private void modifyItemDurability(CallbackInfoReturnable<Integer> cir) {
-        ResourceLocation resourceLocation = Registry.ITEM.getKey((Item) (Object) this);
+        ResourceLocation resourceLocation = BuiltInRegistries.ITEM.getKey((Item) (Object) this);
         if (resourceLocation.getNamespace().equals(AdditionalAdditions.namespace)) {
             String path = resourceLocation.getPath();
             if (path.startsWith(GildedNetheriteArmorMaterial.NAME)) {

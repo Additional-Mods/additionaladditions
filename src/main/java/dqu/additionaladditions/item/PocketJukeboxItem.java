@@ -3,6 +3,7 @@ package dqu.additionaladditions.item;
 import dqu.additionaladditions.config.Config;
 import dqu.additionaladditions.config.ConfigValues;
 import dqu.additionaladditions.misc.PocketMusicSoundInstance;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.contents.TranslatableContents;
 import org.jetbrains.annotations.Nullable;
@@ -67,8 +68,8 @@ public class PocketJukeboxItem extends Item {
         if (nbtGetDisc(stack) == null) {
             ItemStack cursor = cursorStackReference.get();
             if (cursor.getItem() instanceof RecordItem) {
-                ResourceLocation id = Registry.ITEM.getKey(cursor.getItem());
-                RecordItem discItem = (RecordItem) Registry.ITEM.get(id);
+                ResourceLocation id = BuiltInRegistries.ITEM.getKey(cursor.getItem());
+                RecordItem discItem = (RecordItem) BuiltInRegistries.ITEM.get(id);
                 nbtPutDisc(stack, id.toString());
                 cursorStackReference.set(ItemStack.EMPTY);
 
@@ -88,7 +89,7 @@ public class PocketJukeboxItem extends Item {
             if (!cursor.isEmpty()) return false;
 
             String disc = nbtGetDisc(stack);
-            RecordItem discItem = (RecordItem) Registry.ITEM.get(new ResourceLocation(disc));
+            RecordItem discItem = (RecordItem) BuiltInRegistries.ITEM.get(new ResourceLocation(disc));
             ItemStack discStack = new ItemStack(discItem, 1);
             cursorStackReference.set(discStack);
 
@@ -110,7 +111,7 @@ public class PocketJukeboxItem extends Item {
         if (disc == null) {
             tooltip.add(MutableComponent.create(new TranslatableContents("additionaladditions.gui.pocket_jukebox.tooltip")).setStyle(Style.EMPTY.withColor(ChatFormatting.GRAY)));
         } else {
-            Item discItem = Registry.ITEM.get(new ResourceLocation(disc));
+            Item discItem = BuiltInRegistries.ITEM.get(new ResourceLocation(disc));
             String description = discItem.getDescriptionId() + ".desc";
             tooltip.add(MutableComponent.create(new TranslatableContents(description)));
         }

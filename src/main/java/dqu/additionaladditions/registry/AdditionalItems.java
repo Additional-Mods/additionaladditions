@@ -5,16 +5,19 @@ import dqu.additionaladditions.config.Config;
 import dqu.additionaladditions.config.ConfigValues;
 import dqu.additionaladditions.item.*;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
+import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
 import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockSource;
 import net.minecraft.core.Registry;
 import net.minecraft.core.dispenser.DefaultDispenseItemBehavior;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.*;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.DispenserBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -40,48 +43,48 @@ public class AdditionalItems {
     private static final ResourceLocation SHIPWRECK_SUPPLY_CHEST_LOOT_TABLE_ID = BuiltInLootTables.SHIPWRECK_SUPPLY;
 
     // saturation = hunger * saturationModifier
-    public static final Item FRIED_EGG = new Item(new FabricItemSettings().tab(CreativeModeTab.TAB_FOOD)
+    public static final Item FRIED_EGG = new Item(new FabricItemSettings()
             .food(new FoodProperties.Builder().nutrition(6).saturationMod(0.8666f).build())
     );
-    public static final Item BERRY_PIE = new Item(new FabricItemSettings().tab(CreativeModeTab.TAB_FOOD)
+    public static final Item BERRY_PIE = new Item(new FabricItemSettings()
             .food(new FoodProperties.Builder().nutrition(8).saturationMod(0.6f).build())
     );
-    public static final Item HONEYED_APPLE = new Item(new FabricItemSettings().tab(CreativeModeTab.TAB_FOOD)
+    public static final Item HONEYED_APPLE = new Item(new FabricItemSettings()
             .food(new FoodProperties.Builder().nutrition(8).saturationMod(1.6f).build())
     );
-    public static final Item CHICKEN_NUGGET = new Item(new FabricItemSettings().tab(CreativeModeTab.TAB_FOOD)
+    public static final Item CHICKEN_NUGGET = new Item(new FabricItemSettings()
             .food(new FoodProperties.Builder().nutrition(6).saturationMod(0.9f).meat().build())
     );
 
-    public static final WateringCanItem WATERING_CAN = new WateringCanItem(new FabricItemSettings().tab(CreativeModeTab.TAB_TOOLS).stacksTo(1).durability(101));
-    public static final WrenchItem WRENCH_ITEM = new WrenchItem(new FabricItemSettings().tab(CreativeModeTab.TAB_TOOLS).stacksTo(1).durability(256));
-    public static final CrossbowItem CROSSBOW_WITH_SPYGLASS = new CrossbowItem(new FabricItemSettings().tab(CreativeModeTab.TAB_COMBAT).stacksTo(1).durability(350));
-    public static final Item TRIDENT_SHARD = new Item(new FabricItemSettings().tab(CreativeModeTab.TAB_MATERIALS));
-    public static final GlowStickItem GLOW_STICK_ITEM = new GlowStickItem(new FabricItemSettings().tab(CreativeModeTab.TAB_MISC));
-    public static final DepthMeterItem DEPTH_METER_ITEM = new DepthMeterItem(new FabricItemSettings().tab(CreativeModeTab.TAB_TOOLS));
-    public static final MysteriousBundleItem MYSTERIOUS_BUNDLE_ITEM = new MysteriousBundleItem(new FabricItemSettings().tab(CreativeModeTab.TAB_MISC).stacksTo(1).rarity(Rarity.RARE));
-    public static final Item GOLD_RING = new Item(new FabricItemSettings().tab(CreativeModeTab.TAB_MATERIALS).stacksTo(1));
-    public static final PocketJukeboxItem POCKET_JUKEBOX_ITEM = new PocketJukeboxItem(new FabricItemSettings().tab(CreativeModeTab.TAB_MISC).stacksTo(1));
-    public static final Item ROSE_GOLD_ALLOY = new Item(new FabricItemSettings().tab(CreativeModeTab.TAB_MATERIALS));
+    public static final WateringCanItem WATERING_CAN = new WateringCanItem(new FabricItemSettings().stacksTo(1).durability(101));
+    public static final WrenchItem WRENCH_ITEM = new WrenchItem(new FabricItemSettings().stacksTo(1).durability(256));
+    public static final CrossbowItem CROSSBOW_WITH_SPYGLASS = new CrossbowItem(new FabricItemSettings().stacksTo(1).durability(350));
+    public static final Item TRIDENT_SHARD = new Item(new FabricItemSettings());
+    public static final GlowStickItem GLOW_STICK_ITEM = new GlowStickItem(new FabricItemSettings());
+    public static final DepthMeterItem DEPTH_METER_ITEM = new DepthMeterItem(new FabricItemSettings());
+    public static final MysteriousBundleItem MYSTERIOUS_BUNDLE_ITEM = new MysteriousBundleItem(new FabricItemSettings().stacksTo(1).rarity(Rarity.RARE));
+    public static final Item GOLD_RING = new Item(new FabricItemSettings().stacksTo(1));
+    public static final PocketJukeboxItem POCKET_JUKEBOX_ITEM = new PocketJukeboxItem(new FabricItemSettings().stacksTo(1));
+    public static final Item ROSE_GOLD_ALLOY = new Item(new FabricItemSettings());
 
     private static void registerItems() {
-        Registry.register(Registry.ITEM, new ResourceLocation(AdditionalAdditions.namespace, "watering_can"), WATERING_CAN);
-        Registry.register(Registry.ITEM, new ResourceLocation(AdditionalAdditions.namespace, "wrench"), WRENCH_ITEM);
-        Registry.register(Registry.ITEM, new ResourceLocation(AdditionalAdditions.namespace, "crossbow_with_spyglass"), CROSSBOW_WITH_SPYGLASS);
-        Registry.register(Registry.ITEM, new ResourceLocation(AdditionalAdditions.namespace, "trident_shard"), TRIDENT_SHARD);
-        Registry.register(Registry.ITEM, new ResourceLocation(AdditionalAdditions.namespace, "glow_stick"), GLOW_STICK_ITEM);
-        Registry.register(Registry.ITEM, new ResourceLocation(AdditionalAdditions.namespace, "depth_meter"), DEPTH_METER_ITEM);
-        Registry.register(Registry.ITEM, new ResourceLocation(AdditionalAdditions.namespace, "mysterious_bundle"), MYSTERIOUS_BUNDLE_ITEM);
-        Registry.register(Registry.ITEM, new ResourceLocation(AdditionalAdditions.namespace, "pocket_jukebox"), POCKET_JUKEBOX_ITEM);
-        Registry.register(Registry.ITEM, new ResourceLocation(AdditionalAdditions.namespace, "gold_ring"), GOLD_RING);
-        Registry.register(Registry.ITEM, new ResourceLocation(AdditionalAdditions.namespace, "rose_gold_alloy"), ROSE_GOLD_ALLOY);
+        Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(AdditionalAdditions.namespace, "watering_can"), WATERING_CAN);
+        Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(AdditionalAdditions.namespace, "wrench"), WRENCH_ITEM);
+        Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(AdditionalAdditions.namespace, "crossbow_with_spyglass"), CROSSBOW_WITH_SPYGLASS);
+        Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(AdditionalAdditions.namespace, "trident_shard"), TRIDENT_SHARD);
+        Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(AdditionalAdditions.namespace, "glow_stick"), GLOW_STICK_ITEM);
+        Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(AdditionalAdditions.namespace, "depth_meter"), DEPTH_METER_ITEM);
+        Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(AdditionalAdditions.namespace, "mysterious_bundle"), MYSTERIOUS_BUNDLE_ITEM);
+        Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(AdditionalAdditions.namespace, "pocket_jukebox"), POCKET_JUKEBOX_ITEM);
+        Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(AdditionalAdditions.namespace, "gold_ring"), GOLD_RING);
+        Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(AdditionalAdditions.namespace, "rose_gold_alloy"), ROSE_GOLD_ALLOY);
     }
 
     private static void registerFoods() {
-        Registry.register(Registry.ITEM, new ResourceLocation(AdditionalAdditions.namespace, "berry_pie"), BERRY_PIE);
-        Registry.register(Registry.ITEM, new ResourceLocation(AdditionalAdditions.namespace, "fried_egg"), FRIED_EGG);
-        Registry.register(Registry.ITEM, new ResourceLocation(AdditionalAdditions.namespace, "honeyed_apple"), HONEYED_APPLE);
-        Registry.register(Registry.ITEM, new ResourceLocation(AdditionalAdditions.namespace, "chicken_nugget"), CHICKEN_NUGGET);
+        Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(AdditionalAdditions.namespace, "berry_pie"), BERRY_PIE);
+        Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(AdditionalAdditions.namespace, "fried_egg"), FRIED_EGG);
+        Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(AdditionalAdditions.namespace, "honeyed_apple"), HONEYED_APPLE);
+        Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(AdditionalAdditions.namespace, "chicken_nugget"), CHICKEN_NUGGET);
     }
 
     private static void registerLootTables() {
@@ -175,10 +178,33 @@ public class AdditionalItems {
             CompostingChanceRegistry.INSTANCE.add(Items.ROTTEN_FLESH, 0.33F);
     }
 
+    private static void putToItemGroups() {
+        ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.TOOLS_AND_UTILITIES).register(content -> {
+            content.addAfter(Items.BONE_MEAL, WATERING_CAN, WRENCH_ITEM, GLOW_STICK_ITEM);
+            content.addAfter(Items.CLOCK, DEPTH_METER_ITEM);
+            content.addAfter(Items.ELYTRA, MYSTERIOUS_BUNDLE_ITEM);
+            content.addAfter(Items.SPYGLASS, POCKET_JUKEBOX_ITEM);
+        });
+        ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.INGREDIENTS).register(content -> {
+            content.addBefore(Items.NETHERITE_SCRAP, GOLD_RING, ROSE_GOLD_ALLOY);
+            content.addAfter(Items.PRISMARINE_CRYSTALS, TRIDENT_SHARD);
+        });
+        ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.REDSTONE_BLOCKS).register(content -> {
+            content.addAfter(Blocks.TARGET, WRENCH_ITEM);
+        });
+        ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.FOOD_AND_DRINKS).register(content -> {
+            content.addAfter(Items.COOKED_RABBIT, FRIED_EGG);
+            content.addAfter(Items.PUMPKIN_PIE, BERRY_PIE);
+            content.addAfter(Items.APPLE, HONEYED_APPLE);
+            content.addAfter(Items.ROTTEN_FLESH, CHICKEN_NUGGET);
+        });
+    }
+
     public static void registerAll() {
         registerItems();
         registerFoods();
         registerLootTables();
         registerOther();
+        putToItemGroups();
     }
 }
