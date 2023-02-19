@@ -59,7 +59,7 @@ public abstract class PlayerMixin extends LivingEntity {
         if (duration <= 0.0f) return;
 
         int durationCeil = (int) Math.ceil(duration);
-        this.addEffect(new MobEffectInstance(MobEffects.FIRE_RESISTANCE, (durationCeil*20)+5));
+        this.addEffect(new MobEffectInstance(MobEffects.FIRE_RESISTANCE, (durationCeil*20)+5, 0, false, false));
     }
 }
 
