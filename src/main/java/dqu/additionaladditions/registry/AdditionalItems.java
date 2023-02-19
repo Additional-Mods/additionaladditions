@@ -192,6 +192,9 @@ public class AdditionalItems {
         ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.REDSTONE_BLOCKS).register(content -> {
             content.addAfter(Blocks.TARGET, WRENCH_ITEM);
         });
+        ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.COMBAT).register(content -> {
+            content.addAfter(Items.CROSSBOW, CROSSBOW_WITH_SPYGLASS);
+        });
         ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.FOOD_AND_DRINKS).register(content -> {
             content.addAfter(Items.COOKED_RABBIT, FRIED_EGG);
             content.addAfter(Items.PUMPKIN_PIE, BERRY_PIE);
