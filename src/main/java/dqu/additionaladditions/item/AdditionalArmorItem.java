@@ -19,9 +19,9 @@ public class AdditionalArmorItem extends ArmorItem {
     private Multimap<Attribute, AttributeModifier> modifiers = null;
     private int previousLoads = BehaviourManager.loads;
 
-    public AdditionalArmorItem(ArmorMaterial armorMaterial, EquipmentSlot equipmentSlot, Properties properties) {
-        super(armorMaterial, equipmentSlot, properties);
-        rebuildModifiers(equipmentSlot);
+    public AdditionalArmorItem(ArmorMaterial armorMaterial, Type type, Properties properties) {
+        super(armorMaterial, type, properties);
+        rebuildModifiers(type.getSlot());
     }
 
     private void rebuildModifiers(EquipmentSlot slot) {
@@ -37,40 +37,40 @@ public class AdditionalArmorItem extends ArmorItem {
 
     private void rebuildModifiersIfNeeded() {
         if (modifiers == null) {
-            rebuildModifiers(getSlot());
+            rebuildModifiers(getType().getSlot());
             return;
         }
         if (previousLoads != BehaviourManager.loads) {
             previousLoads = BehaviourManager.loads;
-            rebuildModifiers(getSlot());
+            rebuildModifiers(getType().getSlot());
         }
     }
 
     @Override
     public Multimap<Attribute, AttributeModifier> getDefaultAttributeModifiers(EquipmentSlot equipmentSlot) {
         rebuildModifiersIfNeeded();
-        return (getSlot() == equipmentSlot) ? this.modifiers : super.getDefaultAttributeModifiers(equipmentSlot);
+        return (getType().getSlot() == equipmentSlot) ? this.modifiers : super.getDefaultAttributeModifiers(equipmentSlot);
     }
 
     @Override
     public float getToughness() {
-        if (getSlot().getIndex() > 3 || slot.getIndex() < 0) return super.getToughness();
-        String path = getMaterial().getName() + "/" + slotIndexToName(getSlot().getIndex());
+        if (getType().getSlot().getIndex() > 3 || getType().getSlot().getIndex() < 0) return super.getToughness();
+        String path = getMaterial().getName() + "/" + slotIndexToName(getType().getSlot().getIndex());
         Float toughness = BehaviourManager.INSTANCE.getBehaviourValue(path, BehaviourValues.TOUGHNESS);
         return (toughness == null) ? super.getToughness() : toughness;
     }
 
     @Override
     public int getDefense() {
-        if (getSlot().getIndex() > 3 || slot.getIndex() < 0) return super.getDefense();
-        String path = getMaterial().getName() + "/" + slotIndexToName(getSlot().getIndex());
+        if (getType().getSlot().getIndex() > 3 || getType().getSlot().getIndex() < 0) return super.getDefense();
+        String path = getMaterial().getName() + "/" + slotIndexToName(getType().getSlot().getIndex());
         Integer defense = BehaviourManager.INSTANCE.getBehaviourValue(path, BehaviourValues.DEFENSE);
         return (defense == null) ? super.getDefense() : defense;
     }
 
     public float getKnockbackResistance() {
-        if (getSlot().getIndex() > 3 || slot.getIndex() < 0) return 0;
-        String path = getMaterial().getName() + "/" + slotIndexToName(getSlot().getIndex());
+        if (getType().getSlot().getIndex() > 3 || getType().getSlot().getIndex() < 0) return 0;
+        String path = getMaterial().getName() + "/" + slotIndexToName(getType().getSlot().getIndex());
         Float knockback = BehaviourManager.INSTANCE.getBehaviourValue(path, BehaviourValues.KNOCKBACK_RESISTANCE);
         return (knockback == null) ? super.knockbackResistance : knockback;
     }

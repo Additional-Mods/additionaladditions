@@ -109,11 +109,11 @@ public class PocketJukeboxItem extends Item {
     public void appendHoverText(ItemStack stack, @Nullable Level world, List<Component> tooltip, TooltipFlag context) {
         String disc = nbtGetDisc(stack);
         if (disc == null) {
-            tooltip.add(MutableComponent.create(new TranslatableContents("additionaladditions.gui.pocket_jukebox.tooltip")).setStyle(Style.EMPTY.withColor(ChatFormatting.GRAY)));
+            tooltip.add(MutableComponent.create(new TranslatableContents("additionaladditions.gui.pocket_jukebox.tooltip", null, new String[]{})).setStyle(Style.EMPTY.withColor(ChatFormatting.GRAY)));
         } else {
             Item discItem = BuiltInRegistries.ITEM.get(new ResourceLocation(disc));
             String description = discItem.getDescriptionId() + ".desc";
-            tooltip.add(MutableComponent.create(new TranslatableContents(description)));
+            tooltip.add(MutableComponent.create(new TranslatableContents(description, null, new String[]{})));
         }
     }
 }

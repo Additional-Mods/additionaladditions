@@ -15,7 +15,7 @@ import net.minecraft.network.chat.contents.LiteralContents;
 import net.minecraft.network.chat.contents.TranslatableContents;
 
 public class ConfigGui extends LightweightGuiDescription {
-    private static final Component OPTION_DONE = MutableComponent.create(new TranslatableContents("gui.done"));
+    private static final Component OPTION_DONE = MutableComponent.create(new TranslatableContents("gui.done", null, new String[]{}));
     private static final Component SCREEN_TITLE = MutableComponent.create(new LiteralContents("Additional Additions ")).withStyle(ChatFormatting.BOLD).append(MutableComponent.create(new LiteralContents("options.title")));
 
     public ConfigGui() {

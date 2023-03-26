@@ -24,7 +24,7 @@ public class DepthMeterItem extends Item {
 
         if (!Config.getBool(ConfigValues.DEPTH_METER, "displayElevationAlways")) {
             ItemStack itemStack = user.getItemInHand(hand);
-            user.displayClientMessage(MutableComponent.create(new TranslatableContents("depth_meter.elevation", user.getBlockY())), true);
+            user.displayClientMessage(MutableComponent.create(new TranslatableContents("depth_meter.elevation", null, new String[]{String.valueOf(user.getBlockY())})), true);
             return InteractionResultHolder.sidedSuccess(itemStack, world.isClientSide());
         }
 

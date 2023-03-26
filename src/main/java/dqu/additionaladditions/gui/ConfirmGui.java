@@ -14,8 +14,8 @@ import net.minecraft.network.chat.contents.TranslatableContents;
 
 public class ConfirmGui extends LightweightGuiDescription {
     private static final Component SCREEN_TITLE = MutableComponent.create(new LiteralContents("Additional Additions ")).withStyle(ChatFormatting.BOLD);
-    private static final Component OPTION_DONE = MutableComponent.create(new TranslatableContents("gui.done"));
-    private static final Component DESCRIPTION = MutableComponent.create(new TranslatableContents("additionaladditions.gui.config.restart"));
+    private static final Component OPTION_DONE = MutableComponent.create(new TranslatableContents("gui.done", null, new String[]{}));
+    private static final Component DESCRIPTION = MutableComponent.create(new TranslatableContents("additionaladditions.gui.config.restart", null, new String[]{}));
 
     public ConfirmGui() {
         WGridPanel root = (WGridPanel) rootPanel;

@@ -106,6 +106,6 @@ public class WateringCanItem extends Item {
     public void appendHoverText(ItemStack stack, @Nullable Level world, List<Component> tooltip, TooltipFlag context) {
         int water = (int) (stack.getDamageValue() * 0.1);
         String tooltipText = String.format(": %s / 10", water);
-        tooltip.add(MutableComponent.create(new TranslatableContents("block.minecraft.water")).append(tooltipText).withStyle(ChatFormatting.AQUA) );
+        tooltip.add(MutableComponent.create(new TranslatableContents("block.minecraft.water", null, new String[]{})).append(tooltipText).withStyle(ChatFormatting.AQUA) );
     }
 }

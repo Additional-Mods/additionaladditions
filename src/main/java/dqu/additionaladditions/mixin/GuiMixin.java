@@ -32,7 +32,7 @@ public abstract class GuiMixin {
         if (minecraft.player.isHolding(AdditionalItems.DEPTH_METER_ITEM)) {
             if (Config.getBool(ConfigValues.DEPTH_METER, "displayElevationAlways")) {
                 String level = String.valueOf((int) minecraft.player.getY());
-                minecraft.player.displayClientMessage(MutableComponent.create(new TranslatableContents("depth_meter.elevation", level)), true);
+                minecraft.player.displayClientMessage(MutableComponent.create(new TranslatableContents("depth_meter.elevation", null, new String[]{level})), true);
             }
         }
     }

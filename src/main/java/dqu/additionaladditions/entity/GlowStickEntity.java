@@ -38,7 +38,7 @@ public class GlowStickEntity extends ThrowableItemProjectile {
         super.onHit(hitResult);
         if (!this.level.isClientSide()) {
             this.remove(RemovalReason.DISCARDED);
-            BlockPos pos = new BlockPos(this.getX(), this.getY(), this.getZ());
+            BlockPos pos = BlockPos.containing(this.getX(), this.getY(), this.getZ());
             if (this.level.getBlockState(pos).isAir()) {
                 this.level.setBlockAndUpdate(pos, AdditionalBlocks.GLOW_STICK_BLOCK.defaultBlockState()
                     .setValue(GlowStickBlock.FLIPPED, level.getRandom().nextBoolean()));

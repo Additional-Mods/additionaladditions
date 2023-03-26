@@ -8,17 +8,14 @@ import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.item.ArmorMaterial;
-import net.minecraft.world.item.CreativeModeTabs;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
+import net.minecraft.world.item.*;
 
 public class AdditionalMaterials {
     public static final ArmorMaterial ROSE_GOLD_ARMOR_MATERIAL = new RoseGoldArmorMaterial();
-    public static final Item ROSE_GOLD_HELMET = new AdditionalArmorItem(ROSE_GOLD_ARMOR_MATERIAL, EquipmentSlot.HEAD, new Item.Properties());
-    public static final Item ROSE_GOLD_CHESTPLATE = new AdditionalArmorItem(ROSE_GOLD_ARMOR_MATERIAL, EquipmentSlot.CHEST, new Item.Properties());
-    public static final Item ROSE_GOLD_LEGGINGS = new AdditionalArmorItem(ROSE_GOLD_ARMOR_MATERIAL, EquipmentSlot.LEGS, new Item.Properties());
-    public static final Item ROSE_GOLD_BOOTS = new AdditionalArmorItem(ROSE_GOLD_ARMOR_MATERIAL, EquipmentSlot.FEET, new Item.Properties());
+    public static final Item ROSE_GOLD_HELMET = new AdditionalArmorItem(ROSE_GOLD_ARMOR_MATERIAL, ArmorItem.Type.HELMET, new Item.Properties());
+    public static final Item ROSE_GOLD_CHESTPLATE = new AdditionalArmorItem(ROSE_GOLD_ARMOR_MATERIAL, ArmorItem.Type.CHESTPLATE, new Item.Properties());
+    public static final Item ROSE_GOLD_LEGGINGS = new AdditionalArmorItem(ROSE_GOLD_ARMOR_MATERIAL, ArmorItem.Type.LEGGINGS, new Item.Properties());
+    public static final Item ROSE_GOLD_BOOTS = new AdditionalArmorItem(ROSE_GOLD_ARMOR_MATERIAL, ArmorItem.Type.BOOTS, new Item.Properties());
     public static final Item ROSE_GOLD_SWORD = new AdditionalSwordItem(RoseGoldToolMaterial.MATERIAL, 4, -2.4F, new Item.Properties());
     public static final Item ROSE_GOLD_PICKAXE = new AdditionalPickaxeItem(RoseGoldToolMaterial.MATERIAL, 1, -2.8F, new Item.Properties());
     public static final Item ROSE_GOLD_AXE = new AdditionalAxeItem(RoseGoldToolMaterial.MATERIAL, 6, -3.1F, new Item.Properties());
@@ -26,10 +23,10 @@ public class AdditionalMaterials {
     public static final Item ROSE_GOLD_SHOVEL = new AdditionalShovelItem(RoseGoldToolMaterial.MATERIAL, 1.5F, -3F, new Item.Properties());
 
     public static final ArmorMaterial GILDED_NETHERITE_ARMOR_MATERIAL = new GildedNetheriteArmorMaterial();
-    public static final Item GILDED_NETHERITE_HELMET = new AdditionalArmorItem(GILDED_NETHERITE_ARMOR_MATERIAL, EquipmentSlot.HEAD, new Item.Properties().fireResistant());
-    public static final Item GILDED_NETHERITE_CHESTPLATE = new AdditionalArmorItem(GILDED_NETHERITE_ARMOR_MATERIAL, EquipmentSlot.CHEST, new Item.Properties().fireResistant());
-    public static final Item GILDED_NETHERITE_LEGGINGS = new AdditionalArmorItem(GILDED_NETHERITE_ARMOR_MATERIAL, EquipmentSlot.LEGS, new Item.Properties().fireResistant());
-    public static final Item GILDED_NETHERITE_BOOTS = new AdditionalArmorItem(GILDED_NETHERITE_ARMOR_MATERIAL, EquipmentSlot.FEET, new Item.Properties().fireResistant());
+    public static final Item GILDED_NETHERITE_HELMET = new AdditionalArmorItem(GILDED_NETHERITE_ARMOR_MATERIAL, ArmorItem.Type.HELMET, new Item.Properties().fireResistant());
+    public static final Item GILDED_NETHERITE_CHESTPLATE = new AdditionalArmorItem(GILDED_NETHERITE_ARMOR_MATERIAL, ArmorItem.Type.CHESTPLATE, new Item.Properties().fireResistant());
+    public static final Item GILDED_NETHERITE_LEGGINGS = new AdditionalArmorItem(GILDED_NETHERITE_ARMOR_MATERIAL, ArmorItem.Type.LEGGINGS, new Item.Properties().fireResistant());
+    public static final Item GILDED_NETHERITE_BOOTS = new AdditionalArmorItem(GILDED_NETHERITE_ARMOR_MATERIAL, ArmorItem.Type.BOOTS, new Item.Properties().fireResistant());
     public static final Item GILDED_NETHERITE_SWORD = new AdditionalSwordItem(GildedNetheriteToolMaterial.MATERIAL, 5, -2.4F, new Item.Properties().fireResistant());
     public static final Item GILDED_NETHERITE_PICKAXE = new AdditionalPickaxeItem(GildedNetheriteToolMaterial.MATERIAL, 3, -2.6F, new Item.Properties().fireResistant());
     public static final Item GILDED_NETHERITE_AXE = new AdditionalAxeItem(GildedNetheriteToolMaterial.MATERIAL, 7, -3F, new Item.Properties().fireResistant());
