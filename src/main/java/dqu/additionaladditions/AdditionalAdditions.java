@@ -3,8 +3,10 @@ package dqu.additionaladditions;
 import dev.lambdaurora.lambdynlights.api.DynamicLightHandlers;
 import dqu.additionaladditions.behaviour.BehaviourManager;
 import dqu.additionaladditions.config.Config;
+import dqu.additionaladditions.misc.LootHandler;
 import dqu.additionaladditions.registry.*;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.server.packs.PackType;
@@ -31,6 +33,12 @@ public class AdditionalAdditions implements ModInitializer {
         AdditionalMaterials.registerAll();
         AdditionalPotions.registerAll();
         AdditionalMusicDiscs.registerAll();
+
+        LootTableEvents.MODIFY.register(((resourceManager, lootManager, id, table, setter) -> {
+            LootHandler.handle(id, table);
+        }));
+
+        LootHandler.postInit();
 
         if (FabricLoader.getInstance().isModLoaded("lambdynlights")) {
             DynamicLightHandlers.registerDynamicLightHandler(AdditionalEntities.GLOW_STICK_ENTITY_ENTITY_TYPE, entity -> 12);

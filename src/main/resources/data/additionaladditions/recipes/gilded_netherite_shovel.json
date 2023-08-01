@@ -1,6 +1,7 @@
 {
-  "type": "minecraft:smithing",
+  "type": "minecraft:smithing_transform",
   "base": {"item": "minecraft:netherite_shovel"},
-  "addition": {"item": "minecraft:gold_ingot"},
-  "result": {"item": "additionaladditions:gilded_netherite_shovel"}
+  "addition": {"item": "additionaladditions:gold_ring"},
+  "result": {"item": "additionaladditions:gilded_netherite_shovel"},
+  "template": {"item": "additionaladditions:gilded_netherite_upgrade"}
 }

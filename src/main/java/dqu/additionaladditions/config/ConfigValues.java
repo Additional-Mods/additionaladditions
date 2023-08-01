@@ -42,7 +42,6 @@ public enum ConfigValues {
     POCKET_JUKEBOX(6, new ConfigProperty("PocketJukebox")),
     CHICKEN_NUGGET(6, new ConfigProperty("ChickenNugget")),
     POWERED_RAILS_COPPER_RECIPE(6, new ConfigProperty("PoweredRailsCopperRecipe")),
-    GOLD_RING(6, new ConfigProperty("GoldRing")),
     GLOW_BERRY_GLOW(6, new ConfigProperty("GlowBerryEatGlow", new ListConfigValue()
             .put(new ConfigProperty("enabled"))
             .put(new ConfigProperty("duration", new IntegerConfigValue(5)))

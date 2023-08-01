@@ -51,7 +51,7 @@ public class AdditionalAdditionsClient implements ClientModInitializer {
 
         FabricModelPredicateProviderRegistry.register(AdditionalItems.DEPTH_METER_ITEM, new ResourceLocation("angle"), (itemStack, clientWorld, livingEntity, worldSeed) -> {
             if (livingEntity == null) return 0.3125F;
-            Level world = livingEntity.level;
+            Level world = livingEntity.level();
             if (world == null) return 0.3125F;
 
             float sea = world.getSeaLevel();

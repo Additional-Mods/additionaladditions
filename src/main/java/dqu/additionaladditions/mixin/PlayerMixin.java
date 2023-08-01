@@ -38,7 +38,7 @@ public abstract class PlayerMixin extends LivingEntity {
 
     @Inject(method = "tick", at = @At("TAIL"))
     private void applyFireResistance(CallbackInfo ci) {
-        if (level.isClientSide()) return;
+        if (this.level().isClientSide()) return;
         if (this.isEyeInFluid(FluidTags.LAVA) || this.getRemainingFireTicks() > 0) return;
 
         Float durationPerPiece = Config.get(ConfigValues.GILDED_NETHERITE, "fireResistancePerPiece");

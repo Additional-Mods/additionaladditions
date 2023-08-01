@@ -1,6 +1,7 @@
 {
-  "type": "minecraft:smithing",
+  "type": "minecraft:smithing_transform",
   "base": {"item": "minecraft:iron_sword"},
   "addition": {"item": "additionaladditions:rose_gold_alloy"},
-  "result": {"item": "additionaladditions:rose_gold_sword"}
+  "result": {"item": "additionaladditions:rose_gold_sword"},
+  "template": {"item": "additionaladditions:rose_gold_upgrade"}
 }

@@ -2,7 +2,6 @@ package dqu.additionaladditions.block;
 
 import dqu.additionaladditions.config.Config;
 import dqu.additionaladditions.config.ConfigValues;
-import dqu.additionaladditions.registry.AdditionalBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -165,14 +164,14 @@ public class RopeBlock extends Block {
             return InteractionResult.PASS;
         }
 
-        if (!player.getMainHandItem().is(Item.byBlock(AdditionalBlocks.ROPE_BLOCK))) {
+        if (!player.getMainHandItem().is(Item.byBlock(this))) {
             return InteractionResult.PASS;
         }
 
         BlockPos down = pos.relative(Direction.DOWN);
         BlockState statedown = world.getBlockState(down);
 
-        if (statedown.is(AdditionalBlocks.ROPE_BLOCK)) {
+        if (statedown.is(this)) {
             return statedown.getBlock().use(statedown, world, down, player, hand, hit);
         } else if (statedown.isAir() && !world.isOutsideBuildHeight(down.getY())) {
             world.setBlockAndUpdate(down, state);

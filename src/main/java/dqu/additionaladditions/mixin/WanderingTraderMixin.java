@@ -19,7 +19,7 @@ public class WanderingTraderMixin {
     @Inject(method = "updateTrades", at = @At("RETURN"))
     private void addWanderingTraderTrades(CallbackInfo ci) {
         MerchantOffers tradeOfferList = ((WanderingTrader) (Object) this).getOffers();
-        Level world = ((WanderingTrader) (Object) this).level;
+        Level world = ((WanderingTrader) (Object) this).level();
         if (world.getRandom().nextDouble() < 0.5D && Config.getBool(ConfigValues.MYSTERIOUS_BUNDLE)) {
             tradeOfferList.add(new MerchantOffer(new ItemStack(Items.EMERALD, 6), new ItemStack(AdditionalItems.MYSTERIOUS_BUNDLE_ITEM, 1), 6, 6, 0.5f));
         }

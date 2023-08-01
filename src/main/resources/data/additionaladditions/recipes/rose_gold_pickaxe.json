@@ -1,6 +1,7 @@
 {
-  "type": "minecraft:smithing",
+  "type": "minecraft:smithing_transform",
   "base": {"item": "minecraft:iron_pickaxe"},
   "addition": {"item": "additionaladditions:rose_gold_alloy"},
-  "result": {"item": "additionaladditions:rose_gold_pickaxe"}
+  "result": {"item": "additionaladditions:rose_gold_pickaxe"},
+  "template": {"item": "additionaladditions:rose_gold_upgrade"}
 }

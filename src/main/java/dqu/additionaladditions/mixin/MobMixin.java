@@ -29,7 +29,7 @@ public abstract class MobMixin extends LivingEntity {
         if (!isFeatureEnabled) return;
         if (this.tickCount > 0 || !shouldDespawnInPeaceful()) return;
 
-        PoiManager poiManager = ((ServerLevel)level).getPoiManager();
+        PoiManager poiManager = ((ServerLevel)level()).getPoiManager();
         long count = poiManager.getCountInRange(
                 (poiType) -> {
                     return poiType.is(AdditionalBlocks.AMETHYST_LAMP_POI_RL);

@@ -63,7 +63,7 @@ public class PocketJukeboxItem extends Item {
     public boolean overrideOtherStackedOnMe(ItemStack stack, ItemStack otherStack, Slot slot, ClickAction clickType, Player player, SlotAccess cursorStackReference) {
         if (!Config.getBool(ConfigValues.POCKET_JUKEBOX)) return false;
         if (clickType != ClickAction.SECONDARY) return false;
-        Level world = player.level;
+        Level world = player.level();
 
         if (nbtGetDisc(stack) == null) {
             ItemStack cursor = cursorStackReference.get();

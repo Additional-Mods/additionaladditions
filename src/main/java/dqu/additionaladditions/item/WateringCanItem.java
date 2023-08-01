@@ -10,6 +10,7 @@ import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.contents.TranslatableContents;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.util.FastColor;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -19,13 +20,9 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.BonemealableBlock;
-import net.minecraft.world.level.block.BucketPickup;
-import net.minecraft.world.level.block.FarmBlock;
-import net.minecraft.world.level.block.GrassBlock;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import org.jetbrains.annotations.Nullable;
@@ -73,7 +70,7 @@ public class WateringCanItem extends Item {
             }
         }
 
-        if (state.getBlock() instanceof BucketPickup fluid && state.getMaterial() == Material.WATER) {
+        if (state.getBlock() instanceof BucketPickup fluid && state.getBlock() == Blocks.WATER) {
             if (stack.getDamageValue() == 100) return InteractionResultHolder.fail(stack);
             fluid.getPickupSound().ifPresent((sound) -> player.playSound(sound, 1.0F, 1.0F));
             if (!world.isClientSide()) {
@@ -94,7 +91,7 @@ public class WateringCanItem extends Item {
 
     @Override
     public int getBarColor(ItemStack stack) {
-        return Config.getBool(ConfigValues.WATERING_CAN) ? Mth.color(65, 135, 235) : Mth.color(235, 135, 65);
+        return Config.getBool(ConfigValues.WATERING_CAN) ? FastColor.ARGB32.color(0, 65, 135, 235) : Mth.color(235, 135, 65);
     }
 
     @Override

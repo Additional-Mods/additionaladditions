@@ -4,9 +4,9 @@ import dqu.additionaladditions.AdditionalAdditions;
 import dqu.additionaladditions.config.Config;
 import dqu.additionaladditions.config.ConfigValues;
 import dqu.additionaladditions.item.*;
+import dqu.additionaladditions.misc.LootHandler;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
-import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
 import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockSource;
@@ -31,17 +31,9 @@ import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceWit
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 
-public class AdditionalItems {
-    private static final ResourceLocation ELDER_GUARDIAN_LOOT_TABLE_ID = EntityType.ELDER_GUARDIAN.getDefaultLootTable();
-    private static final ResourceLocation ZOMBIE_LOOT_TABLE_ID = EntityType.ZOMBIE.getDefaultLootTable();
-    private static final ResourceLocation CREEPER_LOOT_TABLE_ID = EntityType.CREEPER.getDefaultLootTable();
-    private static final ResourceLocation PIGLIN_BARTERING_LOOT_TABLE_ID = BuiltInLootTables.PIGLIN_BARTERING;
-    private static final ResourceLocation MINESHAFT_CHEST_LOOT_TABLE_ID = BuiltInLootTables.ABANDONED_MINESHAFT;
-    private static final ResourceLocation DUNGEON_CHEST_LOOT_TABLE_ID = BuiltInLootTables.SIMPLE_DUNGEON;
-    private static final ResourceLocation STRONGHOLD_CHEST_LOOT_TABLE_ID = BuiltInLootTables.STRONGHOLD_CORRIDOR;
-    private static final ResourceLocation MANSION_CHEST_LOOT_TABLE_ID = BuiltInLootTables.WOODLAND_MANSION;
-    private static final ResourceLocation SHIPWRECK_SUPPLY_CHEST_LOOT_TABLE_ID = BuiltInLootTables.SHIPWRECK_SUPPLY;
+import java.util.List;
 
+public class AdditionalItems {
     // saturation = hunger * saturationModifier
     public static final Item FRIED_EGG = new Item(new FabricItemSettings()
             .food(new FoodProperties.Builder().nutrition(6).saturationMod(0.8666f).build())
@@ -88,75 +80,44 @@ public class AdditionalItems {
     }
 
     private static void registerLootTables() {
-        //TODO: This method is a mess. I'm sorry.
-
-        LootTableEvents.MODIFY.register(((resourceManager, lootManager, id, table, setter) -> {
-            if (ELDER_GUARDIAN_LOOT_TABLE_ID.equals(id) && Config.getBool(ConfigValues.TRIDENT_SHARD)) {
-                LootPool.Builder poolBuilder = LootPool.lootPool()
-                        .setRolls(ConstantValue.exactly(1f))
-                        .add(LootItem.lootTableItem(TRIDENT_SHARD))
-                        .when(LootItemRandomChanceCondition.randomChance(0.33f));
-                table.withPool(poolBuilder);
-            }
-            if (DUNGEON_CHEST_LOOT_TABLE_ID.equals(id) || MINESHAFT_CHEST_LOOT_TABLE_ID.equals(id) || STRONGHOLD_CHEST_LOOT_TABLE_ID.equals(id)) {
-                if (Config.getBool(ConfigValues.GLOW_STICK)) {
-                    LootPool.Builder poolBuilder = LootPool.lootPool()
-                            .setRolls(UniformGenerator.between(0, 4))
-                            .apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 4)))
-                            .add(LootItem.lootTableItem(GLOW_STICK_ITEM));
-                    table.withPool(poolBuilder);
-                }
-                if (Config.getBool(ConfigValues.ROPES)) {
-                    LootPool.Builder poolBuilder = LootPool.lootPool()
-                            .setRolls(UniformGenerator.between(1, 4))
-                            .apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 8)))
-                            .add(LootItem.lootTableItem(AdditionalBlocks.ROPE_BLOCK.asItem()));
-                    table.withPool(poolBuilder);
-                }
-                if (Config.getBool(ConfigValues.DEPTH_METER)) {
-                    LootPool.Builder poolBuilder = LootPool.lootPool()
-                            .setRolls(ConstantValue.exactly(1))
-                            .when(LootItemRandomChanceCondition.randomChance(0.1f))
-                            .add(LootItem.lootTableItem(DEPTH_METER_ITEM));
-                    table.withPool(poolBuilder);
-                }
-            }
-            if (DUNGEON_CHEST_LOOT_TABLE_ID.equals(id) || MANSION_CHEST_LOOT_TABLE_ID.equals(id)) {
-                if (Config.getBool(ConfigValues.MUSIC_DISCS)) {
-                    LootPool.Builder poolBuilder = LootPool.lootPool()
-                            .setRolls(ConstantValue.exactly(1))
-                            .when(LootItemRandomChanceCondition.randomChance(0.25f))
-                            .add(LootItem.lootTableItem(AdditionalMusicDiscs.MUSIC_DISC_0308))
-                            .add(LootItem.lootTableItem(AdditionalMusicDiscs.MUSIC_DISC_1007))
-                            .add(LootItem.lootTableItem(AdditionalMusicDiscs.MUSIC_DISC_1507));
-                    table.withPool(poolBuilder);
-                }
-            }
-            if (SHIPWRECK_SUPPLY_CHEST_LOOT_TABLE_ID.equals(id) && Config.getBool(ConfigValues.SHIPWRECK_SPYGLASS_LOOT)) {
-                LootPool.Builder poolBuilder = LootPool.lootPool()
-                        .setRolls(ConstantValue.exactly(1))
-                        .when(LootItemRandomChanceCondition.randomChance(0.5f))
-                        .add(LootItem.lootTableItem(Items.SPYGLASS));
-                table.withPool(poolBuilder);
-            }
-            if (ZOMBIE_LOOT_TABLE_ID.equals(id) || CREEPER_LOOT_TABLE_ID.equals(id)) {
-                if (Config.getBool(ConfigValues.CHICKEN_NUGGET)) {
-                    LootPool.Builder poolBuilder = LootPool.lootPool()
-                            .setRolls(ConstantValue.exactly(1))
-                            .when(LootItemKilledByPlayerCondition.killedByPlayer())
-                            .when(LootItemRandomChanceWithLootingCondition.randomChanceAndLootingBoost(0.025f, 0.01f))
-                            .add(LootItem.lootTableItem(CHICKEN_NUGGET));
-                    table.withPool(poolBuilder);
-                }
-            }
-            if (PIGLIN_BARTERING_LOOT_TABLE_ID.equals(id) && Config.getBool(ConfigValues.GOLD_RING)) {
-                LootPool.Builder poolBuilder = LootPool.lootPool()
-                            .setRolls(ConstantValue.exactly(1))
-                            .when(LootItemRandomChanceCondition.randomChance(0.015f))
-                            .add(LootItem.lootTableItem(GOLD_RING));
-                    table.withPool(poolBuilder);
-            }
-        }));
+        LootHandler.register(EntityType.ELDER_GUARDIAN.getDefaultLootTable(), () -> Config.getBool(ConfigValues.TRIDENT_SHARD), LootPool.lootPool()
+                .setRolls(ConstantValue.exactly(1f))
+                .add(LootItem.lootTableItem(TRIDENT_SHARD))
+                .when(LootItemRandomChanceCondition.randomChance(0.33f))
+        );
+        LootHandler.register(List.of(BuiltInLootTables.SIMPLE_DUNGEON, BuiltInLootTables.ABANDONED_MINESHAFT, BuiltInLootTables.STRONGHOLD_CORRIDOR), () -> Config.getBool(ConfigValues.GLOW_STICK), LootPool.lootPool()
+                .setRolls(UniformGenerator.between(0, 4))
+                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 4)))
+                .add(LootItem.lootTableItem(GLOW_STICK_ITEM))
+        );
+        LootHandler.register(List.of(BuiltInLootTables.SIMPLE_DUNGEON, BuiltInLootTables.ABANDONED_MINESHAFT, BuiltInLootTables.STRONGHOLD_CORRIDOR), () -> Config.getBool(ConfigValues.DEPTH_METER), LootPool.lootPool()
+                .setRolls(ConstantValue.exactly(1))
+                .when(LootItemRandomChanceCondition.randomChance(0.1f))
+                .add(LootItem.lootTableItem(DEPTH_METER_ITEM))
+        );
+        LootHandler.register(List.of(BuiltInLootTables.SIMPLE_DUNGEON, BuiltInLootTables.WOODLAND_MANSION), () -> Config.getBool(ConfigValues.MUSIC_DISCS), LootPool.lootPool()
+                .setRolls(ConstantValue.exactly(1))
+                .when(LootItemRandomChanceCondition.randomChance(0.25f))
+                .add(LootItem.lootTableItem(AdditionalMusicDiscs.MUSIC_DISC_0308))
+                .add(LootItem.lootTableItem(AdditionalMusicDiscs.MUSIC_DISC_1007))
+                .add(LootItem.lootTableItem(AdditionalMusicDiscs.MUSIC_DISC_1507))
+        );
+        LootHandler.register(BuiltInLootTables.SHIPWRECK_SUPPLY, () -> Config.getBool(ConfigValues.SHIPWRECK_SPYGLASS_LOOT), LootPool.lootPool()
+                .setRolls(ConstantValue.exactly(1))
+                .when(LootItemRandomChanceCondition.randomChance(0.5f))
+                .add(LootItem.lootTableItem(Items.SPYGLASS))
+        );
+        LootHandler.register(List.of(EntityType.ZOMBIE.getDefaultLootTable(), EntityType.CREEPER.getDefaultLootTable()), () -> Config.getBool(ConfigValues.CHICKEN_NUGGET), LootPool.lootPool()
+                .setRolls(ConstantValue.exactly(1))
+                .when(LootItemKilledByPlayerCondition.killedByPlayer())
+                .when(LootItemRandomChanceWithLootingCondition.randomChanceAndLootingBoost(0.025f, 0.01f))
+                .add(LootItem.lootTableItem(CHICKEN_NUGGET))
+        );
+        LootHandler.register(BuiltInLootTables.PIGLIN_BARTERING, () -> Config.getBool(ConfigValues.GILDED_NETHERITE), LootPool.lootPool()
+                .setRolls(ConstantValue.exactly(1))
+                .when(LootItemRandomChanceCondition.randomChance(0.015f))
+                .add(LootItem.lootTableItem(GOLD_RING))
+        );
     }
 
     private static void registerOther() {

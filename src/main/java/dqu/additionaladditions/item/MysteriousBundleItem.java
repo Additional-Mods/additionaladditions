@@ -14,6 +14,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.storage.loot.LootContext;
+import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 
@@ -27,9 +28,9 @@ public class MysteriousBundleItem extends Item {
         if (!Config.getBool(ConfigValues.MYSTERIOUS_BUNDLE)) { return InteractionResultHolder.fail(user.getItemInHand(hand)); }
         if (world.isClientSide()) return InteractionResultHolder.success(user.getItemInHand(hand));
         ResourceLocation lootTableID = new ResourceLocation(AdditionalAdditions.namespace, "mysterious_bundle");
-        LootContext lootContext = (new LootContext.Builder((ServerLevel) world)).withRandom(world.random).create(LootContextParamSets.EMPTY);
-        LootTable lootTable = ((ServerLevel) world).getServer().getLootTables().get(lootTableID);
-        List<ItemStack> stackList = lootTable.getRandomItems(lootContext);
+        LootParams lootParams = (new LootParams.Builder((ServerLevel) world)).create(LootContextParamSets.EMPTY);
+        LootTable lootTable = ((ServerLevel) world).getServer().getLootData().getLootTable(lootTableID);
+        List<ItemStack> stackList = lootTable.getRandomItems(lootParams);
 
         for (ItemStack stack : stackList) {
             ItemEntity entity = new ItemEntity(world, user.getX(), user.getY(), user.getZ(), stack);
