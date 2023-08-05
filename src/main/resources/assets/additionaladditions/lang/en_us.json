@@ -1,7 +1,7 @@
 {
   "item.additionaladditions.berry_pie": "Sweet Berry Pie",
   "item.additionaladditions.watering_can": "Watering Can",
-  "item.additionaladditions.crossbow_with_spyglass": "Crossbow with Spyglass",
+  "item.additionaladditions.crossbow_with_spyglass": "Crossbow with a Spyglass",
 
   "item.additionaladditions.rose_gold_sword": "Rose Gold Sword",
   "item.additionaladditions.rose_gold_axe": "Rose Gold Axe",
@@ -86,7 +86,7 @@
   "additionaladditions.advancements.obtain_gilded_netherite": "Gilded",
   "additionaladditions.advancements.obtain_gilded_netherite.desc": "Obtain the Gilded Netherite armor",
   "additionaladditions.advancements.obtain_glow_stick": "Let it Glow!",
-  "additionaladditions.advancements.obtain_glow_stick.desc": "Obtain the Glow Stick to lit up caves",
+  "additionaladditions.advancements.obtain_glow_stick.desc": "Obtain the Glow Stick to light up caves",
   "additionaladditions.advancements.obtain_mysterious_bundle": "A Pig in a Poke",
   "additionaladditions.advancements.obtain_mysterious_bundle.desc": "Purchase the Mysterious Bundle from a Wandering Trader",
   "additionaladditions.advancements.obtain_pocket_jukebox": "What a Nugget!",
@@ -94,9 +94,9 @@
   "additionaladditions.advancements.obtain_rose_gold": "Gold n' Roses",
   "additionaladditions.advancements.obtain_rose_gold.desc": "Obtain the Gold Rose armor",
   "additionaladditions.advancements.obtain_scoped_crossbow": "Hitman",
-  "additionaladditions.advancements.obtain_scoped_crossbow.desc": "Obtain Crossbow with Spyglass",
+  "additionaladditions.advancements.obtain_scoped_crossbow.desc": "Obtain a Crossbow with a Spyglass",
   "additionaladditions.advancements.shot_self_scoped_crossbow": "Self-employed Hitman",
-  "additionaladditions.advancements.shot_self_scoped_crossbow.desc": "Hit yourself with your own arrow using Crossbow with Spyglass",
+  "additionaladditions.advancements.shot_self_scoped_crossbow.desc": "Hit yourself with your own arrow using Crossbow with a Spyglass",
   "additionaladditions.advancements.use_watering_can": "Water it can",
   "additionaladditions.advancements.use_watering_can.desc": "Obtain and use the Watering Can to fertilize your crops",
 
