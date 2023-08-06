@@ -2,6 +2,13 @@
   "item.additionaladditions.berry_pie": "Пиріг із солодких ягід",
   "item.additionaladditions.watering_can": "Лійка",
   "item.additionaladditions.crossbow_with_spyglass": "Арбалет з підзорною трубою",
+
+  "item.additionaladditions.smithing_template.rose_gold_upgrade.additions_slot_description": "Розмістіть сплав рожевого золота",
+  "item.additionaladditions.smithing_template.rose_gold_upgrade.applies_to": "Залізне спорядження",
+  "item.additionaladditions.smithing_template.rose_gold_upgrade.base_slot_description": "Розмістіть залізні обладунки, зброю або інструмент",
+  "item.additionaladditions.smithing_template.rose_gold_upgrade.ingredients": "Сплав рожевого золота",
+  "upgrade.additionaladditions.rose_gold_upgrade": "Покращення з рожевого золота",
+
   "item.additionaladditions.rose_gold_sword": "Меч з рожевого золота",
   "item.additionaladditions.rose_gold_axe": "Сокира з рожевого золота",
   "item.additionaladditions.rose_gold_pickaxe": "Кайло з рожевого золота",
@@ -17,6 +24,7 @@
   "item.additionaladditions.glow_stick": "Неонова палиця",
   "item.additionaladditions.honeyed_apple": "Медове яблуко",
   "item.additionaladditions.depth_meter": "Глибиномір",
+
   "item.additionaladditions.gilded_netherite_sword": "Позолочений меч",
   "item.additionaladditions.gilded_netherite_axe": "Позолочена сокира",
   "item.additionaladditions.gilded_netherite_pickaxe": "Позолочене кайло",
@@ -26,6 +34,13 @@
   "item.additionaladditions.gilded_netherite_chestplate": "Позолочений нагрудник",
   "item.additionaladditions.gilded_netherite_leggings": "Позолочені наголінники",
   "item.additionaladditions.gilded_netherite_boots": "Позолочені чоботи",
+
+  "item.additionaladditions.smithing_template.gilded_netherite_upgrade.additions_slot_description": "Розмістіть золоте кільце",
+  "item.additionaladditions.smithing_template.gilded_netherite_upgrade.applies_to": "Незеритове спорядження",
+  "item.additionaladditions.smithing_template.gilded_netherite_upgrade.base_slot_description": "Розмістіть незеритові обладунки, зброю або інструмент",
+  "item.additionaladditions.smithing_template.gilded_netherite_upgrade.ingredients": "Золоте кільце",
+  "upgrade.additionaladditions.gilded_netherite_upgrade": "Позолочене покращення",
+
   "item.additionaladditions.music_disc_0308": "Платівка",
   "item.additionaladditions.music_disc_1007": "Платівка",
   "item.additionaladditions.music_disc_1507": "Платівка",
@@ -36,6 +51,7 @@
   "item.additionaladditions.pocket_jukebox": "Кишеньковий програвач",
   "item.additionaladditions.chicken_nugget": "Курячий наггетс",
   "item.additionaladditions.gold_ring": "Золоте кільце",
+  "item.additionaladditions.rose_gold_alloy": "Сплав рожевого золота",
   "block.additionaladditions.glow_stick": "Неонова палиця",
   "block.additionaladditions.copper_patina": "Мідна патина",
   "block.additionaladditions.rope": "Мотузка",

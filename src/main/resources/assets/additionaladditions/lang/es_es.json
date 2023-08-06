@@ -2,6 +2,7 @@
   "item.additionaladditions.berry_pie": "Pastel dulce",
   "item.additionaladditions.watering_can": "Regadera",
   "item.additionaladditions.crossbow_with_spyglass": "Ballesta con catalejo",
+
   "item.additionaladditions.rose_gold_sword": "Espada de oro rosa",
   "item.additionaladditions.rose_gold_axe": "Hacha de oro rosa",
   "item.additionaladditions.rose_gold_pickaxe": "Pico de oro rosa",
@@ -11,12 +12,20 @@
   "item.additionaladditions.rose_gold_chestplate": "Peto de oro rosa",
   "item.additionaladditions.rose_gold_leggings": "Grebas de oro rosa",
   "item.additionaladditions.rose_gold_boots": "Botas de oro rosa",
+
+  "item.additionaladditions.smithing_template.rose_gold_upgrade.additions_slot_description": "Add Rose Gold Alloy",
+  "item.additionaladditions.smithing_template.rose_gold_upgrade.applies_to": "Iron Equipment",
+  "item.additionaladditions.smithing_template.rose_gold_upgrade.base_slot_description": "Add iron armor, weapon, or tool",
+  "item.additionaladditions.smithing_template.rose_gold_upgrade.ingredients": "Rose Gold Alloy",
+  "upgrade.additionaladditions.rose_gold_upgrade": "Rose Gold Upgrade",
+
   "item.additionaladditions.wrench": "Llave de tuerca",
   "item.additionaladditions.fried_egg": "Huevo frito",
   "item.additionaladditions.trident_shard": "Punta de tridente",
   "item.additionaladditions.glow_stick": "Fluorescente",
   "item.additionaladditions.honeyed_apple": "Manzana con miel",
   "item.additionaladditions.depth_meter": "Barómetro",
+
   "item.additionaladditions.gilded_netherite_sword": "Espada de netherita áurea",
   "item.additionaladditions.gilded_netherite_axe": "Hacha de netherita áurea",
   "item.additionaladditions.gilded_netherite_pickaxe": "Pico de netherita áurea",
@@ -26,6 +35,13 @@
   "item.additionaladditions.gilded_netherite_chestplate": "Peto de netherita áurea",
   "item.additionaladditions.gilded_netherite_leggings": "Grebas de netherita áurea",
   "item.additionaladditions.gilded_netherite_boots": "Botas de netherita áurea",
+
+  "item.additionaladditions.smithing_template.gilded_netherite_upgrade.additions_slot_description": "Add Gold Ring",
+  "item.additionaladditions.smithing_template.gilded_netherite_upgrade.applies_to": "Netherite Equipment",
+  "item.additionaladditions.smithing_template.gilded_netherite_upgrade.base_slot_description": "Add netherite armor, weapon, or tool",
+  "item.additionaladditions.smithing_template.gilded_netherite_upgrade.ingredients": "Gold Ring",
+  "upgrade.additionaladditions.gilded_netherite_upgrade": "Gilded Netherite Upgrade",
+
   "item.additionaladditions.music_disc_0308": "Disco de música",
   "item.additionaladditions.music_disc_1007": "Disco de música",
   "item.additionaladditions.music_disc_1507": "Disco de música",

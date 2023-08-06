@@ -4,9 +4,9 @@ import dqu.additionaladditions.AdditionalAdditions;
 import dqu.additionaladditions.config.Config;
 import dqu.additionaladditions.config.ConfigValues;
 import dqu.additionaladditions.item.*;
+import dqu.additionaladditions.misc.CreativeAdder;
 import dqu.additionaladditions.misc.LootHandler;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
-import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockSource;
@@ -17,7 +17,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.*;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.DispenserBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -140,28 +139,21 @@ public class AdditionalItems {
     }
 
     private static void putToItemGroups() {
-        ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.TOOLS_AND_UTILITIES).register(content -> {
-            content.addAfter(Items.BONE_MEAL, WATERING_CAN, WRENCH_ITEM, GLOW_STICK_ITEM);
-            content.addAfter(Items.CLOCK, DEPTH_METER_ITEM);
-            content.addAfter(Items.ELYTRA, MYSTERIOUS_BUNDLE_ITEM);
-            content.addAfter(Items.SPYGLASS, POCKET_JUKEBOX_ITEM);
-        });
-        ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.INGREDIENTS).register(content -> {
-            content.addBefore(Items.NETHERITE_SCRAP, GOLD_RING, ROSE_GOLD_ALLOY);
-            content.addAfter(Items.PRISMARINE_CRYSTALS, TRIDENT_SHARD);
-        });
-        ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.REDSTONE_BLOCKS).register(content -> {
-            content.addAfter(Blocks.TARGET, WRENCH_ITEM);
-        });
-        ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.COMBAT).register(content -> {
-            content.addAfter(Items.CROSSBOW, CROSSBOW_WITH_SPYGLASS);
-        });
-        ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.FOOD_AND_DRINKS).register(content -> {
-            content.addAfter(Items.COOKED_RABBIT, FRIED_EGG);
-            content.addAfter(Items.PUMPKIN_PIE, BERRY_PIE);
-            content.addAfter(Items.APPLE, HONEYED_APPLE);
-            content.addAfter(Items.ROTTEN_FLESH, CHICKEN_NUGGET);
-        });
+        CreativeAdder.TOOLS_AND_UTILITIES.add(() -> Config.getBool(ConfigValues.WATERING_CAN), Items.BONE_MEAL, WATERING_CAN);
+        CreativeAdder.TOOLS_AND_UTILITIES.add(() -> Config.getBool(ConfigValues.WRENCH), Items.BONE_MEAL, WRENCH_ITEM);
+        CreativeAdder.TOOLS_AND_UTILITIES.add(() -> Config.getBool(ConfigValues.GLOW_STICK), Items.BONE_MEAL, GLOW_STICK_ITEM);
+        CreativeAdder.TOOLS_AND_UTILITIES.add(() -> Config.getBool(ConfigValues.DEPTH_METER, "enabled"), Items.CLOCK, DEPTH_METER_ITEM);
+        CreativeAdder.TOOLS_AND_UTILITIES.add(() -> Config.getBool(ConfigValues.MYSTERIOUS_BUNDLE), Items.ELYTRA, MYSTERIOUS_BUNDLE_ITEM);
+        CreativeAdder.TOOLS_AND_UTILITIES.add(() -> Config.getBool(ConfigValues.POCKET_JUKEBOX), Items.SPYGLASS, POCKET_JUKEBOX_ITEM);
+        CreativeAdder.INGREDIENTS.addBefore(() -> Config.getBool(ConfigValues.GILDED_NETHERITE, "enabled"), Items.NETHERITE_SCRAP, GOLD_RING);
+        CreativeAdder.INGREDIENTS.addBefore(() -> Config.getBool(ConfigValues.ROSE_GOLD), Items.NETHERITE_SCRAP, ROSE_GOLD_ALLOY);
+        CreativeAdder.INGREDIENTS.add(() -> Config.getBool(ConfigValues.TRIDENT_SHARD), Items.PRISMARINE_CRYSTALS, TRIDENT_SHARD);
+        CreativeAdder.REDSTONE_BLOCKS.add(() -> Config.getBool(ConfigValues.WRENCH), Items.TARGET, WRENCH_ITEM);
+        CreativeAdder.COMBAT.add(() -> Config.getBool(ConfigValues.CROSSBOWS), Items.CROSSBOW, CROSSBOW_WITH_SPYGLASS);
+        CreativeAdder.FOOD_AND_DRINKS.add(() -> Config.getBool(ConfigValues.FOOD, "FriedEgg"), Items.COOKED_RABBIT, FRIED_EGG);
+        CreativeAdder.FOOD_AND_DRINKS.add(() -> Config.getBool(ConfigValues.FOOD, "BerryPie"), Items.PUMPKIN_PIE, BERRY_PIE);
+        CreativeAdder.FOOD_AND_DRINKS.add(() -> Config.getBool(ConfigValues.FOOD, "HoneyedApple"), Items.APPLE, HONEYED_APPLE);
+        CreativeAdder.FOOD_AND_DRINKS.add(() -> Config.getBool(ConfigValues.CHICKEN_NUGGET), Items.ROTTEN_FLESH, CHICKEN_NUGGET);
     }
 
     public static void registerAll() {

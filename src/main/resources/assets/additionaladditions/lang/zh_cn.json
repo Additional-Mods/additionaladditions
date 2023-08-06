@@ -2,6 +2,7 @@
   "item.additionaladditions.berry_pie": "甜浆果派",
   "item.additionaladditions.watering_can": "水壶",
   "item.additionaladditions.crossbow_with_spyglass": "带有瞄准镜的弩",
+
   "item.additionaladditions.rose_gold_sword": "玫瑰金剑",
   "item.additionaladditions.rose_gold_axe": "玫瑰金斧",
   "item.additionaladditions.rose_gold_pickaxe": "玫瑰金镐",
@@ -11,12 +12,20 @@
   "item.additionaladditions.rose_gold_chestplate": "玫瑰金胸甲",
   "item.additionaladditions.rose_gold_leggings": "玫瑰金护腿",
   "item.additionaladditions.rose_gold_boots": "玫瑰金靴子",
+
+  "item.additionaladditions.smithing_template.rose_gold_upgrade.additions_slot_description": "Add Rose Gold Alloy",
+  "item.additionaladditions.smithing_template.rose_gold_upgrade.applies_to": "Iron Equipment",
+  "item.additionaladditions.smithing_template.rose_gold_upgrade.base_slot_description": "Add iron armor, weapon, or tool",
+  "item.additionaladditions.smithing_template.rose_gold_upgrade.ingredients": "Rose Gold Alloy",
+  "upgrade.additionaladditions.rose_gold_upgrade": "Rose Gold Upgrade",
+
   "item.additionaladditions.wrench": "扳手",
   "item.additionaladditions.fried_egg": "煎鸡蛋",
   "item.additionaladditions.trident_shard": "三叉戟碎片",
   "item.additionaladditions.glow_stick": "荧光棒",
   "item.additionaladditions.honeyed_apple": "蜜饯苹果",
   "item.additionaladditions.depth_meter": "深度计",
+
   "item.additionaladditions.gilded_netherite_sword": "镶金的下界合金剑",
   "item.additionaladditions.gilded_netherite_axe": "镶金的下界合金斧",
   "item.additionaladditions.gilded_netherite_pickaxe": "镶金的下界合金镐",
@@ -26,6 +35,13 @@
   "item.additionaladditions.gilded_netherite_chestplate": "镶金的下界合金胸甲",
   "item.additionaladditions.gilded_netherite_leggings": "镶金的下界合金护腿",
   "item.additionaladditions.gilded_netherite_boots": "镶金的下界合金靴子",
+
+  "item.additionaladditions.smithing_template.gilded_netherite_upgrade.additions_slot_description": "Add Gold Ring",
+  "item.additionaladditions.smithing_template.gilded_netherite_upgrade.applies_to": "Netherite Equipment",
+  "item.additionaladditions.smithing_template.gilded_netherite_upgrade.base_slot_description": "Add netherite armor, weapon, or tool",
+  "item.additionaladditions.smithing_template.gilded_netherite_upgrade.ingredients": "Gold Ring",
+  "upgrade.additionaladditions.gilded_netherite_upgrade": "Gilded Netherite Upgrade",
+
   "item.additionaladditions.music_disc_0308": "音乐唱片",
   "item.additionaladditions.music_disc_1007": "音乐唱片",
   "item.additionaladditions.music_disc_1507": "音乐唱片",

@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "minecraft:diamond"
+    },
+    "C": {
+      "item": "minecraft:blackstone"
+    },
+    "S": {
+      "item": "additionaladditions:gilded_netherite_upgrade"
+    }
+  },
+  "pattern": [
+    "#S#",
+    "#C#",
+    "###"
+  ],
+  "result": {
+    "count": 2,
+    "item": "additionaladditions:gilded_netherite_upgrade"
+  },
+  "show_notification": true
+}

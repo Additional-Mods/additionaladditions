@@ -1,7 +1,10 @@
 package dqu.additionaladditions.registry;
 
 import dqu.additionaladditions.AdditionalAdditions;
+import dqu.additionaladditions.config.Config;
+import dqu.additionaladditions.config.ConfigValues;
 import dqu.additionaladditions.item.AdditionalMusicDiscItem;
+import dqu.additionaladditions.misc.CreativeAdder;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -33,9 +36,7 @@ public class AdditionalMusicDiscs {
         Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(AdditionalAdditions.namespace, "music_disc_1007"), MUSIC_DISC_1007);
         Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(AdditionalAdditions.namespace, "music_disc_1507"), MUSIC_DISC_1507);
 
-        ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.TOOLS_AND_UTILITIES).register(content -> {
-            content.addAfter(Items.MUSIC_DISC_WAIT, MUSIC_DISC_0308, MUSIC_DISC_1007, MUSIC_DISC_1507);
-        });
+        CreativeAdder.TOOLS_AND_UTILITIES.add(() -> Config.getBool(ConfigValues.MUSIC_DISCS), Items.MUSIC_DISC_WAIT, MUSIC_DISC_0308, MUSIC_DISC_1007, MUSIC_DISC_1507);
     }
 
     public static void registerAll() {

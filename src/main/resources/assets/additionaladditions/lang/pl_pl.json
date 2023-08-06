@@ -2,6 +2,7 @@
   "item.additionaladditions.berry_pie": "Ciasto jagodowe",
   "item.additionaladditions.watering_can": "Konewka",
   "item.additionaladditions.crossbow_with_spyglass": "Kusza z lunetą",
+
   "item.additionaladditions.rose_gold_sword": "Różowo złoty miecz",
   "item.additionaladditions.rose_gold_axe": "Różowo złoty topór",
   "item.additionaladditions.rose_gold_pickaxe": "Różowo złoty kilof",
@@ -11,12 +12,20 @@
   "item.additionaladditions.rose_gold_chestplate": "Różowo złoty napierśnik",
   "item.additionaladditions.rose_gold_leggings": "Różowo złote spodnie",
   "item.additionaladditions.rose_gold_boots": "Różowo złote buty",
+
+  "item.additionaladditions.smithing_template.rose_gold_upgrade.additions_slot_description": "Add Rose Gold Alloy",
+  "item.additionaladditions.smithing_template.rose_gold_upgrade.applies_to": "Iron Equipment",
+  "item.additionaladditions.smithing_template.rose_gold_upgrade.base_slot_description": "Add iron armor, weapon, or tool",
+  "item.additionaladditions.smithing_template.rose_gold_upgrade.ingredients": "Rose Gold Alloy",
+  "upgrade.additionaladditions.rose_gold_upgrade": "Rose Gold Upgrade",
+
   "item.additionaladditions.wrench": "Klucz francuski",
   "item.additionaladditions.fried_egg": "Jajko sadzone",
   "item.additionaladditions.trident_shard": "Odłamek trójzębu",
   "item.additionaladditions.glow_stick": "Świetliki",
   "item.additionaladditions.honeyed_apple": "Jabłko w miodzie",
   "item.additionaladditions.depth_meter": "Głębokościomierz",
+
   "item.additionaladditions.gilded_netherite_sword": "Pozłacany netheritowy miecz",
   "item.additionaladditions.gilded_netherite_axe": "Pozłacany netheritowy siekiera",
   "item.additionaladditions.gilded_netherite_pickaxe": "Pozłacany netheritowy kilof",
@@ -26,6 +35,13 @@
   "item.additionaladditions.gilded_netherite_chestplate": "Pozłacany netheritowy napierśnik",
   "item.additionaladditions.gilded_netherite_leggings": "Pozłacane netheritowe spodnie",
   "item.additionaladditions.gilded_netherite_boots": "Pozłacane netheritowe buty",
+
+  "item.additionaladditions.smithing_template.gilded_netherite_upgrade.additions_slot_description": "Add Gold Ring",
+  "item.additionaladditions.smithing_template.gilded_netherite_upgrade.applies_to": "Netherite Equipment",
+  "item.additionaladditions.smithing_template.gilded_netherite_upgrade.base_slot_description": "Add netherite armor, weapon, or tool",
+  "item.additionaladditions.smithing_template.gilded_netherite_upgrade.ingredients": "Gold Ring",
+  "upgrade.additionaladditions.gilded_netherite_upgrade": "Gilded Netherite Upgrade",
+
   "item.additionaladditions.music_disc_0308": "Płyta muzyczna",
   "item.additionaladditions.music_disc_1007": "Płyta muzyczna",
   "item.additionaladditions.music_disc_1507": "Płyta muzyczna",

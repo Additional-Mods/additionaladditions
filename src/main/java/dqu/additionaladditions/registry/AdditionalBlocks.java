@@ -9,6 +9,7 @@ import dqu.additionaladditions.block.RopeBlock;
 import dqu.additionaladditions.config.Config;
 import dqu.additionaladditions.config.ConfigValues;
 import dqu.additionaladditions.item.CopperPatinaItem;
+import dqu.additionaladditions.misc.CreativeAdder;
 import dqu.additionaladditions.misc.LootHandler;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
@@ -74,20 +75,12 @@ public class AdditionalBlocks {
                 .add(LootItem.lootTableItem(AdditionalBlocks.ROPE_BLOCK))
         );
 
-        ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.REDSTONE_BLOCKS).register(content -> {
-            content.addAfter(Items.REDSTONE, COPPER_PATINA);
-            content.addAfter(Items.REDSTONE_LAMP, AMETHYST_LAMP);
-        });
-        ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.FUNCTIONAL_BLOCKS).register(content -> {
-            content.addAfter(Items.REDSTONE_LAMP, AMETHYST_LAMP);
-        });
-        ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.BUILDING_BLOCKS).register(content -> {
-            content.addAfter(Items.REDSTONE_BLOCK, PATINA_BLOCK);
-            content.addAfter(Items.CHAIN, ROPE_BLOCK);
-        });
-        ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.TOOLS_AND_UTILITIES).register(content -> {
-            content.addAfter(Items.SPYGLASS, ROPE_BLOCK);
-        });
+        CreativeAdder.REDSTONE_BLOCKS.add(() -> Config.getBool(ConfigValues.COPPER_PATINA), Items.REDSTONE_BLOCK, COPPER_PATINA);
+        CreativeAdder.REDSTONE_BLOCKS.add(() -> Config.getBool(ConfigValues.AMETHYST_LAMP, "enabled"), Items.REDSTONE_LAMP, AMETHYST_LAMP);
+        CreativeAdder.FUNCTIONAL_BLOCKS.add(() -> Config.getBool(ConfigValues.AMETHYST_LAMP, "enabled"), Items.REDSTONE_LAMP, AMETHYST_LAMP);
+        CreativeAdder.BUILDING_BLOCKS.add(() -> Config.getBool(ConfigValues.COPPER_PATINA), Items.REDSTONE_BLOCK, PATINA_BLOCK);
+        CreativeAdder.BUILDING_BLOCKS.add(() -> Config.getBool(ConfigValues.ROPES), Items.CHAIN, ROPE_BLOCK);
+        CreativeAdder.TOOLS_AND_UTILITIES.add(() -> Config.getBool(ConfigValues.ROPES), Items.SPYGLASS, ROPE_BLOCK);
 
         // life is meaningless and we're all gonna die
     }

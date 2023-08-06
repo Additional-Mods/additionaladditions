@@ -4,6 +4,13 @@
   "item.additionaladditions.crossbow_with_spyglass": "Арбалет с подзорной трубой",
   "item.additionaladditions.rose_gold_sword": "Меч из розового золота",
   "item.additionaladditions.rose_gold_axe": "Топор из розового золота",
+
+  "item.additionaladditions.smithing_template.rose_gold_upgrade.additions_slot_description": "Add Rose Gold Alloy",
+  "item.additionaladditions.smithing_template.rose_gold_upgrade.applies_to": "Iron Equipment",
+  "item.additionaladditions.smithing_template.rose_gold_upgrade.base_slot_description": "Add iron armor, weapon, or tool",
+  "item.additionaladditions.smithing_template.rose_gold_upgrade.ingredients": "Rose Gold Alloy",
+  "upgrade.additionaladditions.rose_gold_upgrade": "Rose Gold Upgrade",
+
   "item.additionaladditions.rose_gold_pickaxe": "Кирка из розового золота",
   "item.additionaladditions.rose_gold_shovel": "Лопата из розового золота",
   "item.additionaladditions.rose_gold_hoe": "Мотыга из розового золота",
@@ -17,6 +24,7 @@
   "item.additionaladditions.glow_stick": "Светящаяся палочка",
   "item.additionaladditions.honeyed_apple": "Яблоко в меду",
   "item.additionaladditions.depth_meter": "Глубиномер",
+
   "item.additionaladditions.gilded_netherite_sword": "Позолоченный незеритовый меч",
   "item.additionaladditions.gilded_netherite_axe": "Позолоченный незеритовый топор",
   "item.additionaladditions.gilded_netherite_pickaxe": "Позолоченная незеритовая кирка",
@@ -26,6 +34,13 @@
   "item.additionaladditions.gilded_netherite_chestplate": "Позолоченный незеритовый нагрудник",
   "item.additionaladditions.gilded_netherite_leggings": "Позолоченные незеритовые поножи",
   "item.additionaladditions.gilded_netherite_boots": "Позолоченные незеритовые ботинки",
+
+  "item.additionaladditions.smithing_template.gilded_netherite_upgrade.additions_slot_description": "Add Gold Ring",
+  "item.additionaladditions.smithing_template.gilded_netherite_upgrade.applies_to": "Netherite Equipment",
+  "item.additionaladditions.smithing_template.gilded_netherite_upgrade.base_slot_description": "Add netherite armor, weapon, or tool",
+  "item.additionaladditions.smithing_template.gilded_netherite_upgrade.ingredients": "Gold Ring",
+  "upgrade.additionaladditions.gilded_netherite_upgrade": "Gilded Netherite Upgrade",
+
   "item.additionaladditions.music_disc_0308": "Пластинка",
   "item.additionaladditions.music_disc_1007": "Пластинка",
   "item.additionaladditions.music_disc_1507": "Пластинка",

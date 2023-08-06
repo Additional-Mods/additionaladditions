@@ -2,6 +2,7 @@
   "item.additionaladditions.berry_pie": "달콤한 열매 파이",
   "item.additionaladditions.watering_can": "물뿌리게",
   "item.additionaladditions.crossbow_with_spyglass": "석궁과 망원경",
+
   "item.additionaladditions.rose_gold_sword": "로즈 골드 검",
   "item.additionaladditions.rose_gold_axe": "로즈 골드 도끼",
   "item.additionaladditions.rose_gold_pickaxe": "로즈 골드 곡괭이",
@@ -11,12 +12,20 @@
   "item.additionaladditions.rose_gold_chestplate": "로즈 골드 흉갑",
   "item.additionaladditions.rose_gold_leggings": "로즈 골드 각반",
   "item.additionaladditions.rose_gold_boots": "로즈 골드 부츠",
+
+  "item.additionaladditions.smithing_template.rose_gold_upgrade.additions_slot_description": "Add Rose Gold Alloy",
+  "item.additionaladditions.smithing_template.rose_gold_upgrade.applies_to": "Iron Equipment",
+  "item.additionaladditions.smithing_template.rose_gold_upgrade.base_slot_description": "Add iron armor, weapon, or tool",
+  "item.additionaladditions.smithing_template.rose_gold_upgrade.ingredients": "Rose Gold Alloy",
+  "upgrade.additionaladditions.rose_gold_upgrade": "Rose Gold Upgrade",
+
   "item.additionaladditions.wrench": "렌치",
   "item.additionaladditions.fried_egg": "게란 후라이",
   "item.additionaladditions.trident_shard": "삼지창 조각",
   "item.additionaladditions.glow_stick": "발광 막대기",
   "item.additionaladditions.honeyed_apple": "꿀 사과",
   "item.additionaladditions.depth_meter": "깊이 미터",
+
   "item.additionaladditions.gilded_netherite_sword": "금이 박힌 네더라이트 검",
   "item.additionaladditions.gilded_netherite_axe": "금이 박힌 네더라이트 도끼",
   "item.additionaladditions.gilded_netherite_pickaxe": "금이 박힌 네더라이트 곡괭이",
@@ -26,6 +35,13 @@
   "item.additionaladditions.gilded_netherite_chestplate": "금이 박힌 네더라이트 흉갑",
   "item.additionaladditions.gilded_netherite_leggings": "금이 박힌 네더라이트 각반",
   "item.additionaladditions.gilded_netherite_boots": "금이 박힌 네더라이트 부츠",
+
+  "item.additionaladditions.smithing_template.gilded_netherite_upgrade.additions_slot_description": "Add Gold Ring",
+  "item.additionaladditions.smithing_template.gilded_netherite_upgrade.applies_to": "Netherite Equipment",
+  "item.additionaladditions.smithing_template.gilded_netherite_upgrade.base_slot_description": "Add netherite armor, weapon, or tool",
+  "item.additionaladditions.smithing_template.gilded_netherite_upgrade.ingredients": "Gold Ring",
+  "upgrade.additionaladditions.gilded_netherite_upgrade": "Gilded Netherite Upgrade",
+
   "item.additionaladditions.music_disc_0308": "뮤직 디스크",
   "item.additionaladditions.music_disc_1007": "뮤직 디스크",
   "item.additionaladditions.music_disc_1507": "뮤직 디스크",

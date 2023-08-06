@@ -3,13 +3,16 @@ package dqu.additionaladditions;
 import dev.lambdaurora.lambdynlights.api.DynamicLightHandlers;
 import dqu.additionaladditions.behaviour.BehaviourManager;
 import dqu.additionaladditions.config.Config;
+import dqu.additionaladditions.misc.CreativeAdder;
 import dqu.additionaladditions.misc.LootHandler;
 import dqu.additionaladditions.registry.*;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.server.packs.PackType;
+import net.minecraft.world.item.CreativeModeTabs;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -34,6 +37,8 @@ public class AdditionalAdditions implements ModInitializer {
         AdditionalPotions.registerAll();
         AdditionalMusicDiscs.registerAll();
 
+        addItemsToCreative();
+
         LootTableEvents.MODIFY.register(((resourceManager, lootManager, id, table, setter) -> {
             LootHandler.handle(id, table);
         }));
@@ -43,5 +48,15 @@ public class AdditionalAdditions implements ModInitializer {
         if (FabricLoader.getInstance().isModLoaded("lambdynlights")) {
             DynamicLightHandlers.registerDynamicLightHandler(AdditionalEntities.GLOW_STICK_ENTITY_ENTITY_TYPE, entity -> 12);
         }
+    }
+
+    public void addItemsToCreative() {
+        ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.TOOLS_AND_UTILITIES).register(CreativeAdder.TOOLS_AND_UTILITIES::pushAllTo);
+        ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.INGREDIENTS).register(CreativeAdder.INGREDIENTS::pushAllTo);
+        ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.BUILDING_BLOCKS).register(CreativeAdder.BUILDING_BLOCKS::pushAllTo);
+        ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.REDSTONE_BLOCKS).register(CreativeAdder.REDSTONE_BLOCKS::pushAllTo);
+        ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.FOOD_AND_DRINKS).register(CreativeAdder.FOOD_AND_DRINKS::pushAllTo);
+        ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.FUNCTIONAL_BLOCKS).register(CreativeAdder.FUNCTIONAL_BLOCKS::pushAllTo);
+        ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.COMBAT).register(CreativeAdder.COMBAT::pushAllTo);
     }
 }

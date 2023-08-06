@@ -5,6 +5,7 @@ import dqu.additionaladditions.config.Config;
 import dqu.additionaladditions.config.ConfigValues;
 import dqu.additionaladditions.item.*;
 import dqu.additionaladditions.material.*;
+import dqu.additionaladditions.misc.CreativeAdder;
 import dqu.additionaladditions.misc.LootHandler;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.core.Registry;
@@ -79,20 +80,15 @@ public class AdditionalMaterials {
                 .add(LootItem.lootTableItem(GILDED_NETHERITE_UPGRADE))
         );
 
-        ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.TOOLS_AND_UTILITIES).register(content -> {
-            content.addAfter(Items.GOLDEN_HOE, ROSE_GOLD_SHOVEL, ROSE_GOLD_PICKAXE, ROSE_GOLD_AXE, ROSE_GOLD_HOE);
-            content.addAfter(Items.NETHERITE_HOE, GILDED_NETHERITE_SHOVEL, GILDED_NETHERITE_PICKAXE, GILDED_NETHERITE_AXE, GILDED_NETHERITE_HOE);
-        });
-        ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.COMBAT).register(content -> {
-            content.addAfter(Items.GOLDEN_SWORD, ROSE_GOLD_SWORD);
-            content.addAfter(Items.NETHERITE_SWORD, GILDED_NETHERITE_SWORD);
-            content.addAfter(Items.GOLDEN_AXE, ROSE_GOLD_AXE);
-            content.addAfter(Items.NETHERITE_AXE, GILDED_NETHERITE_AXE);
-            content.addAfter(Items.GOLDEN_BOOTS, ROSE_GOLD_HELMET, ROSE_GOLD_CHESTPLATE, ROSE_GOLD_LEGGINGS, ROSE_GOLD_BOOTS);
-            content.addAfter(Items.NETHERITE_BOOTS, GILDED_NETHERITE_HELMET, GILDED_NETHERITE_CHESTPLATE, GILDED_NETHERITE_LEGGINGS, GILDED_NETHERITE_BOOTS);
-        });
-        ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.INGREDIENTS).register(content -> {
-            content.addAfter(Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE, GILDED_NETHERITE_UPGRADE, ROSE_GOLD_UPGRADE);
-        });
+        CreativeAdder.TOOLS_AND_UTILITIES.add(() -> Config.getBool(ConfigValues.ROSE_GOLD), Items.GOLDEN_HOE, ROSE_GOLD_SHOVEL, ROSE_GOLD_PICKAXE, ROSE_GOLD_AXE, ROSE_GOLD_HOE);
+        CreativeAdder.TOOLS_AND_UTILITIES.add(() -> Config.getBool(ConfigValues.GILDED_NETHERITE, "enabled"), Items.NETHERITE_HOE, GILDED_NETHERITE_SHOVEL, GILDED_NETHERITE_PICKAXE, GILDED_NETHERITE_AXE, GILDED_NETHERITE_HOE);
+        CreativeAdder.COMBAT.add(() -> Config.getBool(ConfigValues.ROSE_GOLD), Items.GOLDEN_SWORD, ROSE_GOLD_SWORD);
+        CreativeAdder.COMBAT.add(() -> Config.getBool(ConfigValues.ROSE_GOLD), Items.GOLDEN_AXE, ROSE_GOLD_AXE);
+        CreativeAdder.COMBAT.add(() -> Config.getBool(ConfigValues.ROSE_GOLD), Items.GOLDEN_BOOTS, ROSE_GOLD_HELMET, ROSE_GOLD_CHESTPLATE, ROSE_GOLD_LEGGINGS, ROSE_GOLD_BOOTS);
+        CreativeAdder.COMBAT.add(() -> Config.getBool(ConfigValues.GILDED_NETHERITE, "enabled"), Items.NETHERITE_SWORD, GILDED_NETHERITE_SWORD);
+        CreativeAdder.COMBAT.add(() -> Config.getBool(ConfigValues.GILDED_NETHERITE, "enabled"), Items.NETHERITE_AXE, GILDED_NETHERITE_AXE);
+        CreativeAdder.COMBAT.add(() -> Config.getBool(ConfigValues.GILDED_NETHERITE, "enabled"), Items.NETHERITE_BOOTS, GILDED_NETHERITE_HELMET, GILDED_NETHERITE_CHESTPLATE, GILDED_NETHERITE_LEGGINGS, GILDED_NETHERITE_BOOTS);
+        CreativeAdder.INGREDIENTS.add(() -> Config.getBool(ConfigValues.ROSE_GOLD), Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE, ROSE_GOLD_UPGRADE);
+        CreativeAdder.INGREDIENTS.add(() -> Config.getBool(ConfigValues.GILDED_NETHERITE, "enabled"), Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE, GILDED_NETHERITE_UPGRADE);
     }
 }
