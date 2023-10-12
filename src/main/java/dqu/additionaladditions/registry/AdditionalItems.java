@@ -9,8 +9,8 @@ import dqu.additionaladditions.misc.LootHandler;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.BlockSource;
 import net.minecraft.core.Registry;
+import net.minecraft.core.dispenser.BlockSource;
 import net.minecraft.core.dispenser.DefaultDispenseItemBehavior;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
@@ -125,11 +125,11 @@ public class AdditionalItems {
                 public ItemStack execute(BlockSource pointer, ItemStack stack) {
                     WrenchItem wrench = (WrenchItem) stack.getItem();
 
-                    BlockState dstate = pointer.getBlockState();
-                    BlockPos pos = pointer.getPos().relative(dstate.getValue(BlockStateProperties.FACING));
-                    BlockState state = pointer.getLevel().getBlockState(pos);
+                    BlockState dstate = pointer.state();
+                    BlockPos pos = pointer.pos().relative(dstate.getValue(BlockStateProperties.FACING));
+                    BlockState state = pointer.level().getBlockState(pos);
 
-                    wrench.dispenserUse(pointer.getLevel(), pos, state, stack);
+                    wrench.dispenserUse(pointer.level(), pos, state, stack);
                     return stack;
                 }
             });
