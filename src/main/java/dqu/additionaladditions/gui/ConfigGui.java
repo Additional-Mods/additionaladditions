@@ -11,12 +11,12 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.network.chat.contents.LiteralContents;
+import net.minecraft.network.chat.contents.PlainTextContents;
 import net.minecraft.network.chat.contents.TranslatableContents;
 
 public class ConfigGui extends LightweightGuiDescription {
     private static final Component OPTION_DONE = MutableComponent.create(new TranslatableContents("gui.done", null, new String[]{}));
-    private static final Component SCREEN_TITLE = MutableComponent.create(new LiteralContents("Additional Additions ")).withStyle(ChatFormatting.BOLD).append(MutableComponent.create(new LiteralContents("options.title")));
+    private static final Component SCREEN_TITLE = MutableComponent.create(new PlainTextContents.LiteralContents("Additional Additions ")).withStyle(ChatFormatting.BOLD).append(MutableComponent.create(new PlainTextContents.LiteralContents("options.title")));
 
     public ConfigGui() {
         WGridPanel root = (WGridPanel) rootPanel;
@@ -27,12 +27,12 @@ public class ConfigGui extends LightweightGuiDescription {
 
         for (ConfigValues value : ConfigValues.values()) {
             if (value.getType() == ConfigValueType.BOOLEAN) {
-                WToggleButton button = new WToggleButton(MutableComponent.create(new LiteralContents(value.getProperty().key())));
+                WToggleButton button = new WToggleButton(MutableComponent.create(new PlainTextContents.LiteralContents(value.getProperty().key())));
                 button.setToggle(Config.getBool(value));
                 button.setOnToggle(on -> Config.set(value, on));
                 box.add(button);
             } else {
-                WLabel text = new WLabel(MutableComponent.create(new LiteralContents(value.getProperty().key() + " | Unable to manage ingame. Edit in file instead.")));
+                WLabel text = new WLabel(MutableComponent.create(new PlainTextContents.LiteralContents(value.getProperty().key() + " | Unable to manage ingame. Edit in file instead.")));
                 box.add(text);
             }
         }
