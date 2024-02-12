@@ -112,7 +112,7 @@ public class AdditionalItems {
                 .when(LootItemRandomChanceWithLootingCondition.randomChanceAndLootingBoost(0.025f, 0.01f))
                 .add(LootItem.lootTableItem(CHICKEN_NUGGET))
         );
-        LootHandler.register(BuiltInLootTables.PIGLIN_BARTERING, () -> Config.getBool(ConfigValues.GILDED_NETHERITE), LootPool.lootPool()
+        LootHandler.register(BuiltInLootTables.PIGLIN_BARTERING, () -> Config.getBool(ConfigValues.GILDED_NETHERITE, "enabled"), LootPool.lootPool()
                 .setRolls(ConstantValue.exactly(1))
                 .when(LootItemRandomChanceCondition.randomChance(0.015f))
                 .add(LootItem.lootTableItem(GOLD_RING))
