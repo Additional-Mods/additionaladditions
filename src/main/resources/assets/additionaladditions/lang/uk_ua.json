@@ -7,7 +7,7 @@
   "item.additionaladditions.smithing_template.rose_gold_upgrade.applies_to": "Залізне спорядження",
   "item.additionaladditions.smithing_template.rose_gold_upgrade.base_slot_description": "Розмістіть залізні обладунки, зброю або інструмент",
   "item.additionaladditions.smithing_template.rose_gold_upgrade.ingredients": "Сплав рожевого золота",
-  "upgrade.additionaladditions.rose_gold_upgrade": "Покращення з рожевого золота",
+  "item.additionaladditions.rose_gold_upgrade": "Покращення з рожевого золота",
 
   "item.additionaladditions.rose_gold_sword": "Меч з рожевого золота",
   "item.additionaladditions.rose_gold_axe": "Сокира з рожевого золота",
@@ -39,7 +39,7 @@
   "item.additionaladditions.smithing_template.gilded_netherite_upgrade.applies_to": "Незеритове спорядження",
   "item.additionaladditions.smithing_template.gilded_netherite_upgrade.base_slot_description": "Розмістіть незеритові обладунки, зброю або інструмент",
   "item.additionaladditions.smithing_template.gilded_netherite_upgrade.ingredients": "Золоте кільце",
-  "upgrade.additionaladditions.gilded_netherite_upgrade": "Позолочене покращення",
+  "item.additionaladditions.gilded_netherite_upgrade": "Позолочене покращення",
 
   "item.additionaladditions.music_disc_0308": "Платівка",
   "item.additionaladditions.music_disc_1007": "Платівка",

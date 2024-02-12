@@ -17,7 +17,7 @@
     "item.additionaladditions.smithing_template.rose_gold_upgrade.applies_to": "Iron Equipment",
     "item.additionaladditions.smithing_template.rose_gold_upgrade.base_slot_description": "Add iron armor, weapon, or tool",
     "item.additionaladditions.smithing_template.rose_gold_upgrade.ingredients": "Rose Gold Alloy",
-    "upgrade.additionaladditions.rose_gold_upgrade": "Rose Gold Upgrade",
+    "item.additionaladditions.rose_gold_upgrade": "Rose Gold Upgrade",
 
     "item.additionaladditions.wrench": "Kunci",
     "item.additionaladditions.fried_egg": "Telur Mata Sapi",
@@ -40,7 +40,7 @@
     "item.additionaladditions.smithing_template.gilded_netherite_upgrade.applies_to": "Netherite Equipment",
     "item.additionaladditions.smithing_template.gilded_netherite_upgrade.base_slot_description": "Add netherite armor, weapon, or tool",
     "item.additionaladditions.smithing_template.gilded_netherite_upgrade.ingredients": "Gold Ring",
-    "upgrade.additionaladditions.gilded_netherite_upgrade": "Gilded Netherite Upgrade",
+    "item.additionaladditions.gilded_netherite_upgrade": "Gilded Netherite Upgrade",
 
     "item.additionaladditions.music_disc_0308": "Cakram Musik",
     "item.additionaladditions.music_disc_1007": "Cakram Musik",

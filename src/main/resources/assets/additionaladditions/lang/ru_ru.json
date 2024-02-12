@@ -9,7 +9,7 @@
 	"item.additionaladditions.smithing_template.rose_gold_upgrade.applies_to": "Железному снаряжению",
 	"item.additionaladditions.smithing_template.rose_gold_upgrade.base_slot_description": "Поместите железный доспех, инструмент или оружие",
 	"item.additionaladditions.smithing_template.rose_gold_upgrade.ingredients": "Сплав розового золота",
-	"upgrade.additionaladditions.rose_gold_upgrade": "Улучшение в розовое золото",
+	"item.additionaladditions.rose_gold_upgrade": "Улучшение в розовое золото",
 	
 	"item.additionaladditions.rose_gold_pickaxe": "Кирка из розового золота",
 	"item.additionaladditions.rose_gold_shovel": "Лопата из розового золота",
@@ -39,7 +39,7 @@
 	"item.additionaladditions.smithing_template.gilded_netherite_upgrade.applies_to": "Незеритовому снаряжению",
 	"item.additionaladditions.smithing_template.gilded_netherite_upgrade.base_slot_description": "Поместите незеритовый доспех, инструмент или оружие",
 	"item.additionaladditions.smithing_template.gilded_netherite_upgrade.ingredients": "Золотое кольцо",
-	"upgrade.additionaladditions.gilded_netherite_upgrade": "Улучшение в позолоченный незерит",
+	"item.additionaladditions.gilded_netherite_upgrade": "Улучшение в позолоченный незерит",
 	
 	"item.additionaladditions.music_disc_0308": "Пластинка",
 	"item.additionaladditions.music_disc_1007": "Пластинка",
@@ -57,7 +57,7 @@
 	"block.additionaladditions.rope": "Верёвка",
 	"block.additionaladditions.amethyst_lamp": "Аметистовый фонарь",
 	"block.additionaladditions.patina_block": "Блок медной патины",
-	"enchantment.additionaladditions.precision": "Улучшенный прицел",
+	"enchantment.additionaladditions.precision": "Меткость",
 	"enchantment.additionaladditions.precision.desc": "Уменьшает разброс арбалета.",
 	"enchantment.additionaladditions.speed": "Скорость",
 	"enchantment.additionaladditions.speed.desc": "Увеличивает скорость перемещения.",
@@ -100,5 +100,5 @@
 	"additionaladditions.advancements.use_watering_can.desc": "Используйте лейку, чтобы удобрить посевы",
 	
 	"additionaladditions.gui.config.restart": "Перезапустите игру, чтобы применить изменения",
-	"additionaladditions.gui.pocket_jukebox.tooltip": "Дважды кликните пластинкой, чтобы играть её"
+	"additionaladditions.gui.pocket_jukebox.tooltip": "Вторичный клик пластинкой, чтобы играть"
 }

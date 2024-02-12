@@ -75,7 +75,7 @@ public class WateringCanItem extends Item {
             fluid.getPickupSound().ifPresent((sound) -> player.playSound(sound, 1.0F, 1.0F));
             if (!world.isClientSide()) {
                 stack.setDamageValue(100);
-                fluid.pickupBlock(world, pos, state);
+                fluid.pickupBlock(player, world, pos, state);
                 player.swing(hand);
             }
             return InteractionResultHolder.success(stack);

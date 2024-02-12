@@ -22,8 +22,8 @@ import net.minecraft.world.level.block.state.BlockState;
 
 @Mixin(AxeItem.class)
 public class AxeItemMixin {
-    @Inject(method = "useOn", at = @At(value = "FIELD", target = "Lnet/minecraft/sounds/SoundEvents;AXE_SCRAPE:Lnet/minecraft/sounds/SoundEvent;"), locals = LocalCapture.CAPTURE_FAILSOFT)
-    private void spawnCopperPatina(UseOnContext iuc, CallbackInfoReturnable<InteractionResult> cir, Level world, BlockPos blockPos, Player playerEntity, BlockState blockState, Optional optional, Optional optional2, Optional optional3, ItemStack itemStack, Optional optional4) {
+    @Inject(method = "evaluateNewBlockState", at = @At(value = "FIELD", target = "Lnet/minecraft/sounds/SoundEvents;AXE_SCRAPE:Lnet/minecraft/sounds/SoundEvent;"), locals = LocalCapture.CAPTURE_FAILSOFT)
+    private void spawnCopperPatina(Level world, BlockPos blockPos, Player player, BlockState blockState, CallbackInfoReturnable<Optional<BlockState>> cir, Optional optional, Optional optional2) {
         if (!Config.getBool(ConfigValues.COPPER_PATINA)) return;
         ItemStack stack = new ItemStack(AdditionalBlocks.COPPER_PATINA);
         ItemEntity itemEntity = new ItemEntity(world, blockPos.getX(), blockPos.getY(), blockPos.getZ(), stack);
