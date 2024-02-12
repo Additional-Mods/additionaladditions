@@ -17,7 +17,7 @@
   "item.additionaladditions.smithing_template.rose_gold_upgrade.applies_to": "철 장비",
   "item.additionaladditions.smithing_template.rose_gold_upgrade.base_slot_description": "철 갑옷이나 무기, 도구를 놓으세요",
   "item.additionaladditions.smithing_template.rose_gold_upgrade.ingredients": "로즈 골드 합금",
-  "upgrade.additionaladditions.rose_gold_upgrade": "로즈 골드 강화",
+  "item.additionaladditions.rose_gold_upgrade": "로즈 골드 강화",
 
   "item.additionaladditions.wrench": "렌치",
   "item.additionaladditions.fried_egg": "계란 프라이",
@@ -40,7 +40,7 @@
   "item.additionaladditions.smithing_template.gilded_netherite_upgrade.applies_to": "네더라이트 장비",
   "item.additionaladditions.smithing_template.gilded_netherite_upgrade.base_slot_description": "네더라이트 갑옷이나 무기, 도구를 놓으세요",
   "item.additionaladditions.smithing_template.gilded_netherite_upgrade.ingredients": "금 고리",
-  "upgrade.additionaladditions.gilded_netherite_upgrade": "황금이 박힌 네더라이트 강화",
+  "item.additionaladditions.gilded_netherite_upgrade": "황금이 박힌 네더라이트 강화",
 
   "item.additionaladditions.music_disc_0308": "음반",
   "item.additionaladditions.music_disc_1007": "음반",
