@@ -19,9 +19,14 @@
     "use": {
       "trigger": "minecraft:item_used_on_block",
       "conditions": {
-        "item": {
-          "items": ["additionaladditions:watering_can"]
-        }
+        "location": [
+          {
+            "condition": "minecraft:match_tool",
+            "predicate": {
+              "items": ["additionaladditions:watering_can"]
+            }
+          }
+        ]
       }
     }
   },
