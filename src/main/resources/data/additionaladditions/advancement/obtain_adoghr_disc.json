@@ -8,7 +8,7 @@
       "translate": "additionaladditions.advancements.obtain_adoghr_disc.desc"
     },
     "icon": {
-      "item": "additionaladditions:music_disc_0308"
+      "id": "additionaladditions:music_disc_0308"
     },
     "frame": "task",
     "show_toast": true,

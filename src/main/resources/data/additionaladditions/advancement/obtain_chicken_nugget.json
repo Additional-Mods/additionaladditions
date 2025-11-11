@@ -8,7 +8,7 @@
       "translate": "additionaladditions.advancements.obtain_chicken_nugget.desc"
     },
     "icon": {
-      "item": "additionaladditions:chicken_nugget"
+      "id": "additionaladditions:chicken_nugget"
     },
     "frame": "challenge",
     "show_toast": true,

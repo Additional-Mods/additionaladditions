@@ -7,7 +7,7 @@
     {"item": "minecraft:egg"}
   ],
   "result": {
-    "item": "additionaladditions:berry_pie",
+    "id": "additionaladditions:berry_pie",
     "count": 1
   }
 }

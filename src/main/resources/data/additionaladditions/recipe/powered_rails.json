@@ -11,7 +11,7 @@
     "C": {"item": "minecraft:copper_ingot"}
   },
   "result": {
-    "item": "minecraft:powered_rail",
+    "id": "minecraft:powered_rail",
     "count": 6
   }
 }

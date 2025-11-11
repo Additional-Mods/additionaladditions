@@ -9,7 +9,7 @@
     "S": {"item": "minecraft:string"}
   },
   "result": {
-    "item": "additionaladditions:rope",
+    "id": "additionaladditions:rope",
     "count": 1
   }
 }

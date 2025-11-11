@@ -8,7 +8,7 @@
       "translate": "additionaladditions.advancements.shot_self_scoped_crossbow.desc"
     },
     "icon": {
-      "item": "additionaladditions:crossbow_with_spyglass"
+      "id": "additionaladditions:crossbow_with_spyglass"
     },
     "frame": "challenge",
     "show_toast": true,

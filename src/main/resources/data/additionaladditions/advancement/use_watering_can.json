@@ -8,7 +8,7 @@
       "translate": "additionaladditions.advancements.use_watering_can.desc"
     },
     "icon": {
-      "item": "additionaladditions:watering_can"
+      "id": "additionaladditions:watering_can"
     },
     "frame": "task",
     "show_toast": true,

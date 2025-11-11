@@ -8,7 +8,7 @@
     "P": {"item": "additionaladditions:copper_patina"}
   },
   "result": {
-    "item": "additionaladditions:patina_block",
+    "id": "additionaladditions:patina_block",
     "count": 1
   }
 }

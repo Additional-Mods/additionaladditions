@@ -10,7 +10,7 @@
     "P": {"item": "minecraft:prismarine_shard"}
   },
   "result": {
-    "item": "minecraft:trident",
+    "id": "minecraft:trident",
     "count": 1
   }
 }

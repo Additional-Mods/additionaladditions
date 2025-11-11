@@ -11,7 +11,7 @@
     "S": {"item": "minecraft:spyglass"}
   },
   "result": {
-    "item": "additionaladditions:crossbow_with_spyglass",
+    "id": "additionaladditions:crossbow_with_spyglass",
     "count": 1
   }
 }

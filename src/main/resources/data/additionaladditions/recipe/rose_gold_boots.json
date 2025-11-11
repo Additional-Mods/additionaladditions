@@ -2,6 +2,6 @@
   "type": "minecraft:smithing_transform",
   "base": {"item": "minecraft:iron_boots"},
   "addition": {"item": "additionaladditions:rose_gold_alloy"},
-  "result": {"item": "additionaladditions:rose_gold_boots"},
+  "result": {"id": "additionaladditions:rose_gold_boots"},
   "template": {"item": "additionaladditions:rose_gold_upgrade"}
 }

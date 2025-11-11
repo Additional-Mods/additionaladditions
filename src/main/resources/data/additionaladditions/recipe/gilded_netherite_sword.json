@@ -1,7 +1,0 @@
-{
-  "type": "minecraft:smithing_transform",
-  "base": {"item": "minecraft:netherite_sword"},
-  "addition": {"item": "additionaladditions:gold_ring"},
-  "result": {"item": "additionaladditions:gilded_netherite_sword"},
-  "template": {"item": "additionaladditions:gilded_netherite_upgrade"}
-}

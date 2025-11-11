@@ -5,7 +5,7 @@
     {"item": "minecraft:glow_ink_sac"}
   ],
   "result": {
-    "item": "additionaladditions:glow_stick",
+    "id": "additionaladditions:glow_stick",
     "count": 3
   }
 }

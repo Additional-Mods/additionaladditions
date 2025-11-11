@@ -9,7 +9,7 @@
     "C": {"item": "minecraft:copper_ingot"}
   },
   "result": {
-    "item": "additionaladditions:wrench",
+    "id": "additionaladditions:wrench",
     "count": 1
   }
 }

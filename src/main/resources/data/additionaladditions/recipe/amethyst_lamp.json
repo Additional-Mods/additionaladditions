@@ -10,7 +10,7 @@
     "L": {"item": "minecraft:redstone_lamp"}
   },
   "result": {
-    "item": "additionaladditions:amethyst_lamp",
+    "id": "additionaladditions:amethyst_lamp",
     "count": 1
   }
 }

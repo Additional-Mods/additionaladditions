@@ -11,7 +11,7 @@
     "J": {"item": "minecraft:jukebox"}
   },
   "result": {
-    "item": "additionaladditions:pocket_jukebox",
+    "id": "additionaladditions:pocket_jukebox",
     "count": 1
   }
 }

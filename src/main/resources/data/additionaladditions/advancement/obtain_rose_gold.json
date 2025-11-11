@@ -8,7 +8,7 @@
       "translate": "additionaladditions.advancements.obtain_rose_gold.desc"
     },
     "icon": {
-      "item": "additionaladditions:rose_gold_chestplate"
+      "id": "additionaladditions:rose_gold_chestplate"
     },
     "frame": "task",
     "show_toast": true,
