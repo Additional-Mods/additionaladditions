@@ -1,5 +1,5 @@
 {
-  "0308": {
+  "music_disc.0308": {
     "sounds": [
       {
         "name": "additionaladditions:records/0308",
@@ -7,7 +7,7 @@
       }
     ]
   },
-  "1007": {
+  "music_disc.1007": {
     "sounds": [
       {
         "name": "additionaladditions:records/1007",
@@ -15,7 +15,7 @@
       }
     ]
   },
-  "1507": {
+  "music_disc.1507": {
     "sounds": [
       {
         "name": "additionaladditions:records/1507",

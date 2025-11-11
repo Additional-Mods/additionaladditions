@@ -1,0 +1,10 @@
+{
+  "comparator_output": 3,
+  "description": {
+    "translate": "item.additionaladditions.music_disc_0308.desc"
+  },
+  "length_in_seconds": 100.0,
+  "sound_event": {
+    "sound_id": "additionaladditions:music_disc.0308"
+  }
+}

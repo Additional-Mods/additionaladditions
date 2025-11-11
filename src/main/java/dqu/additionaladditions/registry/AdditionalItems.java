@@ -12,6 +12,8 @@ import net.minecraft.core.Registry;
 import net.minecraft.core.dispenser.BlockSource;
 import net.minecraft.core.dispenser.DefaultDispenseItemBehavior;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.food.FoodProperties;
@@ -56,6 +58,9 @@ public class AdditionalItems {
     public static final Item GOLD_RING = new Item(new Item.Properties().stacksTo(1));
     public static final PocketJukeboxItem POCKET_JUKEBOX_ITEM = new PocketJukeboxItem(new Item.Properties().stacksTo(1));
     public static final Item ROSE_GOLD_ALLOY = new Item(new Item.Properties());
+    public static final Item MUSIC_DISC_0308 = new Item(new Item.Properties().stacksTo(1).rarity(Rarity.RARE).jukeboxPlayable(ResourceKey.create(Registries.JUKEBOX_SONG, ResourceLocation.tryBuild(AdditionalAdditions.namespace, "0308"))));
+    public static final Item MUSIC_DISC_1007 = new Item(new Item.Properties().stacksTo(1).rarity(Rarity.RARE).jukeboxPlayable(ResourceKey.create(Registries.JUKEBOX_SONG, ResourceLocation.tryBuild(AdditionalAdditions.namespace, "1007"))));
+    public static final Item MUSIC_DISC_1507 = new Item(new Item.Properties().stacksTo(1).rarity(Rarity.RARE).jukeboxPlayable(ResourceKey.create(Registries.JUKEBOX_SONG, ResourceLocation.tryBuild(AdditionalAdditions.namespace, "1507"))));
 
     private static void registerItems() {
         Registry.register(BuiltInRegistries.ITEM, ResourceLocation.tryBuild(AdditionalAdditions.namespace, "watering_can"), WATERING_CAN);
@@ -68,6 +73,9 @@ public class AdditionalItems {
         Registry.register(BuiltInRegistries.ITEM, ResourceLocation.tryBuild(AdditionalAdditions.namespace, "pocket_jukebox"), POCKET_JUKEBOX_ITEM);
         Registry.register(BuiltInRegistries.ITEM, ResourceLocation.tryBuild(AdditionalAdditions.namespace, "gold_ring"), GOLD_RING);
         Registry.register(BuiltInRegistries.ITEM, ResourceLocation.tryBuild(AdditionalAdditions.namespace, "rose_gold_alloy"), ROSE_GOLD_ALLOY);
+        Registry.register(BuiltInRegistries.ITEM, ResourceLocation.tryBuild(AdditionalAdditions.namespace, "music_disc_0308"), MUSIC_DISC_0308);
+        Registry.register(BuiltInRegistries.ITEM, ResourceLocation.tryBuild(AdditionalAdditions.namespace, "music_disc_1007"), MUSIC_DISC_1007);
+        Registry.register(BuiltInRegistries.ITEM, ResourceLocation.tryBuild(AdditionalAdditions.namespace, "music_disc_1507"), MUSIC_DISC_1507);
     }
 
     private static void registerFoods() {
@@ -93,13 +101,13 @@ public class AdditionalItems {
                 .when(LootItemRandomChanceCondition.randomChance(0.1f))
                 .add(LootItem.lootTableItem(DEPTH_METER_ITEM))
         );
-//        LootHandler.register(List.of(BuiltInLootTables.SIMPLE_DUNGEON, BuiltInLootTables.WOODLAND_MANSION), () -> Config.getBool(ConfigValues.MUSIC_DISCS), LootPool.lootPool()
-//                .setRolls(ConstantValue.exactly(1))
-//                .when(LootItemRandomChanceCondition.randomChance(0.25f))
-//                .add(LootItem.lootTableItem(AdditionalMusicDiscs.MUSIC_DISC_0308))
-//                .add(LootItem.lootTableItem(AdditionalMusicDiscs.MUSIC_DISC_1007))
-//                .add(LootItem.lootTableItem(AdditionalMusicDiscs.MUSIC_DISC_1507))
-//        );
+        LootHandler.register(List.of(BuiltInLootTables.SIMPLE_DUNGEON, BuiltInLootTables.WOODLAND_MANSION), () -> Config.getBool(ConfigValues.MUSIC_DISCS), LootPool.lootPool()
+                .setRolls(ConstantValue.exactly(1))
+                .when(LootItemRandomChanceCondition.randomChance(0.25f))
+                .add(LootItem.lootTableItem(MUSIC_DISC_0308))
+                .add(LootItem.lootTableItem(MUSIC_DISC_1007))
+                .add(LootItem.lootTableItem(MUSIC_DISC_1507))
+        );
         LootHandler.register(BuiltInLootTables.SHIPWRECK_SUPPLY, () -> Config.getBool(ConfigValues.SHIPWRECK_SPYGLASS_LOOT), LootPool.lootPool()
                 .setRolls(ConstantValue.exactly(1))
                 .when(LootItemRandomChanceCondition.randomChance(0.5f))
@@ -144,6 +152,9 @@ public class AdditionalItems {
         CreativeAdder.TOOLS_AND_UTILITIES.add(() -> Config.getBool(ConfigValues.DEPTH_METER, "enabled"), Items.CLOCK, DEPTH_METER_ITEM);
         CreativeAdder.TOOLS_AND_UTILITIES.add(() -> Config.getBool(ConfigValues.MYSTERIOUS_BUNDLE), Items.ELYTRA, MYSTERIOUS_BUNDLE_ITEM);
         CreativeAdder.TOOLS_AND_UTILITIES.add(() -> Config.getBool(ConfigValues.POCKET_JUKEBOX), Items.SPYGLASS, POCKET_JUKEBOX_ITEM);
+        CreativeAdder.TOOLS_AND_UTILITIES.add(() -> Config.getBool(ConfigValues.MUSIC_DISCS), Items.MUSIC_DISC_WARD, MUSIC_DISC_0308);
+        CreativeAdder.TOOLS_AND_UTILITIES.add(() -> Config.getBool(ConfigValues.MUSIC_DISCS), Items.MUSIC_DISC_WARD, MUSIC_DISC_1007);
+        CreativeAdder.TOOLS_AND_UTILITIES.add(() -> Config.getBool(ConfigValues.MUSIC_DISCS), Items.MUSIC_DISC_WARD, MUSIC_DISC_1507);
         CreativeAdder.INGREDIENTS.addBefore(() -> Config.getBool(ConfigValues.GILDED_NETHERITE, "enabled"), Items.NETHERITE_SCRAP, GOLD_RING);
         CreativeAdder.INGREDIENTS.addBefore(() -> Config.getBool(ConfigValues.ROSE_GOLD), Items.NETHERITE_SCRAP, ROSE_GOLD_ALLOY);
         CreativeAdder.INGREDIENTS.add(() -> Config.getBool(ConfigValues.TRIDENT_SHARD), Items.PRISMARINE_CRYSTALS, TRIDENT_SHARD);
