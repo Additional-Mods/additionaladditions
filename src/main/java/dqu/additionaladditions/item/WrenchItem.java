@@ -1,15 +1,14 @@
 package dqu.additionaladditions.item;
 
-import dqu.additionaladditions.AdditionalAdditions;
 import dqu.additionaladditions.config.Config;
 import dqu.additionaladditions.config.ConfigValues;
-import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.core.BlockPos;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -18,12 +17,10 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BedBlock;
 import net.minecraft.world.level.block.ChestBlock;
 import net.minecraft.world.level.block.SlabBlock;
-import net.minecraft.world.level.block.entity.HopperBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.SlabType;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
 
@@ -42,11 +39,13 @@ public class WrenchItem extends Item {
 
             player.ifPresentOrElse((pl) -> {
                 if (!pl.isCreative()) {
-                    stack.hurtAndBreak(1, pl, (PlayerEntity -> pl.broadcastBreakEvent(hand.get())));
+                    EquipmentSlot slot = hand.map(h -> h == InteractionHand.MAIN_HAND ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND)
+                            .orElse(EquipmentSlot.MAINHAND);
+                    stack.hurtAndBreak(1, pl, slot);
                 }
             }, () -> {
-                if (stack.hurt(1, world.random, null)) {
-                    stack.shrink(1);
+                if (world instanceof ServerLevel serverLevel) {
+                    stack.hurtAndBreak(1, serverLevel, null, item -> {});
                 }
             });
 
@@ -72,20 +71,6 @@ public class WrenchItem extends Item {
         if (state.hasProperty(BlockStateProperties.FACING_HOPPER)) {
             BlockState newstate = state.cycle(BlockStateProperties.FACING_HOPPER);
             if (tryPlacing(pos, newstate, world, stack, player, hand)) {
-                if (FabricLoader.getInstance().isModLoaded("lithium") && !world.isClientSide()) {
-                    /*
-                     * Lithium mod caches hopper's output and input inventories
-                     * Which causes an issue where the hopper keeps transferring to the old location
-                     * This replaces the block entity, which fixes that.
-                     */
-                    HopperBlockEntity hopperBlockEntity = (HopperBlockEntity) world.getBlockEntity(pos);
-                    CompoundTag nbt = hopperBlockEntity.saveWithoutMetadata();
-                    world.removeBlockEntity(pos);
-                    HopperBlockEntity blockEntity = new HopperBlockEntity(pos, newstate);
-                    blockEntity.load(nbt);
-                    world.setBlockEntity(blockEntity);
-                }
-
                 return InteractionResult.SUCCESS;
             }
         }

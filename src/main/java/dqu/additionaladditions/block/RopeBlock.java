@@ -159,7 +159,7 @@ public class RopeBlock extends Block {
     }
 
     @Override
-    public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+    public InteractionResult useWithoutItem(BlockState state, Level world, BlockPos pos, Player player, BlockHitResult hit) {
         if (!state.is(this)) {
             return InteractionResult.PASS;
         }
@@ -172,7 +172,7 @@ public class RopeBlock extends Block {
         BlockState statedown = world.getBlockState(down);
 
         if (statedown.is(this)) {
-            return statedown.getBlock().use(statedown, world, down, player, hand, hit);
+            return statedown.useWithoutItem(world, player, hit);
         } else if (statedown.isAir() && !world.isOutsideBuildHeight(down.getY())) {
             world.setBlockAndUpdate(down, state);
             world.playSound(null, pos.getX(), pos.getY(), pos.getZ(), SoundEvents.WOOL_PLACE, SoundSource.BLOCKS, 1.0F, 1.0F);

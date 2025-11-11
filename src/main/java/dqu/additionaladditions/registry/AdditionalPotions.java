@@ -14,8 +14,8 @@ public class AdditionalPotions {
     public static final Potion STRONG_HASTE_POTION = new Potion(new MobEffectInstance(MobEffects.DIG_SPEED, 1600, 1));
 
     public static void registerAll() {
-        Registry.register(BuiltInRegistries.POTION, new ResourceLocation(AdditionalAdditions.namespace, "haste_potion"), HASTE_POTION);
-        Registry.register(BuiltInRegistries.POTION, new ResourceLocation(AdditionalAdditions.namespace, "long_haste_potion"), LONG_HASTE_POTION);
-        Registry.register(BuiltInRegistries.POTION, new ResourceLocation(AdditionalAdditions.namespace, "strong_haste_potion"), STRONG_HASTE_POTION);
+        Registry.register(BuiltInRegistries.POTION, ResourceLocation.tryBuild(AdditionalAdditions.namespace, "haste_potion"), HASTE_POTION);
+        Registry.register(BuiltInRegistries.POTION, ResourceLocation.tryBuild(AdditionalAdditions.namespace, "long_haste_potion"), LONG_HASTE_POTION);
+        Registry.register(BuiltInRegistries.POTION, ResourceLocation.tryBuild(AdditionalAdditions.namespace, "strong_haste_potion"), STRONG_HASTE_POTION);
     }
 }

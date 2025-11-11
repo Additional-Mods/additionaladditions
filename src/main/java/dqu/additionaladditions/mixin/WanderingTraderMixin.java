@@ -6,6 +6,7 @@ import dqu.additionaladditions.registry.AdditionalItems;
 import net.minecraft.world.entity.npc.WanderingTrader;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.trading.ItemCost;
 import net.minecraft.world.item.trading.MerchantOffer;
 import net.minecraft.world.item.trading.MerchantOffers;
 import net.minecraft.world.level.Level;
@@ -21,7 +22,8 @@ public class WanderingTraderMixin {
         MerchantOffers tradeOfferList = ((WanderingTrader) (Object) this).getOffers();
         Level world = ((WanderingTrader) (Object) this).level();
         if (world.getRandom().nextDouble() < 0.5D && Config.getBool(ConfigValues.MYSTERIOUS_BUNDLE)) {
-            tradeOfferList.add(new MerchantOffer(new ItemStack(Items.EMERALD, 6), new ItemStack(AdditionalItems.MYSTERIOUS_BUNDLE_ITEM, 1), 6, 6, 0.5f));
+            MerchantOffer offer = new MerchantOffer(new ItemCost(Items.EMERALD, 6), new ItemStack(AdditionalItems.MYSTERIOUS_BUNDLE_ITEM, 1), 6, 6, 0.5f);
+            tradeOfferList.add(offer);
         }
     }
 }

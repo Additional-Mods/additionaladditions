@@ -11,8 +11,6 @@ import dqu.additionaladditions.config.ConfigValues;
 import dqu.additionaladditions.item.CopperPatinaItem;
 import dqu.additionaladditions.misc.CreativeAdder;
 import dqu.additionaladditions.misc.LootHandler;
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
-import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.object.builder.v1.world.poi.PointOfInterestHelper;
 import net.minecraft.core.Registry;
@@ -22,6 +20,7 @@ import net.minecraft.world.entity.ai.village.poi.PoiType;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.RedstoneLampBlock;
 import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
@@ -34,33 +33,33 @@ import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import java.util.List;
 
 public class AdditionalBlocks {
-    public static final RopeBlock ROPE_BLOCK = new RopeBlock(FabricBlockSettings.create().mapColor(MapColor.COLOR_BROWN).pistonBehavior(PushReaction.DESTROY).noCollission().sound(SoundType.WOOL).instabreak());
-    public static final RedstoneLampBlock AMETHYST_LAMP = new RedstoneLampBlock(FabricBlockSettings.create().mapColor(MapColor.TERRACOTTA_PURPLE).pistonBehavior(PushReaction.NORMAL).sound(SoundType.GLASS).strength(0.3f));
-    public static final CopperPatinaBlock COPPER_PATINA = new CopperPatinaBlock(FabricBlockSettings.create().mapColor(MapColor.COLOR_CYAN).pistonBehavior(PushReaction.DESTROY).noCollission().sound(SoundType.TUFF).instabreak());
-    public static final GlowStickBlock GLOW_STICK_BLOCK = new GlowStickBlock(FabricBlockSettings.create().mapColor(MapColor.NONE).pistonBehavior(PushReaction.DESTROY).noCollission().lightLevel((state) -> 12).instabreak());
-    public static final PatinaBlock PATINA_BLOCK = new PatinaBlock(FabricBlockSettings.create().mapColor(MapColor.COLOR_CYAN).pistonBehavior(PushReaction.NORMAL).sound(SoundType.ROOTED_DIRT).strength(0.5f));
+    public static final RopeBlock ROPE_BLOCK = new RopeBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BROWN).pushReaction(PushReaction.DESTROY).noCollission().sound(SoundType.WOOL).instabreak());
+    public static final RedstoneLampBlock AMETHYST_LAMP = new RedstoneLampBlock(BlockBehaviour.Properties.of().mapColor(MapColor.TERRACOTTA_PURPLE).pushReaction(PushReaction.NORMAL).sound(SoundType.GLASS).strength(0.3f));
+    public static final CopperPatinaBlock COPPER_PATINA = new CopperPatinaBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_CYAN).pushReaction(PushReaction.DESTROY).noCollission().sound(SoundType.TUFF).instabreak());
+    public static final GlowStickBlock GLOW_STICK_BLOCK = new GlowStickBlock(BlockBehaviour.Properties.of().mapColor(MapColor.NONE).pushReaction(PushReaction.DESTROY).noCollission().lightLevel((state) -> 12).instabreak());
+    public static final PatinaBlock PATINA_BLOCK = new PatinaBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_CYAN).pushReaction(PushReaction.NORMAL).sound(SoundType.ROOTED_DIRT).strength(0.5f));
 
     public static PoiType AMETHYST_LAMP_POI;
-    public static ResourceLocation AMETHYST_LAMP_POI_RL = new ResourceLocation(AdditionalAdditions.namespace, "amethyst_lamp_poi");
+    public static ResourceLocation AMETHYST_LAMP_POI_RL = ResourceLocation.tryBuild(AdditionalAdditions.namespace, "amethyst_lamp_poi");
 
     public static void registerAll() {
-        Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(AdditionalAdditions.namespace, "glow_stick"), GLOW_STICK_BLOCK);
+        Registry.register(BuiltInRegistries.BLOCK, ResourceLocation.tryBuild(AdditionalAdditions.namespace, "glow_stick"), GLOW_STICK_BLOCK);
 
-        Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(AdditionalAdditions.namespace, "copper_patina"), COPPER_PATINA);
-        Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(AdditionalAdditions.namespace, "copper_patina"),
-                new CopperPatinaItem(COPPER_PATINA, new FabricItemSettings()));
+        Registry.register(BuiltInRegistries.BLOCK, ResourceLocation.tryBuild(AdditionalAdditions.namespace, "copper_patina"), COPPER_PATINA);
+        Registry.register(BuiltInRegistries.ITEM, ResourceLocation.tryBuild(AdditionalAdditions.namespace, "copper_patina"),
+                new CopperPatinaItem(COPPER_PATINA, new Item.Properties()));
 
-        Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(AdditionalAdditions.namespace, "rope"), ROPE_BLOCK);
-        Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(AdditionalAdditions.namespace, "rope"),
-                new BlockItem(ROPE_BLOCK, new FabricItemSettings()));
+        Registry.register(BuiltInRegistries.BLOCK, ResourceLocation.tryBuild(AdditionalAdditions.namespace, "rope"), ROPE_BLOCK);
+        Registry.register(BuiltInRegistries.ITEM, ResourceLocation.tryBuild(AdditionalAdditions.namespace, "rope"),
+                new BlockItem(ROPE_BLOCK, new Item.Properties()));
 
-        Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(AdditionalAdditions.namespace, "amethyst_lamp"), AMETHYST_LAMP);
-        Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(AdditionalAdditions.namespace, "amethyst_lamp"),
-                new BlockItem(AMETHYST_LAMP, new FabricItemSettings()));
+        Registry.register(BuiltInRegistries.BLOCK, ResourceLocation.tryBuild(AdditionalAdditions.namespace, "amethyst_lamp"), AMETHYST_LAMP);
+        Registry.register(BuiltInRegistries.ITEM, ResourceLocation.tryBuild(AdditionalAdditions.namespace, "amethyst_lamp"),
+                new BlockItem(AMETHYST_LAMP, new Item.Properties()));
 
-        Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(AdditionalAdditions.namespace, "patina_block"), PATINA_BLOCK);
-        Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(AdditionalAdditions.namespace, "patina_block"),
-                new BlockItem(PATINA_BLOCK, new FabricItemSettings()));
+        Registry.register(BuiltInRegistries.BLOCK, ResourceLocation.tryBuild(AdditionalAdditions.namespace, "patina_block"), PATINA_BLOCK);
+        Registry.register(BuiltInRegistries.ITEM, ResourceLocation.tryBuild(AdditionalAdditions.namespace, "patina_block"),
+                new BlockItem(PATINA_BLOCK, new Item.Properties()));
 
         AMETHYST_LAMP_POI = PointOfInterestHelper.register(
             AMETHYST_LAMP_POI_RL,
@@ -81,7 +80,5 @@ public class AdditionalBlocks {
         CreativeAdder.BUILDING_BLOCKS.add(() -> Config.getBool(ConfigValues.COPPER_PATINA), Items.REDSTONE_BLOCK, PATINA_BLOCK);
         CreativeAdder.BUILDING_BLOCKS.add(() -> Config.getBool(ConfigValues.ROPES), Items.CHAIN, ROPE_BLOCK);
         CreativeAdder.TOOLS_AND_UTILITIES.add(() -> Config.getBool(ConfigValues.ROPES), Items.SPYGLASS, ROPE_BLOCK);
-
-        // life is meaningless and we're all gonna die
     }
 }

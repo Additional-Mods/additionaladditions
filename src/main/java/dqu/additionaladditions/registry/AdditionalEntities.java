@@ -16,6 +16,6 @@ public class AdditionalEntities {
             .trackRangeBlocks(4).trackedUpdateRate(10).build();
 
     public static void registerAll() {
-        Registry.register(BuiltInRegistries.ENTITY_TYPE, new ResourceLocation(AdditionalAdditions.namespace, "glow_stick"), GLOW_STICK_ENTITY_ENTITY_TYPE);
+        Registry.register(BuiltInRegistries.ENTITY_TYPE, ResourceLocation.tryBuild(AdditionalAdditions.namespace, "glow_stick"), GLOW_STICK_ENTITY_ENTITY_TYPE);
     }
 }

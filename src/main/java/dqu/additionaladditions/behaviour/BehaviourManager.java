@@ -77,7 +77,7 @@ public class BehaviourManager extends SimpleJsonResourceReloadListener implement
     }
 
     public ConfigProperty getBehaviour(String name) {
-        return this.behaviours.get(new ResourceLocation(AdditionalAdditions.namespace, name));
+        return this.behaviours.get(ResourceLocation.tryBuild(AdditionalAdditions.namespace, name));
     }
 
     public <T> T getBehaviourValue(String name, BehaviourValues values) {
@@ -98,7 +98,7 @@ public class BehaviourManager extends SimpleJsonResourceReloadListener implement
 
     @Override
     public ResourceLocation getFabricId() {
-        return new ResourceLocation(AdditionalAdditions.namespace, "behaviour");
+        return ResourceLocation.tryBuild(AdditionalAdditions.namespace, "behaviour");
     }
 
     static {
