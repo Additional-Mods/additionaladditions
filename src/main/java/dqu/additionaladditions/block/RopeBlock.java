@@ -172,7 +172,8 @@ public class RopeBlock extends Block {
         BlockState statedown = world.getBlockState(down);
 
         if (statedown.is(this)) {
-            return statedown.useWithoutItem(world, player, hit);
+            BlockHitResult hitBelow = new BlockHitResult(hit.getLocation(), hit.getDirection(), hit.getBlockPos().below(), hit.isInside());
+            return statedown.useWithoutItem(world, player, hitBelow);
         } else if (statedown.isAir() && !world.isOutsideBuildHeight(down.getY())) {
             world.setBlockAndUpdate(down, state);
             world.playSound(null, pos.getX(), pos.getY(), pos.getZ(), SoundEvents.WOOL_PLACE, SoundSource.BLOCKS, 1.0F, 1.0F);
