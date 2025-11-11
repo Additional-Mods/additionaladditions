@@ -305,10 +305,10 @@ public class CopperPatinaBlock extends Block {
                     }
                 }
 
-                return Math.max(i, j - 2);
+                return Math.max(i, j - 1);
             }
         } else {
-            return Math.max(i, j - 2);
+            return Math.max(i, j - 1);
         }
     }
 
