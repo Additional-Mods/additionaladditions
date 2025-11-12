@@ -23,12 +23,12 @@ public enum CreativeAdder {
 
     public void add(Supplier<Boolean> condition, ItemLike after, ItemLike... items) {
         CreativeEntry entry = new CreativeEntry(condition, false, after, items);
-        this.entries.add(entry);
+        this.entries.addFirst(entry);
     }
 
     public void addBefore(Supplier<Boolean> condition, ItemLike after, ItemLike... items) {
         CreativeEntry entry = new CreativeEntry(condition, true, after, items);
-        this.entries.add(entry);
+        this.entries.addFirst(entry);
     }
 
     public void pushAllTo(FabricItemGroupEntries content) {
