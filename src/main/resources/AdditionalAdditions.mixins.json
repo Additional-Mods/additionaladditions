@@ -12,10 +12,10 @@
     "WanderingTraderMixin"
   ],
   "client": [
-    "GameRendererMixin",
+    "AbstractClientPlayerMixin",
     "ItemInHandRendererMixin",
     "LocalPlayerMixin",
-    "MouseHandlerMixin",
+    "PlayerMixin",
     "PlayerRendererMixin"
   ],
   "injectors": {
