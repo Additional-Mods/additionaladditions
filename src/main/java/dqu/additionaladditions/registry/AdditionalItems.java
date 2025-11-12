@@ -58,11 +58,27 @@ public class AdditionalItems {
     public static final Item GOLD_RING = new Item(new Item.Properties().stacksTo(1));
     public static final PocketJukeboxItem POCKET_JUKEBOX_ITEM = new PocketJukeboxItem(new Item.Properties().stacksTo(1));
     public static final Item ROSE_GOLD_ALLOY = new Item(new Item.Properties());
+
     public static final Item MUSIC_DISC_0308 = new Item(new Item.Properties().stacksTo(1).rarity(Rarity.RARE).jukeboxPlayable(ResourceKey.create(Registries.JUKEBOX_SONG, ResourceLocation.tryBuild(AdditionalAdditions.namespace, "0308"))));
     public static final Item MUSIC_DISC_1007 = new Item(new Item.Properties().stacksTo(1).rarity(Rarity.RARE).jukeboxPlayable(ResourceKey.create(Registries.JUKEBOX_SONG, ResourceLocation.tryBuild(AdditionalAdditions.namespace, "1007"))));
     public static final Item MUSIC_DISC_1507 = new Item(new Item.Properties().stacksTo(1).rarity(Rarity.RARE).jukeboxPlayable(ResourceKey.create(Registries.JUKEBOX_SONG, ResourceLocation.tryBuild(AdditionalAdditions.namespace, "1507"))));
 
+    public static final RoseGoldToolMaterial ROSE_GOLD_TOOL_MATERIAL = new RoseGoldToolMaterial();
+    public static final Item ROSE_GOLD_HELMET = new ArmorItem(AdditionalMaterials.ROSE_GOLD, ArmorItem.Type.HELMET, new Item.Properties().durability(312));
+    public static final Item ROSE_GOLD_CHESTPLATE = new ArmorItem(AdditionalMaterials.ROSE_GOLD, ArmorItem.Type.CHESTPLATE, new Item.Properties().durability(360));
+    public static final Item ROSE_GOLD_LEGGINGS = new ArmorItem(AdditionalMaterials.ROSE_GOLD, ArmorItem.Type.LEGGINGS, new Item.Properties().durability(384));
+    public static final Item ROSE_GOLD_BOOTS = new ArmorItem(AdditionalMaterials.ROSE_GOLD, ArmorItem.Type.BOOTS, new Item.Properties().durability(264));
+    public static final Item ROSE_GOLD_SWORD = new SwordItem(ROSE_GOLD_TOOL_MATERIAL, new Item.Properties());
+    public static final Item ROSE_GOLD_AXE = new AxeItem(ROSE_GOLD_TOOL_MATERIAL, new Item.Properties());
+    public static final Item ROSE_GOLD_PICKAXE = new PickaxeItem(ROSE_GOLD_TOOL_MATERIAL, new Item.Properties());
+    public static final Item ROSE_GOLD_SHOVEL = new ShovelItem(ROSE_GOLD_TOOL_MATERIAL, new Item.Properties());
+    public static final Item ROSE_GOLD_HOE = new HoeItem(ROSE_GOLD_TOOL_MATERIAL, new Item.Properties());
+
     private static void registerItems() {
+        Registry.register(BuiltInRegistries.ITEM, ResourceLocation.tryBuild(AdditionalAdditions.namespace, "berry_pie"), BERRY_PIE);
+        Registry.register(BuiltInRegistries.ITEM, ResourceLocation.tryBuild(AdditionalAdditions.namespace, "fried_egg"), FRIED_EGG);
+        Registry.register(BuiltInRegistries.ITEM, ResourceLocation.tryBuild(AdditionalAdditions.namespace, "honeyed_apple"), HONEYED_APPLE);
+        Registry.register(BuiltInRegistries.ITEM, ResourceLocation.tryBuild(AdditionalAdditions.namespace, "chicken_nugget"), CHICKEN_NUGGET);
         Registry.register(BuiltInRegistries.ITEM, ResourceLocation.tryBuild(AdditionalAdditions.namespace, "watering_can"), WATERING_CAN);
         Registry.register(BuiltInRegistries.ITEM, ResourceLocation.tryBuild(AdditionalAdditions.namespace, "wrench"), WRENCH_ITEM);
         Registry.register(BuiltInRegistries.ITEM, ResourceLocation.tryBuild(AdditionalAdditions.namespace, "crossbow_with_spyglass"), CROSSBOW_WITH_SPYGLASS);
@@ -76,13 +92,15 @@ public class AdditionalItems {
         Registry.register(BuiltInRegistries.ITEM, ResourceLocation.tryBuild(AdditionalAdditions.namespace, "music_disc_0308"), MUSIC_DISC_0308);
         Registry.register(BuiltInRegistries.ITEM, ResourceLocation.tryBuild(AdditionalAdditions.namespace, "music_disc_1007"), MUSIC_DISC_1007);
         Registry.register(BuiltInRegistries.ITEM, ResourceLocation.tryBuild(AdditionalAdditions.namespace, "music_disc_1507"), MUSIC_DISC_1507);
-    }
-
-    private static void registerFoods() {
-        Registry.register(BuiltInRegistries.ITEM, ResourceLocation.tryBuild(AdditionalAdditions.namespace, "berry_pie"), BERRY_PIE);
-        Registry.register(BuiltInRegistries.ITEM, ResourceLocation.tryBuild(AdditionalAdditions.namespace, "fried_egg"), FRIED_EGG);
-        Registry.register(BuiltInRegistries.ITEM, ResourceLocation.tryBuild(AdditionalAdditions.namespace, "honeyed_apple"), HONEYED_APPLE);
-        Registry.register(BuiltInRegistries.ITEM, ResourceLocation.tryBuild(AdditionalAdditions.namespace, "chicken_nugget"), CHICKEN_NUGGET);
+        Registry.register(BuiltInRegistries.ITEM, ResourceLocation.tryBuild(AdditionalAdditions.namespace, "rose_gold_helmet"), ROSE_GOLD_HELMET);
+        Registry.register(BuiltInRegistries.ITEM, ResourceLocation.tryBuild(AdditionalAdditions.namespace, "rose_gold_chestplate"), ROSE_GOLD_CHESTPLATE);
+        Registry.register(BuiltInRegistries.ITEM, ResourceLocation.tryBuild(AdditionalAdditions.namespace, "rose_gold_leggings"), ROSE_GOLD_LEGGINGS);
+        Registry.register(BuiltInRegistries.ITEM, ResourceLocation.tryBuild(AdditionalAdditions.namespace, "rose_gold_boots"), ROSE_GOLD_BOOTS);
+        Registry.register(BuiltInRegistries.ITEM, ResourceLocation.tryBuild(AdditionalAdditions.namespace, "rose_gold_sword"), ROSE_GOLD_SWORD);
+        Registry.register(BuiltInRegistries.ITEM, ResourceLocation.tryBuild(AdditionalAdditions.namespace, "rose_gold_axe"), ROSE_GOLD_AXE);
+        Registry.register(BuiltInRegistries.ITEM, ResourceLocation.tryBuild(AdditionalAdditions.namespace, "rose_gold_pickaxe"), ROSE_GOLD_PICKAXE);
+        Registry.register(BuiltInRegistries.ITEM, ResourceLocation.tryBuild(AdditionalAdditions.namespace, "rose_gold_shovel"), ROSE_GOLD_SHOVEL);
+        Registry.register(BuiltInRegistries.ITEM, ResourceLocation.tryBuild(AdditionalAdditions.namespace, "rose_gold_hoe"), ROSE_GOLD_HOE);
     }
 
     private static void registerLootTables() {
@@ -155,11 +173,20 @@ public class AdditionalItems {
         CreativeAdder.TOOLS_AND_UTILITIES.add(() -> Config.getBool(ConfigValues.MUSIC_DISCS), Items.MUSIC_DISC_WARD, MUSIC_DISC_0308);
         CreativeAdder.TOOLS_AND_UTILITIES.add(() -> Config.getBool(ConfigValues.MUSIC_DISCS), Items.MUSIC_DISC_WARD, MUSIC_DISC_1007);
         CreativeAdder.TOOLS_AND_UTILITIES.add(() -> Config.getBool(ConfigValues.MUSIC_DISCS), Items.MUSIC_DISC_WARD, MUSIC_DISC_1507);
+        CreativeAdder.TOOLS_AND_UTILITIES.add(() -> Config.getBool(ConfigValues.ROSE_GOLD), Items.GOLDEN_HOE, ROSE_GOLD_PICKAXE);
+        CreativeAdder.TOOLS_AND_UTILITIES.add(() -> Config.getBool(ConfigValues.ROSE_GOLD), Items.GOLDEN_HOE, ROSE_GOLD_AXE);
+        CreativeAdder.TOOLS_AND_UTILITIES.add(() -> Config.getBool(ConfigValues.ROSE_GOLD), Items.GOLDEN_HOE, ROSE_GOLD_SHOVEL);
+        CreativeAdder.TOOLS_AND_UTILITIES.add(() -> Config.getBool(ConfigValues.ROSE_GOLD), Items.GOLDEN_HOE, ROSE_GOLD_HOE);
         CreativeAdder.INGREDIENTS.addBefore(() -> Config.getBool(ConfigValues.GILDED_NETHERITE, "enabled"), Items.NETHERITE_SCRAP, GOLD_RING);
         CreativeAdder.INGREDIENTS.addBefore(() -> Config.getBool(ConfigValues.ROSE_GOLD), Items.NETHERITE_SCRAP, ROSE_GOLD_ALLOY);
         CreativeAdder.INGREDIENTS.add(() -> Config.getBool(ConfigValues.TRIDENT_SHARD), Items.PRISMARINE_CRYSTALS, TRIDENT_SHARD);
         CreativeAdder.REDSTONE_BLOCKS.add(() -> Config.getBool(ConfigValues.WRENCH), Items.TARGET, WRENCH_ITEM);
         CreativeAdder.COMBAT.add(() -> Config.getBool(ConfigValues.CROSSBOWS), Items.CROSSBOW, CROSSBOW_WITH_SPYGLASS);
+        CreativeAdder.COMBAT.add(() -> Config.getBool(ConfigValues.ROSE_GOLD), Items.GOLDEN_BOOTS, ROSE_GOLD_HELMET);
+        CreativeAdder.COMBAT.add(() -> Config.getBool(ConfigValues.ROSE_GOLD), Items.GOLDEN_BOOTS, ROSE_GOLD_CHESTPLATE);
+        CreativeAdder.COMBAT.add(() -> Config.getBool(ConfigValues.ROSE_GOLD), Items.GOLDEN_BOOTS, ROSE_GOLD_LEGGINGS);
+        CreativeAdder.COMBAT.add(() -> Config.getBool(ConfigValues.ROSE_GOLD), Items.GOLDEN_BOOTS, ROSE_GOLD_BOOTS);
+        CreativeAdder.COMBAT.add(() -> Config.getBool(ConfigValues.ROSE_GOLD), Items.GOLDEN_SWORD, ROSE_GOLD_SWORD);
         CreativeAdder.FOOD_AND_DRINKS.add(() -> Config.getBool(ConfigValues.FOOD, "FriedEgg"), Items.COOKED_RABBIT, FRIED_EGG);
         CreativeAdder.FOOD_AND_DRINKS.add(() -> Config.getBool(ConfigValues.FOOD, "BerryPie"), Items.PUMPKIN_PIE, BERRY_PIE);
         CreativeAdder.FOOD_AND_DRINKS.add(() -> Config.getBool(ConfigValues.FOOD, "HoneyedApple"), Items.APPLE, HONEYED_APPLE);
@@ -168,7 +195,6 @@ public class AdditionalItems {
 
     public static void registerAll() {
         registerItems();
-        registerFoods();
         registerLootTables();
         registerOther();
         putToItemGroups();
