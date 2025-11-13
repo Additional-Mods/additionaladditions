@@ -1,5 +1,67 @@
 {
   "parent": "item/generated",
+  "overrides": [
+    {
+      "model": "additionaladditions:item/rose_gold/leggings_quartz_trim",
+      "predicate": {
+        "trim_type": 0.1
+      }
+    },
+    {
+      "model": "additionaladditions:item/rose_gold/leggings_iron_trim",
+      "predicate": {
+        "trim_type": 0.2
+      }
+    },
+    {
+      "model": "additionaladditions:item/rose_gold/leggings_netherite_trim",
+      "predicate": {
+        "trim_type": 0.3
+      }
+    },
+    {
+      "model": "additionaladditions:item/rose_gold/leggings_redstone_trim",
+      "predicate": {
+        "trim_type": 0.4
+      }
+    },
+    {
+      "model": "additionaladditions:item/rose_gold/leggings_copper_trim",
+      "predicate": {
+        "trim_type": 0.5
+      }
+    },
+    {
+      "model": "additionaladditions:item/rose_gold/leggings_gold_trim",
+      "predicate": {
+        "trim_type": 0.6
+      }
+    },
+    {
+      "model": "additionaladditions:item/rose_gold/leggings_emerald_trim",
+      "predicate": {
+        "trim_type": 0.7
+      }
+    },
+    {
+      "model": "additionaladditions:item/rose_gold/leggings_diamond_trim",
+      "predicate": {
+        "trim_type": 0.8
+      }
+    },
+    {
+      "model": "additionaladditions:item/rose_gold/leggings_lapis_trim",
+      "predicate": {
+        "trim_type": 0.9
+      }
+    },
+    {
+      "model": "additionaladditions:item/rose_gold/leggings_amethyst_trim",
+      "predicate": {
+        "trim_type": 1.0
+      }
+    }
+  ],
   "textures": {
     "layer0": "additionaladditions:item/rose_gold_leggings"
   }
