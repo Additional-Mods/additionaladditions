@@ -68,11 +68,11 @@ public class AdditionalItems {
     public static final Item ROSE_GOLD_CHESTPLATE = new ArmorItem(AdditionalMaterials.ROSE_GOLD, ArmorItem.Type.CHESTPLATE, new Item.Properties().durability(360));
     public static final Item ROSE_GOLD_LEGGINGS = new ArmorItem(AdditionalMaterials.ROSE_GOLD, ArmorItem.Type.LEGGINGS, new Item.Properties().durability(384));
     public static final Item ROSE_GOLD_BOOTS = new ArmorItem(AdditionalMaterials.ROSE_GOLD, ArmorItem.Type.BOOTS, new Item.Properties().durability(264));
-    public static final Item ROSE_GOLD_SWORD = new SwordItem(ROSE_GOLD_TOOL_MATERIAL, new Item.Properties());
-    public static final Item ROSE_GOLD_AXE = new AxeItem(ROSE_GOLD_TOOL_MATERIAL, new Item.Properties());
-    public static final Item ROSE_GOLD_PICKAXE = new PickaxeItem(ROSE_GOLD_TOOL_MATERIAL, new Item.Properties());
-    public static final Item ROSE_GOLD_SHOVEL = new ShovelItem(ROSE_GOLD_TOOL_MATERIAL, new Item.Properties());
-    public static final Item ROSE_GOLD_HOE = new HoeItem(ROSE_GOLD_TOOL_MATERIAL, new Item.Properties());
+    public static final Item ROSE_GOLD_SWORD = new SwordItem(ROSE_GOLD_TOOL_MATERIAL, new Item.Properties().attributes(SwordItem.createAttributes(ROSE_GOLD_TOOL_MATERIAL, 4, -2.4F)));
+    public static final Item ROSE_GOLD_AXE = new AxeItem(ROSE_GOLD_TOOL_MATERIAL, new Item.Properties().attributes(AxeItem.createAttributes(ROSE_GOLD_TOOL_MATERIAL, 6, -3.1F)));
+    public static final Item ROSE_GOLD_PICKAXE = new PickaxeItem(ROSE_GOLD_TOOL_MATERIAL, new Item.Properties().attributes(PickaxeItem.createAttributes(ROSE_GOLD_TOOL_MATERIAL, 1, -2.8F)));
+    public static final Item ROSE_GOLD_SHOVEL = new ShovelItem(ROSE_GOLD_TOOL_MATERIAL, new Item.Properties().attributes(ShovelItem.createAttributes(ROSE_GOLD_TOOL_MATERIAL, 1.5F, -3F)));
+    public static final Item ROSE_GOLD_HOE = new HoeItem(ROSE_GOLD_TOOL_MATERIAL, new Item.Properties().attributes(HoeItem.createAttributes(ROSE_GOLD_TOOL_MATERIAL,  -2, -1F)));
 
     private static void registerItems() {
         Registry.register(BuiltInRegistries.ITEM, ResourceLocation.tryBuild(AdditionalAdditions.namespace, "berry_pie"), BERRY_PIE);
