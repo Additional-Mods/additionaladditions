@@ -36,6 +36,6 @@ public class RoseGoldToolMaterial implements Tier {
 
     @Override
     public Ingredient getRepairIngredient() {
-        return Ingredient.of(AdditionalItems.ROSE_GOLD_ALLOY);
+        return Ingredient.of(AdditionalItems.ROSE_GOLD_INGOT);
     }
 }

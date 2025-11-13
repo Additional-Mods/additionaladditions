@@ -27,6 +27,7 @@ public class AdditionalAdditions implements ModInitializer {
 
         ResourceManagerHelper.get(PackType.SERVER_DATA).registerReloadListener(BehaviourManager.INSTANCE);
 
+        AdditionalMaterials.registerAll();
         AdditionalItems.registerAll();
         AdditionalBlocks.registerAll();
         AdditionalEntities.registerAll();

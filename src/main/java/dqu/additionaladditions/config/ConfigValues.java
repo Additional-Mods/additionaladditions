@@ -26,10 +26,6 @@ public enum ConfigValues {
     CROSSBOWS(6, new ConfigProperty("Crossbows")),
     TRIDENT_SHARD(6, new ConfigProperty("TridentShard")),
     GLOW_STICK(6, new ConfigProperty("GlowStick")),
-    GILDED_NETHERITE(8, new ConfigProperty("GildedNetherite", new ListConfigValue()
-            .put(new ConfigProperty("enabled"))
-            .put(new ConfigProperty("fireResistancePerPiece", new FloatConfigValue(2.5f)))
-    )),
     DEPTH_METER(6, new ConfigProperty("DepthMeter", new ListConfigValue()
             .put(new ConfigProperty("enabled"))
             .put(new ConfigProperty("displayElevationAlways", ConfigValueType.FALSE))
