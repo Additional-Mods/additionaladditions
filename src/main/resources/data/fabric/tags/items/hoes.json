@@ -2,6 +2,5 @@
   "replace": false,
   "values": [
     {"id": "additionaladditions:rose_gold_hoe", "required": false},
-    {"id": "additionaladditions:gilded_netherite_hoe", "required": false}
   ]
 }

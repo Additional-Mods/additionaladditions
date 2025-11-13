@@ -1,0 +1,10 @@
+{
+  "type": "crafting_shapeless",
+  "ingredients": [
+    {"item": "additionaladditions:rose_gold_block"}
+  ],
+  "result": {
+    "id": "additionaladditions:rose_gold_ingot",
+    "count": 9
+  }
+}
