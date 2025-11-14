@@ -4,10 +4,12 @@ import dqu.additionaladditions.item.PocketJukeboxItem;
 import dqu.additionaladditions.registry.AdditionalBlocks;
 import dqu.additionaladditions.registry.AdditionalEntities;
 import dqu.additionaladditions.registry.AdditionalItems;
+import dqu.additionaladditions.render.GlintShader;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
+import net.fabricmc.fabric.api.client.rendering.v1.CoreShaderRegistrationCallback;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.client.model.FabricModelPredicateProviderRegistry;
 import net.minecraft.client.renderer.RenderType;
@@ -72,5 +74,7 @@ public class AdditionalAdditionsClient implements ClientModInitializer {
                 return (float) val;
             }
         });
+
+        CoreShaderRegistrationCallback.EVENT.register(GlintShader::register);
     }
 }

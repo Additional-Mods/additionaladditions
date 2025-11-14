@@ -14,6 +14,7 @@
   "client": [
     "AbstractClientPlayerMixin",
     "ItemInHandRendererMixin",
+    "ItemRendererMixin",
     "LocalPlayerMixin",
     "PlayerMixin",
     "PlayerRendererMixin"
