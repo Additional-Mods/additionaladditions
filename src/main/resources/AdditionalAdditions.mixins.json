@@ -17,10 +17,12 @@
     "LocalPlayerMixin",
     "PlayerMixin",
     "PlayerRendererMixin",
+    "glint.ElytraLayerMixin",
     "glint.HumanoidArmorLayerMixin",
     "glint.ItemRendererMixin",
     "glint.RenderBuffersMixin",
-    "glint.RenderTypeMixin"
+    "glint.RenderTypeMixin",
+    "glint.ThrownTridentRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1

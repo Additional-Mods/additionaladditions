@@ -67,7 +67,7 @@ public class GlintResourceGenerator {
         int tintB = tint & 0xFF;
 
         float fiddle = FIDDLES.getOrDefault(color, 1.5F);
-        if (armor) fiddle *= 3.0F;
+        if (armor) fiddle *= 1.2F;
 
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
