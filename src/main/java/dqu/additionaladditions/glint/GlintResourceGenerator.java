@@ -13,10 +13,14 @@ import net.minecraft.server.packs.resources.Resource;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.item.DyeColor;
 
+import java.util.EnumMap;
 import java.util.Locale;
+import java.util.Map;
 
 @Environment(EnvType.CLIENT)
 public class GlintResourceGenerator {
+    private static final Map<DyeColor, Float> FIDDLES = new EnumMap<>(DyeColor.class);
+
     /**
      * Generates tinted enchantment glint textures and registers them with the texture manager.
      */
@@ -28,7 +32,7 @@ public class GlintResourceGenerator {
             NativeImage image = NativeImage.read(resource.open());
 
             for (DyeColor color : DyeColor.values()) {
-                NativeImage tinted = generateTintedTexture(image, color.getTextColor());
+                NativeImage tinted = generateTintedTexture(image, color);
                 ResourceLocation tintedLocation = ResourceLocation.tryBuild(
                         AdditionalAdditions.namespace,
                         "textures/misc/enchanted_item_glint_" + color.getName().toLowerCase(Locale.ROOT) + ".png"
@@ -43,14 +47,17 @@ public class GlintResourceGenerator {
     /**
      * Tints the given image by gray-scaling it and multiplying by the tint color.
      */
-    private static NativeImage generateTintedTexture(NativeImage image, int tint) {
+    private static NativeImage generateTintedTexture(NativeImage image, DyeColor color) {
         int width = image.getWidth();
         int height = image.getHeight();
         NativeImage tintedImage = new NativeImage(width, height, false);
 
+        int tint = color.getTextColor();
         int tintR = (tint >> 16) & 0xFF;
         int tintG = (tint >> 8) & 0xFF;
         int tintB = tint & 0xFF;
+
+        float fiddle = FIDDLES.getOrDefault(color, 1.5F);
 
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
@@ -63,9 +70,9 @@ public class GlintResourceGenerator {
 
                 int gray = (int) (0.299 * pixelR + 0.587 * pixelG + 0.114 * pixelB);
 
-                int tintedR = Math.min(255, (gray * tintR * 2) / 255);
-                int tintedG = Math.min(255, (gray * tintG * 2) / 255);
-                int tintedB = Math.min(255, (gray * tintB * 2) / 255);
+                int tintedR = Math.min(255, (int) ((gray * tintR * fiddle) / 255));
+                int tintedG = Math.min(255, (int) ((gray * tintG * fiddle) / 255));
+                int tintedB = Math.min(255, (int) ((gray * tintB * fiddle) / 255));
 
                 int tintedPixel = (alpha << 24) | (tintedB << 16) | (tintedG << 8) | tintedR;
                 tintedImage.setPixelRGBA(x, y, tintedPixel);
@@ -73,5 +80,15 @@ public class GlintResourceGenerator {
         }
 
         return tintedImage;
+    }
+
+    static {
+        // Manually adjust the fiddles so the brightness is more consistent
+        // I tried calculating these automatically but it didn't work so if you figure it out please please please PR thanks
+        FIDDLES.put(DyeColor.YELLOW, 1.6F);
+        FIDDLES.put(DyeColor.PINK, 2.0F);
+        FIDDLES.put(DyeColor.RED, 2.0F);
+        FIDDLES.put(DyeColor.ORANGE, 2.0F);
+        FIDDLES.put(DyeColor.BROWN, 3.5F);
     }
 }
