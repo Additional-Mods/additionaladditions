@@ -1,21 +1,24 @@
 package dqu.additionaladditions;
 
+import dqu.additionaladditions.glint.GlintResourceGenerator;
 import dqu.additionaladditions.item.PocketJukeboxItem;
 import dqu.additionaladditions.registry.AdditionalBlocks;
 import dqu.additionaladditions.registry.AdditionalEntities;
 import dqu.additionaladditions.registry.AdditionalItems;
-import dqu.additionaladditions.render.GlintShader;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
-import net.fabricmc.fabric.api.client.rendering.v1.CoreShaderRegistrationCallback;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.client.model.FabricModelPredicateProviderRegistry;
+import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
+import net.fabricmc.fabric.api.resource.SimpleSynchronousResourceReloadListener;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.packs.PackType;
+import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.item.CrossbowItem;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.component.ChargedProjectiles;
@@ -75,6 +78,16 @@ public class AdditionalAdditionsClient implements ClientModInitializer {
             }
         });
 
-        CoreShaderRegistrationCallback.EVENT.register(GlintShader::register);
+        ResourceManagerHelper.get(PackType.CLIENT_RESOURCES).registerReloadListener(new SimpleSynchronousResourceReloadListener() {
+            @Override
+            public void onResourceManagerReload(ResourceManager resourceManager) {
+                GlintResourceGenerator.generateResources(resourceManager);
+            }
+
+            @Override
+            public ResourceLocation getFabricId() {
+                return ResourceLocation.fromNamespaceAndPath(AdditionalAdditions.namespace, "glint_resource_generator");
+            }
+        });
     }
 }

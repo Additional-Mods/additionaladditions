@@ -11,6 +11,7 @@ import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.core.component.DataComponentType;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.dispenser.BlockSource;
 import net.minecraft.core.dispenser.DefaultDispenseItemBehavior;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -76,7 +77,7 @@ public class AdditionalItems {
     public static final Item ROSE_GOLD_SHOVEL = new ShovelItem(ROSE_GOLD_TOOL_MATERIAL, new Item.Properties().attributes(ShovelItem.createAttributes(ROSE_GOLD_TOOL_MATERIAL, 1.5F, -3F)));
     public static final Item ROSE_GOLD_HOE = new HoeItem(ROSE_GOLD_TOOL_MATERIAL, new Item.Properties().attributes(HoeItem.createAttributes(ROSE_GOLD_TOOL_MATERIAL,  -2, -1F)));
 
-    public static final DataComponentType<Integer> GLINT_COLOR_COMPONENT = DataComponentType.<Integer>builder().persistent(Codec.INT).networkSynchronized(ByteBufCodecs.INT).build();
+    public static final DataComponentType<DyeColor> GLINT_COLOR_COMPONENT = DataComponentType.<DyeColor>builder().persistent(DyeColor.CODEC).networkSynchronized(DyeColor.STREAM_CODEC).build();
 
     private static void registerItems() {
         Registry.register(BuiltInRegistries.ITEM, ResourceLocation.tryBuild(AdditionalAdditions.namespace, "berry_pie"), BERRY_PIE);

@@ -14,10 +14,12 @@
   "client": [
     "AbstractClientPlayerMixin",
     "ItemInHandRendererMixin",
-    "ItemRendererMixin",
     "LocalPlayerMixin",
     "PlayerMixin",
-    "PlayerRendererMixin"
+    "PlayerRendererMixin",
+    "glint.ItemRendererMixin",
+    "glint.RenderBuffersMixin",
+    "glint.RenderTypeMixin"
   ],
   "injectors": {
     "defaultRequire": 1
