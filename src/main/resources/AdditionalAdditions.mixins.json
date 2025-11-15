@@ -21,8 +21,7 @@
     "glint.HumanoidArmorLayerMixin",
     "glint.ItemRendererMixin",
     "glint.RenderBuffersMixin",
-    "glint.RenderTypeMixin",
-    "glint.ThrownTridentRendererMixin"
+    "glint.RenderTypeMixin"
   ],
   "injectors": {
     "defaultRequire": 1
