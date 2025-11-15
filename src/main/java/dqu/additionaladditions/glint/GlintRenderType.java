@@ -15,22 +15,36 @@ import java.util.*;
 @Environment(EnvType.CLIENT)
 public class GlintRenderType {
     private static final Map<DyeColor, RenderType> GLINT = new EnumMap<>(DyeColor.class);
+    private static final Map<DyeColor, RenderType> ARMOR_ENTITY_GLINT = new EnumMap<>(DyeColor.class);
 
     public static RenderType getGlint(DyeColor color) {
         return GLINT.get(color);
     }
 
+    public static RenderType getArmorEntityGlint(DyeColor color) {
+        return ARMOR_ENTITY_GLINT.get(color);
+    }
+
     public static Collection<RenderType> getRenderTypes() {
-        return Collections.unmodifiableCollection(GLINT.values());
+        Set<RenderType> types = new HashSet<>();
+        types.addAll(GLINT.values());
+        types.addAll(ARMOR_ENTITY_GLINT.values());
+        return types;
     }
 
     static {
         for (DyeColor color : DyeColor.values()) {
-            ResourceLocation texture = ResourceLocation.tryBuild(
+            ResourceLocation itemTexture = ResourceLocation.tryBuild(
                     AdditionalAdditions.namespace,
                     "textures/misc/enchanted_item_glint_" + color.getName().toLowerCase(Locale.ROOT) + ".png"
             );
-            GLINT.put(color, createGlintRenderType(texture));
+            ResourceLocation entityTexture = ResourceLocation.tryBuild(
+                    AdditionalAdditions.namespace,
+                    "textures/misc/enchanted_entity_glint_" + color.getName().toLowerCase(Locale.ROOT) + ".png"
+            );
+
+            GLINT.put(color, createGlintRenderType(itemTexture));
+            ARMOR_ENTITY_GLINT.put(color, createArmorEntityGlintRenderType(entityTexture));
         }
     }
 
@@ -50,6 +64,27 @@ public class GlintRenderType {
 
         return RenderType.create(
                 "glint",
+                DefaultVertexFormat.POSITION_TEX,
+                VertexFormat.Mode.QUADS,
+                1536,
+                state
+        );
+    }
+
+    private static RenderType createArmorEntityGlintRenderType(ResourceLocation texture) {
+        RenderType.CompositeState state = RenderType.CompositeState.builder()
+                .setShaderState(RenderStateShard.RENDERTYPE_ARMOR_ENTITY_GLINT_SHADER)
+                .setTextureState(new RenderStateShard.TextureStateShard(texture, true, false))
+                .setWriteMaskState(RenderStateShard.COLOR_WRITE)
+                .setCullState(RenderStateShard.NO_CULL)
+                .setDepthTestState(RenderStateShard.EQUAL_DEPTH_TEST)
+                .setTransparencyState(RenderStateShard.GLINT_TRANSPARENCY)
+                .setTexturingState(RenderStateShard.ENTITY_GLINT_TEXTURING)
+                .setLayeringState(RenderStateShard.VIEW_OFFSET_Z_LAYERING)
+                .createCompositeState(false);
+
+        return RenderType.create(
+                "armor_entity_glint",
                 DefaultVertexFormat.POSITION_TEX,
                 VertexFormat.Mode.QUADS,
                 1536,

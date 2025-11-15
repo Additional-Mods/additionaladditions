@@ -28,16 +28,25 @@ public class GlintResourceGenerator {
         TextureManager textureManager = Minecraft.getInstance().getTextureManager();
 
         try {
-            Resource resource = resourceManager.getResource(ItemRenderer.ENCHANTED_GLINT_ITEM).orElseThrow();
-            NativeImage image = NativeImage.read(resource.open());
+            Resource itemResource = resourceManager.getResource(ItemRenderer.ENCHANTED_GLINT_ITEM).orElseThrow();
+            Resource entityResource = resourceManager.getResource(ItemRenderer.ENCHANTED_GLINT_ENTITY).orElseThrow();
+            NativeImage itemImage = NativeImage.read(itemResource.open());
+            NativeImage entityImage = NativeImage.read(entityResource.open());
 
             for (DyeColor color : DyeColor.values()) {
-                NativeImage tinted = generateTintedTexture(image, color);
-                ResourceLocation tintedLocation = ResourceLocation.tryBuild(
+                NativeImage tintedItem = generateTintedTexture(itemImage, color, false);
+                ResourceLocation tintedItemLocation = ResourceLocation.tryBuild(
                         AdditionalAdditions.namespace,
                         "textures/misc/enchanted_item_glint_" + color.getName().toLowerCase(Locale.ROOT) + ".png"
                 );
-                textureManager.register(tintedLocation, new DynamicTexture(tinted));
+                textureManager.register(tintedItemLocation, new DynamicTexture(tintedItem));
+
+                NativeImage tintedEntity = generateTintedTexture(entityImage, color, true);
+                ResourceLocation tintedEntityLocation = ResourceLocation.tryBuild(
+                        AdditionalAdditions.namespace,
+                        "textures/misc/enchanted_entity_glint_" + color.getName().toLowerCase(Locale.ROOT) + ".png"
+                );
+                textureManager.register(tintedEntityLocation, new DynamicTexture(tintedEntity));
             }
         } catch (Exception e) {
             throw new RuntimeException("Failed to generate colored enchantment glint resources", e);
@@ -47,7 +56,7 @@ public class GlintResourceGenerator {
     /**
      * Tints the given image by gray-scaling it and multiplying by the tint color.
      */
-    private static NativeImage generateTintedTexture(NativeImage image, DyeColor color) {
+    private static NativeImage generateTintedTexture(NativeImage image, DyeColor color, boolean armor) {
         int width = image.getWidth();
         int height = image.getHeight();
         NativeImage tintedImage = new NativeImage(width, height, false);
@@ -58,6 +67,7 @@ public class GlintResourceGenerator {
         int tintB = tint & 0xFF;
 
         float fiddle = FIDDLES.getOrDefault(color, 1.5F);
+        if (armor) fiddle *= 3.0F;
 
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {

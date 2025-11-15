@@ -15,6 +15,16 @@ public class RenderTypeMixin {
         RenderType renderType = GlintRenderType.getGlint(GlintContext.getDyeColor());
         if (renderType != null) {
             cir.setReturnValue(renderType);
+            GlintContext.setCurrentItem(null);
+        }
+    }
+
+    @Inject(method = "armorEntityGlint", at = @At("HEAD"), cancellable = true)
+    private static void getArmorEntityGlintInject(CallbackInfoReturnable<RenderType> cir) {
+        RenderType renderType = GlintRenderType.getArmorEntityGlint(GlintContext.getDyeColor());
+        if (renderType != null) {
+            cir.setReturnValue(renderType);
+            GlintContext.setCurrentItem(null);
         }
     }
 }

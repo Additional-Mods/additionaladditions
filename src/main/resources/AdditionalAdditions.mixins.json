@@ -17,6 +17,7 @@
     "LocalPlayerMixin",
     "PlayerMixin",
     "PlayerRendererMixin",
+    "glint.HumanoidArmorLayerMixin",
     "glint.ItemRendererMixin",
     "glint.RenderBuffersMixin",
     "glint.RenderTypeMixin"
