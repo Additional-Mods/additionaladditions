@@ -115,7 +115,7 @@ public class AdditionalItems {
             .creativeAfter(Items.CROSSBOW, CreativeAdder.COMBAT)
             .build(CrossbowItem::new);
 
-`    public static final Item TRIDENT_SHARD = new Builder("trident_shard")
+    public static final Item TRIDENT_SHARD = new Builder("trident_shard")
             .config(() -> Config.getBool(ConfigValues.TRIDENT_SHARD))
             .creativeAfter(Items.PRISMARINE_CRYSTALS, CreativeAdder.INGREDIENTS)
             .lootTable(
@@ -125,7 +125,7 @@ public class AdditionalItems {
                         .add(LootItem.lootTableItem(item))
                         .when(LootItemRandomChanceCondition.randomChance(0.33f))
             )
-            .build();`
+            .build();
 
     public static final Item GLOW_STICK_ITEM = new Builder("glow_stick")
             .config(() -> Config.getBool(ConfigValues.GLOW_STICK))
