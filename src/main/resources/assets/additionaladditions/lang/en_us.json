@@ -95,5 +95,22 @@
   "additionaladditions.advancements.use_watering_can.desc": "Obtain and use the Watering Can to fertilize your crops",
 
   "additionaladditions.gui.config.restart": "Restart the game to apply the changes",
-  "additionaladditions.gui.pocket_jukebox.tooltip": "Secondary Click with a Music Disc to play"
+  "additionaladditions.gui.pocket_jukebox.tooltip": "Secondary Click with a Music Disc to play",
+
+  "additionaladditions.gui.glint.white": "White Glint",
+  "additionaladditions.gui.glint.black": "Black Glint",
+  "additionaladditions.gui.glint.gray": "Gray Glint",
+  "additionaladditions.gui.glint.light_gray": "Light Gray Glint",
+  "additionaladditions.gui.glint.brown": "Brown Glint",
+  "additionaladditions.gui.glint.red": "Red Glint",
+  "additionaladditions.gui.glint.orange": "Orange Glint",
+  "additionaladditions.gui.glint.yellow": "Yellow Glint",
+  "additionaladditions.gui.glint.lime": "Lime Glint",
+  "additionaladditions.gui.glint.green": "Green Glint",
+  "additionaladditions.gui.glint.cyan": "Cyan Glint",
+  "additionaladditions.gui.glint.light_blue": "Light Blue Glint",
+  "additionaladditions.gui.glint.blue": "Blue Glint",
+  "additionaladditions.gui.glint.purple": "Purple Glint",
+  "additionaladditions.gui.glint.magenta": "Magenta Glint",
+  "additionaladditions.gui.glint.pink": "Pink Glint"
 }

@@ -1,5 +1,6 @@
 package dqu.additionaladditions.misc;
 
+import dqu.additionaladditions.glint.GlintColor;
 import dqu.additionaladditions.item.SuspiciousDyeItem;
 import dqu.additionaladditions.registry.AdditionalItems;
 import net.minecraft.core.HolderLookup;
@@ -52,7 +53,7 @@ public class SuspiciousDyeRecipe extends CustomRecipe {
         if (dye.getItem() instanceof SuspiciousDyeItem suspiciousDyeItem) {
             DyeColor color = suspiciousDyeItem.getDyeColor();
             ItemStack copyStack = itemStack.copy();
-            copyStack.set(AdditionalItems.GLINT_COLOR_COMPONENT, color);
+            copyStack.set(AdditionalItems.GLINT_COLOR_COMPONENT, new GlintColor(color));
             return copyStack;
         }
 

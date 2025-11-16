@@ -21,7 +21,7 @@ public class GlintContext {
     public static DyeColor getDyeColor() {
         ItemStack itemStack = getCurrentItem();
         if (itemStack != null && itemStack.has(AdditionalItems.GLINT_COLOR_COMPONENT)) {
-            return itemStack.get(AdditionalItems.GLINT_COLOR_COMPONENT);
+            return itemStack.get(AdditionalItems.GLINT_COLOR_COMPONENT).color();
         }
         return null;
     }

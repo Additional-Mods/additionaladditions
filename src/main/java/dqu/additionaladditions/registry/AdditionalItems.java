@@ -3,6 +3,7 @@ package dqu.additionaladditions.registry;
 import dqu.additionaladditions.AdditionalAdditions;
 import dqu.additionaladditions.config.Config;
 import dqu.additionaladditions.config.ConfigValues;
+import dqu.additionaladditions.glint.GlintColor;
 import dqu.additionaladditions.item.*;
 import dqu.additionaladditions.misc.CreativeAdder;
 import dqu.additionaladditions.misc.LootHandler;
@@ -363,7 +364,7 @@ public class AdditionalItems {
             .creativeBefore(Items.EXPERIENCE_BOTTLE, CreativeAdder.INGREDIENTS)
             .build(p -> new SuspiciousDyeItem(DyeColor.PINK, p));
 
-    public static final DataComponentType<DyeColor> GLINT_COLOR_COMPONENT = DataComponentType.<DyeColor>builder().persistent(DyeColor.CODEC).networkSynchronized(DyeColor.STREAM_CODEC).build();
+    public static final DataComponentType<GlintColor> GLINT_COLOR_COMPONENT = DataComponentType.<GlintColor>builder().persistent(GlintColor.CODEC).networkSynchronized(GlintColor.STREAM_CODEC).build();
 
     public static final TagKey<Item> SUSPICIOUS_DYES_TAG = TagKey.create(Registries.ITEM, ResourceLocation.tryBuild(AdditionalAdditions.namespace, "suspicious_dyes"));
 
