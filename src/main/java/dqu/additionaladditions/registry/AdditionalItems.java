@@ -1,24 +1,24 @@
 package dqu.additionaladditions.registry;
 
-import com.mojang.serialization.Codec;
 import dqu.additionaladditions.AdditionalAdditions;
 import dqu.additionaladditions.config.Config;
 import dqu.additionaladditions.config.ConfigValues;
 import dqu.additionaladditions.item.*;
 import dqu.additionaladditions.misc.CreativeAdder;
 import dqu.additionaladditions.misc.LootHandler;
+import dqu.additionaladditions.misc.RoseGoldTransmuteRecipe;
+import dqu.additionaladditions.misc.SuspiciousDyeRecipe;
 import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.core.component.DataComponentType;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.dispenser.BlockSource;
 import net.minecraft.core.dispenser.DefaultDispenseItemBehavior;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.*;
@@ -77,7 +77,23 @@ public class AdditionalItems {
     public static final Item ROSE_GOLD_SHOVEL = new ShovelItem(ROSE_GOLD_TOOL_MATERIAL, new Item.Properties().attributes(ShovelItem.createAttributes(ROSE_GOLD_TOOL_MATERIAL, 1.5F, -3F)));
     public static final Item ROSE_GOLD_HOE = new HoeItem(ROSE_GOLD_TOOL_MATERIAL, new Item.Properties().attributes(HoeItem.createAttributes(ROSE_GOLD_TOOL_MATERIAL,  -2, -1F)));
 
+    public static final SuspiciousDyeItem WHITE_SUSPICIOUS_DYE = new SuspiciousDyeItem(DyeColor.WHITE, new Item.Properties().stacksTo(1));
+    public static final SuspiciousDyeItem BROWN_SUSPICIOUS_DYE = new SuspiciousDyeItem(DyeColor.BROWN, new Item.Properties().stacksTo(1));
+    public static final SuspiciousDyeItem RED_SUSPICIOUS_DYE = new SuspiciousDyeItem(DyeColor.RED, new Item.Properties().stacksTo(1));
+    public static final SuspiciousDyeItem ORANGE_SUSPICIOUS_DYE = new SuspiciousDyeItem(DyeColor.ORANGE, new Item.Properties().stacksTo(1));
+    public static final SuspiciousDyeItem YELLOW_SUSPICIOUS_DYE = new SuspiciousDyeItem(DyeColor.YELLOW, new Item.Properties().stacksTo(1));
+    public static final SuspiciousDyeItem LIME_SUSPICIOUS_DYE = new SuspiciousDyeItem(DyeColor.LIME, new Item.Properties().stacksTo(1));
+    public static final SuspiciousDyeItem GREEN_SUSPICIOUS_DYE = new SuspiciousDyeItem(DyeColor.GREEN, new Item.Properties().stacksTo(1));
+    public static final SuspiciousDyeItem CYAN_SUSPICIOUS_DYE = new SuspiciousDyeItem(DyeColor.CYAN, new Item.Properties().stacksTo(1));
+    public static final SuspiciousDyeItem LIGHT_BLUE_SUSPICIOUS_DYE = new SuspiciousDyeItem(DyeColor.LIGHT_BLUE, new Item.Properties().stacksTo(1));
+    public static final SuspiciousDyeItem BLUE_SUSPICIOUS_DYE = new SuspiciousDyeItem(DyeColor.BLUE, new Item.Properties().stacksTo(1));
+    public static final SuspiciousDyeItem PURPLE_SUSPICIOUS_DYE = new SuspiciousDyeItem(DyeColor.PURPLE, new Item.Properties().stacksTo(1));
+    public static final SuspiciousDyeItem MAGENTA_SUSPICIOUS_DYE = new SuspiciousDyeItem(DyeColor.MAGENTA, new Item.Properties().stacksTo(1));
+    public static final SuspiciousDyeItem PINK_SUSPICIOUS_DYE = new SuspiciousDyeItem(DyeColor.PINK, new Item.Properties().stacksTo(1));
+
     public static final DataComponentType<DyeColor> GLINT_COLOR_COMPONENT = DataComponentType.<DyeColor>builder().persistent(DyeColor.CODEC).networkSynchronized(DyeColor.STREAM_CODEC).build();
+
+    public static final TagKey<Item> SUSPICIOUS_DYES_TAG = TagKey.create(Registries.ITEM, ResourceLocation.tryBuild(AdditionalAdditions.namespace, "suspicious_dyes"));
 
     private static void registerItems() {
         Registry.register(BuiltInRegistries.ITEM, ResourceLocation.tryBuild(AdditionalAdditions.namespace, "berry_pie"), BERRY_PIE);
@@ -105,6 +121,19 @@ public class AdditionalItems {
         Registry.register(BuiltInRegistries.ITEM, ResourceLocation.tryBuild(AdditionalAdditions.namespace, "rose_gold_pickaxe"), ROSE_GOLD_PICKAXE);
         Registry.register(BuiltInRegistries.ITEM, ResourceLocation.tryBuild(AdditionalAdditions.namespace, "rose_gold_shovel"), ROSE_GOLD_SHOVEL);
         Registry.register(BuiltInRegistries.ITEM, ResourceLocation.tryBuild(AdditionalAdditions.namespace, "rose_gold_hoe"), ROSE_GOLD_HOE);
+        Registry.register(BuiltInRegistries.ITEM, ResourceLocation.tryBuild(AdditionalAdditions.namespace, "white_suspicious_dye"), WHITE_SUSPICIOUS_DYE);
+        Registry.register(BuiltInRegistries.ITEM, ResourceLocation.tryBuild(AdditionalAdditions.namespace, "brown_suspicious_dye"), BROWN_SUSPICIOUS_DYE);
+        Registry.register(BuiltInRegistries.ITEM, ResourceLocation.tryBuild(AdditionalAdditions.namespace, "red_suspicious_dye"), RED_SUSPICIOUS_DYE);
+        Registry.register(BuiltInRegistries.ITEM, ResourceLocation.tryBuild(AdditionalAdditions.namespace, "orange_suspicious_dye"), ORANGE_SUSPICIOUS_DYE);
+        Registry.register(BuiltInRegistries.ITEM, ResourceLocation.tryBuild(AdditionalAdditions.namespace, "yellow_suspicious_dye"), YELLOW_SUSPICIOUS_DYE);
+        Registry.register(BuiltInRegistries.ITEM, ResourceLocation.tryBuild(AdditionalAdditions.namespace, "lime_suspicious_dye"), LIME_SUSPICIOUS_DYE);
+        Registry.register(BuiltInRegistries.ITEM, ResourceLocation.tryBuild(AdditionalAdditions.namespace, "green_suspicious_dye"), GREEN_SUSPICIOUS_DYE);
+        Registry.register(BuiltInRegistries.ITEM, ResourceLocation.tryBuild(AdditionalAdditions.namespace, "cyan_suspicious_dye"), CYAN_SUSPICIOUS_DYE);
+        Registry.register(BuiltInRegistries.ITEM, ResourceLocation.tryBuild(AdditionalAdditions.namespace, "light_blue_suspicious_dye"), LIGHT_BLUE_SUSPICIOUS_DYE);
+        Registry.register(BuiltInRegistries.ITEM, ResourceLocation.tryBuild(AdditionalAdditions.namespace, "blue_suspicious_dye"), BLUE_SUSPICIOUS_DYE);
+        Registry.register(BuiltInRegistries.ITEM, ResourceLocation.tryBuild(AdditionalAdditions.namespace, "purple_suspicious_dye"), PURPLE_SUSPICIOUS_DYE);
+        Registry.register(BuiltInRegistries.ITEM, ResourceLocation.tryBuild(AdditionalAdditions.namespace, "magenta_suspicious_dye"), MAGENTA_SUSPICIOUS_DYE);
+        Registry.register(BuiltInRegistries.ITEM, ResourceLocation.tryBuild(AdditionalAdditions.namespace, "pink_suspicious_dye"), PINK_SUSPICIOUS_DYE);
     }
 
     private static void registerLootTables() {
@@ -178,6 +207,19 @@ public class AdditionalItems {
         CreativeAdder.TOOLS_AND_UTILITIES.add(() -> Config.getBool(ConfigValues.ROSE_GOLD), Items.GOLDEN_HOE, ROSE_GOLD_HOE);
         CreativeAdder.INGREDIENTS.add(() -> Config.getBool(ConfigValues.ROSE_GOLD), Items.GOLD_INGOT, ROSE_GOLD_INGOT);
         CreativeAdder.INGREDIENTS.add(() -> Config.getBool(ConfigValues.TRIDENT_SHARD), Items.PRISMARINE_CRYSTALS, TRIDENT_SHARD);
+        CreativeAdder.INGREDIENTS.addBefore(() -> true, Items.EXPERIENCE_BOTTLE, WHITE_SUSPICIOUS_DYE);
+        CreativeAdder.INGREDIENTS.addBefore(() -> true, Items.EXPERIENCE_BOTTLE, BROWN_SUSPICIOUS_DYE);
+        CreativeAdder.INGREDIENTS.addBefore(() -> true, Items.EXPERIENCE_BOTTLE, RED_SUSPICIOUS_DYE);
+        CreativeAdder.INGREDIENTS.addBefore(() -> true, Items.EXPERIENCE_BOTTLE, ORANGE_SUSPICIOUS_DYE);
+        CreativeAdder.INGREDIENTS.addBefore(() -> true, Items.EXPERIENCE_BOTTLE, YELLOW_SUSPICIOUS_DYE);
+        CreativeAdder.INGREDIENTS.addBefore(() -> true, Items.EXPERIENCE_BOTTLE, LIME_SUSPICIOUS_DYE);
+        CreativeAdder.INGREDIENTS.addBefore(() -> true, Items.EXPERIENCE_BOTTLE, GREEN_SUSPICIOUS_DYE);
+        CreativeAdder.INGREDIENTS.addBefore(() -> true, Items.EXPERIENCE_BOTTLE, CYAN_SUSPICIOUS_DYE);
+        CreativeAdder.INGREDIENTS.addBefore(() -> true, Items.EXPERIENCE_BOTTLE, LIGHT_BLUE_SUSPICIOUS_DYE);
+        CreativeAdder.INGREDIENTS.addBefore(() -> true, Items.EXPERIENCE_BOTTLE, BLUE_SUSPICIOUS_DYE);
+        CreativeAdder.INGREDIENTS.addBefore(() -> true, Items.EXPERIENCE_BOTTLE, PURPLE_SUSPICIOUS_DYE);
+        CreativeAdder.INGREDIENTS.addBefore(() -> true, Items.EXPERIENCE_BOTTLE, MAGENTA_SUSPICIOUS_DYE);
+        CreativeAdder.INGREDIENTS.addBefore(() -> true, Items.EXPERIENCE_BOTTLE, PINK_SUSPICIOUS_DYE);
         CreativeAdder.REDSTONE_BLOCKS.add(() -> Config.getBool(ConfigValues.WRENCH), Items.TARGET, WRENCH_ITEM);
         CreativeAdder.COMBAT.add(() -> Config.getBool(ConfigValues.CROSSBOWS), Items.CROSSBOW, CROSSBOW_WITH_SPYGLASS);
         CreativeAdder.COMBAT.add(() -> Config.getBool(ConfigValues.ROSE_GOLD), Items.GOLDEN_BOOTS, ROSE_GOLD_HELMET);
@@ -193,6 +235,10 @@ public class AdditionalItems {
 
     public static void registerAll() {
         Registry.register(BuiltInRegistries.DATA_COMPONENT_TYPE, ResourceLocation.tryBuild(AdditionalAdditions.namespace, "glint_color"), GLINT_COLOR_COMPONENT);
+
+        Registry.register(BuiltInRegistries.RECIPE_SERIALIZER, ResourceLocation.tryBuild(AdditionalAdditions.namespace, "rose_gold_transmute"), RoseGoldTransmuteRecipe.ROSE_GOLD_TRANSMUTE_RECIPE_SERIALIZER);
+        Registry.register(BuiltInRegistries.RECIPE_SERIALIZER, ResourceLocation.tryBuild(AdditionalAdditions.namespace, "suspicious_dye"), SuspiciousDyeRecipe.SUSPICIOUS_DYE_RECIPE_SERIALIZER);
+
         registerItems();
         registerLootTables();
         registerOther();

@@ -28,7 +28,7 @@ public enum CreativeAdder {
 
     public void addBefore(Supplier<Boolean> condition, ItemLike after, ItemLike... items) {
         CreativeEntry entry = new CreativeEntry(condition, true, after, items);
-        this.entries.addFirst(entry);
+        this.entries.addLast(entry);
     }
 
     public void pushAllTo(FabricItemGroupEntries content) {

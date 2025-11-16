@@ -1,0 +1,18 @@
+{
+  "replace": false,
+  "values": [
+    {"id": "additionaladditions:white_suspicious_dye", "required": false},
+    {"id": "additionaladditions:brown_suspicious_dye", "required": false},
+    {"id": "additionaladditions:red_suspicious_dye", "required": false},
+    {"id": "additionaladditions:orange_suspicious_dye", "required": false},
+    {"id": "additionaladditions:yellow_suspicious_dye", "required": false},
+    {"id": "additionaladditions:lime_suspicious_dye", "required": false},
+    {"id": "additionaladditions:green_suspicious_dye", "required": false},
+    {"id": "additionaladditions:cyan_suspicious_dye", "required": false},
+    {"id": "additionaladditions:light_blue_suspicious_dye", "required": false},
+    {"id": "additionaladditions:blue_suspicious_dye", "required": false},
+    {"id": "additionaladditions:purple_suspicious_dye", "required": false},
+    {"id": "additionaladditions:magenta_suspicious_dye", "required": false},
+    {"id": "additionaladditions:pink_suspicious_dye", "required": false}
+  ]
+}

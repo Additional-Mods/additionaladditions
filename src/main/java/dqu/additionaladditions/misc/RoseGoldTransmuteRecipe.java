@@ -1,7 +1,6 @@
 package dqu.additionaladditions.misc;
 
 import dqu.additionaladditions.registry.AdditionalItems;
-import dqu.additionaladditions.registry.AdditionalMaterials;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -13,6 +12,8 @@ import java.util.Arrays;
 import java.util.Map;
 
 public class RoseGoldTransmuteRecipe extends CustomRecipe {
+    public static final RecipeSerializer<RoseGoldTransmuteRecipe> ROSE_GOLD_TRANSMUTE_RECIPE_SERIALIZER = new SimpleCraftingRecipeSerializer<>(RoseGoldTransmuteRecipe::new);
+
     public RoseGoldTransmuteRecipe(CraftingBookCategory craftingBookCategory) {
         super(craftingBookCategory);
     }
@@ -88,6 +89,6 @@ public class RoseGoldTransmuteRecipe extends CustomRecipe {
 
     @Override
     public RecipeSerializer<?> getSerializer() {
-        return AdditionalMaterials.ROSE_GOLD_TRANSMUTE_RECIPE_SERIALIZER;
+        return RoseGoldTransmuteRecipe.ROSE_GOLD_TRANSMUTE_RECIPE_SERIALIZER;
     }
 }

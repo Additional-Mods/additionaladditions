@@ -1,11 +1,9 @@
 package dqu.additionaladditions.registry;
 
 import dqu.additionaladditions.AdditionalAdditions;
-import dqu.additionaladditions.misc.RoseGoldTransmuteRecipe;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -19,8 +17,6 @@ import java.util.Map;
 import java.util.function.Supplier;
 
 public class AdditionalMaterials {
-    public static final RecipeSerializer<RoseGoldTransmuteRecipe> ROSE_GOLD_TRANSMUTE_RECIPE_SERIALIZER = new SimpleCraftingRecipeSerializer<>(RoseGoldTransmuteRecipe::new);
-
     public static final Holder<ArmorMaterial> ROSE_GOLD = register(
             "rose_gold",
             new EnumMap<>(Map.of(
@@ -35,10 +31,6 @@ public class AdditionalMaterials {
             SoundEvents.ARMOR_EQUIP_GOLD,
             () -> Ingredient.of(AdditionalItems.ROSE_GOLD_INGOT)
     );
-
-    public static void registerAll() {
-        Registry.register(BuiltInRegistries.RECIPE_SERIALIZER, ResourceLocation.tryBuild(AdditionalAdditions.namespace, "rose_gold_transmute"), ROSE_GOLD_TRANSMUTE_RECIPE_SERIALIZER);
-    }
 
     private static Holder<ArmorMaterial> register(String name, EnumMap<ArmorItem.Type, Integer> protection,
                                                   int enchantability, float toughness, float knockbackResistance,
