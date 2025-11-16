@@ -15,6 +15,9 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+/**
+ * Handles mob despawning near amethyst lamps.
+ */
 @Mixin(Mob.class)
 public abstract class MobMixin extends LivingEntity {
     @Shadow protected abstract boolean shouldDespawnInPeaceful();
@@ -22,11 +25,10 @@ public abstract class MobMixin extends LivingEntity {
     protected MobMixin(EntityType<? extends LivingEntity> entityType, Level world) {
         super(entityType, world);
     }
-    private final static boolean isFeatureEnabled = Config.getBool(ConfigValues.AMETHYST_LAMP, "enabled");
 
     @Inject(method = "checkDespawn", at = @At("TAIL"))
     public void checkDespawn(CallbackInfo ci) {
-        if (!isFeatureEnabled) return;
+        if (!Config.getBool(ConfigValues.AMETHYST_LAMP, "enabled")) return;
         if (this.tickCount > 0 || !shouldDespawnInPeaceful()) return;
 
         PoiManager poiManager = ((ServerLevel)level()).getPoiManager();

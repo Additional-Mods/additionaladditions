@@ -12,6 +12,9 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+/**
+ * Stores the currently rendered itemstack in GlintContext.
+ */
 @Mixin(ItemRenderer.class)
 public class ItemRendererMixin {
     @Inject(method = "render", at = @At("HEAD"))

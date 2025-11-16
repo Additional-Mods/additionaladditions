@@ -1,4 +1,4 @@
-package dqu.additionaladditions.mixin;
+package dqu.additionaladditions.mixin.crossbow;
 
 import dqu.additionaladditions.registry.AdditionalItems;
 import net.minecraft.client.model.HumanoidModel;
@@ -12,6 +12,9 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+/**
+ * Changes arm pose to CROSSBOW_HOLD when holding a charged crossbow with spyglass.
+ */
 @Mixin(PlayerRenderer.class)
 public class PlayerRendererMixin {
     @Inject(method = "getArmPose", at = @At("RETURN"), cancellable = true)

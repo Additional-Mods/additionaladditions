@@ -14,6 +14,9 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+/**
+ * Displays elevation action bar message when holding the depth meter.
+ */
 @Mixin(Gui.class)
 public abstract class GuiMixin {
     @Shadow @Final private Minecraft minecraft;

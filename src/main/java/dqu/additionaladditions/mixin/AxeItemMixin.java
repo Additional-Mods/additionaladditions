@@ -20,6 +20,9 @@ import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 
+/**
+ * Drops copper patina when scraping copper blocks with an axe.
+ */
 @Mixin(AxeItem.class)
 public class AxeItemMixin {
     @Inject(method = "evaluateNewBlockState", at = @At(value = "FIELD", target = "Lnet/minecraft/sounds/SoundEvents;AXE_SCRAPE:Lnet/minecraft/sounds/SoundEvent;"), locals = LocalCapture.CAPTURE_FAILSOFT)

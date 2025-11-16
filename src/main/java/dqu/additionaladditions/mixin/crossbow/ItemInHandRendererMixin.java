@@ -1,4 +1,4 @@
-package dqu.additionaladditions.mixin;
+package dqu.additionaladditions.mixin.crossbow;
 
 import dqu.additionaladditions.registry.AdditionalItems;
 import net.minecraft.client.player.LocalPlayer;
@@ -10,6 +10,9 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+/**
+ * Makes offhand not render when holding charged crossbow with spyglass.
+ */
 @Mixin(ItemInHandRenderer.class)
 public class ItemInHandRendererMixin {
     @Inject(method = "evaluateWhichHandsToRender", at = @At("RETURN"), cancellable = true)

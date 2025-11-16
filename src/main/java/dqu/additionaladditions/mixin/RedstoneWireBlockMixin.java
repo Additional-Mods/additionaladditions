@@ -12,6 +12,9 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+/**
+ * Prevents redstone dust from connecting to copper patina and from receiving power through it.
+ */
 @Mixin(RedStoneWireBlock.class)
 public class RedstoneWireBlockMixin {
     @Inject(method = "shouldConnectTo(Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/core/Direction;)Z", at = @At("RETURN"), cancellable = true)

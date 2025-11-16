@@ -1,4 +1,4 @@
-package dqu.additionaladditions.mixin;
+package dqu.additionaladditions.mixin.crossbow;
 
 import dqu.additionaladditions.AdditionalAdditions;
 import dqu.additionaladditions.config.Config;
@@ -13,6 +13,9 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+/**
+ * Updates AdditionalAdditions.zoom field depending on whether the player is sneaking with a crossbow with spyglass.
+ */
 @Mixin(LocalPlayer.class)
 public class LocalPlayerMixin {
     @Inject(method = "isShiftKeyDown", at = @At("HEAD"))

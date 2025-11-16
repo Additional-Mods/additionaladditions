@@ -1,4 +1,4 @@
-package dqu.additionaladditions.mixin;
+package dqu.additionaladditions.mixin.crossbow;
 
 import dqu.additionaladditions.AdditionalAdditions;
 import net.minecraft.client.player.AbstractClientPlayer;
@@ -8,6 +8,9 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+/**
+ * Modifies player FOV when using crossbow with spyglass.
+ */
 @Mixin(AbstractClientPlayer.class)
 public class AbstractClientPlayerMixin {
     @Inject(method = "getFieldOfViewModifier()F", at = @At("RETURN"), cancellable = true)

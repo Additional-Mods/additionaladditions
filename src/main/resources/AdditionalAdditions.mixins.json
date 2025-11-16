@@ -13,11 +13,11 @@
     "WanderingTraderMixin"
   ],
   "client": [
-    "AbstractClientPlayerMixin",
-    "ItemInHandRendererMixin",
-    "LocalPlayerMixin",
-    "PlayerMixin",
-    "PlayerRendererMixin",
+    "crossbow.AbstractClientPlayerMixin",
+    "crossbow.ItemInHandRendererMixin",
+    "crossbow.LocalPlayerMixin",
+    "crossbow.PlayerMixin",
+    "crossbow.PlayerRendererMixin",
     "glint.ElytraLayerMixin",
     "glint.HumanoidArmorLayerMixin",
     "glint.ItemRendererMixin",

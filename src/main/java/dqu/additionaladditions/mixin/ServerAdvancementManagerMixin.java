@@ -17,6 +17,9 @@ import net.minecraft.server.ServerAdvancementManager;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.util.profiling.ProfilerFiller;
 
+/**
+ * Removes advancements when their corresponding features are disabled in the config.
+ */
 @Mixin(ServerAdvancementManager.class)
 public class ServerAdvancementManagerMixin {
     @Inject(method = "apply", at = @At("HEAD"))

@@ -11,6 +11,9 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+/**
+ * Registers custom glint render types in RenderBuffers.
+ */
 @Mixin(RenderBuffers.class)
 public class RenderBuffersMixin {
     @Unique

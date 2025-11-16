@@ -19,6 +19,9 @@ import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 import java.util.List;
 import java.util.function.Consumer;
 
+/**
+ * Adds custom item components to item tooltips.
+ */
 @Mixin(ItemStack.class)
 public abstract class ItemStackMixin {
     @Shadow

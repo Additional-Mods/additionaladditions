@@ -15,6 +15,9 @@ import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.util.profiling.ProfilerFiller;
 import net.minecraft.world.item.crafting.RecipeManager;
 
+/**
+ * Removes recipes when their corresponding features are disabled in the config.
+ */
 @Mixin(RecipeManager.class)
 public class RecipeManagerMixin {
     @Inject(method = "apply", at = @At("HEAD"))

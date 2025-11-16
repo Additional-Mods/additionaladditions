@@ -16,7 +16,6 @@ public enum ConfigValues {
     ROSE_GOLD( 6, new ConfigProperty("RoseGold")),
     ROPES(6, new ConfigProperty("Ropes")),
     ENCHANTMENT_PRECISION(6, new ConfigProperty("EnchantmentPrecision")),
-    ENCHANTMENT_SPEED(6, new ConfigProperty("EnchantmentSpeed")),
     WRENCH(6, new ConfigProperty("Wrench")),
     COPPER_PATINA(6, new ConfigProperty("CopperPatina")),
     AMETHYST_LAMP(7, new ConfigProperty("AmethystLamp", new ListConfigValue()
@@ -33,16 +32,10 @@ public enum ConfigValues {
     MYSTERIOUS_BUNDLE(6, new ConfigProperty("MysteriousBundle")),
     COMPOSTABLE_ROTTEN_FLESH(6, new ConfigProperty("CompostableRottenFlesh")),
     MUSIC_DISCS(6, new ConfigProperty("MusicDiscs")),
-    NOTE_BLOCK_AMETHYST_SOUNDS(6, new ConfigProperty("NoteBlockAmethystSounds")),
     SHIPWRECK_SPYGLASS_LOOT(6, new ConfigProperty("ShipwreckSpyglassLoot")),
     POCKET_JUKEBOX(6, new ConfigProperty("PocketJukebox")),
     CHICKEN_NUGGET(6, new ConfigProperty("ChickenNugget")),
-    POWERED_RAILS_COPPER_RECIPE(6, new ConfigProperty("PoweredRailsCopperRecipe")),
-    GLOW_BERRY_GLOW(6, new ConfigProperty("GlowBerryEatGlow", new ListConfigValue()
-            .put(new ConfigProperty("enabled"))
-            .put(new ConfigProperty("duration", new IntegerConfigValue(5)))
-    )),
-    HASTE_POTIONS(6, new ConfigProperty("HastePotions"));
+    POWERED_RAILS_COPPER_RECIPE(6, new ConfigProperty("PoweredRailsCopperRecipe"));
 
     private final int version;
     private final ConfigProperty configProperty;

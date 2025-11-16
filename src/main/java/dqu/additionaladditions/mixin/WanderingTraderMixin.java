@@ -15,6 +15,9 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+/**
+ * Adds custom trades to the wandering trader.
+ */
 @Mixin(WanderingTrader.class)
 public class WanderingTraderMixin {
     @Inject(method = "updateTrades", at = @At("RETURN"))
