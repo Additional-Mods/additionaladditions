@@ -30,8 +30,6 @@ public class AdditionalAdditions implements ModInitializer {
         AdditionalItems.registerAll();
         AdditionalBlocks.registerAll();
         AdditionalEntities.registerAll();
-        AdditionalPotions.registerAll();
-
         addItemsToCreative();
 
         LootTableEvents.MODIFY.register((key, tableBuilder, source, registries) -> {
