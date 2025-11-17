@@ -1,6 +1,9 @@
 package dqu.additionaladditions.config;
 
+import com.google.gson.JsonElement;
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.DataResult;
+import com.mojang.serialization.JsonOps;
 import dqu.additionaladditions.AdditionalAdditions;
 import net.minecraft.resources.ResourceLocation;
 
@@ -32,6 +35,10 @@ public abstract class ConfigProperty<T> {
 
     public Codec<T> codec() {
         return codec;
+    }
+
+    public DataResult<JsonElement> serialize() {
+        return codec().encodeStart(JsonOps.INSTANCE, get());
     }
 
     public T get() {

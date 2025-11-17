@@ -1,5 +1,7 @@
 package dqu.additionaladditions;
 
+import dqu.additionaladditions.config.ConfigLoader;
+import dqu.additionaladditions.config.network.ConfigSyncS2CPayload;
 import dqu.additionaladditions.glint.GlintResourceGenerator;
 import dqu.additionaladditions.item.PocketJukeboxItem;
 import dqu.additionaladditions.registry.AdditionalBlocks;
@@ -9,6 +11,8 @@ import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
+import net.fabricmc.fabric.api.client.networking.v1.ClientConfigurationNetworking;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.client.model.FabricModelPredicateProviderRegistry;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
@@ -28,6 +32,19 @@ import net.minecraft.world.level.Level;
 public class AdditionalAdditionsClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
+        ClientConfigurationNetworking.registerGlobalReceiver(ConfigSyncS2CPayload.TYPE, (packet, context) -> {
+            context.client().execute(() -> {
+                ConfigLoader.apply(packet.config());
+                AdditionalAdditions.LOGGER.info("[{}] Loaded config from server", AdditionalAdditions.namespace);
+            });
+        });
+        ClientPlayConnectionEvents.DISCONNECT.register((handler, client) -> {
+            client.execute(() -> {
+                ConfigLoader.load();
+                AdditionalAdditions.LOGGER.info("[{}] Reverted to local config", AdditionalAdditions.namespace);
+            });
+        });
+
         BlockRenderLayerMap.INSTANCE.putBlock(AdditionalBlocks.COPPER_PATINA, RenderType.cutout());
         BlockRenderLayerMap.INSTANCE.putBlock(AdditionalBlocks.ROPE_BLOCK, RenderType.cutout());
         BlockRenderLayerMap.INSTANCE.putBlock(AdditionalBlocks.GLOW_STICK_BLOCK, RenderType.cutout());

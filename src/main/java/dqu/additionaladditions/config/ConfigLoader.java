@@ -57,28 +57,14 @@ public class ConfigLoader {
         AdditionalAdditions.LOGGER.info("[{}] Loaded {} config files", AdditionalAdditions.namespace, configFiles.size());
     }
 
-    /**
-     * Parses and sets each config property from the provided map.
-     */
-    private static void apply(Map<ResourceLocation, JsonElement> map) {
-        for (Map.Entry<ResourceLocation, JsonElement> entry : map.entrySet()) {
+    public static void apply(Map<ResourceLocation, JsonElement> configFiles) {
+        for (Map.Entry<ResourceLocation, JsonElement> entry : configFiles.entrySet()) {
             ResourceLocation location = entry.getKey();
             JsonElement json = entry.getValue();
-
             ConfigProperty<?> property = ConfigProperty.getByPath(location);
-            if (property == null) {
-                AdditionalAdditions.LOGGER.warn("[{}] Unknown config property: {}", AdditionalAdditions.namespace, location);
-                continue;
-            }
 
             parseAndSet(property, json);
         }
-
-        ConfigProperty.getAll().forEach(property -> {
-            if (property.get() == null) {
-                throw new IllegalStateException("Config property " + property.path() + " was not deserialized.");
-            }
-        });
     }
 
     private static <T> void parseAndSet(ConfigProperty<T> property, JsonElement json) {
