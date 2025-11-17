@@ -1,7 +1,6 @@
 package dqu.additionaladditions.mixin;
 
 import dqu.additionaladditions.config.Config;
-import dqu.additionaladditions.config.ConfigValues;
 import dqu.additionaladditions.registry.AdditionalItems;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
@@ -23,9 +22,9 @@ public abstract class GuiMixin {
 
     @Inject(method = "render", at = @At("TAIL"))
     private void depthMeterMessage(CallbackInfo ci) {
-        if (!Config.getBool(ConfigValues.DEPTH_METER, "enabled")) return;
+        if (!Config.DEPTH_METER.get().enabled()) return;
         if (minecraft.player.isHolding(AdditionalItems.DEPTH_METER_ITEM)) {
-            if (Config.getBool(ConfigValues.DEPTH_METER, "displayElevationAlways")) {
+            if (Config.DEPTH_METER_DISPLAY_ALWAYS.get().enabled()) {
                 String level = String.valueOf((int) minecraft.player.getY());
                 minecraft.player.displayClientMessage(MutableComponent.create(new TranslatableContents("depth_meter.elevation", null, new String[]{level})), true);
             }

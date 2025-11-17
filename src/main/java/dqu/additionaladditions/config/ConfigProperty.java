@@ -1,27 +1,44 @@
 package dqu.additionaladditions.config;
 
-import dqu.additionaladditions.config.value.ConfigValue;
-import dqu.additionaladditions.config.value.ConfigValueType;
+import com.mojang.serialization.Codec;
+import dqu.additionaladditions.AdditionalAdditions;
+import net.minecraft.resources.ResourceLocation;
 
-public class ConfigProperty {
-    private final String key;
-    private final ConfigValue value;
+import java.util.List;
 
-    public ConfigProperty(String key, ConfigValue value) {
-        this.key = key;
-        this.value = value;
+public abstract class ConfigProperty<T> {
+    private final ResourceLocation path;
+    private final Codec<T> codec;
+    private T value;
+
+    protected ConfigProperty(String path, Codec<T> codec, T defaultValue) {
+        this.path = ResourceLocation.tryBuild(AdditionalAdditions.namespace, path);
+        this.codec = codec;
+        this.value = defaultValue;
+        Config.PROPERTIES.put(this.path, this);
     }
 
-    public ConfigProperty(String key) {
-        this.key = key;
-        this.value = ConfigValueType.TRUE;
+    public static ConfigProperty<?> getByPath(ResourceLocation location) {
+        return Config.PROPERTIES.get(location);
     }
 
-    public String key() {
-        return key;
+    public static List<ConfigProperty<?>> getAll() {
+        return List.copyOf(Config.PROPERTIES.values());
     }
 
-    public ConfigValue value() {
+    public ResourceLocation path() {
+        return path;
+    }
+
+    public Codec<T> codec() {
+        return codec;
+    }
+
+    public T get() {
         return value;
+    }
+
+    public void set(T value) {
+        this.value = value;
     }
 }

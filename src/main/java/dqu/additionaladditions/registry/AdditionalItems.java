@@ -2,7 +2,6 @@ package dqu.additionaladditions.registry;
 
 import dqu.additionaladditions.AdditionalAdditions;
 import dqu.additionaladditions.config.Config;
-import dqu.additionaladditions.config.ConfigValues;
 import dqu.additionaladditions.glint.GlintColor;
 import dqu.additionaladditions.item.*;
 import dqu.additionaladditions.misc.CreativeAdder;
@@ -49,33 +48,49 @@ import java.util.function.Supplier;
 public class AdditionalItems {
     // saturation = hunger * saturationModifier
     public static final Item FRIED_EGG = new Builder("fried_egg")
-            .config(() -> Config.getBool(ConfigValues.FOOD, "FriedEgg"))
+            .config(() -> Config.FRIED_EGG.get().enabled())
             .properties(p -> p
-                    .food(new FoodProperties.Builder().nutrition(6).saturationModifier(0.8666f).build())
+                    .food(new FoodProperties.Builder()
+                            .nutrition(Config.FRIED_EGG_FOOD.get().nutrition())
+                            .saturationModifier(Config.FRIED_EGG_FOOD.get().saturation() / Config.FRIED_EGG_FOOD.get().nutrition())
+                            .build()
+                    )
             )
             .creativeAfter(Items.COOKED_RABBIT, CreativeAdder.FOOD_AND_DRINKS)
             .build();
 
     public static final Item BERRY_PIE = new Builder("berry_pie")
-            .config(() -> Config.getBool(ConfigValues.FOOD, "BerryPie"))
+            .config(() -> Config.BERRY_PIE.get().enabled())
             .properties(p -> p
-                    .food(new FoodProperties.Builder().nutrition(8).saturationModifier(0.6f).build())
+                    .food(new FoodProperties.Builder().
+                            nutrition(Config.BERRY_PIE_FOOD.get().nutrition()).
+                            saturationModifier(Config.BERRY_PIE_FOOD.get().saturation() / Config.BERRY_PIE_FOOD.get().nutrition())
+                            .build()
+                    )
             )
             .creativeAfter(Items.PUMPKIN_PIE, CreativeAdder.FOOD_AND_DRINKS)
             .build();
 
     public static final Item HONEYED_APPLE = new Builder("honeyed_apple")
-            .config(() -> Config.getBool(ConfigValues.FOOD, "HoneyedApple"))
+            .config(() -> Config.HONEYED_APPLE.get().enabled())
             .properties(p -> p
-                    .food(new FoodProperties.Builder().nutrition(8).saturationModifier(1.6f).build())
+                    .food(new FoodProperties.Builder()
+                            .nutrition(Config.HONEYED_APPLE_FOOD.get().nutrition())
+                            .saturationModifier(Config.HONEYED_APPLE_FOOD.get().saturation() / Config.HONEYED_APPLE_FOOD.get().nutrition())
+                            .build()
+                    )
             )
             .creativeAfter(Items.APPLE, CreativeAdder.FOOD_AND_DRINKS)
             .build();
 
     public static final Item CHICKEN_NUGGET = new Builder("chicken_nugget")
-            .config(() -> Config.getBool(ConfigValues.CHICKEN_NUGGET))
+            .config(() -> Config.CHICKEN_NUGGET.get().enabled())
             .properties(p -> p
-                    .food(new FoodProperties.Builder().nutrition(6).saturationModifier(0.9f).build())
+                    .food(new FoodProperties.Builder()
+                            .nutrition(Config.CHICKEN_NUGGET_FOOD.get().nutrition())
+                            .saturationModifier(Config.CHICKEN_NUGGET_FOOD.get().saturation() / Config.CHICKEN_NUGGET_FOOD.get().nutrition())
+                            .build()
+                    )
             )
             .creativeAfter(Items.ROTTEN_FLESH, CreativeAdder.FOOD_AND_DRINKS)
             .lootTable(
@@ -89,35 +104,35 @@ public class AdditionalItems {
             .build();
 
     public static final WateringCanItem WATERING_CAN = new Builder("watering_can")
-            .config(() -> Config.getBool(ConfigValues.WATERING_CAN))
+            .config(() -> Config.WATERING_CAN.get().enabled())
             .properties(p -> p
                     .stacksTo(1)
-                    .durability(101)
+                    .durability(Config.WATERING_CAN_DURABILITY.get().durability())
             )
             .creativeAfter(Items.BONE_MEAL, CreativeAdder.TOOLS_AND_UTILITIES)
             .build(WateringCanItem::new);
 
     public static final WrenchItem WRENCH_ITEM = new Builder("wrench")
-            .config(() -> Config.getBool(ConfigValues.WRENCH))
+            .config(() -> Config.WRENCH.get().enabled())
             .properties(p -> p
                     .stacksTo(1)
-                    .durability(256)
+                    .durability(Config.WRENCH_DURABILITY.get().durability())
             )
             .creativeAfter(Items.BONE_MEAL, CreativeAdder.TOOLS_AND_UTILITIES)
             .creativeAfter(Items.TARGET, CreativeAdder.REDSTONE_BLOCKS)
             .build(WrenchItem::new);
 
     public static final CrossbowItem CROSSBOW_WITH_SPYGLASS = new Builder("crossbow_with_spyglass")
-            .config(() -> Config.getBool(ConfigValues.CROSSBOWS))
+            .config(() -> Config.CROSSBOW_WITH_SPYGLASS.get().enabled())
             .properties(p -> p
                     .stacksTo(1)
-                    .durability(350)
+                    .durability(Config.CROSSBOW_WITH_SPYGLASS_DURABILITY.get().durability())
             )
             .creativeAfter(Items.CROSSBOW, CreativeAdder.COMBAT)
             .build(CrossbowItem::new);
 
     public static final Item TRIDENT_SHARD = new Builder("trident_shard")
-            .config(() -> Config.getBool(ConfigValues.TRIDENT_SHARD))
+            .config(() -> Config.TRIDENT_SHARD.get().enabled())
             .creativeAfter(Items.PRISMARINE_CRYSTALS, CreativeAdder.INGREDIENTS)
             .lootTable(
                     EntityType.ELDER_GUARDIAN.getDefaultLootTable(),
@@ -129,7 +144,7 @@ public class AdditionalItems {
             .build();
 
     public static final Item GLOW_STICK_ITEM = new Builder("glow_stick")
-            .config(() -> Config.getBool(ConfigValues.GLOW_STICK))
+            .config(() -> Config.GLOW_STICK.get().enabled())
             .creativeAfter(Items.BONE_MEAL, CreativeAdder.TOOLS_AND_UTILITIES)
             .lootTable(
                     List.of(BuiltInLootTables.SIMPLE_DUNGEON, BuiltInLootTables.ABANDONED_MINESHAFT, BuiltInLootTables.STRONGHOLD_CORRIDOR),
@@ -141,7 +156,7 @@ public class AdditionalItems {
             .build();
 
     public static final DepthMeterItem DEPTH_METER_ITEM = new Builder("depth_meter")
-            .config(() -> Config.getBool(ConfigValues.DEPTH_METER, "enabled"))
+            .config(() -> Config.DEPTH_METER.get().enabled())
             .creativeAfter(Items.CLOCK, CreativeAdder.TOOLS_AND_UTILITIES)
             .lootTable(
                     List.of(BuiltInLootTables.SIMPLE_DUNGEON, BuiltInLootTables.ABANDONED_MINESHAFT, BuiltInLootTables.STRONGHOLD_CORRIDOR),
@@ -153,7 +168,7 @@ public class AdditionalItems {
             .build(DepthMeterItem::new);
 
     public static final MysteriousBundleItem MYSTERIOUS_BUNDLE_ITEM = new Builder("mysterious_bundle")
-            .config(() -> Config.getBool(ConfigValues.MYSTERIOUS_BUNDLE))
+            .config(() -> Config.MYSTERIOUS_BUNDLE.get().enabled())
             .properties(p -> p
                     .stacksTo(1)
                     .rarity(Rarity.RARE)
@@ -162,7 +177,7 @@ public class AdditionalItems {
             .build(MysteriousBundleItem::new);
 
     public static final PocketJukeboxItem POCKET_JUKEBOX_ITEM = new Builder("pocket_jukebox")
-            .config(() -> Config.getBool(ConfigValues.POCKET_JUKEBOX))
+            .config(() -> Config.POCKET_JUKEBOX.get().enabled())
             .properties(p -> p
                     .stacksTo(1)
             )
@@ -170,12 +185,12 @@ public class AdditionalItems {
             .build(PocketJukeboxItem::new);
 
     public static final Item ROSE_GOLD_INGOT = new Builder("rose_gold_ingot")
-            .config(() -> Config.getBool(ConfigValues.ROSE_GOLD))
+            .config(() -> Config.ROSE_GOLD.get().enabled())
             .creativeAfter(Items.GOLD_INGOT, CreativeAdder.INGREDIENTS)
             .build();
 
     public static final Item MUSIC_DISC_0308 = new Builder("music_disc_0308")
-            .config(() -> Config.getBool(ConfigValues.MUSIC_DISCS))
+            .config(() -> Config.MUSIC_DISC_0308.get().enabled())
             .properties(p -> p
                     .stacksTo(1)
                     .rarity(Rarity.RARE)
@@ -192,7 +207,7 @@ public class AdditionalItems {
             .build();
 
     public static final Item MUSIC_DISC_1007 = new Builder("music_disc_1007")
-            .config(() -> Config.getBool(ConfigValues.MUSIC_DISCS))
+            .config(() -> Config.MUSIC_DISC_1007.get().enabled())
             .properties(p -> p
                     .stacksTo(1)
                     .rarity(Rarity.RARE)
@@ -209,7 +224,7 @@ public class AdditionalItems {
             .build();
 
     public static final Item MUSIC_DISC_1507 = new Builder("music_disc_1507")
-            .config(() -> Config.getBool(ConfigValues.MUSIC_DISCS))
+            .config(() -> Config.MUSIC_DISC_1507.get().enabled())
             .properties(p -> p
                     .stacksTo(1)
                     .rarity(Rarity.RARE)
@@ -228,7 +243,7 @@ public class AdditionalItems {
     public static final RoseGoldToolMaterial ROSE_GOLD_TOOL_MATERIAL = new RoseGoldToolMaterial();
 
     public static final Item ROSE_GOLD_HELMET = new Builder("rose_gold_helmet")
-            .config(() -> Config.getBool(ConfigValues.ROSE_GOLD))
+            .config(() -> Config.ROSE_GOLD.get().enabled())
             .properties(p -> p
                     .durability(312)
             )
@@ -236,7 +251,7 @@ public class AdditionalItems {
             .build(p -> new ArmorItem(AdditionalMaterials.ROSE_GOLD, ArmorItem.Type.HELMET, p));
 
     public static final Item ROSE_GOLD_CHESTPLATE = new Builder("rose_gold_chestplate")
-            .config(() -> Config.getBool(ConfigValues.ROSE_GOLD))
+            .config(() -> Config.ROSE_GOLD.get().enabled())
             .properties(p -> p
                     .durability(360)
             )
@@ -244,7 +259,7 @@ public class AdditionalItems {
             .build(p -> new ArmorItem(AdditionalMaterials.ROSE_GOLD, ArmorItem.Type.CHESTPLATE, p));
 
     public static final Item ROSE_GOLD_LEGGINGS = new Builder("rose_gold_leggings")
-            .config(() -> Config.getBool(ConfigValues.ROSE_GOLD))
+            .config(() -> Config.ROSE_GOLD.get().enabled())
             .properties(p -> p
                     .durability(384)
             )
@@ -252,7 +267,7 @@ public class AdditionalItems {
             .build(p -> new ArmorItem(AdditionalMaterials.ROSE_GOLD, ArmorItem.Type.LEGGINGS, p));
 
     public static final Item ROSE_GOLD_BOOTS = new Builder("rose_gold_boots")
-            .config(() -> Config.getBool(ConfigValues.ROSE_GOLD))
+            .config(() -> Config.ROSE_GOLD.get().enabled())
             .properties(p -> p
                     .durability(264)
             )
@@ -260,7 +275,7 @@ public class AdditionalItems {
             .build(p -> new ArmorItem(AdditionalMaterials.ROSE_GOLD, ArmorItem.Type.BOOTS, p));
 
     public static final Item ROSE_GOLD_SWORD = new Builder("rose_gold_sword")
-            .config(() -> Config.getBool(ConfigValues.ROSE_GOLD))
+            .config(() -> Config.ROSE_GOLD.get().enabled())
             .properties(p -> p
                     .attributes(SwordItem.createAttributes(ROSE_GOLD_TOOL_MATERIAL, 4, -2.4F))
             )
@@ -268,7 +283,7 @@ public class AdditionalItems {
             .build(p -> new SwordItem(ROSE_GOLD_TOOL_MATERIAL, p));
 
     public static final Item ROSE_GOLD_AXE = new Builder("rose_gold_axe")
-            .config(() -> Config.getBool(ConfigValues.ROSE_GOLD))
+            .config(() -> Config.ROSE_GOLD.get().enabled())
             .properties(p -> p
                     .attributes(AxeItem.createAttributes(ROSE_GOLD_TOOL_MATERIAL, 6, -3.1F))
             )
@@ -276,7 +291,7 @@ public class AdditionalItems {
             .build(p -> new AxeItem(ROSE_GOLD_TOOL_MATERIAL, p));
 
     public static final Item ROSE_GOLD_PICKAXE = new Builder("rose_gold_pickaxe")
-            .config(() -> Config.getBool(ConfigValues.ROSE_GOLD))
+            .config(() -> Config.ROSE_GOLD.get().enabled())
             .properties(p -> p
                     .attributes(PickaxeItem.createAttributes(ROSE_GOLD_TOOL_MATERIAL, 1, -2.8F))
             )
@@ -284,7 +299,7 @@ public class AdditionalItems {
             .build(p -> new PickaxeItem(ROSE_GOLD_TOOL_MATERIAL, p));
 
     public static final Item ROSE_GOLD_SHOVEL = new Builder("rose_gold_shovel")
-            .config(() -> Config.getBool(ConfigValues.ROSE_GOLD))
+            .config(() -> Config.ROSE_GOLD.get().enabled())
             .properties(p -> p
                     .attributes(ShovelItem.createAttributes(ROSE_GOLD_TOOL_MATERIAL, 1.5F, -3F))
             )
@@ -292,7 +307,7 @@ public class AdditionalItems {
             .build(p -> new ShovelItem(ROSE_GOLD_TOOL_MATERIAL, p));
 
     public static final Item ROSE_GOLD_HOE = new Builder("rose_gold_hoe")
-            .config(() -> Config.getBool(ConfigValues.ROSE_GOLD))
+            .config(() -> Config.ROSE_GOLD.get().enabled())
             .properties(p -> p
                     .attributes(HoeItem.createAttributes(ROSE_GOLD_TOOL_MATERIAL, -2, -1F))
             )
@@ -446,13 +461,13 @@ public class AdditionalItems {
         Registry.register(BuiltInRegistries.RECIPE_SERIALIZER, ResourceLocation.tryBuild(AdditionalAdditions.namespace, "rose_gold_transmute"), RoseGoldTransmuteRecipe.ROSE_GOLD_TRANSMUTE_RECIPE_SERIALIZER);
         Registry.register(BuiltInRegistries.RECIPE_SERIALIZER, ResourceLocation.tryBuild(AdditionalAdditions.namespace, "suspicious_dye"), SuspiciousDyeRecipe.SUSPICIOUS_DYE_RECIPE_SERIALIZER);
 
-        LootHandler.register(BuiltInLootTables.SHIPWRECK_SUPPLY, () -> Config.getBool(ConfigValues.SHIPWRECK_SPYGLASS_LOOT), LootPool.lootPool()
+        LootHandler.register(BuiltInLootTables.SHIPWRECK_SUPPLY, () -> Config.SHIPWRECK_SPYGLASS_LOOT.get().enabled(), LootPool.lootPool()
                 .setRolls(ConstantValue.exactly(1))
                 .when(LootItemRandomChanceCondition.randomChance(0.5f))
                 .add(LootItem.lootTableItem(Items.SPYGLASS))
         );
 
-        if (Config.getBool(ConfigValues.WRENCH)) {
+        if (Config.WRENCH.get().enabled()) {
             DispenserBlock.registerBehavior(WRENCH_ITEM, new DefaultDispenseItemBehavior() {
                 public ItemStack execute(BlockSource pointer, ItemStack stack) {
                     WrenchItem wrench = (WrenchItem) stack.getItem();
@@ -467,7 +482,7 @@ public class AdditionalItems {
             });
         }
 
-        if (Config.getBool(ConfigValues.COMPOSTABLE_ROTTEN_FLESH)) {
+        if (Config.COMPOSTABLE_ROTTEN_FLESH.get().enabled()) {
             CompostingChanceRegistry.INSTANCE.add(Items.ROTTEN_FLESH, 0.33F);
         }
     }

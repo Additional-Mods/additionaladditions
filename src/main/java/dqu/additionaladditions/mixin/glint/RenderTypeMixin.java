@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 /**
- * Swaps vanilla glint render types with custom ones if rendering an item with a dyed glint.
+ * Swaps vanilla glint render type with custom ones if rendering an item with a dyed glint.
  */
 @Mixin(RenderType.class)
 public class RenderTypeMixin {

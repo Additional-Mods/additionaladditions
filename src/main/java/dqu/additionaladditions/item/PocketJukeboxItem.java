@@ -1,7 +1,6 @@
 package dqu.additionaladditions.item;
 
 import dqu.additionaladditions.config.Config;
-import dqu.additionaladditions.config.ConfigValues;
 import dqu.additionaladditions.misc.PocketMusicSoundInstance;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
@@ -55,7 +54,7 @@ public class PocketJukeboxItem extends Item {
 
     @Override
     public boolean overrideOtherStackedOnMe(ItemStack stack, ItemStack otherStack, Slot slot, ClickAction clickType, Player player, SlotAccess cursorStackReference) {
-        if (!Config.getBool(ConfigValues.POCKET_JUKEBOX)) return false;
+        if (!Config.POCKET_JUKEBOX.get().enabled()) return false;
         if (clickType != ClickAction.SECONDARY) return false;
 
         if (!hasDisc(stack)) {

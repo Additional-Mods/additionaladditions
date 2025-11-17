@@ -1,8 +1,6 @@
 package dqu.additionaladditions.misc;
 
 import dqu.additionaladditions.config.Config;
-import dqu.additionaladditions.config.ConfigValues;
-import dqu.additionaladditions.registry.AdditionalItems;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;
@@ -36,7 +34,7 @@ public class PocketMusicSoundInstance extends AbstractTickableSoundInstance {
         if (cursor == null) cursor = ItemStack.EMPTY;
         boolean hasDisc = ItemStack.matches(cursor, stack) || this.playerEntity.getInventory().contains(stack);
 
-        if (this.playerEntity.isDeadOrDying() || !hasDisc || !Config.getBool(ConfigValues.POCKET_JUKEBOX)) {
+        if (this.playerEntity.isDeadOrDying() || !hasDisc || !Config.POCKET_JUKEBOX.get().enabled()) {
             this.cancel();
         } else {
             this.x = this.playerEntity.getX();

@@ -1,14 +1,12 @@
 package dqu.additionaladditions.block;
 
 import dqu.additionaladditions.config.Config;
-import dqu.additionaladditions.config.ConfigValues;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -59,7 +57,7 @@ public class RopeBlock extends Block {
 
     @Override
     public boolean canSurvive(BlockState state, LevelReader world, BlockPos pos) {
-        if (!Config.getBool(ConfigValues.ROPES)) return false;
+        if (!Config.ROPE.get().enabled()) return false;
 
         BlockState up = world.getBlockState(pos.relative(Direction.UP));
 

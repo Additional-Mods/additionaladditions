@@ -10,7 +10,6 @@ import java.util.Random;
 import java.util.Set;
 
 import dqu.additionaladditions.config.Config;
-import dqu.additionaladditions.config.ConfigValues;
 import dqu.additionaladditions.registry.AdditionalBlocks;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
@@ -224,7 +223,7 @@ public class CopperPatinaBlock extends Block {
     }
 
     public boolean canSurvive(BlockState state, LevelReader world, BlockPos pos) {
-        if (!Config.getBool(ConfigValues.COPPER_PATINA)) return false;
+        if (!Config.COPPER_PATINA.get().enabled()) return false;
 
         BlockPos blockPos = pos.below();
         BlockState blockState = world.getBlockState(blockPos);
@@ -237,7 +236,7 @@ public class CopperPatinaBlock extends Block {
 
     private void update(Level world, BlockPos pos, BlockState state) {
         int i = this.getReceivedRedstonePower(world, pos);
-        if (!Config.getBool(ConfigValues.COPPER_PATINA)) i = 0;
+        if (!Config.COPPER_PATINA.get().enabled()) i = 0;
         if ((Integer)state.getValue(POWER) != i) {
             if (world.getBlockState(pos) == state) {
                 world.setBlock(pos, (BlockState)state.setValue(POWER, i), 2);

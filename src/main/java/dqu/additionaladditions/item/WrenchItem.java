@@ -1,7 +1,6 @@
 package dqu.additionaladditions.item;
 
 import dqu.additionaladditions.config.Config;
-import dqu.additionaladditions.config.ConfigValues;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
@@ -57,7 +56,7 @@ public class WrenchItem extends Item {
     }
 
     private InteractionResult rotate(BlockPos pos, BlockState state, Level world, ItemStack stack, Optional<Player> player, Optional<InteractionHand> hand) {
-        if (!Config.getBool(ConfigValues.WRENCH)) { return InteractionResult.FAIL; }
+        if (!Config.WRENCH.get().enabled()) { return InteractionResult.FAIL; }
 
         if (world.isClientSide()) return InteractionResult.PASS;
         if (state.getBlock() instanceof ChestBlock || state.getBlock() instanceof BedBlock) return InteractionResult.PASS;

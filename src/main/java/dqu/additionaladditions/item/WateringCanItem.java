@@ -1,7 +1,6 @@
 package dqu.additionaladditions.item;
 
 import dqu.additionaladditions.config.Config;
-import dqu.additionaladditions.config.ConfigValues;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -25,7 +24,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
@@ -37,7 +35,7 @@ public class WateringCanItem extends Item {
     @Override
     public InteractionResultHolder<ItemStack> use(Level world, Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
-        if (!Config.getBool(ConfigValues.WATERING_CAN)) { return InteractionResultHolder.fail(stack); }
+        if (!Config.WATERING_CAN.get().enabled()) { return InteractionResultHolder.fail(stack); }
         BlockHitResult hitResult = getPlayerPOVHitResult(world, player, ClipContext.Fluid.SOURCE_ONLY);
         if (hitResult.getType() != HitResult.Type.BLOCK) return InteractionResultHolder.fail(stack);
         BlockPos pos = hitResult.getBlockPos();
@@ -91,12 +89,12 @@ public class WateringCanItem extends Item {
 
     @Override
     public int getBarColor(ItemStack stack) {
-        return Config.getBool(ConfigValues.WATERING_CAN) ? FastColor.ARGB32.color(0, 65, 135, 235) : Mth.color(235, 135, 65);
+        return Config.WATERING_CAN.get().enabled() ? FastColor.ARGB32.color(0, 65, 135, 235) : Mth.color(235, 135, 65);
     }
 
     @Override
     public int getBarWidth(ItemStack stack) {
-        return Config.getBool(ConfigValues.WATERING_CAN) ? Math.min(Math.round(13 * stack.getDamageValue() / 100.0F), 13) : 13;
+        return Config.WATERING_CAN.get().enabled() ? Math.min(Math.round(13 * stack.getDamageValue() / 100.0F), 13) : 13;
     }
 
     @Override

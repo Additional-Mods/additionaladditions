@@ -1,7 +1,6 @@
 package dqu.additionaladditions.item;
 
 import dqu.additionaladditions.config.Config;
-import dqu.additionaladditions.config.ConfigValues;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.contents.TranslatableContents;
 import net.minecraft.world.InteractionHand;
@@ -18,11 +17,11 @@ public class DepthMeterItem extends Item {
 
     @Override
     public InteractionResultHolder<ItemStack> use(Level world, Player user, InteractionHand hand) {
-        if (!Config.getBool(ConfigValues.DEPTH_METER, "enabled")) {
+        if (!Config.DEPTH_METER.get().enabled()) {
             return super.use(world, user, hand);
         }
 
-        if (!Config.getBool(ConfigValues.DEPTH_METER, "displayElevationAlways")) {
+        if (!Config.DEPTH_METER_DISPLAY_ALWAYS.get().enabled()) {
             ItemStack itemStack = user.getItemInHand(hand);
             user.displayClientMessage(MutableComponent.create(new TranslatableContents("depth_meter.elevation", null, new String[]{String.valueOf(user.getBlockY())})), true);
             return InteractionResultHolder.sidedSuccess(itemStack, world.isClientSide());

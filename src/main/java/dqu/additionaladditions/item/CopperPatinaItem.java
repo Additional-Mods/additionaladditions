@@ -1,7 +1,6 @@
 package dqu.additionaladditions.item;
 
 import dqu.additionaladditions.config.Config;
-import dqu.additionaladditions.config.ConfigValues;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
@@ -25,7 +24,7 @@ public class CopperPatinaItem extends BlockItem {
 
     @Override
     public InteractionResult useOn(UseOnContext context) {
-        if (!Config.getBool(ConfigValues.COPPER_PATINA)) return super.useOn(context);
+        if (!Config.COPPER_PATINA.get().enabled()) return super.useOn(context);
 
         Player player = context.getPlayer();
         Level world = context.getLevel();

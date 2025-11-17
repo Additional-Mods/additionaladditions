@@ -1,234 +1,143 @@
 package dqu.additionaladditions.config;
 
-import com.google.common.io.Files;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import dqu.additionaladditions.AdditionalAdditions;
-import dqu.additionaladditions.config.value.ConfigValueType;
-import dqu.additionaladditions.config.value.ListConfigValue;
-import net.fabricmc.loader.api.FabricLoader;
+import dqu.additionaladditions.config.type.ChanceConfig;
+import dqu.additionaladditions.config.type.DurabilityConfig;
+import dqu.additionaladditions.config.type.FeatureFlagConfig;
+import dqu.additionaladditions.config.type.FoodConfig;
+import net.minecraft.resources.ResourceLocation;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 import java.util.Map;
 
-@SuppressWarnings("unchecked")
 public class Config {
-    public static final int VERSION = 10;
-    private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
-    private static final String PATH = FabricLoader.getInstance().getConfigDir().resolve("additional-additions-config.json").toString();
-    private static final File DBFILE = new File(PATH);
-    public static boolean initialized = false;
-    private static JsonObject db;
+    protected static final Map<ResourceLocation, ConfigProperty<?>> PROPERTIES = new HashMap<>();
 
-    private static String format(String message) {
-        return String.format("[%s] %s", AdditionalAdditions.namespace, message);
-    }
+    // Food
 
-    private static void addPropertyTo(JsonObject object, ConfigProperty property) {
-        switch (property.value().getType()) {
-            case BOOLEAN -> object.addProperty(property.key(), (Boolean) property.value().getValue());
-            case STRING -> object.addProperty(property.key(), (String) property.value().getValue());
-            case INTEGER -> object.addProperty(property.key(), (Integer) property.value().getValue());
-            case FLOAT -> object.addProperty(property.key(), (Float) property.value().getValue());
-            case LIST -> {
-                JsonObject newObject = new JsonObject();
-                for (ConfigProperty i : (List<ConfigProperty>) property.value().getValue()) {
-                    addPropertyTo(newObject, i);
-                }
-                object.add(property.key(), newObject);
-            }
-            default -> {
-                throw new IllegalArgumentException("Unsupported config value type: " + property.value().getType());
-            }
-        }
-    }
+    public static final ConfigProperty<FeatureFlagConfig> FRIED_EGG =
+            new ConfigProperty<>("fried_egg/flag", FeatureFlagConfig.CODEC, new FeatureFlagConfig(true)) {};
 
-    public static void load() {
-        if (!DBFILE.exists()) {
-            createConfig();
-        }
+    public static final ConfigProperty<FoodConfig> FRIED_EGG_FOOD =
+            new ConfigProperty<>("fried_egg/food", FoodConfig.CODEC, new FoodConfig(6, 5.2f)) {};
 
-        try {
-            BufferedReader bufferedReader = Files.newReader(DBFILE, StandardCharsets.UTF_8);
-            db = GSON.fromJson(bufferedReader, JsonObject.class);
-        } catch (Exception e) {
-            AdditionalAdditions.LOGGER.error(format("Unable to load configuration file!"), e);
-        }
+    public static final ConfigProperty<FeatureFlagConfig> BERRY_PIE =
+            new ConfigProperty<>("berry_pie/flag", FeatureFlagConfig.CODEC, new FeatureFlagConfig(true)) {};
 
-        try {
-            if (db.get("version").getAsInt() != VERSION) {
-                convert(db.get("version").getAsInt());
-            }
-        } catch (Exception e) {
-            AdditionalAdditions.LOGGER.error(format("Configuration file is damaged!"), e);
-            createConfig(); // try to overwrite the damaged config
-        }
+    public static final ConfigProperty<FoodConfig> BERRY_PIE_FOOD =
+            new ConfigProperty<>("berry_pie/food", FoodConfig.CODEC, new FoodConfig(8, 4.8f)) {};
 
-        repair();
+    public static final ConfigProperty<FeatureFlagConfig> HONEYED_APPLE =
+            new ConfigProperty<>("honeyed_apple/flag", FeatureFlagConfig.CODEC, new FeatureFlagConfig(true)) {};
 
-        initialized = true;
-    }
+    public static final ConfigProperty<FoodConfig> HONEYED_APPLE_FOOD =
+            new ConfigProperty<>("honeyed_apple/food", FoodConfig.CODEC, new FoodConfig(8, 12.8f)) {};
 
-    private static void createConfig() {
-        db = new JsonObject();
-        db.addProperty("version", VERSION);
-        for (ConfigValues value : ConfigValues.values()) {
-            addPropertyTo(db, value.getProperty());
-        }
-        save();
-    }
+    // Chicken Nugget
 
-    private static void save() {
-        try {
-            BufferedWriter bufferedWriter = Files.newWriter(DBFILE, StandardCharsets.UTF_8);
-            String json = GSON.toJson(db);
-            bufferedWriter.write(json);
-            bufferedWriter.close();
-        } catch (Exception e) {
-            AdditionalAdditions.LOGGER.error(format("Unable to save configuration file!"), e);
-        }
-    }
+    public static final ConfigProperty<FeatureFlagConfig> CHICKEN_NUGGET =
+            new ConfigProperty<>("chicken_nugget/flag", FeatureFlagConfig.CODEC, new FeatureFlagConfig(true)) {};
 
-    public static boolean getBool(ConfigValues value) {
-        return Boolean.TRUE.equals(get(value));
-    }
+    public static final ConfigProperty<FoodConfig> CHICKEN_NUGGET_FOOD =
+            new ConfigProperty<>("chicken_nugget/food", FoodConfig.CODEC, new FoodConfig(6, 5.4f)) {};
 
-    public static boolean getBool(ConfigValues value, String key) {
-        return Boolean.TRUE.equals(get(value, key));
-    }
+    // Watering Can
 
-    public static <T> T get(ConfigValues value) {
-        if (!initialized) {
-            load();
-        }
+    public static final ConfigProperty<FeatureFlagConfig> WATERING_CAN =
+            new ConfigProperty<>("watering_can/flag", FeatureFlagConfig.CODEC, new FeatureFlagConfig(true)) {};
 
-        switch (value.getType()) {
-            case STRING -> {
-                return (T) db.get(value.getProperty().key()).getAsString();
-            }
-            case BOOLEAN -> {
-                return (T) (Boolean) db.get(value.getProperty().key()).getAsBoolean();
-            }
-            case INTEGER -> {
-                return (T) (Integer) db.get(value.getProperty().key()).getAsInt();
-            }
-            case FLOAT -> {
-                return (T) (Float) db.get(value.getProperty().key()).getAsFloat();
-            }
-            default -> {
-                return null;
-            }
-        }
-    }
+    public static final ConfigProperty<DurabilityConfig> WATERING_CAN_DURABILITY =
+            new ConfigProperty<>("watering_can/durability", DurabilityConfig.CODEC, new DurabilityConfig(101)) {};
 
-    public static <T> T get(ConfigValues value, String key) {
-        if (!initialized) {
-            load();
-        }
+    // Wrench
 
-        if (value.getType() == ConfigValueType.LIST) {
-            ListConfigValue configValue = (ListConfigValue) value.getProperty().value();
-            JsonObject object = db.get(value.getProperty().key()).getAsJsonObject();
-            ConfigProperty keyProperty = configValue.get(key);
-            switch (keyProperty.value().getType()) {
-                case STRING -> {
-                    return (T) object.get(key).getAsString();
-                }
-                case BOOLEAN -> {
-                    return (T) (Boolean) object.get(key).getAsBoolean();
-                }
-                case INTEGER -> {
-                    return (T) (Integer) object.get(key).getAsInt();
-                }
-                case FLOAT -> {
-                    return (T) (Float) object.get(key).getAsFloat();
-                }
-                case LIST -> {
-                    throw new IllegalArgumentException("Cannot put lists inside lists!");
-                }
-                default -> {
-                    return null;
-                }
-            }
-        }
+    public static final ConfigProperty<FeatureFlagConfig> WRENCH =
+            new ConfigProperty<>("wrench/flag", FeatureFlagConfig.CODEC, new FeatureFlagConfig(true)) {};
 
-        return null;
-    }
+    public static final ConfigProperty<DurabilityConfig> WRENCH_DURABILITY =
+            new ConfigProperty<>("wrench/durability", DurabilityConfig.CODEC, new DurabilityConfig(256)) {};
 
-    public static void set(ConfigValues value, Object property) {
-        if (!initialized) {
-            load();
-        }
+    // Crossbow with Spyglass
 
-        switch (value.getType()) {
-            case STRING -> {
-                if (property instanceof String)
-                    db.addProperty(value.getProperty().key(), (String) property);
-            }
-            case BOOLEAN -> {
-                if (property instanceof Boolean)
-                    db.addProperty(value.getProperty().key(), (Boolean) property);
-            }
-            case INTEGER -> {
-                if (property instanceof Integer) {
-                    db.addProperty(value.getProperty().key(), (Integer) property);
-                }
-            }
-            case FLOAT -> {
-                if (property instanceof Float) {
-                    db.addProperty(value.getProperty().key(), (Float) property);
-                }
-            }
-        }
+    public static final ConfigProperty<FeatureFlagConfig> CROSSBOW_WITH_SPYGLASS =
+            new ConfigProperty<>("crossbow_with_spyglass/flag", FeatureFlagConfig.CODEC, new FeatureFlagConfig(true)) {};
 
-        save();
-    }
+    public static final ConfigProperty<DurabilityConfig> CROSSBOW_WITH_SPYGLASS_DURABILITY =
+            new ConfigProperty<>("crossbow_with_spyglass/durability", DurabilityConfig.CODEC, new DurabilityConfig(350)) {};
 
-    private static void convert(int version) {
-        for (ConfigValues value : ConfigValues.values()) {
-            if (value.getVersion() > version) {
-                // Reset the property to the default value if it is outdated
-                db.remove(value.getProperty().key());
-            }
-        }
-        db.addProperty("version", VERSION);
+    // Trident Shard
 
-        AdditionalAdditions.LOGGER.info(format("Converted outdated config."));
-    }
+    public static final ConfigProperty<FeatureFlagConfig> TRIDENT_SHARD =
+            new ConfigProperty<>("trident_shard/flag", FeatureFlagConfig.CODEC, new FeatureFlagConfig(true)) {};
 
-    private static void repair() {
-        int repaired = 0;
-        ArrayList<String> toRemove = new ArrayList<>();
+    // Glow Stick
 
-        for (Map.Entry<String, JsonElement> entry : db.entrySet()) {
-            // Remove all properties that are not in the enum
-            if (ConfigValues.getByName(entry.getKey()) == null && !entry.getKey().equals("version")) {
-                toRemove.add(entry.getKey());
-                repaired++;
-            }
-        }
+    public static final ConfigProperty<FeatureFlagConfig> GLOW_STICK =
+            new ConfigProperty<>("glow_stick/flag", FeatureFlagConfig.CODEC, new FeatureFlagConfig(true)) {};
 
-        toRemove.forEach(db::remove);
+    // Depth Meter
 
-        for (ConfigValues value : ConfigValues.values()) {
-            if (db.get(value.getProperty().key()) == null) {
-                // Reset the property if it doesn't exist
-                addPropertyTo(db, value.getProperty());
-                repaired++;
-            }
-        }
+    public static final ConfigProperty<FeatureFlagConfig> DEPTH_METER =
+            new ConfigProperty<>("depth_meter/flag", FeatureFlagConfig.CODEC, new FeatureFlagConfig(true)) {};
 
-        if (repaired > 0) {
-            AdditionalAdditions.LOGGER.info(format("Repaired " + repaired + " config properties"));
-        }
+    public static final ConfigProperty<FeatureFlagConfig> DEPTH_METER_DISPLAY_ALWAYS =
+            new ConfigProperty<>("depth_meter/display_elevation_always", FeatureFlagConfig.CODEC, new FeatureFlagConfig(false)) {};
 
-        save();
-    }
+    // Mysterious Bundle
+
+    public static final ConfigProperty<FeatureFlagConfig> MYSTERIOUS_BUNDLE =
+            new ConfigProperty<>("mysterious_bundle/flag", FeatureFlagConfig.CODEC, new FeatureFlagConfig(true)) {};
+
+    // Pocket Jukebox
+
+    public static final ConfigProperty<FeatureFlagConfig> POCKET_JUKEBOX =
+            new ConfigProperty<>("pocket_jukebox/flag", FeatureFlagConfig.CODEC, new FeatureFlagConfig(true)) {};
+
+    // Rose Gold
+
+    public static final ConfigProperty<FeatureFlagConfig> ROSE_GOLD =
+            new ConfigProperty<>("rose_gold/flag", FeatureFlagConfig.CODEC, new FeatureFlagConfig(true)) {};
+
+    // Music Discs
+
+    public static final ConfigProperty<FeatureFlagConfig> MUSIC_DISC_0308 =
+            new ConfigProperty<>("music_discs/0308", FeatureFlagConfig.CODEC, new FeatureFlagConfig(true)) {};
+
+    public static final ConfigProperty<FeatureFlagConfig> MUSIC_DISC_1007 =
+            new ConfigProperty<>("music_discs/1007", FeatureFlagConfig.CODEC, new FeatureFlagConfig(true)) {};
+
+    public static final ConfigProperty<FeatureFlagConfig> MUSIC_DISC_1507 =
+            new ConfigProperty<>("music_discs/1507", FeatureFlagConfig.CODEC, new FeatureFlagConfig(true)) {};
+
+    // Amethyst Lamp
+
+    public static final ConfigProperty<FeatureFlagConfig> AMETHYST_LAMP =
+            new ConfigProperty<>("amethyst_lamp/flag", FeatureFlagConfig.CODEC, new FeatureFlagConfig(true)) {};
+
+    public static final ConfigProperty<ChanceConfig> AMETHYST_LAMP_DESPAWN_CHANCE =
+            new ConfigProperty<>("amethyst_lamp/despawn_chance", ChanceConfig.CODEC, new ChanceConfig(1.0f)) {};
+
+    // Copper Patina
+
+    public static final ConfigProperty<FeatureFlagConfig> COPPER_PATINA =
+            new ConfigProperty<>("copper_patina/flag", FeatureFlagConfig.CODEC, new FeatureFlagConfig(true)) {};
+
+    // Rope
+
+    public static final ConfigProperty<FeatureFlagConfig> ROPE =
+            new ConfigProperty<>("rope/flag", FeatureFlagConfig.CODEC, new FeatureFlagConfig(true)) {};
+
+    // Compostable Rotten Flesh
+
+    public static final ConfigProperty<FeatureFlagConfig> COMPOSTABLE_ROTTEN_FLESH =
+            new ConfigProperty<>("compostable_rotten_flesh/flag", FeatureFlagConfig.CODEC, new FeatureFlagConfig(true)) {};
+
+    // Shipwreck Spyglass Loot
+
+    public static final ConfigProperty<FeatureFlagConfig> SHIPWRECK_SPYGLASS_LOOT =
+            new ConfigProperty<>("shipwreck_spyglass_loot/flag", FeatureFlagConfig.CODEC, new FeatureFlagConfig(true)) {};
+
+    // Powered Rails Copper Recipe
+
+    public static final ConfigProperty<FeatureFlagConfig> POWERED_RAILS_COPPER_RECIPE =
+            new ConfigProperty<>("powered_rails_copper_recipe/flag", FeatureFlagConfig.CODEC, new FeatureFlagConfig(true)) {};
 }

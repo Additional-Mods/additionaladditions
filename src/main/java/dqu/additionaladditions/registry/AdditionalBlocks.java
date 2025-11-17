@@ -7,7 +7,6 @@ import dqu.additionaladditions.block.GlowStickBlock;
 import dqu.additionaladditions.block.PatinaBlock;
 import dqu.additionaladditions.block.RopeBlock;
 import dqu.additionaladditions.config.Config;
-import dqu.additionaladditions.config.ConfigValues;
 import dqu.additionaladditions.item.CopperPatinaItem;
 import dqu.additionaladditions.misc.CreativeAdder;
 import dqu.additionaladditions.misc.LootHandler;
@@ -73,18 +72,18 @@ public class AdditionalBlocks {
                     AdditionalBlocks.AMETHYST_LAMP.getStateDefinition().getPossibleStates().stream().filter(state -> state.getValue(BlockStateProperties.LIT)).toList()
         ));
 
-        LootHandler.register(List.of(BuiltInLootTables.SIMPLE_DUNGEON, BuiltInLootTables.ABANDONED_MINESHAFT, BuiltInLootTables.STRONGHOLD_CORRIDOR), () -> Config.getBool(ConfigValues.ROPES), LootPool.lootPool()
+        LootHandler.register(List.of(BuiltInLootTables.SIMPLE_DUNGEON, BuiltInLootTables.ABANDONED_MINESHAFT, BuiltInLootTables.STRONGHOLD_CORRIDOR), () -> Config.ROPE.get().enabled(), LootPool.lootPool()
                 .setRolls(UniformGenerator.between(1, 4))
                 .apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 8)))
                 .add(LootItem.lootTableItem(AdditionalBlocks.ROPE_BLOCK))
         );
 
-        CreativeAdder.REDSTONE_BLOCKS.add(() -> Config.getBool(ConfigValues.COPPER_PATINA), Items.REDSTONE_BLOCK, COPPER_PATINA);
-        CreativeAdder.REDSTONE_BLOCKS.add(() -> Config.getBool(ConfigValues.AMETHYST_LAMP, "enabled"), Items.REDSTONE_LAMP, AMETHYST_LAMP);
-        CreativeAdder.FUNCTIONAL_BLOCKS.add(() -> Config.getBool(ConfigValues.AMETHYST_LAMP, "enabled"), Items.REDSTONE_LAMP, AMETHYST_LAMP);
-        CreativeAdder.FUNCTIONAL_BLOCKS.add(() -> Config.getBool(ConfigValues.ROPES), Items.LADDER, ROPE_BLOCK);
-        CreativeAdder.BUILDING_BLOCKS.add(() -> Config.getBool(ConfigValues.COPPER_PATINA), Items.REDSTONE_BLOCK, PATINA_BLOCK);
-        CreativeAdder.BUILDING_BLOCKS.add(() -> Config.getBool(ConfigValues.ROSE_GOLD), Items.LIGHT_WEIGHTED_PRESSURE_PLATE, ROSE_GOLD_BLOCK);
-        CreativeAdder.TOOLS_AND_UTILITIES.add(() -> Config.getBool(ConfigValues.ROPES), Items.SPYGLASS, ROPE_BLOCK);
+        CreativeAdder.REDSTONE_BLOCKS.add(() -> Config.COPPER_PATINA.get().enabled(), Items.REDSTONE_BLOCK, COPPER_PATINA);
+        CreativeAdder.REDSTONE_BLOCKS.add(() -> Config.AMETHYST_LAMP.get().enabled(), Items.REDSTONE_LAMP, AMETHYST_LAMP);
+        CreativeAdder.FUNCTIONAL_BLOCKS.add(() -> Config.AMETHYST_LAMP.get().enabled(), Items.REDSTONE_LAMP, AMETHYST_LAMP);
+        CreativeAdder.FUNCTIONAL_BLOCKS.add(() -> Config.ROPE.get().enabled(), Items.LADDER, ROPE_BLOCK);
+        CreativeAdder.BUILDING_BLOCKS.add(() -> Config.COPPER_PATINA.get().enabled(), Items.REDSTONE_BLOCK, PATINA_BLOCK);
+        CreativeAdder.BUILDING_BLOCKS.add(() -> Config.ROSE_GOLD.get().enabled(), Items.LIGHT_WEIGHTED_PRESSURE_PLATE, ROSE_GOLD_BLOCK);
+        CreativeAdder.TOOLS_AND_UTILITIES.add(() -> Config.ROPE.get().enabled(), Items.SPYGLASS, ROPE_BLOCK);
     }
 }

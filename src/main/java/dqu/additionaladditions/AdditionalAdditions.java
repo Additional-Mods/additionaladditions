@@ -1,15 +1,12 @@
 package dqu.additionaladditions;
 
-import dqu.additionaladditions.behaviour.BehaviourManager;
-import dqu.additionaladditions.config.Config;
+import dqu.additionaladditions.config.ConfigLoader;
 import dqu.additionaladditions.misc.CreativeAdder;
 import dqu.additionaladditions.misc.LootHandler;
 import dqu.additionaladditions.registry.*;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.fabric.api.loot.v3.LootTableEvents;
-import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
-import net.minecraft.server.packs.PackType;
 import net.minecraft.world.item.CreativeModeTabs;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,11 +18,7 @@ public class AdditionalAdditions implements ModInitializer {
 
     @Override
     public void onInitialize() {
-        if (!Config.initialized) {
-            Config.load();
-        }
-
-        ResourceManagerHelper.get(PackType.SERVER_DATA).registerReloadListener(BehaviourManager.INSTANCE);
+        ConfigLoader.load();
 
         AdditionalItems.registerAll();
         AdditionalBlocks.registerAll();

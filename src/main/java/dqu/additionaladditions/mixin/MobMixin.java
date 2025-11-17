@@ -1,7 +1,6 @@
 package dqu.additionaladditions.mixin;
 
 import dqu.additionaladditions.config.Config;
-import dqu.additionaladditions.config.ConfigValues;
 import dqu.additionaladditions.registry.AdditionalBlocks;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.EntityType;
@@ -28,7 +27,7 @@ public abstract class MobMixin extends LivingEntity {
 
     @Inject(method = "checkDespawn", at = @At("TAIL"))
     public void checkDespawn(CallbackInfo ci) {
-        if (!Config.getBool(ConfigValues.AMETHYST_LAMP, "enabled")) return;
+        if (!Config.AMETHYST_LAMP.get().enabled()) return;
         if (this.tickCount > 0 || !shouldDespawnInPeaceful()) return;
 
         PoiManager poiManager = ((ServerLevel)level()).getPoiManager();
@@ -39,8 +38,8 @@ public abstract class MobMixin extends LivingEntity {
                 blockPosition(), 8, PoiManager.Occupancy.ANY
         );
 
-        Float chance = Config.get(ConfigValues.AMETHYST_LAMP, "despawnChance");
-        if (count > 0 && chance != null && getRandom().nextFloat() < chance) {
+        float chance = Config.AMETHYST_LAMP_DESPAWN_CHANCE.get().chance();
+        if (count > 0 && getRandom().nextFloat() < chance) {
             this.discard();
         }
     }

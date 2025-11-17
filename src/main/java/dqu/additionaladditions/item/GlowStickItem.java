@@ -1,7 +1,6 @@
 package dqu.additionaladditions.item;
 
 import dqu.additionaladditions.config.Config;
-import dqu.additionaladditions.config.ConfigValues;
 import dqu.additionaladditions.entity.GlowStickEntity;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
@@ -19,7 +18,7 @@ public class GlowStickItem extends Item {
     @Override
     public InteractionResultHolder<ItemStack> use(Level world, Player user, InteractionHand hand) {
         ItemStack itemStack = user.getItemInHand(hand);
-        if (!Config.getBool(ConfigValues.GLOW_STICK)) { return InteractionResultHolder.fail(itemStack); }
+        if (!Config.GLOW_STICK.get().enabled()) { return InteractionResultHolder.fail(itemStack); }
         if (!world.isClientSide()) {
             GlowStickEntity glowStickEntity = new GlowStickEntity(world, user);
             glowStickEntity.setItem(itemStack);
