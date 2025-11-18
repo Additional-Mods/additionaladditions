@@ -1,0 +1,30 @@
+{
+  "required": true,
+  "package": "one.dqu.additionaladditions.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "minVersion": "0.8",
+  "client": [
+    "GuiMixin",
+    "crossbow.AbstractClientPlayerMixin",
+    "crossbow.ItemInHandRendererMixin",
+    "crossbow.LocalPlayerMixin",
+    "crossbow.PlayerRendererMixin",
+    "crossbow.PlayerMixin",
+    "glint.ElytraLayerMixin",
+    "glint.HumanoidArmorLayerMixin",
+    "glint.ItemRendererMixin",
+    "glint.RenderBuffersMixin",
+    "glint.RenderTypeMixin"
+  ],
+  "mixins": [
+    "ItemStackMixin",
+    "MobMixin",
+    "RecipeManagerMixin",
+    "RedstoneWireBlockMixin",
+    "ServerAdvancementManagerMixin",
+    "WanderingTraderMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
