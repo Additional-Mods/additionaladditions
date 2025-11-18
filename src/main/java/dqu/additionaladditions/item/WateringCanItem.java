@@ -1,9 +1,11 @@
 package dqu.additionaladditions.item;
 
 import dqu.additionaladditions.config.Config;
+import dqu.additionaladditions.item.configurable.ConfigurableItem;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.contents.TranslatableContents;
@@ -27,9 +29,11 @@ import net.minecraft.world.phys.HitResult;
 
 import java.util.List;
 
-public class WateringCanItem extends Item {
+public class WateringCanItem extends ConfigurableItem {
     public WateringCanItem(Properties settings) {
-        super(settings);
+        super(settings, builder -> {
+            builder.set(DataComponents.MAX_DAMAGE, Config.WATERING_CAN_DURABILITY.get().durability());
+        });
     }
 
     @Override

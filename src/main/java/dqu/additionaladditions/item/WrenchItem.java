@@ -1,7 +1,9 @@
 package dqu.additionaladditions.item;
 
 import dqu.additionaladditions.config.Config;
+import dqu.additionaladditions.item.configurable.ConfigurableItem;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -23,9 +25,11 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Optional;
 
-public class WrenchItem extends Item {
+public class WrenchItem extends ConfigurableItem {
     public WrenchItem(Properties settings) {
-        super(settings);
+        super(settings, builder -> {
+            builder.set(DataComponents.MAX_DAMAGE, Config.WRENCH_DURABILITY.get().durability());
+        });
     }
 
     private boolean tryPlacing(BlockPos pos, BlockState state, Level world, ItemStack stack, Optional<Player> player, Optional<InteractionHand> hand) {

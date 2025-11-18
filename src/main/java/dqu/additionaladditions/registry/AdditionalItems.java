@@ -122,14 +122,14 @@ public class AdditionalItems {
             .creativeAfter(Items.TARGET, CreativeAdder.REDSTONE_BLOCKS)
             .build(WrenchItem::new);
 
-    public static final CrossbowItem CROSSBOW_WITH_SPYGLASS = new Builder("crossbow_with_spyglass")
+    public static final CrossbowWithSpyglassItem CROSSBOW_WITH_SPYGLASS = new Builder("crossbow_with_spyglass")
             .config(() -> Config.CROSSBOW_WITH_SPYGLASS.get().enabled())
             .properties(p -> p
                     .stacksTo(1)
                     .durability(Config.CROSSBOW_WITH_SPYGLASS_DURABILITY.get().durability())
             )
             .creativeAfter(Items.CROSSBOW, CreativeAdder.COMBAT)
-            .build(CrossbowItem::new);
+            .build(CrossbowWithSpyglassItem::new);
 
     public static final Item TRIDENT_SHARD = new Builder("trident_shard")
             .config(() -> Config.TRIDENT_SHARD.get().enabled())
