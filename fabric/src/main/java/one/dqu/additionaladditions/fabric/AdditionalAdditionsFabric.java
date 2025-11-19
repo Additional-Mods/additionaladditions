@@ -15,6 +15,7 @@ import one.dqu.additionaladditions.config.ConfigProperty;
 import one.dqu.additionaladditions.config.network.ConfigSyncS2CPayload;
 import one.dqu.additionaladditions.util.CreativeAdder;
 import one.dqu.additionaladditions.util.LootHandler;
+import one.dqu.additionaladditions.util.fabric.RegistrarImpl;
 
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -23,6 +24,8 @@ public final class AdditionalAdditionsFabric implements ModInitializer {
     @Override
     public void onInitialize() {
         AdditionalAdditions.init();
+
+        RegistrarImpl.runDeferred();
 
         // creative adder
         ItemGroupEvents.MODIFY_ENTRIES_ALL.register((tab, entries) -> {

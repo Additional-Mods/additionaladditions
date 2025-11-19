@@ -379,19 +379,19 @@ public class AdditionalItems {
             .creativeBefore(Items.EXPERIENCE_BOTTLE, CreativeModeTabs.INGREDIENTS)
             .build(p -> new SuspiciousDyeItem(DyeColor.PINK, p));
 
-    public static final Supplier<DataComponentType<GlintColor>> GLINT_COLOR_COMPONENT = Registrar.dataComponentType(
+    public static final Supplier<DataComponentType<GlintColor>> GLINT_COLOR_COMPONENT = AdditionalRegistries.DATA_COMPONENT_TYPES.register(
             ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "glint_color"),
             () -> DataComponentType.<GlintColor>builder().persistent(GlintColor.CODEC).networkSynchronized(GlintColor.STREAM_CODEC).build()
     );
 
     public static final TagKey<Item> SUSPICIOUS_DYES_TAG = TagKey.create(Registries.ITEM, ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "suspicious_dyes"));
 
-    public static final Supplier<RecipeSerializer<RoseGoldTransmuteRecipe>> ROSE_GOLD_TRANSMUTE_RECIPE_SERIALIZER = Registrar.recipeSerializer(
+    public static final Supplier<RecipeSerializer<RoseGoldTransmuteRecipe>> ROSE_GOLD_TRANSMUTE_RECIPE_SERIALIZER = AdditionalRegistries.RECIPE_SERIALIZERS.register(
             ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "rose_gold_transmute"),
             () -> new SimpleCraftingRecipeSerializer<>(RoseGoldTransmuteRecipe::new)
     );
 
-    public static final Supplier<RecipeSerializer<SuspiciousDyeRecipe>> SUSPICIOUS_DYE_RECIPE_SERIALIZER = Registrar.recipeSerializer(
+    public static final Supplier<RecipeSerializer<SuspiciousDyeRecipe>> SUSPICIOUS_DYE_RECIPE_SERIALIZER = AdditionalRegistries.RECIPE_SERIALIZERS.register(
             ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "suspicious_dye"),
             () -> new SimpleCraftingRecipeSerializer<>(SuspiciousDyeRecipe::new)
     );
@@ -447,7 +447,7 @@ public class AdditionalItems {
         public <T extends Item> Supplier<T> build(Function<Item.Properties, T> consumer) {
             ResourceLocation location = ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, id);
 
-            Supplier<T> item = Registrar.item(location, () -> consumer.apply(this.properties));
+            Supplier<T> item = AdditionalRegistries.ITEMS.register(location, () -> consumer.apply(this.properties));
 
             for (Map.Entry<ResourceKey<CreativeModeTab>, List<ItemLike>> entry : this.creativeAfter.entrySet()) {
                 for (ItemLike itemLike : entry.getValue()) {
@@ -490,10 +490,6 @@ public class AdditionalItems {
                     }
                 });
             });
-        }
-
-        if (Config.COMPOSTABLE_ROTTEN_FLESH.get().enabled()) {
-            Registrar.compostingChance(Items.ROTTEN_FLESH, 0.33F);
         }
     }
 }

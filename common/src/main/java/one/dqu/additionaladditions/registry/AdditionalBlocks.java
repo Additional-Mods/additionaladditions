@@ -29,40 +29,54 @@ import java.util.Optional;
 import java.util.function.Supplier;
 
 public class AdditionalBlocks {
-    public static final Supplier<RopeBlock> ROPE_BLOCK = Registrar.block(
+    public static final Supplier<RopeBlock> ROPE_BLOCK = AdditionalRegistries.BLOCKS.register(
                     ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "rope"),
-                    () -> new RopeBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BROWN).pushReaction(PushReaction.DESTROY).noCollission().sound(SoundType.WOOL).instabreak()),
-                    Optional.of(Item.Properties::new)
+                    () -> new RopeBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BROWN).pushReaction(PushReaction.DESTROY).noCollission().sound(SoundType.WOOL).instabreak())
             );
+    public static final Supplier<Item> ROPE_BLOCK_ITEM = AdditionalRegistries.ITEMS.register(
+            ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "rope"),
+            () -> new BlockItem(ROPE_BLOCK.get(), new Item.Properties())
+    );
 
-    public static final Supplier<RedstoneLampBlock> AMETHYST_LAMP = Registrar.block(
+    public static final Supplier<RedstoneLampBlock> AMETHYST_LAMP = AdditionalRegistries.BLOCKS.register(
             ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "amethyst_lamp"),
-            () -> new RedstoneLampBlock(BlockBehaviour.Properties.of().mapColor(MapColor.TERRACOTTA_PURPLE).pushReaction(PushReaction.NORMAL).sound(SoundType.GLASS).strength(0.3f)),
-            Optional.of(Item.Properties::new)
+            () -> new RedstoneLampBlock(BlockBehaviour.Properties.of().mapColor(MapColor.TERRACOTTA_PURPLE).pushReaction(PushReaction.NORMAL).sound(SoundType.GLASS).strength(0.3f))
+    );
+    public static final Supplier<Item> AMETHYST_BLOCK_ITEM = AdditionalRegistries.ITEMS.register(
+            ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "amethyst_lamp"),
+            () -> new BlockItem(AMETHYST_LAMP.get(), new Item.Properties())
     );
 
-    public static final Supplier<CopperPatinaBlock> COPPER_PATINA = Registrar.block(
+    public static final Supplier<CopperPatinaBlock> COPPER_PATINA = AdditionalRegistries.BLOCKS.register(
             ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "copper_patina"),
-            () -> new CopperPatinaBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_CYAN).pushReaction(PushReaction.DESTROY).noCollission().sound(SoundType.TUFF).instabreak()),
-            Optional.of(Item.Properties::new)
+            () -> new CopperPatinaBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_CYAN).pushReaction(PushReaction.DESTROY).noCollission().sound(SoundType.TUFF).instabreak())
+    );
+    public static final Supplier<Item> COPPER_PATINA_ITEM = AdditionalRegistries.ITEMS.register(
+            ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "copper_patina"),
+            () -> new BlockItem(COPPER_PATINA.get(), new Item.Properties())
     );
 
-    public static final Supplier<GlowStickBlock> GLOW_STICK_BLOCK = Registrar.block(
+    public static final Supplier<GlowStickBlock> GLOW_STICK_BLOCK = AdditionalRegistries.BLOCKS.register(
             ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "glow_stick"),
-            () -> new GlowStickBlock(BlockBehaviour.Properties.of().mapColor(MapColor.NONE).pushReaction(PushReaction.DESTROY).noCollission().lightLevel((state) -> 12).instabreak()),
-            Optional.empty()
+            () -> new GlowStickBlock(BlockBehaviour.Properties.of().mapColor(MapColor.NONE).pushReaction(PushReaction.DESTROY).noCollission().lightLevel((state) -> 12).instabreak())
     );
 
-    public static final Supplier<PatinaBlock> PATINA_BLOCK = Registrar.block(
+    public static final Supplier<PatinaBlock> PATINA_BLOCK = AdditionalRegistries.BLOCKS.register(
             ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "patina_block"),
-            () -> new PatinaBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_CYAN).pushReaction(PushReaction.NORMAL).sound(SoundType.ROOTED_DIRT).strength(0.5f)),
-            Optional.of(Item.Properties::new)
+            () -> new PatinaBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_CYAN).pushReaction(PushReaction.NORMAL).sound(SoundType.ROOTED_DIRT).strength(0.5f))
+    );
+    public static final Supplier<Item> PATINA_BLOCK_ITEM = AdditionalRegistries.ITEMS.register(
+            ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "patina_block"),
+            () -> new BlockItem(PATINA_BLOCK.get(), new Item.Properties())
     );
 
-    public static final Supplier<Block> ROSE_GOLD_BLOCK = Registrar.block(
+    public static final Supplier<Block> ROSE_GOLD_BLOCK = AdditionalRegistries.BLOCKS.register(
             ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "rose_gold_block"),
-            () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_PINK).requiresCorrectToolForDrops().strength(3.0f, 6.0f).sound(SoundType.METAL)),
-            Optional.of(Item.Properties::new)
+            () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_PINK).requiresCorrectToolForDrops().strength(3.0f, 6.0f).sound(SoundType.METAL))
+    );
+    public static final Supplier<Item> ROSE_GOLD_BLOCK_ITEM = AdditionalRegistries.ITEMS.register(
+            ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "rose_gold_block"),
+            () -> new BlockItem(ROSE_GOLD_BLOCK.get(), new Item.Properties())
     );
 
     public static PoiType AMETHYST_LAMP_POI;
