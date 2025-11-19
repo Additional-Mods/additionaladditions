@@ -9,7 +9,7 @@ import net.minecraft.resources.ResourceLocation;
 
 import java.util.List;
 
-public abstract class ConfigProperty<T> {
+public class ConfigProperty<T> {
     private final ResourceLocation path;
     private final Codec<T> codec;
     private T value;
