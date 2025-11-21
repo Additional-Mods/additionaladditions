@@ -4,8 +4,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.dispenser.BlockSource;
 import net.minecraft.core.dispenser.DefaultDispenseItemBehavior;
-import net.minecraft.world.item.crafting.RecipeSerializer;
-import net.minecraft.world.item.crafting.SimpleCraftingRecipeSerializer;
 import net.minecraft.world.level.block.DispenserBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -13,16 +11,12 @@ import one.dqu.additionaladditions.AdditionalAdditions;
 import one.dqu.additionaladditions.config.Config;
 import one.dqu.additionaladditions.glint.GlintColor;
 import one.dqu.additionaladditions.item.*;
-import one.dqu.additionaladditions.misc.RoseGoldTransmuteRecipe;
-import one.dqu.additionaladditions.misc.SuspiciousDyeRecipe;
 import one.dqu.additionaladditions.util.CreativeAdder;
 import one.dqu.additionaladditions.util.LootHandler;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.*;
@@ -433,19 +427,19 @@ public class AdditionalItems {
             .build(p -> new SuspiciousDyeItem(DyeColor.PINK, p));
 
     private static class Builder {
-        private final Item.Properties properties = new Item.Properties();
-        private Supplier<Boolean> config = () -> true;
+        private final String id;
         private final Map<ResourceKey<CreativeModeTab>, List<ItemLike>> creativeAfter = new HashMap<>();
         private final Map<ResourceKey<CreativeModeTab>, List<ItemLike>> creativeBefore = new HashMap<>();
         private final Map<ResourceKey<LootTable>, BiFunction<HolderLookup.Provider, Item, LootPool.Builder>> lootTables = new HashMap<>();
-        private String id;
+        private Consumer<Item.Properties> propertiesConfig = p -> {};
+        private Supplier<Boolean> config = () -> true;
 
         public Builder(String id) {
             this.id = id;
         }
 
         public Builder properties(Consumer<Item.Properties> consumer) {
-            consumer.accept(this.properties);
+            this.propertiesConfig = consumer;
             return this;
         }
 
@@ -470,9 +464,7 @@ public class AdditionalItems {
         }
 
         public Builder lootTable(List<ResourceKey<LootTable>> tables, BiFunction<HolderLookup.Provider, Item, LootPool.Builder> lootPoolBuilder) {
-            for (ResourceKey<LootTable> table : tables) {
-                this.lootTables.put(table, lootPoolBuilder);
-            }
+            tables.forEach(table -> this.lootTables.put(table, lootPoolBuilder));
             return this;
         }
 
@@ -480,25 +472,27 @@ public class AdditionalItems {
             return build(Item::new);
         }
 
-        public <T extends Item> Supplier<T> build(Function<Item.Properties, T> consumer) {
+        public <T extends Item> Supplier<T> build(Function<Item.Properties, T> itemFactory) {
             ResourceLocation location = ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, id);
 
-            Supplier<T> item = AdditionalRegistries.ITEMS.register(location, () -> consumer.apply(this.properties));
+            Consumer<Item.Properties> deferredProperties = propertiesConfig;
+            Supplier<T> item = AdditionalRegistries.ITEMS.register(location, () -> {
+                Item.Properties props = new Item.Properties();
+                deferredProperties.accept(props);
+                return itemFactory.apply(props);
+            });
 
-            for (Map.Entry<ResourceKey<CreativeModeTab>, List<ItemLike>> entry : this.creativeAfter.entrySet()) {
-                for (ItemLike itemLike : entry.getValue()) {
-                    CreativeAdder.add(entry.getKey(), this.config, itemLike, item);
-                }
-            }
-            for (Map.Entry<ResourceKey<CreativeModeTab>, List<ItemLike>> entry : this.creativeBefore.entrySet()) {
-                for (ItemLike itemLike : entry.getValue()) {
-                    CreativeAdder.addBefore(entry.getKey(), this.config, itemLike, item);
-                }
-            }
+            creativeAfter.forEach((tab, items) ->
+                items.forEach(anchor -> CreativeAdder.add(tab, config, anchor, item))
+            );
 
-            for (Map.Entry<ResourceKey<LootTable>, BiFunction<HolderLookup.Provider, Item, LootPool.Builder>> entry : this.lootTables.entrySet()) {
-                LootHandler.register(entry.getKey(), this.config, provider -> entry.getValue().apply(provider, item.get()));
-            }
+            creativeBefore.forEach((tab, items) ->
+                items.forEach(anchor -> CreativeAdder.addBefore(tab, config, anchor, item))
+            );
+
+            lootTables.forEach((table, builder) ->
+                LootHandler.register(table, config, provider -> builder.apply(provider, item.get()))
+            );
 
             return item;
         }

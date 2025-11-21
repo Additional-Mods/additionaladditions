@@ -1,10 +1,7 @@
 package one.dqu.additionaladditions;
 
 import one.dqu.additionaladditions.config.ConfigLoader;
-import one.dqu.additionaladditions.registry.AdditionalBlocks;
-import one.dqu.additionaladditions.registry.AdditionalEntities;
-import one.dqu.additionaladditions.registry.AdditionalItems;
-import one.dqu.additionaladditions.registry.AdditionalMisc;
+import one.dqu.additionaladditions.registry.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
