@@ -3,15 +3,22 @@
   "id": "additionaladditions",
   "version": "${version}",
   "name": "Additional Additions",
-  "description": "This is an example description! Tell everyone what your mod is about!",
-  "authors": [
-    "Me!"
+  "description": "A mod that expands on parts of Minecraft that feel incomplete, with additions that feel like they should already be part of vanilla.",
+  "authors": ["Dqu1J"],
+  "contributors": [
+    "MorganFreeguy (Textures)", "Avila27 (Textures)", "houlstycraft (Textures)", "Gabby42 (Textures)",
+    "adoghr (Music)", "aresociety (Korean Translation)", "zrll12 (Chinese Translation)",
+    "wdnmdyaya (Chinese Translation)", "Grape reprint (Chinese Translation)", "DerTwitchLappen (German Translation)",
+    "ChromexUnderscore (German Translation)", "Gabby42 (Romanian Translation)", "kxkxrxtx (Spanish Translation)",
+    "JustAnUmbreon (Polish Translation)", "Alyson (Portuguese Translation)", "baooduy (Vietnamese Translation)",
+    "nzuliaf (Indonesian Translation)", "WolfBone4545 (Czech Translation)"
   ],
   "contact": {
-    "homepage": "https://fabricmc.net/",
-    "sources": "https://github.com/FabricMC/fabric-example-mod"
+    "homepage": "https://discord.com/invite/g5a7ZA62t3",
+    "issues": "https://github.com/Additional-Mods/additionaladditions/issues/new",
+    "sources": "https://github.com/Additional-Mods/additionaladditions"
   },
-  "license": "CC0-1.0",
+  "license": "LGPL-3.0",
   "icon": "assets/additionaladditions/icon.png",
   "environment": "*",
   "entrypoints": {

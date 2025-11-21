@@ -1,17 +1,18 @@
 modLoader = "javafml"
 loaderVersion = "[4,)"
-#issueTrackerURL = ""
-license = "Insert License Here"
+license = "LGPL-3.0"
+issueTrackerURL = "https://github.com/Additional-Mods/additionaladditions/issues/new"
 
 [[mods]]
 modId = "additionaladditions"
 version = "${version}"
 displayName = "Additional Additions"
-authors = "Me!"
+authors = "Dqu1J"
+credits = "MorganFreeguy (Textures); Avila27 (Textures); houlstycraft (Textures); Gabby42 (Textures); adoghr (Music); aresociety (Korean Translation); zrll12 (Chinese Translation); wdnmdyaya (Chinese Translation); Grape reprint (Chinese Translation); DerTwitchLappen (German Translation); ChromexUnderscore (German Translation); Gabby42 (Romanian Translation); kxkxrxtx (Spanish Translation); JustAnUmbreon (Polish Translation); Alyson (Portuguese Translation); baooduy (Vietnamese Translation); nzuliaf (Indonesian Translation); WolfBone4545 (Czech Translation)"
 description = '''
-This is an example description! Tell everyone what your mod is about!
+A mod that expands on parts of Minecraft that feel incomplete, with additions that feel like they should already be part of vanilla.
 '''
-#logoFile = ""
+logoFile = "assets/additionaladditions/icon.png"
 
 [[dependencies.additionaladditions]]
 modId = "neoforge"
