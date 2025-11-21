@@ -2,6 +2,7 @@ package one.dqu.additionaladditions.glint;
 
 import com.mojang.serialization.Codec;
 import io.netty.buffer.ByteBuf;
+import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.contents.TranslatableContents;
@@ -31,7 +32,7 @@ public record GlintColor(DyeColor color) implements StringRepresentable, Tooltip
         String key = "additionaladditions.gui.glint." + color.getSerializedName();
         consumer.accept(
                 MutableComponent.create(new TranslatableContents(key, null, new String[]{}))
-                .withColor(color.getTextColor())
+                .withStyle(ChatFormatting.GRAY)
         );
     }
 }
