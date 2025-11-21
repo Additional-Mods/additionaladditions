@@ -22,13 +22,13 @@ public class SuspiciousDyeRecipe extends CustomRecipe {
         for (int i = 0; i < recipeInput.size(); i++) {
             ItemStack stack = recipeInput.getItem(i);
             if (!stack.isEmpty()) {
-                if (stack.hasFoil()) {
-                    glint++;
+                if (stack.is(AdditionalMisc.SUSPICIOUS_DYES_TAG)) {
+                    dye++;
                     continue;
                 }
 
-                if (stack.is(AdditionalMisc.SUSPICIOUS_DYES_TAG)) {
-                    dye++;
+                if (stack.hasFoil()) {
+                    glint++;
                     continue;
                 }
 
