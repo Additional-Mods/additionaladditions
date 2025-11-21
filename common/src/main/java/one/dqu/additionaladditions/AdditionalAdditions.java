@@ -4,6 +4,7 @@ import one.dqu.additionaladditions.config.ConfigLoader;
 import one.dqu.additionaladditions.registry.AdditionalBlocks;
 import one.dqu.additionaladditions.registry.AdditionalEntities;
 import one.dqu.additionaladditions.registry.AdditionalItems;
+import one.dqu.additionaladditions.registry.AdditionalMisc;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -15,6 +16,7 @@ public final class AdditionalAdditions {
     public static void init() {
         ConfigLoader.load();
 
+        AdditionalMisc.registerAll();
         AdditionalEntities.registerAll();
         AdditionalItems.registerAll();
         AdditionalBlocks.registerAll();

@@ -7,6 +7,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
+import one.dqu.additionaladditions.registry.AdditionalMisc;
 
 import java.util.Arrays;
 import java.util.Map;
@@ -87,6 +88,6 @@ public class RoseGoldTransmuteRecipe extends CustomRecipe {
 
     @Override
     public RecipeSerializer<?> getSerializer() {
-        return AdditionalItems.ROSE_GOLD_TRANSMUTE_RECIPE_SERIALIZER.get();
+        return AdditionalMisc.ROSE_GOLD_TRANSMUTE_RECIPE_SERIALIZER.get();
     }
 }

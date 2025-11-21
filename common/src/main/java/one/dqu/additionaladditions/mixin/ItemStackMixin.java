@@ -1,6 +1,5 @@
 package one.dqu.additionaladditions.mixin;
 
-import one.dqu.additionaladditions.registry.AdditionalItems;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
@@ -8,6 +7,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.TooltipProvider;
+import one.dqu.additionaladditions.registry.AdditionalMisc;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -41,7 +41,7 @@ public abstract class ItemStackMixin {
     )
     private void addGlintColor(Item.TooltipContext tooltipContext, @Nullable Player player, TooltipFlag tooltipFlag, CallbackInfoReturnable<List<Component>> cir, List<Component> list) {
         if (this.hasFoil()) {
-            addToTooltip(AdditionalItems.GLINT_COLOR_COMPONENT.get(), tooltipContext, list::add, tooltipFlag);
+            addToTooltip(AdditionalMisc.GLINT_COLOR_COMPONENT.get(), tooltipContext, list::add, tooltipFlag);
         }
     }
 }

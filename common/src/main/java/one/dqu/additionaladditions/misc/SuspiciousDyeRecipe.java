@@ -2,12 +2,12 @@ package one.dqu.additionaladditions.misc;
 
 import one.dqu.additionaladditions.glint.GlintColor;
 import one.dqu.additionaladditions.item.SuspiciousDyeItem;
-import one.dqu.additionaladditions.registry.AdditionalItems;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
+import one.dqu.additionaladditions.registry.AdditionalMisc;
 
 public class SuspiciousDyeRecipe extends CustomRecipe {
     public SuspiciousDyeRecipe(CraftingBookCategory craftingBookCategory) {
@@ -27,7 +27,7 @@ public class SuspiciousDyeRecipe extends CustomRecipe {
                     continue;
                 }
 
-                if (stack.is(AdditionalItems.SUSPICIOUS_DYES_TAG)) {
+                if (stack.is(AdditionalMisc.SUSPICIOUS_DYES_TAG)) {
                     dye++;
                     continue;
                 }
@@ -41,8 +41,8 @@ public class SuspiciousDyeRecipe extends CustomRecipe {
 
     @Override
     public ItemStack assemble(CraftingInput recipeInput, HolderLookup.Provider provider) {
-        ItemStack itemStack = recipeInput.items().stream().filter(item -> !item.isEmpty() && !item.is(AdditionalItems.SUSPICIOUS_DYES_TAG)).findFirst().orElse(ItemStack.EMPTY);
-        ItemStack dye = recipeInput.items().stream().filter(item -> !item.isEmpty() && item.is(AdditionalItems.SUSPICIOUS_DYES_TAG)).findFirst().orElse(ItemStack.EMPTY);
+        ItemStack itemStack = recipeInput.items().stream().filter(item -> !item.isEmpty() && !item.is(AdditionalMisc.SUSPICIOUS_DYES_TAG)).findFirst().orElse(ItemStack.EMPTY);
+        ItemStack dye = recipeInput.items().stream().filter(item -> !item.isEmpty() && item.is(AdditionalMisc.SUSPICIOUS_DYES_TAG)).findFirst().orElse(ItemStack.EMPTY);
 
         if (itemStack.isEmpty() || dye.isEmpty()) {
             return ItemStack.EMPTY;
@@ -51,7 +51,7 @@ public class SuspiciousDyeRecipe extends CustomRecipe {
         if (dye.getItem() instanceof SuspiciousDyeItem suspiciousDyeItem) {
             DyeColor color = suspiciousDyeItem.getDyeColor();
             ItemStack copyStack = itemStack.copy();
-            copyStack.set(AdditionalItems.GLINT_COLOR_COMPONENT.get(), new GlintColor(color));
+            copyStack.set(AdditionalMisc.GLINT_COLOR_COMPONENT.get(), new GlintColor(color));
             return copyStack;
         }
 
@@ -65,6 +65,6 @@ public class SuspiciousDyeRecipe extends CustomRecipe {
 
     @Override
     public RecipeSerializer<?> getSerializer() {
-        return AdditionalItems.SUSPICIOUS_DYE_RECIPE_SERIALIZER.get();
+        return AdditionalMisc.SUSPICIOUS_DYE_RECIPE_SERIALIZER.get();
     }
 }

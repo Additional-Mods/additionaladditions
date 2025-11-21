@@ -1,6 +1,7 @@
 package one.dqu.additionaladditions.registry;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.dispenser.BlockSource;
 import net.minecraft.core.dispenser.DefaultDispenseItemBehavior;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -315,86 +316,121 @@ public class AdditionalItems {
             .build(p -> new HoeItem(ROSE_GOLD_TOOL_MATERIAL, p));
 
     public static final Supplier<SuspiciousDyeItem> WHITE_SUSPICIOUS_DYE = new Builder("white_suspicious_dye")
-            .properties(p -> p.stacksTo(1))
+            .properties(p -> p
+                    .stacksTo(1)
+                    .component(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true)
+                    .component(AdditionalMisc.GLINT_COLOR_COMPONENT.get(), new GlintColor(DyeColor.WHITE))
+            )
             .creativeBefore(Items.EXPERIENCE_BOTTLE, CreativeModeTabs.INGREDIENTS)
             .build(p -> new SuspiciousDyeItem(DyeColor.WHITE, p));
 
     public static final Supplier<SuspiciousDyeItem> BROWN_SUSPICIOUS_DYE = new Builder("brown_suspicious_dye")
-            .properties(p -> p.stacksTo(1))
+            .properties(p -> p
+                    .stacksTo(1)
+                    .component(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true)
+                    .component(AdditionalMisc.GLINT_COLOR_COMPONENT.get(), new GlintColor(DyeColor.BROWN))
+            )
             .creativeBefore(Items.EXPERIENCE_BOTTLE, CreativeModeTabs.INGREDIENTS)
             .build(p -> new SuspiciousDyeItem(DyeColor.BROWN, p));
 
     public static final Supplier<SuspiciousDyeItem> RED_SUSPICIOUS_DYE = new Builder("red_suspicious_dye")
-            .properties(p -> p.stacksTo(1))
+            .properties(p -> p
+                    .stacksTo(1)
+                    .component(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true)
+                    .component(AdditionalMisc.GLINT_COLOR_COMPONENT.get(), new GlintColor(DyeColor.RED))
+            )
             .creativeBefore(Items.EXPERIENCE_BOTTLE, CreativeModeTabs.INGREDIENTS)
             .build(p -> new SuspiciousDyeItem(DyeColor.RED, p));
 
     public static final Supplier<SuspiciousDyeItem> ORANGE_SUSPICIOUS_DYE = new Builder("orange_suspicious_dye")
-            .properties(p -> p.stacksTo(1))
+            .properties(p -> p
+                    .stacksTo(1)
+                    .component(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true)
+                    .component(AdditionalMisc.GLINT_COLOR_COMPONENT.get(), new GlintColor(DyeColor.ORANGE))
+            )
             .creativeBefore(Items.EXPERIENCE_BOTTLE, CreativeModeTabs.INGREDIENTS)
             .build(p -> new SuspiciousDyeItem(DyeColor.ORANGE, p));
 
     public static final Supplier<SuspiciousDyeItem> YELLOW_SUSPICIOUS_DYE = new Builder("yellow_suspicious_dye")
-            .properties(p -> p.stacksTo(1))
+            .properties(p -> p
+                    .stacksTo(1)
+                    .component(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true)
+                    .component(AdditionalMisc.GLINT_COLOR_COMPONENT.get(), new GlintColor(DyeColor.YELLOW))
+            )
             .creativeBefore(Items.EXPERIENCE_BOTTLE, CreativeModeTabs.INGREDIENTS)
             .build(p -> new SuspiciousDyeItem(DyeColor.YELLOW, p));
 
     public static final Supplier<SuspiciousDyeItem> LIME_SUSPICIOUS_DYE = new Builder("lime_suspicious_dye")
-            .properties(p -> p.stacksTo(1))
+            .properties(p -> p
+                    .stacksTo(1)
+                    .component(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true)
+                    .component(AdditionalMisc.GLINT_COLOR_COMPONENT.get(), new GlintColor(DyeColor.LIME))
+            )
             .creativeBefore(Items.EXPERIENCE_BOTTLE, CreativeModeTabs.INGREDIENTS)
             .build(p -> new SuspiciousDyeItem(DyeColor.LIME, p));
 
     public static final Supplier<SuspiciousDyeItem> GREEN_SUSPICIOUS_DYE = new Builder("green_suspicious_dye")
-            .properties(p -> p.stacksTo(1))
+            .properties(p -> p
+                    .stacksTo(1)
+                    .component(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true)
+                    .component(AdditionalMisc.GLINT_COLOR_COMPONENT.get(), new GlintColor(DyeColor.GREEN))
+            )
             .creativeBefore(Items.EXPERIENCE_BOTTLE, CreativeModeTabs.INGREDIENTS)
             .build(p -> new SuspiciousDyeItem(DyeColor.GREEN, p));
 
     public static final Supplier<SuspiciousDyeItem> CYAN_SUSPICIOUS_DYE = new Builder("cyan_suspicious_dye")
-            .properties(p -> p.stacksTo(1))
+            .properties(p -> p
+                    .stacksTo(1)
+                    .component(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true)
+                    .component(AdditionalMisc.GLINT_COLOR_COMPONENT.get(), new GlintColor(DyeColor.CYAN))
+            )
             .creativeBefore(Items.EXPERIENCE_BOTTLE, CreativeModeTabs.INGREDIENTS)
             .build(p -> new SuspiciousDyeItem(DyeColor.CYAN, p));
 
     public static final Supplier<SuspiciousDyeItem> LIGHT_BLUE_SUSPICIOUS_DYE = new Builder("light_blue_suspicious_dye")
-            .properties(p -> p.stacksTo(1))
+            .properties(p -> p
+                    .stacksTo(1)
+                    .component(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true)
+                    .component(AdditionalMisc.GLINT_COLOR_COMPONENT.get(), new GlintColor(DyeColor.LIGHT_BLUE))
+            )
             .creativeBefore(Items.EXPERIENCE_BOTTLE, CreativeModeTabs.INGREDIENTS)
             .build(p -> new SuspiciousDyeItem(DyeColor.LIGHT_BLUE, p));
 
     public static final Supplier<SuspiciousDyeItem> BLUE_SUSPICIOUS_DYE = new Builder("blue_suspicious_dye")
-            .properties(p -> p.stacksTo(1))
+            .properties(p -> p
+                    .stacksTo(1)
+                    .component(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true)
+                    .component(AdditionalMisc.GLINT_COLOR_COMPONENT.get(), new GlintColor(DyeColor.BLUE))
+            )
             .creativeBefore(Items.EXPERIENCE_BOTTLE, CreativeModeTabs.INGREDIENTS)
             .build(p -> new SuspiciousDyeItem(DyeColor.BLUE, p));
 
     public static final Supplier<SuspiciousDyeItem> PURPLE_SUSPICIOUS_DYE = new Builder("purple_suspicious_dye")
-            .properties(p -> p.stacksTo(1))
+            .properties(p -> p
+                    .stacksTo(1)
+                    .component(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true)
+                    .component(AdditionalMisc.GLINT_COLOR_COMPONENT.get(), new GlintColor(DyeColor.PURPLE))
+            )
             .creativeBefore(Items.EXPERIENCE_BOTTLE, CreativeModeTabs.INGREDIENTS)
             .build(p -> new SuspiciousDyeItem(DyeColor.PURPLE, p));
 
     public static final Supplier<SuspiciousDyeItem> MAGENTA_SUSPICIOUS_DYE = new Builder("magenta_suspicious_dye")
-            .properties(p -> p.stacksTo(1))
+            .properties(p -> p
+                    .stacksTo(1)
+                    .component(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true)
+                    .component(AdditionalMisc.GLINT_COLOR_COMPONENT.get(), new GlintColor(DyeColor.MAGENTA))
+            )
             .creativeBefore(Items.EXPERIENCE_BOTTLE, CreativeModeTabs.INGREDIENTS)
             .build(p -> new SuspiciousDyeItem(DyeColor.MAGENTA, p));
 
     public static final Supplier<SuspiciousDyeItem> PINK_SUSPICIOUS_DYE = new Builder("pink_suspicious_dye")
-            .properties(p -> p.stacksTo(1))
+            .properties(p -> p
+                    .stacksTo(1)
+                    .component(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true)
+                    .component(AdditionalMisc.GLINT_COLOR_COMPONENT.get(), new GlintColor(DyeColor.PINK))
+            )
             .creativeBefore(Items.EXPERIENCE_BOTTLE, CreativeModeTabs.INGREDIENTS)
             .build(p -> new SuspiciousDyeItem(DyeColor.PINK, p));
-
-    public static final Supplier<DataComponentType<GlintColor>> GLINT_COLOR_COMPONENT = AdditionalRegistries.DATA_COMPONENT_TYPES.register(
-            ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "glint_color"),
-            () -> DataComponentType.<GlintColor>builder().persistent(GlintColor.CODEC).networkSynchronized(GlintColor.STREAM_CODEC).build()
-    );
-
-    public static final TagKey<Item> SUSPICIOUS_DYES_TAG = TagKey.create(Registries.ITEM, ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "suspicious_dyes"));
-
-    public static final Supplier<RecipeSerializer<RoseGoldTransmuteRecipe>> ROSE_GOLD_TRANSMUTE_RECIPE_SERIALIZER = AdditionalRegistries.RECIPE_SERIALIZERS.register(
-            ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "rose_gold_transmute"),
-            () -> new SimpleCraftingRecipeSerializer<>(RoseGoldTransmuteRecipe::new)
-    );
-
-    public static final Supplier<RecipeSerializer<SuspiciousDyeRecipe>> SUSPICIOUS_DYE_RECIPE_SERIALIZER = AdditionalRegistries.RECIPE_SERIALIZERS.register(
-            ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "suspicious_dye"),
-            () -> new SimpleCraftingRecipeSerializer<>(SuspiciousDyeRecipe::new)
-    );
 
     private static class Builder {
         private final Item.Properties properties = new Item.Properties();
