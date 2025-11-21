@@ -11,7 +11,6 @@
     "crossbow.PlayerRendererMixin",
     "crossbow.PlayerMixin",
     "glint.ElytraLayerMixin",
-    "glint.HumanoidArmorLayerMixin",
     "glint.ItemRendererMixin",
     "glint.RenderBuffersMixin",
     "glint.RenderTypeMixin"
