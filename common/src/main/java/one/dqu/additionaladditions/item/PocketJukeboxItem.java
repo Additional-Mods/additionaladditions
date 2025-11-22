@@ -1,14 +1,11 @@
 package one.dqu.additionaladditions.item;
 
+import net.minecraft.world.item.*;
 import one.dqu.additionaladditions.config.Config;
 import one.dqu.additionaladditions.misc.PocketMusicSoundInstance;
-import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.contents.TranslatableContents;
-import net.minecraft.sounds.SoundEvent;
-import net.minecraft.world.item.JukeboxPlayable;
-import net.minecraft.world.item.JukeboxSong;
 import net.minecraft.world.item.component.ItemContainerContents;
 
 import java.util.List;
@@ -19,9 +16,6 @@ import net.minecraft.world.entity.SlotAccess;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ClickAction;
 import net.minecraft.world.inventory.Slot;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.TooltipFlag;
 
 public class PocketJukeboxItem extends Item {
     public PocketJukeboxItem(Properties settings) {
@@ -72,10 +66,8 @@ public class PocketJukeboxItem extends Item {
                     }
 
                     jukeboxPlayable.song().unwrap(player.level().registryAccess()).ifPresent(jukeboxSongHolder -> {
-                        JukeboxSong jukeboxSong = jukeboxSongHolder.value();
-                        Holder<SoundEvent> soundEvent = jukeboxSong.soundEvent();
                         PocketMusicSoundInstance.instance = new PocketMusicSoundInstance(
-                            soundEvent.value(),
+                            jukeboxSongHolder.value(),
                             player,
                             stack,
                             false,
