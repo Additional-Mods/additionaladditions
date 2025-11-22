@@ -150,7 +150,7 @@ public class AdditionalItems {
             )
             .build();
 
-    public static final Supplier<DepthMeterItem> DEPTH_METER_ITEM = new Builder("depth_meter")
+    public static final Supplier<Item> DEPTH_METER_ITEM = new Builder("depth_meter")
             .config(() -> Config.DEPTH_METER.get().enabled())
             .creativeAfter(Items.CLOCK, CreativeModeTabs.TOOLS_AND_UTILITIES)
             .lootTable(
@@ -160,7 +160,7 @@ public class AdditionalItems {
                         .when(LootItemRandomChanceCondition.randomChance(0.1f))
                         .add(LootItem.lootTableItem(item))
             )
-            .build(DepthMeterItem::new);
+            .build(Item::new);
 
     public static final Supplier<MysteriousBundleItem> MYSTERIOUS_BUNDLE_ITEM = new Builder("mysterious_bundle")
             .config(() -> Config.MYSTERIOUS_BUNDLE.get().enabled())
