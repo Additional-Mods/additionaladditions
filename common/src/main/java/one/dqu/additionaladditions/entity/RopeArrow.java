@@ -66,14 +66,8 @@ public class RopeArrow extends AbstractArrow {
             return;
         }
 
-        BlockPos pos = hitResult.getBlockPos().relative(hitResult.getDirection());
-        BlockState state = this.level().getBlockState(pos);
-        if (!AdditionalBlocks.ROPE_BLOCK.get().canSurvive(state, this.level(), pos)) {
-            return;
-        }
-
         // start placing ropes
-        this.startPos = pos;
+        this.startPos = hitResult.getBlockPos().relative(hitResult.getDirection());
         this.isPlacingRopes = true;
         this.ropesPlaced = 0;
         this.tickCounter = 0;
@@ -101,13 +95,15 @@ public class RopeArrow extends AbstractArrow {
             BlockState downState = this.level().getBlockState(downPos);
 
             boolean canReplace = downState.is(BlockTags.REPLACEABLE) || downState.getFluidState().is(FluidTags.WATER);
-            if (!canReplace) {
+            boolean canSurvive = AdditionalBlocks.ROPE_BLOCK.get().canSurvive(downState, this.level(), downPos);
+            if (!canReplace || !canSurvive) {
                 // drop remaining ropes
                 int remaining = 8 - ropesPlaced;
                 if (remaining > 0) {
                     ItemStack stack = AdditionalBlocks.ROPE_BLOCK_ITEM.get().getDefaultInstance();
                     stack.setCount(remaining);
-                    ItemEntity itemEntity = new ItemEntity(this.level(), downPos.getCenter().x, downPos.getCenter().y + 1, downPos.getCenter().z, stack);
+                    int up = canReplace ? 0 : 1;
+                    ItemEntity itemEntity = new ItemEntity(this.level(), downPos.getCenter().x, downPos.getCenter().y + up, downPos.getCenter().z, stack);
                     this.level().addFreshEntity(itemEntity);
                 }
                 isPlacingRopes = false;
@@ -117,8 +113,8 @@ public class RopeArrow extends AbstractArrow {
             boolean isWaterlogged = this.level().getFluidState(downPos).is(Fluids.WATER);
             BlockState ropeState = AdditionalBlocks.ROPE_BLOCK.get().defaultBlockState()
                     .setValue(BlockStateProperties.WATERLOGGED, isWaterlogged);
-            this.level().setBlockAndUpdate(downPos, ropeState);
 
+            this.level().setBlockAndUpdate(downPos, ropeState);
             this.level().playSound(null, downPos, SoundType.WOOL.getPlaceSound(), SoundSource.BLOCKS, 1.0f, 1.0f);
             ropesPlaced++;
         }
