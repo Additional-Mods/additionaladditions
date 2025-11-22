@@ -426,6 +426,10 @@ public class AdditionalItems {
             .creativeBefore(Items.EXPERIENCE_BOTTLE, CreativeModeTabs.INGREDIENTS)
             .build(p -> new SuspiciousDyeItem(DyeColor.PINK, p));
 
+    public static final Supplier<RopeArrowItem> ROPE_ARROW = new Builder("rope_arrow")
+            .creativeAfter(Items.ARROW, CreativeModeTabs.COMBAT)
+            .build(RopeArrowItem::new);
+
     private static class Builder {
         private final String id;
         private final Map<ResourceKey<CreativeModeTab>, List<ItemLike>> creativeAfter = new HashMap<>();

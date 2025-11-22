@@ -34,6 +34,7 @@ import one.dqu.additionaladditions.AdditionalAdditions;
 import one.dqu.additionaladditions.config.ConfigLoader;
 import one.dqu.additionaladditions.config.network.ConfigSyncS2CPayload;
 import one.dqu.additionaladditions.config.network.neoforge.ConfigSyncTask;
+import one.dqu.additionaladditions.entity.RopeArrowRenderer;
 import one.dqu.additionaladditions.glint.GlintResourceGenerator;
 import one.dqu.additionaladditions.item.PocketJukeboxItem;
 import one.dqu.additionaladditions.registry.AdditionalBlocks;
@@ -136,8 +137,13 @@ public final class AdditionalAdditionsNeoForge {
 
     private void onRegisterEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
         event.registerEntityRenderer(
-            AdditionalEntities.GLOW_STICK_ENTITY_ENTITY_TYPE.get(),
+            AdditionalEntities.GLOW_STICK.get(),
             ThrownItemRenderer::new
+        );
+
+        event.registerEntityRenderer(
+            AdditionalEntities.ROPE_ARROW.get(),
+            RopeArrowRenderer::new
         );
     }
 

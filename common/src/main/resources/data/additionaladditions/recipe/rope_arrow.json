@@ -1,0 +1,18 @@
+{
+  "type": "crafting_shapeless",
+  "ingredients": [
+    {"item": "minecraft:arrow"},
+    {"item": "additionaladditions:rope"},
+    {"item": "additionaladditions:rope"},
+    {"item": "additionaladditions:rope"},
+    {"item": "additionaladditions:rope"},
+    {"item": "additionaladditions:rope"},
+    {"item": "additionaladditions:rope"},
+    {"item": "additionaladditions:rope"},
+    {"item": "additionaladditions:rope"}
+  ],
+  "result": {
+    "id": "additionaladditions:rope_arrow",
+    "count": 1
+  }
+}

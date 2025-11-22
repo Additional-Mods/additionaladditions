@@ -22,11 +22,11 @@ public class GlowStickEntity extends ThrowableItemProjectile {
     }
 
     public GlowStickEntity(Level world, LivingEntity owner) {
-        super(AdditionalEntities.GLOW_STICK_ENTITY_ENTITY_TYPE.get(), owner, world);
+        super(AdditionalEntities.GLOW_STICK.get(), owner, world);
     }
 
     public GlowStickEntity(Level world, double x, double y, double z) {
-        super(AdditionalEntities.GLOW_STICK_ENTITY_ENTITY_TYPE.get(), x, y, z, world);
+        super(AdditionalEntities.GLOW_STICK.get(), x, y, z, world);
     }
 
     @Override

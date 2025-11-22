@@ -21,6 +21,7 @@ import net.minecraft.world.level.Level;
 import one.dqu.additionaladditions.AdditionalAdditions;
 import one.dqu.additionaladditions.config.ConfigLoader;
 import one.dqu.additionaladditions.config.network.ConfigSyncS2CPayload;
+import one.dqu.additionaladditions.entity.RopeArrowRenderer;
 import one.dqu.additionaladditions.glint.GlintResourceGenerator;
 import one.dqu.additionaladditions.item.PocketJukeboxItem;
 import one.dqu.additionaladditions.registry.AdditionalBlocks;
@@ -50,7 +51,8 @@ public final class AdditionalAdditionsClientFabric implements ClientModInitializ
         BlockRenderLayerMap.INSTANCE.putBlock(AdditionalBlocks.GLOW_STICK_BLOCK.get(), RenderType.cutout());
 
         // entity renderers
-        EntityRendererRegistry.register(AdditionalEntities.GLOW_STICK_ENTITY_ENTITY_TYPE.get(), ThrownItemRenderer::new);
+        EntityRendererRegistry.register(AdditionalEntities.GLOW_STICK.get(), ThrownItemRenderer::new);
+        EntityRendererRegistry.register(AdditionalEntities.ROPE_ARROW.get(), RopeArrowRenderer::new);
 
         // resource managers
         ResourceManagerHelper.get(PackType.CLIENT_RESOURCES).registerReloadListener(new SimpleSynchronousResourceReloadListener() {
