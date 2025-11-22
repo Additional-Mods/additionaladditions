@@ -25,7 +25,6 @@ import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import one.dqu.additionaladditions.util.Registrar;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.function.Supplier;
 
 public class AdditionalBlocks {

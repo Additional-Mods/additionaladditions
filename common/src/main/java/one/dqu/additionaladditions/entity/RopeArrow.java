@@ -3,6 +3,7 @@ package one.dqu.additionaladditions.entity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -12,6 +13,8 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
 import one.dqu.additionaladditions.registry.AdditionalBlocks;
 import one.dqu.additionaladditions.registry.AdditionalEntities;
@@ -97,7 +100,8 @@ public class RopeArrow extends AbstractArrow {
             BlockPos downPos = startPos.below(ropesPlaced);
             BlockState downState = this.level().getBlockState(downPos);
 
-            if (!downState.is(BlockTags.REPLACEABLE)) {
+            boolean canReplace = downState.is(BlockTags.REPLACEABLE) || downState.getFluidState().is(FluidTags.WATER);
+            if (!canReplace) {
                 // drop remaining ropes
                 int remaining = 8 - ropesPlaced;
                 if (remaining > 0) {
@@ -110,7 +114,11 @@ public class RopeArrow extends AbstractArrow {
                 return;
             }
 
-            this.level().setBlockAndUpdate(downPos, AdditionalBlocks.ROPE_BLOCK.get().defaultBlockState());
+            boolean isWaterlogged = this.level().getFluidState(downPos).is(Fluids.WATER);
+            BlockState ropeState = AdditionalBlocks.ROPE_BLOCK.get().defaultBlockState()
+                    .setValue(BlockStateProperties.WATERLOGGED, isWaterlogged);
+            this.level().setBlockAndUpdate(downPos, ropeState);
+
             this.level().playSound(null, downPos, SoundType.WOOL.getPlaceSound(), SoundSource.BLOCKS, 1.0f, 1.0f);
             ropesPlaced++;
         }

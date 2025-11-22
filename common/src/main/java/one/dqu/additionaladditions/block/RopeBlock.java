@@ -1,5 +1,10 @@
 package one.dqu.additionaladditions.block;
 
+import net.minecraft.tags.BlockTags;
+import net.minecraft.world.level.block.SimpleWaterloggedBlock;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Fluids;
 import one.dqu.additionaladditions.config.Config;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -24,11 +29,12 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraft.world.ticks.ScheduledTick;
+import org.jetbrains.annotations.Nullable;
 
-/** @noinspection deprecation*/
-public class RopeBlock extends Block {
+public class RopeBlock extends Block implements SimpleWaterloggedBlock {
     public static final VoxelShape shape = Block.box(6, 0, 6,10, 16, 10);
 
+    public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
     public static final BooleanProperty NORTH = BooleanProperty.create("north");
     public static final BooleanProperty SOUTH = BooleanProperty.create("south");
     public static final BooleanProperty WEST = BooleanProperty.create("west");
@@ -43,6 +49,7 @@ public class RopeBlock extends Block {
                 .setValue(EAST, false)
                 .setValue(WEST, false)
                 .setValue(UP, false)
+                .setValue(WATERLOGGED, false)
         );
     }
 
@@ -53,6 +60,7 @@ public class RopeBlock extends Block {
         stateManager.add(SOUTH);
         stateManager.add(WEST);
         stateManager.add(UP);
+        stateManager.add(WATERLOGGED);
     }
 
     @Override
@@ -101,6 +109,17 @@ public class RopeBlock extends Block {
     @Override
     public boolean canBeReplaced(BlockState state, BlockPlaceContext context) {
         return false;
+    }
+
+    @Override
+    public @Nullable BlockState getStateForPlacement(BlockPlaceContext context) {
+        return this.defaultBlockState()
+                .setValue(WATERLOGGED, context.getLevel().getFluidState(context.getClickedPos()).is(Fluids.WATER));
+    }
+
+    @Override
+    protected FluidState getFluidState(BlockState state) {
+        return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
     }
 
     /*
@@ -153,7 +172,10 @@ public class RopeBlock extends Block {
         if (!world.isClientSide()) {
             world.getBlockTicks().schedule(ScheduledTick.probe(this, pos));
         }
-        return state;
+        if (state.getValue(WATERLOGGED)) {
+            world.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(world));
+        }
+        return super.updateShape(state, direction, neighborState, world, pos, neighborPos);
     }
 
     @Override
@@ -169,11 +191,15 @@ public class RopeBlock extends Block {
         BlockPos down = pos.relative(Direction.DOWN);
         BlockState statedown = world.getBlockState(down);
 
+        boolean canReplace = statedown.is(BlockTags.REPLACEABLE) || world.getFluidState(down).is(Fluids.WATER);
         if (statedown.is(this)) {
             BlockHitResult hitBelow = new BlockHitResult(hit.getLocation(), hit.getDirection(), hit.getBlockPos().below(), hit.isInside());
             return statedown.useWithoutItem(world, player, hitBelow);
-        } else if (statedown.isAir() && !world.isOutsideBuildHeight(down.getY())) {
-            world.setBlockAndUpdate(down, state);
+        } else if (canReplace && !world.isOutsideBuildHeight(down.getY())) {
+            boolean isWaterlogged = world.getFluidState(down).is(Fluids.WATER);
+            BlockState newState = state.setValue(WATERLOGGED, isWaterlogged);
+            world.setBlockAndUpdate(down, newState);
+
             world.playSound(null, pos.getX(), pos.getY(), pos.getZ(), SoundEvents.WOOL_PLACE, SoundSource.BLOCKS, 1.0F, 1.0F);
             if (!player.isCreative()) player.getMainHandItem().shrink(1);
             return InteractionResult.SUCCESS;
