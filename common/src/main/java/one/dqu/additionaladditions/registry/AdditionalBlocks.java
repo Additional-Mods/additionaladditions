@@ -31,7 +31,7 @@ import java.util.function.Supplier;
 public class AdditionalBlocks {
     public static final Supplier<RopeBlock> ROPE_BLOCK = AdditionalRegistries.BLOCKS.register(
                     ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "rope"),
-                    () -> new RopeBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BROWN).pushReaction(PushReaction.DESTROY).noCollission().sound(SoundType.WOOL).instabreak())
+                    () -> new RopeBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BROWN).pushReaction(PushReaction.DESTROY).noCollission().sound(SoundType.WOOL).explosionResistance(0f).destroyTime(0.2f))
             );
     public static final Supplier<Item> ROPE_BLOCK_ITEM = AdditionalRegistries.ITEMS.register(
             ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "rope"),
