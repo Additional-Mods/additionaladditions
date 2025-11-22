@@ -8,8 +8,8 @@
     "crossbow.AbstractClientPlayerMixin",
     "crossbow.ItemInHandRendererMixin",
     "crossbow.LocalPlayerMixin",
-    "crossbow.PlayerRendererMixin",
     "crossbow.PlayerMixin",
+    "crossbow.PlayerRendererMixin",
     "glint.ElytraLayerMixin",
     "glint.ItemRendererMixin",
     "glint.RenderBuffersMixin",
@@ -21,7 +21,9 @@
     "RecipeManagerMixin",
     "RedstoneWireBlockMixin",
     "ServerAdvancementManagerMixin",
-    "WanderingTraderMixin"
+    "WanderingTraderMixin",
+    "album.JukeboxBlockEntityMixin",
+    "album.JukeboxBlockMixin"
   ],
   "injectors": {
     "defaultRequire": 1

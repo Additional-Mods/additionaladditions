@@ -9,6 +9,7 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.SimpleCraftingRecipeSerializer;
 import one.dqu.additionaladditions.AdditionalAdditions;
 import one.dqu.additionaladditions.glint.GlintColor;
+import one.dqu.additionaladditions.misc.AlbumContents;
 import one.dqu.additionaladditions.misc.RoseGoldTransmuteRecipe;
 import one.dqu.additionaladditions.misc.SuspiciousDyeRecipe;
 
@@ -18,6 +19,11 @@ public class AdditionalMisc {
     public static final Supplier<DataComponentType<GlintColor>> GLINT_COLOR_COMPONENT = AdditionalRegistries.DATA_COMPONENT_TYPES.register(
             ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "glint_color"),
             () -> DataComponentType.<GlintColor>builder().persistent(GlintColor.CODEC).networkSynchronized(GlintColor.STREAM_CODEC).build()
+    );
+
+    public static final Supplier<DataComponentType<AlbumContents>> ALBUM_CONTENTS_COMPONENT = AdditionalRegistries.DATA_COMPONENT_TYPES.register(
+            ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "album_contents"),
+            () -> DataComponentType.<AlbumContents>builder().persistent(AlbumContents.CODEC).networkSynchronized(AlbumContents.STREAM_CODEC).build()
     );
 
     public static final TagKey<Item> SUSPICIOUS_DYES_TAG = TagKey.create(Registries.ITEM, ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "suspicious_dyes"));

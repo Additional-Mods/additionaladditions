@@ -83,6 +83,7 @@
 
   "additionaladditions.gui.config.restart": "Restart the game to apply the changes",
   "additionaladditions.gui.pocket_jukebox.tooltip": "Secondary Click with a Music Disc to play",
+  "additionaladditions.gui.album.discs": "Discs",
 
   "additionaladditions.gui.glint.white": "White Glint",
   "additionaladditions.gui.glint.black": "Black Glint",

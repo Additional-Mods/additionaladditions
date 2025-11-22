@@ -11,6 +11,7 @@ import one.dqu.additionaladditions.AdditionalAdditions;
 import one.dqu.additionaladditions.config.Config;
 import one.dqu.additionaladditions.glint.GlintColor;
 import one.dqu.additionaladditions.item.*;
+import one.dqu.additionaladditions.misc.AlbumContents;
 import one.dqu.additionaladditions.util.CreativeAdder;
 import one.dqu.additionaladditions.util.LootHandler;
 import net.minecraft.core.HolderLookup;
@@ -429,6 +430,13 @@ public class AdditionalItems {
     public static final Supplier<RopeArrowItem> ROPE_ARROW = new Builder("rope_arrow")
             .creativeAfter(Items.ARROW, CreativeModeTabs.COMBAT)
             .build(RopeArrowItem::new);
+
+    public static final Supplier<AlbumItem> ALBUM = new Builder("album")
+            .properties(p -> p
+                    .stacksTo(1)
+                    .component(AdditionalMisc.ALBUM_CONTENTS_COMPONENT.get(), AlbumContents.EMPTY)
+            )
+            .build(AlbumItem::new);
 
     private static class Builder {
         private final String id;
