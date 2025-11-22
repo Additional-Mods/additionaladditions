@@ -278,13 +278,13 @@ public class AdditionalItems {
             .creativeAfter(Items.GOLDEN_SWORD, CreativeModeTabs.COMBAT)
             .build(p -> new SwordItem(ROSE_GOLD_TOOL_MATERIAL, p));
 
-    public static final Supplier<Item> ROSE_GOLD_AXE = new Builder("rose_gold_axe")
+    public static final Supplier<Item> ROSE_GOLD_SHOVEL = new Builder("rose_gold_shovel")
             .config(() -> Config.ROSE_GOLD.get().enabled())
             .properties(p -> p
-                    .attributes(AxeItem.createAttributes(ROSE_GOLD_TOOL_MATERIAL, 6, -3.1F))
+                    .attributes(ShovelItem.createAttributes(ROSE_GOLD_TOOL_MATERIAL, 1.5F, -3F))
             )
             .creativeAfter(Items.GOLDEN_HOE, CreativeModeTabs.TOOLS_AND_UTILITIES)
-            .build(p -> new AxeItem(ROSE_GOLD_TOOL_MATERIAL, p));
+            .build(p -> new ShovelItem(ROSE_GOLD_TOOL_MATERIAL, p));
 
     public static final Supplier<Item> ROSE_GOLD_PICKAXE = new Builder("rose_gold_pickaxe")
             .config(() -> Config.ROSE_GOLD.get().enabled())
@@ -294,13 +294,13 @@ public class AdditionalItems {
             .creativeAfter(Items.GOLDEN_HOE, CreativeModeTabs.TOOLS_AND_UTILITIES)
             .build(p -> new PickaxeItem(ROSE_GOLD_TOOL_MATERIAL, p));
 
-    public static final Supplier<Item> ROSE_GOLD_SHOVEL = new Builder("rose_gold_shovel")
+    public static final Supplier<Item> ROSE_GOLD_AXE = new Builder("rose_gold_axe")
             .config(() -> Config.ROSE_GOLD.get().enabled())
             .properties(p -> p
-                    .attributes(ShovelItem.createAttributes(ROSE_GOLD_TOOL_MATERIAL, 1.5F, -3F))
+                    .attributes(AxeItem.createAttributes(ROSE_GOLD_TOOL_MATERIAL, 6, -3.1F))
             )
             .creativeAfter(Items.GOLDEN_HOE, CreativeModeTabs.TOOLS_AND_UTILITIES)
-            .build(p -> new ShovelItem(ROSE_GOLD_TOOL_MATERIAL, p));
+            .build(p -> new AxeItem(ROSE_GOLD_TOOL_MATERIAL, p));
 
     public static final Supplier<Item> ROSE_GOLD_HOE = new Builder("rose_gold_hoe")
             .config(() -> Config.ROSE_GOLD.get().enabled())

@@ -98,11 +98,11 @@ public class AdditionalBlocks {
             );
         });
 
-        CreativeAdder.add(CreativeModeTabs.REDSTONE_BLOCKS, () -> Config.COPPER_PATINA.get().enabled(), Items.REDSTONE_BLOCK, () -> COPPER_PATINA.get().asItem());
+        CreativeAdder.add(CreativeModeTabs.REDSTONE_BLOCKS, () -> Config.COPPER_PATINA.get().enabled(), Items.REDSTONE, () -> COPPER_PATINA.get().asItem());
         CreativeAdder.add(CreativeModeTabs.REDSTONE_BLOCKS, () -> Config.AMETHYST_LAMP.get().enabled(), Items.REDSTONE_LAMP, () -> AMETHYST_LAMP.get().asItem());
         CreativeAdder.add(CreativeModeTabs.FUNCTIONAL_BLOCKS, () -> Config.AMETHYST_LAMP.get().enabled(), Items.REDSTONE_LAMP, () -> AMETHYST_LAMP.get().asItem());
         CreativeAdder.add(CreativeModeTabs.FUNCTIONAL_BLOCKS, () -> Config.ROPE.get().enabled(), Items.LADDER, () -> ROPE_BLOCK.get().asItem());
-        CreativeAdder.add(CreativeModeTabs.BUILDING_BLOCKS, () -> Config.COPPER_PATINA.get().enabled(), Items.REDSTONE_BLOCK, () -> PATINA_BLOCK.get().asItem());
+        CreativeAdder.addBefore(CreativeModeTabs.BUILDING_BLOCKS, () -> Config.COPPER_PATINA.get().enabled(), Items.COPPER_BLOCK, () -> PATINA_BLOCK.get().asItem());
         CreativeAdder.add(CreativeModeTabs.BUILDING_BLOCKS, () -> Config.ROSE_GOLD.get().enabled(), Items.LIGHT_WEIGHTED_PRESSURE_PLATE, () -> ROSE_GOLD_BLOCK.get().asItem());
         CreativeAdder.add(CreativeModeTabs.TOOLS_AND_UTILITIES, () -> Config.ROPE.get().enabled(), Items.SPYGLASS, () -> ROPE_BLOCK.get().asItem());
     }
