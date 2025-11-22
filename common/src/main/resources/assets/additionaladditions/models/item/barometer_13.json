@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "additionaladditions:item/depth_meter_04"
+    "layer0": "additionaladditions:item/barometer_13"
   }
 }

@@ -150,7 +150,7 @@ public class AdditionalItems {
             )
             .build();
 
-    public static final Supplier<Item> DEPTH_METER_ITEM = new Builder("depth_meter")
+    public static final Supplier<Item> BAROMETER = new Builder("barometer")
             .config(() -> Config.DEPTH_METER.get().enabled())
             .creativeAfter(Items.CLOCK, CreativeModeTabs.TOOLS_AND_UTILITIES)
             .lootTable(

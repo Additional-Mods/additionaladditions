@@ -21,7 +21,7 @@
   "item.additionaladditions.trident_shard": "Trident Shard",
   "item.additionaladditions.glow_stick": "Glow Stick",
   "item.additionaladditions.honeyed_apple": "Honeyed Apple",
-  "item.additionaladditions.depth_meter": "Depth Meter",
+  "item.additionaladditions.barometer": "Barometer",
   "item.additionaladditions.music_disc_0308": "Music Disc",
   "item.additionaladditions.music_disc_1007": "Music Disc",
   "item.additionaladditions.music_disc_1507": "Music Disc",
@@ -58,7 +58,7 @@
 
   "entity.additionaladditions.glow_stick": "Glow Stick",
 
-  "depth_meter.elevation": "Altitude: %s",
+  "additionaladditions.gui.barometer.elevation": "Altitude: %s",
 
   "additionaladditions.advancements.obtain_adoghr_disc": "adoghr",
   "additionaladditions.advancements.obtain_adoghr_disc.desc": "Obtain one of adoghr's music discs",

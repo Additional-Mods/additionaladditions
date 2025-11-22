@@ -176,7 +176,7 @@ public final class AdditionalAdditionsNeoForge {
             return PocketJukeboxItem.hasDisc(itemStack) ? 1.0F : 0.0F;
         }));
 
-        ItemProperties.register(AdditionalItems.DEPTH_METER_ITEM.get(), ResourceLocation.withDefaultNamespace("angle"), (itemStack, clientWorld, livingEntity, worldSeed) -> {
+        ItemProperties.register(AdditionalItems.BAROMETER.get(), ResourceLocation.withDefaultNamespace("angle"), (itemStack, clientWorld, livingEntity, worldSeed) -> {
             if (livingEntity == null) return 0.3125F;
             Level world = livingEntity.level();
             if (world == null) return 0.3125F;
