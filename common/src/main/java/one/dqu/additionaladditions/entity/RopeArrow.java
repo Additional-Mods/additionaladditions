@@ -16,6 +16,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.EntityHitResult;
 import one.dqu.additionaladditions.registry.AdditionalBlocks;
 import one.dqu.additionaladditions.registry.AdditionalEntities;
 import org.jetbrains.annotations.Nullable;
@@ -71,6 +72,18 @@ public class RopeArrow extends AbstractArrow {
         this.isPlacingRopes = true;
         this.ropesPlaced = 0;
         this.tickCounter = 0;
+    }
+
+    @Override
+    protected void onHitEntity(EntityHitResult hitResult) {
+        super.onHitEntity(hitResult);
+        if (ropesPlaced < 8 && this.pickup == Pickup.ALLOWED) {
+            ItemStack stack = AdditionalBlocks.ROPE_BLOCK_ITEM.get().getDefaultInstance();
+            stack.setCount(8 - ropesPlaced);
+            ItemEntity itemEntity = new ItemEntity(this.level(), hitResult.getLocation().x, hitResult.getLocation().y, hitResult.getLocation().z, stack);
+            this.level().addFreshEntity(itemEntity);
+            ropesPlaced = 8;
+        }
     }
 
     @Override
