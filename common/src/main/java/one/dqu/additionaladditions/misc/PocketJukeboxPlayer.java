@@ -129,11 +129,14 @@ public class PocketJukeboxPlayer {
             this.player = player;
             this.volume = 0.8f;
             this.looping = false;
-            this.x = player.getX();
-            this.y = player.getY();
-            this.z = player.getZ();
+
             this.attenuation = Attenuation.NONE;
             this.relative = true;
+
+            // coordinates are relative to player position when relative = true
+            this.x = 0;
+            this.y = 0;
+            this.z = 0;
         }
 
         // creates and automatically plays sound instance
@@ -150,11 +153,6 @@ public class PocketJukeboxPlayer {
                 this.stop();
                 return;
             }
-
-            // follow player
-            this.x = this.player.getX();
-            this.y = this.player.getY();
-            this.z = this.player.getZ();
         }
     }
 }
