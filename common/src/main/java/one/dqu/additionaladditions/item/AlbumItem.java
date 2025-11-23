@@ -36,6 +36,10 @@ public class AlbumItem extends Item {
             return false;
         }
 
+        if (contents.items().size() >= 8) {
+            return false;
+        }
+
         setContents(album, contents.add(disc));
         return true;
     }

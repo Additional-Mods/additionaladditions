@@ -1,28 +1,30 @@
 package one.dqu.additionaladditions.item;
 
-import net.minecraft.world.item.*;
-import one.dqu.additionaladditions.config.Config;
-import one.dqu.additionaladditions.misc.PocketMusicSoundInstance;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.contents.TranslatableContents;
-import net.minecraft.world.item.component.ItemContainerContents;
-
-import java.util.List;
-import net.minecraft.ChatFormatting;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.Style;
 import net.minecraft.world.entity.SlotAccess;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ClickAction;
 import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.item.*;
+import net.minecraft.world.item.component.ItemContainerContents;
+import one.dqu.additionaladditions.config.Config;
+import one.dqu.additionaladditions.misc.AlbumContents;
+import one.dqu.additionaladditions.misc.PocketJukeboxPlayer;
+import one.dqu.additionaladditions.registry.AdditionalItems;
+import one.dqu.additionaladditions.registry.AdditionalMisc;
+
+import java.util.List;
 
 public class PocketJukeboxItem extends Item {
     public PocketJukeboxItem(Properties settings) {
         super(settings);
     }
 
-    private static ItemStack getStoredDisc(ItemStack stack) {
+    public static ItemStack getStoredDisc(ItemStack stack) {
         ItemContainerContents contents = stack.get(DataComponents.CONTAINER);
         if (contents != null && !contents.stream().toList().isEmpty()) {
             return contents.stream().toList().getFirst();
@@ -53,31 +55,26 @@ public class PocketJukeboxItem extends Item {
 
         if (!hasDisc(stack)) {
             ItemStack cursor = cursorStackReference.get();
-            JukeboxPlayable jukeboxPlayable = cursor.get(DataComponents.JUKEBOX_PLAYABLE);
+            if (cursor.isEmpty()) return false;
 
-            if (jukeboxPlayable != null) {
+            AlbumContents contents = null;
+
+            if (cursor.is(AdditionalItems.ALBUM.get())) {
+                contents = cursor.getOrDefault(AdditionalMisc.ALBUM_CONTENTS_COMPONENT.get(), AlbumContents.EMPTY);
+            } else if (AlbumContents.isValidItem(cursor)) {
+                contents = new AlbumContents(List.of(cursor));
+            }
+
+            if (contents != null && !contents.items().isEmpty()) {
                 storeDisc(stack, cursor);
-                cursorStackReference.set(ItemStack.EMPTY);
+                cursorStackReference.set(ItemStack.EMPTY); //todo this might need to be .shrink(1) just in case
 
                 if (player.level().isClientSide()) {
-                    if (PocketMusicSoundInstance.instance != null) {
-                        PocketMusicSoundInstance.instance.cancel();
-                        PocketMusicSoundInstance.instance = null;
-                    }
-
-                    jukeboxPlayable.song().unwrap(player.level().registryAccess()).ifPresent(jukeboxSongHolder -> {
-                        PocketMusicSoundInstance.instance = new PocketMusicSoundInstance(
-                            jukeboxSongHolder.value(),
-                            player,
-                            stack,
-                            false,
-                            0.8f
-                        );
-                        PocketMusicSoundInstance.instance.play();
-                    });
+                    PocketJukeboxPlayer.INSTANCE.play(contents, player, stack);
                 }
+                return true;
             }
-            return true;
+            return false;
         } else {
             ItemStack cursor = cursorStackReference.get();
             if (!cursor.isEmpty()) return false;
@@ -86,10 +83,7 @@ public class PocketJukeboxItem extends Item {
             cursorStackReference.set(storedDisc);
 
             if (player.level().isClientSide()) {
-                if (PocketMusicSoundInstance.instance != null) {
-                    PocketMusicSoundInstance.instance.cancel();
-                    PocketMusicSoundInstance.instance = null;
-                }
+                PocketJukeboxPlayer.INSTANCE.stop();
             }
 
             removeStoredDisc(stack);
@@ -100,15 +94,19 @@ public class PocketJukeboxItem extends Item {
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag flag) {
         if (!hasDisc(stack)) {
-            tooltip.add(MutableComponent.create(new TranslatableContents("additionaladditions.gui.pocket_jukebox.tooltip", null, new String[]{})).setStyle(Style.EMPTY.withColor(ChatFormatting.GRAY)));
+            tooltip.add(MutableComponent.create(new TranslatableContents("additionaladditions.gui.pocket_jukebox.tooltip", null, new String[]{})).withStyle(ChatFormatting.GRAY));
+            return;
+        }
+
+        ItemStack storedDisc = getStoredDisc(stack);
+
+        if (storedDisc.is(AdditionalItems.ALBUM.get())) {
+            AlbumContents contents = storedDisc.getOrDefault(AdditionalMisc.ALBUM_CONTENTS_COMPONENT.get(), AlbumContents.EMPTY);
+            contents.addToTooltip(context, tooltip::add, flag);
         } else {
-            ItemStack storedDisc = getStoredDisc(stack);
             JukeboxPlayable jukeboxPlayable = storedDisc.get(DataComponents.JUKEBOX_PLAYABLE);
-            if (jukeboxPlayable != null && context.registries() != null) {
-                jukeboxPlayable.song().unwrap(context.registries()).ifPresent(jukeboxSongHolder -> {
-                    JukeboxSong jukeboxSong = jukeboxSongHolder.value();
-                    tooltip.add(jukeboxSong.description().copy().withStyle(ChatFormatting.GRAY));
-                });
+            if (jukeboxPlayable != null) {
+                jukeboxPlayable.addToTooltip(context, tooltip::add, flag);
             }
         }
     }

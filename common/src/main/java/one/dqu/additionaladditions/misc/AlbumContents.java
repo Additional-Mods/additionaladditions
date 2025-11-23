@@ -16,6 +16,7 @@ import net.minecraft.world.item.component.TooltipProvider;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
+import java.util.stream.Collectors;
 
 public record AlbumContents(List<ItemStack> items) implements TooltipProvider {
     public static final AlbumContents EMPTY = new AlbumContents(List.of());
@@ -26,7 +27,7 @@ public record AlbumContents(List<ItemStack> items) implements TooltipProvider {
             ItemStack.STREAM_CODEC.apply(ByteBufCodecs.list()).map(AlbumContents::new, AlbumContents::items);
 
     public AlbumContents {
-        items = List.copyOf(items);
+        items = items.stream().map(ItemStack::copy).toList();
     }
 
     public static boolean isValidItem(ItemStack itemStack) {
@@ -53,7 +54,12 @@ public record AlbumContents(List<ItemStack> items) implements TooltipProvider {
 
     @Override
     public void addToTooltip(Item.TooltipContext tooltipContext, Consumer<Component> consumer, TooltipFlag tooltipFlag) {
-        consumer.accept(Component.translatable("additionaladditions.gui.album.discs").withStyle(ChatFormatting.GRAY));
+        consumer.accept(
+                Component.literal("")
+                .append(Component.translatable("additionaladditions.gui.album.discs"))
+                .append(" " + items.size() + "/8")
+                .withStyle(ChatFormatting.GRAY)
+        );
         for (ItemStack disc : items) {
             disc.get(DataComponents.JUKEBOX_PLAYABLE).addToTooltip(
                     tooltipContext,
@@ -63,5 +69,19 @@ public record AlbumContents(List<ItemStack> items) implements TooltipProvider {
                     tooltipFlag
             );
         }
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj instanceof AlbumContents other) {
+            return ItemStack.listMatches(this.items, other.items);
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return ItemStack.hashStackList(this.items);
     }
 }

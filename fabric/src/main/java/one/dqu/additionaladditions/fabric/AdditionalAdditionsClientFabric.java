@@ -2,6 +2,7 @@ package one.dqu.additionaladditions.fabric;
 
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
+import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.networking.v1.ClientConfigurationNetworking;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
@@ -24,6 +25,7 @@ import one.dqu.additionaladditions.config.network.ConfigSyncS2CPayload;
 import one.dqu.additionaladditions.entity.RopeArrowRenderer;
 import one.dqu.additionaladditions.glint.GlintResourceGenerator;
 import one.dqu.additionaladditions.item.PocketJukeboxItem;
+import one.dqu.additionaladditions.misc.PocketJukeboxPlayer;
 import one.dqu.additionaladditions.registry.AdditionalBlocks;
 import one.dqu.additionaladditions.registry.AdditionalEntities;
 import one.dqu.additionaladditions.registry.AdditionalItems;
@@ -31,6 +33,9 @@ import one.dqu.additionaladditions.registry.AdditionalItems;
 public final class AdditionalAdditionsClientFabric implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
+        // pocket jukebox
+        ClientTickEvents.END_CLIENT_TICK.register((blah) -> PocketJukeboxPlayer.INSTANCE.tick());
+
         // config sync
         ClientConfigurationNetworking.registerGlobalReceiver(ConfigSyncS2CPayload.TYPE, (packet, context) -> {
             context.client().execute(() -> {

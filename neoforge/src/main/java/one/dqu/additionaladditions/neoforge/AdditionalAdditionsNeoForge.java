@@ -22,6 +22,7 @@ import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.fml.loading.FMLEnvironment;
 import net.neoforged.neoforge.client.event.ClientPlayerNetworkEvent;
+import net.neoforged.neoforge.client.event.ClientTickEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.RegisterClientReloadListenersEvent;
 import net.neoforged.neoforge.common.NeoForge;
@@ -37,6 +38,7 @@ import one.dqu.additionaladditions.config.network.neoforge.ConfigSyncTask;
 import one.dqu.additionaladditions.entity.RopeArrowRenderer;
 import one.dqu.additionaladditions.glint.GlintResourceGenerator;
 import one.dqu.additionaladditions.item.PocketJukeboxItem;
+import one.dqu.additionaladditions.misc.PocketJukeboxPlayer;
 import one.dqu.additionaladditions.registry.AdditionalBlocks;
 import one.dqu.additionaladditions.registry.AdditionalEntities;
 import one.dqu.additionaladditions.registry.AdditionalItems;
@@ -64,6 +66,7 @@ public final class AdditionalAdditionsNeoForge {
 
         if (FMLEnvironment.dist.isClient()) {
             NeoForge.EVENT_BUS.addListener(ClientPlayerNetworkEvent.LoggingOut.class, this::onClientLogout);
+            NeoForge.EVENT_BUS.addListener(ClientTickEvent.Post.class, this::onClientEndTick);
             modEventBus.addListener(RegisterClientReloadListenersEvent.class, this::onRegisterClientReloadListeners);
             modEventBus.addListener(FMLClientSetupEvent.class, this::onClientSetup);
             modEventBus.addListener(EntityRenderersEvent.RegisterRenderers.class, this::onRegisterEntityRenderers);
@@ -73,6 +76,10 @@ public final class AdditionalAdditionsNeoForge {
     }
 
     // EVENT HANDLERS
+
+    private void onClientEndTick(ClientTickEvent.Post event) {
+        PocketJukeboxPlayer.INSTANCE.tick();
+    }
 
     private void onSetupEvent(FMLCommonSetupEvent event) {
         RegistrarImpl.runDeferred();

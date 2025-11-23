@@ -23,7 +23,7 @@ public class AdditionalMisc {
 
     public static final Supplier<DataComponentType<AlbumContents>> ALBUM_CONTENTS_COMPONENT = AdditionalRegistries.DATA_COMPONENT_TYPES.register(
             ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "album_contents"),
-            () -> DataComponentType.<AlbumContents>builder().persistent(AlbumContents.CODEC).networkSynchronized(AlbumContents.STREAM_CODEC).build()
+            () -> DataComponentType.<AlbumContents>builder().persistent(AlbumContents.CODEC).networkSynchronized(AlbumContents.STREAM_CODEC).cacheEncoding().build()
     );
 
     public static final TagKey<Item> SUSPICIOUS_DYES_TAG = TagKey.create(Registries.ITEM, ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "suspicious_dyes"));

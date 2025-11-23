@@ -19,3 +19,4 @@ public final class AdditionalAdditions {
         AdditionalBlocks.registerAll();
     }
 }
+
