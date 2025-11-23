@@ -30,6 +30,7 @@
   "item.additionaladditions.music_disc_1507.desc": "adoghr - 1507",
   "item.additionaladditions.mysterious_bundle": "Mysterious Bundle",
   "item.additionaladditions.pocket_jukebox": "Pocket Jukebox",
+  "item.additionaladditions.album": "Album",
   "item.additionaladditions.chicken_nugget": "Chicken Nugget",
 
   "item.additionaladditions.white_suspicious_dye": "White Suspicious Dye",
@@ -82,7 +83,7 @@
   "additionaladditions.advancements.use_watering_can.desc": "Obtain and use the Watering Can to fertilize your crops",
 
   "additionaladditions.gui.config.restart": "Restart the game to apply the changes",
-  "additionaladditions.gui.pocket_jukebox.tooltip": "Secondary Click with a Music Disc to play",
+  "additionaladditions.gui.pocket_jukebox.tooltip": "Right Click with Music Disc or Album",
   "additionaladditions.gui.album.discs": "Discs",
 
   "additionaladditions.gui.glint.white": "White Glint",

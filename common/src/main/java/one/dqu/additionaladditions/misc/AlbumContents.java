@@ -12,6 +12,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.TooltipProvider;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,12 +55,25 @@ public record AlbumContents(List<ItemStack> items) implements TooltipProvider {
 
     @Override
     public void addToTooltip(Item.TooltipContext tooltipContext, Consumer<Component> consumer, TooltipFlag tooltipFlag) {
-        consumer.accept(
-                Component.literal("")
-                .append(Component.translatable("additionaladditions.gui.album.discs"))
-                .append(" " + items.size() + "/8")
-                .withStyle(ChatFormatting.GRAY)
-        );
+        addToTooltip(tooltipContext, consumer, tooltipFlag, null);
+    }
+
+    public void addToTooltip(Item.TooltipContext tooltipContext, Consumer<Component> consumer, TooltipFlag tooltipFlag, @Nullable Component albumName) {
+        if (albumName != null) {
+            consumer.accept(
+                    Component.literal("")
+                            .append(albumName)
+                            .withStyle(ChatFormatting.YELLOW)
+            );
+        } else {
+            consumer.accept(
+                    Component.literal("")
+                            .append(items.size() + "/8 ")
+                            .append(Component.translatable("additionaladditions.gui.album.discs"))
+                            .withStyle(ChatFormatting.GRAY)
+            );
+        }
+
         for (ItemStack disc : items) {
             disc.get(DataComponents.JUKEBOX_PLAYABLE).addToTooltip(
                     tooltipContext,
