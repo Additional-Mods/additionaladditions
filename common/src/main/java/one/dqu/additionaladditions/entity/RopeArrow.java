@@ -91,6 +91,13 @@ public class RopeArrow extends AbstractArrow {
                 return;
             }
 
+            // prevents dupes with multishot crossbows / infinity enchants
+            // this breaks the arrows in creative mode but oh well
+            if (this.pickup != Pickup.ALLOWED) {
+                isPlacingRopes = false;
+                return;
+            }
+
             BlockPos downPos = startPos.below(ropesPlaced);
             BlockState downState = this.level().getBlockState(downPos);
 
