@@ -55,10 +55,10 @@ public record AlbumContents(List<ItemStack> items) implements TooltipProvider {
 
     @Override
     public void addToTooltip(Item.TooltipContext tooltipContext, Consumer<Component> consumer, TooltipFlag tooltipFlag) {
-        addToTooltip(tooltipContext, consumer, tooltipFlag, null);
+        addToTooltip(tooltipContext, consumer, tooltipFlag, null, null);
     }
 
-    public void addToTooltip(Item.TooltipContext tooltipContext, Consumer<Component> consumer, TooltipFlag tooltipFlag, @Nullable Component albumName) {
+    public void addToTooltip(Item.TooltipContext tooltipContext, Consumer<Component> consumer, TooltipFlag tooltipFlag, @Nullable Component albumName, @Nullable Integer highlight) {
         if (albumName != null) {
             consumer.accept(
                     Component.literal("")
@@ -74,11 +74,20 @@ public record AlbumContents(List<ItemStack> items) implements TooltipProvider {
             );
         }
 
-        for (ItemStack disc : items) {
+        for (int i = 0; i < items.size(); i++) {
+            ItemStack disc = items.get(i);
+            final int j = i;
+
             disc.get(DataComponents.JUKEBOX_PLAYABLE).addToTooltip(
                     tooltipContext,
                     component -> {
-                        consumer.accept(CommonComponents.space().append(component));
+                        Component song = component;
+                        if (highlight != null && j == highlight) {
+                            song = song.copy().withStyle(ChatFormatting.WHITE);
+                        }
+                        consumer.accept(
+                                CommonComponents.space().append(song)
+                        );
                     },
                     tooltipFlag
             );

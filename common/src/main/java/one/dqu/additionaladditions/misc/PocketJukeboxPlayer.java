@@ -46,10 +46,15 @@ public class PocketJukeboxPlayer {
             Minecraft.getInstance().getSoundManager().stop(this.currentSong);
             this.currentSong = null;
         }
+        this.currentTrack = -1;
         this.isPlaying = false;
         this.album = null;
         this.player = null;
         this.jukeboxStack = null;
+    }
+
+    public int getCurrentTrack() {
+        return this.currentTrack;
     }
 
     public void tick() {
@@ -69,7 +74,10 @@ public class PocketJukeboxPlayer {
     }
 
     private boolean canContinuePlaying() {
-        if (this.player == null || this.player.isDeadOrDying() || !Config.POCKET_JUKEBOX.get().enabled()) {
+        if (this.player == null || this.player.isRemoved() || this.player.isDeadOrDying() || !Config.POCKET_JUKEBOX.get().enabled()) {
+            return false;
+        }
+        if (Minecraft.getInstance().level == null) {
             return false;
         }
         if (this.jukeboxStack == null || this.jukeboxStack.isEmpty()) {
