@@ -45,6 +45,7 @@ import one.dqu.additionaladditions.registry.AdditionalItems;
 import one.dqu.additionaladditions.util.CreativeAdder;
 import one.dqu.additionaladditions.util.Registrar;
 import one.dqu.additionaladditions.util.neoforge.AdditionalLootModifier;
+import one.dqu.additionaladditions.util.neoforge.ModCompatibilityImpl;
 import one.dqu.additionaladditions.util.neoforge.RegistrarImpl;
 
 @Mod(AdditionalAdditions.NAMESPACE)
@@ -204,5 +205,8 @@ public final class AdditionalAdditionsNeoForge {
                 return (float) val;
             }
         });
+
+        // mod compatibility
+        event.enqueueWork(ModCompatibilityImpl::showToasts);
     }
 }

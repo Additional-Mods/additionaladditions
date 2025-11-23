@@ -2,6 +2,7 @@ package one.dqu.additionaladditions.fabric;
 
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
+import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientLifecycleEvents;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.networking.v1.ClientConfigurationNetworking;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
@@ -29,6 +30,7 @@ import one.dqu.additionaladditions.misc.PocketJukeboxPlayer;
 import one.dqu.additionaladditions.registry.AdditionalBlocks;
 import one.dqu.additionaladditions.registry.AdditionalEntities;
 import one.dqu.additionaladditions.registry.AdditionalItems;
+import one.dqu.additionaladditions.util.fabric.ModCompatibilityImpl;
 
 public final class AdditionalAdditionsClientFabric implements ClientModInitializer {
     @Override
@@ -115,6 +117,11 @@ public final class AdditionalAdditionsClientFabric implements ClientModInitializ
                 double val = (height / (2 * (bottom - sea))) + 0.75 - ((bottom + sea) / (4 * (bottom - sea)));
                 return (float) val;
             }
+        });
+
+        // mod compatibility
+        ClientLifecycleEvents.CLIENT_STARTED.register((minecraft) -> {
+            ModCompatibilityImpl.showToasts();
         });
     }
 }
