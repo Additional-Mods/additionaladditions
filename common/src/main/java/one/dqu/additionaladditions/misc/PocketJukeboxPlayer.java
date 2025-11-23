@@ -132,7 +132,8 @@ public class PocketJukeboxPlayer {
             this.x = player.getX();
             this.y = player.getY();
             this.z = player.getZ();
-            this.attenuation = Attenuation.LINEAR;
+            this.attenuation = Attenuation.NONE;
+            this.relative = true;
         }
 
         // creates and automatically plays sound instance
