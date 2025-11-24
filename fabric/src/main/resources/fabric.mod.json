@@ -27,6 +27,15 @@
     ],
     "client": [
       "one.dqu.additionaladditions.fabric.AdditionalAdditionsClientFabric"
+    ],
+    "fabric-gametest": [
+      "one.dqu.additionaladditions.test.ExampleTest",
+      "one.dqu.additionaladditions.test.TurkishLocaleTest",
+      "one.dqu.additionaladditions.test.WrenchPlayerTest",
+      "one.dqu.additionaladditions.test.WrenchDispenserTest",
+      "one.dqu.additionaladditions.test.WrenchPistonTest",
+      "one.dqu.additionaladditions.test.WrenchHopperTest",
+      "one.dqu.additionaladditions.test.PatinaTransmitTest"
     ]
   },
   "mixins": [
