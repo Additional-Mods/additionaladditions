@@ -137,15 +137,6 @@ public class AAItems {
             )
             .build(Item::new);
 
-    public static final Supplier<MysteriousBundleItem> MYSTERIOUS_BUNDLE_ITEM = new Builder("mysterious_bundle")
-            .config(() -> Config.MYSTERIOUS_BUNDLE.get().enabled())
-            .properties(p -> p
-                    .stacksTo(1)
-                    .rarity(Rarity.RARE)
-            )
-            .creativeAfter(Items.ELYTRA, CreativeModeTabs.TOOLS_AND_UTILITIES)
-            .build(MysteriousBundleItem::new);
-
     public static final Supplier<PocketJukeboxItem> POCKET_JUKEBOX_ITEM = new Builder("pocket_jukebox")
             .config(() -> Config.POCKET_JUKEBOX.get().enabled())
             .properties(p -> p
