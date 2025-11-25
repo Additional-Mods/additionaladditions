@@ -31,7 +31,7 @@ import java.util.List;
 public class WateringCanItem extends ConfigurableItem {
     public WateringCanItem(Properties settings) {
         super(settings, builder -> {
-            builder.set(DataComponents.MAX_DAMAGE, Config.WATERING_CAN_DURABILITY.get().durability());
+            builder.set(DataComponents.MAX_DAMAGE, Config.WATERING_CAN.get().durability());
         });
     }
 

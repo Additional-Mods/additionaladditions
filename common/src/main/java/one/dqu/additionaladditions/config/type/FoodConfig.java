@@ -2,15 +2,16 @@ package one.dqu.additionaladditions.config.type;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.world.food.FoodProperties;
 
 public record FoodConfig(
-        int nutrition,
-        float saturation
+        boolean enabled,
+        FoodProperties food
 ) {
     public static final Codec<FoodConfig> CODEC = RecordCodecBuilder.create(instance ->
             instance.group(
-                    Codec.intRange(1, Integer.MAX_VALUE).fieldOf("nutrition").forGetter(FoodConfig::nutrition),
-                    Codec.floatRange(0, Integer.MAX_VALUE).fieldOf("saturation").forGetter(FoodConfig::saturation)
+                    Codec.BOOL.fieldOf("enabled").forGetter(FoodConfig::enabled),
+                    FoodProperties.DIRECT_CODEC.fieldOf("food").forGetter(FoodConfig::food)
             ).apply(instance, FoodConfig::new)
     );
 }

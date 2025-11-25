@@ -27,7 +27,7 @@ import java.util.Optional;
 public class WrenchItem extends ConfigurableItem {
     public WrenchItem(Properties settings) {
         super(settings, builder -> {
-            builder.set(DataComponents.MAX_DAMAGE, Config.WRENCH_DURABILITY.get().durability());
+            builder.set(DataComponents.MAX_DAMAGE, Config.WRENCH.get().durability());
         });
     }
 

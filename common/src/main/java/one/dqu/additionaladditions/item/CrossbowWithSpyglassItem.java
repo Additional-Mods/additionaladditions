@@ -7,7 +7,7 @@ import net.minecraft.core.component.DataComponents;
 public class CrossbowWithSpyglassItem extends ConfigurableCrossbowItem {
     public CrossbowWithSpyglassItem(Properties properties) {
         super(properties, builder -> {
-            builder.set(DataComponents.MAX_DAMAGE, Config.CROSSBOW_WITH_SPYGLASS_DURABILITY.get().durability());
+            builder.set(DataComponents.MAX_DAMAGE, Config.CROSSBOW_WITH_SPYGLASS.get().durability());
         });
     }
 }

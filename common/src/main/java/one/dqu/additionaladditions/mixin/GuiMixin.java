@@ -24,7 +24,7 @@ public abstract class GuiMixin {
     private void depthMeterMessage(CallbackInfo ci) {
         if (!Config.DEPTH_METER.get().enabled()) return;
         if (minecraft.player.isHolding(AdditionalItems.BAROMETER.get())) {
-            if (Config.DEPTH_METER_DISPLAY_ALWAYS.get().enabled()) {
+            if (Config.DEPTH_METER.get().displayElevationAlways()) {
                 String level = String.valueOf((int) minecraft.player.getY());
                 minecraft.player.displayClientMessage(MutableComponent.create(new TranslatableContents("additionaladditions.gui.barometer.elevation", null, new String[]{level})), true);
             }

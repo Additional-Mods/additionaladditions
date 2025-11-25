@@ -43,51 +43,27 @@ import java.util.function.Supplier;
 @SuppressWarnings("unused")
 public class AdditionalItems {
     // saturation = hunger * saturationModifier
-    public static final Supplier<Item> FRIED_EGG = new Builder("fried_egg")
+    public static final Supplier<FoodItem> FRIED_EGG = new Builder("fried_egg")
             .config(() -> Config.FRIED_EGG.get().enabled())
-            .properties(p -> p
-                    .food(new FoodProperties.Builder()
-                            .nutrition(Config.FRIED_EGG_FOOD.get().nutrition())
-                            .saturationModifier(Config.FRIED_EGG_FOOD.get().saturation() / Config.FRIED_EGG_FOOD.get().nutrition())
-                            .build()
-                    )
-            )
+            .properties(p -> p.food(Config.FRIED_EGG.get().food()))
             .creativeAfter(Items.COOKED_RABBIT, CreativeModeTabs.FOOD_AND_DRINKS)
-            .build();
+            .build(p -> new FoodItem(p, Config.FRIED_EGG));
 
-    public static final Supplier<Item> BERRY_PIE = new Builder("berry_pie")
+    public static final Supplier<FoodItem> BERRY_PIE = new Builder("berry_pie")
             .config(() -> Config.BERRY_PIE.get().enabled())
-            .properties(p -> p
-                    .food(new FoodProperties.Builder().
-                            nutrition(Config.BERRY_PIE_FOOD.get().nutrition()).
-                            saturationModifier(Config.BERRY_PIE_FOOD.get().saturation() / Config.BERRY_PIE_FOOD.get().nutrition())
-                            .build()
-                    )
-            )
+            .properties(p -> p.food(Config.BERRY_PIE.get().food()))
             .creativeAfter(Items.PUMPKIN_PIE, CreativeModeTabs.FOOD_AND_DRINKS)
-            .build();
+            .build(p -> new FoodItem(p, Config.BERRY_PIE));
 
-    public static final Supplier<Item> HONEYED_APPLE = new Builder("honeyed_apple")
+    public static final Supplier<FoodItem> HONEYED_APPLE = new Builder("honeyed_apple")
             .config(() -> Config.HONEYED_APPLE.get().enabled())
-            .properties(p -> p
-                    .food(new FoodProperties.Builder()
-                            .nutrition(Config.HONEYED_APPLE_FOOD.get().nutrition())
-                            .saturationModifier(Config.HONEYED_APPLE_FOOD.get().saturation() / Config.HONEYED_APPLE_FOOD.get().nutrition())
-                            .build()
-                    )
-            )
+            .properties(p -> p.food(Config.HONEYED_APPLE.get().food()))
             .creativeAfter(Items.APPLE, CreativeModeTabs.FOOD_AND_DRINKS)
-            .build();
+            .build(p -> new FoodItem(p, Config.HONEYED_APPLE));
 
-    public static final Supplier<Item> CHICKEN_NUGGET = new Builder("chicken_nugget")
+    public static final Supplier<FoodItem> CHICKEN_NUGGET = new Builder("chicken_nugget")
             .config(() -> Config.CHICKEN_NUGGET.get().enabled())
-            .properties(p -> p
-                    .food(new FoodProperties.Builder()
-                            .nutrition(Config.CHICKEN_NUGGET_FOOD.get().nutrition())
-                            .saturationModifier(Config.CHICKEN_NUGGET_FOOD.get().saturation() / Config.CHICKEN_NUGGET_FOOD.get().nutrition())
-                            .build()
-                    )
-            )
+            .properties(p -> p.food(Config.CHICKEN_NUGGET.get().food()))
             .creativeAfter(Items.ROTTEN_FLESH, CreativeModeTabs.FOOD_AND_DRINKS)
             .lootTable(
                     List.of(EntityType.ZOMBIE.getDefaultLootTable(), EntityType.CREEPER.getDefaultLootTable()),
@@ -97,13 +73,13 @@ public class AdditionalItems {
                         .when(LootItemRandomChanceWithEnchantedBonusCondition.randomChanceAndLootingBoost(registries, 0.025f, 0.01f))
                         .add(LootItem.lootTableItem(item))
             )
-            .build();
+            .build(p -> new FoodItem(p, Config.CHICKEN_NUGGET));
 
     public static final Supplier<WateringCanItem> WATERING_CAN = new Builder("watering_can")
             .config(() -> Config.WATERING_CAN.get().enabled())
             .properties(p -> p
                     .stacksTo(1)
-                    .durability(Config.WATERING_CAN_DURABILITY.get().durability())
+                    .durability(Config.WATERING_CAN.get().durability())
             )
             .creativeAfter(Items.BONE_MEAL, CreativeModeTabs.TOOLS_AND_UTILITIES)
             .build(WateringCanItem::new);
@@ -112,7 +88,7 @@ public class AdditionalItems {
             .config(() -> Config.WRENCH.get().enabled())
             .properties(p -> p
                     .stacksTo(1)
-                    .durability(Config.WRENCH_DURABILITY.get().durability())
+                    .durability(Config.WRENCH.get().durability())
             )
             .creativeAfter(Items.BONE_MEAL, CreativeModeTabs.TOOLS_AND_UTILITIES)
             .creativeAfter(Items.TARGET, CreativeModeTabs.REDSTONE_BLOCKS)
@@ -122,7 +98,7 @@ public class AdditionalItems {
             .config(() -> Config.CROSSBOW_WITH_SPYGLASS.get().enabled())
             .properties(p -> p
                     .stacksTo(1)
-                    .durability(Config.CROSSBOW_WITH_SPYGLASS_DURABILITY.get().durability())
+                    .durability(Config.CROSSBOW_WITH_SPYGLASS.get().durability())
             )
             .creativeAfter(Items.CROSSBOW, CreativeModeTabs.COMBAT)
             .build(CrossbowWithSpyglassItem::new);

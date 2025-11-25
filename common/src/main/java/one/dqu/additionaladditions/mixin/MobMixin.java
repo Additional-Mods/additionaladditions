@@ -38,7 +38,7 @@ public abstract class MobMixin extends LivingEntity {
                 blockPosition(), 8, PoiManager.Occupancy.ANY
         );
 
-        float chance = Config.AMETHYST_LAMP_DESPAWN_CHANCE.get().chance();
+        float chance = Config.AMETHYST_LAMP.get().chance();
         if (count > 0 && getRandom().nextFloat() < chance) {
             this.discard();
         }
