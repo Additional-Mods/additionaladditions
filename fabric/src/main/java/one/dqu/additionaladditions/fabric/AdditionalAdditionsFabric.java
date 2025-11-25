@@ -24,7 +24,6 @@ public final class AdditionalAdditionsFabric implements ModInitializer {
     @Override
     public void onInitialize() {
         AdditionalAdditions.init();
-
         RegistrarImpl.runDeferred();
 
         // creative adder

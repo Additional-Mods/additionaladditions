@@ -1,5 +1,13 @@
 package one.dqu.additionaladditions.registry;
 
+import com.google.common.base.Suppliers;
+import com.google.common.collect.ImmutableSet;
+import net.minecraft.core.Holder;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.entity.ai.village.poi.PoiTypes;
+import net.minecraft.world.level.block.state.BlockState;
 import one.dqu.additionaladditions.AdditionalAdditions;
 import one.dqu.additionaladditions.block.CopperPatinaBlock;
 import one.dqu.additionaladditions.block.GlowStickBlock;
@@ -25,8 +33,11 @@ import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import one.dqu.additionaladditions.util.Registrar;
 
 import java.util.List;
+import java.util.Set;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
+@SuppressWarnings("unused")
 public class AABlocks {
     public static final Supplier<RopeBlock> ROPE_BLOCK = AARegistries.BLOCKS.register(
                     ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "rope"),
@@ -78,24 +89,35 @@ public class AABlocks {
             () -> new BlockItem(ROSE_GOLD_BLOCK.get(), new Item.Properties())
     );
 
-    public static PoiType AMETHYST_LAMP_POI;
-    public static ResourceLocation AMETHYST_LAMP_POI_RL = ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "amethyst_lamp_poi");
+    // amethyst lamp poi
+    private static final Supplier<Set<BlockState>> AMETHYST_LAMP_POI_STATES = Suppliers.memoize(() -> ImmutableSet.copyOf(AABlocks.AMETHYST_LAMP.get().getStateDefinition().getPossibleStates().stream().filter(state -> state.getValue(RedstoneLampBlock.LIT)).toList()));
+    public static ResourceKey<PoiType> AMETHYST_LAMP_POI_KEY = ResourceKey.create(
+            Registries.POINT_OF_INTEREST_TYPE, ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "amethyst_lamp_poi")
+    );
+    public static Supplier<PoiType> AMETHYST_LAMP_POI = AARegistries.POI.register(
+            AMETHYST_LAMP_POI_KEY.location(),
+            () -> new PoiType(AMETHYST_LAMP_POI_STATES.get(), 0, 0)
+    );
 
     public static void registerAll() {
-        //TODO poi
-//        AMETHYST_LAMP_POI = PointOfInterestHelper.register(
-//            AMETHYST_LAMP_POI_RL,
-//            0, 8,
-//            ImmutableSet.copyOf(
-//                    AdditionalBlocks.AMETHYST_LAMP.getStateDefinition().getPossibleStates().stream().filter(state -> state.getValue(BlockStateProperties.LIT)).toList()
-//        ));
-
         Registrar.defer(() -> {
             LootAdder.register(List.of(BuiltInLootTables.SIMPLE_DUNGEON, BuiltInLootTables.ABANDONED_MINESHAFT, BuiltInLootTables.STRONGHOLD_CORRIDOR), () -> Config.ROPE.get().enabled(), LootPool.lootPool()
                 .setRolls(UniformGenerator.between(1, 4))
                 .apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 8)))
                 .add(LootItem.lootTableItem(AABlocks.ROPE_BLOCK.get()))
             );
+        });
+
+        // amethyst lamp poi
+        Registrar.defer(() -> {
+            Holder<PoiType> poi = BuiltInRegistries.POINT_OF_INTEREST_TYPE.getHolderOrThrow(AMETHYST_LAMP_POI_KEY);
+
+            // collect unregistered states. on neoforge they seem to get registered automatically, but not on fabric?
+            Set<BlockState> states = AMETHYST_LAMP_POI_STATES.get().stream()
+                    .filter(state -> PoiTypes.forState(state).orElse(null) == null)
+                    .collect(Collectors.toUnmodifiableSet());
+
+            PoiTypes.registerBlockStates(poi, states);
         });
 
         CreativeAdder.add(CreativeModeTabs.REDSTONE_BLOCKS, () -> Config.COPPER_PATINA.get().enabled(), Items.REDSTONE, () -> COPPER_PATINA.get().asItem());

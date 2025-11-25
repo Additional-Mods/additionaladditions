@@ -30,15 +30,15 @@ public abstract class MobMixin extends LivingEntity {
         if (!Config.AMETHYST_LAMP.get().enabled()) return;
         if (this.tickCount > 0 || !shouldDespawnInPeaceful()) return;
 
+        float chance = Config.AMETHYST_LAMP.get().chance();
+        int range = Config.AMETHYST_LAMP.get().range();
+
         PoiManager poiManager = ((ServerLevel)level()).getPoiManager();
         long count = poiManager.getCountInRange(
-                (poiType) -> {
-                    return poiType.is(AABlocks.AMETHYST_LAMP_POI_RL);
-                },
-                blockPosition(), 8, PoiManager.Occupancy.ANY
+                (poiType) -> poiType.is(AABlocks.AMETHYST_LAMP_POI_KEY),
+                blockPosition(), range, PoiManager.Occupancy.ANY
         );
 
-        float chance = Config.AMETHYST_LAMP.get().chance();
         if (count > 0 && getRandom().nextFloat() < chance) {
             this.discard();
         }

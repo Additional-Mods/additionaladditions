@@ -102,7 +102,7 @@ public class Config {
 
     public static final ConfigProperty<AmethystLampConfig> AMETHYST_LAMP = new ConfigProperty<>(
             "amethyst_lamp", AmethystLampConfig.CODEC,
-            new AmethystLampConfig(true, 1.0f)
+            new AmethystLampConfig(true, 1.0f, 16)
     );
 
     public static final ConfigProperty<FeatureConfig> COPPER_PATINA = new ConfigProperty<>(

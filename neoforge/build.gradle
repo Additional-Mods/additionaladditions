@@ -11,6 +11,8 @@ loom {
     neoForge {
 
     }
+
+    accessWidenerPath = project(":common").file("src/main/resources/additionaladditions.accesswidener")
 }
 
 configurations {
