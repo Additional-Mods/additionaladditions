@@ -35,7 +35,11 @@
       "one.dqu.additionaladditions.test.WrenchDispenserTest",
       "one.dqu.additionaladditions.test.WrenchPistonTest",
       "one.dqu.additionaladditions.test.WrenchHopperTest",
-      "one.dqu.additionaladditions.test.PatinaTransmitTest"
+      "one.dqu.additionaladditions.test.PatinaTransmitTest",
+      "one.dqu.additionaladditions.test.RopeArrowPlacementTest",
+      "one.dqu.additionaladditions.test.RopeArrowPartialPlacementTest",
+      "one.dqu.additionaladditions.test.RopeArrowEntityHitTest",
+      "one.dqu.additionaladditions.test.RopeArrowBadPlacementTest"
     ]
   },
   "mixins": [
