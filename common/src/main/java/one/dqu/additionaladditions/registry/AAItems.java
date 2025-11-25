@@ -126,7 +126,7 @@ public class AAItems {
             .build();
 
     public static final Supplier<Item> BAROMETER = new Builder("barometer")
-            .config(() -> Config.DEPTH_METER.get().enabled())
+            .config(() -> Config.BAROMETER.get().enabled())
             .creativeAfter(Items.CLOCK, CreativeModeTabs.TOOLS_AND_UTILITIES)
             .lootTable(
                     List.of(BuiltInLootTables.SIMPLE_DUNGEON, BuiltInLootTables.ABANDONED_MINESHAFT, BuiltInLootTables.STRONGHOLD_CORRIDOR),

@@ -65,9 +65,9 @@ public class Config {
 
     // Depth Meter
 
-    public static final ConfigProperty<DepthMeterConfig> DEPTH_METER = new ConfigProperty<>(
-            "depth_meter", DepthMeterConfig.CODEC,
-            new DepthMeterConfig(true, true)
+    public static final ConfigProperty<BarometerConfig> BAROMETER = new ConfigProperty<>(
+            "barometer", BarometerConfig.CODEC,
+            new BarometerConfig(true, false)
     );
 
     public static final ConfigProperty<FeatureConfig> MYSTERIOUS_BUNDLE = new ConfigProperty<>(
