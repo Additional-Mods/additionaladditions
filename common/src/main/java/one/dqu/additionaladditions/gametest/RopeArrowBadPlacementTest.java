@@ -1,4 +1,4 @@
-package one.dqu.additionaladditions.test;
+package one.dqu.additionaladditions.gametest;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.gametest.framework.GameTest;
@@ -8,8 +8,8 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.level.block.Blocks;
 import one.dqu.additionaladditions.entity.RopeArrow;
-import one.dqu.additionaladditions.registry.AdditionalBlocks;
-import one.dqu.additionaladditions.registry.AdditionalEntities;
+import one.dqu.additionaladditions.registry.AABlocks;
+import one.dqu.additionaladditions.registry.AAEntities;
 
 import java.util.List;
 
@@ -25,7 +25,7 @@ public class RopeArrowBadPlacementTest {
         ctx.setBlock(targetPos, Blocks.CAKE);
 
         ctx.runAtTickTime(5, () -> {
-            RopeArrow arrow = ctx.spawn(AdditionalEntities.ROPE_ARROW.get(), arrowStartPos);
+            RopeArrow arrow = ctx.spawn(AAEntities.ROPE_ARROW.get(), arrowStartPos);
             arrow.pickup = AbstractArrow.Pickup.ALLOWED;
             arrow.setDeltaMovement(0, 1, 0);
         });
@@ -33,7 +33,7 @@ public class RopeArrowBadPlacementTest {
         ctx.runAtTickTime(30, () -> {
             for (int i = 1; i <= 8; i++) {
                 BlockPos ropePos = targetPos.below(i);
-                ctx.assertBlockNotPresent(AdditionalBlocks.ROPE_BLOCK.get(), ropePos);
+                ctx.assertBlockNotPresent(AABlocks.ROPE_BLOCK.get(), ropePos);
             }
 
             List<ItemEntity> entities = ctx.getEntities(EntityType.ITEM);

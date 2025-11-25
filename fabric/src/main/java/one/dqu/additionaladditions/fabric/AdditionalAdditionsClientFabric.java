@@ -27,9 +27,9 @@ import one.dqu.additionaladditions.entity.RopeArrowRenderer;
 import one.dqu.additionaladditions.glint.GlintResourceGenerator;
 import one.dqu.additionaladditions.item.PocketJukeboxItem;
 import one.dqu.additionaladditions.misc.PocketJukeboxPlayer;
-import one.dqu.additionaladditions.registry.AdditionalBlocks;
-import one.dqu.additionaladditions.registry.AdditionalEntities;
-import one.dqu.additionaladditions.registry.AdditionalItems;
+import one.dqu.additionaladditions.registry.AABlocks;
+import one.dqu.additionaladditions.registry.AAEntities;
+import one.dqu.additionaladditions.registry.AAItems;
 import one.dqu.additionaladditions.util.fabric.ModCompatibilityImpl;
 
 public final class AdditionalAdditionsClientFabric implements ClientModInitializer {
@@ -53,13 +53,13 @@ public final class AdditionalAdditionsClientFabric implements ClientModInitializ
         });
 
         // render types
-        BlockRenderLayerMap.INSTANCE.putBlock(AdditionalBlocks.COPPER_PATINA.get(), RenderType.cutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(AdditionalBlocks.ROPE_BLOCK.get(), RenderType.cutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(AdditionalBlocks.GLOW_STICK_BLOCK.get(), RenderType.cutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(AABlocks.COPPER_PATINA.get(), RenderType.cutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(AABlocks.ROPE_BLOCK.get(), RenderType.cutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(AABlocks.GLOW_STICK_BLOCK.get(), RenderType.cutout());
 
         // entity renderers
-        EntityRendererRegistry.register(AdditionalEntities.GLOW_STICK.get(), ThrownItemRenderer::new);
-        EntityRendererRegistry.register(AdditionalEntities.ROPE_ARROW.get(), RopeArrowRenderer::new);
+        EntityRendererRegistry.register(AAEntities.GLOW_STICK.get(), ThrownItemRenderer::new);
+        EntityRendererRegistry.register(AAEntities.ROPE_ARROW.get(), RopeArrowRenderer::new);
 
         // resource managers
         ResourceManagerHelper.get(PackType.CLIENT_RESOURCES).registerReloadListener(new SimpleSynchronousResourceReloadListener() {
@@ -75,29 +75,29 @@ public final class AdditionalAdditionsClientFabric implements ClientModInitializ
         });
 
         // model predicates
-        ItemProperties.register(AdditionalItems.CROSSBOW_WITH_SPYGLASS.get(), ResourceLocation.withDefaultNamespace("pull"), (itemStack, clientWorld, livingEntity, worldSeed) -> {
+        ItemProperties.register(AAItems.CROSSBOW_WITH_SPYGLASS.get(), ResourceLocation.withDefaultNamespace("pull"), (itemStack, clientWorld, livingEntity, worldSeed) -> {
             if (livingEntity == null) return 0.0F;
             return livingEntity.getUseItem() != itemStack ? 0.0F : (itemStack.getUseDuration(livingEntity) - livingEntity.getUseItemRemainingTicks()) / 20.0F;
         });
 
-        ItemProperties.register(AdditionalItems.CROSSBOW_WITH_SPYGLASS.get(), ResourceLocation.withDefaultNamespace("pulling"), (itemStack, clientWorld, livingEntity, worldSeed) -> {
+        ItemProperties.register(AAItems.CROSSBOW_WITH_SPYGLASS.get(), ResourceLocation.withDefaultNamespace("pulling"), (itemStack, clientWorld, livingEntity, worldSeed) -> {
             if (livingEntity == null) return 0.0F;
             return livingEntity.isUsingItem() && livingEntity.getUseItem() == itemStack ? 1.0F : 0.0F;
         });
 
-        ItemProperties.register(AdditionalItems.CROSSBOW_WITH_SPYGLASS.get(), ResourceLocation.withDefaultNamespace("charged"), (itemStack, clientWorld, livingEntity, worldSeed) -> {
+        ItemProperties.register(AAItems.CROSSBOW_WITH_SPYGLASS.get(), ResourceLocation.withDefaultNamespace("charged"), (itemStack, clientWorld, livingEntity, worldSeed) -> {
             return CrossbowItem.isCharged(itemStack) ? 1.0F : 0.0F;
         });
 
-        ItemProperties.register(AdditionalItems.CROSSBOW_WITH_SPYGLASS.get(), ResourceLocation.withDefaultNamespace("firework"), (itemStack, clientWorld, livingEntity, worldSeed) -> {
+        ItemProperties.register(AAItems.CROSSBOW_WITH_SPYGLASS.get(), ResourceLocation.withDefaultNamespace("firework"), (itemStack, clientWorld, livingEntity, worldSeed) -> {
             return itemStack.getOrDefault(DataComponents.CHARGED_PROJECTILES, ChargedProjectiles.EMPTY).getItems().stream().anyMatch(stack -> stack.is(Items.FIREWORK_ROCKET)) ? 1.0F : 0.0F;
         });
 
-        ItemProperties.register(AdditionalItems.POCKET_JUKEBOX_ITEM.get(), ResourceLocation.withDefaultNamespace("disc"), ((itemStack, clientWorld, livingEntity, worldSeed) -> {
+        ItemProperties.register(AAItems.POCKET_JUKEBOX_ITEM.get(), ResourceLocation.withDefaultNamespace("disc"), ((itemStack, clientWorld, livingEntity, worldSeed) -> {
             return PocketJukeboxItem.hasDisc(itemStack) ? 1.0F : 0.0F;
         }));
 
-        ItemProperties.register(AdditionalItems.BAROMETER.get(), ResourceLocation.withDefaultNamespace("angle"), (itemStack, clientWorld, livingEntity, worldSeed) -> {
+        ItemProperties.register(AAItems.BAROMETER.get(), ResourceLocation.withDefaultNamespace("angle"), (itemStack, clientWorld, livingEntity, worldSeed) -> {
             if (livingEntity == null) return 0.3125F;
             Level world = livingEntity.level();
             if (world == null) return 0.3125F;

@@ -1,7 +1,7 @@
 package one.dqu.additionaladditions.mixin;
 
 import one.dqu.additionaladditions.config.Config;
-import one.dqu.additionaladditions.registry.AdditionalBlocks;
+import one.dqu.additionaladditions.registry.AABlocks;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -33,7 +33,7 @@ public abstract class MobMixin extends LivingEntity {
         PoiManager poiManager = ((ServerLevel)level()).getPoiManager();
         long count = poiManager.getCountInRange(
                 (poiType) -> {
-                    return poiType.is(AdditionalBlocks.AMETHYST_LAMP_POI_RL);
+                    return poiType.is(AABlocks.AMETHYST_LAMP_POI_RL);
                 },
                 blockPosition(), 8, PoiManager.Occupancy.ANY
         );

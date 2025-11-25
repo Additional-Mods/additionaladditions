@@ -1,7 +1,7 @@
 package one.dqu.additionaladditions.block;
 
 import com.mojang.serialization.MapCodec;
-import one.dqu.additionaladditions.registry.AdditionalItems;
+import one.dqu.additionaladditions.registry.AAItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.BlockGetter;
@@ -51,6 +51,6 @@ public class GlowStickBlock extends FallingBlock {
 
     @Override
     public Item asItem() {
-        return AdditionalItems.GLOW_STICK_ITEM.get();
+        return AAItems.GLOW_STICK_ITEM.get();
     }
 }

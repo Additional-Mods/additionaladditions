@@ -6,7 +6,7 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.properties.RedstoneSide;
-import one.dqu.additionaladditions.registry.AdditionalBlocks;
+import one.dqu.additionaladditions.registry.AABlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.state.BlockState;
@@ -33,7 +33,7 @@ public abstract class RedstoneWireBlockMixin {
     )
     protected void getConnectingSide(BlockGetter blockGetter, BlockPos blockPos, Direction direction, boolean bl, CallbackInfoReturnable<RedstoneSide> cir) {
         Block self = (Block) (Object) this;
-        boolean isCopperPatina = self == AdditionalBlocks.COPPER_PATINA.get();
+        boolean isCopperPatina = self == AABlocks.COPPER_PATINA.get();
         boolean isRedstoneWire = self == Blocks.REDSTONE_WIRE;
         if (!isCopperPatina && !isRedstoneWire) {
             return;
@@ -63,7 +63,7 @@ public abstract class RedstoneWireBlockMixin {
 
     @Unique
     private static boolean additionaladditions$shouldConnectTo(BlockState blockState, @Nullable Direction direction, boolean isCopperPatina) {
-        if (blockState.is(AdditionalBlocks.COPPER_PATINA.get())) {
+        if (blockState.is(AABlocks.COPPER_PATINA.get())) {
             return isCopperPatina;
         } else if (blockState.is(Blocks.REDSTONE_WIRE)) {
             return !isCopperPatina;
@@ -86,7 +86,7 @@ public abstract class RedstoneWireBlockMixin {
     )
     private static int getBestNeighborSignal(Level level, BlockPos blockPos, Operation<Integer> original) {
         BlockState blockState = level.getBlockState(blockPos);
-        boolean isCopperPatina = blockState.is(AdditionalBlocks.COPPER_PATINA.get());
+        boolean isCopperPatina = blockState.is(AABlocks.COPPER_PATINA.get());
         boolean isRedstoneWire = blockState.is(Blocks.REDSTONE_WIRE);
 
         if (!isCopperPatina && !isRedstoneWire) {
@@ -96,7 +96,7 @@ public abstract class RedstoneWireBlockMixin {
         int i = 0;
         for (Direction direction : Direction.values()) {
             BlockState offsetState = level.getBlockState(blockPos.relative(direction));
-            boolean flag = isCopperPatina ? !offsetState.is(Blocks.REDSTONE_WIRE) : !offsetState.is(AdditionalBlocks.COPPER_PATINA.get());
+            boolean flag = isCopperPatina ? !offsetState.is(Blocks.REDSTONE_WIRE) : !offsetState.is(AABlocks.COPPER_PATINA.get());
 
             int j = 0;
             if (flag) {

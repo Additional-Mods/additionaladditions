@@ -1,4 +1,4 @@
-package one.dqu.additionaladditions.test;
+package one.dqu.additionaladditions.gametest;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -8,7 +8,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.DispenserBlock;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import one.dqu.additionaladditions.registry.AdditionalItems;
+import one.dqu.additionaladditions.registry.AAItems;
 
 /**
  * Test for hoppers rotated by wrench updating their block entity correctly.
@@ -27,7 +27,7 @@ public class WrenchHopperTest {
         ctx.setBlock(chestWestPos, Blocks.CHEST);
         ctx.setBlock(dispenserPos, Blocks.DISPENSER.defaultBlockState().setValue(DispenserBlock.FACING, Direction.SOUTH));
         ctx.setBlock(dispenserPos.above(), Blocks.HOPPER.defaultBlockState().setValue(BlockStateProperties.FACING_HOPPER, Direction.DOWN));
-        ctx.spawnItem(AdditionalItems.WRENCH_ITEM.get(), dispenserPos.above().above());
+        ctx.spawnItem(AAItems.WRENCH_ITEM.get(), dispenserPos.above().above());
 
         ctx.runAtTickTime(10, () -> {
             ctx.spawnItem(Items.IRON_INGOT, hopperPos.above());

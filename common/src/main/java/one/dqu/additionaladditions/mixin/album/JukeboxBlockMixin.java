@@ -14,7 +14,7 @@ import net.minecraft.world.level.block.entity.JukeboxBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.BlockHitResult;
-import one.dqu.additionaladditions.registry.AdditionalItems;
+import one.dqu.additionaladditions.registry.AAItems;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -28,7 +28,7 @@ public class JukeboxBlockMixin {
             return;
         }
 
-        if (!itemStack.is(AdditionalItems.ALBUM.get())) {
+        if (!itemStack.is(AAItems.ALBUM.get())) {
             return;
         }
 

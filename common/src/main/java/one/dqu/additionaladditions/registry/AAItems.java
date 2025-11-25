@@ -13,13 +13,12 @@ import one.dqu.additionaladditions.glint.GlintColor;
 import one.dqu.additionaladditions.item.*;
 import one.dqu.additionaladditions.misc.AlbumContents;
 import one.dqu.additionaladditions.util.CreativeAdder;
-import one.dqu.additionaladditions.util.LootHandler;
+import one.dqu.additionaladditions.util.LootAdder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.storage.loot.BuiltInLootTables;
@@ -41,7 +40,7 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 
 @SuppressWarnings("unused")
-public class AdditionalItems {
+public class AAItems {
     // saturation = hunger * saturationModifier
     public static final Supplier<FoodItem> FRIED_EGG = new Builder("fried_egg")
             .config(() -> Config.FRIED_EGG.get().enabled())
@@ -220,7 +219,7 @@ public class AdditionalItems {
                     .durability(312)
             )
             .creativeAfter(Items.GOLDEN_BOOTS, CreativeModeTabs.COMBAT)
-            .build(p -> new ArmorItem(AdditionalMaterials.ROSE_GOLD, ArmorItem.Type.HELMET, p));
+            .build(p -> new ArmorItem(AAMaterials.ROSE_GOLD, ArmorItem.Type.HELMET, p));
 
     public static final Supplier<Item> ROSE_GOLD_CHESTPLATE = new Builder("rose_gold_chestplate")
             .config(() -> Config.ROSE_GOLD.get().enabled())
@@ -228,7 +227,7 @@ public class AdditionalItems {
                     .durability(360)
             )
             .creativeAfter(Items.GOLDEN_BOOTS, CreativeModeTabs.COMBAT)
-            .build(p -> new ArmorItem(AdditionalMaterials.ROSE_GOLD, ArmorItem.Type.CHESTPLATE, p));
+            .build(p -> new ArmorItem(AAMaterials.ROSE_GOLD, ArmorItem.Type.CHESTPLATE, p));
 
     public static final Supplier<Item> ROSE_GOLD_LEGGINGS = new Builder("rose_gold_leggings")
             .config(() -> Config.ROSE_GOLD.get().enabled())
@@ -236,7 +235,7 @@ public class AdditionalItems {
                     .durability(384)
             )
             .creativeAfter(Items.GOLDEN_BOOTS, CreativeModeTabs.COMBAT)
-            .build(p -> new ArmorItem(AdditionalMaterials.ROSE_GOLD, ArmorItem.Type.LEGGINGS, p));
+            .build(p -> new ArmorItem(AAMaterials.ROSE_GOLD, ArmorItem.Type.LEGGINGS, p));
 
     public static final Supplier<Item> ROSE_GOLD_BOOTS = new Builder("rose_gold_boots")
             .config(() -> Config.ROSE_GOLD.get().enabled())
@@ -244,7 +243,7 @@ public class AdditionalItems {
                     .durability(264)
             )
             .creativeAfter(Items.GOLDEN_BOOTS, CreativeModeTabs.COMBAT)
-            .build(p -> new ArmorItem(AdditionalMaterials.ROSE_GOLD, ArmorItem.Type.BOOTS, p));
+            .build(p -> new ArmorItem(AAMaterials.ROSE_GOLD, ArmorItem.Type.BOOTS, p));
 
     public static final Supplier<Item> ROSE_GOLD_SWORD = new Builder("rose_gold_sword")
             .config(() -> Config.ROSE_GOLD.get().enabled())
@@ -290,7 +289,7 @@ public class AdditionalItems {
             .properties(p -> p
                     .stacksTo(1)
                     .component(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true)
-                    .component(AdditionalMisc.GLINT_COLOR_COMPONENT.get(), new GlintColor(DyeColor.WHITE))
+                    .component(AAMisc.GLINT_COLOR_COMPONENT.get(), new GlintColor(DyeColor.WHITE))
             )
             .creativeBefore(Items.EXPERIENCE_BOTTLE, CreativeModeTabs.INGREDIENTS)
             .build(p -> new SuspiciousDyeItem(DyeColor.WHITE, p));
@@ -299,7 +298,7 @@ public class AdditionalItems {
             .properties(p -> p
                     .stacksTo(1)
                     .component(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true)
-                    .component(AdditionalMisc.GLINT_COLOR_COMPONENT.get(), new GlintColor(DyeColor.BROWN))
+                    .component(AAMisc.GLINT_COLOR_COMPONENT.get(), new GlintColor(DyeColor.BROWN))
             )
             .creativeBefore(Items.EXPERIENCE_BOTTLE, CreativeModeTabs.INGREDIENTS)
             .build(p -> new SuspiciousDyeItem(DyeColor.BROWN, p));
@@ -308,7 +307,7 @@ public class AdditionalItems {
             .properties(p -> p
                     .stacksTo(1)
                     .component(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true)
-                    .component(AdditionalMisc.GLINT_COLOR_COMPONENT.get(), new GlintColor(DyeColor.RED))
+                    .component(AAMisc.GLINT_COLOR_COMPONENT.get(), new GlintColor(DyeColor.RED))
             )
             .creativeBefore(Items.EXPERIENCE_BOTTLE, CreativeModeTabs.INGREDIENTS)
             .build(p -> new SuspiciousDyeItem(DyeColor.RED, p));
@@ -317,7 +316,7 @@ public class AdditionalItems {
             .properties(p -> p
                     .stacksTo(1)
                     .component(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true)
-                    .component(AdditionalMisc.GLINT_COLOR_COMPONENT.get(), new GlintColor(DyeColor.ORANGE))
+                    .component(AAMisc.GLINT_COLOR_COMPONENT.get(), new GlintColor(DyeColor.ORANGE))
             )
             .creativeBefore(Items.EXPERIENCE_BOTTLE, CreativeModeTabs.INGREDIENTS)
             .build(p -> new SuspiciousDyeItem(DyeColor.ORANGE, p));
@@ -326,7 +325,7 @@ public class AdditionalItems {
             .properties(p -> p
                     .stacksTo(1)
                     .component(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true)
-                    .component(AdditionalMisc.GLINT_COLOR_COMPONENT.get(), new GlintColor(DyeColor.YELLOW))
+                    .component(AAMisc.GLINT_COLOR_COMPONENT.get(), new GlintColor(DyeColor.YELLOW))
             )
             .creativeBefore(Items.EXPERIENCE_BOTTLE, CreativeModeTabs.INGREDIENTS)
             .build(p -> new SuspiciousDyeItem(DyeColor.YELLOW, p));
@@ -335,7 +334,7 @@ public class AdditionalItems {
             .properties(p -> p
                     .stacksTo(1)
                     .component(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true)
-                    .component(AdditionalMisc.GLINT_COLOR_COMPONENT.get(), new GlintColor(DyeColor.LIME))
+                    .component(AAMisc.GLINT_COLOR_COMPONENT.get(), new GlintColor(DyeColor.LIME))
             )
             .creativeBefore(Items.EXPERIENCE_BOTTLE, CreativeModeTabs.INGREDIENTS)
             .build(p -> new SuspiciousDyeItem(DyeColor.LIME, p));
@@ -344,7 +343,7 @@ public class AdditionalItems {
             .properties(p -> p
                     .stacksTo(1)
                     .component(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true)
-                    .component(AdditionalMisc.GLINT_COLOR_COMPONENT.get(), new GlintColor(DyeColor.GREEN))
+                    .component(AAMisc.GLINT_COLOR_COMPONENT.get(), new GlintColor(DyeColor.GREEN))
             )
             .creativeBefore(Items.EXPERIENCE_BOTTLE, CreativeModeTabs.INGREDIENTS)
             .build(p -> new SuspiciousDyeItem(DyeColor.GREEN, p));
@@ -353,7 +352,7 @@ public class AdditionalItems {
             .properties(p -> p
                     .stacksTo(1)
                     .component(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true)
-                    .component(AdditionalMisc.GLINT_COLOR_COMPONENT.get(), new GlintColor(DyeColor.CYAN))
+                    .component(AAMisc.GLINT_COLOR_COMPONENT.get(), new GlintColor(DyeColor.CYAN))
             )
             .creativeBefore(Items.EXPERIENCE_BOTTLE, CreativeModeTabs.INGREDIENTS)
             .build(p -> new SuspiciousDyeItem(DyeColor.CYAN, p));
@@ -362,7 +361,7 @@ public class AdditionalItems {
             .properties(p -> p
                     .stacksTo(1)
                     .component(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true)
-                    .component(AdditionalMisc.GLINT_COLOR_COMPONENT.get(), new GlintColor(DyeColor.LIGHT_BLUE))
+                    .component(AAMisc.GLINT_COLOR_COMPONENT.get(), new GlintColor(DyeColor.LIGHT_BLUE))
             )
             .creativeBefore(Items.EXPERIENCE_BOTTLE, CreativeModeTabs.INGREDIENTS)
             .build(p -> new SuspiciousDyeItem(DyeColor.LIGHT_BLUE, p));
@@ -371,7 +370,7 @@ public class AdditionalItems {
             .properties(p -> p
                     .stacksTo(1)
                     .component(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true)
-                    .component(AdditionalMisc.GLINT_COLOR_COMPONENT.get(), new GlintColor(DyeColor.BLUE))
+                    .component(AAMisc.GLINT_COLOR_COMPONENT.get(), new GlintColor(DyeColor.BLUE))
             )
             .creativeBefore(Items.EXPERIENCE_BOTTLE, CreativeModeTabs.INGREDIENTS)
             .build(p -> new SuspiciousDyeItem(DyeColor.BLUE, p));
@@ -380,7 +379,7 @@ public class AdditionalItems {
             .properties(p -> p
                     .stacksTo(1)
                     .component(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true)
-                    .component(AdditionalMisc.GLINT_COLOR_COMPONENT.get(), new GlintColor(DyeColor.PURPLE))
+                    .component(AAMisc.GLINT_COLOR_COMPONENT.get(), new GlintColor(DyeColor.PURPLE))
             )
             .creativeBefore(Items.EXPERIENCE_BOTTLE, CreativeModeTabs.INGREDIENTS)
             .build(p -> new SuspiciousDyeItem(DyeColor.PURPLE, p));
@@ -389,7 +388,7 @@ public class AdditionalItems {
             .properties(p -> p
                     .stacksTo(1)
                     .component(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true)
-                    .component(AdditionalMisc.GLINT_COLOR_COMPONENT.get(), new GlintColor(DyeColor.MAGENTA))
+                    .component(AAMisc.GLINT_COLOR_COMPONENT.get(), new GlintColor(DyeColor.MAGENTA))
             )
             .creativeBefore(Items.EXPERIENCE_BOTTLE, CreativeModeTabs.INGREDIENTS)
             .build(p -> new SuspiciousDyeItem(DyeColor.MAGENTA, p));
@@ -398,7 +397,7 @@ public class AdditionalItems {
             .properties(p -> p
                     .stacksTo(1)
                     .component(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true)
-                    .component(AdditionalMisc.GLINT_COLOR_COMPONENT.get(), new GlintColor(DyeColor.PINK))
+                    .component(AAMisc.GLINT_COLOR_COMPONENT.get(), new GlintColor(DyeColor.PINK))
             )
             .creativeBefore(Items.EXPERIENCE_BOTTLE, CreativeModeTabs.INGREDIENTS)
             .build(p -> new SuspiciousDyeItem(DyeColor.PINK, p));
@@ -410,7 +409,7 @@ public class AdditionalItems {
     public static final Supplier<AlbumItem> ALBUM = new Builder("album")
             .properties(p -> p
                     .stacksTo(1)
-                    .component(AdditionalMisc.ALBUM_CONTENTS_COMPONENT.get(), AlbumContents.EMPTY)
+                    .component(AAMisc.ALBUM_CONTENTS_COMPONENT.get(), AlbumContents.EMPTY)
             )
             .build(AlbumItem::new);
 
@@ -464,7 +463,7 @@ public class AdditionalItems {
             ResourceLocation location = ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, id);
 
             Consumer<Item.Properties> deferredProperties = propertiesConfig;
-            Supplier<T> item = AdditionalRegistries.ITEMS.register(location, () -> {
+            Supplier<T> item = AARegistries.ITEMS.register(location, () -> {
                 Item.Properties props = new Item.Properties();
                 deferredProperties.accept(props);
                 return itemFactory.apply(props);
@@ -479,7 +478,7 @@ public class AdditionalItems {
             );
 
             lootTables.forEach((table, builder) ->
-                LootHandler.register(table, config, provider -> builder.apply(provider, item.get()))
+                LootAdder.register(table, config, provider -> builder.apply(provider, item.get()))
             );
 
             return item;
@@ -487,7 +486,7 @@ public class AdditionalItems {
     }
 
     public static void registerAll() {
-        LootHandler.register(BuiltInLootTables.SHIPWRECK_SUPPLY, () -> Config.SHIPWRECK_SPYGLASS_LOOT.get().enabled(), LootPool.lootPool()
+        LootAdder.register(BuiltInLootTables.SHIPWRECK_SUPPLY, () -> Config.SHIPWRECK_SPYGLASS_LOOT.get().enabled(), LootPool.lootPool()
                 .setRolls(ConstantValue.exactly(1))
                 .when(LootItemRandomChanceCondition.randomChance(0.5f))
                 .add(LootItem.lootTableItem(Items.SPYGLASS))

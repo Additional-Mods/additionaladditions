@@ -1,4 +1,4 @@
-package one.dqu.additionaladditions.test;
+package one.dqu.additionaladditions.gametest;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.gametest.framework.GameTest;
@@ -7,8 +7,8 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.animal.Pig;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import one.dqu.additionaladditions.entity.RopeArrow;
-import one.dqu.additionaladditions.registry.AdditionalBlocks;
-import one.dqu.additionaladditions.registry.AdditionalEntities;
+import one.dqu.additionaladditions.registry.AABlocks;
+import one.dqu.additionaladditions.registry.AAEntities;
 
 /**
  * Tests for rope arrow hitting entities and dropping ropes.
@@ -22,13 +22,13 @@ public class RopeArrowEntityHitTest {
         ctx.runAtTickTime(5, () -> {
             Pig pig = ctx.spawnWithNoFreeWill(EntityType.PIG, pigPos);
 
-            RopeArrow arrow = ctx.spawn(AdditionalEntities.ROPE_ARROW.get(), arrowStartPos);
+            RopeArrow arrow = ctx.spawn(AAEntities.ROPE_ARROW.get(), arrowStartPos);
             arrow.pickup = AbstractArrow.Pickup.ALLOWED;
             arrow.setDeltaMovement(0, 0.1, 0.8);
         });
 
         ctx.runAtTickTime(20, () -> {
-            ctx.assertItemEntityPresent(AdditionalBlocks.ROPE_BLOCK_ITEM.get());
+            ctx.assertItemEntityPresent(AABlocks.ROPE_BLOCK_ITEM.get());
             ctx.succeed();
         });
     }
@@ -41,13 +41,13 @@ public class RopeArrowEntityHitTest {
         ctx.runAtTickTime(5, () -> {
             Pig pig = ctx.spawnWithNoFreeWill(EntityType.PIG, pigPos);
 
-            RopeArrow arrow = ctx.spawn(AdditionalEntities.ROPE_ARROW.get(), arrowStartPos);
+            RopeArrow arrow = ctx.spawn(AAEntities.ROPE_ARROW.get(), arrowStartPos);
             arrow.pickup = AbstractArrow.Pickup.DISALLOWED;
             arrow.setDeltaMovement(0, 0.1, 0.8);
         });
 
         ctx.runAtTickTime(20, () -> {
-            ctx.assertItemEntityNotPresent(AdditionalBlocks.ROPE_BLOCK_ITEM.get());
+            ctx.assertItemEntityNotPresent(AABlocks.ROPE_BLOCK_ITEM.get());
             ctx.succeed();
         });
     }

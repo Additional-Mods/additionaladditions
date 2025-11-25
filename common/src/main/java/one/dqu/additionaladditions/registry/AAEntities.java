@@ -10,9 +10,9 @@ import one.dqu.additionaladditions.entity.RopeArrow;
 
 import java.util.function.Supplier;
 
-public class AdditionalEntities {
+public class AAEntities {
     public static final Supplier<EntityType<GlowStickEntity>> GLOW_STICK =
-            AdditionalRegistries.ENTITY_TYPES.register(
+            AARegistries.ENTITY_TYPES.register(
                     ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "glow_stick"),
                     () -> EntityType.Builder.of(
                                     (EntityType<GlowStickEntity> type, Level level) -> new GlowStickEntity(type, level),
@@ -23,7 +23,7 @@ public class AdditionalEntities {
             );
 
     public static final Supplier<EntityType<RopeArrow>> ROPE_ARROW =
-            AdditionalRegistries.ENTITY_TYPES.register(
+            AARegistries.ENTITY_TYPES.register(
                     ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "rope_arrow"),
                     () -> EntityType.Builder.of(
                                     (EntityType<RopeArrow> type, Level level) -> new RopeArrow(type, level),

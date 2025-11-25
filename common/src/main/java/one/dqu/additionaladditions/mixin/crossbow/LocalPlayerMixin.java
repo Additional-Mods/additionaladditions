@@ -2,7 +2,7 @@ package one.dqu.additionaladditions.mixin.crossbow;
 
 import one.dqu.additionaladditions.AdditionalAdditions;
 import one.dqu.additionaladditions.config.Config;
-import one.dqu.additionaladditions.registry.AdditionalItems;
+import one.dqu.additionaladditions.registry.AAItems;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.player.Player;
@@ -23,7 +23,7 @@ public class LocalPlayerMixin {
         Player player = (Player) (Object) this;
         if (!player.getCommandSenderWorld().isClientSide()) return;
         ItemStack stack = player.getMainHandItem();
-        if (stack.is(AdditionalItems.CROSSBOW_WITH_SPYGLASS.get())) {
+        if (stack.is(AAItems.CROSSBOW_WITH_SPYGLASS.get())) {
             boolean sneaking = player.isCrouching();
             if (sneaking && sneaking != AdditionalAdditions.zoom) {
                 player.playSound(SoundEvents.SPYGLASS_USE, 1.0F, 1.0F);

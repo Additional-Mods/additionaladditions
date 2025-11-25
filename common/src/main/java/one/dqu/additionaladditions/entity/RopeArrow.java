@@ -17,8 +17,8 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
-import one.dqu.additionaladditions.registry.AdditionalBlocks;
-import one.dqu.additionaladditions.registry.AdditionalEntities;
+import one.dqu.additionaladditions.registry.AABlocks;
+import one.dqu.additionaladditions.registry.AAEntities;
 import org.jetbrains.annotations.Nullable;
 
 public class RopeArrow extends AbstractArrow {
@@ -32,11 +32,11 @@ public class RopeArrow extends AbstractArrow {
     }
 
     public RopeArrow(Level level, LivingEntity livingEntity, ItemStack itemStack, @Nullable ItemStack itemStack2) {
-        super(AdditionalEntities.ROPE_ARROW.get(), livingEntity, level, itemStack, itemStack2);
+        super(AAEntities.ROPE_ARROW.get(), livingEntity, level, itemStack, itemStack2);
     }
 
     public RopeArrow(Level level, double d, double e, double f, ItemStack itemStack, @Nullable ItemStack itemStack2) {
-        super(AdditionalEntities.ROPE_ARROW.get(), d, e, f, level, itemStack, itemStack2);
+        super(AAEntities.ROPE_ARROW.get(), d, e, f, level, itemStack, itemStack2);
     }
 
     @Override
@@ -78,7 +78,7 @@ public class RopeArrow extends AbstractArrow {
     protected void onHitEntity(EntityHitResult hitResult) {
         super.onHitEntity(hitResult);
         if (ropesPlaced < 8 && this.pickup == Pickup.ALLOWED) {
-            ItemStack stack = AdditionalBlocks.ROPE_BLOCK_ITEM.get().getDefaultInstance();
+            ItemStack stack = AABlocks.ROPE_BLOCK_ITEM.get().getDefaultInstance();
             stack.setCount(8 - ropesPlaced);
             ItemEntity itemEntity = new ItemEntity(this.level(), hitResult.getLocation().x, hitResult.getLocation().y, hitResult.getLocation().z, stack);
             this.level().addFreshEntity(itemEntity);
@@ -115,12 +115,12 @@ public class RopeArrow extends AbstractArrow {
             BlockState downState = this.level().getBlockState(downPos);
 
             boolean canReplace = downState.is(BlockTags.REPLACEABLE) || downState.getFluidState().is(FluidTags.WATER);
-            boolean canSurvive = AdditionalBlocks.ROPE_BLOCK.get().canSurvive(downState, this.level(), downPos);
+            boolean canSurvive = AABlocks.ROPE_BLOCK.get().canSurvive(downState, this.level(), downPos);
             if (!canReplace || !canSurvive) {
                 // drop remaining ropes
                 int remaining = 8 - ropesPlaced;
                 if (remaining > 0) {
-                    ItemStack stack = AdditionalBlocks.ROPE_BLOCK_ITEM.get().getDefaultInstance();
+                    ItemStack stack = AABlocks.ROPE_BLOCK_ITEM.get().getDefaultInstance();
                     stack.setCount(remaining);
                     int up = canReplace ? 0 : 1;
                     ItemEntity itemEntity = new ItemEntity(this.level(), downPos.getCenter().x, downPos.getCenter().y + up, downPos.getCenter().z, stack);
@@ -131,7 +131,7 @@ public class RopeArrow extends AbstractArrow {
             }
 
             boolean isWaterlogged = this.level().getFluidState(downPos).is(Fluids.WATER);
-            BlockState ropeState = AdditionalBlocks.ROPE_BLOCK.get().defaultBlockState()
+            BlockState ropeState = AABlocks.ROPE_BLOCK.get().defaultBlockState()
                     .setValue(BlockStateProperties.WATERLOGGED, isWaterlogged);
 
             this.level().setBlockAndUpdate(downPos, ropeState);

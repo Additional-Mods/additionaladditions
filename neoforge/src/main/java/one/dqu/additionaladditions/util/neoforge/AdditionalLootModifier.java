@@ -9,7 +9,7 @@ import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.neoforged.neoforge.common.loot.IGlobalLootModifier;
 import one.dqu.additionaladditions.AdditionalAdditions;
-import one.dqu.additionaladditions.util.LootHandler;
+import one.dqu.additionaladditions.util.LootAdder;
 
 import java.util.Optional;
 import java.util.function.Supplier;
@@ -30,7 +30,7 @@ public class AdditionalLootModifier implements IGlobalLootModifier {
                 .withQueriedLootTableId(VIRTUAL_TABLE)
                 .create(Optional.empty());
 
-        LootHandler.handle(
+        LootAdder.handle(
                 context.getQueriedLootTableId(),
                 lootTable,
                 context.getLevel().registryAccess()

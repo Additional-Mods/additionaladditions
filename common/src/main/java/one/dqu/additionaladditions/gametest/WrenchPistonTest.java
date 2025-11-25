@@ -1,4 +1,4 @@
-package one.dqu.additionaladditions.test;
+package one.dqu.additionaladditions.gametest;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -6,7 +6,7 @@ import net.minecraft.gametest.framework.GameTest;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import one.dqu.additionaladditions.registry.AdditionalItems;
+import one.dqu.additionaladditions.registry.AAItems;
 
 /**
  * Test for the wrench item NOT rotating extended pistons.
@@ -25,7 +25,7 @@ public class WrenchPistonTest {
         ctx.setBlock(redstoneBlockPos, Blocks.REDSTONE_BLOCK);
         ctx.setBlock(dispenserPos, Blocks.DISPENSER.defaultBlockState().setValue(BlockStateProperties.FACING, Direction.NORTH));
         ctx.setBlock(dispenserPos.above(), Blocks.HOPPER.defaultBlockState().setValue(BlockStateProperties.FACING_HOPPER, Direction.DOWN));
-        ctx.spawnItem(AdditionalItems.WRENCH_ITEM.get(), dispenserPos.above().above());
+        ctx.spawnItem(AAItems.WRENCH_ITEM.get(), dispenserPos.above().above());
 
         // Test piston base
         ctx.runAtTickTime(10, () -> {
@@ -45,7 +45,7 @@ public class WrenchPistonTest {
             ctx.destroyBlock(dispenserPos.above());
             ctx.setBlock(dispenserPosForHead, Blocks.DISPENSER.defaultBlockState().setValue(BlockStateProperties.FACING, Direction.NORTH));
             ctx.setBlock(dispenserPosForHead.above(), Blocks.HOPPER.defaultBlockState().setValue(BlockStateProperties.FACING_HOPPER, Direction.DOWN));
-            ctx.spawnItem(AdditionalItems.WRENCH_ITEM.get(), dispenserPosForHead.above().above());
+            ctx.spawnItem(AAItems.WRENCH_ITEM.get(), dispenserPosForHead.above().above());
         });
 
         // Test piston head

@@ -15,10 +15,10 @@ public final class AdditionalAdditions {
     public static void init() {
         ConfigLoader.load();
 
-        AdditionalMisc.registerAll();
-        AdditionalEntities.registerAll();
-        AdditionalItems.registerAll();
-        AdditionalBlocks.registerAll();
+        AAMisc.registerAll();
+        AAEntities.registerAll();
+        AAItems.registerAll();
+        AABlocks.registerAll();
 
         ModCompatibility.add(
                 () -> Config.COPPER_PATINA.get().enabled(),

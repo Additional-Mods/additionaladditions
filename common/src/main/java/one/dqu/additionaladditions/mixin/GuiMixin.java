@@ -1,7 +1,7 @@
 package one.dqu.additionaladditions.mixin;
 
 import one.dqu.additionaladditions.config.Config;
-import one.dqu.additionaladditions.registry.AdditionalItems;
+import one.dqu.additionaladditions.registry.AAItems;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.network.chat.MutableComponent;
@@ -23,7 +23,7 @@ public abstract class GuiMixin {
     @Inject(method = "render", at = @At("TAIL"))
     private void depthMeterMessage(CallbackInfo ci) {
         if (!Config.DEPTH_METER.get().enabled()) return;
-        if (minecraft.player.isHolding(AdditionalItems.BAROMETER.get())) {
+        if (minecraft.player.isHolding(AAItems.BAROMETER.get())) {
             if (Config.DEPTH_METER.get().displayElevationAlways()) {
                 String level = String.valueOf((int) minecraft.player.getY());
                 minecraft.player.displayClientMessage(MutableComponent.create(new TranslatableContents("additionaladditions.gui.barometer.elevation", null, new String[]{level})), true);

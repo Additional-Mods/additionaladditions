@@ -1,11 +1,11 @@
-package one.dqu.additionaladditions.test;
+package one.dqu.additionaladditions.gametest;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.gametest.framework.GameTest;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import one.dqu.additionaladditions.registry.AdditionalBlocks;
+import one.dqu.additionaladditions.registry.AABlocks;
 
 /**
  * Tests that copper patina doesn't interfere with redstone wire.
@@ -14,7 +14,7 @@ public class CopperPatinaInterferenceTest {
     @GameTest(template = "additionaladditions:empty")
     public void crossing(GameTestHelper ctx) {
         for (int z = 0; z < 5; z++) {
-            ctx.setBlock(new BlockPos(2, 2, z), AdditionalBlocks.COPPER_PATINA.get());
+            ctx.setBlock(new BlockPos(2, 2, z), AABlocks.COPPER_PATINA.get());
         }
         for (int x = 0; x < 5; x++) {
             ctx.setBlock(new BlockPos(x, 2, 2), Blocks.REDSTONE_WIRE);
@@ -45,7 +45,7 @@ public class CopperPatinaInterferenceTest {
             ctx.setBlock(new BlockPos(x, 2, 0), Blocks.REDSTONE_WIRE);
         }
         for (int x = 2; x < 4; x++) {
-            ctx.setBlock(new BlockPos(x, 2, 0), AdditionalBlocks.COPPER_PATINA.get());
+            ctx.setBlock(new BlockPos(x, 2, 0), AABlocks.COPPER_PATINA.get());
         }
 
         BlockPos lampPos = new BlockPos(4, 3, 0);
@@ -68,7 +68,7 @@ public class CopperPatinaInterferenceTest {
 
         ctx.setBlock(redstonePos, Blocks.REDSTONE_WIRE);
         ctx.setBlock(stonePos, Blocks.STONE);
-        ctx.setBlock(patinaPos, AdditionalBlocks.COPPER_PATINA.get());
+        ctx.setBlock(patinaPos, AABlocks.COPPER_PATINA.get());
 
         ctx.pulseRedstone(new BlockPos(0, 2, 0), 5);
         ctx.runAtTickTime(4, () -> {

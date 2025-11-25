@@ -1,6 +1,6 @@
 package one.dqu.additionaladditions.item;
 
-import one.dqu.additionaladditions.registry.AdditionalItems;
+import one.dqu.additionaladditions.registry.AAItems;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Tier;
@@ -35,6 +35,6 @@ public class RoseGoldToolMaterial implements Tier {
 
     @Override
     public Ingredient getRepairIngredient() {
-        return Ingredient.of(AdditionalItems.ROSE_GOLD_INGOT.get());
+        return Ingredient.of(AAItems.ROSE_GOLD_INGOT.get());
     }
 }

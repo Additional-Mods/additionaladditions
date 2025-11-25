@@ -1,6 +1,6 @@
 package one.dqu.additionaladditions.mixin.crossbow;
 
-import one.dqu.additionaladditions.registry.AdditionalItems;
+import one.dqu.additionaladditions.registry.AAItems;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.ItemInHandRenderer;
 import net.minecraft.world.item.CrossbowItem;
@@ -18,7 +18,7 @@ public class ItemInHandRendererMixin {
     @Inject(method = "evaluateWhichHandsToRender", at = @At("RETURN"), cancellable = true)
     private static void isCharged(LocalPlayer player, CallbackInfoReturnable<ItemInHandRenderer.HandRenderSelection> cir) {
         ItemStack stack = player.getMainHandItem();
-        if (stack.is(AdditionalItems.CROSSBOW_WITH_SPYGLASS.get()) && CrossbowItem.isCharged(stack)) {
+        if (stack.is(AAItems.CROSSBOW_WITH_SPYGLASS.get()) && CrossbowItem.isCharged(stack)) {
             cir.setReturnValue(ItemInHandRenderer.HandRenderSelection.RENDER_MAIN_HAND_ONLY);
         }
     }

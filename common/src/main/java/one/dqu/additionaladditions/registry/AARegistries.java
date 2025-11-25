@@ -8,7 +8,7 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.block.Block;
 import one.dqu.additionaladditions.util.Registrar;
 
-public class AdditionalRegistries {
+public class AARegistries {
     public static final Registrar<DataComponentType<?>> DATA_COMPONENT_TYPES = Registrar.wrap(BuiltInRegistries.DATA_COMPONENT_TYPE);
     public static final Registrar<RecipeSerializer<?>> RECIPE_SERIALIZERS = Registrar.wrap(BuiltInRegistries.RECIPE_SERIALIZER);
     public static final Registrar<Block> BLOCKS = Registrar.wrap(BuiltInRegistries.BLOCK);

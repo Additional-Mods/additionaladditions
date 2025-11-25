@@ -1,11 +1,11 @@
-package one.dqu.additionaladditions.test;
+package one.dqu.additionaladditions.gametest;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.gametest.framework.GameTest;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import one.dqu.additionaladditions.registry.AdditionalBlocks;
+import one.dqu.additionaladditions.registry.AABlocks;
 
 /**
  * Verifies that copper patina transmits power correctly and doesn't interfere with redstone wire.
@@ -25,7 +25,7 @@ public class CopperPatinaTransmitTest {
 
         for (int i = 1; i < 4; i++) {
             ctx.setBlock(new BlockPos(0, 2, i), Blocks.REDSTONE_WIRE);
-            ctx.setBlock(new BlockPos(1, 2, i), AdditionalBlocks.COPPER_PATINA.get());
+            ctx.setBlock(new BlockPos(1, 2, i), AABlocks.COPPER_PATINA.get());
         }
 
         ctx.runAtTickTime(5, () -> {

@@ -1,4 +1,4 @@
-package one.dqu.additionaladditions.test;
+package one.dqu.additionaladditions.gametest;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -11,7 +11,7 @@ import net.minecraft.world.level.GameType;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.SlabType;
-import one.dqu.additionaladditions.registry.AdditionalItems;
+import one.dqu.additionaladditions.registry.AAItems;
 
 /**
  * Test for the wrench item rotating blocks by a player.
@@ -21,7 +21,7 @@ public class WrenchPlayerTest {
     public void test(GameTestHelper ctx) {
         BlockPos pos = new BlockPos(0, 2, 0);
         Player player = ctx.makeMockPlayer(GameType.SURVIVAL);
-        player.setItemInHand(InteractionHand.MAIN_HAND, AdditionalItems.WRENCH_ITEM.get().getDefaultInstance());
+        player.setItemInHand(InteractionHand.MAIN_HAND, AAItems.WRENCH_ITEM.get().getDefaultInstance());
         player.setShiftKeyDown(true);
         player.setPose(Pose.CROUCHING);
 

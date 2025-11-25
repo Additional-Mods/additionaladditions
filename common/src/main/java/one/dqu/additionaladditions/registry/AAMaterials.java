@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Supplier;
 
-public class AdditionalMaterials {
+public class AAMaterials {
     public static final Holder<ArmorMaterial> ROSE_GOLD = register(
             "rose_gold",
             new EnumMap<>(Map.of(
@@ -29,7 +29,7 @@ public class AdditionalMaterials {
             0.0f,
             0.0f,
             SoundEvents.ARMOR_EQUIP_GOLD,
-            () -> Ingredient.of(AdditionalItems.ROSE_GOLD_INGOT.get())
+            () -> Ingredient.of(AAItems.ROSE_GOLD_INGOT.get())
     );
 
     //TODO

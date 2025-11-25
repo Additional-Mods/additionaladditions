@@ -14,8 +14,8 @@ import net.minecraft.world.item.component.ItemContainerContents;
 import one.dqu.additionaladditions.config.Config;
 import one.dqu.additionaladditions.misc.AlbumContents;
 import one.dqu.additionaladditions.misc.PocketJukeboxPlayer;
-import one.dqu.additionaladditions.registry.AdditionalItems;
-import one.dqu.additionaladditions.registry.AdditionalMisc;
+import one.dqu.additionaladditions.registry.AAItems;
+import one.dqu.additionaladditions.registry.AAMisc;
 
 import java.util.List;
 
@@ -59,8 +59,8 @@ public class PocketJukeboxItem extends Item {
 
             AlbumContents contents = null;
 
-            if (cursor.is(AdditionalItems.ALBUM.get())) {
-                contents = cursor.getOrDefault(AdditionalMisc.ALBUM_CONTENTS_COMPONENT.get(), AlbumContents.EMPTY);
+            if (cursor.is(AAItems.ALBUM.get())) {
+                contents = cursor.getOrDefault(AAMisc.ALBUM_CONTENTS_COMPONENT.get(), AlbumContents.EMPTY);
             } else if (AlbumContents.isValidItem(cursor)) {
                 contents = new AlbumContents(List.of(cursor));
             }
@@ -100,8 +100,8 @@ public class PocketJukeboxItem extends Item {
 
         ItemStack storedDisc = getStoredDisc(stack);
 
-        if (storedDisc.is(AdditionalItems.ALBUM.get())) {
-            AlbumContents contents = storedDisc.getOrDefault(AdditionalMisc.ALBUM_CONTENTS_COMPONENT.get(), AlbumContents.EMPTY);
+        if (storedDisc.is(AAItems.ALBUM.get())) {
+            AlbumContents contents = storedDisc.getOrDefault(AAMisc.ALBUM_CONTENTS_COMPONENT.get(), AlbumContents.EMPTY);
             int index = PocketJukeboxPlayer.INSTANCE.getCurrentTrack();
             contents.addToTooltip(context, tooltip::add, flag, storedDisc.getHoverName(), index);
         } else {

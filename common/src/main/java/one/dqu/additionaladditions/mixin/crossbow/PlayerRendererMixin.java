@@ -1,6 +1,6 @@
 package one.dqu.additionaladditions.mixin.crossbow;
 
-import one.dqu.additionaladditions.registry.AdditionalItems;
+import one.dqu.additionaladditions.registry.AAItems;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.client.renderer.entity.player.PlayerRenderer;
@@ -20,7 +20,7 @@ public class PlayerRendererMixin {
     @Inject(method = "getArmPose", at = @At("RETURN"), cancellable = true)
     private static void setCrossbowArmPose(AbstractClientPlayer player, InteractionHand hand, CallbackInfoReturnable<HumanoidModel.ArmPose> cir) {
         ItemStack itemStack = player.getItemInHand(hand);
-        if (!player.swinging && itemStack.is(AdditionalItems.CROSSBOW_WITH_SPYGLASS.get()) && CrossbowItem.isCharged(itemStack)) {
+        if (!player.swinging && itemStack.is(AAItems.CROSSBOW_WITH_SPYGLASS.get()) && CrossbowItem.isCharged(itemStack)) {
             cir.setReturnValue(HumanoidModel.ArmPose.CROSSBOW_HOLD);
         }
     }

@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-public class LootHandler {
+public class LootAdder {
     private static final List<LootEntry> entries = new ArrayList<>();
 
     public static void register(ResourceKey<?> table, Supplier<Boolean> condition, Function<HolderLookup.Provider, LootPool.Builder> poolFactory) {

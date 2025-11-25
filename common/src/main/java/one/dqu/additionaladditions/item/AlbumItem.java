@@ -9,7 +9,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import one.dqu.additionaladditions.misc.AlbumContents;
-import one.dqu.additionaladditions.registry.AdditionalMisc;
+import one.dqu.additionaladditions.registry.AAMisc;
 
 import java.util.List;
 import java.util.Optional;
@@ -22,11 +22,11 @@ public class AlbumItem extends Item {
     // CONTENTS
 
     private static AlbumContents getContents(ItemStack stack) {
-        return stack.getOrDefault(AdditionalMisc.ALBUM_CONTENTS_COMPONENT.get(), AlbumContents.EMPTY);
+        return stack.getOrDefault(AAMisc.ALBUM_CONTENTS_COMPONENT.get(), AlbumContents.EMPTY);
     }
 
     private static void setContents(ItemStack stack, AlbumContents contents) {
-        stack.set(AdditionalMisc.ALBUM_CONTENTS_COMPONENT.get(), contents);
+        stack.set(AAMisc.ALBUM_CONTENTS_COMPONENT.get(), contents);
     }
 
     private static boolean addDisc(ItemStack album, ItemStack disc) {
