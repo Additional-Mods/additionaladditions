@@ -41,7 +41,6 @@ import java.util.function.Supplier;
 
 @SuppressWarnings("unused")
 public class AAItems {
-    // saturation = hunger * saturationModifier
     public static final Supplier<FoodItem> FRIED_EGG = new Builder("fried_egg")
             .config(() -> Config.FRIED_EGG.get().enabled())
             .properties(p -> p.food(Config.FRIED_EGG.get().food()))

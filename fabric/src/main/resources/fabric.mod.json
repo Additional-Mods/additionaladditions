@@ -38,6 +38,7 @@
       "one.dqu.additionaladditions.gametest.CopperPatinaTransmitTest",
       "one.dqu.additionaladditions.gametest.CopperPatinaDecayTest",
       "one.dqu.additionaladditions.gametest.CopperPatinaInterferenceTest",
+      "one.dqu.additionaladditions.gametest.CopperPatinaWithCopperBlockTest",
       "one.dqu.additionaladditions.gametest.RopeArrowPlacementTest",
       "one.dqu.additionaladditions.gametest.RopeArrowPartialPlacementTest",
       "one.dqu.additionaladditions.gametest.RopeArrowEntityHitTest",

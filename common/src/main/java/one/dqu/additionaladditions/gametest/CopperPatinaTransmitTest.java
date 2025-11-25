@@ -28,20 +28,24 @@ public class CopperPatinaTransmitTest {
             ctx.setBlock(new BlockPos(1, 2, i), AABlocks.COPPER_PATINA.get());
         }
 
-        ctx.runAtTickTime(5, () -> {
-            ctx.pulseRedstone(pulseOne, 2);
-            ctx.assertBlockProperty(lampOne, BlockStateProperties.LIT, (state) -> state, "Lamp one should be lit");
-        });
-
-        ctx.runAtTickTime(10, () -> {;
-            ctx.pulseRedstone(pulseTwo, 2);
-            ctx.assertBlockProperty(lampTwo, BlockStateProperties.LIT, (state) -> state, "Lamp two should be lit");
-        });
-
-        ctx.runAtTickTime(20, () -> {
-            ctx.assertBlockProperty(lampOne, BlockStateProperties.LIT, (state) -> !state, "Lamp one should be unlit");
-            ctx.assertBlockProperty(lampTwo, BlockStateProperties.LIT, (state) -> !state, "Lamp two should be unlit");
-            ctx.succeed();
-        });
+        ctx.startSequence()
+                .thenIdle(5)
+                .thenExecute(() -> {
+                    ctx.pulseRedstone(pulseOne, 2);
+                    ctx.assertBlockProperty(lampOne, BlockStateProperties.LIT, (state) -> state, "Lamp one should be lit");
+                    ctx.assertBlockProperty(lampTwo, BlockStateProperties.LIT, (state) -> !state, "Lamp two should be unlit");
+                })
+                .thenIdle(10)
+                .thenExecute(() -> {
+                    ctx.pulseRedstone(pulseTwo, 2);
+                    ctx.assertBlockProperty(lampOne, BlockStateProperties.LIT, (state) -> !state, "Lamp one should be unlit");
+                    ctx.assertBlockProperty(lampTwo, BlockStateProperties.LIT, (state) -> state, "Lamp two should be lit");
+                })
+                .thenIdle(10)
+                .thenExecute(() -> {
+                    ctx.assertBlockProperty(lampOne, BlockStateProperties.LIT, (state) -> !state, "Lamp one should be unlit");
+                    ctx.assertBlockProperty(lampTwo, BlockStateProperties.LIT, (state) -> !state, "Lamp two should be unlit");
+                })
+                .thenSucceed();
     }
  }
