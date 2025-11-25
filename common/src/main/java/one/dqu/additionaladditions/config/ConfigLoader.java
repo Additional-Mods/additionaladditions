@@ -3,6 +3,7 @@ package one.dqu.additionaladditions.config;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
+import com.google.gson.JsonSyntaxException;
 import com.mojang.serialization.DataResult;
 import com.mojang.serialization.JsonOps;
 import dev.architectury.injectables.annotations.ExpectPlatform;
@@ -45,8 +46,13 @@ public class ConfigLoader {
                 }
 
                 String jsonString = Files.readString(path);
-                JsonElement jsonElement = GSON.fromJson(jsonString, JsonElement.class);
-                configFiles.put(location, jsonElement);
+
+                try {
+                    JsonElement jsonElement = GSON.fromJson(jsonString, JsonElement.class);
+                    configFiles.put(location, jsonElement);
+                } catch (JsonSyntaxException e) {
+                    AdditionalAdditions.LOGGER.error("[{}] Malformed JSON in config file for property {} at path {}: {}", AdditionalAdditions.NAMESPACE, location, path, e);
+                }
             } catch (IOException e) {
                 AdditionalAdditions.LOGGER.error("[{}] Failed to create config file for property {} at path {}: {}", AdditionalAdditions.NAMESPACE, location, path, e);
             }
