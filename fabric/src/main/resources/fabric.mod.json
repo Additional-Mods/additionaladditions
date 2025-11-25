@@ -29,19 +29,19 @@
       "one.dqu.additionaladditions.fabric.AdditionalAdditionsClientFabric"
     ],
     "fabric-gametest": [
-      "one.dqu.additionaladditions.test.ExampleTest",
-      "one.dqu.additionaladditions.test.TurkishLocaleTest",
-      "one.dqu.additionaladditions.test.WrenchPlayerTest",
-      "one.dqu.additionaladditions.test.WrenchDispenserTest",
-      "one.dqu.additionaladditions.test.WrenchPistonTest",
-      "one.dqu.additionaladditions.test.WrenchHopperTest",
-      "one.dqu.additionaladditions.test.CopperPatinaTransmitTest",
-      "one.dqu.additionaladditions.test.CopperPatinaDecayTest",
-      "one.dqu.additionaladditions.test.CopperPatinaInterferenceTest",
-      "one.dqu.additionaladditions.test.RopeArrowPlacementTest",
-      "one.dqu.additionaladditions.test.RopeArrowPartialPlacementTest",
-      "one.dqu.additionaladditions.test.RopeArrowEntityHitTest",
-      "one.dqu.additionaladditions.test.RopeArrowBadPlacementTest"
+      "one.dqu.additionaladditions.gametest.ExampleTest",
+      "one.dqu.additionaladditions.gametest.TurkishLocaleTest",
+      "one.dqu.additionaladditions.gametest.WrenchPlayerTest",
+      "one.dqu.additionaladditions.gametest.WrenchDispenserTest",
+      "one.dqu.additionaladditions.gametest.WrenchPistonTest",
+      "one.dqu.additionaladditions.gametest.WrenchHopperTest",
+      "one.dqu.additionaladditions.gametest.CopperPatinaTransmitTest",
+      "one.dqu.additionaladditions.gametest.CopperPatinaDecayTest",
+      "one.dqu.additionaladditions.gametest.CopperPatinaInterferenceTest",
+      "one.dqu.additionaladditions.gametest.RopeArrowPlacementTest",
+      "one.dqu.additionaladditions.gametest.RopeArrowPartialPlacementTest",
+      "one.dqu.additionaladditions.gametest.RopeArrowEntityHitTest",
+      "one.dqu.additionaladditions.gametest.RopeArrowBadPlacementTest"
     ]
   },
   "mixins": [
