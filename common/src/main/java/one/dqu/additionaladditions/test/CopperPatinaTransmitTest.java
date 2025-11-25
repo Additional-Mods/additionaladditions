@@ -10,7 +10,7 @@ import one.dqu.additionaladditions.registry.AdditionalBlocks;
 /**
  * Verifies that copper patina transmits power correctly and doesn't interfere with redstone wire.
  */
-public class PatinaTransmitTest {
+public class CopperPatinaTransmitTest {
     @GameTest(template = "additionaladditions:empty")
     public void test(GameTestHelper ctx) {
         BlockPos lampOne = new BlockPos(0, 3, 0);
