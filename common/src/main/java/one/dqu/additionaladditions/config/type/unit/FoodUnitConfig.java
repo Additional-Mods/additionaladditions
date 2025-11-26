@@ -15,10 +15,10 @@ public record FoodUnitConfig(
 ) {
     public static final Codec<FoodUnitConfig> CODEC = RecordCodecBuilder.create(instance ->
             instance.group(
-                    Codec.INT.fieldOf("nutrition").forGetter(FoodUnitConfig::nutrition),
-                    Codec.FLOAT.fieldOf("saturation").forGetter(FoodUnitConfig::saturation),
+                    Codec.intRange(1, Integer.MAX_VALUE).fieldOf("nutrition").forGetter(FoodUnitConfig::nutrition),
+                    Codec.floatRange(0f, Float.MAX_VALUE).fieldOf("saturation").forGetter(FoodUnitConfig::saturation),
                     Codec.BOOL.optionalFieldOf("can_always_eat", false).forGetter(FoodUnitConfig::canAlwaysEat),
-                    Codec.FLOAT.optionalFieldOf("eat_duration", 1.6f).forGetter(FoodUnitConfig::eatSeconds)
+                    Codec.floatRange(0f, Float.MAX_VALUE).optionalFieldOf("eat_seconds", 1.6f).forGetter(FoodUnitConfig::eatSeconds)
             ).apply(instance, FoodUnitConfig::new)
     );
 
