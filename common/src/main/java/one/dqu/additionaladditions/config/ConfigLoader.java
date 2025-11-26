@@ -101,7 +101,7 @@ public class ConfigLoader {
         configFiles.remove(Config.VERSION.path());
 
         // Run DFU
-        for (Map.Entry<ResourceLocation, JsonElement> entry : configFiles.entrySet()) {
+        for (Map.Entry<ResourceLocation, JsonElement> entry : configFiles.entrySet().stream().toList()) {
             ResourceLocation location = entry.getKey();
             JsonElement json = entry.getValue();
 
