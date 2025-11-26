@@ -21,7 +21,6 @@
     "RecipeManagerMixin",
     "RedstoneWireBlockMixin",
     "ServerAdvancementManagerMixin",
-    "WanderingTraderMixin",
     "album.JukeboxBlockEntityMixin",
     "album.JukeboxBlockMixin"
   ],

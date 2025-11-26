@@ -5,10 +5,13 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonSyntaxException;
 import com.mojang.serialization.DataResult;
+import com.mojang.serialization.Dynamic;
 import com.mojang.serialization.JsonOps;
 import dev.architectury.injectables.annotations.ExpectPlatform;
 import one.dqu.additionaladditions.AdditionalAdditions;
 import net.minecraft.resources.ResourceLocation;
+import one.dqu.additionaladditions.config.datafixer.ConfigFixerUpper;
+import one.dqu.additionaladditions.config.type.VersionConfig;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -26,6 +29,8 @@ public class ConfigLoader {
      * If the file does not exist, creates it with the default values.
      */
     public static void load() {
+        Config.VERSION.get().version(); // force static init
+
         try {
             Files.createDirectories(Paths.get(PATH));
         } catch (IOException e) {
@@ -49,6 +54,9 @@ public class ConfigLoader {
 
                 try {
                     JsonElement jsonElement = GSON.fromJson(jsonString, JsonElement.class);
+                    if (jsonElement == null) {
+                        throw new JsonSyntaxException("File is empty or null");
+                    }
                     configFiles.put(location, jsonElement);
                 } catch (JsonSyntaxException e) {
                     AdditionalAdditions.LOGGER.error("[{}] Malformed JSON in config file for property {} at path {}: {}", AdditionalAdditions.NAMESPACE, location, path, e);
@@ -58,11 +66,61 @@ public class ConfigLoader {
             }
         }
 
+        // This should always be true because the part above creates non-existent files
+        assert configFiles.get(Config.VERSION.path()) != null : "Config version file is missing";
+
+        // Load saved version
+        apply(Map.of(Config.VERSION.path(), configFiles.get(Config.VERSION.path())));
+
+        // Remove version from the list so it doesn't get passed into datafixer
+        configFiles.remove(Config.VERSION.path());
+
+        // DFU
+        if (Config.VERSION.get().version() != ConfigFixerUpper.CURRENT_VERSION) {
+            for (Map.Entry<ResourceLocation, JsonElement> entry : configFiles.entrySet()) {
+                ResourceLocation location = entry.getKey();
+                JsonElement json = entry.getValue();
+
+                JsonElement result = ConfigFixerUpper.INSTANCE.update(
+                        ConfigProperty.getByPath(location).typeReference(),
+                        new Dynamic<>(JsonOps.INSTANCE, json),
+                        Config.VERSION.get().version(),
+                        ConfigFixerUpper.CURRENT_VERSION
+                ).getValue();
+
+                // put datafixed json
+                configFiles.put(location, result);
+            }
+
+            // Put latest version into map to save it
+            Config.VERSION.set(new VersionConfig(ConfigFixerUpper.CURRENT_VERSION));
+            configFiles.put(Config.VERSION.path(), Config.VERSION.serialize().getOrThrow());
+
+            // Write all files
+            for (Map.Entry<ResourceLocation, JsonElement> entry : configFiles.entrySet()) {
+                ResourceLocation location = entry.getKey();
+                JsonElement json = entry.getValue();
+                Path path = Paths.get(PATH).resolve(location.getPath() + ".json");
+
+                try {
+                    String updatedJsonString = GSON.toJson(json);
+                    Files.writeString(path, updatedJsonString);
+                } catch (IOException e) {
+                    AdditionalAdditions.LOGGER.error("[{}] Failed to write updated config file for property {} at path {}: {}", AdditionalAdditions.NAMESPACE, location, path, e);
+                }
+            }
+
+            AdditionalAdditions.LOGGER.info("[{}] Updated config files from version {} to {}", AdditionalAdditions.NAMESPACE, Config.VERSION.get().version(), ConfigFixerUpper.CURRENT_VERSION);
+        }
+
         apply(configFiles);
 
         AdditionalAdditions.LOGGER.info("[{}] Loaded {} config files", AdditionalAdditions.NAMESPACE, configFiles.size());
     }
 
+    /**
+     * Applies the given config files to their respective ConfigProperty instances.
+     */
     public static void apply(Map<ResourceLocation, JsonElement> configFiles) {
         for (Map.Entry<ResourceLocation, JsonElement> entry : configFiles.entrySet()) {
             ResourceLocation location = entry.getKey();
