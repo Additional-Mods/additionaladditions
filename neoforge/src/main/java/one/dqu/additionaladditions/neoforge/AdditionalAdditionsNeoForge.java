@@ -6,6 +6,7 @@ import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.packs.resources.SimplePreparableReloadListener;
@@ -32,6 +33,7 @@ import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 import net.neoforged.neoforge.registries.NeoForgeRegistries;
 import one.dqu.additionaladditions.AdditionalAdditions;
+import one.dqu.additionaladditions.config.Config;
 import one.dqu.additionaladditions.config.ConfigLoader;
 import one.dqu.additionaladditions.config.network.ConfigSyncS2CPayload;
 import one.dqu.additionaladditions.config.network.neoforge.ConfigSyncTask;
@@ -114,7 +116,14 @@ public final class AdditionalAdditionsNeoForge {
             ConfigSyncS2CPayload.TYPE,
             ConfigSyncS2CPayload.STREAM_CODEC,
             (payload, context) -> context.enqueueWork(() -> {
-                ConfigLoader.apply(payload.config());
+                var config = payload.config();
+                int version = ConfigLoader.readVersion(config).version();
+                if (version != Config.VERSION.get().version()) {
+                    AdditionalAdditions.LOGGER.warn("[{}] Received incompatible config version from server, disconnecting. (server: {}, client: {})", AdditionalAdditions.NAMESPACE, version, Config.VERSION.get().version());
+                    context.disconnect(Component.translatable("additionaladditions.gui.config.disconnect"));
+                    return;
+                }
+                ConfigLoader.apply(config);
                 AdditionalAdditions.LOGGER.info("[{}] Loaded config from server", AdditionalAdditions.NAMESPACE);
             })
         );

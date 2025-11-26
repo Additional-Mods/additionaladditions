@@ -168,6 +168,14 @@ public class ConfigLoader {
         return configFiles;
     }
 
+    public static VersionConfig readVersion(Map<ResourceLocation, JsonElement> configFiles) {
+        JsonElement json = configFiles.get(Config.VERSION.path());
+        if (json == null) {
+            return new VersionConfig(-1);
+        }
+        return Config.VERSION.deserialize(json).result().orElse(new VersionConfig(-1));
+    }
+
     private static <T> void parseAndSet(ConfigProperty<T> property, JsonElement json) {
         property.deserialize(json).resultOrPartial((error) -> {
             AdditionalAdditions.LOGGER.error("[{}] Failed to deserialize config property {}: {}", AdditionalAdditions.NAMESPACE, property.path(), error);

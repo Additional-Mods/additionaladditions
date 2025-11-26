@@ -83,6 +83,8 @@
   "additionaladditions.advancements.use_watering_can.desc": "Obtain and use the Watering Can to fertilize your crops",
 
   "additionaladditions.gui.config.restart": "Restart the game to apply the changes",
+  "additionaladditions.gui.config.disconnect": "Additional Additions version mismatch between client and server.",
+
   "additionaladditions.gui.pocket_jukebox.tooltip": "Right Click with Music Disc or Album",
   "additionaladditions.gui.album.discs": "Discs",
 
