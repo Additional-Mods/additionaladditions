@@ -16,7 +16,9 @@ public class ConfigV1Schema extends Schema {
 
     @Override
     public void registerTypes(Schema schema, Map<String, Supplier<TypeTemplate>> entityTypes, Map<String, Supplier<TypeTemplate>> blockEntityTypes) {
-        schema.registerType(true, ConfigProperty.typeReference(FoodConfig.class), () ->
+        schema.registerType(true, () -> "crashes_without_this", DSL::remainder);
+
+        schema.registerType(false, ConfigProperty.typeReference(FoodConfig.class), () ->
                 DSL.fields(
                         "enabled", DSL.constType(DSL.bool()),
                         "food", DSL.optionalFields(
@@ -29,27 +31,27 @@ public class ConfigV1Schema extends Schema {
                 )
         );
 
-        schema.registerType(true, ConfigProperty.typeReference(FeatureConfig.class), () ->
+        schema.registerType(false, ConfigProperty.typeReference(FeatureConfig.class), () ->
                 DSL.fields(
                         "enabled", DSL.constType(DSL.bool())
                 )
         );
 
-        schema.registerType(true, ConfigProperty.typeReference(DamageableItemConfig.class), () ->
+        schema.registerType(false, ConfigProperty.typeReference(DamageableItemConfig.class), () ->
                 DSL.fields(
                         "enabled", DSL.constType(DSL.bool()),
                         "durability", DSL.constType(DSL.intType())
                 )
         );
 
-        schema.registerType(true, ConfigProperty.typeReference(BarometerConfig.class), () ->
+        schema.registerType(false, ConfigProperty.typeReference(BarometerConfig.class), () ->
                 DSL.fields(
                         "enabled", DSL.constType(DSL.bool()),
                         "display_elevation_always", DSL.constType(DSL.bool())
                 )
         );
 
-        schema.registerType(true, ConfigProperty.typeReference(AmethystLampConfig.class), () ->
+        schema.registerType(false, ConfigProperty.typeReference(AmethystLampConfig.class), () ->
                 DSL.fields(
                         "enabled", DSL.constType(DSL.bool()),
                         "despawn_chance", DSL.constType(DSL.floatType()),
