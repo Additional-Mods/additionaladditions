@@ -49,6 +49,7 @@
     "additionaladditions.mixins.json",
     "additionaladditions.fabric.mixins.json"
   ],
+  "accessWidener": "additionaladditions.accesswidener",
   "depends": {
     "fabricloader": ">=0.18.0",
     "minecraft": "~1.21.1",
