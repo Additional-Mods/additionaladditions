@@ -4,7 +4,6 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonSyntaxException;
-import com.mojang.serialization.DataResult;
 import com.mojang.serialization.Dynamic;
 import com.mojang.serialization.JsonOps;
 import dev.architectury.injectables.annotations.ExpectPlatform;
@@ -29,7 +28,9 @@ public class ConfigLoader {
      * If the file does not exist, creates it with the default values.
      */
     public static void load() {
-        Config.VERSION.get().version(); // force static init
+        AdditionalAdditions.LOGGER.info("[{}] Loading config files...", AdditionalAdditions.NAMESPACE);
+
+        Config.init();
 
         try {
             Files.createDirectories(Paths.get(PATH));
@@ -40,82 +41,41 @@ public class ConfigLoader {
 
         Map<ResourceLocation, JsonElement> configFiles = new HashMap<>();
 
+        // Read or create files
         for (ConfigProperty<?> property : ConfigProperty.getAll()) {
-            ResourceLocation location = property.path();
-            Path path = Paths.get(PATH).resolve(location.getPath() + ".json");
+            Path path = Paths.get(PATH).resolve(property.path().getPath() + ".json");
 
             try {
-                Files.createDirectories(path.getParent());
                 if (!Files.exists(path)) {
                     createDefault(property, path);
                 }
 
-                String jsonString = Files.readString(path);
-
-                try {
-                    JsonElement jsonElement = GSON.fromJson(jsonString, JsonElement.class);
-                    if (jsonElement == null) {
-                        throw new JsonSyntaxException("File is empty or null");
-                    }
-                    configFiles.put(location, jsonElement);
-                } catch (JsonSyntaxException e) {
-                    AdditionalAdditions.LOGGER.error("[{}] Malformed JSON in config file for property {} at path {}: {}", AdditionalAdditions.NAMESPACE, location, path, e);
+                JsonElement jsonElement = GSON.fromJson(Files.readString(path), JsonElement.class);
+                if (jsonElement == null) {
+                    throw new JsonSyntaxException("File is empty or null");
                 }
+                configFiles.put(property.path(), jsonElement);
             } catch (IOException e) {
-                AdditionalAdditions.LOGGER.error("[{}] Failed to create config file for property {} at path {}: {}", AdditionalAdditions.NAMESPACE, location, path, e);
+                AdditionalAdditions.LOGGER.error("[{}] Failed to create config file for property {} at path {}: {}", AdditionalAdditions.NAMESPACE, property.path(), path, e);
+            } catch (JsonSyntaxException e) {
+                AdditionalAdditions.LOGGER.error("[{}] Malformed JSON in config file for property {} at path {}: {}", AdditionalAdditions.NAMESPACE, property.path(), path, e);
             }
         }
 
-        // This should always be true because the part above creates non-existent files
-        assert configFiles.get(Config.VERSION.path()) != null : "Config version file is missing";
-
-        // Load saved version
+        if (configFiles.get(Config.VERSION.path()) == null) {
+            AdditionalAdditions.LOGGER.error("[{}] Unknown config version! Skipping config load and using defaults.", AdditionalAdditions.NAMESPACE);
+            return;
+        }
+        // Need to know what version it is to run datafixer
         apply(Map.of(Config.VERSION.path(), configFiles.get(Config.VERSION.path())));
 
-        // Remove version from the list so it doesn't get passed into datafixer
-        configFiles.remove(Config.VERSION.path());
-
-        // DFU
         if (Config.VERSION.get().version() != ConfigFixerUpper.CURRENT_VERSION) {
-            for (Map.Entry<ResourceLocation, JsonElement> entry : configFiles.entrySet()) {
-                ResourceLocation location = entry.getKey();
-                JsonElement json = entry.getValue();
-
-                JsonElement result = ConfigFixerUpper.INSTANCE.update(
-                        ConfigProperty.getByPath(location).typeReference(),
-                        new Dynamic<>(JsonOps.INSTANCE, json),
-                        Config.VERSION.get().version(),
-                        ConfigFixerUpper.CURRENT_VERSION
-                ).getValue();
-
-                // put datafixed json
-                configFiles.put(location, result);
-            }
-
-            // Put latest version into map to save it
-            Config.VERSION.set(new VersionConfig(ConfigFixerUpper.CURRENT_VERSION));
-            configFiles.put(Config.VERSION.path(), Config.VERSION.serialize().getOrThrow());
-
-            // Write all files
-            for (Map.Entry<ResourceLocation, JsonElement> entry : configFiles.entrySet()) {
-                ResourceLocation location = entry.getKey();
-                JsonElement json = entry.getValue();
-                Path path = Paths.get(PATH).resolve(location.getPath() + ".json");
-
-                try {
-                    String updatedJsonString = GSON.toJson(json);
-                    Files.writeString(path, updatedJsonString);
-                } catch (IOException e) {
-                    AdditionalAdditions.LOGGER.error("[{}] Failed to write updated config file for property {} at path {}: {}", AdditionalAdditions.NAMESPACE, location, path, e);
-                }
-            }
-
-            AdditionalAdditions.LOGGER.info("[{}] Updated config files from version {} to {}", AdditionalAdditions.NAMESPACE, Config.VERSION.get().version(), ConfigFixerUpper.CURRENT_VERSION);
+            datafix(configFiles);
         }
 
         apply(configFiles);
 
-        AdditionalAdditions.LOGGER.info("[{}] Loaded {} config files", AdditionalAdditions.NAMESPACE, configFiles.size());
+        AdditionalAdditions.LOGGER.info("[{}] Config load complete.", AdditionalAdditions.NAMESPACE);
     }
 
     /**
@@ -131,9 +91,53 @@ public class ConfigLoader {
         }
     }
 
+    /**
+     * Updates config format to the latest version.
+     */
+    private static void datafix(Map<ResourceLocation, JsonElement> configFiles) {
+        int version = Config.VERSION.get().version();
+
+        // Remove version from the map as we don't need to datafix it
+        configFiles.remove(Config.VERSION.path());
+
+        // Run DFU
+        for (Map.Entry<ResourceLocation, JsonElement> entry : configFiles.entrySet()) {
+            ResourceLocation location = entry.getKey();
+            JsonElement json = entry.getValue();
+
+            JsonElement result = ConfigFixerUpper.INSTANCE.update(
+                    ConfigProperty.getByPath(location).typeReference(),
+                    new Dynamic<>(JsonOps.INSTANCE, json),
+                    version, ConfigFixerUpper.CURRENT_VERSION
+            ).getValue();
+
+            // put datafixed json
+            configFiles.put(location, result);
+        }
+
+        // Put current version
+        Config.VERSION.set(new VersionConfig(ConfigFixerUpper.CURRENT_VERSION));
+        configFiles.put(Config.VERSION.path(), Config.VERSION.serialize().getOrThrow());
+
+        // Write all files
+        for (Map.Entry<ResourceLocation, JsonElement> entry : configFiles.entrySet()) {
+            ResourceLocation location = entry.getKey();
+            JsonElement json = entry.getValue();
+            Path path = Paths.get(PATH).resolve(location.getPath() + ".json");
+
+            try {
+                String updatedJsonString = GSON.toJson(json);
+                Files.writeString(path, updatedJsonString);
+            } catch (IOException e) {
+                AdditionalAdditions.LOGGER.error("[{}] Failed to write updated config file for property {} at path {}: {}", AdditionalAdditions.NAMESPACE, location, path, e);
+            }
+        }
+
+        AdditionalAdditions.LOGGER.info("[{}] Updated config files from version {} to {}", AdditionalAdditions.NAMESPACE, version, ConfigFixerUpper.CURRENT_VERSION);
+    }
+
     private static <T> void parseAndSet(ConfigProperty<T> property, JsonElement json) {
-        DataResult<T> result = property.codec().parse(JsonOps.INSTANCE, json);
-        result.resultOrPartial((error) -> {
+        property.deserialize(json).resultOrPartial((error) -> {
             AdditionalAdditions.LOGGER.error("[{}] Failed to deserialize config property {}: {}", AdditionalAdditions.NAMESPACE, property.path(), error);
         }).ifPresent(property::set);
     }

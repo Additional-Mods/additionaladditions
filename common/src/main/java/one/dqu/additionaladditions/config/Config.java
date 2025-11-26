@@ -9,6 +9,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Config {
+    public static void init() { /* forces static init */ }
+
     public static final ConfigProperty<VersionConfig> VERSION = new ConfigProperty<>(
             "version", VersionConfig.CODEC,
             new VersionConfig(ConfigFixerUpper.CURRENT_VERSION)
