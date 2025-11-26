@@ -44,6 +44,10 @@ processResources {
     filesMatching('fabric.mod.json') {
         expand version: inputs.properties.version
     }
+
+    from(project(":common").file("src/main/resources")) {
+        include "additionaladditions.accesswidener"
+    }
 }
 
 shadowJar {
