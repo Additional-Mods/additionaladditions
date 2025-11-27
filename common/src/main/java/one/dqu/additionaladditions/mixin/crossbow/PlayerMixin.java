@@ -15,6 +15,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class PlayerMixin {
     @Inject(method = "isScoping()Z", at = @At("RETURN"), cancellable = true)
     private void isScoping(CallbackInfoReturnable<Boolean> cir) {
-        cir.setReturnValue(cir.getReturnValue() || AdditionalAdditions.zoom);
+        if (!cir.getReturnValue() && AdditionalAdditions.zoom) {
+            cir.setReturnValue(true);
+        }
     }
 }
