@@ -77,6 +77,36 @@ public abstract class RedstoneWireBlockMixin {
         }
     }
 
+    @Inject(
+            method = "calculateTargetStrength",
+            at = @At("HEAD")
+    )
+    private void unsetShouldSignal(Level level, BlockPos blockPos, CallbackInfoReturnable<Integer> cir) {
+        Block self = (Block) (Object) this;
+        boolean isCopperPatina = self == AABlocks.COPPER_PATINA.get();
+        boolean isRedstoneWire = self == Blocks.REDSTONE_WIRE;
+
+        if (isRedstoneWire) AABlocks.COPPER_PATINA.get().shouldSignal = false;
+        if (isCopperPatina) ((RedStoneWireBlock) Blocks.REDSTONE_WIRE).shouldSignal = false;
+    }
+
+    @Inject(
+            method = "calculateTargetStrength",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/world/level/Level;getBestNeighborSignal(Lnet/minecraft/core/BlockPos;)I",
+                    shift = At.Shift.AFTER
+            )
+    )
+    private void setShouldSignal(Level level, BlockPos blockPos, CallbackInfoReturnable<Integer> cir) {
+        Block self = (Block) (Object) this;
+        boolean isCopperPatina = self == AABlocks.COPPER_PATINA.get();
+        boolean isRedstoneWire = self == Blocks.REDSTONE_WIRE;
+
+        if (isRedstoneWire) AABlocks.COPPER_PATINA.get().shouldSignal = true;
+        if (isCopperPatina) ((RedStoneWireBlock) Blocks.REDSTONE_WIRE).shouldSignal = true;
+    }
+
     @WrapOperation(
             method = "calculateTargetStrength",
             at = @At(
