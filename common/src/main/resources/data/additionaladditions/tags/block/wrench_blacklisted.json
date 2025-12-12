@@ -1,0 +1,12 @@
+{
+  "replace": false,
+  "values": [
+    {"id": "#minecraft:beds", "required": false},
+    {"id": "minecraft:chest", "required": false},
+    {"id": "minecraft:trapped_chest", "required": false},
+    {"id": "minecraft:piston", "required": false},
+    {"id": "minecraft:sticky_piston", "required": false},
+    {"id": "minecraft:piston_head", "required": false},
+    {"id": "#c:chests", "required": false}
+  ]
+}

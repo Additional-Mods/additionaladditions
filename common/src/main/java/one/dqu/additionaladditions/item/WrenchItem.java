@@ -14,12 +14,11 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.BedBlock;
-import net.minecraft.world.level.block.ChestBlock;
 import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.SlabType;
+import one.dqu.additionaladditions.registry.AAMisc;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Optional;
@@ -62,7 +61,8 @@ public class WrenchItem extends ConfigurableItem {
         if (!Config.WRENCH.get().enabled()) { return InteractionResult.FAIL; }
 
         if (world.isClientSide()) return InteractionResult.PASS;
-        if (state.getBlock() instanceof ChestBlock || state.getBlock() instanceof BedBlock) return InteractionResult.PASS;
+
+        if (state.is(AAMisc.WRENCH_BLACKLIST_TAG)) return InteractionResult.PASS;
 
         if (state.hasProperty(BlockStateProperties.FACING)) {
             if (tryPlacing(pos, state.cycle(BlockStateProperties.FACING), world, stack, player, hand)) {
