@@ -14,6 +14,7 @@ import one.dqu.additionaladditions.block.GlowStickBlock;
 import one.dqu.additionaladditions.block.PatinaBlock;
 import one.dqu.additionaladditions.block.RopeBlock;
 import one.dqu.additionaladditions.config.Config;
+import one.dqu.additionaladditions.item.CopperPatinaItem;
 import one.dqu.additionaladditions.util.CreativeAdder;
 import one.dqu.additionaladditions.util.LootAdder;
 import net.minecraft.resources.ResourceLocation;
@@ -61,9 +62,9 @@ public class AABlocks {
             ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "copper_patina"),
             () -> new CopperPatinaBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_CYAN).pushReaction(PushReaction.DESTROY).noCollission().sound(SoundType.TUFF).instabreak())
     );
-    public static final Supplier<Item> COPPER_PATINA_ITEM = AARegistries.ITEMS.register(
+    public static final Supplier<CopperPatinaItem> COPPER_PATINA_ITEM = AARegistries.ITEMS.register(
             ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "copper_patina"),
-            () -> new BlockItem(COPPER_PATINA.get(), new Item.Properties())
+            () -> new CopperPatinaItem(COPPER_PATINA.get(), new Item.Properties())
     );
 
     public static final Supplier<GlowStickBlock> GLOW_STICK_BLOCK = AARegistries.BLOCKS.register(

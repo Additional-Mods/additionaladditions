@@ -1,5 +1,6 @@
 package one.dqu.additionaladditions.item;
 
+import net.minecraft.world.level.block.LevelEvent;
 import one.dqu.additionaladditions.config.Config;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
@@ -31,20 +32,30 @@ public class CopperPatinaItem extends BlockItem {
         BlockPos pos = context.getClickedPos();
         BlockState state = world.getBlockState(pos);
 
-        Optional<BlockState> optional = WeatheringCopper.getNext(state.getBlock()).map((block) -> block.withPropertiesOf(state));
-        if (optional.isPresent() && player != null && !player.isShiftKeyDown()) {
-            if (player instanceof ServerPlayer serverPlayer) {
-                CriteriaTriggers.USING_ITEM.trigger(serverPlayer, context.getItemInHand());
-            }
-
-            world.playSound(player, pos, SoundEvents.AXE_SCRAPE, SoundSource.BLOCKS, 1.0F, 1.0F);
-            world.levelEvent(player, 3005, pos, 0);
-            world.setBlock(pos, optional.get(), 11);
-            context.getItemInHand().shrink(1);
-
-            return InteractionResult.SUCCESS;
+        Optional<BlockState> optional = Optional.empty();
+        if (state.getBlock() instanceof WeatheringCopper weatheringCopper) {
+            optional = weatheringCopper.getNext(state);
+        }
+        if (optional.isEmpty()) {
+            return super.useOn(context);
         }
 
-        return super.useOn(context);
+        if (context.isSecondaryUseActive()) {
+            InteractionResult interactionResult = state.useWithoutItem(world, player, context.getHitResult());
+            if (!interactionResult.consumesAction()) {
+                return super.useOn(context);
+            }
+        }
+
+        if (player instanceof ServerPlayer serverPlayer) {
+            CriteriaTriggers.USING_ITEM.trigger(serverPlayer, context.getItemInHand());
+        }
+
+        world.playSound(player, pos, SoundEvents.AXE_SCRAPE, SoundSource.BLOCKS, 1.0F, 1.0F);
+        world.levelEvent(player, LevelEvent.PARTICLES_SCRAPE, pos, 0);
+        world.setBlock(pos, optional.get(), Block.UPDATE_ALL_IMMEDIATE);
+        context.getItemInHand().shrink(1);
+
+        return InteractionResult.SUCCESS;
     }
 }

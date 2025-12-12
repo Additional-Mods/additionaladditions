@@ -31,4 +31,6 @@ accessible field net/minecraft/world/item/CreativeModeTabs INGREDIENTS Lnet/mine
 
 accessible method net/minecraft/world/entity/ai/village/poi/PoiTypes registerBlockStates (Lnet/minecraft/core/Holder;Ljava/util/Set;)V
 
+accessible method net/minecraft/world/item/context/UseOnContext getHitResult ()Lnet/minecraft/world/phys/BlockHitResult;
+
 accessible field net/minecraft/world/level/block/RedStoneWireBlock shouldSignal Z
