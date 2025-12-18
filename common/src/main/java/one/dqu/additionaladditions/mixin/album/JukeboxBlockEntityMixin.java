@@ -8,7 +8,6 @@ import net.minecraft.world.level.block.entity.JukeboxBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import one.dqu.additionaladditions.misc.AlbumContents;
 import one.dqu.additionaladditions.misc.AlbumJukeboxExtension;
-import one.dqu.additionaladditions.registry.AAItems;
 import one.dqu.additionaladditions.registry.AAMisc;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -26,7 +25,7 @@ public class JukeboxBlockEntityMixin implements AlbumJukeboxExtension {
     @Inject(method = "setTheItem", at = @At("TAIL"))
     private void setTheItem(ItemStack stack, CallbackInfo ci) {
         additionaladditions$track = -1;
-        if (!stack.is(AAItems.ALBUM.get())) {
+        if (!stack.is(AAMisc.ALBUMS_TAG)) {
             return;
         }
         additionaladditions$playing = true;

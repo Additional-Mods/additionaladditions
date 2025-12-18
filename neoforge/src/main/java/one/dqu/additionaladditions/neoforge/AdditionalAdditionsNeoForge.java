@@ -3,6 +3,7 @@ package one.dqu.additionaladditions.neoforge;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
+import net.minecraft.client.renderer.item.ClampedItemPropertyFunction;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -44,6 +45,7 @@ import one.dqu.additionaladditions.misc.PocketJukeboxPlayer;
 import one.dqu.additionaladditions.registry.AABlocks;
 import one.dqu.additionaladditions.registry.AAEntities;
 import one.dqu.additionaladditions.registry.AAItems;
+import one.dqu.additionaladditions.registry.AAMisc;
 import one.dqu.additionaladditions.util.CreativeAdder;
 import one.dqu.additionaladditions.util.Registrar;
 import one.dqu.additionaladditions.util.neoforge.AdditionalLootModifier;
@@ -192,6 +194,31 @@ public final class AdditionalAdditionsNeoForge {
         ItemProperties.register(AAItems.POCKET_JUKEBOX_ITEM.get(), ResourceLocation.withDefaultNamespace("disc"), ((itemStack, clientWorld, livingEntity, worldSeed) -> {
             return PocketJukeboxItem.hasDisc(itemStack) ? 1.0F : 0.0F;
         }));
+
+        ClampedItemPropertyFunction albumFunction = (itemStack, clientWorld, livingEntity, worldSeed) -> {
+            if (!itemStack.has(AAMisc.ALBUM_CONTENTS_COMPONENT.get())) {
+                return 0.0F;
+            }
+            return itemStack.get(AAMisc.ALBUM_CONTENTS_COMPONENT.get()).items().isEmpty() ? 0.0F : 1.0F;
+        };
+        ResourceLocation albumLocation = ResourceLocation.fromNamespaceAndPath(AdditionalAdditions.NAMESPACE, "disc");
+        ItemProperties.register(AAItems.ALBUM.get(), albumLocation, albumFunction);
+        ItemProperties.register(AAItems.WHITE_ALBUM.get(), albumLocation, albumFunction);
+        ItemProperties.register(AAItems.LIGHT_GRAY_ALBUM.get(), albumLocation, albumFunction);
+        ItemProperties.register(AAItems.GRAY_ALBUM.get(), albumLocation, albumFunction);
+        ItemProperties.register(AAItems.BLACK_ALBUM.get(), albumLocation, albumFunction);
+        ItemProperties.register(AAItems.BROWN_ALBUM.get(), albumLocation, albumFunction);
+        ItemProperties.register(AAItems.RED_ALBUM.get(), albumLocation, albumFunction);
+        ItemProperties.register(AAItems.ORANGE_ALBUM.get(), albumLocation, albumFunction);
+        ItemProperties.register(AAItems.YELLOW_ALBUM.get(), albumLocation, albumFunction);
+        ItemProperties.register(AAItems.LIME_ALBUM.get(), albumLocation, albumFunction);
+        ItemProperties.register(AAItems.GREEN_ALBUM.get(), albumLocation, albumFunction);
+        ItemProperties.register(AAItems.CYAN_ALBUM.get(), albumLocation, albumFunction);
+        ItemProperties.register(AAItems.LIGHT_BLUE_ALBUM.get(), albumLocation, albumFunction);
+        ItemProperties.register(AAItems.BLUE_ALBUM.get(), albumLocation, albumFunction);
+        ItemProperties.register(AAItems.PURPLE_ALBUM.get(), albumLocation, albumFunction);
+        ItemProperties.register(AAItems.MAGENTA_ALBUM.get(), albumLocation, albumFunction);
+        ItemProperties.register(AAItems.PINK_ALBUM.get(), albumLocation, albumFunction);
 
         ItemProperties.register(AAItems.BAROMETER.get(), ResourceLocation.withDefaultNamespace("angle"), (itemStack, clientWorld, livingEntity, worldSeed) -> {
             if (livingEntity == null) return 0.3125F;

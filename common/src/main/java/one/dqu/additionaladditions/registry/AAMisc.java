@@ -36,6 +36,7 @@ public class AAMisc {
 
     public static final TagKey<Item> SUSPICIOUS_DYES_TAG = TagKey.create(Registries.ITEM, ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "suspicious_dyes"));
     public static final TagKey<Block> WRENCH_BLACKLIST_TAG = TagKey.create(Registries.BLOCK, ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "wrench_blacklisted"));
+    public static final TagKey<Item> ALBUMS_TAG = TagKey.create(Registries.ITEM, ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "albums"));
 
     public static final Supplier<RecipeSerializer<RoseGoldTransmuteRecipe>> ROSE_GOLD_TRANSMUTE_RECIPE_SERIALIZER = AARegistries.RECIPE_SERIALIZERS.register(
             ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "rose_gold_transmute"),

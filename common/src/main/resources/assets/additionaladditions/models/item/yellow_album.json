@@ -1,20 +1,20 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "additionaladditions:item/album"
+    "layer0": "additionaladditions:item/yellow_album"
   },
   "overrides": [
     {
       "predicate": {
         "additionaladditions:disc": 0
       },
-      "model": "additionaladditions:item/album/album_0"
+      "model": "additionaladditions:item/album/yellow_album_0"
     },
     {
       "predicate": {
         "additionaladditions:disc": 1
       },
-      "model": "additionaladditions:item/album/album_1"
+      "model": "additionaladditions:item/album/yellow_album_1"
     }
   ]
 }

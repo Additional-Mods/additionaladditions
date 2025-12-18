@@ -397,11 +397,28 @@ public class AAItems {
             .build(RopeArrowItem::new);
 
     public static final Supplier<AlbumItem> ALBUM = new Builder("album")
+            .creativeBefore(Items.MUSIC_DISC_13, CreativeModeTabs.TOOLS_AND_UTILITIES)
             .properties(p -> p
                     .stacksTo(1)
                     .component(AAMisc.ALBUM_CONTENTS_COMPONENT.get(), AlbumContents.EMPTY)
             )
             .build(AlbumItem::new);
+    public static final Supplier<AlbumItem> WHITE_ALBUM = new Builder("white_album").creativeBefore(Items.MUSIC_DISC_13, CreativeModeTabs.TOOLS_AND_UTILITIES).properties(p -> p.stacksTo(1).component(AAMisc.ALBUM_CONTENTS_COMPONENT.get(), AlbumContents.EMPTY)).build(AlbumItem::new);
+    public static final Supplier<AlbumItem> LIGHT_GRAY_ALBUM = new Builder("light_gray_album").creativeBefore(Items.MUSIC_DISC_13, CreativeModeTabs.TOOLS_AND_UTILITIES).properties(p -> p.stacksTo(1).component(AAMisc.ALBUM_CONTENTS_COMPONENT.get(), AlbumContents.EMPTY)).build(AlbumItem::new);
+    public static final Supplier<AlbumItem> GRAY_ALBUM = new Builder("gray_album").creativeBefore(Items.MUSIC_DISC_13, CreativeModeTabs.TOOLS_AND_UTILITIES).properties(p -> p.stacksTo(1).component(AAMisc.ALBUM_CONTENTS_COMPONENT.get(), AlbumContents.EMPTY)).build(AlbumItem::new);
+    public static final Supplier<AlbumItem> BLACK_ALBUM = new Builder("black_album").creativeBefore(Items.MUSIC_DISC_13, CreativeModeTabs.TOOLS_AND_UTILITIES).properties(p -> p.stacksTo(1).component(AAMisc.ALBUM_CONTENTS_COMPONENT.get(), AlbumContents.EMPTY)).build(AlbumItem::new);
+    public static final Supplier<AlbumItem> BROWN_ALBUM = new Builder("brown_album").creativeBefore(Items.MUSIC_DISC_13, CreativeModeTabs.TOOLS_AND_UTILITIES).properties(p -> p.stacksTo(1).component(AAMisc.ALBUM_CONTENTS_COMPONENT.get(), AlbumContents.EMPTY)).build(AlbumItem::new);
+    public static final Supplier<AlbumItem> RED_ALBUM = new Builder("red_album").creativeBefore(Items.MUSIC_DISC_13, CreativeModeTabs.TOOLS_AND_UTILITIES).properties(p -> p.stacksTo(1).component(AAMisc.ALBUM_CONTENTS_COMPONENT.get(), AlbumContents.EMPTY)).build(AlbumItem::new);
+    public static final Supplier<AlbumItem> ORANGE_ALBUM = new Builder("orange_album").creativeBefore(Items.MUSIC_DISC_13, CreativeModeTabs.TOOLS_AND_UTILITIES).properties(p -> p.stacksTo(1).component(AAMisc.ALBUM_CONTENTS_COMPONENT.get(), AlbumContents.EMPTY)).build(AlbumItem::new);
+    public static final Supplier<AlbumItem> YELLOW_ALBUM = new Builder("yellow_album").creativeBefore(Items.MUSIC_DISC_13, CreativeModeTabs.TOOLS_AND_UTILITIES).properties(p -> p.stacksTo(1).component(AAMisc.ALBUM_CONTENTS_COMPONENT.get(), AlbumContents.EMPTY)).build(AlbumItem::new);
+    public static final Supplier<AlbumItem> LIME_ALBUM = new Builder("lime_album").creativeBefore(Items.MUSIC_DISC_13, CreativeModeTabs.TOOLS_AND_UTILITIES).properties(p -> p.stacksTo(1).component(AAMisc.ALBUM_CONTENTS_COMPONENT.get(), AlbumContents.EMPTY)).build(AlbumItem::new);
+    public static final Supplier<AlbumItem> GREEN_ALBUM = new Builder("green_album").creativeBefore(Items.MUSIC_DISC_13, CreativeModeTabs.TOOLS_AND_UTILITIES).properties(p -> p.stacksTo(1).component(AAMisc.ALBUM_CONTENTS_COMPONENT.get(), AlbumContents.EMPTY)).build(AlbumItem::new);
+    public static final Supplier<AlbumItem> CYAN_ALBUM = new Builder("cyan_album").creativeBefore(Items.MUSIC_DISC_13, CreativeModeTabs.TOOLS_AND_UTILITIES).properties(p -> p.stacksTo(1).component(AAMisc.ALBUM_CONTENTS_COMPONENT.get(), AlbumContents.EMPTY)).build(AlbumItem::new);
+    public static final Supplier<AlbumItem> LIGHT_BLUE_ALBUM = new Builder("light_blue_album").creativeBefore(Items.MUSIC_DISC_13, CreativeModeTabs.TOOLS_AND_UTILITIES).properties(p -> p.stacksTo(1).component(AAMisc.ALBUM_CONTENTS_COMPONENT.get(), AlbumContents.EMPTY)).build(AlbumItem::new);
+    public static final Supplier<AlbumItem> BLUE_ALBUM = new Builder("blue_album").creativeBefore(Items.MUSIC_DISC_13, CreativeModeTabs.TOOLS_AND_UTILITIES).properties(p -> p.stacksTo(1).component(AAMisc.ALBUM_CONTENTS_COMPONENT.get(), AlbumContents.EMPTY)).build(AlbumItem::new);
+    public static final Supplier<AlbumItem> PURPLE_ALBUM = new Builder("purple_album").creativeBefore(Items.MUSIC_DISC_13, CreativeModeTabs.TOOLS_AND_UTILITIES).properties(p -> p.stacksTo(1).component(AAMisc.ALBUM_CONTENTS_COMPONENT.get(), AlbumContents.EMPTY)).build(AlbumItem::new);
+    public static final Supplier<AlbumItem> MAGENTA_ALBUM = new Builder("magenta_album").creativeBefore(Items.MUSIC_DISC_13, CreativeModeTabs.TOOLS_AND_UTILITIES).properties(p -> p.stacksTo(1).component(AAMisc.ALBUM_CONTENTS_COMPONENT.get(), AlbumContents.EMPTY)).build(AlbumItem::new);
+    public static final Supplier<AlbumItem> PINK_ALBUM = new Builder("pink_album").creativeBefore(Items.MUSIC_DISC_13, CreativeModeTabs.TOOLS_AND_UTILITIES).properties(p -> p.stacksTo(1).component(AAMisc.ALBUM_CONTENTS_COMPONENT.get(), AlbumContents.EMPTY)).build(AlbumItem::new);
 
     private static class Builder {
         private final String id;
