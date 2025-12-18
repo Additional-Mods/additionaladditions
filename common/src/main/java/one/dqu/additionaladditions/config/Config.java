@@ -3,10 +3,6 @@ package one.dqu.additionaladditions.config;
 import net.minecraft.world.food.FoodProperties;
 import one.dqu.additionaladditions.config.datafixer.ConfigFixerUpper;
 import one.dqu.additionaladditions.config.type.*;
-import net.minecraft.resources.ResourceLocation;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class Config {
     public static void init() { /* forces static init */ }
@@ -44,9 +40,9 @@ public class Config {
             )
     );
 
-    public static final ConfigProperty<DamageableItemConfig> WATERING_CAN = new ConfigProperty<>(
-            "watering_can", DamageableItemConfig.CODEC,
-            new DamageableItemConfig(true, 101)
+    public static final ConfigProperty<WateringCanConfig> WATERING_CAN = new ConfigProperty<>(
+            "watering_can", WateringCanConfig.CODEC,
+            new WateringCanConfig(true, 10)
     );
 
     public static final ConfigProperty<DamageableItemConfig> WRENCH = new ConfigProperty<>(

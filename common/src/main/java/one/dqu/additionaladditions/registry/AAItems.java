@@ -77,7 +77,7 @@ public class AAItems {
             .config(() -> Config.WATERING_CAN.get().enabled())
             .properties(p -> p
                     .stacksTo(1)
-                    .durability(Config.WATERING_CAN.get().durability())
+                    .component(AAMisc.WATER_LEVEL_COMPONENT.get(), 0)
             )
             .creativeAfter(Items.BONE_MEAL, CreativeModeTabs.TOOLS_AND_UTILITIES)
             .build(WateringCanItem::new);

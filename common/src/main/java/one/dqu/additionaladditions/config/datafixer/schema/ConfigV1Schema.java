@@ -44,6 +44,13 @@ public class ConfigV1Schema extends Schema {
                 )
         );
 
+        schema.registerType(false, ConfigProperty.typeReference(WateringCanConfig.class), () ->
+                DSL.fields(
+                        "enabled", DSL.constType(DSL.bool()),
+                        "max_water_level", DSL.constType(DSL.intType())
+                )
+        );
+
         schema.registerType(false, ConfigProperty.typeReference(BarometerConfig.class), () ->
                 DSL.fields(
                         "enabled", DSL.constType(DSL.bool()),

@@ -1,7 +1,9 @@
 package one.dqu.additionaladditions.registry;
 
+import com.mojang.serialization.Codec;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
@@ -25,6 +27,11 @@ public class AAMisc {
     public static final Supplier<DataComponentType<AlbumContents>> ALBUM_CONTENTS_COMPONENT = AARegistries.DATA_COMPONENT_TYPES.register(
             ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "album_contents"),
             () -> DataComponentType.<AlbumContents>builder().persistent(AlbumContents.CODEC).networkSynchronized(AlbumContents.STREAM_CODEC).cacheEncoding().build()
+    );
+
+    public static final Supplier<DataComponentType<Integer>> WATER_LEVEL_COMPONENT = AARegistries.DATA_COMPONENT_TYPES.register(
+            ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "water_level"),
+            () -> DataComponentType.<Integer>builder().persistent(Codec.INT).networkSynchronized(ByteBufCodecs.INT).build()
     );
 
     public static final TagKey<Item> SUSPICIOUS_DYES_TAG = TagKey.create(Registries.ITEM, ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "suspicious_dyes"));
