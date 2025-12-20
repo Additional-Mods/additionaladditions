@@ -57,6 +57,10 @@ public class PocketJukeboxPlayer {
         return this.currentTrack;
     }
 
+    public boolean isPlayingFrom(ItemStack jukeboxStack) {
+        return this.isPlaying && this.jukeboxStack != null && ItemStack.matches(this.jukeboxStack, jukeboxStack);
+    }
+
     public void tick() {
         if (!this.isPlaying) {
             return;

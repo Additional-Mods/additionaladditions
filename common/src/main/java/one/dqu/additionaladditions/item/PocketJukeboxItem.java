@@ -101,7 +101,11 @@ public class PocketJukeboxItem extends Item {
 
         if (storedDisc.is(AAMisc.ALBUMS_TAG)) {
             AlbumContents contents = storedDisc.getOrDefault(AAMisc.ALBUM_CONTENTS_COMPONENT.get(), AlbumContents.EMPTY);
-            int index = PocketJukeboxPlayer.INSTANCE.getCurrentTrack();
+
+            int index = PocketJukeboxPlayer.INSTANCE.isPlayingFrom(stack)
+                    ? PocketJukeboxPlayer.INSTANCE.getCurrentTrack()
+                    : -1;
+
             contents.addToTooltip(context, tooltip::add, flag, storedDisc.getHoverName(), index);
         } else {
             JukeboxPlayable jukeboxPlayable = storedDisc.get(DataComponents.JUKEBOX_PLAYABLE);
