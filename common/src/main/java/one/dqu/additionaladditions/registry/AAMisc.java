@@ -13,6 +13,7 @@ import net.minecraft.world.level.block.Block;
 import one.dqu.additionaladditions.AdditionalAdditions;
 import one.dqu.additionaladditions.glint.GlintColor;
 import one.dqu.additionaladditions.misc.AlbumContents;
+import one.dqu.additionaladditions.misc.AlbumDyeRecipe;
 import one.dqu.additionaladditions.misc.RoseGoldTransmuteRecipe;
 import one.dqu.additionaladditions.misc.SuspiciousDyeRecipe;
 
@@ -46,6 +47,11 @@ public class AAMisc {
     public static final Supplier<RecipeSerializer<SuspiciousDyeRecipe>> SUSPICIOUS_DYE_RECIPE_SERIALIZER = AARegistries.RECIPE_SERIALIZERS.register(
             ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "suspicious_dye"),
             () -> new SimpleCraftingRecipeSerializer<>(SuspiciousDyeRecipe::new)
+    );
+
+    public static final Supplier<RecipeSerializer<AlbumDyeRecipe>> ALBUM_DYE_RECIPE_SERIALIZER = AARegistries.RECIPE_SERIALIZERS.register(
+            ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "album_dye"),
+            () -> new SimpleCraftingRecipeSerializer<>(AlbumDyeRecipe::new)
     );
 
     public static void registerAll() {
