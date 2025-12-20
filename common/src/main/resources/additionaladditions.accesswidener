@@ -34,3 +34,5 @@ accessible method net/minecraft/world/entity/ai/village/poi/PoiTypes registerBlo
 accessible method net/minecraft/world/item/context/UseOnContext getHitResult ()Lnet/minecraft/world/phys/BlockHitResult;
 
 accessible field net/minecraft/world/level/block/RedStoneWireBlock shouldSignal Z
+
+accessible method net/minecraft/client/renderer/item/ItemProperties register (Lnet/minecraft/world/item/Item;Lnet/minecraft/resources/ResourceLocation;Lnet/minecraft/client/renderer/item/ClampedItemPropertyFunction;)V

@@ -3,9 +3,6 @@ package one.dqu.additionaladditions.neoforge;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
-import net.minecraft.client.renderer.item.ClampedItemPropertyFunction;
-import net.minecraft.client.renderer.item.ItemProperties;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -13,10 +10,6 @@ import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.packs.resources.SimplePreparableReloadListener;
 import net.minecraft.util.profiling.ProfilerFiller;
 import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.CrossbowItem;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.component.ChargedProjectiles;
-import net.minecraft.world.level.Level;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
 
@@ -34,18 +27,16 @@ import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 import net.neoforged.neoforge.registries.NeoForgeRegistries;
 import one.dqu.additionaladditions.AdditionalAdditions;
+import one.dqu.additionaladditions.AdditionalAdditionsClient;
 import one.dqu.additionaladditions.config.Config;
 import one.dqu.additionaladditions.config.ConfigLoader;
 import one.dqu.additionaladditions.config.network.ConfigSyncS2CPayload;
 import one.dqu.additionaladditions.config.network.neoforge.ConfigSyncTask;
 import one.dqu.additionaladditions.entity.RopeArrowRenderer;
 import one.dqu.additionaladditions.glint.GlintResourceGenerator;
-import one.dqu.additionaladditions.item.PocketJukeboxItem;
 import one.dqu.additionaladditions.misc.PocketJukeboxPlayer;
 import one.dqu.additionaladditions.registry.AABlocks;
 import one.dqu.additionaladditions.registry.AAEntities;
-import one.dqu.additionaladditions.registry.AAItems;
-import one.dqu.additionaladditions.registry.AAMisc;
 import one.dqu.additionaladditions.util.CreativeAdder;
 import one.dqu.additionaladditions.util.Registrar;
 import one.dqu.additionaladditions.util.neoforge.AdditionalLootModifier;
@@ -167,80 +158,13 @@ public final class AdditionalAdditionsNeoForge {
     }
 
     private void onClientSetup(FMLClientSetupEvent event) {
+        // common client init
+        AdditionalAdditionsClient.init();
+
         // Block render layers
         ItemBlockRenderTypes.setRenderLayer(AABlocks.COPPER_PATINA.get(), RenderType.cutout());
         ItemBlockRenderTypes.setRenderLayer(AABlocks.ROPE_BLOCK.get(), RenderType.cutout());
         ItemBlockRenderTypes.setRenderLayer(AABlocks.GLOW_STICK_BLOCK.get(), RenderType.cutout());
-
-        // Item predicates
-        ItemProperties.register(AAItems.CROSSBOW_WITH_SPYGLASS.get(), ResourceLocation.withDefaultNamespace("pull"), (itemStack, clientWorld, livingEntity, worldSeed) -> {
-            if (livingEntity == null) return 0.0F;
-            return livingEntity.getUseItem() != itemStack ? 0.0F : (itemStack.getUseDuration(livingEntity) - livingEntity.getUseItemRemainingTicks()) / 20.0F;
-        });
-
-        ItemProperties.register(AAItems.CROSSBOW_WITH_SPYGLASS.get(), ResourceLocation.withDefaultNamespace("pulling"), (itemStack, clientWorld, livingEntity, worldSeed) -> {
-            if (livingEntity == null) return 0.0F;
-            return livingEntity.isUsingItem() && livingEntity.getUseItem() == itemStack ? 1.0F : 0.0F;
-        });
-
-        ItemProperties.register(AAItems.CROSSBOW_WITH_SPYGLASS.get(), ResourceLocation.withDefaultNamespace("charged"), (itemStack, clientWorld, livingEntity, worldSeed) -> {
-            return CrossbowItem.isCharged(itemStack) ? 1.0F : 0.0F;
-        });
-
-        ItemProperties.register(AAItems.CROSSBOW_WITH_SPYGLASS.get(), ResourceLocation.withDefaultNamespace("firework"), (itemStack, clientWorld, livingEntity, worldSeed) -> {
-            return itemStack.getOrDefault(DataComponents.CHARGED_PROJECTILES, ChargedProjectiles.EMPTY).getItems().stream().anyMatch(stack -> stack.is(Items.FIREWORK_ROCKET)) ? 1.0F : 0.0F;
-        });
-
-        ItemProperties.register(AAItems.POCKET_JUKEBOX_ITEM.get(), ResourceLocation.withDefaultNamespace("disc"), ((itemStack, clientWorld, livingEntity, worldSeed) -> {
-            return PocketJukeboxItem.hasDisc(itemStack) ? 1.0F : 0.0F;
-        }));
-
-        ClampedItemPropertyFunction albumFunction = (itemStack, clientWorld, livingEntity, worldSeed) -> {
-            if (!itemStack.has(AAMisc.ALBUM_CONTENTS_COMPONENT.get())) {
-                return 0.0F;
-            }
-            return itemStack.get(AAMisc.ALBUM_CONTENTS_COMPONENT.get()).items().isEmpty() ? 0.0F : 1.0F;
-        };
-        ResourceLocation albumLocation = ResourceLocation.fromNamespaceAndPath(AdditionalAdditions.NAMESPACE, "disc");
-        ItemProperties.register(AAItems.ALBUM.get(), albumLocation, albumFunction);
-        ItemProperties.register(AAItems.WHITE_ALBUM.get(), albumLocation, albumFunction);
-        ItemProperties.register(AAItems.LIGHT_GRAY_ALBUM.get(), albumLocation, albumFunction);
-        ItemProperties.register(AAItems.GRAY_ALBUM.get(), albumLocation, albumFunction);
-        ItemProperties.register(AAItems.BLACK_ALBUM.get(), albumLocation, albumFunction);
-        ItemProperties.register(AAItems.BROWN_ALBUM.get(), albumLocation, albumFunction);
-        ItemProperties.register(AAItems.RED_ALBUM.get(), albumLocation, albumFunction);
-        ItemProperties.register(AAItems.ORANGE_ALBUM.get(), albumLocation, albumFunction);
-        ItemProperties.register(AAItems.YELLOW_ALBUM.get(), albumLocation, albumFunction);
-        ItemProperties.register(AAItems.LIME_ALBUM.get(), albumLocation, albumFunction);
-        ItemProperties.register(AAItems.GREEN_ALBUM.get(), albumLocation, albumFunction);
-        ItemProperties.register(AAItems.CYAN_ALBUM.get(), albumLocation, albumFunction);
-        ItemProperties.register(AAItems.LIGHT_BLUE_ALBUM.get(), albumLocation, albumFunction);
-        ItemProperties.register(AAItems.BLUE_ALBUM.get(), albumLocation, albumFunction);
-        ItemProperties.register(AAItems.PURPLE_ALBUM.get(), albumLocation, albumFunction);
-        ItemProperties.register(AAItems.MAGENTA_ALBUM.get(), albumLocation, albumFunction);
-        ItemProperties.register(AAItems.PINK_ALBUM.get(), albumLocation, albumFunction);
-
-        ItemProperties.register(AAItems.BAROMETER.get(), ResourceLocation.withDefaultNamespace("angle"), (itemStack, clientWorld, livingEntity, worldSeed) -> {
-            if (livingEntity == null) return 0.3125F;
-            Level world = livingEntity.level();
-            if (world == null) return 0.3125F;
-
-            float sea = world.getSeaLevel();
-            float height = livingEntity.getBlockY();
-            float top = world.getMaxBuildHeight();
-            float bottom = world.getMinBuildHeight();
-
-            if (height > top) return 0;
-            if (height < bottom) return 1;
-
-            if (height >= sea) {
-                double val = (height / (2 * (sea - top))) + 0.25 - ((sea + top) / (4 * (sea - top)));
-                return (float) val;
-            } else {
-                double val = (height / (2 * (bottom - sea))) + 0.75 - ((bottom + sea) / (4 * (bottom - sea)));
-                return (float) val;
-            }
-        });
 
         // mod compatibility
         event.enqueueWork(ModCompatibilityImpl::showToasts);
