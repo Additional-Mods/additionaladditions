@@ -4,6 +4,10 @@ import net.minecraft.world.food.FoodProperties;
 import one.dqu.additionaladditions.config.datafixer.ConfigFixerUpper;
 import one.dqu.additionaladditions.config.type.*;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class Config {
     public static void init() { /* forces static init */ }
 
@@ -65,8 +69,6 @@ public class Config {
             new FeatureConfig(true)
     );
 
-    // Depth Meter
-
     public static final ConfigProperty<BarometerConfig> BAROMETER = new ConfigProperty<>(
             "barometer", BarometerConfig.CODEC,
             new BarometerConfig(true, false)
@@ -79,6 +81,16 @@ public class Config {
 
     public static final ConfigProperty<FeatureConfig> POCKET_JUKEBOX = new ConfigProperty<>(
             "pocket_jukebox", FeatureConfig.CODEC,
+            new FeatureConfig(true)
+    );
+
+    public static final ConfigProperty<FeatureConfig> ALBUM = new ConfigProperty<>(
+            "album", FeatureConfig.CODEC,
+            new FeatureConfig(true)
+    );
+
+    public static final ConfigProperty<FeatureConfig> SUSPICIOUS_DYES = new ConfigProperty<>(
+            "suspicious_dyes", FeatureConfig.CODEC,
             new FeatureConfig(true)
     );
 
@@ -126,4 +138,17 @@ public class Config {
             "powered_rails_copper_recipe", FeatureConfig.CODEC,
             new FeatureConfig(true)
     );
+
+    public static List<ConfigProperty<?>> getAllConfigProperties() {
+        return Arrays.stream(Config.class.getDeclaredFields())
+                .filter(field -> field.getType().equals(ConfigProperty.class))
+                .map(field -> {
+                    try {
+                        return (ConfigProperty<?>) field.get(null);
+                    } catch (IllegalAccessException e) {
+                        throw new RuntimeException(e);
+                    }
+                })
+                .collect(Collectors.toList());
+    }
 }

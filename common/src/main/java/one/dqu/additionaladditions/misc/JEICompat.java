@@ -19,6 +19,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.*;
 import one.dqu.additionaladditions.AdditionalAdditions;
+import one.dqu.additionaladditions.config.Config;
 import one.dqu.additionaladditions.glint.GlintColor;
 import one.dqu.additionaladditions.item.SuspiciousDyeItem;
 import one.dqu.additionaladditions.registry.AAItems;
@@ -36,13 +37,19 @@ public class JEICompat implements IModPlugin {
 
     @Override
     public void registerVanillaCategoryExtensions(IVanillaCategoryExtensionRegistration event) {
-        event.getCraftingCategory().addExtension(SuspiciousDyeRecipe.class, new SuspiciousDyeExtension());
+        if (Config.SUSPICIOUS_DYES.get().enabled()) {
+            event.getCraftingCategory().addExtension(SuspiciousDyeRecipe.class, new SuspiciousDyeExtension());
+        }
     }
 
     @Override
     public void registerRecipes(IRecipeRegistration event) {
-        albumDyeRecipe(event);
-        roseGoldTransmuteRecipe(event);
+        if (Config.ALBUM.get().enabled()) {
+            albumDyeRecipe(event);
+        }
+        if (Config.ROSE_GOLD.get().enabled()) {
+            roseGoldTransmuteRecipe(event);
+        }
     }
 
     // AlbumDyeRecipe

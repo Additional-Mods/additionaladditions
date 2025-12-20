@@ -9,6 +9,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.*;
+import one.dqu.additionaladditions.config.Config;
 import one.dqu.additionaladditions.registry.AAItems;
 import one.dqu.additionaladditions.registry.AAMisc;
 
@@ -19,8 +20,12 @@ import java.util.Map;
 public class REICompat implements REIClientPlugin {
     @Override
     public void registerDisplays(DisplayRegistry registry) {
-        registerAlbumRecipes(registry);
-        roseGoldTransmuteRecipe(registry);
+        if (Config.ALBUM.get().enabled()) {
+            registerAlbumRecipes(registry);
+        }
+        if (Config.ROSE_GOLD.get().enabled()) {
+            roseGoldTransmuteRecipe(registry);
+        }
         // couldnt figure out how to add suspicious dye recipe stuff
     }
 
