@@ -74,11 +74,6 @@ public class Config {
             new BarometerConfig(true, false)
     );
 
-    public static final ConfigProperty<FeatureConfig> MYSTERIOUS_BUNDLE = new ConfigProperty<>(
-            "mysterious_bundle", FeatureConfig.CODEC,
-            new FeatureConfig(true)
-    );
-
     public static final ConfigProperty<FeatureConfig> POCKET_JUKEBOX = new ConfigProperty<>(
             "pocket_jukebox", FeatureConfig.CODEC,
             new FeatureConfig(true)
