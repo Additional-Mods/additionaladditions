@@ -111,7 +111,7 @@ public class Config {
 
     public static final ConfigProperty<TintedRedstoneLampConfig> TINTED_REDSTONE_LAMP = new ConfigProperty<>(
             "tinted_redstone_lamp", TintedRedstoneLampConfig.CODEC,
-            new TintedRedstoneLampConfig(true, 1.0f, 16)
+            new TintedRedstoneLampConfig(true, 1.0f, 14)
     );
 
     public static final ConfigProperty<FeatureConfig> COPPER_PATINA = new ConfigProperty<>(

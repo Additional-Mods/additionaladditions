@@ -1,46 +1,51 @@
 package one.dqu.additionaladditions.mixin;
 
+import net.minecraft.core.BlockPos;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.*;
+import net.minecraft.world.level.LevelAccessor;
 import one.dqu.additionaladditions.config.Config;
 import one.dqu.additionaladditions.registry.AABlocks;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.village.poi.PoiManager;
-import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 /**
  * Handles mob despawning near tinted redstone lamps.
  */
 @Mixin(Mob.class)
-public abstract class MobMixin extends LivingEntity {
-    @Shadow protected abstract boolean shouldDespawnInPeaceful();
-
-    protected MobMixin(EntityType<? extends LivingEntity> entityType, Level world) {
-        super(entityType, world);
-    }
-
-    @Inject(method = "checkDespawn", at = @At("TAIL"))
-    public void checkDespawn(CallbackInfo ci) {
+public abstract class MobMixin {
+    @Inject(method = "checkMobSpawnRules", at = @At("TAIL"), cancellable = true)
+    private static void checkMobSpawnRules(EntityType<? extends Mob> entityType, LevelAccessor levelAccessor, MobSpawnType mobSpawnType, BlockPos blockPos, RandomSource randomSource, CallbackInfoReturnable<Boolean> cir) {
         if (!Config.TINTED_REDSTONE_LAMP.get().enabled()) return;
-        if (this.tickCount > 0 || !shouldDespawnInPeaceful()) return;
+        if (!(levelAccessor instanceof ServerLevel level)) return;
+        if (entityType.getCategory() != MobCategory.MONSTER) return;
+        if (mobSpawnType != MobSpawnType.NATURAL &&
+            mobSpawnType != MobSpawnType.CHUNK_GENERATION &&
+            mobSpawnType != MobSpawnType.PATROL
+        ) return;
 
         float chance = Config.TINTED_REDSTONE_LAMP.get().chance();
         int range = Config.TINTED_REDSTONE_LAMP.get().range();
 
-        PoiManager poiManager = ((ServerLevel)level()).getPoiManager();
-        long count = poiManager.getCountInRange(
-                (poiType) -> poiType.is(AABlocks.AMETHYST_LAMP_POI_KEY),
-                blockPosition(), range, PoiManager.Occupancy.ANY
-        );
+        PoiManager poiManager = level.getPoiManager();
 
-        if (count > 0 && getRandom().nextFloat() < chance) {
-            this.discard();
+        boolean hasLamp = poiManager.findAll(
+                (poiType) -> poiType.is(AABlocks.AMETHYST_LAMP_POI_KEY),
+                (pos) -> {
+                    int dx = Math.abs(pos.getX() - blockPos.getX());
+                    int dy = Math.abs(pos.getY() - blockPos.getY());
+                    int dz = Math.abs(pos.getZ() - blockPos.getZ());
+                    return (dx + dy + dz) <= range;
+                },
+                blockPos, range, PoiManager.Occupancy.ANY
+        ).findAny().isPresent();
+
+        if (hasLamp && randomSource.nextFloat() < chance) {
+            cir.setReturnValue(false);
         }
     }
 }
