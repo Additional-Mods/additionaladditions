@@ -43,6 +43,9 @@
       "one.dqu.additionaladditions.gametest.RopeArrowPartialPlacementTest",
       "one.dqu.additionaladditions.gametest.RopeArrowEntityHitTest",
       "one.dqu.additionaladditions.gametest.RopeArrowBadPlacementTest"
+    ],
+    "jei_mod_plugin": [
+      "one.dqu.additionaladditions.misc.JEICompat"
     ]
   },
   "mixins": [
