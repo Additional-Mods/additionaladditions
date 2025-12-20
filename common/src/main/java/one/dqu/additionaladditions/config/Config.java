@@ -109,9 +109,9 @@ public class Config {
             new FeatureConfig(true)
     );
 
-    public static final ConfigProperty<AmethystLampConfig> AMETHYST_LAMP = new ConfigProperty<>(
-            "amethyst_lamp", AmethystLampConfig.CODEC,
-            new AmethystLampConfig(true, 1.0f, 16)
+    public static final ConfigProperty<TintedRedstoneLampConfig> TINTED_REDSTONE_LAMP = new ConfigProperty<>(
+            "tinted_redstone_lamp", TintedRedstoneLampConfig.CODEC,
+            new TintedRedstoneLampConfig(true, 1.0f, 16)
     );
 
     public static final ConfigProperty<FeatureConfig> COPPER_PATINA = new ConfigProperty<>(

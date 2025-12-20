@@ -49,13 +49,13 @@ public class AABlocks {
             () -> new BlockItem(ROPE_BLOCK.get(), new Item.Properties())
     );
 
-    public static final Supplier<RedstoneLampBlock> AMETHYST_LAMP = AARegistries.BLOCKS.register(
-            ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "amethyst_lamp"),
+    public static final Supplier<RedstoneLampBlock> TINTED_REDSTONE_LAMP = AARegistries.BLOCKS.register(
+            ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "tinted_redstone_lamp"),
             () -> new RedstoneLampBlock(BlockBehaviour.Properties.of().mapColor(MapColor.TERRACOTTA_PURPLE).pushReaction(PushReaction.NORMAL).sound(SoundType.GLASS).strength(0.3f))
     );
-    public static final Supplier<Item> AMETHYST_BLOCK_ITEM = AARegistries.ITEMS.register(
-            ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "amethyst_lamp"),
-            () -> new BlockItem(AMETHYST_LAMP.get(), new Item.Properties())
+    public static final Supplier<Item> TINTED_REDSTONE_LAMP_ITEM = AARegistries.ITEMS.register(
+            ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "tinted_redstone_lamp"),
+            () -> new BlockItem(TINTED_REDSTONE_LAMP.get(), new Item.Properties())
     );
 
     public static final Supplier<CopperPatinaBlock> COPPER_PATINA = AARegistries.BLOCKS.register(
@@ -91,7 +91,7 @@ public class AABlocks {
     );
 
     // amethyst lamp poi
-    private static final Supplier<Set<BlockState>> AMETHYST_LAMP_POI_STATES = Suppliers.memoize(() -> ImmutableSet.copyOf(AABlocks.AMETHYST_LAMP.get().getStateDefinition().getPossibleStates().stream().filter(state -> state.getValue(RedstoneLampBlock.LIT)).toList()));
+    private static final Supplier<Set<BlockState>> AMETHYST_LAMP_POI_STATES = Suppliers.memoize(() -> ImmutableSet.copyOf(AABlocks.TINTED_REDSTONE_LAMP.get().getStateDefinition().getPossibleStates().stream().filter(state -> state.getValue(RedstoneLampBlock.LIT)).toList()));
     public static ResourceKey<PoiType> AMETHYST_LAMP_POI_KEY = ResourceKey.create(
             Registries.POINT_OF_INTEREST_TYPE, ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "amethyst_lamp_poi")
     );
@@ -122,8 +122,8 @@ public class AABlocks {
         });
 
         CreativeAdder.add(CreativeModeTabs.REDSTONE_BLOCKS, () -> Config.COPPER_PATINA.get().enabled(), Items.REDSTONE, () -> COPPER_PATINA.get().asItem());
-        CreativeAdder.add(CreativeModeTabs.REDSTONE_BLOCKS, () -> Config.AMETHYST_LAMP.get().enabled(), Items.REDSTONE_LAMP, () -> AMETHYST_LAMP.get().asItem());
-        CreativeAdder.add(CreativeModeTabs.FUNCTIONAL_BLOCKS, () -> Config.AMETHYST_LAMP.get().enabled(), Items.REDSTONE_LAMP, () -> AMETHYST_LAMP.get().asItem());
+        CreativeAdder.add(CreativeModeTabs.REDSTONE_BLOCKS, () -> Config.TINTED_REDSTONE_LAMP.get().enabled(), Items.REDSTONE_LAMP, () -> TINTED_REDSTONE_LAMP.get().asItem());
+        CreativeAdder.add(CreativeModeTabs.FUNCTIONAL_BLOCKS, () -> Config.TINTED_REDSTONE_LAMP.get().enabled(), Items.REDSTONE_LAMP, () -> TINTED_REDSTONE_LAMP.get().asItem());
         CreativeAdder.add(CreativeModeTabs.FUNCTIONAL_BLOCKS, () -> Config.ROPE.get().enabled(), Items.LADDER, () -> ROPE_BLOCK.get().asItem());
         CreativeAdder.addBefore(CreativeModeTabs.BUILDING_BLOCKS, () -> Config.COPPER_PATINA.get().enabled(), Items.COPPER_BLOCK, () -> PATINA_BLOCK.get().asItem());
         CreativeAdder.add(CreativeModeTabs.BUILDING_BLOCKS, () -> Config.ROSE_GOLD.get().enabled(), Items.LIGHT_WEIGHTED_PRESSURE_PLATE, () -> ROSE_GOLD_BLOCK.get().asItem());

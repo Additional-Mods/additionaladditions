@@ -58,7 +58,7 @@ public class ConfigV1Schema extends Schema {
                 )
         );
 
-        schema.registerType(false, ConfigProperty.typeReference(AmethystLampConfig.class), () ->
+        schema.registerType(false, ConfigProperty.typeReference(TintedRedstoneLampConfig.class), () ->
                 DSL.fields(
                         "enabled", DSL.constType(DSL.bool()),
                         "despawn_chance", DSL.constType(DSL.floatType()),

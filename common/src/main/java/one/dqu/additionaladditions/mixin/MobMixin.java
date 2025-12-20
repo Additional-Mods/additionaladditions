@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 /**
- * Handles mob despawning near amethyst lamps.
+ * Handles mob despawning near tinted redstone lamps.
  */
 @Mixin(Mob.class)
 public abstract class MobMixin extends LivingEntity {
@@ -27,11 +27,11 @@ public abstract class MobMixin extends LivingEntity {
 
     @Inject(method = "checkDespawn", at = @At("TAIL"))
     public void checkDespawn(CallbackInfo ci) {
-        if (!Config.AMETHYST_LAMP.get().enabled()) return;
+        if (!Config.TINTED_REDSTONE_LAMP.get().enabled()) return;
         if (this.tickCount > 0 || !shouldDespawnInPeaceful()) return;
 
-        float chance = Config.AMETHYST_LAMP.get().chance();
-        int range = Config.AMETHYST_LAMP.get().range();
+        float chance = Config.TINTED_REDSTONE_LAMP.get().chance();
+        int range = Config.TINTED_REDSTONE_LAMP.get().range();
 
         PoiManager poiManager = ((ServerLevel)level()).getPoiManager();
         long count = poiManager.getCountInRange(
