@@ -46,6 +46,9 @@
     ],
     "jei_mod_plugin": [
       "one.dqu.additionaladditions.misc.JEICompat"
+    ],
+    "rei_client": [
+      "one.dqu.additionaladditions.misc.REICompat"
     ]
   },
   "mixins": [

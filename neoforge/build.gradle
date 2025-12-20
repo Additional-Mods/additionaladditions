@@ -44,6 +44,8 @@ dependencies {
 
     common(project(path: ':common', configuration: 'namedElements')) { transitive = false }
     shadowBundle project(path: ':common', configuration: 'transformProductionNeoForge')
+
+    modCompileOnly "me.shedaniel:RoughlyEnoughItems-api-neoforge:${rei_api_version}"
 }
 
 processResources {
