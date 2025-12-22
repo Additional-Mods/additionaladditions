@@ -24,7 +24,7 @@ public class FluidHelperImpl {
 
         return new FluidHelper.Transaction(drained.getAmount(), (committed) -> {
             FluidStack toDrain = new FluidStack(fluid, committed);
-            toDrain.getFluid().getPickupSound().ifPresent((sound) -> level.playSound(player, pos, sound, net.minecraft.sounds.SoundSource.BLOCKS));
+            toDrain.getFluid().getPickupSound().ifPresent((sound) -> level.playSound(null, pos, sound, net.minecraft.sounds.SoundSource.BLOCKS));
             capability.drain(toDrain, IFluidHandler.FluidAction.EXECUTE);
         });
     }

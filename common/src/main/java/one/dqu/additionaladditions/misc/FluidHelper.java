@@ -28,7 +28,7 @@ public class FluidHelper {
             if (amount >= 1000 && !isSource) return new Transaction(0, (committed) -> {});
 
             return new Transaction(Math.min(amount, 1000), (committed) -> {
-                fluid.getPickupSound().ifPresent((sound) -> level.playSound(player, pos, sound, SoundSource.BLOCKS));
+                fluid.getPickupSound().ifPresent((sound) -> level.playSound(null, pos, sound, SoundSource.BLOCKS));
 
                 if (committed >= 1000 && !level.isClientSide()) {
                     bucketPickup.pickupBlock(player, level, pos, state);
@@ -44,7 +44,7 @@ public class FluidHelper {
             int finalAmount = (Math.min(needed, layers) * 1000) / LayeredCauldronBlock.MAX_FILL_LEVEL;
 
             return new Transaction(finalAmount, (commited) -> {
-                fluid.getPickupSound().ifPresent((sound) -> level.playSound(player, pos, sound, SoundSource.BLOCKS));
+                fluid.getPickupSound().ifPresent((sound) -> level.playSound(null, pos, sound, SoundSource.BLOCKS));
 
                 int toTake = Math.ceilDiv(commited * LayeredCauldronBlock.MAX_FILL_LEVEL, 1000);
 
@@ -66,7 +66,7 @@ public class FluidHelper {
             return new Transaction(1000, (committed) -> {
                 if (committed < 1000) return;
 
-                fluid.getPickupSound().ifPresent((sound) -> level.playSound(player, pos, sound, SoundSource.BLOCKS));
+                fluid.getPickupSound().ifPresent((sound) -> level.playSound(null, pos, sound, SoundSource.BLOCKS));
                 if (!level.isClientSide()) {
                     level.setBlockAndUpdate(pos, Blocks.CAULDRON.defaultBlockState());
                 }

@@ -29,7 +29,7 @@ public class FluidHelperImpl {
         }
 
         return new FluidHelper.Transaction((int)(extracted / 81L), (committed) -> {
-            fluid.getPickupSound().ifPresent((sound) -> level.playSound(player, pos, sound, net.minecraft.sounds.SoundSource.BLOCKS));
+            fluid.getPickupSound().ifPresent((sound) -> level.playSound(null, pos, sound, net.minecraft.sounds.SoundSource.BLOCKS));
 
             try (Transaction transaction = Transaction.openOuter()) {
                 storage.extract(fluidVariant, committed * 81L, transaction);
