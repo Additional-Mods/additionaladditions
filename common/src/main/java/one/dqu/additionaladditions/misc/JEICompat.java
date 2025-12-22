@@ -121,7 +121,8 @@ public class JEICompat implements IModPlugin {
                 Items.IRON_HELMET, AAItems.ROSE_GOLD_HELMET.get(),
                 Items.IRON_CHESTPLATE, AAItems.ROSE_GOLD_CHESTPLATE.get(),
                 Items.IRON_LEGGINGS, AAItems.ROSE_GOLD_LEGGINGS.get(),
-                Items.IRON_BOOTS, AAItems.ROSE_GOLD_BOOTS.get()
+                Items.IRON_BOOTS, AAItems.ROSE_GOLD_BOOTS.get(),
+                Items.IRON_HORSE_ARMOR, AAItems.ROSE_GOLD_HORSE_ARMOR.get()
         );
 
         for (Map.Entry<Item, Item> entry : transmuteMap.entrySet()) {

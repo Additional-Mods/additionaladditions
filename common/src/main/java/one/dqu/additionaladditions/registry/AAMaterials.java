@@ -23,7 +23,8 @@ public class AAMaterials {
                     ArmorItem.Type.BOOTS, 2,
                     ArmorItem.Type.LEGGINGS, 6,
                     ArmorItem.Type.CHESTPLATE, 7,
-                    ArmorItem.Type.HELMET, 2
+                    ArmorItem.Type.HELMET, 2,
+                    ArmorItem.Type.BODY, 9
             )),
             17,
             0.0f,
@@ -32,7 +33,6 @@ public class AAMaterials {
             () -> Ingredient.of(AAItems.ROSE_GOLD_INGOT.get())
     );
 
-    //TODO
     private static Holder<ArmorMaterial> register(String name, EnumMap<ArmorItem.Type, Integer> protection,
                                                   int enchantability, float toughness, float knockbackResistance,
                                                   Holder<SoundEvent> equipSound, Supplier<Ingredient> repairIngredient) {

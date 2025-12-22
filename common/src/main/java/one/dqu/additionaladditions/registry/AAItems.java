@@ -235,6 +235,14 @@ public class AAItems {
             .creativeAfter(Items.GOLDEN_BOOTS, CreativeModeTabs.COMBAT)
             .build(p -> new ArmorItem(AAMaterials.ROSE_GOLD, ArmorItem.Type.BOOTS, p));
 
+    public static final Supplier<Item> ROSE_GOLD_HORSE_ARMOR = new Builder("rose_gold_horse_armor")
+            .config(() -> Config.ROSE_GOLD.get().enabled())
+            .properties(p -> p
+                    .stacksTo(1)
+            )
+            .creativeAfter(Items.GOLDEN_HORSE_ARMOR, CreativeModeTabs.COMBAT)
+            .build(p -> new AnimalArmorItem(AAMaterials.ROSE_GOLD, AnimalArmorItem.BodyType.EQUESTRIAN, false, p));
+
     public static final Supplier<Item> ROSE_GOLD_SWORD = new Builder("rose_gold_sword")
             .config(() -> Config.ROSE_GOLD.get().enabled())
             .properties(p -> p
