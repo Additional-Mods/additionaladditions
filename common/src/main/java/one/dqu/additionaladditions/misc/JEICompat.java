@@ -24,6 +24,7 @@ import one.dqu.additionaladditions.glint.GlintColor;
 import one.dqu.additionaladditions.item.SuspiciousDyeItem;
 import one.dqu.additionaladditions.registry.AAItems;
 import one.dqu.additionaladditions.registry.AAMisc;
+import one.dqu.additionaladditions.util.ModCompatibility;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
@@ -37,7 +38,9 @@ public class JEICompat implements IModPlugin {
 
     @Override
     public void registerVanillaCategoryExtensions(IVanillaCategoryExtensionRegistration event) {
-        if (Config.SUSPICIOUS_DYES.get().enabled()) {
+        // its bugged with emi so
+        // noinspection ConstantValue
+        if (Config.SUSPICIOUS_DYES.get().enabled() && !ModCompatibility.isModPresent("emi")) {
             event.getCraftingCategory().addExtension(SuspiciousDyeRecipe.class, new SuspiciousDyeExtension());
         }
     }

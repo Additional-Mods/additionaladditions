@@ -9,4 +9,9 @@ public class ModCompatibility {
     public static void add(Supplier<Boolean> condition, String description, String... modids) {
         throw new AssertionError();
     }
+
+    @ExpectPlatform
+    public static boolean isModPresent(String... modids) {
+        throw new AssertionError();
+    }
 }

@@ -40,6 +40,15 @@ public class ModCompatibilityImpl {
         ));
     }
 
+    public static boolean isModPresent(String... modids) {
+        for (String modid : modids) {
+            if (FabricLoader.getInstance().isModLoaded(modid)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public static void showToasts() {
         for (Supplier<SystemToast> toastSupplier : toasts) {
             Minecraft.getInstance().getToasts().addToast(toastSupplier.get());
