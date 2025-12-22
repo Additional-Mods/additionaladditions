@@ -94,13 +94,13 @@ public class JEICompat implements IModPlugin {
 
             NonNullList<Ingredient> inputs = NonNullList.of(Ingredient.EMPTY, albumIngredient, dyeIngredient);
             ShapelessRecipe recipe = new ShapelessRecipe(
-                    "additionaladditions:jei_albums",
+                    "additionaladditions:/jei_albums",
                     CraftingBookCategory.MISC,
                     new ItemStack(result),
                     inputs
             );
 
-            ResourceLocation location = ResourceLocation.fromNamespaceAndPath("additionaladditions", "jei_album_" + color.getName());
+            ResourceLocation location = ResourceLocation.fromNamespaceAndPath("additionaladditions", "/jei_album_" + color.getName());
             recipes.add(new RecipeHolder<>(location, recipe));
         }
 
@@ -135,13 +135,13 @@ public class JEICompat implements IModPlugin {
 
             NonNullList<Ingredient> inputs = NonNullList.of(Ingredient.EMPTY, ironIngredient, roseGoldIngotIngredient);
             ShapelessRecipe recipe = new ShapelessRecipe(
-                    "additionaladditions:jei_rose_gold_transmute_" + ironId,
+                    "additionaladditions:/jei_rose_gold_transmute_" + ironId,
                     CraftingBookCategory.EQUIPMENT,
                     new ItemStack(roseGoldItem),
                     inputs
             );
 
-            ResourceLocation location = ResourceLocation.fromNamespaceAndPath("additionaladditions", "jei_rose_gold_transmute_" + ironId);
+            ResourceLocation location = ResourceLocation.fromNamespaceAndPath("additionaladditions", "/jei_rose_gold_transmute_" + ironId);
             recipes.add(new RecipeHolder<>(location, recipe));
         }
 
