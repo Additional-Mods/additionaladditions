@@ -13,10 +13,7 @@ public record FoodConfig(
     public static final Codec<FoodConfig> CODEC = RecordCodecBuilder.create(instance ->
             instance.group(
                     Codec.BOOL.fieldOf("enabled").forGetter(FoodConfig::enabled),
-                    FoodUnitConfig.CODEC.xmap(
-                            FoodUnitConfig::toFoodProperties,
-                            FoodUnitConfig::fromFoodProperties
-                    ).fieldOf("food").forGetter(FoodConfig::food)
+                    FoodUnitConfig.CODEC.fieldOf("food").forGetter(FoodConfig::food)
             ).apply(instance, FoodConfig::new)
     );
 }

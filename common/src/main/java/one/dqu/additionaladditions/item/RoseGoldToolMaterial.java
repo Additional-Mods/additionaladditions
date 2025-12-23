@@ -1,6 +1,6 @@
 package one.dqu.additionaladditions.item;
 
-import one.dqu.additionaladditions.registry.AAItems;
+import one.dqu.additionaladditions.config.Config;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Tier;
@@ -15,12 +15,12 @@ public class RoseGoldToolMaterial implements Tier {
 
     @Override
     public float getSpeed() {
-        return 9.0F;
+        return 0.0F;
     }
 
     @Override
     public float getAttackDamageBonus() {
-        return 2.0F;
+        return -1.0F;
     }
 
     @Override
@@ -30,11 +30,11 @@ public class RoseGoldToolMaterial implements Tier {
 
     @Override
     public int getEnchantmentValue() {
-        return 17;
+        return Config.ROSE_GOLD_ARMOR_MATERIAL.get().enchantability();
     }
 
     @Override
     public Ingredient getRepairIngredient() {
-        return Ingredient.of(AAItems.ROSE_GOLD_INGOT.get());
+        return Config.ROSE_GOLD_ARMOR_MATERIAL.get().repairIngredient().get();
     }
 }

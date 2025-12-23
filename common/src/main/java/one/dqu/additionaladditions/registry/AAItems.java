@@ -9,8 +9,11 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import one.dqu.additionaladditions.AdditionalAdditions;
 import one.dqu.additionaladditions.config.Config;
+import one.dqu.additionaladditions.config.type.SwordItemConfig;
+import one.dqu.additionaladditions.config.type.ToolItemConfig;
 import one.dqu.additionaladditions.glint.GlintColor;
 import one.dqu.additionaladditions.item.*;
+import one.dqu.additionaladditions.item.configurable.*;
 import one.dqu.additionaladditions.misc.AlbumContents;
 import one.dqu.additionaladditions.util.CreativeAdder;
 import one.dqu.additionaladditions.util.LootAdder;
@@ -206,34 +209,34 @@ public class AAItems {
     public static final Supplier<Item> ROSE_GOLD_HELMET = new Builder("rose_gold_helmet")
             .config(() -> Config.ROSE_GOLD.get().enabled())
             .properties(p -> p
-                    .durability(312)
+                    .durability(Config.ROSE_GOLD_HELMET.get().durability())
             )
             .creativeAfter(Items.GOLDEN_BOOTS, CreativeModeTabs.COMBAT)
-            .build(p -> new ArmorItem(AAMaterials.ROSE_GOLD, ArmorItem.Type.HELMET, p));
+            .build(p -> new RoseGoldArmorItem(ArmorItem.Type.HELMET, p));
 
     public static final Supplier<Item> ROSE_GOLD_CHESTPLATE = new Builder("rose_gold_chestplate")
             .config(() -> Config.ROSE_GOLD.get().enabled())
             .properties(p -> p
-                    .durability(360)
+                    .durability(Config.ROSE_GOLD_CHESTPLATE.get().durability())
             )
             .creativeAfter(Items.GOLDEN_BOOTS, CreativeModeTabs.COMBAT)
-            .build(p -> new ArmorItem(AAMaterials.ROSE_GOLD, ArmorItem.Type.CHESTPLATE, p));
+            .build(p -> new RoseGoldArmorItem(ArmorItem.Type.CHESTPLATE, p));
 
     public static final Supplier<Item> ROSE_GOLD_LEGGINGS = new Builder("rose_gold_leggings")
             .config(() -> Config.ROSE_GOLD.get().enabled())
             .properties(p -> p
-                    .durability(384)
+                    .durability(Config.ROSE_GOLD_LEGGINGS.get().durability())
             )
             .creativeAfter(Items.GOLDEN_BOOTS, CreativeModeTabs.COMBAT)
-            .build(p -> new ArmorItem(AAMaterials.ROSE_GOLD, ArmorItem.Type.LEGGINGS, p));
+            .build(p -> new RoseGoldArmorItem(ArmorItem.Type.LEGGINGS, p));
 
     public static final Supplier<Item> ROSE_GOLD_BOOTS = new Builder("rose_gold_boots")
             .config(() -> Config.ROSE_GOLD.get().enabled())
             .properties(p -> p
-                    .durability(264)
+                    .durability(Config.ROSE_GOLD_BOOTS.get().durability())
             )
             .creativeAfter(Items.GOLDEN_BOOTS, CreativeModeTabs.COMBAT)
-            .build(p -> new ArmorItem(AAMaterials.ROSE_GOLD, ArmorItem.Type.BOOTS, p));
+            .build(p -> new RoseGoldArmorItem(ArmorItem.Type.BOOTS, p));
 
     public static final Supplier<Item> ROSE_GOLD_HORSE_ARMOR = new Builder("rose_gold_horse_armor")
             .config(() -> Config.ROSE_GOLD.get().enabled())
@@ -241,47 +244,72 @@ public class AAItems {
                     .stacksTo(1)
             )
             .creativeAfter(Items.GOLDEN_HORSE_ARMOR, CreativeModeTabs.COMBAT)
-            .build(p -> new AnimalArmorItem(AAMaterials.ROSE_GOLD, AnimalArmorItem.BodyType.EQUESTRIAN, false, p));
+            .build(p -> new RoseGoldAnimalArmorItem(AnimalArmorItem.BodyType.EQUESTRIAN, false, p));
 
     public static final Supplier<Item> ROSE_GOLD_SWORD = new Builder("rose_gold_sword")
             .config(() -> Config.ROSE_GOLD.get().enabled())
             .properties(p -> p
-                    .attributes(SwordItem.createAttributes(ROSE_GOLD_TOOL_MATERIAL, 4, -2.4F))
+                    .durability(Config.ROSE_GOLD_SWORD.get().durability())
+                    .attributes(SwordItem.createAttributes(ROSE_GOLD_TOOL_MATERIAL, Config.ROSE_GOLD_SWORD.get().attack_damage(), Config.ROSE_GOLD_SWORD.get().attack_speed()))
             )
             .creativeAfter(Items.GOLDEN_SWORD, CreativeModeTabs.COMBAT)
-            .build(p -> new SwordItem(ROSE_GOLD_TOOL_MATERIAL, p));
+            .build(p -> new ConfigurableSwordItem(ROSE_GOLD_TOOL_MATERIAL, p, builder -> {
+                SwordItemConfig config = Config.ROSE_GOLD_SWORD.get();
+                builder.set(DataComponents.MAX_DAMAGE, config.durability());
+                builder.set(DataComponents.ATTRIBUTE_MODIFIERS, SwordItem.createAttributes(ROSE_GOLD_TOOL_MATERIAL, config.attack_damage(), config.attack_speed()));
+            }));
 
     public static final Supplier<Item> ROSE_GOLD_SHOVEL = new Builder("rose_gold_shovel")
             .config(() -> Config.ROSE_GOLD.get().enabled())
             .properties(p -> p
-                    .attributes(ShovelItem.createAttributes(ROSE_GOLD_TOOL_MATERIAL, 1.5F, -3F))
+                    .durability(Config.ROSE_GOLD_SHOVEL.get().durability())
+                    .attributes(ShovelItem.createAttributes(ROSE_GOLD_TOOL_MATERIAL, Config.ROSE_GOLD_SHOVEL.get().attack_damage(), Config.ROSE_GOLD_SHOVEL.get().attack_speed()))
             )
             .creativeAfter(Items.GOLDEN_HOE, CreativeModeTabs.TOOLS_AND_UTILITIES)
-            .build(p -> new ShovelItem(ROSE_GOLD_TOOL_MATERIAL, p));
+            .build(p -> new ConfigurableShovelItem(ROSE_GOLD_TOOL_MATERIAL, p, builder -> {
+                ToolItemConfig config = Config.ROSE_GOLD_SHOVEL.get();
+                builder.set(DataComponents.MAX_DAMAGE, config.durability());
+                builder.set(DataComponents.ATTRIBUTE_MODIFIERS, ShovelItem.createAttributes(ROSE_GOLD_TOOL_MATERIAL, config.attack_damage(), config.attack_speed()));
+            }));
 
     public static final Supplier<Item> ROSE_GOLD_PICKAXE = new Builder("rose_gold_pickaxe")
             .config(() -> Config.ROSE_GOLD.get().enabled())
             .properties(p -> p
-                    .attributes(PickaxeItem.createAttributes(ROSE_GOLD_TOOL_MATERIAL, 1, -2.8F))
+                    .durability(Config.ROSE_GOLD_PICKAXE.get().durability())
+                    .attributes(PickaxeItem.createAttributes(ROSE_GOLD_TOOL_MATERIAL, Config.ROSE_GOLD_PICKAXE.get().attack_damage(), Config.ROSE_GOLD_PICKAXE.get().attack_speed()))
             )
             .creativeAfter(Items.GOLDEN_HOE, CreativeModeTabs.TOOLS_AND_UTILITIES)
-            .build(p -> new PickaxeItem(ROSE_GOLD_TOOL_MATERIAL, p));
+            .build(p -> new ConfigurablePickaxeItem(ROSE_GOLD_TOOL_MATERIAL, p, builder -> {
+                ToolItemConfig config = Config.ROSE_GOLD_PICKAXE.get();
+                builder.set(DataComponents.MAX_DAMAGE, config.durability());
+                builder.set(DataComponents.ATTRIBUTE_MODIFIERS, PickaxeItem.createAttributes(ROSE_GOLD_TOOL_MATERIAL, config.attack_damage(), config.attack_speed()));
+            }));
 
     public static final Supplier<Item> ROSE_GOLD_AXE = new Builder("rose_gold_axe")
             .config(() -> Config.ROSE_GOLD.get().enabled())
             .properties(p -> p
-                    .attributes(AxeItem.createAttributes(ROSE_GOLD_TOOL_MATERIAL, 6, -3.1F))
+                    .durability(Config.ROSE_GOLD_AXE.get().durability())
+                    .attributes(AxeItem.createAttributes(ROSE_GOLD_TOOL_MATERIAL, Config.ROSE_GOLD_AXE.get().attack_damage(), Config.ROSE_GOLD_AXE.get().attack_speed()))
             )
             .creativeAfter(Items.GOLDEN_HOE, CreativeModeTabs.TOOLS_AND_UTILITIES)
-            .build(p -> new AxeItem(ROSE_GOLD_TOOL_MATERIAL, p));
+            .build(p -> new ConfigurableAxeItem(ROSE_GOLD_TOOL_MATERIAL, p, builder -> {
+                ToolItemConfig config = Config.ROSE_GOLD_AXE.get();
+                builder.set(DataComponents.MAX_DAMAGE, config.durability());
+                builder.set(DataComponents.ATTRIBUTE_MODIFIERS, AxeItem.createAttributes(ROSE_GOLD_TOOL_MATERIAL, config.attack_damage(), config.attack_speed()));
+            }));
 
     public static final Supplier<Item> ROSE_GOLD_HOE = new Builder("rose_gold_hoe")
             .config(() -> Config.ROSE_GOLD.get().enabled())
             .properties(p -> p
-                    .attributes(HoeItem.createAttributes(ROSE_GOLD_TOOL_MATERIAL, -2, -1F))
+                    .durability(Config.ROSE_GOLD_HOE.get().durability())
+                    .attributes(HoeItem.createAttributes(ROSE_GOLD_TOOL_MATERIAL, Config.ROSE_GOLD_HOE.get().attack_damage(), Config.ROSE_GOLD_HOE.get().attack_speed()))
             )
             .creativeAfter(Items.GOLDEN_HOE, CreativeModeTabs.TOOLS_AND_UTILITIES)
-            .build(p -> new HoeItem(ROSE_GOLD_TOOL_MATERIAL, p));
+            .build(p -> new ConfigurableHoeItem(ROSE_GOLD_TOOL_MATERIAL, p, builder -> {
+                ToolItemConfig config = Config.ROSE_GOLD_HOE.get();
+                builder.set(DataComponents.MAX_DAMAGE, config.durability());
+                builder.set(DataComponents.ATTRIBUTE_MODIFIERS, HoeItem.createAttributes(ROSE_GOLD_TOOL_MATERIAL, config.attack_damage(), config.attack_speed()));
+            }));
 
     public static final Supplier<SuspiciousDyeItem> WHITE_SUSPICIOUS_DYE = new Builder("white_suspicious_dye")
             .properties(p -> p

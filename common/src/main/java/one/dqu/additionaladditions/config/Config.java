@@ -1,8 +1,11 @@
 package one.dqu.additionaladditions.config;
 
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.food.FoodProperties;
+import net.minecraft.world.item.crafting.Ingredient;
 import one.dqu.additionaladditions.config.datafixer.ConfigFixerUpper;
 import one.dqu.additionaladditions.config.type.*;
+import one.dqu.additionaladditions.registry.AAItems;
 
 import java.util.Arrays;
 import java.util.List;
@@ -92,6 +95,61 @@ public class Config {
     public static final ConfigProperty<FeatureConfig> ROSE_GOLD = new ConfigProperty<>(
             "rose_gold/enabled", FeatureConfig.CODEC,
             new FeatureConfig(true)
+    );
+
+    public static final ConfigProperty<ArmorMaterialConfig> ROSE_GOLD_ARMOR_MATERIAL = new ConfigProperty<>(
+            "rose_gold/armor_material", ArmorMaterialConfig.CODEC,
+            new ArmorMaterialConfig(0f, 0f, 17, SoundEvents.ARMOR_EQUIP_GOLD, () -> Ingredient.of(AAItems.ROSE_GOLD_INGOT.get()))
+    );
+
+    public static final ConfigProperty<ArmorItemConfig> ROSE_GOLD_HELMET = new ConfigProperty<>(
+            "rose_gold/helmet", ArmorItemConfig.CODEC,
+            new ArmorItemConfig(2, 312)
+    );
+
+    public static final ConfigProperty<ArmorItemConfig> ROSE_GOLD_CHESTPLATE = new ConfigProperty<>(
+            "rose_gold/chestplate", ArmorItemConfig.CODEC,
+            new ArmorItemConfig(7, 384)
+    );
+
+    public static final ConfigProperty<ArmorItemConfig> ROSE_GOLD_LEGGINGS = new ConfigProperty<>(
+            "rose_gold/leggings", ArmorItemConfig.CODEC,
+            new ArmorItemConfig(6, 360)
+    );
+
+    public static final ConfigProperty<ArmorItemConfig> ROSE_GOLD_BOOTS = new ConfigProperty<>(
+            "rose_gold/boots", ArmorItemConfig.CODEC,
+            new ArmorItemConfig(2, 264)
+    );
+
+    public static final ConfigProperty<BodyArmorItemConfig> ROSE_GOLD_BODY_ARMOR = new ConfigProperty<>(
+            "rose_gold/body_armor", BodyArmorItemConfig.CODEC,
+            new BodyArmorItemConfig(9)
+    );
+
+    public static final ConfigProperty<SwordItemConfig> ROSE_GOLD_SWORD = new ConfigProperty<>(
+            "rose_gold/sword", SwordItemConfig.CODEC,
+            new SwordItemConfig(1.6f, 7, 900)
+    );
+
+    public static final ConfigProperty<ToolItemConfig> ROSE_GOLD_SHOVEL = new ConfigProperty<>(
+            "rose_gold/shovel", ToolItemConfig.CODEC,
+            new ToolItemConfig(1f, 4.5f, 900)
+    );
+
+    public static final ConfigProperty<ToolItemConfig> ROSE_GOLD_PICKAXE = new ConfigProperty<>(
+            "rose_gold/pickaxe", ToolItemConfig.CODEC,
+            new ToolItemConfig(1.2f, 4f, 900)
+    );
+
+    public static final ConfigProperty<ToolItemConfig> ROSE_GOLD_AXE = new ConfigProperty<>(
+            "rose_gold/axe", ToolItemConfig.CODEC,
+            new ToolItemConfig(0.9f, 9f, 900)
+    );
+
+    public static final ConfigProperty<ToolItemConfig> ROSE_GOLD_HOE = new ConfigProperty<>(
+            "rose_gold/hoe", ToolItemConfig.CODEC,
+            new ToolItemConfig(3f, 1f, 900)
     );
 
     public static final ConfigProperty<FeatureConfig> MUSIC_DISC_0308 = new ConfigProperty<>(

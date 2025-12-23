@@ -8,33 +8,21 @@ import java.util.List;
 import java.util.Optional;
 
 public record FoodUnitConfig(
-        int nutrition,
-        float saturation,
-        boolean canAlwaysEat,
-        float eatSeconds
+        FoodProperties foodProperties
 ) {
-    public static final Codec<FoodUnitConfig> CODEC = RecordCodecBuilder.create(instance ->
+    private static final Codec<FoodUnitConfig> ICODEC = RecordCodecBuilder.create(instance ->
             instance.group(
-                    Codec.intRange(1, Integer.MAX_VALUE).fieldOf("nutrition").forGetter(FoodUnitConfig::nutrition),
-                    Codec.floatRange(0f, Float.MAX_VALUE).fieldOf("saturation").forGetter(FoodUnitConfig::saturation),
-                    Codec.BOOL.optionalFieldOf("can_always_eat", false).forGetter(FoodUnitConfig::canAlwaysEat),
-                    Codec.floatRange(0f, Float.MAX_VALUE).optionalFieldOf("eat_seconds", 1.6f).forGetter(FoodUnitConfig::eatSeconds)
-            ).apply(instance, FoodUnitConfig::new)
+                    Codec.intRange(1, Integer.MAX_VALUE).fieldOf("nutrition").forGetter(f -> f.foodProperties().nutrition()),
+                    Codec.floatRange(0f, Float.MAX_VALUE).fieldOf("saturation").forGetter(f -> f.foodProperties().saturation()),
+                    Codec.BOOL.optionalFieldOf("can_always_eat", false).forGetter(f -> f.foodProperties().canAlwaysEat()),
+                    Codec.floatRange(0f, Float.MAX_VALUE).optionalFieldOf("eat_seconds", 1.6f).forGetter(f -> f.foodProperties().eatSeconds())
+            ).apply(instance, (nutrition, saturation, canAlwaysEat, eatSeconds) ->
+                    new FoodUnitConfig(new FoodProperties(nutrition, saturation, canAlwaysEat, eatSeconds, Optional.empty(), List.of()))
+            )
     );
 
-    public FoodProperties toFoodProperties() {
-        return new FoodProperties(
-                nutrition, saturation, canAlwaysEat,
-                eatSeconds, Optional.empty(), List.of()
-        );
-    }
-
-    public static FoodUnitConfig fromFoodProperties(FoodProperties foodProperties) {
-        return new FoodUnitConfig(
-                foodProperties.nutrition(),
-                foodProperties.saturation(),
-                foodProperties.canAlwaysEat(),
-                foodProperties.eatSeconds()
-        );
-    }
+    public static final Codec<FoodProperties> CODEC = ICODEC.xmap(
+            FoodUnitConfig::foodProperties,
+            FoodUnitConfig::new
+    );
 }
