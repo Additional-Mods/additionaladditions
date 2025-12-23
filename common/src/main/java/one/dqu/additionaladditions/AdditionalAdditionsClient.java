@@ -6,6 +6,7 @@ import net.minecraft.client.renderer.item.ClampedItemPropertyFunction;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.CrossbowItem;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.component.ChargedProjectiles;
@@ -69,12 +70,12 @@ public final class AdditionalAdditionsClient {
         ItemProperties.register(AAItems.PINK_ALBUM.get(), albumLocation, albumFunction);
 
         ItemProperties.register(AAItems.BAROMETER.get(), ResourceLocation.withDefaultNamespace("angle"), (itemStack, clientWorld, livingEntity, worldSeed) -> {
-            if (livingEntity == null) return 0.3125F;
-            Level world = livingEntity.level();
-            if (world == null) return 0.3125F;
+            Entity entity = livingEntity != null ? livingEntity : itemStack.getEntityRepresentation();
+            if (entity == null) return 0.3125F;
+            Level world = entity.level();
 
             float sea = world.getSeaLevel();
-            float height = livingEntity.getBlockY();
+            float height = entity.getBlockY();
             float top = world.getMaxBuildHeight();
             float bottom = world.getMinBuildHeight();
 
