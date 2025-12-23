@@ -121,5 +121,9 @@
   "additionaladditions.gui.glint.blue": "Blue Glint",
   "additionaladditions.gui.glint.purple": "Purple Glint",
   "additionaladditions.gui.glint.magenta": "Magenta Glint",
-  "additionaladditions.gui.glint.pink": "Pink Glint"
+  "additionaladditions.gui.glint.pink": "Pink Glint",
+
+  "tag.item.additionaladditions.albums": "Albums",
+  "tag.item.additionaladditions.suspicious_dyes": "Suspicious Dyes",
+  "tag.block.additionaladditions.wrench_blacklisted": "Cannot be rotated with Wrench"
 }
