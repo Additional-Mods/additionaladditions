@@ -292,6 +292,7 @@ public class AAItems {
                     .attributes(AxeItem.createAttributes(ROSE_GOLD_TOOL_MATERIAL, Config.ROSE_GOLD_AXE.get().attackDamage(), Config.ROSE_GOLD_AXE.get().attackSpeed()))
             )
             .creativeAfter(Items.GOLDEN_HOE, CreativeModeTabs.TOOLS_AND_UTILITIES)
+            .creativeAfter(Items.GOLDEN_AXE, CreativeModeTabs.COMBAT)
             .build(p -> new ConfigurableAxeItem(ROSE_GOLD_TOOL_MATERIAL, p, builder -> {
                 ToolItemConfig config = Config.ROSE_GOLD_AXE.get();
                 builder.set(DataComponents.MAX_DAMAGE, config.durability());
