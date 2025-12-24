@@ -191,17 +191,4 @@ public class Config {
             "powered_rails_copper_recipe", FeatureConfig.CODEC,
             new FeatureConfig(true)
     );
-
-    public static List<ConfigProperty<?>> getAllConfigProperties() {
-        return Arrays.stream(Config.class.getDeclaredFields())
-                .filter(field -> field.getType().equals(ConfigProperty.class))
-                .map(field -> {
-                    try {
-                        return (ConfigProperty<?>) field.get(null);
-                    } catch (IllegalAccessException e) {
-                        throw new RuntimeException(e);
-                    }
-                })
-                .collect(Collectors.toList());
-    }
 }

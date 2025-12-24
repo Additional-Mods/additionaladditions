@@ -32,7 +32,7 @@ public class RecipeManagerMixin {
 
             String name = identifier.getPath().split("/")[0];
 
-            ConfigProperty<?> property = Config.getAllConfigProperties().stream()
+            ConfigProperty<?> property = ConfigProperty.getAll().stream()
                     .filter((p) -> p.path().getPath().split("/")[0].equals(name))
                     .findFirst().orElse(null);
 
