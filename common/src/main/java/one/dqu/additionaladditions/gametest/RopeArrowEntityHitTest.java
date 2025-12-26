@@ -7,8 +7,8 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.animal.Pig;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import one.dqu.additionaladditions.entity.RopeArrow;
-import one.dqu.additionaladditions.registry.AABlocks;
 import one.dqu.additionaladditions.registry.AAEntities;
+import one.dqu.additionaladditions.registry.AAItems;
 
 /**
  * Tests for rope arrow hitting entities and dropping ropes.
@@ -28,7 +28,7 @@ public class RopeArrowEntityHitTest {
         });
 
         ctx.runAtTickTime(20, () -> {
-            ctx.assertItemEntityPresent(AABlocks.ROPE_BLOCK_ITEM.get());
+            ctx.assertItemEntityPresent(AAItems.ROPE.get());
             ctx.succeed();
         });
     }
@@ -47,7 +47,7 @@ public class RopeArrowEntityHitTest {
         });
 
         ctx.runAtTickTime(20, () -> {
-            ctx.assertItemEntityNotPresent(AABlocks.ROPE_BLOCK_ITEM.get());
+            ctx.assertItemEntityNotPresent(AAItems.ROPE.get());
             ctx.succeed();
         });
     }

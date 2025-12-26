@@ -10,6 +10,7 @@ import net.minecraft.world.level.block.Blocks;
 import one.dqu.additionaladditions.entity.RopeArrow;
 import one.dqu.additionaladditions.registry.AABlocks;
 import one.dqu.additionaladditions.registry.AAEntities;
+import one.dqu.additionaladditions.registry.AAItems;
 
 import java.util.List;
 
@@ -68,9 +69,8 @@ public class RopeArrowPartialPlacementTest {
             }
             ctx.assertBlockPresent(Blocks.STONE, obstaclePos);
 
-            ctx.assertItemEntityNotPresent(AABlocks.ROPE_BLOCK_ITEM.get());
+            ctx.assertItemEntityNotPresent(AAItems.ROPE.get());
             ctx.succeed();
         });
     }
 }
-

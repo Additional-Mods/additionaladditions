@@ -19,6 +19,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import one.dqu.additionaladditions.registry.AABlocks;
 import one.dqu.additionaladditions.registry.AAEntities;
+import one.dqu.additionaladditions.registry.AAItems;
 import org.jetbrains.annotations.Nullable;
 
 public class RopeArrow extends AbstractArrow {
@@ -78,7 +79,7 @@ public class RopeArrow extends AbstractArrow {
     protected void onHitEntity(EntityHitResult hitResult) {
         super.onHitEntity(hitResult);
         if (ropesPlaced < 8 && this.pickup == Pickup.ALLOWED) {
-            ItemStack stack = AABlocks.ROPE_BLOCK_ITEM.get().getDefaultInstance();
+            ItemStack stack = AAItems.ROPE.get().getDefaultInstance();
             stack.setCount(8 - ropesPlaced);
             ItemEntity itemEntity = new ItemEntity(this.level(), hitResult.getLocation().x, hitResult.getLocation().y, hitResult.getLocation().z, stack);
             this.level().addFreshEntity(itemEntity);
@@ -120,7 +121,7 @@ public class RopeArrow extends AbstractArrow {
                 // drop remaining ropes
                 int remaining = 8 - ropesPlaced;
                 if (remaining > 0) {
-                    ItemStack stack = AABlocks.ROPE_BLOCK_ITEM.get().getDefaultInstance();
+                    ItemStack stack = AAItems.ROPE.get().getDefaultInstance();
                     stack.setCount(remaining);
                     int up = canReplace ? 0 : 1;
                     ItemEntity itemEntity = new ItemEntity(this.level(), downPos.getCenter().x, downPos.getCenter().y + up, downPos.getCenter().z, stack);

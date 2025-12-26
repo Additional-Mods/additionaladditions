@@ -44,27 +44,15 @@ public class AABlocks {
                     ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "rope"),
                     () -> new RopeBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BROWN).pushReaction(PushReaction.DESTROY).noCollission().sound(SoundType.WOOL).explosionResistance(0f).destroyTime(0.2f))
             );
-    public static final Supplier<Item> ROPE_BLOCK_ITEM = AARegistries.ITEMS.register(
-            ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "rope"),
-            () -> new BlockItem(ROPE_BLOCK.get(), new Item.Properties())
-    );
 
     public static final Supplier<RedstoneLampBlock> TINTED_REDSTONE_LAMP = AARegistries.BLOCKS.register(
             ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "tinted_redstone_lamp"),
             () -> new RedstoneLampBlock(BlockBehaviour.Properties.of().mapColor(MapColor.TERRACOTTA_PURPLE).pushReaction(PushReaction.NORMAL).sound(SoundType.GLASS).strength(0.3f))
     );
-    public static final Supplier<Item> TINTED_REDSTONE_LAMP_ITEM = AARegistries.ITEMS.register(
-            ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "tinted_redstone_lamp"),
-            () -> new BlockItem(TINTED_REDSTONE_LAMP.get(), new Item.Properties())
-    );
 
     public static final Supplier<CopperPatinaBlock> COPPER_PATINA = AARegistries.BLOCKS.register(
             ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "copper_patina"),
             () -> new CopperPatinaBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_CYAN).pushReaction(PushReaction.DESTROY).noCollission().sound(SoundType.TUFF).instabreak())
-    );
-    public static final Supplier<CopperPatinaItem> COPPER_PATINA_ITEM = AARegistries.ITEMS.register(
-            ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "copper_patina"),
-            () -> new CopperPatinaItem(COPPER_PATINA.get(), new Item.Properties())
     );
 
     public static final Supplier<GlowStickBlock> GLOW_STICK_BLOCK = AARegistries.BLOCKS.register(
@@ -76,18 +64,10 @@ public class AABlocks {
             ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "patina_block"),
             () -> new PatinaBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_CYAN).pushReaction(PushReaction.NORMAL).sound(SoundType.ROOTED_DIRT).strength(0.5f))
     );
-    public static final Supplier<Item> PATINA_BLOCK_ITEM = AARegistries.ITEMS.register(
-            ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "patina_block"),
-            () -> new BlockItem(PATINA_BLOCK.get(), new Item.Properties())
-    );
 
     public static final Supplier<Block> ROSE_GOLD_BLOCK = AARegistries.BLOCKS.register(
             ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "rose_gold_block"),
             () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_PINK).requiresCorrectToolForDrops().strength(3.0f, 6.0f).sound(SoundType.METAL))
-    );
-    public static final Supplier<Item> ROSE_GOLD_BLOCK_ITEM = AARegistries.ITEMS.register(
-            ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "rose_gold_block"),
-            () -> new BlockItem(ROSE_GOLD_BLOCK.get(), new Item.Properties())
     );
 
     // amethyst lamp poi
@@ -101,14 +81,6 @@ public class AABlocks {
     );
 
     public static void registerAll() {
-        Registrar.defer(() -> {
-            LootAdder.register(List.of(BuiltInLootTables.SIMPLE_DUNGEON, BuiltInLootTables.ABANDONED_MINESHAFT, BuiltInLootTables.STRONGHOLD_CORRIDOR), () -> Config.ROPE.get().enabled(), LootPool.lootPool()
-                .setRolls(UniformGenerator.between(1, 4))
-                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 8)))
-                .add(LootItem.lootTableItem(AABlocks.ROPE_BLOCK.get()))
-            );
-        });
-
         // amethyst lamp poi
         Registrar.defer(() -> {
             Holder<PoiType> poi = BuiltInRegistries.POINT_OF_INTEREST_TYPE.getHolderOrThrow(AMETHYST_LAMP_POI_KEY);
@@ -120,13 +92,5 @@ public class AABlocks {
 
             PoiTypes.registerBlockStates(poi, states);
         });
-
-        CreativeAdder.add(CreativeModeTabs.REDSTONE_BLOCKS, () -> Config.COPPER_PATINA.get().enabled(), Items.REDSTONE, () -> COPPER_PATINA.get().asItem());
-        CreativeAdder.add(CreativeModeTabs.REDSTONE_BLOCKS, () -> Config.TINTED_REDSTONE_LAMP.get().enabled(), Items.REDSTONE_LAMP, () -> TINTED_REDSTONE_LAMP.get().asItem());
-        CreativeAdder.add(CreativeModeTabs.FUNCTIONAL_BLOCKS, () -> Config.TINTED_REDSTONE_LAMP.get().enabled(), Items.REDSTONE_LAMP, () -> TINTED_REDSTONE_LAMP.get().asItem());
-        CreativeAdder.add(CreativeModeTabs.FUNCTIONAL_BLOCKS, () -> Config.ROPE.get().enabled(), Items.LADDER, () -> ROPE_BLOCK.get().asItem());
-        CreativeAdder.addBefore(CreativeModeTabs.BUILDING_BLOCKS, () -> Config.COPPER_PATINA.get().enabled(), Items.COPPER_BLOCK, () -> PATINA_BLOCK.get().asItem());
-        CreativeAdder.add(CreativeModeTabs.BUILDING_BLOCKS, () -> Config.ROSE_GOLD.get().enabled(), Items.LIGHT_WEIGHTED_PRESSURE_PLATE, () -> ROSE_GOLD_BLOCK.get().asItem());
-        CreativeAdder.add(CreativeModeTabs.TOOLS_AND_UTILITIES, () -> Config.ROPE.get().enabled(), Items.SPYGLASS, () -> ROPE_BLOCK.get().asItem());
     }
 }

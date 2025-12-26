@@ -28,6 +28,7 @@ import net.minecraft.world.level.storage.loot.BuiltInLootTables;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
+import net.minecraft.world.level.storage.loot.entries.LootPoolSingletonContainer;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.predicates.LootItemKilledByPlayerCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceCondition;
@@ -37,13 +38,47 @@ import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import one.dqu.additionaladditions.util.Registrar;
 
 import java.util.*;
-import java.util.function.BiFunction;
+import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
 @SuppressWarnings("unused")
 public class AAItems {
+
+    public static final Supplier<Item> ROPE = new Builder("rope")
+            .config(() -> Config.ROPE.get().enabled())
+            .creativeAfter(Items.LADDER, CreativeModeTabs.FUNCTIONAL_BLOCKS)
+            .creativeAfter(Items.SPYGLASS, CreativeModeTabs.TOOLS_AND_UTILITIES)
+            .lootTable(
+                    List.of(BuiltInLootTables.SIMPLE_DUNGEON, BuiltInLootTables.ABANDONED_MINESHAFT, BuiltInLootTables.STRONGHOLD_CORRIDOR),
+                    builder -> builder
+                            .apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 8)))
+                            .setWeight(20)
+            )
+            .build(p -> new BlockItem(AABlocks.ROPE_BLOCK.get(), p));
+
+    public static final Supplier<Item> TINTED_REDSTONE_LAMP = new Builder("tinted_redstone_lamp")
+            .config(() -> Config.TINTED_REDSTONE_LAMP.get().enabled())
+            .creativeAfter(Items.REDSTONE_LAMP, CreativeModeTabs.REDSTONE_BLOCKS)
+            .creativeAfter(Items.REDSTONE_LAMP, CreativeModeTabs.FUNCTIONAL_BLOCKS)
+            .build(p -> new BlockItem(AABlocks.TINTED_REDSTONE_LAMP.get(), p));
+
+    public static final Supplier<CopperPatinaItem> COPPER_PATINA = new Builder("copper_patina")
+            .config(() -> Config.COPPER_PATINA.get().enabled())
+            .creativeAfter(Items.REDSTONE, CreativeModeTabs.REDSTONE_BLOCKS)
+            .build(p -> new CopperPatinaItem(AABlocks.COPPER_PATINA.get(), p));
+
+    public static final Supplier<Item> PATINA_BLOCK = new Builder("patina_block")
+            .config(() -> Config.COPPER_PATINA.get().enabled())
+            .creativeBefore(Items.COPPER_BLOCK, CreativeModeTabs.BUILDING_BLOCKS)
+            .build(p -> new BlockItem(AABlocks.PATINA_BLOCK.get(), p));
+
+    public static final Supplier<Item> ROSE_GOLD_BLOCK = new Builder("rose_gold_block")
+            .config(() -> Config.ROSE_GOLD.get().enabled())
+            .creativeAfter(Items.LIGHT_WEIGHTED_PRESSURE_PLATE, CreativeModeTabs.BUILDING_BLOCKS)
+            .build(p -> new BlockItem(AABlocks.ROSE_GOLD_BLOCK.get(), p));
+
     public static final Supplier<FoodItem> FRIED_EGG = new Builder("fried_egg")
             .config(() -> Config.FRIED_EGG.get().enabled())
             .properties(p -> p.food(Config.FRIED_EGG.get().food()))
@@ -68,11 +103,9 @@ public class AAItems {
             .creativeAfter(Items.ROTTEN_FLESH, CreativeModeTabs.FOOD_AND_DRINKS)
             .lootTable(
                     List.of(EntityType.ZOMBIE.getDefaultLootTable(), EntityType.CREEPER.getDefaultLootTable()),
-                    (registries, item) -> LootPool.lootPool()
-                        .setRolls(ConstantValue.exactly(1))
+                    (registries, builder) -> builder
                         .when(LootItemKilledByPlayerCondition.killedByPlayer())
                         .when(LootItemRandomChanceWithEnchantedBonusCondition.randomChanceAndLootingBoost(registries, 0.025f, 0.01f))
-                        .add(LootItem.lootTableItem(item))
             )
             .build(p -> new FoodItem(p, Config.CHICKEN_NUGGET));
 
@@ -109,9 +142,7 @@ public class AAItems {
             .creativeAfter(Items.PRISMARINE_CRYSTALS, CreativeModeTabs.INGREDIENTS)
             .lootTable(
                     EntityType.ELDER_GUARDIAN.getDefaultLootTable(),
-                    (registries, item) -> LootPool.lootPool()
-                        .setRolls(ConstantValue.exactly(1f))
-                        .add(LootItem.lootTableItem(item))
+                    builder -> builder
                         .when(LootItemRandomChanceCondition.randomChance(0.33f))
             )
             .build();
@@ -121,10 +152,9 @@ public class AAItems {
             .creativeAfter(Items.BONE_MEAL, CreativeModeTabs.TOOLS_AND_UTILITIES)
             .lootTable(
                     List.of(BuiltInLootTables.SIMPLE_DUNGEON, BuiltInLootTables.ABANDONED_MINESHAFT, BuiltInLootTables.STRONGHOLD_CORRIDOR),
-                    (registries, item) -> LootPool.lootPool()
-                        .setRolls(UniformGenerator.between(0, 4))
+                    builder -> builder
                         .apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 4)))
-                        .add(LootItem.lootTableItem(item))
+                        .setWeight(20)
             )
             .build();
 
@@ -133,10 +163,9 @@ public class AAItems {
             .creativeAfter(Items.CLOCK, CreativeModeTabs.TOOLS_AND_UTILITIES)
             .lootTable(
                     List.of(BuiltInLootTables.SIMPLE_DUNGEON, BuiltInLootTables.ABANDONED_MINESHAFT, BuiltInLootTables.STRONGHOLD_CORRIDOR),
-                    (registries, item) -> LootPool.lootPool()
-                        .setRolls(ConstantValue.exactly(1))
+                    builder -> builder
                         .when(LootItemRandomChanceCondition.randomChance(0.1f))
-                        .add(LootItem.lootTableItem(item))
+                        .setWeight(5)
             )
             .build(Item::new);
 
@@ -163,10 +192,9 @@ public class AAItems {
             .creativeAfter(Items.MUSIC_DISC_WARD, CreativeModeTabs.TOOLS_AND_UTILITIES)
             .lootTable(
                     List.of(BuiltInLootTables.SIMPLE_DUNGEON, BuiltInLootTables.WOODLAND_MANSION),
-                    (registries, item) -> LootPool.lootPool()
-                            .setRolls(ConstantValue.exactly(1))
+                    builder -> builder
                             .when(LootItemRandomChanceCondition.randomChance(0.25f))
-                            .add(LootItem.lootTableItem(item))
+                            .setWeight(5)
             )
             .build();
 
@@ -180,10 +208,9 @@ public class AAItems {
             .creativeAfter(Items.MUSIC_DISC_WARD, CreativeModeTabs.TOOLS_AND_UTILITIES)
             .lootTable(
                     List.of(BuiltInLootTables.SIMPLE_DUNGEON, BuiltInLootTables.WOODLAND_MANSION),
-                    (registries, item) -> LootPool.lootPool()
-                            .setRolls(ConstantValue.exactly(1))
+                    builder -> builder
                             .when(LootItemRandomChanceCondition.randomChance(0.25f))
-                            .add(LootItem.lootTableItem(item))
+                            .setWeight(5)
             )
             .build();
 
@@ -197,10 +224,9 @@ public class AAItems {
             .creativeAfter(Items.MUSIC_DISC_WARD, CreativeModeTabs.TOOLS_AND_UTILITIES)
             .lootTable(
                     List.of(BuiltInLootTables.SIMPLE_DUNGEON, BuiltInLootTables.WOODLAND_MANSION),
-                    (registries, item) -> LootPool.lootPool()
-                            .setRolls(ConstantValue.exactly(1))
+                    builder -> builder
                             .when(LootItemRandomChanceCondition.randomChance(0.25f))
-                            .add(LootItem.lootTableItem(item))
+                            .setWeight(5)
             )
             .build();
 
@@ -461,7 +487,7 @@ public class AAItems {
         private final String id;
         private final Map<ResourceKey<CreativeModeTab>, List<ItemLike>> creativeAfter = new HashMap<>();
         private final Map<ResourceKey<CreativeModeTab>, List<ItemLike>> creativeBefore = new HashMap<>();
-        private final Map<ResourceKey<LootTable>, BiFunction<HolderLookup.Provider, Item, LootPool.Builder>> lootTables = new HashMap<>();
+        private final Map<ResourceKey<LootTable>, BiConsumer<HolderLookup.Provider, LootPoolSingletonContainer.Builder<?>>> lootTables = new HashMap<>();
         private Consumer<Item.Properties> propertiesConfig = p -> {};
         private Supplier<Boolean> config = () -> true;
 
@@ -489,14 +515,22 @@ public class AAItems {
             return this;
         }
 
-        public Builder lootTable(ResourceKey<LootTable> table, BiFunction<HolderLookup.Provider, Item, LootPool.Builder> lootPoolBuilder) {
+        public Builder lootTable(ResourceKey<LootTable> table, BiConsumer<HolderLookup.Provider, LootPoolSingletonContainer.Builder<?>> lootPoolBuilder) {
             this.lootTables.put(table, lootPoolBuilder);
             return this;
         }
 
-        public Builder lootTable(List<ResourceKey<LootTable>> tables, BiFunction<HolderLookup.Provider, Item, LootPool.Builder> lootPoolBuilder) {
+        public Builder lootTable(List<ResourceKey<LootTable>> tables, BiConsumer<HolderLookup.Provider, LootPoolSingletonContainer.Builder<?>> lootPoolBuilder) {
             tables.forEach(table -> this.lootTables.put(table, lootPoolBuilder));
             return this;
+        }
+
+        public Builder lootTable(ResourceKey<LootTable> table, Consumer<LootPoolSingletonContainer.Builder<?>> lootPoolBuilder) {
+            return lootTable(table, (registries, b) -> lootPoolBuilder.accept(b));
+        }
+
+        public Builder lootTable(List<ResourceKey<LootTable>> tables, Consumer<LootPoolSingletonContainer.Builder<?>> lootPoolBuilder) {
+            return lootTable(tables, (registries, b) -> lootPoolBuilder.accept(b));
         }
 
         public Supplier<Item> build() {
@@ -522,7 +556,7 @@ public class AAItems {
             );
 
             lootTables.forEach((table, builder) ->
-                LootAdder.register(table, config, provider -> builder.apply(provider, item.get()))
+                LootAdder.addBatched(table, item, config, builder)
             );
 
             return item;
@@ -535,6 +569,8 @@ public class AAItems {
                 .when(LootItemRandomChanceCondition.randomChance(0.5f))
                 .add(LootItem.lootTableItem(Items.SPYGLASS))
         );
+
+        LootAdder.processBatched();
 
         if (Config.WRENCH.get().enabled()) {
             Registrar.defer(() -> {
