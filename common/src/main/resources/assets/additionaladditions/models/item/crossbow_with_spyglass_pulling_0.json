@@ -1,16 +1,6 @@
 {
-  "parent": "additionaladditions:item/crossbow_with_spyglass",
+  "parent": "item/generated",
   "textures": {
-    "2": "minecraft:item/crossbow_pulling_0"
-  },
-  "display": {
-    "firstperson_righthand": {
-      "translation": [-1, 2, -1],
-      "rotation": [0, -45, 0]
-    },
-    "firstperson_lefthand": {
-      "translation": [-1, 2, -1],
-      "rotation": [0, 45, 0]
-    }
+    "layer0": "additionaladditions:item/crossbow_with_spyglass_pulling_0"
   }
 }

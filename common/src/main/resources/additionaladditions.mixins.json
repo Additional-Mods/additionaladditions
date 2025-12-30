@@ -7,6 +7,7 @@
     "GuiMixin",
     "crossbow.AbstractClientPlayerMixin",
     "crossbow.ItemInHandRendererMixin",
+    "crossbow.ItemRendererMixin",
     "crossbow.LocalPlayerMixin",
     "crossbow.PlayerMixin",
     "crossbow.PlayerRendererMixin",

@@ -17,11 +17,17 @@ import one.dqu.additionaladditions.registry.AAMisc;
 
 @Environment(EnvType.CLIENT)
 public final class AdditionalAdditionsClient {
+    public static boolean requestingInHandModel = false;
+
     public static void init() {
         itemProperties();
     }
 
     private static void itemProperties() {
+        ItemProperties.register(AAItems.CROSSBOW_WITH_SPYGLASS.get(), ResourceLocation.fromNamespaceAndPath(AdditionalAdditions.NAMESPACE, "hand"), (itemStack, clientWorld, livingEntity, worldSeed) -> {
+            return requestingInHandModel ? 1.0F : 0.0F;
+        });
+
         ItemProperties.register(AAItems.CROSSBOW_WITH_SPYGLASS.get(), ResourceLocation.withDefaultNamespace("pull"), (itemStack, clientWorld, livingEntity, worldSeed) -> {
             if (livingEntity == null) return 0.0F;
             return livingEntity.getUseItem() != itemStack ? 0.0F : (itemStack.getUseDuration(livingEntity) - livingEntity.getUseItemRemainingTicks()) / 20.0F;
