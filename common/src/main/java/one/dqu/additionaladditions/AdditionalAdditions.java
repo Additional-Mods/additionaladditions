@@ -1,7 +1,7 @@
 package one.dqu.additionaladditions;
 
 import one.dqu.additionaladditions.config.Config;
-import one.dqu.additionaladditions.config.ConfigLoader;
+import one.dqu.additionaladditions.config.io.ConfigLoader;
 import one.dqu.additionaladditions.registry.*;
 import one.dqu.additionaladditions.util.ModCompatibility;
 import org.slf4j.Logger;

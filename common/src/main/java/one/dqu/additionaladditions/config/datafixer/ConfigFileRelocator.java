@@ -45,8 +45,8 @@ public class ConfigFileRelocator {
 
     private static Handler move(String oldPath, String newPath) {
         return path -> {
-            Path from = path.resolve(oldPath + ".json");
-            Path to = path.resolve(newPath + ".json");
+            Path from = path.resolve(oldPath + ".json5");
+            Path to = path.resolve(newPath + ".json5");
             if (Files.exists(from)) {
                 Files.createDirectories(to.getParent());
                 Files.move(from, to, StandardCopyOption.REPLACE_EXISTING);
@@ -56,7 +56,7 @@ public class ConfigFileRelocator {
 
     private static Handler delete(String targetPath) {
         return path -> {
-            Path target = path.resolve(targetPath + ".json");
+            Path target = path.resolve(targetPath + ".json5");
             Files.deleteIfExists(target);
         };
     }

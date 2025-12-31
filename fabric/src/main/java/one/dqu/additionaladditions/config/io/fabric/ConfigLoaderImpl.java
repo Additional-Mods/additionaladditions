@@ -1,4 +1,4 @@
-package one.dqu.additionaladditions.config.fabric;
+package one.dqu.additionaladditions.config.io.fabric;
 
 import net.fabricmc.loader.api.FabricLoader;
 

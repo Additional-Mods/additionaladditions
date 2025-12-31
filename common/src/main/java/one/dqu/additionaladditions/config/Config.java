@@ -7,10 +7,6 @@ import one.dqu.additionaladditions.config.datafixer.ConfigFixerUpper;
 import one.dqu.additionaladditions.config.type.*;
 import one.dqu.additionaladditions.registry.AAItems;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
-
 public class Config {
     public static void init() { /* forces static init */ }
 

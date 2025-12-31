@@ -2,7 +2,7 @@ package one.dqu.additionaladditions.gametest;
 
 import net.minecraft.gametest.framework.GameTest;
 import net.minecraft.gametest.framework.GameTestHelper;
-import one.dqu.additionaladditions.config.ConfigLoader;
+import one.dqu.additionaladditions.config.io.ConfigLoader;
 
 import java.util.Locale;
 

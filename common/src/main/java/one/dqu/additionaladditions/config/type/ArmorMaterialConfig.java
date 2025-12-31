@@ -6,6 +6,7 @@ import net.minecraft.core.Holder;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
+import one.dqu.additionaladditions.config.io.Comment;
 import one.dqu.additionaladditions.config.type.unit.ItemUnitConfig;
 import one.dqu.additionaladditions.config.type.unit.SoundEventUnitConfig;
 

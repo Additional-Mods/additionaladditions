@@ -9,27 +9,24 @@ import net.minecraft.world.item.Item;
 import java.util.function.Supplier;
 
 public record ItemUnitConfig(
-        Supplier<Item> item
+        String item
 ) {
     private static final Codec<ItemUnitConfig> ICODEC = RecordCodecBuilder.create(
             instance -> instance.group(
-                    Codec.STRING.xmap(
-                            ItemUnitConfig::toItem,
-                            ItemUnitConfig::fromItem
-                    ).fieldOf("item").forGetter(ItemUnitConfig::item)
+                    Codec.STRING.fieldOf("item").forGetter(ItemUnitConfig::item)
             ).apply(instance, ItemUnitConfig::new)
     );
 
     public static final Codec<Supplier<Item>> CODEC = ICODEC.xmap(
-            ItemUnitConfig::item,
-            ItemUnitConfig::new
+            ItemUnitConfig::toItem,
+            ItemUnitConfig::fromItem
     );
 
-    private static Supplier<Item> toItem(String id) {
-        return () -> BuiltInRegistries.ITEM.get(ResourceLocation.parse(id));
+    private Supplier<Item> toItem() {
+        return () -> BuiltInRegistries.ITEM.get(ResourceLocation.parse(this.item));
     }
 
-    private static String fromItem(Supplier<Item> item) {
-        return BuiltInRegistries.ITEM.getKey(item.get()).toString();
+    private static ItemUnitConfig fromItem(Supplier<Item> item) {
+        return new ItemUnitConfig(BuiltInRegistries.ITEM.getKey(item.get()).toString());
     }
 }

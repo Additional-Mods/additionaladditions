@@ -29,7 +29,7 @@ import net.neoforged.neoforge.registries.NeoForgeRegistries;
 import one.dqu.additionaladditions.AdditionalAdditions;
 import one.dqu.additionaladditions.AdditionalAdditionsClient;
 import one.dqu.additionaladditions.config.Config;
-import one.dqu.additionaladditions.config.ConfigLoader;
+import one.dqu.additionaladditions.config.io.ConfigLoader;
 import one.dqu.additionaladditions.config.network.ConfigSyncS2CPayload;
 import one.dqu.additionaladditions.config.network.neoforge.ConfigSyncTask;
 import one.dqu.additionaladditions.entity.RopeArrowRenderer;

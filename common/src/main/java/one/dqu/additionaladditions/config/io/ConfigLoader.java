@@ -1,4 +1,4 @@
-package one.dqu.additionaladditions.config;
+package one.dqu.additionaladditions.config.io;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -7,11 +7,15 @@ import com.google.gson.JsonSyntaxException;
 import com.mojang.serialization.Dynamic;
 import com.mojang.serialization.JsonOps;
 import dev.architectury.injectables.annotations.ExpectPlatform;
+import net.minecraft.world.food.FoodProperties;
 import one.dqu.additionaladditions.AdditionalAdditions;
 import net.minecraft.resources.ResourceLocation;
+import one.dqu.additionaladditions.config.Config;
+import one.dqu.additionaladditions.config.ConfigProperty;
 import one.dqu.additionaladditions.config.datafixer.ConfigFileRelocator;
 import one.dqu.additionaladditions.config.datafixer.ConfigFixerUpper;
 import one.dqu.additionaladditions.config.type.VersionConfig;
+import one.dqu.additionaladditions.config.type.unit.FoodUnitConfig;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -23,16 +27,19 @@ import java.util.Map;
 
 public class ConfigLoader {
     private static final String PATH = getConfigDirectory().resolve(AdditionalAdditions.NAMESPACE).toString();
-    private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
+    private static final Gson GSON = new GsonBuilder().setPrettyPrinting().setLenient().create();
 
     /**
      * Handles config loading.
      * In order: init config -> create config directory -> load config version
-     *           -> run fiddler -> read or create config files
+     *           -> run relocator -> read or create config files
      *           -> datafix if version is outdated -> apply config values
      */
     public static void load() {
         AdditionalAdditions.LOGGER.info("[{}] Loading config files...", AdditionalAdditions.NAMESPACE);
+
+        // Register config types so the comments can be found by the writer
+        Json5Writer.registerType(FoodProperties.class, FoodUnitConfig.class);
 
         Path directory = Paths.get(PATH);
         Config.init();
@@ -129,10 +136,12 @@ public class ConfigLoader {
         for (Map.Entry<ResourceLocation, JsonElement> entry : configFiles.entrySet()) {
             ResourceLocation location = entry.getKey();
             JsonElement json = entry.getValue();
-            Path path = Paths.get(PATH).resolve(location.getPath() + ".json");
+            Path path = Paths.get(PATH).resolve(location.getPath() + ".json5");
 
             try {
-                String updatedJsonString = GSON.toJson(json);
+                ConfigProperty<?> property = ConfigProperty.getByPath(location);
+                Class<?> configClass = property != null ? property.get().getClass() : null;
+                String updatedJsonString = Json5Writer.write(json, configClass);
                 Files.writeString(path, updatedJsonString);
             } catch (IOException e) {
                 AdditionalAdditions.LOGGER.error("[{}] Failed to write updated config file for property {} at path {}: {}", AdditionalAdditions.NAMESPACE, location, path, e);
@@ -147,7 +156,7 @@ public class ConfigLoader {
     private static Map<ResourceLocation, JsonElement> readFiles(Path directory, List<ConfigProperty<?>> properties) {
         Map<ResourceLocation, JsonElement> configFiles = new HashMap<>();
         for (ConfigProperty<?> property : properties) {
-            Path path = directory.resolve(property.path().getPath() + ".json");
+            Path path = directory.resolve(property.path().getPath() + ".json5");
 
             try {
                 if (!Files.exists(path)) {
@@ -187,7 +196,8 @@ public class ConfigLoader {
             Files.createDirectories(path.getParent());
 
             T defaultValue = property.get();
-            String defaultJson = GSON.toJson(property.codec().encodeStart(JsonOps.INSTANCE, defaultValue).getOrThrow());
+            JsonElement json = property.codec().encodeStart(JsonOps.INSTANCE, defaultValue).getOrThrow();
+            String defaultJson = Json5Writer.write(json, defaultValue.getClass());
 
             Files.writeString(path, defaultJson);
         } catch (IOException e) {

@@ -1,4 +1,4 @@
-package one.dqu.additionaladditions.config.neoforge;
+package one.dqu.additionaladditions.config.io.neoforge;
 
 import net.neoforged.fml.loading.FMLPaths;
 

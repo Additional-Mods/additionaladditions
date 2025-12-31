@@ -10,29 +10,26 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 
 public record SoundEventUnitConfig(
-        Holder<SoundEvent> soundEvent
+       String soundEvent
 ) {
     private static final Codec<SoundEventUnitConfig> ICODEC = RecordCodecBuilder.create(instance ->
             instance.group(
-                    Codec.STRING.xmap(
-                            SoundEventUnitConfig::toSoundEvent,
-                            SoundEventUnitConfig::fromSoundEvent
-                    ).fieldOf("sound_event").forGetter(SoundEventUnitConfig::soundEvent)
+                    Codec.STRING.fieldOf("sound_event").forGetter(SoundEventUnitConfig::soundEvent)
             ).apply(instance, SoundEventUnitConfig::new)
     );
 
     public static final Codec<Holder<SoundEvent>> CODEC = ICODEC.xmap(
-            SoundEventUnitConfig::soundEvent,
-            SoundEventUnitConfig::new
+            SoundEventUnitConfig::toSoundEvent,
+            SoundEventUnitConfig::fromSoundEvent
     );
 
-    private static Holder<SoundEvent> toSoundEvent(String id) {
+    private Holder<SoundEvent> toSoundEvent() {
         return BuiltInRegistries.SOUND_EVENT.getHolderOrThrow(
-                ResourceKey.create(Registries.SOUND_EVENT, ResourceLocation.parse(id))
+                ResourceKey.create(Registries.SOUND_EVENT, ResourceLocation.parse(this.soundEvent))
         );
     }
 
-    private static String fromSoundEvent(Holder<SoundEvent> soundEvent) {
-        return soundEvent.getRegisteredName();
+    private static SoundEventUnitConfig fromSoundEvent(Holder<SoundEvent> soundEvent) {
+        return new SoundEventUnitConfig(soundEvent.getRegisteredName());
     }
 }

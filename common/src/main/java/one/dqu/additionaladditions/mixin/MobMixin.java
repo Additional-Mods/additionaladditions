@@ -28,8 +28,8 @@ public abstract class MobMixin {
             mobSpawnType != MobSpawnType.PATROL
         ) return;
 
-        float chance = Config.TINTED_REDSTONE_LAMP.get().chance();
-        int range = Config.TINTED_REDSTONE_LAMP.get().range();
+        float chance = Config.TINTED_REDSTONE_LAMP.get().despawnChance();
+        int range = Config.TINTED_REDSTONE_LAMP.get().despawnRange();
 
         PoiManager poiManager = level.getPoiManager();
 

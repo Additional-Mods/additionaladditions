@@ -2,7 +2,6 @@ package one.dqu.additionaladditions.mixin;
 
 import com.google.gson.JsonElement;
 import one.dqu.additionaladditions.AdditionalAdditions;
-import one.dqu.additionaladditions.config.Config;
 import one.dqu.additionaladditions.config.ConfigProperty;
 import one.dqu.additionaladditions.config.Toggleable;
 import org.spongepowered.asm.mixin.Mixin;
