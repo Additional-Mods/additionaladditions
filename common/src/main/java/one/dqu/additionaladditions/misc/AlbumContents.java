@@ -12,6 +12,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.TooltipProvider;
+import one.dqu.additionaladditions.config.Config;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -68,7 +69,7 @@ public record AlbumContents(List<ItemStack> items) implements TooltipProvider {
         } else {
             consumer.accept(
                     Component.literal("")
-                            .append(items.size() + "/8 ")
+                            .append(String.format("%s/%s ", items.size(), Config.ALBUM.get().capacity()))
                             .append(Component.translatable("additionaladditions.gui.album.discs"))
                             .withStyle(ChatFormatting.GRAY)
             );

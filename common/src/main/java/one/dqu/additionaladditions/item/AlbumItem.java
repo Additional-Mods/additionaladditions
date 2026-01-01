@@ -8,6 +8,7 @@ import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
+import one.dqu.additionaladditions.config.Config;
 import one.dqu.additionaladditions.misc.AlbumContents;
 import one.dqu.additionaladditions.registry.AAMisc;
 
@@ -36,7 +37,7 @@ public class AlbumItem extends Item {
             return false;
         }
 
-        if (contents.items().size() >= 8) {
+        if (contents.items().size() >= Config.ALBUM.get().capacity()) {
             return false;
         }
 

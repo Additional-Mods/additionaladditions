@@ -116,6 +116,13 @@ public class ConfigV1Schema extends Schema {
                         "durability", DSL.constType(DSL.intType())
                 )
         );
+
+        schema.registerType(false, ConfigProperty.typeReference(AlbumConfig.class), () ->
+                DSL.fields(
+                        "enabled", DSL.constType(DSL.bool()),
+                        "capacity", DSL.constType(DSL.intType())
+                )
+        );
     }
 
     @Override

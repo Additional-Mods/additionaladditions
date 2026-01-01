@@ -78,9 +78,9 @@ public class Config {
             new FeatureConfig(true)
     );
 
-    public static final ConfigProperty<FeatureConfig> ALBUM = new ConfigProperty<>(
-            "album", FeatureConfig.CODEC,
-            new FeatureConfig(true)
+    public static final ConfigProperty<AlbumConfig> ALBUM = new ConfigProperty<>(
+            "album", AlbumConfig.CODEC,
+            new AlbumConfig(true, 8)
     );
 
     public static final ConfigProperty<FeatureConfig> SUSPICIOUS_DYES = new ConfigProperty<>(
