@@ -49,16 +49,22 @@ public class ConfigV1Schema extends Schema {
         );
 
         schema.registerType(false, ConfigProperty.typeReference(WateringCanConfig.class), () ->
-                DSL.fields(
-                        "enabled", DSL.constType(DSL.bool()),
-                        "max_water_level", DSL.constType(DSL.intType())
+                DSL.and(
+                        DSL.fields(
+                                "enabled", DSL.constType(DSL.bool()),
+                                "max_water_level", DSL.constType(DSL.intType()),
+                                "volume_water_level", DSL.constType(DSL.intType())
+                        ),
+                        DSL.fields(
+                                "fertilize_chance", DSL.constType(DSL.floatType())
+                        )
                 )
         );
 
         schema.registerType(false, ConfigProperty.typeReference(BarometerConfig.class), () ->
                 DSL.fields(
                         "enabled", DSL.constType(DSL.bool()),
-                        "display_elevation_always", DSL.constType(DSL.bool())
+                        "display_elevation_hud", DSL.constType(DSL.bool())
                 )
         );
 
@@ -85,10 +91,10 @@ public class ConfigV1Schema extends Schema {
                                 "enchantability", DSL.constType(DSL.intType())
                         ),
                         DSL.fields(
-                                "equip_sound", DSL.optionalFields(
+                                "equip_sound", DSL.fields(
                                         "name", DSL.constType(DSL.string())
                                 ),
-                                "repair_ingredient", DSL.optionalFields(
+                                "repair_ingredient", DSL.fields(
                                         "item", DSL.constType(DSL.string())
                                 )
                         )

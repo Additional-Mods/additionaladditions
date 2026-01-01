@@ -9,12 +9,12 @@ public record BarometerConfig(
         boolean enabled,
 
         @Comment("If true, Y coordinate of the player will be displayed in the HUD (action bar) when the barometer is held.")
-        boolean displayElevationAlways
+        boolean displayElevationHud
 ) implements Toggleable {
     public static final Codec<BarometerConfig> CODEC = RecordCodecBuilder.create(instance ->
             instance.group(
                     Codec.BOOL.fieldOf("enabled").forGetter(BarometerConfig::enabled),
-                    Codec.BOOL.fieldOf("display_elevation_always").forGetter(BarometerConfig::displayElevationAlways)
+                    Codec.BOOL.fieldOf("display_elevation_hud").forGetter(BarometerConfig::displayElevationHud)
             ).apply(instance, BarometerConfig::new)
     );
 }
