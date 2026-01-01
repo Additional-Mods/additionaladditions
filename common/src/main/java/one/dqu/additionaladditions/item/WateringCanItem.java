@@ -61,6 +61,10 @@ public class WateringCanItem extends ConfigurableItem {
         // watering
         if (waterLevel > 0 || player.isCreative()) {
             if (state.getBlock() instanceof BonemealableBlock fertilizable && !(state.getBlock() instanceof GrassBlock)) {
+                if (!fertilizable.isValidBonemealTarget(world, pos, state)) {
+                    return InteractionResultHolder.pass(stack);
+                }
+
                 player.playSound(SoundEvents.BONE_MEAL_USE, 1.0F, 1.5F);
                 if (world.isClientSide()) {
                     return InteractionResultHolder.success(stack);
