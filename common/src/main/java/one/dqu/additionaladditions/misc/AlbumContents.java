@@ -18,7 +18,6 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
-import java.util.stream.Collectors;
 
 public record AlbumContents(List<ItemStack> items) implements TooltipProvider {
     public static final AlbumContents EMPTY = new AlbumContents(List.of());
@@ -75,23 +74,49 @@ public record AlbumContents(List<ItemStack> items) implements TooltipProvider {
             );
         }
 
-        for (int i = 0; i < items.size(); i++) {
+        int start = 0;
+        int end = items.size();
+
+        if (items.size() > 8) {
+            if (highlight != null) {
+                start = highlight - 4;
+                if (start < 0) start = 0;
+                if (start + 8 > items.size()) {
+                    start = items.size() - 8;
+                }
+            }
+            end = start + 8;
+        }
+
+        if (start > 0) {
+            consumer.accept(CommonComponents.space().append(Component.literal("...").withStyle(ChatFormatting.GRAY)));
+            start++;
+        }
+
+        for (int i = start; i < end; i++) {
             ItemStack disc = items.get(i);
             final int j = i;
 
-            disc.get(DataComponents.JUKEBOX_PLAYABLE).addToTooltip(
-                    tooltipContext,
-                    component -> {
-                        Component song = component;
-                        if (highlight != null && j == highlight) {
-                            song = song.copy().withStyle(ChatFormatting.WHITE);
-                        }
-                        consumer.accept(
-                                CommonComponents.space().append(song)
-                        );
-                    },
-                    tooltipFlag
-            );
+            var jukeboxPlayable = disc.get(DataComponents.JUKEBOX_PLAYABLE);
+            if (jukeboxPlayable != null) {
+                jukeboxPlayable.addToTooltip(
+                        tooltipContext,
+                        component -> {
+                            Component song = component;
+                            if (highlight != null && j == highlight) {
+                                song = song.copy().withStyle(ChatFormatting.WHITE);
+                            }
+                            consumer.accept(
+                                    CommonComponents.space().append(song)
+                            );
+                        },
+                        tooltipFlag
+                );
+            }
+        }
+
+        if (end < items.size()) {
+            consumer.accept(CommonComponents.space().append(Component.literal("...").withStyle(ChatFormatting.GRAY)));
         }
     }
 
