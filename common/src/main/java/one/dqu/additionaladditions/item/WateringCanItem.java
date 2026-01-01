@@ -67,7 +67,7 @@ public class WateringCanItem extends ConfigurableItem {
                 }
 
                 if (fertilizable.isBonemealSuccess(world, world.random, pos, state)) {
-                    if (world.random.nextFloat() < 0.25) {
+                    if (world.random.nextFloat() < Config.WATERING_CAN.get().fertilizeChance()) {
                         fertilizable.performBonemeal((ServerLevel) world, world.random, pos, state);
                     }
                 }
@@ -98,15 +98,16 @@ public class WateringCanItem extends ConfigurableItem {
 
         // filling
         if (waterLevel < maxWaterLevel) {
+            int volumePerLevel = Config.WATERING_CAN.get().volumeWaterLevel();
             int waterNeeded = maxWaterLevel - waterLevel;
-            int millibuckets = waterNeeded * 100;
+            int millibuckets = waterNeeded * volumePerLevel;
 
             FluidHelper.Transaction transaction = FluidHelper.transaction(player, pos, hitResult.getDirection(), millibuckets, Fluids.WATER);
 
-            int waterGained = transaction.amount() / 100;
+            int waterGained = transaction.amount() / volumePerLevel;
             if (waterGained > 0) {
                 if (!world.isClientSide()) {
-                    transaction.commitAmount(waterGained * 100);
+                    transaction.commitAmount(waterGained * volumePerLevel);
                     setWaterLevel(stack, waterLevel + waterGained);
                 }
                 return InteractionResultHolder.success(stack);

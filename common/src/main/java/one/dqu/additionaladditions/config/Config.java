@@ -45,7 +45,7 @@ public class Config {
 
     public static final ConfigProperty<WateringCanConfig> WATERING_CAN = new ConfigProperty<>(
             "watering_can", WateringCanConfig.CODEC,
-            new WateringCanConfig(true, 10)
+            new WateringCanConfig(true, 10, 100, 0.25f)
     );
 
     public static final ConfigProperty<DamageableItemConfig> WRENCH = new ConfigProperty<>(
