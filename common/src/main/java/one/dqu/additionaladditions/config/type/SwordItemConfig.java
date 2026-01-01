@@ -10,14 +10,18 @@ public record SwordItemConfig(
 ) {
     public static final Codec<SwordItemConfig> CODEC = RecordCodecBuilder.create(
             instance -> instance.group(
-                    Codec.floatRange(0, Float.MAX_VALUE).xmap(
-                            // its 4.0f base or something and it ignores getSpeed() from tool material
-                            f -> f - 4.0f,
-                            f -> f + 4.0f
-                    ).fieldOf("attack_speed").forGetter(SwordItemConfig::attackSpeed),
-                    // for attack damage it does not ignore attack damage bonus from tool material so no need to fiddle with it
+                    Codec.floatRange(0, Float.MAX_VALUE).fieldOf("attack_speed").forGetter(SwordItemConfig::rawAttackSpeed),
                     Codec.intRange(0, Integer.MAX_VALUE).fieldOf("attack_damage").forGetter(SwordItemConfig::attackDamage),
                     Codec.intRange(0, Integer.MAX_VALUE).fieldOf("durability").forGetter(SwordItemConfig::durability)
             ).apply(instance, SwordItemConfig::new)
     );
+
+    private float rawAttackSpeed() {
+        return attackSpeed;
+    }
+
+    // its 4.0f base or something and it ignores getSpeed() from tool material
+    public float attackSpeed() {
+        return attackSpeed - 4f;
+    }
 }
