@@ -73,6 +73,18 @@
   "item.additionaladditions.magenta_album": "Пурпурный Альбом",
   "item.additionaladditions.pink_album": "Розовый Альбом",
 
+  "block.additionaladditions.cottonshiver": "Хладнохлопок",
+  "block.additionaladditions.mudflower": "Грязецвет",
+  "block.additionaladditions.crimson_blossom": "Кровоцвет",
+  "block.additionaladditions.amber_blossom": "Светлоцвет",
+  "block.additionaladditions.bulbus": "Пузатик",
+  "block.additionaladditions.sawtooth_fern": "Зуболистник",
+  "block.additionaladditions.frostleaf": "Морозник",
+  "block.additionaladditions.wisteria": "Глициния",
+  "block.additionaladditions.spikeblossom": "Иглоцвет",
+  "block.additionaladditions.snapdragon": "Львиный зев",
+  "block.additionaladditions.lotus_lily": "Лотосовая лилия",
+
   "entity.additionaladditions.glow_stick": "Светящаяся палочка",
 
   "additionaladditions.gui.barometer.elevation": "Высота: %s",
