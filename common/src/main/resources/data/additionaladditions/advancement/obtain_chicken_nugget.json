@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:adventure/kill_a_mob",
+  "display": {
+    "title": {
+      "translate": "additionaladditions.advancements.obtain_chicken_nugget"
+    },
+    "description": {
+      "translate": "additionaladditions.advancements.obtain_chicken_nugget.desc"
+    },
+    "icon": {
+      "id": "additionaladditions:chicken_nugget",
+      "count": 1
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": true
+  },
+  "criteria": {
+    "nugget": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "additionaladditions:chicken_nugget"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+      ["nugget"]
+  ]
+}
