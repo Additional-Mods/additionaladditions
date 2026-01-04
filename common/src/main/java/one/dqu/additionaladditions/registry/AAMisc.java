@@ -79,6 +79,11 @@ public class AAMisc {
             SimplePlayerTrigger::new
     );
 
+    public static final Supplier<SimplePlayerTrigger> ACTIVATE_TINTED_LAMP_TRIGGER = AARegistries.TRIGGERS.register(
+            ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "activate_tinted_redstone_lamp"),
+            SimplePlayerTrigger::new
+    );
+
     public static void registerAll() {
 
     }

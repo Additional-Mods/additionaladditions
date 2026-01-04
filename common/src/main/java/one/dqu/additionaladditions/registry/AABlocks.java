@@ -9,10 +9,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.ai.village.poi.PoiTypes;
 import net.minecraft.world.level.block.state.BlockState;
 import one.dqu.additionaladditions.AdditionalAdditions;
-import one.dqu.additionaladditions.block.CopperPatinaBlock;
-import one.dqu.additionaladditions.block.GlowStickBlock;
-import one.dqu.additionaladditions.block.PatinaBlock;
-import one.dqu.additionaladditions.block.RopeBlock;
+import one.dqu.additionaladditions.block.*;
 import one.dqu.additionaladditions.config.Config;
 import one.dqu.additionaladditions.item.CopperPatinaItem;
 import one.dqu.additionaladditions.util.CreativeAdder;
@@ -45,9 +42,9 @@ public class AABlocks {
                     () -> new RopeBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BROWN).pushReaction(PushReaction.DESTROY).noCollission().sound(SoundType.WOOL).explosionResistance(0f).destroyTime(0.2f))
             );
 
-    public static final Supplier<RedstoneLampBlock> TINTED_REDSTONE_LAMP = AARegistries.BLOCKS.register(
+    public static final Supplier<TintedRedstoneLampBlock> TINTED_REDSTONE_LAMP = AARegistries.BLOCKS.register(
             ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "tinted_redstone_lamp"),
-            () -> new RedstoneLampBlock(BlockBehaviour.Properties.of().mapColor(MapColor.TERRACOTTA_PURPLE).pushReaction(PushReaction.NORMAL).sound(SoundType.GLASS).strength(0.3f))
+            () -> new TintedRedstoneLampBlock(BlockBehaviour.Properties.of().mapColor(MapColor.TERRACOTTA_PURPLE).pushReaction(PushReaction.NORMAL).sound(SoundType.GLASS).strength(0.3f))
     );
 
     public static final Supplier<CopperPatinaBlock> COPPER_PATINA = AARegistries.BLOCKS.register(
