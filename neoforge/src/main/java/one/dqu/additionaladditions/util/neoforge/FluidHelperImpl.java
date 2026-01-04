@@ -1,4 +1,4 @@
-package one.dqu.additionaladditions.misc.neoforge;
+package one.dqu.additionaladditions.util.neoforge;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -8,7 +8,7 @@ import net.minecraft.world.level.material.Fluid;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
-import one.dqu.additionaladditions.misc.FluidHelper;
+import one.dqu.additionaladditions.util.FluidHelper;
 
 public class FluidHelperImpl {
     public static FluidHelper.Transaction modded(Player player, BlockPos pos, Direction side, int amount, Fluid fluid) {

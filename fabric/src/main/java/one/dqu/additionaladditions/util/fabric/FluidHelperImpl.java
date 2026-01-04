@@ -1,4 +1,4 @@
-package one.dqu.additionaladditions.misc.fabric;
+package one.dqu.additionaladditions.util.fabric;
 
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
@@ -9,7 +9,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.material.Fluid;
-import one.dqu.additionaladditions.misc.FluidHelper;
+import one.dqu.additionaladditions.util.FluidHelper;
 
 public class FluidHelperImpl {
     public static FluidHelper.Transaction modded(Player player, BlockPos pos, Direction side, int amount, Fluid fluid) {
