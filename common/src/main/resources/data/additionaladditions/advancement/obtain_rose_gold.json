@@ -1,0 +1,47 @@
+{
+  "parent": "minecraft:story/iron_tools",
+  "display": {
+    "title": {
+      "translate": "additionaladditions.advancements.obtain_rose_gold"
+    },
+    "description": {
+      "translate": "additionaladditions.advancements.obtain_rose_gold.desc"
+    },
+    "icon": {
+      "id": "additionaladditions:rose_gold_chestplate",
+      "count": 1
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "craft": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "additionaladditions:rose_gold_sword",
+              "additionaladditions:rose_gold_shovel",
+              "additionaladditions:rose_gold_pickaxe",
+              "additionaladditions:rose_gold_axe",
+              "additionaladditions:rose_gold_hoe",
+
+              "additionaladditions:rose_gold_helmet",
+              "additionaladditions:rose_gold_chestplate",
+              "additionaladditions:rose_gold_leggings",
+              "additionaladditions:rose_gold_boots",
+
+              "additionaladditions:rose_gold_horse_armor"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+      ["craft"]
+  ]
+}
