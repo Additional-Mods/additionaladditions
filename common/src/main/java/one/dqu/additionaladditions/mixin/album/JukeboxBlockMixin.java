@@ -1,6 +1,7 @@
 package one.dqu.additionaladditions.mixin.album;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.ItemInteractionResult;
@@ -44,6 +45,7 @@ public class JukeboxBlockMixin {
             if (blockEntity instanceof JukeboxBlockEntity jukebox) {
                 jukebox.setTheItem(itemStack2);
                 level.gameEvent(GameEvent.BLOCK_CHANGE, blockPos, GameEvent.Context.of(player, blockState));
+                AAMisc.PLAY_ALBUM_TRIGGER.get().trigger((ServerPlayer) player);
             }
             player.awardStat(Stats.PLAY_RECORD);
         }

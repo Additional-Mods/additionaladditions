@@ -73,6 +73,9 @@ public class PocketJukeboxItem extends Item {
                     PocketJukeboxPlayer.INSTANCE.play(contents, player, stack);
                 } else {
                     AAMisc.PLAY_POCKET_JUKEBOX_TRIGGER.get().trigger((ServerPlayer) player);
+                    if (cursor.is(AAMisc.ALBUMS_TAG)) {
+                        AAMisc.PLAY_ALBUM_TRIGGER.get().trigger((ServerPlayer) player);
+                    }
                 }
 
                 return true;
