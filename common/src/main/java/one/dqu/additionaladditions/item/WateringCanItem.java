@@ -1,5 +1,6 @@
 package one.dqu.additionaladditions.item;
 
+import net.minecraft.server.level.ServerPlayer;
 import one.dqu.additionaladditions.config.Config;
 import one.dqu.additionaladditions.item.configurable.ConfigurableItem;
 import one.dqu.additionaladditions.util.FluidHelper;
@@ -73,6 +74,7 @@ public class WateringCanItem extends ConfigurableItem {
                 if (fertilizable.isBonemealSuccess(world, world.random, pos, state)) {
                     if (world.random.nextFloat() < Config.WATERING_CAN.get().fertilizeChance()) {
                         fertilizable.performBonemeal((ServerLevel) world, world.random, pos, state);
+                        AAMisc.FERTILIZE_WITH_WATERING_CAN_TRIGGER.get().trigger((ServerPlayer) player);
                     }
                 }
 

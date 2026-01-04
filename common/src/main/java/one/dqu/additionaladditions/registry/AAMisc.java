@@ -11,6 +11,7 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.SimpleCraftingRecipeSerializer;
 import net.minecraft.world.level.block.Block;
 import one.dqu.additionaladditions.AdditionalAdditions;
+import one.dqu.additionaladditions.advancement.FertilizeWithWateringCanTrigger;
 import one.dqu.additionaladditions.advancement.PlayPocketJukeboxTrigger;
 import one.dqu.additionaladditions.glint.GlintColor;
 import one.dqu.additionaladditions.misc.AlbumContents;
@@ -66,6 +67,11 @@ public class AAMisc {
     public static final Supplier<PlayPocketJukeboxTrigger> PLAY_POCKET_JUKEBOX_TRIGGER = AARegistries.TRIGGERS.register(
             ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "play_pocket_jukebox"),
             PlayPocketJukeboxTrigger::new
+    );
+
+    public static final Supplier<FertilizeWithWateringCanTrigger> FERTILIZE_WITH_WATERING_CAN_TRIGGER = AARegistries.TRIGGERS.register(
+            ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "fertilize_with_watering_can"),
+            FertilizeWithWateringCanTrigger::new
     );
 
     public static void registerAll() {
