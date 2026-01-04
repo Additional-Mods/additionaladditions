@@ -1,0 +1,28 @@
+{
+  "parent": "minecraft:adventure/sleep_in_bed",
+  "display": {
+    "title": {
+      "translate": "additionaladditions.advancements.play_pocket_jukebox"
+    },
+    "description": {
+      "translate": "additionaladditions.advancements.play_pocket_jukebox.desc"
+    },
+    "icon": {
+      "id": "additionaladditions:pocket_jukebox",
+      "count": 1
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "play_music": {
+      "trigger": "additionaladditions:play_pocket_jukebox",
+      "conditions": {}
+    }
+  },
+  "requirements": [
+      ["play_music"]
+  ]
+}

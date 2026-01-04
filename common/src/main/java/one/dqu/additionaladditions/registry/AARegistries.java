@@ -1,5 +1,6 @@
 package one.dqu.additionaladditions.registry;
 
+import net.minecraft.advancements.CriterionTrigger;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.EntityType;
@@ -16,4 +17,5 @@ public class AARegistries {
     public static final Registrar<Item> ITEMS = Registrar.wrap(BuiltInRegistries.ITEM);
     public static final Registrar<EntityType<?>> ENTITY_TYPES = Registrar.wrap(BuiltInRegistries.ENTITY_TYPE);
     public static final Registrar<PoiType> POI = Registrar.wrap(BuiltInRegistries.POINT_OF_INTEREST_TYPE);
+    public static final Registrar<CriterionTrigger<?>> TRIGGERS = Registrar.wrap(BuiltInRegistries.TRIGGER_TYPES);
 }

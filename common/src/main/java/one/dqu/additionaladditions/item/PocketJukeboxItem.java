@@ -5,6 +5,7 @@ import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.contents.TranslatableContents;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.SlotAccess;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ClickAction;
@@ -70,7 +71,10 @@ public class PocketJukeboxItem extends Item {
 
                 if (player.level().isClientSide()) {
                     PocketJukeboxPlayer.INSTANCE.play(contents, player, stack);
+                } else {
+                    AAMisc.PLAY_POCKET_JUKEBOX_TRIGGER.get().trigger((ServerPlayer) player);
                 }
+
                 return true;
             }
             return false;

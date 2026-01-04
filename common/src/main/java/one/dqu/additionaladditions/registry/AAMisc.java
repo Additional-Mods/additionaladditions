@@ -11,6 +11,7 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.SimpleCraftingRecipeSerializer;
 import net.minecraft.world.level.block.Block;
 import one.dqu.additionaladditions.AdditionalAdditions;
+import one.dqu.additionaladditions.advancement.PlayPocketJukeboxTrigger;
 import one.dqu.additionaladditions.glint.GlintColor;
 import one.dqu.additionaladditions.misc.AlbumContents;
 import one.dqu.additionaladditions.misc.AlbumDyeRecipe;
@@ -20,6 +21,8 @@ import one.dqu.additionaladditions.misc.SuspiciousDyeRecipe;
 import java.util.function.Supplier;
 
 public class AAMisc {
+    /* DATA COMPONENTS */
+
     public static final Supplier<DataComponentType<GlintColor>> GLINT_COLOR_COMPONENT = AARegistries.DATA_COMPONENT_TYPES.register(
             ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "glint_color"),
             () -> DataComponentType.<GlintColor>builder().persistent(GlintColor.CODEC).networkSynchronized(GlintColor.STREAM_CODEC).build()
@@ -35,9 +38,13 @@ public class AAMisc {
             () -> DataComponentType.<Integer>builder().persistent(Codec.INT).networkSynchronized(ByteBufCodecs.INT).build()
     );
 
+    /* TAGS */
+
     public static final TagKey<Item> SUSPICIOUS_DYES_TAG = TagKey.create(Registries.ITEM, ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "suspicious_dyes"));
     public static final TagKey<Block> WRENCH_BLACKLIST_TAG = TagKey.create(Registries.BLOCK, ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "wrench_blacklisted"));
     public static final TagKey<Item> ALBUMS_TAG = TagKey.create(Registries.ITEM, ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "albums"));
+
+    /* RECIPE SERIALIZERS */
 
     public static final Supplier<RecipeSerializer<RoseGoldTransmuteRecipe>> ROSE_GOLD_TRANSMUTE_RECIPE_SERIALIZER = AARegistries.RECIPE_SERIALIZERS.register(
             ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "rose_gold_transmute"),
@@ -52,6 +59,13 @@ public class AAMisc {
     public static final Supplier<RecipeSerializer<AlbumDyeRecipe>> ALBUM_DYE_RECIPE_SERIALIZER = AARegistries.RECIPE_SERIALIZERS.register(
             ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "album_dye"),
             () -> new SimpleCraftingRecipeSerializer<>(AlbumDyeRecipe::new)
+    );
+
+    /* ADVANCEMENT TRIGGERS */
+
+    public static final Supplier<PlayPocketJukeboxTrigger> PLAY_POCKET_JUKEBOX_TRIGGER = AARegistries.TRIGGERS.register(
+            ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "play_pocket_jukebox"),
+            PlayPocketJukeboxTrigger::new
     );
 
     public static void registerAll() {
