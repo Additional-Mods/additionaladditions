@@ -1,0 +1,28 @@
+{
+  "parent": "additionaladditions:play_album",
+  "display": {
+    "title": {
+      "translate": "additionaladditions.advancements.fill_album_same_disc"
+    },
+    "description": {
+      "translate": "additionaladditions.advancements.fill_album_same_disc.desc"
+    },
+    "icon": {
+      "id": "minecraft:music_disc_11",
+      "count": 1
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "fill_album": {
+      "trigger": "additionaladditions:fill_album_same_disc",
+      "conditions": {}
+    }
+  },
+  "requirements": [
+      ["fill_album"]
+  ]
+}

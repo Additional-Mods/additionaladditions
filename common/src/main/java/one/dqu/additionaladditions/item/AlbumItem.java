@@ -1,6 +1,7 @@
 package one.dqu.additionaladditions.item;
 
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.SlotAccess;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ClickAction;
@@ -45,6 +46,24 @@ public class AlbumItem extends Item {
         return true;
     }
 
+    private static void checkFillAlbumSameDiscAdvancement(ItemStack album, Player player) {
+        if (!(player instanceof ServerPlayer serverPlayer)) return;
+        if (!Config.ALBUM.get().enabled()) return;
+
+        AlbumContents contents = getContents(album);
+        int capacity = Config.ALBUM.get().capacity();
+
+        if (contents.items().size() != capacity) return;
+
+        ItemStack first = contents.items().getFirst();
+        boolean allIdentical = contents.items().stream()
+                .allMatch(item -> ItemStack.isSameItemSameComponents(item, first));
+
+        if (allIdentical) {
+            AAMisc.FILL_ALBUM_SAME_DISC_TRIGGER.get().trigger(serverPlayer);
+        }
+    }
+
     private static Optional<ItemStack> popDisc(ItemStack album) {
         AlbumContents contents = getContents(album);
 
@@ -86,6 +105,7 @@ public class AlbumItem extends Item {
         } else {
             if (addDisc(album, other)) {
                 other.shrink(1);
+                checkFillAlbumSameDiscAdvancement(album, player);
                 return true;
             }
         }
@@ -107,6 +127,7 @@ public class AlbumItem extends Item {
         } else {
             if (addDisc(album, cursor)) {
                 cursor.shrink(1);
+                checkFillAlbumSameDiscAdvancement(album, player);
                 return true;
             }
         }

@@ -12,6 +12,7 @@ import net.minecraft.world.item.crafting.SimpleCraftingRecipeSerializer;
 import net.minecraft.world.level.block.Block;
 import one.dqu.additionaladditions.AdditionalAdditions;
 import one.dqu.additionaladditions.advancement.FertilizeWithWateringCanTrigger;
+import one.dqu.additionaladditions.advancement.FillAlbumSameDiscTrigger;
 import one.dqu.additionaladditions.advancement.PlayAlbumTrigger;
 import one.dqu.additionaladditions.advancement.PlayPocketJukeboxTrigger;
 import one.dqu.additionaladditions.glint.GlintColor;
@@ -78,6 +79,11 @@ public class AAMisc {
     public static final Supplier<PlayAlbumTrigger> PLAY_ALBUM_TRIGGER = AARegistries.TRIGGERS.register(
             ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "play_album"),
             PlayAlbumTrigger::new
+    );
+
+    public static final Supplier<FillAlbumSameDiscTrigger> FILL_ALBUM_SAME_DISC_TRIGGER = AARegistries.TRIGGERS.register(
+            ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "fill_album_same_disc"),
+            FillAlbumSameDiscTrigger::new
     );
 
     public static void registerAll() {
