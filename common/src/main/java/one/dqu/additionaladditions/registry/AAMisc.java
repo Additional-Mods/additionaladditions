@@ -11,15 +11,8 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.SimpleCraftingRecipeSerializer;
 import net.minecraft.world.level.block.Block;
 import one.dqu.additionaladditions.AdditionalAdditions;
-import one.dqu.additionaladditions.advancement.FertilizeWithWateringCanTrigger;
-import one.dqu.additionaladditions.advancement.FillAlbumSameDiscTrigger;
-import one.dqu.additionaladditions.advancement.PlayAlbumTrigger;
-import one.dqu.additionaladditions.advancement.PlayPocketJukeboxTrigger;
 import one.dqu.additionaladditions.glint.GlintColor;
-import one.dqu.additionaladditions.misc.AlbumContents;
-import one.dqu.additionaladditions.misc.AlbumDyeRecipe;
-import one.dqu.additionaladditions.misc.RoseGoldTransmuteRecipe;
-import one.dqu.additionaladditions.misc.SuspiciousDyeRecipe;
+import one.dqu.additionaladditions.misc.*;
 
 import java.util.function.Supplier;
 
@@ -66,24 +59,24 @@ public class AAMisc {
 
     /* ADVANCEMENT TRIGGERS */
 
-    public static final Supplier<PlayPocketJukeboxTrigger> PLAY_POCKET_JUKEBOX_TRIGGER = AARegistries.TRIGGERS.register(
+    public static final Supplier<SimplePlayerTrigger> PLAY_POCKET_JUKEBOX_TRIGGER = AARegistries.TRIGGERS.register(
             ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "play_pocket_jukebox"),
-            PlayPocketJukeboxTrigger::new
+            SimplePlayerTrigger::new
     );
 
-    public static final Supplier<FertilizeWithWateringCanTrigger> FERTILIZE_WITH_WATERING_CAN_TRIGGER = AARegistries.TRIGGERS.register(
+    public static final Supplier<SimplePlayerTrigger> FERTILIZE_WITH_WATERING_CAN_TRIGGER = AARegistries.TRIGGERS.register(
             ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "fertilize_with_watering_can"),
-            FertilizeWithWateringCanTrigger::new
+            SimplePlayerTrigger::new
     );
 
-    public static final Supplier<PlayAlbumTrigger> PLAY_ALBUM_TRIGGER = AARegistries.TRIGGERS.register(
+    public static final Supplier<SimplePlayerTrigger> PLAY_ALBUM_TRIGGER = AARegistries.TRIGGERS.register(
             ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "play_album"),
-            PlayAlbumTrigger::new
+            SimplePlayerTrigger::new
     );
 
-    public static final Supplier<FillAlbumSameDiscTrigger> FILL_ALBUM_SAME_DISC_TRIGGER = AARegistries.TRIGGERS.register(
+    public static final Supplier<SimplePlayerTrigger> FILL_ALBUM_SAME_DISC_TRIGGER = AARegistries.TRIGGERS.register(
             ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "fill_album_same_disc"),
-            FillAlbumSameDiscTrigger::new
+            SimplePlayerTrigger::new
     );
 
     public static void registerAll() {

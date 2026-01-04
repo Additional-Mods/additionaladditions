@@ -1,4 +1,4 @@
-package one.dqu.additionaladditions.advancement;
+package one.dqu.additionaladditions.misc;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -9,7 +9,7 @@ import net.minecraft.server.level.ServerPlayer;
 
 import java.util.Optional;
 
-public class PlayPocketJukeboxTrigger extends SimpleCriterionTrigger<PlayPocketJukeboxTrigger.TriggerInstance> {
+public class SimplePlayerTrigger extends SimpleCriterionTrigger<SimplePlayerTrigger.TriggerInstance> {
     public void trigger(ServerPlayer player) {
         this.trigger(player, instance -> true);
     }
