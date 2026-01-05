@@ -46,6 +46,8 @@ import java.util.function.Supplier;
 @SuppressWarnings("unused")
 public class AAItems {
 
+    // BLOCKS
+
     public static final Supplier<Item> ROPE = new Builder("rope")
             .config(() -> Config.ROPE.get().enabled())
             .creativeAfter(Items.LADDER, CreativeModeTabs.FUNCTIONAL_BLOCKS)
@@ -79,6 +81,87 @@ public class AAItems {
             .creativeAfter(Items.LIGHT_WEIGHTED_PRESSURE_PLATE, CreativeModeTabs.BUILDING_BLOCKS)
             .build(p -> new BlockItem(AABlocks.ROSE_GOLD_BLOCK.get(), p));
 
+    // SNIFFER PLANTS
+
+    public static final Supplier<Item> COTTONSHIVER = new Builder("cottonshiver")
+            .creativeAfter(Items.PITCHER_PLANT, CreativeModeTabs.NATURAL_BLOCKS)
+            .build(p -> new BlockItem(AABlocks.COTTONSHIVER.get(), p));
+    public static final Supplier<Item> COTTONSHIVER_SEEDS = new Builder("cottonshiver_seeds")
+            .creativeAfter(Items.PITCHER_POD, CreativeModeTabs.NATURAL_BLOCKS)
+            .build(p -> new ItemNameBlockItem(AABlocks.COTTONSHIVER.get(), p));
+
+    public static final Supplier<Item> MUDFLOWER = new Builder("mudflower")
+            .creativeAfter(Items.PITCHER_PLANT, CreativeModeTabs.NATURAL_BLOCKS)
+            .build(p -> new BlockItem(AABlocks.MUDFLOWER.get(), p));
+    public static final Supplier<Item> MUDFLOWER_SEEDS = new Builder("mudflower_seeds")
+            .creativeAfter(Items.PITCHER_POD, CreativeModeTabs.NATURAL_BLOCKS)
+            .build(p -> new ItemNameBlockItem(AABlocks.MUDFLOWER.get(), p));
+
+    public static final Supplier<Item> CRIMSON_BLOSSOM = new Builder("crimson_blossom")
+            .creativeAfter(Items.TORCHFLOWER, CreativeModeTabs.NATURAL_BLOCKS)
+            .build(p -> new BlockItem(AABlocks.CRIMSON_BLOSSOM.get(), p));
+    public static final Supplier<Item> CRIMSON_BLOSSOM_SEEDS = new Builder("crimson_blossom_seeds")
+            .creativeAfter(Items.PITCHER_POD, CreativeModeTabs.NATURAL_BLOCKS)
+            .build(p -> new ItemNameBlockItem(AABlocks.CRIMSON_BLOSSOM.get(), p));
+
+    public static final Supplier<Item> AMBER_BLOSSOM = new Builder("amber_blossom")
+            .creativeAfter(Items.PITCHER_PLANT, CreativeModeTabs.NATURAL_BLOCKS)
+            .build(p -> new BlockItem(AABlocks.AMBER_BLOSSOM.get(), p));
+    public static final Supplier<Item> AMBER_BLOSSOM_SEEDS = new Builder("amber_blossom_seeds")
+            .creativeAfter(Items.PITCHER_POD, CreativeModeTabs.NATURAL_BLOCKS)
+            .build(p -> new ItemNameBlockItem(AABlocks.AMBER_BLOSSOM.get(), p));
+
+    public static final Supplier<Item> BULBUS = new Builder("bulbus")
+            .creativeAfter(Items.TORCHFLOWER, CreativeModeTabs.NATURAL_BLOCKS)
+            .build(p -> new BlockItem(AABlocks.BULBUS.get(), p));
+    public static final Supplier<Item> BULBUS_SEEDS = new Builder("bulbus_seeds")
+            .creativeAfter(Items.PITCHER_POD, CreativeModeTabs.NATURAL_BLOCKS)
+            .build(p -> new ItemNameBlockItem(AABlocks.BULBUS.get(), p));
+
+    public static final Supplier<Item> SAWTOOTH_FERN = new Builder("sawtooth_fern")
+            .creativeAfter(Items.PITCHER_PLANT, CreativeModeTabs.NATURAL_BLOCKS)
+            .build(p -> new BlockItem(AABlocks.SAWTOOTH_FERN.get(), p));
+    public static final Supplier<Item> SAWTOOTH_FERN_SEEDS = new Builder("sawtooth_fern_seeds")
+            .creativeAfter(Items.PITCHER_POD, CreativeModeTabs.NATURAL_BLOCKS)
+            .build(p -> new ItemNameBlockItem(AABlocks.SAWTOOTH_FERN.get(), p));
+
+    public static final Supplier<Item> FROSTLEAF = new Builder("frostleaf")
+            .creativeAfter(Items.TORCHFLOWER, CreativeModeTabs.NATURAL_BLOCKS)
+            .build(p -> new BlockItem(AABlocks.FROSTLEAF.get(), p));
+    public static final Supplier<Item> FROSTLEAF_SEEDS = new Builder("frostleaf_seeds")
+            .creativeAfter(Items.PITCHER_POD, CreativeModeTabs.NATURAL_BLOCKS)
+            .build(p -> new ItemNameBlockItem(AABlocks.FROSTLEAF.get(), p));
+
+    public static final Supplier<Item> WISTERIA = new Builder("wisteria")
+            .creativeAfter(Items.TORCHFLOWER, CreativeModeTabs.NATURAL_BLOCKS)
+            .build(p -> new BlockItem(AABlocks.WISTERIA.get(), p));
+    public static final Supplier<Item> WISTERIA_SEEDS = new Builder("wisteria_seeds")
+            .creativeAfter(Items.PITCHER_POD, CreativeModeTabs.NATURAL_BLOCKS)
+            .build(p -> new ItemNameBlockItem(AABlocks.WISTERIA.get(), p));
+
+    public static final Supplier<Item> SPIKEBLOSSOM = new Builder("spikeblossom")
+            .creativeAfter(Items.PITCHER_PLANT, CreativeModeTabs.NATURAL_BLOCKS)
+            .build(p -> new BlockItem(AABlocks.SPIKEBLOSSOM.get(), p));
+    public static final Supplier<Item> SPIKEBLOSSOM_SEEDS = new Builder("spikeblossom_seeds")
+            .creativeAfter(Items.PITCHER_POD, CreativeModeTabs.NATURAL_BLOCKS)
+            .build(p -> new ItemNameBlockItem(AABlocks.SPIKEBLOSSOM.get(), p));
+
+    public static final Supplier<Item> SNAPDRAGON = new Builder("snapdragon")
+            .creativeAfter(Items.PITCHER_PLANT, CreativeModeTabs.NATURAL_BLOCKS)
+            .build(p -> new BlockItem(AABlocks.SNAPDRAGON.get(), p));
+    public static final Supplier<Item> SNAPDRAGON_SEEDS = new Builder("snapdragon_seeds")
+            .creativeAfter(Items.PITCHER_POD, CreativeModeTabs.NATURAL_BLOCKS)
+            .build(p -> new ItemNameBlockItem(AABlocks.SNAPDRAGON.get(), p));
+
+    public static final Supplier<Item> LOTUS_LILY = new Builder("lotus_lily")
+            .creativeAfter(Items.TORCHFLOWER, CreativeModeTabs.NATURAL_BLOCKS)
+            .build(p -> new BlockItem(AABlocks.LOTUS_LILY.get(), p));
+    public static final Supplier<Item> LOTUS_LILY_SEEDS = new Builder("lotus_lily_seeds")
+            .creativeAfter(Items.PITCHER_POD, CreativeModeTabs.NATURAL_BLOCKS)
+            .build(p -> new ItemNameBlockItem(AABlocks.LOTUS_LILY.get(), p));
+
+    // FOOD
+
     public static final Supplier<FoodItem> FRIED_EGG = new Builder("fried_egg")
             .config(() -> Config.FRIED_EGG.get().enabled())
             .properties(p -> p.food(Config.FRIED_EGG.get().food()))
@@ -108,6 +191,8 @@ public class AAItems {
                         .when(LootItemRandomChanceWithEnchantedBonusCondition.randomChanceAndLootingBoost(registries, 0.025f, 0.01f))
             )
             .build(p -> new FoodItem(p, Config.CHICKEN_NUGGET));
+
+    // OTHER
 
     public static final Supplier<WateringCanItem> WATERING_CAN = new Builder("watering_can")
             .config(() -> Config.WATERING_CAN.get().enabled())
@@ -230,6 +315,8 @@ public class AAItems {
             )
             .build();
 
+    // ROSE GOLD
+
     public static final RoseGoldToolMaterial ROSE_GOLD_TOOL_MATERIAL = new RoseGoldToolMaterial();
 
     public static final Supplier<Item> ROSE_GOLD_HELMET = new Builder("rose_gold_helmet")
@@ -337,6 +424,8 @@ public class AAItems {
                 builder.set(DataComponents.MAX_DAMAGE, config.durability());
                 builder.set(DataComponents.ATTRIBUTE_MODIFIERS, HoeItem.createAttributes(ROSE_GOLD_TOOL_MATERIAL, config.attackDamage(), config.attackSpeed()));
             }));
+
+    // SUSPICIOUS DYE
 
     public static final Supplier<SuspiciousDyeItem> WHITE_SUSPICIOUS_DYE = new Builder("white_suspicious_dye")
             .properties(p -> p
@@ -455,9 +544,13 @@ public class AAItems {
             .creativeBefore(Items.EXPERIENCE_BOTTLE, CreativeModeTabs.INGREDIENTS)
             .build(p -> new SuspiciousDyeItem(DyeColor.PINK, p));
 
+    // OTHER
+
     public static final Supplier<RopeArrowItem> ROPE_ARROW = new Builder("rope_arrow")
             .creativeAfter(Items.ARROW, CreativeModeTabs.COMBAT)
             .build(RopeArrowItem::new);
+
+    // ALBUMS
 
     public static final Supplier<AlbumItem> ALBUM = new Builder("album")
             .creativeBefore(Items.MUSIC_DISC_13, CreativeModeTabs.TOOLS_AND_UTILITIES)

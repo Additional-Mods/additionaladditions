@@ -61,6 +61,28 @@ public final class AdditionalAdditionsClientFabric implements ClientModInitializ
         BlockRenderLayerMap.INSTANCE.putBlock(AABlocks.COPPER_PATINA.get(), RenderType.cutout());
         BlockRenderLayerMap.INSTANCE.putBlock(AABlocks.ROPE_BLOCK.get(), RenderType.cutout());
         BlockRenderLayerMap.INSTANCE.putBlock(AABlocks.GLOW_STICK_BLOCK.get(), RenderType.cutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(AABlocks.COTTONSHIVER.get(), RenderType.cutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(AABlocks.COTTONSHIVER_CROP.get(), RenderType.cutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(AABlocks.MUDFLOWER.get(), RenderType.cutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(AABlocks.MUDFLOWER_CROP.get(), RenderType.cutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(AABlocks.CRIMSON_BLOSSOM.get(), RenderType.cutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(AABlocks.CRIMSON_BLOSSOM_CROP.get(), RenderType.cutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(AABlocks.AMBER_BLOSSOM.get(), RenderType.cutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(AABlocks.AMBER_BLOSSOM_CROP.get(), RenderType.cutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(AABlocks.BULBUS.get(), RenderType.cutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(AABlocks.BULBUS_CROP.get(), RenderType.cutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(AABlocks.SAWTOOTH_FERN.get(), RenderType.cutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(AABlocks.SAWTOOTH_FERN_CROP.get(), RenderType.cutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(AABlocks.FROSTLEAF.get(), RenderType.cutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(AABlocks.FROSTLEAF_CROP.get(), RenderType.cutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(AABlocks.WISTERIA.get(), RenderType.cutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(AABlocks.WISTERIA_CROP.get(), RenderType.cutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(AABlocks.SPIKEBLOSSOM.get(), RenderType.cutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(AABlocks.SPIKEBLOSSOM_CROP.get(), RenderType.cutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(AABlocks.SNAPDRAGON.get(), RenderType.cutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(AABlocks.SNAPDRAGON_CROP.get(), RenderType.cutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(AABlocks.LOTUS_LILY.get(), RenderType.cutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(AABlocks.LOTUS_LILY_CROP.get(), RenderType.cutout());
 
         // entity renderers
         EntityRendererRegistry.register(AAEntities.GLOW_STICK.get(), ThrownItemRenderer::new);

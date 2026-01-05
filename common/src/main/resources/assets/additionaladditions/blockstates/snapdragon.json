@@ -1,0 +1,11 @@
+{
+  "variants": {
+    "half=lower": {
+      "model": "additionaladditions:block/snapdragon_bottom"
+    },
+    "half=upper": {
+      "model": "additionaladditions:block/snapdragon_top"
+    }
+  }
+}
+

@@ -1,0 +1,11 @@
+{
+  "variants": {
+    "half=lower": {
+      "model": "additionaladditions:block/spikeblossom_bottom"
+    },
+    "half=upper": {
+      "model": "additionaladditions:block/spikeblossom_top"
+    }
+  }
+}
+

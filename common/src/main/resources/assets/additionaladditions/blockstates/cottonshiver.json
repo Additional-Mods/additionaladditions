@@ -1,0 +1,11 @@
+{
+  "variants": {
+    "half=lower": {
+      "model": "additionaladditions:block/cottonshiver_bottom"
+    },
+    "half=upper": {
+      "model": "additionaladditions:block/cottonshiver_top"
+    }
+  }
+}
+

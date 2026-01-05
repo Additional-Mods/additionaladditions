@@ -165,6 +165,28 @@ public final class AdditionalAdditionsNeoForge {
         ItemBlockRenderTypes.setRenderLayer(AABlocks.COPPER_PATINA.get(), RenderType.cutout());
         ItemBlockRenderTypes.setRenderLayer(AABlocks.ROPE_BLOCK.get(), RenderType.cutout());
         ItemBlockRenderTypes.setRenderLayer(AABlocks.GLOW_STICK_BLOCK.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(AABlocks.COTTONSHIVER.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(AABlocks.COTTONSHIVER_CROP.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(AABlocks.MUDFLOWER.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(AABlocks.MUDFLOWER_CROP.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(AABlocks.CRIMSON_BLOSSOM.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(AABlocks.CRIMSON_BLOSSOM_CROP.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(AABlocks.AMBER_BLOSSOM.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(AABlocks.AMBER_BLOSSOM_CROP.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(AABlocks.BULBUS.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(AABlocks.BULBUS_CROP.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(AABlocks.SAWTOOTH_FERN.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(AABlocks.SAWTOOTH_FERN_CROP.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(AABlocks.FROSTLEAF.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(AABlocks.FROSTLEAF_CROP.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(AABlocks.WISTERIA.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(AABlocks.WISTERIA_CROP.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(AABlocks.SPIKEBLOSSOM.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(AABlocks.SPIKEBLOSSOM_CROP.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(AABlocks.SNAPDRAGON.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(AABlocks.SNAPDRAGON_CROP.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(AABlocks.LOTUS_LILY.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(AABlocks.LOTUS_LILY_CROP.get(), RenderType.cutout());
 
         // mod compatibility
         event.enqueueWork(ModCompatibilityImpl::showToasts);

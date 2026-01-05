@@ -1,0 +1,11 @@
+{
+  "variants": {
+    "age=0": {
+      "model": "additionaladditions:block/lotus_lily_crop_stage0"
+    },
+    "age=1": {
+      "model": "additionaladditions:block/lotus_lily_crop_stage1"
+    }
+  }
+}
+

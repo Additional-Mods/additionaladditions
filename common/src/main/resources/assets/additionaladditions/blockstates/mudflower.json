@@ -1,0 +1,11 @@
+{
+  "variants": {
+    "half=lower": {
+      "model": "additionaladditions:block/mudflower_bottom"
+    },
+    "half=upper": {
+      "model": "additionaladditions:block/mudflower_top"
+    }
+  }
+}
+
