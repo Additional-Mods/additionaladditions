@@ -8,6 +8,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 import one.dqu.additionaladditions.registry.AAMisc;
+import one.dqu.additionaladditions.util.ConventionalTags;
 
 public class SuspiciousDyeRecipe extends CustomRecipe {
     public SuspiciousDyeRecipe(CraftingBookCategory craftingBookCategory) {
@@ -26,8 +27,7 @@ public class SuspiciousDyeRecipe extends CustomRecipe {
                     dye++;
                     continue;
                 }
-
-                if (stack.hasFoil()) {
+                if (stack.hasFoil() && stack.is(ConventionalTags.ENCHANTABLE)) {
                     glint++;
                     continue;
                 }
