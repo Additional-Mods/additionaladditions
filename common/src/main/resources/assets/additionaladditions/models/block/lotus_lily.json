@@ -1,7 +1,37 @@
 {
-  "parent": "minecraft:block/cross",
-  "textures": {
-    "cross": "additionaladditions:block/lotus_lily"
-  }
+	"ambientocclusion": false,
+	"texture_size": [32, 32],
+	"textures": {
+		"1": "additionaladditions:block/lotus_lily",
+		"particle": "block/lily_pad",
+		"texture": "block/lily_pad"
+	},
+	"elements": [
+		{
+			"from": [0, 0.25, 0],
+			"to": [16, 0.25, 16],
+			"faces": {
+				"up": {"uv": [0, 0, 16, 16], "texture": "#texture", "tintindex": 0},
+				"down": {"uv": [0, 16, 16, 0], "texture": "#texture", "tintindex": 0}
+			}
+		},
+		{
+			"from": [0, 0.25, 8],
+			"to": [16, 10.25, 8],
+			"rotation": {"angle": 45, "axis": "y", "origin": [8, 0.25, 8]},
+			"faces": {
+				"north": {"uv": [1, 5, 15, 15], "texture": "#1", "tintindex": 0},
+				"south": {"uv": [1, 5, 15, 15], "texture": "#1", "tintindex": 0}
+			}
+		},
+		{
+			"from": [0, 0.25, 8],
+			"to": [16, 10.25, 8],
+			"rotation": {"angle": -45, "axis": "y", "origin": [8, 0.25, 8]},
+			"faces": {
+				"north": {"uv": [1, 5, 15, 15], "texture": "#1", "tintindex": 0},
+				"south": {"uv": [1, 5, 15, 15], "texture": "#1", "tintindex": 0}
+			}
+		}
+	]
 }
-
