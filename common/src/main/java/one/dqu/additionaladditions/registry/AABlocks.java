@@ -78,7 +78,7 @@ public class AABlocks {
     public static final Supplier<Block> COTTONSHIVER_CROP = AARegistries.BLOCKS.register(
             ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "cottonshiver_crop"),
             () -> new FlowerCropBlock(
-                    COTTONSHIVER, 2, new VoxelShape[]{Block.box(5d, 0d, 5d, 11d, 6d, 11d), Block.box(4d, 0d, 4d, 12d, 10d, 12d), Shapes.block()},
+                    COTTONSHIVER, 2, new VoxelShape[]{Block.box(4d, 0d, 4d, 12d, 8d, 12d), Block.box(4d, 0d, 4d, 12d, 15d, 12d), Shapes.block()},
                     BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.CROP).pushReaction(PushReaction.DESTROY)
             )
     );
@@ -91,7 +91,7 @@ public class AABlocks {
     public static final Supplier<Block> MUDFLOWER_CROP = AARegistries.BLOCKS.register(
             ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "mudflower_crop"),
             () -> new FlowerCropBlock(
-                    MUDFLOWER, 2, new VoxelShape[]{Block.box(5d, 0d, 5d, 11d, 6d, 11d), Block.box(4d, 0d, 4d, 12d, 10d, 12d), Shapes.block()},
+                    MUDFLOWER, 2, new VoxelShape[]{Block.box(5d, 0d, 5d, 11d, 9d, 11d), Block.box(4d, 0d, 4d, 12d, 15d, 12d), Shapes.block()},
                     BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.CROP).pushReaction(PushReaction.DESTROY)
             )
     );
@@ -104,7 +104,7 @@ public class AABlocks {
     public static final Supplier<Block> CRIMSON_BLOSSOM_CROP = AARegistries.BLOCKS.register(
             ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "crimson_blossom_crop"),
             () -> new FlowerCropBlock(
-                    CRIMSON_BLOSSOM, 2, new VoxelShape[]{Block.box(5d, 0d, 5d, 11d, 6d, 11d), Block.box(4d, 0d, 4d, 12d, 10d, 12d), Shapes.block()},
+                    CRIMSON_BLOSSOM, 2, new VoxelShape[]{Block.box(3d, 0d, 3d, 13d, 10d, 13d), Block.box(3d, 0d, 3d, 13d, 12d, 13d), Shapes.block()},
                     BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.CROP).pushReaction(PushReaction.DESTROY)
             )
     );
@@ -117,7 +117,7 @@ public class AABlocks {
     public static final Supplier<Block> AMBER_BLOSSOM_CROP = AARegistries.BLOCKS.register(
             ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "amber_blossom_crop"),
             () -> new FlowerCropBlock(
-                    AMBER_BLOSSOM, 2, new VoxelShape[]{Block.box(5d, 0d, 5d, 11d, 6d, 11d), Block.box(4d, 0d, 4d, 12d, 10d, 12d), Shapes.block()},
+                    AMBER_BLOSSOM, 2, new VoxelShape[]{Block.box(5d, 0d, 5d, 11d, 7d, 11d), Block.box(4d, 0d, 4d, 12d, 12d, 12d), Shapes.block()},
                     BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.CROP).pushReaction(PushReaction.DESTROY)
             )
     );
@@ -130,7 +130,7 @@ public class AABlocks {
     public static final Supplier<Block> BULBUS_CROP = AARegistries.BLOCKS.register(
             ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "bulbus_crop"),
             () -> new FlowerCropBlock(
-                    BULBUS, 2, new VoxelShape[]{Block.box(5d, 0d, 5d, 11d, 6d, 11d), Block.box(4d, 0d, 4d, 12d, 10d, 12d), Shapes.block()},
+                    BULBUS, 2, new VoxelShape[]{Block.box(5d, 0d, 5d, 11d, 10d, 11d), Block.box(4d, 0d, 4d, 12d, 15d, 12d), Shapes.block()},
                     BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.CROP).pushReaction(PushReaction.DESTROY)
             )
     );
@@ -143,7 +143,7 @@ public class AABlocks {
     public static final Supplier<Block> SAWTOOTH_FERN_CROP = AARegistries.BLOCKS.register(
             ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "sawtooth_fern_crop"),
             () -> new FlowerCropBlock(
-                    SAWTOOTH_FERN, 2, new VoxelShape[]{Block.box(5d, 0d, 5d, 11d, 6d, 11d), Block.box(4d, 0d, 4d, 12d, 10d, 12d), Shapes.block()},
+                    SAWTOOTH_FERN, 2, new VoxelShape[]{Block.box(5d, 0d, 5d, 11d, 10d, 11d), Block.box(4d, 0d, 4d, 12d, 15d, 12d), Shapes.block()},
                     BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.CROP).pushReaction(PushReaction.DESTROY)
             )
     );
@@ -156,7 +156,7 @@ public class AABlocks {
     public static final Supplier<Block> FROSTLEAF_CROP = AARegistries.BLOCKS.register(
             ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "frostleaf_crop"),
             () -> new FlowerCropBlock(
-                    FROSTLEAF, 2, new VoxelShape[]{Block.box(5d, 0d, 5d, 11d, 6d, 11d), Block.box(4d, 0d, 4d, 12d, 10d, 12d), Shapes.block()},
+                    FROSTLEAF, 2, new VoxelShape[]{Block.box(1d, 0d, 1d, 14d, 6d, 14d), Block.box(1d, 0d, 1d, 14d, 6d, 14d), Shapes.block()},
                     BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.CROP).pushReaction(PushReaction.DESTROY)
             )
     );
@@ -182,7 +182,7 @@ public class AABlocks {
     public static final Supplier<Block> SPIKEBLOSSOM_CROP = AARegistries.BLOCKS.register(
             ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "spikeblossom_crop"),
             () -> new FlowerCropBlock(
-                    SPIKEBLOSSOM, 2, new VoxelShape[]{Block.box(5d, 0d, 5d, 11d, 6d, 11d), Block.box(4d, 0d, 4d, 12d, 10d, 12d), Shapes.block()},
+                    SPIKEBLOSSOM, 2, new VoxelShape[]{Block.box(5d, 0d, 5d, 11d, 7d, 11d), Block.box(4d, 0d, 4d, 12d, 11d, 12d), Shapes.block()},
                     BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.CROP).pushReaction(PushReaction.DESTROY)
             )
     );
@@ -195,7 +195,7 @@ public class AABlocks {
     public static final Supplier<Block> SNAPDRAGON_CROP = AARegistries.BLOCKS.register(
             ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "snapdragon_crop"),
             () -> new FlowerCropBlock(
-                    SNAPDRAGON, 2, new VoxelShape[]{Block.box(5d, 0d, 5d, 11d, 6d, 11d), Block.box(4d, 0d, 4d, 12d, 10d, 12d), Shapes.block()},
+                    SNAPDRAGON, 2, new VoxelShape[]{Block.box(5d, 0d, 5d, 11d, 8d, 11d), Block.box(4d, 0d, 4d, 12d, 15d, 12d), Shapes.block()},
                     BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.CROP).pushReaction(PushReaction.DESTROY)
             )
     );
