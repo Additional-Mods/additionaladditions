@@ -88,77 +88,77 @@ public class AAItems {
             .build(p -> new BlockItem(AABlocks.COTTONSHIVER.get(), p));
     public static final Supplier<Item> COTTONSHIVER_SEEDS = new Builder("cottonshiver_seeds")
             .creativeAfter(Items.PITCHER_POD, CreativeModeTabs.NATURAL_BLOCKS)
-            .build(p -> new ItemNameBlockItem(AABlocks.COTTONSHIVER.get(), p));
+            .build(p -> new ItemNameBlockItem(AABlocks.COTTONSHIVER_CROP.get(), p));
 
     public static final Supplier<Item> MUDFLOWER = new Builder("mudflower")
             .creativeAfter(Items.PITCHER_PLANT, CreativeModeTabs.NATURAL_BLOCKS)
             .build(p -> new BlockItem(AABlocks.MUDFLOWER.get(), p));
     public static final Supplier<Item> MUDFLOWER_SEEDS = new Builder("mudflower_seeds")
             .creativeAfter(Items.PITCHER_POD, CreativeModeTabs.NATURAL_BLOCKS)
-            .build(p -> new ItemNameBlockItem(AABlocks.MUDFLOWER.get(), p));
+            .build(p -> new ItemNameBlockItem(AABlocks.MUDFLOWER_CROP.get(), p));
 
     public static final Supplier<Item> CRIMSON_BLOSSOM = new Builder("crimson_blossom")
             .creativeAfter(Items.TORCHFLOWER, CreativeModeTabs.NATURAL_BLOCKS)
             .build(p -> new BlockItem(AABlocks.CRIMSON_BLOSSOM.get(), p));
     public static final Supplier<Item> CRIMSON_BLOSSOM_SEEDS = new Builder("crimson_blossom_seeds")
             .creativeAfter(Items.PITCHER_POD, CreativeModeTabs.NATURAL_BLOCKS)
-            .build(p -> new ItemNameBlockItem(AABlocks.CRIMSON_BLOSSOM.get(), p));
+            .build(p -> new ItemNameBlockItem(AABlocks.CRIMSON_BLOSSOM_CROP.get(), p));
 
     public static final Supplier<Item> AMBER_BLOSSOM = new Builder("amber_blossom")
             .creativeAfter(Items.PITCHER_PLANT, CreativeModeTabs.NATURAL_BLOCKS)
             .build(p -> new BlockItem(AABlocks.AMBER_BLOSSOM.get(), p));
     public static final Supplier<Item> AMBER_BLOSSOM_SEEDS = new Builder("amber_blossom_seeds")
             .creativeAfter(Items.PITCHER_POD, CreativeModeTabs.NATURAL_BLOCKS)
-            .build(p -> new ItemNameBlockItem(AABlocks.AMBER_BLOSSOM.get(), p));
+            .build(p -> new ItemNameBlockItem(AABlocks.AMBER_BLOSSOM_CROP.get(), p));
 
     public static final Supplier<Item> BULBUS = new Builder("bulbus")
             .creativeAfter(Items.TORCHFLOWER, CreativeModeTabs.NATURAL_BLOCKS)
             .build(p -> new BlockItem(AABlocks.BULBUS.get(), p));
     public static final Supplier<Item> BULBUS_SEEDS = new Builder("bulbus_seeds")
             .creativeAfter(Items.PITCHER_POD, CreativeModeTabs.NATURAL_BLOCKS)
-            .build(p -> new ItemNameBlockItem(AABlocks.BULBUS.get(), p));
+            .build(p -> new ItemNameBlockItem(AABlocks.BULBUS_CROP.get(), p));
 
     public static final Supplier<Item> SAWTOOTH_FERN = new Builder("sawtooth_fern")
             .creativeAfter(Items.PITCHER_PLANT, CreativeModeTabs.NATURAL_BLOCKS)
             .build(p -> new BlockItem(AABlocks.SAWTOOTH_FERN.get(), p));
     public static final Supplier<Item> SAWTOOTH_FERN_SEEDS = new Builder("sawtooth_fern_seeds")
             .creativeAfter(Items.PITCHER_POD, CreativeModeTabs.NATURAL_BLOCKS)
-            .build(p -> new ItemNameBlockItem(AABlocks.SAWTOOTH_FERN.get(), p));
+            .build(p -> new ItemNameBlockItem(AABlocks.SAWTOOTH_FERN_CROP.get(), p));
 
     public static final Supplier<Item> FROSTLEAF = new Builder("frostleaf")
             .creativeAfter(Items.TORCHFLOWER, CreativeModeTabs.NATURAL_BLOCKS)
             .build(p -> new BlockItem(AABlocks.FROSTLEAF.get(), p));
     public static final Supplier<Item> FROSTLEAF_SEEDS = new Builder("frostleaf_seeds")
             .creativeAfter(Items.PITCHER_POD, CreativeModeTabs.NATURAL_BLOCKS)
-            .build(p -> new ItemNameBlockItem(AABlocks.FROSTLEAF.get(), p));
+            .build(p -> new ItemNameBlockItem(AABlocks.FROSTLEAF_CROP.get(), p));
 
     public static final Supplier<Item> WISTERIA = new Builder("wisteria")
             .creativeAfter(Items.TORCHFLOWER, CreativeModeTabs.NATURAL_BLOCKS)
             .build(p -> new BlockItem(AABlocks.WISTERIA.get(), p));
     public static final Supplier<Item> WISTERIA_SEEDS = new Builder("wisteria_seeds")
             .creativeAfter(Items.PITCHER_POD, CreativeModeTabs.NATURAL_BLOCKS)
-            .build(p -> new ItemNameBlockItem(AABlocks.WISTERIA.get(), p));
+            .build(p -> new ItemNameBlockItem(AABlocks.WISTERIA_CROP.get(), p));
 
     public static final Supplier<Item> SPIKEBLOSSOM = new Builder("spikeblossom")
             .creativeAfter(Items.PITCHER_PLANT, CreativeModeTabs.NATURAL_BLOCKS)
             .build(p -> new BlockItem(AABlocks.SPIKEBLOSSOM.get(), p));
     public static final Supplier<Item> SPIKEBLOSSOM_SEEDS = new Builder("spikeblossom_seeds")
             .creativeAfter(Items.PITCHER_POD, CreativeModeTabs.NATURAL_BLOCKS)
-            .build(p -> new ItemNameBlockItem(AABlocks.SPIKEBLOSSOM.get(), p));
+            .build(p -> new ItemNameBlockItem(AABlocks.SPIKEBLOSSOM_CROP.get(), p));
 
     public static final Supplier<Item> SNAPDRAGON = new Builder("snapdragon")
             .creativeAfter(Items.PITCHER_PLANT, CreativeModeTabs.NATURAL_BLOCKS)
             .build(p -> new BlockItem(AABlocks.SNAPDRAGON.get(), p));
     public static final Supplier<Item> SNAPDRAGON_SEEDS = new Builder("snapdragon_seeds")
             .creativeAfter(Items.PITCHER_POD, CreativeModeTabs.NATURAL_BLOCKS)
-            .build(p -> new ItemNameBlockItem(AABlocks.SNAPDRAGON.get(), p));
+            .build(p -> new ItemNameBlockItem(AABlocks.SNAPDRAGON_CROP.get(), p));
 
     public static final Supplier<Item> LOTUS_LILY = new Builder("lotus_lily")
             .creativeAfter(Items.TORCHFLOWER, CreativeModeTabs.NATURAL_BLOCKS)
             .build(p -> new BlockItem(AABlocks.LOTUS_LILY.get(), p));
     public static final Supplier<Item> LOTUS_LILY_SEEDS = new Builder("lotus_lily_seeds")
             .creativeAfter(Items.PITCHER_POD, CreativeModeTabs.NATURAL_BLOCKS)
-            .build(p -> new ItemNameBlockItem(AABlocks.LOTUS_LILY.get(), p));
+            .build(p -> new ItemNameBlockItem(AABlocks.LOTUS_LILY_CROP.get(), p));
 
     // FOOD
 
