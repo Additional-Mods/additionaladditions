@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/cross",
-  "textures": {
-    "cross": "additionaladditions:block/cottonshiver_crop_stage2"
-  }
-}
-

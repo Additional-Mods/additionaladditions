@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/cross",
-  "textures": {
-    "cross": "additionaladditions:block/frostleaf_crop_stage2"
-  }
-}
-

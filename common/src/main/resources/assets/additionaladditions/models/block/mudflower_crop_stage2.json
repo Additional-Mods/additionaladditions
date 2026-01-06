@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/cross",
-  "textures": {
-    "cross": "additionaladditions:block/mudflower_crop_stage2"
-  }
-}
-

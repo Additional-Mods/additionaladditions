@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/cross",
-  "textures": {
-    "cross": "additionaladditions:block/sawtooth_fern_crop_stage2"
-  }
-}
-

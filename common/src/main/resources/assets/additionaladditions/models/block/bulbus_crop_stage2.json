@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/cross",
-  "textures": {
-    "cross": "additionaladditions:block/bulbus_crop_stage2"
-  }
-}
-

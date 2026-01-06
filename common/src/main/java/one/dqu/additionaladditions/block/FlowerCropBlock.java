@@ -19,12 +19,15 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import java.util.function.Supplier;
 
 public class FlowerCropBlock extends CropBlock {
-    public static final IntegerProperty AGE = BlockStateProperties.AGE_3;
+    public static final IntegerProperty AGE = BlockStateProperties.AGE_2;
 
     private final int MAX_AGE;
     private final VoxelShape[] SHAPE_BY_AGE;
     private final Supplier<Block> GROWN_BLOCK;
 
+    /**
+     * @param maxAge Maximum age is 2 (because I'm not using more than that)
+     */
     public FlowerCropBlock(Supplier<Block> grownBlock, int maxAge, VoxelShape[] shapeByAge, Properties properties) {
         super(properties);
 

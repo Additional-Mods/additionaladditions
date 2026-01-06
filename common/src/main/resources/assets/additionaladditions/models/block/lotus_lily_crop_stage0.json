@@ -1,7 +1,7 @@
 {
-  "parent": "minecraft:block/cross",
+  "parent": "additionaladditions:block/lotus_lily",
   "textures": {
-    "cross": "additionaladditions:block/lotus_lily_crop_stage0"
+    "1": "additionaladditions:block/lotus_lily_crop_stage0"
   }
 }
 
