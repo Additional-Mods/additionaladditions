@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "additionaladditions:item/sawtooth_fern_seeds"
+    "layer0": "additionaladditions:item/frostleaf_pod"
   }
 }

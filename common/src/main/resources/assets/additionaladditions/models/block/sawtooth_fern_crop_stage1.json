@@ -1,8 +1,7 @@
 {
-  "parent": "additionaladditions:block/tall_cross",
+  "parent": "minecraft:block/cross",
   "textures": {
-    "0": "additionaladditions:block/sawtooth_fern_crop_stage1_bottom",
-    "1": "additionaladditions:block/sawtooth_fern_crop_stage1_top"
+    "cross": "additionaladditions:block/sawtooth_fern_crop_stage1"
   }
 }
 

@@ -86,7 +86,7 @@ public class AAItems {
     public static final Supplier<Item> COTTONSHIVER = new Builder("cottonshiver")
             .creativeAfter(Items.PITCHER_PLANT, CreativeModeTabs.NATURAL_BLOCKS)
             .build(p -> new BlockItem(AABlocks.COTTONSHIVER.get(), p));
-    public static final Supplier<Item> COTTONSHIVER_SEEDS = new Builder("cottonshiver_seeds")
+    public static final Supplier<Item> COTTONSHIVER_POD = new Builder("cottonshiver_pod")
             .creativeAfter(Items.PITCHER_POD, CreativeModeTabs.NATURAL_BLOCKS)
             .build(p -> new ItemNameBlockItem(AABlocks.COTTONSHIVER_CROP.get(), p));
 
@@ -114,21 +114,21 @@ public class AAItems {
     public static final Supplier<Item> BULBUS = new Builder("bulbus")
             .creativeAfter(Items.TORCHFLOWER, CreativeModeTabs.NATURAL_BLOCKS)
             .build(p -> new BlockItem(AABlocks.BULBUS.get(), p));
-    public static final Supplier<Item> BULBUS_SEEDS = new Builder("bulbus_seeds")
+    public static final Supplier<Item> BULBUS_POD = new Builder("bulbus_pod")
             .creativeAfter(Items.PITCHER_POD, CreativeModeTabs.NATURAL_BLOCKS)
             .build(p -> new ItemNameBlockItem(AABlocks.BULBUS_CROP.get(), p));
 
     public static final Supplier<Item> SAWTOOTH_FERN = new Builder("sawtooth_fern")
             .creativeAfter(Items.PITCHER_PLANT, CreativeModeTabs.NATURAL_BLOCKS)
             .build(p -> new BlockItem(AABlocks.SAWTOOTH_FERN.get(), p));
-    public static final Supplier<Item> SAWTOOTH_FERN_SEEDS = new Builder("sawtooth_fern_seeds")
+    public static final Supplier<Item> SAWTOOTH_FERN_FIDDLEHEAD = new Builder("sawtooth_fern_fiddlehead")
             .creativeAfter(Items.PITCHER_POD, CreativeModeTabs.NATURAL_BLOCKS)
             .build(p -> new ItemNameBlockItem(AABlocks.SAWTOOTH_FERN_CROP.get(), p));
 
     public static final Supplier<Item> FROSTLEAF = new Builder("frostleaf")
             .creativeAfter(Items.TORCHFLOWER, CreativeModeTabs.NATURAL_BLOCKS)
             .build(p -> new BlockItem(AABlocks.FROSTLEAF.get(), p));
-    public static final Supplier<Item> FROSTLEAF_SEEDS = new Builder("frostleaf_seeds")
+    public static final Supplier<Item> FROSTLEAF_POD = new Builder("frostleaf_pod")
             .creativeAfter(Items.PITCHER_POD, CreativeModeTabs.NATURAL_BLOCKS)
             .build(p -> new ItemNameBlockItem(AABlocks.FROSTLEAF_CROP.get(), p));
 
@@ -149,14 +149,14 @@ public class AAItems {
     public static final Supplier<Item> SNAPDRAGON = new Builder("snapdragon")
             .creativeAfter(Items.PITCHER_PLANT, CreativeModeTabs.NATURAL_BLOCKS)
             .build(p -> new BlockItem(AABlocks.SNAPDRAGON.get(), p));
-    public static final Supplier<Item> SNAPDRAGON_SEEDS = new Builder("snapdragon_seeds")
+    public static final Supplier<Item> SNAPDRAGON_POD = new Builder("snapdragon_pod")
             .creativeAfter(Items.PITCHER_POD, CreativeModeTabs.NATURAL_BLOCKS)
             .build(p -> new ItemNameBlockItem(AABlocks.SNAPDRAGON_CROP.get(), p));
 
     public static final Supplier<Item> LOTUS_LILY = new Builder("lotus_lily")
             .creativeAfter(Items.TORCHFLOWER, CreativeModeTabs.NATURAL_BLOCKS)
             .build(p -> new BlockItem(AABlocks.LOTUS_LILY.get(), p));
-    public static final Supplier<Item> LOTUS_LILY_SEEDS = new Builder("lotus_lily_seeds")
+    public static final Supplier<Item> LOTUS_LILY_POD = new Builder("lotus_lily_pod")
             .creativeAfter(Items.PITCHER_POD, CreativeModeTabs.NATURAL_BLOCKS)
             .build(p -> new ItemNameBlockItem(AABlocks.LOTUS_LILY_CROP.get(), p));
 

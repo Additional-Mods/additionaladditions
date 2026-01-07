@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "additionaladditions:item/cottonshiver_seeds"
+    "layer0": "additionaladditions:item/snapdragon_pod"
   }
 }

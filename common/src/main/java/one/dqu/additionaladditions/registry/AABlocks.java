@@ -143,7 +143,7 @@ public class AABlocks {
     public static final Supplier<Block> SAWTOOTH_FERN_CROP = AARegistries.BLOCKS.register(
             ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "sawtooth_fern_crop"),
             () -> new FlowerCropBlock(
-                    SAWTOOTH_FERN, 2, new VoxelShape[]{Block.box(5d, 0d, 5d, 11d, 10d, 11d), Block.box(4d, 0d, 4d, 12d, 15d, 12d), Shapes.block()},
+                    SAWTOOTH_FERN, 3, new VoxelShape[]{Block.box(5d, 0d, 5d, 11d, 10d, 11d), Block.box(5d, 0d, 5d, 11d, 10d, 11d), Block.box(4d, 0d, 4d, 12d, 15d, 12d), Shapes.block()},
                     BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.CROP).pushReaction(PushReaction.DESTROY)
             )
     );
