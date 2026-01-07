@@ -16,10 +16,7 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.fml.loading.FMLEnvironment;
-import net.neoforged.neoforge.client.event.ClientPlayerNetworkEvent;
-import net.neoforged.neoforge.client.event.ClientTickEvent;
-import net.neoforged.neoforge.client.event.EntityRenderersEvent;
-import net.neoforged.neoforge.client.event.RegisterClientReloadListenersEvent;
+import net.neoforged.neoforge.client.event.*;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.network.event.RegisterConfigurationTasksEvent;
@@ -66,6 +63,7 @@ public final class AdditionalAdditionsNeoForge {
             modEventBus.addListener(RegisterClientReloadListenersEvent.class, this::onRegisterClientReloadListeners);
             modEventBus.addListener(FMLClientSetupEvent.class, this::onClientSetup);
             modEventBus.addListener(EntityRenderersEvent.RegisterRenderers.class, this::onRegisterEntityRenderers);
+            modEventBus.addListener(RegisterColorHandlersEvent.Block.class, this::registerBlockColors);
         }
 
         RegistrarImpl.registerAll(modEventBus);
@@ -190,5 +188,11 @@ public final class AdditionalAdditionsNeoForge {
 
         // mod compatibility
         event.enqueueWork(ModCompatibilityImpl::showToasts);
+    }
+
+    private void registerBlockColors(RegisterColorHandlersEvent.Block event) {
+        event.register((state, getter, pos, tintIndex) -> {
+            return getter != null && pos != null ? -14647248 : -9321636;
+        }, AABlocks.LOTUS_LILY.get(), AABlocks.LOTUS_LILY_CROP.get());
     }
 }

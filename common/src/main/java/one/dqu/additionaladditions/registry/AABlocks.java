@@ -14,24 +14,14 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import one.dqu.additionaladditions.AdditionalAdditions;
 import one.dqu.additionaladditions.block.*;
-import one.dqu.additionaladditions.config.Config;
-import one.dqu.additionaladditions.item.CopperPatinaItem;
-import one.dqu.additionaladditions.util.CreativeAdder;
-import one.dqu.additionaladditions.util.LootAdder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.ai.village.poi.PoiType;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
-import net.minecraft.world.level.storage.loot.BuiltInLootTables;
-import net.minecraft.world.level.storage.loot.LootPool;
-import net.minecraft.world.level.storage.loot.entries.LootItem;
-import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
-import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import one.dqu.additionaladditions.util.Registrar;
 
-import java.util.List;
 import java.util.Set;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
@@ -202,14 +192,13 @@ public class AABlocks {
 
     public static final Supplier<Block> LOTUS_LILY = AARegistries.BLOCKS.register(
             ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "lotus_lily"),
-            () -> new FlowerBlock(MobEffects.WATER_BREATHING, 5f, BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).noCollission().instabreak().sound(SoundType.GRASS).offsetType(BlockBehaviour.OffsetType.XZ).pushReaction(PushReaction.DESTROY))
+            () -> new WaterlilyBlock(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).instabreak().sound(SoundType.LILY_PAD).noOcclusion().pushReaction(PushReaction.DESTROY))
     );
 
     public static final Supplier<Block> LOTUS_LILY_CROP = AARegistries.BLOCKS.register(
             ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "lotus_lily_crop"),
-            () -> new FlowerCropBlock(
-                    LOTUS_LILY, 1, new VoxelShape[]{Block.box(5d, 0d, 5d, 11d, 6d, 11d), Shapes.block()},
-                    BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.CROP).pushReaction(PushReaction.DESTROY)
+            () -> new LotusLilyCropBlock(
+                    BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).randomTicks().instabreak().sound(SoundType.LILY_PAD).noOcclusion().pushReaction(PushReaction.DESTROY)
             )
     );
 

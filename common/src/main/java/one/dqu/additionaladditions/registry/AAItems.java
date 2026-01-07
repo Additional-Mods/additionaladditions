@@ -155,10 +155,10 @@ public class AAItems {
 
     public static final Supplier<Item> LOTUS_LILY = new Builder("lotus_lily")
             .creativeAfter(Items.TORCHFLOWER, CreativeModeTabs.NATURAL_BLOCKS)
-            .build(p -> new BlockItem(AABlocks.LOTUS_LILY.get(), p));
+            .build(p -> new PlaceOnWaterBlockItem(AABlocks.LOTUS_LILY.get(), p));
     public static final Supplier<Item> LOTUS_LILY_POD = new Builder("lotus_lily_pod")
             .creativeAfter(Items.PITCHER_POD, CreativeModeTabs.NATURAL_BLOCKS)
-            .build(p -> new ItemNameBlockItem(AABlocks.LOTUS_LILY_CROP.get(), p));
+            .build(p -> new ItemNamePlaceOnWaterBlockItem(AABlocks.LOTUS_LILY_CROP.get(), p));
 
     // FOOD
 

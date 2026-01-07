@@ -6,6 +6,7 @@ import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientLifecycleEvents;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.networking.v1.ClientConfigurationNetworking;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
+import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.fabricmc.fabric.api.resource.SimpleSynchronousResourceReloadListener;
@@ -83,6 +84,11 @@ public final class AdditionalAdditionsClientFabric implements ClientModInitializ
         BlockRenderLayerMap.INSTANCE.putBlock(AABlocks.SNAPDRAGON_CROP.get(), RenderType.cutout());
         BlockRenderLayerMap.INSTANCE.putBlock(AABlocks.LOTUS_LILY.get(), RenderType.cutout());
         BlockRenderLayerMap.INSTANCE.putBlock(AABlocks.LOTUS_LILY_CROP.get(), RenderType.cutout());
+
+        // color providers
+        ColorProviderRegistry.BLOCK.register((state, getter, pos, tintIndex) -> {
+            return getter != null && pos != null ? -14647248 : -9321636;
+        }, AABlocks.LOTUS_LILY.get(), AABlocks.LOTUS_LILY_CROP.get());
 
         // entity renderers
         EntityRendererRegistry.register(AAEntities.GLOW_STICK.get(), ThrownItemRenderer::new);
