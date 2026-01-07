@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "additionaladditions:bulbus_seeds"
+          "name": "additionaladditions:bulbus_pod"
         }
       ],
       "conditions": [

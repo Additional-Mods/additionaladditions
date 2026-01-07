@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "additionaladditions:frostleaf_seeds"
+          "name": "additionaladditions:frostleaf_pod"
         }
       ],
       "conditions": [

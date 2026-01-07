@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "additionaladditions:lotus_lily_seeds"
+          "name": "additionaladditions:lotus_lily_pod"
         }
       ],
       "conditions": [

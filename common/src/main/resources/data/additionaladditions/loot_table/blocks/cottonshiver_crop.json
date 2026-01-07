@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "additionaladditions:cottonshiver_seeds"
+          "name": "additionaladditions:cottonshiver_pod"
         }
       ],
       "conditions": [
