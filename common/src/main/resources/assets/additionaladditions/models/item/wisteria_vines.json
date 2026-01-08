@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "additionaladditions:item/wisteria_seeds"
+    "layer0": "additionaladditions:block/wisteria_crop_stage0"
   }
 }

@@ -153,14 +153,13 @@ public class AABlocks {
 
     public static final Supplier<Block> WISTERIA = AARegistries.BLOCKS.register(
             ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "wisteria"),
-            () -> new FlowerBlock(MobEffects.JUMP, 5f, BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).noCollission().instabreak().sound(SoundType.GRASS).offsetType(BlockBehaviour.OffsetType.XZ).pushReaction(PushReaction.DESTROY))
+            () -> new WisteriaBlock(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).noCollission().instabreak().sound(SoundType.VINE).strength(0.2F).pushReaction(PushReaction.DESTROY))
     );
 
     public static final Supplier<Block> WISTERIA_CROP = AARegistries.BLOCKS.register(
             ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "wisteria_crop"),
-            () -> new FlowerCropBlock(
-                    WISTERIA, 2, new VoxelShape[]{Block.box(5d, 0d, 5d, 11d, 6d, 11d), Block.box(4d, 0d, 4d, 12d, 10d, 12d), Shapes.block()},
-                    BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.CROP).pushReaction(PushReaction.DESTROY)
+            () -> new WisteriaCropBlock(
+                    BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.VINE).pushReaction(PushReaction.DESTROY)
             )
     );
 

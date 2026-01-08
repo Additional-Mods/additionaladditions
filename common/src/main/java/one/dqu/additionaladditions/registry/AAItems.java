@@ -135,7 +135,7 @@ public class AAItems {
     public static final Supplier<Item> WISTERIA = new Builder("wisteria")
             .creativeAfter(Items.TORCHFLOWER, CreativeModeTabs.NATURAL_BLOCKS)
             .build(p -> new BlockItem(AABlocks.WISTERIA.get(), p));
-    public static final Supplier<Item> WISTERIA_SEEDS = new Builder("wisteria_seeds")
+    public static final Supplier<Item> WISTERIA_VINES = new Builder("wisteria_vines")
             .creativeAfter(Items.PITCHER_POD, CreativeModeTabs.NATURAL_BLOCKS)
             .build(p -> new ItemNameBlockItem(AABlocks.WISTERIA_CROP.get(), p));
 

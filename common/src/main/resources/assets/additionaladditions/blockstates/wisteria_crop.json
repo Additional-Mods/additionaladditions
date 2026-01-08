@@ -1,14 +1,77 @@
 {
-  "variants": {
-    "age=0": {
-      "model": "additionaladditions:block/wisteria_crop_stage0"
+  "multipart": [
+    {
+      "apply": { "model": "additionaladditions:block/wisteria_crop_stage0" },
+      "when": { "north": "true", "age": "0" }
     },
-    "age=1": {
-      "model": "additionaladditions:block/wisteria_crop_stage1"
+    {
+      "apply": { "model": "additionaladditions:block/wisteria_crop_stage1" },
+      "when": { "north": "true", "age": "1" }
     },
-    "age=2": {
-      "model": "additionaladditions:block/wisteria_crop_stage2"
+    {
+      "apply": { "model": "additionaladditions:block/wisteria_crop_stage1" },
+      "when": { "north": "true", "age": "2" }
+    },
+    {
+      "apply": { "model": "additionaladditions:block/wisteria_crop_stage0", "y": 90 },
+      "when": { "east": "true", "age": "0" }
+    },
+    {
+      "apply": { "model": "additionaladditions:block/wisteria_crop_stage1", "y": 90 },
+      "when": { "east": "true", "age": "1" }
+    },
+    {
+      "apply": { "model": "additionaladditions:block/wisteria_crop_stage1", "y": 90 },
+      "when": { "east": "true", "age": "2" }
+    },
+    {
+      "apply": { "model": "additionaladditions:block/wisteria_crop_stage0", "y": 180 },
+      "when": { "south": "true", "age": "0" }
+    },
+    {
+      "apply": { "model": "additionaladditions:block/wisteria_crop_stage1", "y": 180 },
+      "when": { "south": "true", "age": "1" }
+    },
+    {
+      "apply": { "model": "additionaladditions:block/wisteria_crop_stage1", "y": 180 },
+      "when": { "south": "true", "age": "2" }
+    },
+    {
+      "apply": { "model": "additionaladditions:block/wisteria_crop_stage0", "y": 270 },
+      "when": { "west": "true", "age": "0" }
+    },
+    {
+      "apply": { "model": "additionaladditions:block/wisteria_crop_stage1", "y": 270 },
+      "when": { "west": "true", "age": "1" }
+    },
+    {
+      "apply": { "model": "additionaladditions:block/wisteria_crop_stage1", "y": 270 },
+      "when": { "west": "true", "age": "2" }
+    },
+    {
+      "apply": { "model": "additionaladditions:block/wisteria_crop_stage0", "x": 270 },
+      "when": { "up": "true", "age": "0" }
+    },
+    {
+      "apply": { "model": "additionaladditions:block/wisteria_crop_stage1", "x": 270 },
+      "when": { "up": "true", "age": "1" }
+    },
+    {
+      "apply": { "model": "additionaladditions:block/wisteria_crop_stage1", "x": 270 },
+      "when": { "up": "true", "age": "2" }
+    },
+    {
+      "apply": { "model": "additionaladditions:block/wisteria_crop_stage0" },
+      "when": { "east": "false", "north": "false", "south": "false", "up": "false", "west": "false", "age": "0" }
+    },
+    {
+      "apply": { "model": "additionaladditions:block/wisteria_crop_stage1" },
+      "when": { "east": "false", "north": "false", "south": "false", "up": "false", "west": "false", "age": "1" }
+    },
+    {
+      "apply": { "model": "additionaladditions:block/wisteria_crop_stage1" },
+      "when": { "east": "false", "north": "false", "south": "false", "up": "false", "west": "false", "age": "2" }
     }
-  }
+  ]
 }
 
