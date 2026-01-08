@@ -5,12 +5,6 @@
   "minVersion": "0.8",
   "client": [
     "GuiMixin",
-    "crossbow.AbstractClientPlayerMixin",
-    "crossbow.ItemInHandRendererMixin",
-    "crossbow.ItemRendererMixin",
-    "crossbow.LocalPlayerMixin",
-    "crossbow.PlayerMixin",
-    "crossbow.PlayerRendererMixin",
     "glint.ElytraLayerMixin",
     "glint.ItemRendererMixin",
     "glint.RenderBuffersMixin",

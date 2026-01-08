@@ -53,11 +53,6 @@ public class Config {
             new DamageableItemConfig(true, 256)
     );
 
-    public static final ConfigProperty<DamageableItemConfig> CROSSBOW_WITH_SPYGLASS = new ConfigProperty<>(
-            "crossbow_with_spyglass", DamageableItemConfig.CODEC,
-            new DamageableItemConfig(true, 350)
-    );
-
     public static final ConfigProperty<FeatureConfig> TRIDENT_SHARD = new ConfigProperty<>(
             "trident_shard", FeatureConfig.CODEC,
             new FeatureConfig(true)

@@ -1,6 +1,0 @@
-{
-  "parent": "additionaladditions:item/crossbow_with_spyglass_in_hand",
-  "textures": {
-    "2": "minecraft:item/crossbow_pulling_0"
-  }
-}

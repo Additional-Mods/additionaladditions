@@ -213,15 +213,6 @@ public class AAItems {
             .creativeAfter(Items.TARGET, CreativeModeTabs.REDSTONE_BLOCKS)
             .build(WrenchItem::new);
 
-    public static final Supplier<CrossbowWithSpyglassItem> CROSSBOW_WITH_SPYGLASS = new Builder("crossbow_with_spyglass")
-            .config(() -> Config.CROSSBOW_WITH_SPYGLASS.get().enabled())
-            .properties(p -> p
-                    .stacksTo(1)
-                    .durability(Config.CROSSBOW_WITH_SPYGLASS.get().durability())
-            )
-            .creativeAfter(Items.CROSSBOW, CreativeModeTabs.COMBAT)
-            .build(CrossbowWithSpyglassItem::new);
-
     public static final Supplier<Item> TRIDENT_SHARD = new Builder("trident_shard")
             .config(() -> Config.TRIDENT_SHARD.get().enabled())
             .creativeAfter(Items.PRISMARINE_CRYSTALS, CreativeModeTabs.INGREDIENTS)

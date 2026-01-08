@@ -10,7 +10,6 @@ import org.slf4j.LoggerFactory;
 public final class AdditionalAdditions {
     public static final String NAMESPACE = "additionaladditions";
     public static final Logger LOGGER = LoggerFactory.getLogger(NAMESPACE);
-    public static boolean zoom = false;
 
     public static void init() {
         ConfigLoader.load();
