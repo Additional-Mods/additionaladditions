@@ -16,29 +16,14 @@ import one.dqu.additionaladditions.item.*;
 import one.dqu.additionaladditions.item.configurable.*;
 import one.dqu.additionaladditions.misc.AlbumContents;
 import one.dqu.additionaladditions.util.CreativeAdder;
-import one.dqu.additionaladditions.util.LootAdder;
-import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.ItemLike;
-import net.minecraft.world.level.storage.loot.BuiltInLootTables;
-import net.minecraft.world.level.storage.loot.LootPool;
-import net.minecraft.world.level.storage.loot.LootTable;
-import net.minecraft.world.level.storage.loot.entries.LootItem;
-import net.minecraft.world.level.storage.loot.entries.LootPoolSingletonContainer;
-import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
-import net.minecraft.world.level.storage.loot.predicates.LootItemKilledByPlayerCondition;
-import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceCondition;
-import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceWithEnchantedBonusCondition;
-import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
-import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import one.dqu.additionaladditions.util.Registrar;
 
 import java.util.*;
-import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -52,12 +37,6 @@ public class AAItems {
             .config(() -> Config.ROPE.get().enabled())
             .creativeAfter(Items.LADDER, CreativeModeTabs.FUNCTIONAL_BLOCKS)
             .creativeAfter(Items.SPYGLASS, CreativeModeTabs.TOOLS_AND_UTILITIES)
-            .lootTable(
-                    List.of(BuiltInLootTables.SIMPLE_DUNGEON, BuiltInLootTables.ABANDONED_MINESHAFT, BuiltInLootTables.STRONGHOLD_CORRIDOR),
-                    builder -> builder
-                            .apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 8)))
-                            .setWeight(20)
-            )
             .build(p -> new BlockItem(AABlocks.ROPE_BLOCK.get(), p));
 
     public static final Supplier<Item> TINTED_REDSTONE_LAMP = new Builder("tinted_redstone_lamp")
@@ -184,12 +163,6 @@ public class AAItems {
             .config(() -> Config.CHICKEN_NUGGET.get().enabled())
             .properties(p -> p.food(Config.CHICKEN_NUGGET.get().food()))
             .creativeAfter(Items.ROTTEN_FLESH, CreativeModeTabs.FOOD_AND_DRINKS)
-            .lootTable(
-                    List.of(EntityType.ZOMBIE.getDefaultLootTable(), EntityType.CREEPER.getDefaultLootTable()),
-                    (registries, builder) -> builder
-                        .when(LootItemKilledByPlayerCondition.killedByPlayer())
-                        .when(LootItemRandomChanceWithEnchantedBonusCondition.randomChanceAndLootingBoost(registries, 0.025f, 0.01f))
-            )
             .build(p -> new FoodItem(p, Config.CHICKEN_NUGGET));
 
     // OTHER
@@ -216,33 +189,16 @@ public class AAItems {
     public static final Supplier<Item> TRIDENT_SHARD = new Builder("trident_shard")
             .config(() -> Config.TRIDENT_SHARD.get().enabled())
             .creativeAfter(Items.PRISMARINE_CRYSTALS, CreativeModeTabs.INGREDIENTS)
-            .lootTable(
-                    EntityType.ELDER_GUARDIAN.getDefaultLootTable(),
-                    builder -> builder
-                        .when(LootItemRandomChanceCondition.randomChance(0.33f))
-            )
             .build();
 
     public static final Supplier<Item> GLOW_STICK_ITEM = new Builder("glow_stick")
             .config(() -> Config.GLOW_STICK.get().enabled())
             .creativeAfter(Items.BONE_MEAL, CreativeModeTabs.TOOLS_AND_UTILITIES)
-            .lootTable(
-                    List.of(BuiltInLootTables.SIMPLE_DUNGEON, BuiltInLootTables.ABANDONED_MINESHAFT, BuiltInLootTables.STRONGHOLD_CORRIDOR),
-                    builder -> builder
-                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 4)))
-                        .setWeight(20)
-            )
             .build();
 
     public static final Supplier<Item> BAROMETER = new Builder("barometer")
             .config(() -> Config.BAROMETER.get().enabled())
             .creativeAfter(Items.CLOCK, CreativeModeTabs.TOOLS_AND_UTILITIES)
-            .lootTable(
-                    List.of(BuiltInLootTables.SIMPLE_DUNGEON, BuiltInLootTables.ABANDONED_MINESHAFT, BuiltInLootTables.STRONGHOLD_CORRIDOR),
-                    builder -> builder
-                        .when(LootItemRandomChanceCondition.randomChance(0.1f))
-                        .setWeight(5)
-            )
             .build(Item::new);
 
     public static final Supplier<PocketJukeboxItem> POCKET_JUKEBOX_ITEM = new Builder("pocket_jukebox")
@@ -266,12 +222,6 @@ public class AAItems {
                     .jukeboxPlayable(ResourceKey.create(Registries.JUKEBOX_SONG, ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "0308")))
             )
             .creativeAfter(Items.MUSIC_DISC_WARD, CreativeModeTabs.TOOLS_AND_UTILITIES)
-            .lootTable(
-                    List.of(BuiltInLootTables.SIMPLE_DUNGEON, BuiltInLootTables.WOODLAND_MANSION),
-                    builder -> builder
-                            .when(LootItemRandomChanceCondition.randomChance(0.25f))
-                            .setWeight(5)
-            )
             .build();
 
     public static final Supplier<Item> MUSIC_DISC_1007 = new Builder("music_disc_1007")
@@ -282,12 +232,6 @@ public class AAItems {
                     .jukeboxPlayable(ResourceKey.create(Registries.JUKEBOX_SONG, ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "1007")))
             )
             .creativeAfter(Items.MUSIC_DISC_WARD, CreativeModeTabs.TOOLS_AND_UTILITIES)
-            .lootTable(
-                    List.of(BuiltInLootTables.SIMPLE_DUNGEON, BuiltInLootTables.WOODLAND_MANSION),
-                    builder -> builder
-                            .when(LootItemRandomChanceCondition.randomChance(0.25f))
-                            .setWeight(5)
-            )
             .build();
 
     public static final Supplier<Item> MUSIC_DISC_1507 = new Builder("music_disc_1507")
@@ -298,12 +242,6 @@ public class AAItems {
                     .jukeboxPlayable(ResourceKey.create(Registries.JUKEBOX_SONG, ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "1507")))
             )
             .creativeAfter(Items.MUSIC_DISC_WARD, CreativeModeTabs.TOOLS_AND_UTILITIES)
-            .lootTable(
-                    List.of(BuiltInLootTables.SIMPLE_DUNGEON, BuiltInLootTables.WOODLAND_MANSION),
-                    builder -> builder
-                            .when(LootItemRandomChanceCondition.randomChance(0.25f))
-                            .setWeight(5)
-            )
             .build();
 
     // ROSE GOLD
@@ -571,7 +509,6 @@ public class AAItems {
         private final String id;
         private final Map<ResourceKey<CreativeModeTab>, List<ItemLike>> creativeAfter = new HashMap<>();
         private final Map<ResourceKey<CreativeModeTab>, List<ItemLike>> creativeBefore = new HashMap<>();
-        private final Map<ResourceKey<LootTable>, BiConsumer<HolderLookup.Provider, LootPoolSingletonContainer.Builder<?>>> lootTables = new HashMap<>();
         private Consumer<Item.Properties> propertiesConfig = p -> {};
         private Supplier<Boolean> config = () -> true;
 
@@ -599,24 +536,6 @@ public class AAItems {
             return this;
         }
 
-        public Builder lootTable(ResourceKey<LootTable> table, BiConsumer<HolderLookup.Provider, LootPoolSingletonContainer.Builder<?>> lootPoolBuilder) {
-            this.lootTables.put(table, lootPoolBuilder);
-            return this;
-        }
-
-        public Builder lootTable(List<ResourceKey<LootTable>> tables, BiConsumer<HolderLookup.Provider, LootPoolSingletonContainer.Builder<?>> lootPoolBuilder) {
-            tables.forEach(table -> this.lootTables.put(table, lootPoolBuilder));
-            return this;
-        }
-
-        public Builder lootTable(ResourceKey<LootTable> table, Consumer<LootPoolSingletonContainer.Builder<?>> lootPoolBuilder) {
-            return lootTable(table, (registries, b) -> lootPoolBuilder.accept(b));
-        }
-
-        public Builder lootTable(List<ResourceKey<LootTable>> tables, Consumer<LootPoolSingletonContainer.Builder<?>> lootPoolBuilder) {
-            return lootTable(tables, (registries, b) -> lootPoolBuilder.accept(b));
-        }
-
         public Supplier<Item> build() {
             return build(Item::new);
         }
@@ -639,23 +558,11 @@ public class AAItems {
                 items.forEach(anchor -> CreativeAdder.addBefore(tab, config, anchor, item))
             );
 
-            lootTables.forEach((table, builder) ->
-                LootAdder.addBatched(table, item, config, builder)
-            );
-
             return item;
         }
     }
 
     public static void registerAll() {
-        LootAdder.register(BuiltInLootTables.SHIPWRECK_SUPPLY, () -> Config.SHIPWRECK_SPYGLASS_LOOT.get().enabled(), LootPool.lootPool()
-                .setRolls(ConstantValue.exactly(1))
-                .when(LootItemRandomChanceCondition.randomChance(0.5f))
-                .add(LootItem.lootTableItem(Items.SPYGLASS))
-        );
-
-        LootAdder.processBatched();
-
         if (Config.WRENCH.get().enabled()) {
             Registrar.defer(() -> {
                 DispenserBlock.registerBehavior(WRENCH_ITEM.get(), new DefaultDispenseItemBehavior() {

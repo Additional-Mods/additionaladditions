@@ -5,7 +5,6 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.packs.resources.SimplePreparableReloadListener;
 import net.minecraft.util.profiling.ProfilerFiller;
@@ -19,10 +18,10 @@ import net.neoforged.fml.loading.FMLEnvironment;
 import net.neoforged.neoforge.client.event.*;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
+import net.neoforged.neoforge.event.LootTableLoadEvent;
 import net.neoforged.neoforge.network.event.RegisterConfigurationTasksEvent;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;
-import net.neoforged.neoforge.registries.NeoForgeRegistries;
 import one.dqu.additionaladditions.AdditionalAdditions;
 import one.dqu.additionaladditions.AdditionalAdditionsClient;
 import one.dqu.additionaladditions.config.Config;
@@ -35,8 +34,7 @@ import one.dqu.additionaladditions.misc.PocketJukeboxPlayer;
 import one.dqu.additionaladditions.registry.AABlocks;
 import one.dqu.additionaladditions.registry.AAEntities;
 import one.dqu.additionaladditions.util.CreativeAdder;
-import one.dqu.additionaladditions.util.Registrar;
-import one.dqu.additionaladditions.util.neoforge.AdditionalLootModifier;
+import one.dqu.additionaladditions.util.LootAdder;
 import one.dqu.additionaladditions.util.neoforge.ModCompatibilityImpl;
 import one.dqu.additionaladditions.util.neoforge.RegistrarImpl;
 
@@ -44,13 +42,6 @@ import one.dqu.additionaladditions.util.neoforge.RegistrarImpl;
 public final class AdditionalAdditionsNeoForge {
     public AdditionalAdditionsNeoForge(IEventBus modEventBus) {
         AdditionalAdditions.init();
-
-        // Global loot modifier
-        var GLM_REGISTRY = Registrar.wrap(NeoForgeRegistries.GLOBAL_LOOT_MODIFIER_SERIALIZERS);
-        GLM_REGISTRY.register(
-                ResourceLocation.fromNamespaceAndPath(AdditionalAdditions.NAMESPACE, "loot_modifier"),
-                AdditionalLootModifier.CODEC
-        );
 
         modEventBus.addListener(FMLCommonSetupEvent.class, this::onSetupEvent);
         modEventBus.addListener(BuildCreativeModeTabContentsEvent.class, this::onBuildCreativeTabContents);
@@ -64,6 +55,10 @@ public final class AdditionalAdditionsNeoForge {
             modEventBus.addListener(FMLClientSetupEvent.class, this::onClientSetup);
             modEventBus.addListener(EntityRenderersEvent.RegisterRenderers.class, this::onRegisterEntityRenderers);
             modEventBus.addListener(RegisterColorHandlersEvent.Block.class, this::registerBlockColors);
+        }
+
+        if (!FMLEnvironment.dist.isClient()) {
+            NeoForge.EVENT_BUS.addListener(LootTableLoadEvent.class, this::onLootTableLoad);
         }
 
         RegistrarImpl.registerAll(modEventBus);
@@ -99,6 +94,12 @@ public final class AdditionalAdditionsNeoForge {
         } else {
             event.insertAfter(anchorStack, itemStack, visibility);
         }
+    }
+
+    private void onLootTableLoad(LootTableLoadEvent event) {
+        LootAdder.INSTANCE.inject(
+                event.getKey().location(), event.getRegistries(), event.getTable()::addPool
+        );
     }
 
     private void onRegisterPayloadHandlers(RegisterPayloadHandlersEvent event) {

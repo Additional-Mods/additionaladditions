@@ -42,9 +42,8 @@ public final class AdditionalAdditionsFabric implements ModInitializer {
 
         // loot handler
         LootTableEvents.MODIFY.register(((resourceKey, builder, lootTableSource, provider) -> {
-            LootAdder.handle(resourceKey.location(), builder, provider);
+            LootAdder.INSTANCE.inject(resourceKey.location(), provider, builder::pool);
         }));
-        LootAdder.postInit();
 
         // config sync
         PayloadTypeRegistry.configurationS2C().register(ConfigSyncS2CPayload.TYPE, ConfigSyncS2CPayload.STREAM_CODEC);

@@ -15,6 +15,7 @@
     "MobMixin",
     "RecipeManagerMixin",
     "RedstoneWireBlockMixin",
+    "ReloadableServerResourcesMixin",
     "ServerAdvancementManagerMixin",
     "album.JukeboxBlockEntityMixin",
     "album.JukeboxBlockMixin"
