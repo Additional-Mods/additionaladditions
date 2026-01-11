@@ -194,7 +194,7 @@ public class AAItems {
     public static final Supplier<Item> GLOW_STICK_ITEM = new Builder("glow_stick")
             .config(() -> Config.GLOW_STICK.get().enabled())
             .creativeAfter(Items.BONE_MEAL, CreativeModeTabs.TOOLS_AND_UTILITIES)
-            .build();
+            .build(GlowStickItem::new);
 
     public static final Supplier<Item> BAROMETER = new Builder("barometer")
             .config(() -> Config.BAROMETER.get().enabled())
