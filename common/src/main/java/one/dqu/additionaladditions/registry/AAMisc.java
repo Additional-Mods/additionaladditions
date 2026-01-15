@@ -84,6 +84,11 @@ public class AAMisc {
             SimplePlayerTrigger::new
     );
 
+    public static final Supplier<SimplePlayerTrigger> ROPE_WORLD_HEIGHT = AARegistries.TRIGGERS.register(
+            ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "rope_world_height"),
+            SimplePlayerTrigger::new
+    );
+
     public static void registerAll() {
 
     }

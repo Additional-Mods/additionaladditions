@@ -1,5 +1,6 @@
 package one.dqu.additionaladditions.block;
 
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.ItemInteractionResult;
@@ -15,9 +16,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -32,6 +31,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraft.world.ticks.ScheduledTick;
+import one.dqu.additionaladditions.registry.AAMisc;
 import org.jetbrains.annotations.Nullable;
 
 public class RopeBlock extends Block implements SimpleWaterloggedBlock {
@@ -210,6 +210,26 @@ public class RopeBlock extends Block implements SimpleWaterloggedBlock {
             if (!player.isCreative()) {
                 stack.shrink(1);
             }
+
+            // Advancement trigger
+            if (!level.isClientSide() && player instanceof ServerPlayer serverPlayer) {
+                // +10 to account for bedrock
+                if (currentPos.getY() <= level.getMinBuildHeight() + 10) {
+                    BlockPos topPos = pos.relative(Direction.UP);
+                    BlockState topState = level.getBlockState(topPos);
+
+                    while (topState.is(this)) {
+                        topPos = topPos.relative(Direction.UP);
+                        topState = level.getBlockState(topPos);
+                    }
+
+                    // topPos is one above actual so we don't need to -1 build height
+                    if (topPos.getY() == level.getMaxBuildHeight()) {
+                        AAMisc.ROPE_WORLD_HEIGHT.get().trigger(serverPlayer);
+                    }
+                }
+            }
+
             return ItemInteractionResult.sidedSuccess(level.isClientSide());
         }
 
