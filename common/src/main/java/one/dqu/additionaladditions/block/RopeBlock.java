@@ -1,6 +1,9 @@
 package one.dqu.additionaladditions.block;
 
 import net.minecraft.tags.BlockTags;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.ItemInteractionResult;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.SimpleWaterloggedBlock;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.material.FluidState;
@@ -179,33 +182,37 @@ public class RopeBlock extends Block implements SimpleWaterloggedBlock {
     }
 
     @Override
-    public InteractionResult useWithoutItem(BlockState state, Level world, BlockPos pos, Player player, BlockHitResult hit) {
+    protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
         if (!state.is(this)) {
-            return InteractionResult.PASS;
+            return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
         }
 
-        if (!player.getMainHandItem().is(Item.byBlock(this))) {
-            return InteractionResult.PASS;
+        if (!stack.is(this.asItem())) {
+            return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
         }
 
-        BlockPos down = pos.relative(Direction.DOWN);
-        BlockState statedown = world.getBlockState(down);
+        BlockPos currentPos = pos.relative(Direction.DOWN);
+        BlockState currentState = level.getBlockState(currentPos);
 
-        boolean canReplace = statedown.is(BlockTags.REPLACEABLE) || world.getFluidState(down).is(Fluids.WATER);
-        if (statedown.is(this)) {
-            BlockHitResult hitBelow = new BlockHitResult(hit.getLocation(), hit.getDirection(), hit.getBlockPos().below(), hit.isInside());
-            return statedown.useWithoutItem(world, player, hitBelow);
-        } else if (canReplace && !world.isOutsideBuildHeight(down.getY())) {
-            boolean isWaterlogged = world.getFluidState(down).is(Fluids.WATER);
-            BlockState newState = state.setValue(WATERLOGGED, isWaterlogged);
-            world.setBlockAndUpdate(down, newState);
-
-            world.playSound(null, pos.getX(), pos.getY(), pos.getZ(), SoundEvents.WOOL_PLACE, SoundSource.BLOCKS, 1.0F, 1.0F);
-            if (!player.isCreative()) player.getMainHandItem().shrink(1);
-            return InteractionResult.SUCCESS;
+        while (currentState.is(this)) {
+            currentPos = currentPos.relative(Direction.DOWN);
+            currentState = level.getBlockState(currentPos);
         }
 
-        return InteractionResult.PASS;
+        boolean canReplace = currentState.is(BlockTags.REPLACEABLE) || level.getFluidState(currentPos).is(Fluids.WATER);
+
+        if (canReplace && !level.isOutsideBuildHeight(currentPos.getY())) {
+            boolean isWaterlogged = level.getFluidState(currentPos).is(Fluids.WATER);
+            BlockState newState = this.defaultBlockState().setValue(WATERLOGGED, isWaterlogged);
+            level.setBlockAndUpdate(currentPos, newState);
+
+            level.playSound(null, pos.getX(), pos.getY(), pos.getZ(), SoundEvents.WOOL_PLACE, SoundSource.BLOCKS, 1.0F, 1.0F);
+            if (!player.isCreative()) {
+                stack.shrink(1);
+            }
+            return ItemInteractionResult.sidedSuccess(level.isClientSide());
+        }
+
+        return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
     }
-
 }
