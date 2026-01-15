@@ -16,6 +16,7 @@ import one.dqu.additionaladditions.config.datafixer.ConfigFileRelocator;
 import one.dqu.additionaladditions.config.datafixer.ConfigFixerUpper;
 import one.dqu.additionaladditions.config.type.VersionConfig;
 import one.dqu.additionaladditions.config.type.unit.FoodUnitConfig;
+import one.dqu.additionaladditions.util.Registrar;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -151,7 +152,7 @@ public class ConfigLoader {
 
     /**
      * Reads all given config properties from given directory and serializes them into JSON.
-     * If a file does not exist, creates it with default values.
+     * If a file does not exist, creates it with default values after the registries are ready.
      */
     private static Map<ResourceLocation, JsonElement> readFiles(Path directory, List<ConfigProperty<?>> properties) {
         Map<ResourceLocation, JsonElement> configFiles = new HashMap<>();
@@ -160,7 +161,8 @@ public class ConfigLoader {
 
             try {
                 if (!Files.exists(path)) {
-                    createDefault(property, path);
+                    Registrar.defer(() -> createDefault(property, path));
+                    continue;
                 }
 
                 JsonElement jsonElement = GSON.fromJson(Files.readString(path), JsonElement.class);
