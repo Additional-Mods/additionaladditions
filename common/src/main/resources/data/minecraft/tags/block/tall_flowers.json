@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    {"id": "additionaladditions:cottonshiver", "required": false},
+    {"id": "additionaladditions:mudflower", "required": false},
+    {"id": "additionaladditions:amber_blossom", "required": false},
+    {"id": "additionaladditions:spikeblossom", "required": false},
+    {"id": "additionaladditions:snapdragon", "required": false}
+  ]
+}

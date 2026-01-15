@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    {"id": "additionaladditions:music_disc_0308", "required": false},
+    {"id": "additionaladditions:music_disc_1007", "required": false},
+    {"id": "additionaladditions:music_disc_1507", "required": false}
+  ]
+}

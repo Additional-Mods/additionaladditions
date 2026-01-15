@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "additionaladditions:light_gray_album",
+      "required": false
+    }
+  ]
+}
+

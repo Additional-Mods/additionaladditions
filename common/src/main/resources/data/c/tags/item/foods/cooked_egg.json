@@ -1,0 +1,6 @@
+{
+  "replace": false,
+  "values": [
+    {"id": "additionaladditions:fried_egg", "required": false}
+  ]
+}
