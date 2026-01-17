@@ -161,8 +161,12 @@ public class ConfigLoader {
 
             try {
                 if (!Files.exists(path)) {
-                    Registrar.defer(() -> createDefault(property, path));
-                    continue;
+                    if (property.get() instanceof VersionConfig) {
+                        createDefault(property, path);
+                    } else {
+                        Registrar.defer(() -> createDefault(property, path));
+                        continue;
+                    }
                 }
 
                 JsonElement jsonElement = GSON.fromJson(Files.readString(path), JsonElement.class);
