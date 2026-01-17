@@ -2,20 +2,29 @@ package one.dqu.additionaladditions.misc;
 
 import me.shedaniel.rei.api.client.plugins.REIClientPlugin;
 import me.shedaniel.rei.api.client.registry.display.DisplayRegistry;
+import me.shedaniel.rei.api.common.entry.EntryIngredient;
+import me.shedaniel.rei.api.common.util.EntryIngredients;
+import me.shedaniel.rei.plugin.common.displays.brewing.DefaultBrewingDisplay;
 import me.shedaniel.rei.plugin.common.displays.crafting.DefaultCraftingDisplay;
 import net.minecraft.core.Holder;
 import net.minecraft.core.NonNullList;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.*;
 import one.dqu.additionaladditions.config.Config;
+import one.dqu.additionaladditions.feature.glint.GlintColor;
+import one.dqu.additionaladditions.item.SuspiciousDyeItem;
 import one.dqu.additionaladditions.registry.AAItems;
 import one.dqu.additionaladditions.registry.AAMisc;
+import one.dqu.additionaladditions.util.ConventionalTags;
+import one.dqu.additionaladditions.util.ModCompatibility;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 public class REICompat implements REIClientPlugin {
     @Override
@@ -26,7 +35,10 @@ public class REICompat implements REIClientPlugin {
         if (Config.ROSE_GOLD.get().enabled()) {
             roseGoldTransmuteRecipe(registry);
         }
-        // couldnt figure out how to add suspicious dye recipe stuff
+        brewingRecipes(registry);
+        if (Config.SUSPICIOUS_DYES.get().enabled()) {
+            suspiciousDye(registry);
+        }
     }
 
     // copy pasted from JEICompat
@@ -126,6 +138,68 @@ public class REICompat implements REIClientPlugin {
 
         for (RecipeHolder<CraftingRecipe> recipeHolder : recipes) {
             registry.add(DefaultCraftingDisplay.of(recipeHolder));
+        }
+    }
+
+    private void brewingRecipes(DisplayRegistry registry) {
+        if (!ModCompatibility.isClientSide()) return;
+
+        List<BrewingRecipe> recipes = ModCompatibility.Client.getClientLevel().getRecipeManager()
+                .getAllRecipesFor(AAMisc.BREWING_RECIPE_TYPE.get())
+                .stream()
+                .map(RecipeHolder::value)
+                .toList();
+
+        for (BrewingRecipe recipe : recipes) {
+            registry.add(new DefaultBrewingDisplay(recipe.getInput(), recipe.getIngredient(), recipe.getResult()));
+        }
+    }
+
+    private void suspiciousDye(DisplayRegistry registry) {
+        List<ItemStack> validItems = new ArrayList<>();
+        for (var holder : BuiltInRegistries.ITEM.getTagOrEmpty(ConventionalTags.ENCHANTABLE)) {
+            ItemStack stack = new ItemStack(holder);
+            if (!stack.is(AAMisc.SUSPICIOUS_DYES_TAG)) {
+                stack.set(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true);
+                validItems.add(stack);
+            }
+        }
+
+        List<ItemStack> dyeStacks = new ArrayList<>();
+        for (var holder : BuiltInRegistries.ITEM.getTagOrEmpty(AAMisc.SUSPICIOUS_DYES_TAG)) {
+            dyeStacks.add(new ItemStack(holder));
+        }
+
+        for (ItemStack dyeStack : dyeStacks) {
+            if (dyeStack.getItem() instanceof SuspiciousDyeItem dyeItem) {
+                DyeColor color = dyeItem.getDyeColor();
+
+                List<ItemStack> outputs = new ArrayList<>();
+                for (ItemStack input : validItems) {
+                    ItemStack result = input.copy();
+                    result.set(AAMisc.GLINT_COLOR_COMPONENT.get(), new GlintColor(color));
+                    outputs.add(result);
+                }
+
+                EntryIngredient slot1 = EntryIngredients.ofItemStacks(validItems);
+                EntryIngredient slot2 = EntryIngredients.of(dyeStack);
+                EntryIngredient outputSlot = EntryIngredients.ofItemStacks(outputs);
+
+                List<EntryIngredient> inputs = List.of(slot1, slot2);
+                List<EntryIngredient> outputList = List.of(outputSlot);
+
+                registry.add(new DefaultCraftingDisplay(inputs, outputList, Optional.empty()) {
+                    @Override
+                    public int getWidth() {
+                        return 2;
+                    }
+
+                    @Override
+                    public int getHeight() {
+                        return 1;
+                    }
+                });
+            }
         }
     }
 }
