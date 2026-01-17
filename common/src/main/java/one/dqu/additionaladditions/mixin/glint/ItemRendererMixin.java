@@ -1,7 +1,7 @@
 package one.dqu.additionaladditions.mixin.glint;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import one.dqu.additionaladditions.glint.GlintContext;
+import one.dqu.additionaladditions.feature.glint.GlintContext;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.resources.model.BakedModel;

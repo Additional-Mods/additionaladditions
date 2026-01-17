@@ -1,4 +1,4 @@
-package one.dqu.additionaladditions.misc;
+package one.dqu.additionaladditions.feature.album;
 
 public interface AlbumJukeboxExtension {
     int additionaladditions$getTrack();

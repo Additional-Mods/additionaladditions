@@ -13,8 +13,8 @@ import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.component.ItemContainerContents;
 import one.dqu.additionaladditions.config.Config;
-import one.dqu.additionaladditions.misc.AlbumContents;
-import one.dqu.additionaladditions.misc.PocketJukeboxPlayer;
+import one.dqu.additionaladditions.feature.album.AlbumContents;
+import one.dqu.additionaladditions.feature.PocketJukeboxPlayer;
 import one.dqu.additionaladditions.registry.AAMisc;
 
 import java.util.List;

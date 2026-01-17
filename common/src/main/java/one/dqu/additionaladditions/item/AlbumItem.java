@@ -10,7 +10,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import one.dqu.additionaladditions.config.Config;
-import one.dqu.additionaladditions.misc.AlbumContents;
+import one.dqu.additionaladditions.feature.album.AlbumContents;
 import one.dqu.additionaladditions.registry.AAMisc;
 
 import java.util.List;

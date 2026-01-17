@@ -1,7 +1,7 @@
 package one.dqu.additionaladditions.mixin.glint;
 
-import one.dqu.additionaladditions.glint.GlintContext;
-import one.dqu.additionaladditions.glint.GlintRenderType;
+import one.dqu.additionaladditions.feature.glint.GlintContext;
+import one.dqu.additionaladditions.feature.glint.GlintRenderType;
 import net.minecraft.client.renderer.RenderType;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;

@@ -1,4 +1,4 @@
-package one.dqu.additionaladditions.misc;
+package one.dqu.additionaladditions.feature.album;
 
 import com.mojang.serialization.Codec;
 import net.minecraft.ChatFormatting;

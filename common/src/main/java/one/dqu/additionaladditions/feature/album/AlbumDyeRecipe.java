@@ -1,4 +1,4 @@
-package one.dqu.additionaladditions.misc;
+package one.dqu.additionaladditions.feature.album;
 
 import net.minecraft.core.HolderLookup;
 import net.minecraft.world.item.DyeColor;

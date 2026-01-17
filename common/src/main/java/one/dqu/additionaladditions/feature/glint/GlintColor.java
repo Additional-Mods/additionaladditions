@@ -1,4 +1,4 @@
-package one.dqu.additionaladditions.glint;
+package one.dqu.additionaladditions.feature.glint;
 
 import com.mojang.serialization.Codec;
 import io.netty.buffer.ByteBuf;

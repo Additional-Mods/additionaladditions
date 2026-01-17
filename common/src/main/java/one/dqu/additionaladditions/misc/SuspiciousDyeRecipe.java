@@ -1,6 +1,6 @@
 package one.dqu.additionaladditions.misc;
 
-import one.dqu.additionaladditions.glint.GlintColor;
+import one.dqu.additionaladditions.feature.glint.GlintColor;
 import one.dqu.additionaladditions.item.SuspiciousDyeItem;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.world.item.DyeColor;

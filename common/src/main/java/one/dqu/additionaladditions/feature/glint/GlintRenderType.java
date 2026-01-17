@@ -1,4 +1,4 @@
-package one.dqu.additionaladditions.glint;
+package one.dqu.additionaladditions.feature.glint;
 
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.blaze3d.vertex.VertexFormat;

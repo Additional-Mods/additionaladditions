@@ -11,7 +11,9 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.SimpleCraftingRecipeSerializer;
 import net.minecraft.world.level.block.Block;
 import one.dqu.additionaladditions.AdditionalAdditions;
-import one.dqu.additionaladditions.glint.GlintColor;
+import one.dqu.additionaladditions.feature.album.AlbumContents;
+import one.dqu.additionaladditions.feature.album.AlbumDyeRecipe;
+import one.dqu.additionaladditions.feature.glint.GlintColor;
 import one.dqu.additionaladditions.misc.*;
 
 import java.util.function.Supplier;

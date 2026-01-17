@@ -1,7 +1,7 @@
 package one.dqu.additionaladditions.mixin.glint;
 
 import com.mojang.blaze3d.vertex.ByteBufferBuilder;
-import one.dqu.additionaladditions.glint.GlintRenderType;
+import one.dqu.additionaladditions.feature.glint.GlintRenderType;
 import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
 import net.minecraft.client.renderer.RenderBuffers;
 import net.minecraft.client.renderer.RenderType;

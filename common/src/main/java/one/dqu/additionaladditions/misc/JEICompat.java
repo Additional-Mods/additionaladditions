@@ -20,7 +20,7 @@ import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.*;
 import one.dqu.additionaladditions.AdditionalAdditions;
 import one.dqu.additionaladditions.config.Config;
-import one.dqu.additionaladditions.glint.GlintColor;
+import one.dqu.additionaladditions.feature.glint.GlintColor;
 import one.dqu.additionaladditions.item.SuspiciousDyeItem;
 import one.dqu.additionaladditions.registry.AAItems;
 import one.dqu.additionaladditions.registry.AAMisc;

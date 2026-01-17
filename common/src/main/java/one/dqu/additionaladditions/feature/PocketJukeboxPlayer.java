@@ -1,4 +1,4 @@
-package one.dqu.additionaladditions.misc;
+package one.dqu.additionaladditions.feature;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -12,6 +12,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.JukeboxPlayable;
 import net.minecraft.world.item.JukeboxSong;
 import one.dqu.additionaladditions.config.Config;
+import one.dqu.additionaladditions.feature.album.AlbumContents;
 import org.jetbrains.annotations.Nullable;
 
 @Environment(EnvType.CLIENT)
