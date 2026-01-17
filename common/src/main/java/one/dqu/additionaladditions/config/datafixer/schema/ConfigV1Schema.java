@@ -129,6 +129,46 @@ public class ConfigV1Schema extends Schema {
                         "capacity", DSL.constType(DSL.intType())
                 )
         );
+
+        schema.registerType(false, ConfigProperty.typeReference(SnifferPlantsConfig.class), () ->
+                DSL.fields(
+                        "enabled", DSL.constType(DSL.bool()),
+                        "add_drops_to_sniffer_loot_table", DSL.constType(DSL.bool())
+                )
+        );
+
+        schema.registerType(false, ConfigProperty.typeReference(SuspiciousDyeConfig.class), () ->
+                DSL.fields(
+                        "enabled", DSL.constType(DSL.bool()),
+                        "brightness_multipliers", DSL.and(
+                                DSL.optionalFields(
+                                        "white", DSL.constType(DSL.floatType()),
+                                        "orange", DSL.constType(DSL.floatType()),
+                                        "magenta", DSL.constType(DSL.floatType()),
+                                        "light_blue", DSL.constType(DSL.floatType()),
+                                        "yellow", DSL.constType(DSL.floatType())
+                                ),
+                                DSL.optionalFields(
+                                        "lime", DSL.constType(DSL.floatType()),
+                                        "pink", DSL.constType(DSL.floatType()),
+                                        "gray", DSL.constType(DSL.floatType()),
+                                        "light_gray", DSL.constType(DSL.floatType()),
+                                        "cyan", DSL.constType(DSL.floatType())
+                                ),
+                                DSL.optionalFields(
+                                        "purple", DSL.constType(DSL.floatType()),
+                                        "blue", DSL.constType(DSL.floatType()),
+                                        "brown", DSL.constType(DSL.floatType()),
+                                        "green", DSL.constType(DSL.floatType()),
+                                        "red", DSL.constType(DSL.floatType())
+                                ),
+                                DSL.optionalFields(
+                                        "black", DSL.constType(DSL.floatType())
+                                )
+                        ),
+                        "armor_brightness_multiplier", DSL.constType(DSL.floatType())
+                )
+        );
     }
 
     @Override

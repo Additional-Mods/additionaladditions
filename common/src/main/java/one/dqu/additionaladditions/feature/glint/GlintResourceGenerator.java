@@ -12,15 +12,12 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.Resource;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.item.DyeColor;
+import one.dqu.additionaladditions.config.Config;
 
-import java.util.EnumMap;
 import java.util.Locale;
-import java.util.Map;
 
 @Environment(EnvType.CLIENT)
 public class GlintResourceGenerator {
-    private static final Map<DyeColor, Float> FIDDLES = new EnumMap<>(DyeColor.class);
-
     /**
      * Generates tinted enchantment glint textures and registers them with the texture manager.
      */
@@ -66,8 +63,8 @@ public class GlintResourceGenerator {
         int tintG = (tint >> 8) & 0xFF;
         int tintB = tint & 0xFF;
 
-        float fiddle = FIDDLES.getOrDefault(color, 1.5F);
-        if (armor) fiddle *= 1.2F;
+        float fiddle = Config.SUSPICIOUS_DYE.get().brightnessMultipliers().getOrDefault(color, 1.5f);
+        if (armor) fiddle *= Config.SUSPICIOUS_DYE.get().armorBrightnessMultiplier();
 
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
@@ -90,15 +87,5 @@ public class GlintResourceGenerator {
         }
 
         return tintedImage;
-    }
-
-    static {
-        // Manually adjust the fiddles so the brightness is more consistent
-        // I tried calculating these automatically but it didn't work so if you figure it out please please please PR thanks
-        FIDDLES.put(DyeColor.YELLOW, 1.6F);
-        FIDDLES.put(DyeColor.PINK, 2.0F);
-        FIDDLES.put(DyeColor.RED, 2.0F);
-        FIDDLES.put(DyeColor.ORANGE, 2.0F);
-        FIDDLES.put(DyeColor.BROWN, 3.5F);
     }
 }

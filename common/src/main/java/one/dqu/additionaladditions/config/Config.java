@@ -2,10 +2,13 @@ package one.dqu.additionaladditions.config;
 
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.food.FoodProperties;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.crafting.Ingredient;
 import one.dqu.additionaladditions.config.datafixer.ConfigFixerUpper;
 import one.dqu.additionaladditions.config.type.*;
 import one.dqu.additionaladditions.registry.AAItems;
+
+import java.util.Map;
 
 public class Config {
     public static void init() { /* forces static init */ }
@@ -76,11 +79,6 @@ public class Config {
     public static final ConfigProperty<AlbumConfig> ALBUM = new ConfigProperty<>(
             "album", AlbumConfig.CODEC,
             new AlbumConfig(true, 8)
-    );
-
-    public static final ConfigProperty<FeatureConfig> SUSPICIOUS_DYES = new ConfigProperty<>(
-            "suspicious_dyes", FeatureConfig.CODEC,
-            new FeatureConfig(true)
     );
 
     public static final ConfigProperty<FeatureConfig> ROSE_GOLD = new ConfigProperty<>(
@@ -171,6 +169,26 @@ public class Config {
     public static final ConfigProperty<FeatureConfig> ROPE = new ConfigProperty<>(
             "rope", FeatureConfig.CODEC,
             new FeatureConfig(true)
+    );
+
+    public static final ConfigProperty<SnifferPlantsConfig> SNIFFER_PLANTS = new ConfigProperty<>(
+            "sniffer_plants", SnifferPlantsConfig.CODEC,
+            new SnifferPlantsConfig(true, true)
+    );
+
+    public static final ConfigProperty<SuspiciousDyeConfig> SUSPICIOUS_DYE = new ConfigProperty<>(
+            "suspicious_dye", SuspiciousDyeConfig.CODEC,
+            new SuspiciousDyeConfig(
+                    true,
+                    Map.of(
+                            DyeColor.YELLOW, 1.6F,
+                            DyeColor.PINK, 2.0F,
+                            DyeColor.RED, 2.0F,
+                            DyeColor.ORANGE, 2.0F,
+                            DyeColor.BROWN, 3.5F
+                    ),
+                    1.2f
+            )
     );
 
     public static final ConfigProperty<FeatureConfig> SHIPWRECK_SPYGLASS_LOOT = new ConfigProperty<>(
