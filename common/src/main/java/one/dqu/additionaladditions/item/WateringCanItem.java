@@ -1,6 +1,8 @@
 package one.dqu.additionaladditions.item;
 
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundSource;
 import one.dqu.additionaladditions.config.Config;
 import one.dqu.additionaladditions.item.configurable.ConfigurableItem;
 import one.dqu.additionaladditions.util.FluidHelper;
@@ -38,6 +40,14 @@ public class WateringCanItem extends ConfigurableItem {
         stack.set(AAMisc.WATER_LEVEL_COMPONENT.get(), Mth.clamp(level, 0, maxWaterLevel));
     }
 
+    private void splashParticles(ServerLevel level, BlockPos pos) {
+        level.sendParticles(
+                ParticleTypes.SPLASH,
+                pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5,
+                10, 0.25, 0.1, 0.25, 0.1
+        );
+    }
+
     @Override
     public InteractionResultHolder<ItemStack> use(Level world, Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
@@ -66,17 +76,20 @@ public class WateringCanItem extends ConfigurableItem {
                     return InteractionResultHolder.pass(stack);
                 }
 
-                player.playSound(SoundEvents.BONE_MEAL_USE, 1.0F, 1.5F);
                 if (world.isClientSide()) {
                     return InteractionResultHolder.success(stack);
                 }
 
-                if (fertilizable.isBonemealSuccess(world, world.random, pos, state)) {
-                    if (world.random.nextFloat() < Config.WATERING_CAN.get().fertilizeChance()) {
-                        fertilizable.performBonemeal((ServerLevel) world, world.random, pos, state);
-                        AAMisc.FERTILIZE_WITH_WATERING_CAN_TRIGGER.get().trigger((ServerPlayer) player);
-                    }
+                boolean shouldFertilize = world.random.nextFloat() < Config.WATERING_CAN.get().fertilizeChance();
+                if (shouldFertilize && fertilizable.isBonemealSuccess(world, world.random, pos, state)) {
+                    fertilizable.performBonemeal((ServerLevel) world, world.random, pos, state);
+
+                    AAMisc.FERTILIZE_WITH_WATERING_CAN_TRIGGER.get().trigger((ServerPlayer) player);
+                    world.playSound(null, pos, SoundEvents.BONE_MEAL_USE, SoundSource.BLOCKS);
+                } else {
+                    world.playSound(null, pos, SoundEvents.BOTTLE_EMPTY, SoundSource.BLOCKS);
                 }
+                splashParticles((ServerLevel) world, pos);
 
                 if (stateBelow.getBlock() instanceof FarmBlock) {
                     world.setBlockAndUpdate(posBelow, stateBelow.setValue(BlockStateProperties.MOISTURE, FarmBlock.MAX_MOISTURE));
@@ -89,12 +102,14 @@ public class WateringCanItem extends ConfigurableItem {
             }
 
             if (state.getBlock() instanceof FarmBlock) {
-                player.playSound(SoundEvents.BOTTLE_EMPTY, 1.0F, 1.0F);
                 if (world.isClientSide()) {
                     return InteractionResultHolder.success(stack);
                 }
 
                 world.setBlockAndUpdate(pos, state.setValue(BlockStateProperties.MOISTURE, FarmBlock.MAX_MOISTURE));
+                world.playSound(null, pos, SoundEvents.BOTTLE_EMPTY, SoundSource.BLOCKS);
+                splashParticles((ServerLevel) world, pos.above());
+
                 if (!player.isCreative()) {
                     setWaterLevel(stack, waterLevel - 1);
                 }
