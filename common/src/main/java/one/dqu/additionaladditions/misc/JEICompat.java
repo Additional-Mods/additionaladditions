@@ -9,6 +9,8 @@ import mezz.jei.api.gui.ingredient.ICraftingGridHelper;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.category.extensions.vanilla.crafting.ICraftingCategoryExtension;
+import mezz.jei.api.recipe.vanilla.IJeiBrewingRecipe;
+import mezz.jei.api.recipe.vanilla.IVanillaRecipeFactory;
 import mezz.jei.api.registration.IRecipeRegistration;
 import mezz.jei.api.registration.IVanillaCategoryExtensionRegistration;
 import net.minecraft.core.Holder;
@@ -24,6 +26,7 @@ import one.dqu.additionaladditions.feature.glint.GlintColor;
 import one.dqu.additionaladditions.item.SuspiciousDyeItem;
 import one.dqu.additionaladditions.registry.AAItems;
 import one.dqu.additionaladditions.registry.AAMisc;
+import one.dqu.additionaladditions.util.ConventionalTags;
 import one.dqu.additionaladditions.util.ModCompatibility;
 import org.jetbrains.annotations.NotNull;
 
@@ -53,6 +56,7 @@ public class JEICompat implements IModPlugin {
         if (Config.ROSE_GOLD.get().enabled()) {
             roseGoldTransmuteRecipe(event);
         }
+        brewingRecipes(event);
     }
 
     // AlbumDyeRecipe
@@ -151,19 +155,41 @@ public class JEICompat implements IModPlugin {
         event.addRecipes(RecipeTypes.CRAFTING, recipes);
     }
 
+   // BrewingRecipe
+    private void brewingRecipes(IRecipeRegistration event) {
+        if (!ModCompatibility.isClientSide()) return;
+
+        IVanillaRecipeFactory factory = event.getVanillaRecipeFactory();
+
+        List<RecipeHolder<BrewingRecipe>> recipes = ModCompatibility.Client.getClientLevel().getRecipeManager()
+                .getAllRecipesFor(AAMisc.BREWING_RECIPE_TYPE.get());
+
+        List<IJeiBrewingRecipe> jeiRecipes = recipes
+                .stream()
+                .map(holder -> {
+                    BrewingRecipe recipe = holder.value();
+                    ResourceLocation location = holder.id();
+
+                    List<ItemStack> inputs = List.of(recipe.getInput().getItems());
+                    List<ItemStack> ingredients = List.of(recipe.getIngredient().getItems());
+                    ItemStack output = recipe.getResult();
+
+                    return factory.createBrewingRecipe(ingredients, inputs, output, location);
+                })
+                .toList();
+
+        event.addRecipes(RecipeTypes.BREWING, jeiRecipes);
+    }
+
     private static class SuspiciousDyeExtension implements ICraftingCategoryExtension<SuspiciousDyeRecipe> {
         @Override
         public void setRecipe(RecipeHolder<SuspiciousDyeRecipe> recipeHolder, IRecipeLayoutBuilder builder, ICraftingGridHelper craftingGridHelper, IFocusGroup focuses) {
             List<ItemStack> validFoilItems = new ArrayList<>();
-            for (Item item : BuiltInRegistries.ITEM) {
+            for (Holder<Item> item : BuiltInRegistries.ITEM.getTagOrEmpty(ConventionalTags.ENCHANTABLE)) {
                 ItemStack stack = new ItemStack(item);
                 if (stack.is(AAMisc.SUSPICIOUS_DYES_TAG)) continue;
-                if (stack.hasFoil()) {
-                    validFoilItems.add(stack);
-                } else if (stack.isEnchantable()) {
-                    stack.set(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true);
-                    validFoilItems.add(stack);
-                }
+                stack.set(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true);
+                validFoilItems.add(stack);
             }
 
             List<ItemStack> allDyes = new ArrayList<>();
