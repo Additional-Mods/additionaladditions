@@ -8,6 +8,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.item.crafting.SimpleCraftingRecipeSerializer;
 import net.minecraft.world.level.block.Block;
 import one.dqu.additionaladditions.AdditionalAdditions;
@@ -42,7 +43,7 @@ public class AAMisc {
     public static final TagKey<Block> WRENCH_BLACKLIST_TAG = TagKey.create(Registries.BLOCK, ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "wrench_blacklisted"));
     public static final TagKey<Item> ALBUMS_TAG = TagKey.create(Registries.ITEM, ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "albums"));
 
-    /* RECIPE SERIALIZERS */
+    /* RECIPE SERIALIZERS AND TYPES */
 
     public static final Supplier<RecipeSerializer<RoseGoldTransmuteRecipe>> ROSE_GOLD_TRANSMUTE_RECIPE_SERIALIZER = AARegistries.RECIPE_SERIALIZERS.register(
             ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "rose_gold_transmute"),
@@ -57,6 +58,21 @@ public class AAMisc {
     public static final Supplier<RecipeSerializer<AlbumDyeRecipe>> ALBUM_DYE_RECIPE_SERIALIZER = AARegistries.RECIPE_SERIALIZERS.register(
             ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "album_dye"),
             () -> new SimpleCraftingRecipeSerializer<>(AlbumDyeRecipe::new)
+    );
+
+    public static final Supplier<RecipeSerializer<BrewingRecipe>> BREWING_RECIPE_SERIALIZER = AARegistries.RECIPE_SERIALIZERS.register(
+            ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "brewing"),
+            BrewingRecipe.BrewingRecipeSerializer::new
+    );
+
+    public static final Supplier<RecipeType<BrewingRecipe>> BREWING_RECIPE_TYPE = AARegistries.RECIPE_TYPES.register(
+            ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "brewing"),
+            () -> new RecipeType<>() {
+                @Override
+                public String toString() {
+                    return "additionaladditions:brewing";
+                }
+            }
     );
 
     /* ADVANCEMENT TRIGGERS */

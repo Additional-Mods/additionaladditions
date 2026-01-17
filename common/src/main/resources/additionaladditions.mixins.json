@@ -11,6 +11,8 @@
     "glint.RenderTypeMixin"
   ],
   "mixins": [
+    "BrewingStandBlockEntityMixin",
+    "BrewingStandMenuMixin",
     "ItemStackMixin",
     "MobMixin",
     "RecipeManagerMixin",

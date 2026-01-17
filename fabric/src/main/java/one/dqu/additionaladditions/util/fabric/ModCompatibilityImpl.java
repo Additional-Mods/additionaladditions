@@ -1,5 +1,6 @@
 package one.dqu.additionaladditions.util.fabric;
 
+import net.fabricmc.api.EnvType;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.toasts.SystemToast;
@@ -54,5 +55,9 @@ public class ModCompatibilityImpl {
             Minecraft.getInstance().getToasts().addToast(toastSupplier.get());
         }
         toasts.clear();
+    }
+
+    public static boolean isClientSide() {
+        return FabricLoader.getInstance().getEnvironmentType() == EnvType.CLIENT;
     }
 }

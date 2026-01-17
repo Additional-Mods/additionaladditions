@@ -4,6 +4,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.toasts.SystemToast;
 import net.minecraft.network.chat.Component;
 import net.neoforged.fml.ModList;
+import net.neoforged.fml.loading.FMLEnvironment;
 import one.dqu.additionaladditions.AdditionalAdditions;
 
 import java.util.ArrayList;
@@ -54,5 +55,9 @@ public class ModCompatibilityImpl {
             Minecraft.getInstance().getToasts().addToast(toastSupplier.get());
         }
         toasts.clear();
+    }
+
+    public static boolean isClientSide() {
+        return FMLEnvironment.dist.isClient();
     }
 }
