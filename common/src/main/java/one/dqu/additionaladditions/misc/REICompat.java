@@ -36,7 +36,7 @@ public class REICompat implements REIClientPlugin {
             roseGoldTransmuteRecipe(registry);
         }
         brewingRecipes(registry);
-        if (Config.SUSPICIOUS_DYES.get().enabled()) {
+        if (Config.SUSPICIOUS_DYE.get().enabled()) {
             suspiciousDye(registry);
         }
     }

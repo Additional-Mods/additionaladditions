@@ -43,7 +43,7 @@ public class JEICompat implements IModPlugin {
     public void registerVanillaCategoryExtensions(IVanillaCategoryExtensionRegistration event) {
         // its bugged with emi so
         // noinspection ConstantValue
-        if (Config.SUSPICIOUS_DYES.get().enabled() && !ModCompatibility.isModPresent("emi")) {
+        if (Config.SUSPICIOUS_DYE.get().enabled() && !ModCompatibility.isModPresent("emi")) {
             event.getCraftingCategory().addExtension(SuspiciousDyeRecipe.class, new SuspiciousDyeExtension());
         }
     }
