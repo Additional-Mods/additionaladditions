@@ -44,6 +44,7 @@ public final class AdditionalAdditionsNeoForge {
     public AdditionalAdditionsNeoForge(IEventBus modEventBus) {
         AdditionalAdditions.init();
 
+        NeoForge.EVENT_BUS.addListener(LootTableLoadEvent.class, this::onLootTableLoad);
         modEventBus.addListener(FMLCommonSetupEvent.class, this::onSetupEvent);
         modEventBus.addListener(BuildCreativeModeTabContentsEvent.class, this::onBuildCreativeTabContents);
         modEventBus.addListener(RegisterPayloadHandlersEvent.class, this::onRegisterPayloadHandlers);
@@ -56,10 +57,6 @@ public final class AdditionalAdditionsNeoForge {
             modEventBus.addListener(FMLClientSetupEvent.class, this::onClientSetup);
             modEventBus.addListener(EntityRenderersEvent.RegisterRenderers.class, this::onRegisterEntityRenderers);
             modEventBus.addListener(RegisterColorHandlersEvent.Block.class, this::registerBlockColors);
-        }
-
-        if (!FMLEnvironment.dist.isClient()) {
-            NeoForge.EVENT_BUS.addListener(LootTableLoadEvent.class, this::onLootTableLoad);
         }
 
         RegistrarImpl.registerAll(modEventBus);
