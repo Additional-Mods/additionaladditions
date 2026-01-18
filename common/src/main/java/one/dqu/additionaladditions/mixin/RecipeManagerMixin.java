@@ -36,6 +36,7 @@ public class RecipeManagerMixin {
                     .findFirst().orElse(null);
 
             if (property == null) {
+                AdditionalAdditions.LOGGER.warn("[{}] Could not find a matching config property for recipe '{}'!", AdditionalAdditions.NAMESPACE, identifier);
                 return false;
             }
 

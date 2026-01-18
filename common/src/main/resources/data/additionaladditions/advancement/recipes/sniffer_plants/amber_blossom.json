@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_plant": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "additionaladditions:amber_blossom"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "additionaladditions:sniffer_plants/yellow_dye_from_amber_blossom"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_plant",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "additionaladditions:sniffer_plants/yellow_dye_from_amber_blossom"
+    ]
+  }
+}
