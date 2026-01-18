@@ -7,7 +7,8 @@
     "glint.HumanoidArmorLayerMixin"
   ],
   "mixins": [
-    "AxeItemMixin"
+    "AxeItemMixin",
+    "LootTableBuilderMixin"
   ],
   "injectors": {
     "defaultRequire": 1

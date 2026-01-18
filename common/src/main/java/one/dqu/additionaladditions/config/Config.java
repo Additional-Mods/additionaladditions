@@ -171,9 +171,9 @@ public class Config {
             new FeatureConfig(true)
     );
 
-    public static final ConfigProperty<SnifferPlantsConfig> SNIFFER_PLANTS = new ConfigProperty<>(
-            "sniffer_plants", SnifferPlantsConfig.CODEC,
-            new SnifferPlantsConfig(true, true)
+    public static final ConfigProperty<FeatureConfig> SNIFFER_PLANTS = new ConfigProperty<>(
+            "sniffer_plants", FeatureConfig.CODEC,
+            new FeatureConfig(true)
     );
 
     public static final ConfigProperty<SuspiciousDyeConfig> SUSPICIOUS_DYE = new ConfigProperty<>(

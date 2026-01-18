@@ -130,13 +130,6 @@ public class ConfigV1Schema extends Schema {
                 )
         );
 
-        schema.registerType(false, ConfigProperty.typeReference(SnifferPlantsConfig.class), () ->
-                DSL.fields(
-                        "enabled", DSL.constType(DSL.bool()),
-                        "add_drops_to_sniffer_loot_table", DSL.constType(DSL.bool())
-                )
-        );
-
         schema.registerType(false, ConfigProperty.typeReference(SuspiciousDyeConfig.class), () ->
                 DSL.fields(
                         "enabled", DSL.constType(DSL.bool()),

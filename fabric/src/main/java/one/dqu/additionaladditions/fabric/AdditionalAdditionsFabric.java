@@ -15,6 +15,7 @@ import one.dqu.additionaladditions.config.ConfigProperty;
 import one.dqu.additionaladditions.config.network.ConfigSyncS2CPayload;
 import one.dqu.additionaladditions.util.CreativeAdder;
 import one.dqu.additionaladditions.util.LootAdder;
+import one.dqu.additionaladditions.util.LootTableExtension;
 import one.dqu.additionaladditions.util.fabric.RegistrarImpl;
 
 import java.util.Map;
@@ -42,7 +43,7 @@ public final class AdditionalAdditionsFabric implements ModInitializer {
 
         // loot handler
         LootTableEvents.MODIFY.register(((resourceKey, builder, lootTableSource, provider) -> {
-            LootAdder.INSTANCE.inject(resourceKey.location(), provider, builder::pool);
+            LootAdder.INSTANCE.inject(resourceKey.location(), provider, builder::pool, () -> ((LootTableExtension) builder).additionaladditions$clearPools());
         }));
 
         // config sync

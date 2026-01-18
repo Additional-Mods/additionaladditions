@@ -57,10 +57,11 @@ public class LootAdder {
             LootPoolEntryType::codec
     );
 
-    public record LootInjection(ResourceLocation target, List<LootPoolEntryContainer> entries) {
+    public record LootInjection(ResourceLocation target, boolean replaceOtherPools, List<LootPoolEntryContainer> entries) {
         public static final Codec<LootInjection> CODEC = RecordCodecBuilder.create(instance ->
                 instance.group(
                         ResourceLocation.CODEC.fieldOf("target").forGetter(LootInjection::target),
+                        Codec.BOOL.optionalFieldOf("replace_other_pools", false).forGetter(LootInjection::replaceOtherPools),
                         Codec.list(ENTRY_CODEC).fieldOf("entries").forGetter(LootInjection::entries)
                 ).apply(instance, LootInjection::new)
         );
@@ -137,14 +138,16 @@ public class LootAdder {
      * @param target the loot table to inject into
      * @param registries holder lookup provider for registry access
      * @param consumer receives the created loot pool
+     * @param cleanPools runnable to clear existing pools of the target loot table
      */
-    public void inject(ResourceLocation target, HolderLookup.Provider registries, Consumer<LootPool> consumer) {
+    public void inject(ResourceLocation target, HolderLookup.Provider registries, Consumer<LootPool> consumer, Runnable cleanPools) {
         List<JsonElement> injections = this.injections.get(target);
 
         if (injections == null) {
             return;
         }
 
+        boolean cleaned = false;
         LootPool.Builder pool = LootPool.lootPool();
 
         if (target.getPath().startsWith("chests/")) {
@@ -158,6 +161,11 @@ public class LootAdder {
             if (injection.result().isEmpty()) {
                 AdditionalAdditions.LOGGER.error("[{}] Failed to parse loot injection for target {}: {}", AdditionalAdditions.NAMESPACE, target, injection.error().get().message());
                 continue;
+            }
+
+            if (injection.result().get().replaceOtherPools() && !cleaned) {
+                cleanPools.run();
+                cleaned = true;
             }
 
             for (LootPoolEntryContainer entry : injection.result().get().entries()) {

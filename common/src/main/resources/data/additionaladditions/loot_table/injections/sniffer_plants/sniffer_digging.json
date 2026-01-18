@@ -1,0 +1,54 @@
+{
+  "target": "minecraft:gameplay/sniffer_digging",
+  "replace_other_pools": true,
+  "entries": [
+    {
+      "type": "minecraft:item",
+      "name": "minecraft:torchflower_seeds"
+    },
+    {
+      "type": "minecraft:item",
+      "name": "minecraft:pitcher_pod"
+    },
+    {
+      "type": "minecraft:item",
+      "name": "additionaladditions:cottonshiver_pod"
+    },
+    {
+      "type": "minecraft:item",
+      "name": "additionaladditions:crimson_blossom_seeds"
+    },
+    {
+      "type": "minecraft:item",
+      "name": "additionaladditions:amber_blossom_seeds"
+    },
+    {
+      "type": "minecraft:item",
+      "name": "additionaladditions:bulbus_pod"
+    },
+    {
+      "type": "minecraft:item",
+      "name": "additionaladditions:sawtooth_fern_fiddlehead"
+    },
+    {
+      "type": "minecraft:item",
+      "name": "additionaladditions:frostleaf_pod"
+    },
+    {
+      "type": "minecraft:item",
+      "name": "additionaladditions:wisteria_vines"
+    },
+    {
+      "type": "minecraft:item",
+      "name": "additionaladditions:spikeblossom_seeds"
+    },
+    {
+      "type": "minecraft:item",
+      "name": "additionaladditions:snapdragon_pod"
+    },
+    {
+      "type": "minecraft:item",
+      "name": "additionaladditions:lotus_lily_pod"
+    }
+  ]
+}

@@ -35,6 +35,7 @@ import one.dqu.additionaladditions.registry.AABlocks;
 import one.dqu.additionaladditions.registry.AAEntities;
 import one.dqu.additionaladditions.util.CreativeAdder;
 import one.dqu.additionaladditions.util.LootAdder;
+import one.dqu.additionaladditions.util.LootTableExtension;
 import one.dqu.additionaladditions.util.neoforge.ModCompatibilityImpl;
 import one.dqu.additionaladditions.util.neoforge.RegistrarImpl;
 
@@ -98,7 +99,7 @@ public final class AdditionalAdditionsNeoForge {
 
     private void onLootTableLoad(LootTableLoadEvent event) {
         LootAdder.INSTANCE.inject(
-                event.getKey().location(), event.getRegistries(), event.getTable()::addPool
+                event.getKey().location(), event.getRegistries(), event.getTable()::addPool, () -> ((LootTableExtension) event.getTable()).additionaladditions$clearPools()
         );
     }
 
