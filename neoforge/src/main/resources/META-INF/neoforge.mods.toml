@@ -56,3 +56,6 @@ config = "additionaladditions.mixins.json"
 
 [[mixins]]
 config = "additionaladditions.neoforge.mixins.json"
+
+["lithium:options"]
+"mixin.block.redstone_wire" = false

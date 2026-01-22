@@ -77,5 +77,10 @@
     "minecraft": "~1.21.1",
     "java": ">=21",
     "fabric-api": "*"
+  },
+  "custom": {
+    "lithium:options": {
+      "mixin.block.redstone_wire": false
+    }
   }
 }
