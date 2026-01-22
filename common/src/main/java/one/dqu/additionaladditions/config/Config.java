@@ -21,28 +21,28 @@ public class Config {
     public static final ConfigProperty<FoodConfig> FRIED_EGG = new ConfigProperty<>(
             "fried_egg", FoodConfig.CODEC,
             new FoodConfig(true, new FoodProperties.Builder()
-                    .nutrition(6).saturationModifier(0.867f).build()
+                    .nutrition(6).saturationModifier(0.6f).build()
             )
     );
 
     public static final ConfigProperty<FoodConfig> BERRY_PIE = new ConfigProperty<>(
             "berry_pie", FoodConfig.CODEC,
             new FoodConfig(true, new FoodProperties.Builder()
-                    .nutrition(8).saturationModifier(0.6f).build()
+                    .nutrition(8).saturationModifier(0.3f).build()
             )
     );
 
     public static final ConfigProperty<FoodConfig> HONEYED_APPLE = new ConfigProperty<>(
             "honeyed_apple", FoodConfig.CODEC,
             new FoodConfig(true, new FoodProperties.Builder()
-                    .nutrition(8).saturationModifier(1.6f).build()
+                    .nutrition(6).saturationModifier(1.0f).build()
             )
     );
 
     public static final ConfigProperty<FoodConfig> CHICKEN_NUGGET = new ConfigProperty<>(
             "chicken_nugget", FoodConfig.CODEC,
             new FoodConfig(true, new FoodProperties.Builder()
-                    .nutrition(6).saturationModifier(0.9f).build()
+                    .nutrition(6).saturationModifier(0.6f).build()
             )
     );
 
