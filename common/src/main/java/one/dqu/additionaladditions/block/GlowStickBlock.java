@@ -2,7 +2,10 @@ package one.dqu.additionaladditions.block;
 
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.Direction;
+import net.minecraft.world.entity.item.FallingBlockEntity;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.phys.shapes.Shapes;
 import one.dqu.additionaladditions.registry.AAItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.Item;
@@ -32,8 +35,17 @@ public class GlowStickBlock extends FallingBlock {
     }
 
     @Override
+    public void onLand(Level level, BlockPos blockPos, BlockState thisBlock, BlockState existingBlock, FallingBlockEntity fallingBlockEntity) {
+        super.onLand(level, blockPos, thisBlock, existingBlock, fallingBlockEntity);
+
+        if (!thisBlock.canSurvive(level, blockPos)) {
+            level.destroyBlock(blockPos, true);
+        }
+    }
+
+    @Override
     public VoxelShape getCollisionShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
-        return shape;
+        return Shapes.empty();
     }
 
     @Override
