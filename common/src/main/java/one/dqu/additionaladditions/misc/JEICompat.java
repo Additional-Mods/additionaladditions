@@ -13,6 +13,8 @@ import mezz.jei.api.recipe.vanilla.IJeiBrewingRecipe;
 import mezz.jei.api.recipe.vanilla.IVanillaRecipeFactory;
 import mezz.jei.api.registration.IRecipeRegistration;
 import mezz.jei.api.registration.IVanillaCategoryExtensionRegistration;
+import mezz.jei.api.runtime.IIngredientManager;
+import mezz.jei.api.runtime.IJeiRuntime;
 import net.minecraft.core.Holder;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.component.DataComponents;
@@ -22,6 +24,8 @@ import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.*;
 import one.dqu.additionaladditions.AdditionalAdditions;
 import one.dqu.additionaladditions.config.Config;
+import one.dqu.additionaladditions.config.ConfigProperty;
+import one.dqu.additionaladditions.config.Toggleable;
 import one.dqu.additionaladditions.feature.glint.GlintColor;
 import one.dqu.additionaladditions.item.SuspiciousDyeItem;
 import one.dqu.additionaladditions.registry.AAItems;
@@ -31,6 +35,7 @@ import one.dqu.additionaladditions.util.ModCompatibility;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
+import java.util.function.Supplier;
 
 @JeiPlugin
 public class JEICompat implements IModPlugin {
@@ -57,6 +62,22 @@ public class JEICompat implements IModPlugin {
             roseGoldTransmuteRecipe(event);
         }
         brewingRecipes(event);
+    }
+
+    @Override
+    public void onRuntimeAvailable(IJeiRuntime jeiRuntime) {
+        IIngredientManager manager = jeiRuntime.getIngredientManager();
+
+        List<ItemStack> toHide = ConfigProperty.getAll()
+                .stream()
+                .filter(property -> property.get() instanceof Toggleable toggleable && !toggleable.enabled())
+                .map(AAItems::fromConfigProperty)
+                .flatMap(Collection::stream)
+                .map(Supplier::get)
+                .map(ItemStack::new)
+                .toList();
+
+        manager.removeIngredientsAtRuntime(VanillaTypes.ITEM_STACK, toHide);
     }
 
     // AlbumDyeRecipe

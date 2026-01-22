@@ -9,6 +9,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import one.dqu.additionaladditions.AdditionalAdditions;
 import one.dqu.additionaladditions.config.Config;
+import one.dqu.additionaladditions.config.ConfigProperty;
+import one.dqu.additionaladditions.config.Toggleable;
 import one.dqu.additionaladditions.config.type.SwordItemConfig;
 import one.dqu.additionaladditions.config.type.ToolItemConfig;
 import one.dqu.additionaladditions.feature.glint.GlintColor;
@@ -30,159 +32,164 @@ import java.util.function.Supplier;
 
 @SuppressWarnings("unused")
 public class AAItems {
+    private static final Map<ResourceLocation, Set<Supplier<? extends Item>>> CONFIG_TO_ITEM = new HashMap<>();
+
+    public static Collection<Supplier<? extends Item>> fromConfigProperty(ConfigProperty<?> configProperty) {
+        return CONFIG_TO_ITEM.get(configProperty.path());
+    }
 
     // BLOCKS
 
     public static final Supplier<Item> ROPE = new Builder("rope")
-            .config(() -> Config.ROPE.get().enabled())
+            .config(Config.ROPE)
             .creativeAfter(Items.LADDER, CreativeModeTabs.FUNCTIONAL_BLOCKS)
             .creativeAfter(Items.SPYGLASS, CreativeModeTabs.TOOLS_AND_UTILITIES)
             .build(p -> new BlockItem(AABlocks.ROPE_BLOCK.get(), p));
 
     public static final Supplier<Item> TINTED_REDSTONE_LAMP = new Builder("tinted_redstone_lamp")
-            .config(() -> Config.TINTED_REDSTONE_LAMP.get().enabled())
+            .config(Config.TINTED_REDSTONE_LAMP)
             .creativeAfter(Items.REDSTONE_LAMP, CreativeModeTabs.REDSTONE_BLOCKS)
             .creativeAfter(Items.REDSTONE_LAMP, CreativeModeTabs.FUNCTIONAL_BLOCKS)
             .build(p -> new BlockItem(AABlocks.TINTED_REDSTONE_LAMP.get(), p));
 
     public static final Supplier<CopperPatinaItem> COPPER_PATINA = new Builder("copper_patina")
-            .config(() -> Config.COPPER_PATINA.get().enabled())
+            .config(Config.COPPER_PATINA)
             .creativeAfter(Items.REDSTONE, CreativeModeTabs.REDSTONE_BLOCKS)
             .build(p -> new CopperPatinaItem(AABlocks.COPPER_PATINA.get(), p));
 
     public static final Supplier<Item> PATINA_BLOCK = new Builder("patina_block")
-            .config(() -> Config.COPPER_PATINA.get().enabled())
+            .config(Config.COPPER_PATINA)
             .creativeBefore(Items.COPPER_BLOCK, CreativeModeTabs.BUILDING_BLOCKS)
             .build(p -> new BlockItem(AABlocks.PATINA_BLOCK.get(), p));
 
     public static final Supplier<Item> ROSE_GOLD_BLOCK = new Builder("rose_gold_block")
-            .config(() -> Config.ROSE_GOLD.get().enabled())
+            .config(Config.ROSE_GOLD)
             .creativeAfter(Items.LIGHT_WEIGHTED_PRESSURE_PLATE, CreativeModeTabs.BUILDING_BLOCKS)
             .build(p -> new BlockItem(AABlocks.ROSE_GOLD_BLOCK.get(), p));
 
     // SNIFFER PLANTS
 
     public static final Supplier<Item> COTTONSHIVER = new Builder("cottonshiver")
-            .config(() -> Config.SNIFFER_PLANTS.get().enabled())
+            .config(Config.SNIFFER_PLANTS)
             .creativeAfter(Items.PITCHER_PLANT, CreativeModeTabs.NATURAL_BLOCKS)
             .build(p -> new BlockItem(AABlocks.COTTONSHIVER.get(), p));
     public static final Supplier<Item> COTTONSHIVER_POD = new Builder("cottonshiver_pod")
-            .config(() -> Config.SNIFFER_PLANTS.get().enabled())
+            .config(Config.SNIFFER_PLANTS)
             .creativeAfter(Items.PITCHER_POD, CreativeModeTabs.NATURAL_BLOCKS)
             .build(p -> new ItemNameBlockItem(AABlocks.COTTONSHIVER_CROP.get(), p));
 
     public static final Supplier<Item> MUDFLOWER = new Builder("mudflower")
-            .config(() -> Config.SNIFFER_PLANTS.get().enabled())
+            .config(Config.SNIFFER_PLANTS)
             .creativeAfter(Items.PITCHER_PLANT, CreativeModeTabs.NATURAL_BLOCKS)
             .build(p -> new BlockItem(AABlocks.MUDFLOWER.get(), p));
     public static final Supplier<Item> MUDFLOWER_SEEDS = new Builder("mudflower_seeds")
-            .config(() -> Config.SNIFFER_PLANTS.get().enabled())
+            .config(Config.SNIFFER_PLANTS)
             .creativeAfter(Items.PITCHER_POD, CreativeModeTabs.NATURAL_BLOCKS)
             .build(p -> new ItemNameBlockItem(AABlocks.MUDFLOWER_CROP.get(), p));
 
     public static final Supplier<Item> CRIMSON_BLOSSOM = new Builder("crimson_blossom")
-            .config(() -> Config.SNIFFER_PLANTS.get().enabled())
+            .config(Config.SNIFFER_PLANTS)
             .creativeAfter(Items.TORCHFLOWER, CreativeModeTabs.NATURAL_BLOCKS)
             .build(p -> new BlockItem(AABlocks.CRIMSON_BLOSSOM.get(), p));
     public static final Supplier<Item> CRIMSON_BLOSSOM_SEEDS = new Builder("crimson_blossom_seeds")
-            .config(() -> Config.SNIFFER_PLANTS.get().enabled())
+            .config(Config.SNIFFER_PLANTS)
             .creativeAfter(Items.PITCHER_POD, CreativeModeTabs.NATURAL_BLOCKS)
             .build(p -> new ItemNameBlockItem(AABlocks.CRIMSON_BLOSSOM_CROP.get(), p));
 
     public static final Supplier<Item> AMBER_BLOSSOM = new Builder("amber_blossom")
-            .config(() -> Config.SNIFFER_PLANTS.get().enabled())
+            .config(Config.SNIFFER_PLANTS)
             .creativeAfter(Items.PITCHER_PLANT, CreativeModeTabs.NATURAL_BLOCKS)
             .build(p -> new BlockItem(AABlocks.AMBER_BLOSSOM.get(), p));
     public static final Supplier<Item> AMBER_BLOSSOM_SEEDS = new Builder("amber_blossom_seeds")
-            .config(() -> Config.SNIFFER_PLANTS.get().enabled())
+            .config(Config.SNIFFER_PLANTS)
             .creativeAfter(Items.PITCHER_POD, CreativeModeTabs.NATURAL_BLOCKS)
             .build(p -> new ItemNameBlockItem(AABlocks.AMBER_BLOSSOM_CROP.get(), p));
 
     public static final Supplier<Item> BULBUS = new Builder("bulbus")
-            .config(() -> Config.SNIFFER_PLANTS.get().enabled())
+            .config(Config.SNIFFER_PLANTS)
             .creativeAfter(Items.TORCHFLOWER, CreativeModeTabs.NATURAL_BLOCKS)
             .build(p -> new BlockItem(AABlocks.BULBUS.get(), p));
     public static final Supplier<Item> BULBUS_POD = new Builder("bulbus_pod")
-            .config(() -> Config.SNIFFER_PLANTS.get().enabled())
+            .config(Config.SNIFFER_PLANTS)
             .creativeAfter(Items.PITCHER_POD, CreativeModeTabs.NATURAL_BLOCKS)
             .build(p -> new ItemNameBlockItem(AABlocks.BULBUS_CROP.get(), p));
 
     public static final Supplier<Item> SAWTOOTH_FERN = new Builder("sawtooth_fern")
-            .config(() -> Config.SNIFFER_PLANTS.get().enabled())
+            .config(Config.SNIFFER_PLANTS)
             .creativeAfter(Items.PITCHER_PLANT, CreativeModeTabs.NATURAL_BLOCKS)
             .build(p -> new BlockItem(AABlocks.SAWTOOTH_FERN.get(), p));
     public static final Supplier<Item> SAWTOOTH_FERN_FIDDLEHEAD = new Builder("sawtooth_fern_fiddlehead")
-            .config(() -> Config.SNIFFER_PLANTS.get().enabled())
+            .config(Config.SNIFFER_PLANTS)
             .creativeAfter(Items.PITCHER_POD, CreativeModeTabs.NATURAL_BLOCKS)
             .build(p -> new ItemNameBlockItem(AABlocks.SAWTOOTH_FERN_CROP.get(), p));
 
     public static final Supplier<Item> FROSTLEAF = new Builder("frostleaf")
-            .config(() -> Config.SNIFFER_PLANTS.get().enabled())
+            .config(Config.SNIFFER_PLANTS)
             .creativeAfter(Items.TORCHFLOWER, CreativeModeTabs.NATURAL_BLOCKS)
             .build(p -> new BlockItem(AABlocks.FROSTLEAF.get(), p));
     public static final Supplier<Item> FROSTLEAF_POD = new Builder("frostleaf_pod")
-            .config(() -> Config.SNIFFER_PLANTS.get().enabled())
+            .config(Config.SNIFFER_PLANTS)
             .creativeAfter(Items.PITCHER_POD, CreativeModeTabs.NATURAL_BLOCKS)
             .build(p -> new ItemNameBlockItem(AABlocks.FROSTLEAF_CROP.get(), p));
 
     public static final Supplier<Item> WISTERIA = new Builder("wisteria")
-            .config(() -> Config.SNIFFER_PLANTS.get().enabled())
+            .config(Config.SNIFFER_PLANTS)
             .creativeAfter(Items.TORCHFLOWER, CreativeModeTabs.NATURAL_BLOCKS)
             .build(p -> new BlockItem(AABlocks.WISTERIA.get(), p));
     public static final Supplier<Item> WISTERIA_VINES = new Builder("wisteria_vines")
-            .config(() -> Config.SNIFFER_PLANTS.get().enabled())
+            .config(Config.SNIFFER_PLANTS)
             .creativeAfter(Items.PITCHER_POD, CreativeModeTabs.NATURAL_BLOCKS)
             .build(p -> new ItemNameBlockItem(AABlocks.WISTERIA_CROP.get(), p));
 
     public static final Supplier<Item> SPIKEBLOSSOM = new Builder("spikeblossom")
-            .config(() -> Config.SNIFFER_PLANTS.get().enabled())
+            .config(Config.SNIFFER_PLANTS)
             .creativeAfter(Items.PITCHER_PLANT, CreativeModeTabs.NATURAL_BLOCKS)
             .build(p -> new BlockItem(AABlocks.SPIKEBLOSSOM.get(), p));
     public static final Supplier<Item> SPIKEBLOSSOM_SEEDS = new Builder("spikeblossom_seeds")
-            .config(() -> Config.SNIFFER_PLANTS.get().enabled())
+            .config(Config.SNIFFER_PLANTS)
             .creativeAfter(Items.PITCHER_POD, CreativeModeTabs.NATURAL_BLOCKS)
             .build(p -> new ItemNameBlockItem(AABlocks.SPIKEBLOSSOM_CROP.get(), p));
 
     public static final Supplier<Item> SNAPDRAGON = new Builder("snapdragon")
-            .config(() -> Config.SNIFFER_PLANTS.get().enabled())
+            .config(Config.SNIFFER_PLANTS)
             .creativeAfter(Items.PITCHER_PLANT, CreativeModeTabs.NATURAL_BLOCKS)
             .build(p -> new BlockItem(AABlocks.SNAPDRAGON.get(), p));
     public static final Supplier<Item> SNAPDRAGON_POD = new Builder("snapdragon_pod")
-            .config(() -> Config.SNIFFER_PLANTS.get().enabled())
+            .config(Config.SNIFFER_PLANTS)
             .creativeAfter(Items.PITCHER_POD, CreativeModeTabs.NATURAL_BLOCKS)
             .build(p -> new ItemNameBlockItem(AABlocks.SNAPDRAGON_CROP.get(), p));
 
     public static final Supplier<Item> LOTUS_LILY = new Builder("lotus_lily")
-            .config(() -> Config.SNIFFER_PLANTS.get().enabled())
+            .config(Config.SNIFFER_PLANTS)
             .creativeAfter(Items.TORCHFLOWER, CreativeModeTabs.NATURAL_BLOCKS)
             .build(p -> new PlaceOnWaterBlockItem(AABlocks.LOTUS_LILY.get(), p));
     public static final Supplier<Item> LOTUS_LILY_POD = new Builder("lotus_lily_pod")
-            .config(() -> Config.SNIFFER_PLANTS.get().enabled())
+            .config(Config.SNIFFER_PLANTS)
             .creativeAfter(Items.PITCHER_POD, CreativeModeTabs.NATURAL_BLOCKS)
             .build(p -> new ItemNamePlaceOnWaterBlockItem(AABlocks.LOTUS_LILY_CROP.get(), p));
 
     // FOOD
 
     public static final Supplier<FoodItem> FRIED_EGG = new Builder("fried_egg")
-            .config(() -> Config.FRIED_EGG.get().enabled())
+            .config(Config.FRIED_EGG)
             .properties(p -> p.food(Config.FRIED_EGG.get().food()))
             .creativeAfter(Items.COOKED_RABBIT, CreativeModeTabs.FOOD_AND_DRINKS)
             .build(p -> new FoodItem(p, Config.FRIED_EGG));
 
     public static final Supplier<FoodItem> BERRY_PIE = new Builder("berry_pie")
-            .config(() -> Config.BERRY_PIE.get().enabled())
+            .config(Config.BERRY_PIE)
             .properties(p -> p.food(Config.BERRY_PIE.get().food()))
             .creativeAfter(Items.PUMPKIN_PIE, CreativeModeTabs.FOOD_AND_DRINKS)
             .build(p -> new FoodItem(p, Config.BERRY_PIE));
 
     public static final Supplier<FoodItem> HONEYED_APPLE = new Builder("honeyed_apple")
-            .config(() -> Config.HONEYED_APPLE.get().enabled())
+            .config(Config.HONEYED_APPLE)
             .properties(p -> p.food(Config.HONEYED_APPLE.get().food()))
             .creativeAfter(Items.APPLE, CreativeModeTabs.FOOD_AND_DRINKS)
             .build(p -> new FoodItem(p, Config.HONEYED_APPLE));
 
     public static final Supplier<FoodItem> CHICKEN_NUGGET = new Builder("chicken_nugget")
-            .config(() -> Config.CHICKEN_NUGGET.get().enabled())
+            .config(Config.CHICKEN_NUGGET)
             .properties(p -> p.food(Config.CHICKEN_NUGGET.get().food()))
             .creativeAfter(Items.ROTTEN_FLESH, CreativeModeTabs.FOOD_AND_DRINKS)
             .build(p -> new FoodItem(p, Config.CHICKEN_NUGGET));
@@ -190,7 +197,7 @@ public class AAItems {
     // OTHER
 
     public static final Supplier<WateringCanItem> WATERING_CAN = new Builder("watering_can")
-            .config(() -> Config.WATERING_CAN.get().enabled())
+            .config(Config.WATERING_CAN)
             .properties(p -> p
                     .stacksTo(1)
                     .component(AAMisc.WATER_LEVEL_COMPONENT.get(), 0)
@@ -199,7 +206,7 @@ public class AAItems {
             .build(WateringCanItem::new);
 
     public static final Supplier<WrenchItem> WRENCH_ITEM = new Builder("wrench")
-            .config(() -> Config.WRENCH.get().enabled())
+            .config(Config.WRENCH)
             .properties(p -> p
                     .stacksTo(1)
                     .durability(Config.WRENCH.get().durability())
@@ -209,22 +216,22 @@ public class AAItems {
             .build(WrenchItem::new);
 
     public static final Supplier<Item> TRIDENT_SHARD = new Builder("trident_shard")
-            .config(() -> Config.TRIDENT_SHARD.get().enabled())
+            .config(Config.TRIDENT_SHARD)
             .creativeAfter(Items.PRISMARINE_CRYSTALS, CreativeModeTabs.INGREDIENTS)
             .build();
 
     public static final Supplier<Item> GLOW_STICK_ITEM = new Builder("glow_stick")
-            .config(() -> Config.GLOW_STICK.get().enabled())
+            .config(Config.GLOW_STICK)
             .creativeAfter(Items.BONE_MEAL, CreativeModeTabs.TOOLS_AND_UTILITIES)
             .build(p -> new GlowStickItem(AABlocks.GLOW_STICK_BLOCK.get(), p));
 
     public static final Supplier<Item> BAROMETER = new Builder("barometer")
-            .config(() -> Config.BAROMETER.get().enabled())
+            .config(Config.BAROMETER)
             .creativeAfter(Items.CLOCK, CreativeModeTabs.TOOLS_AND_UTILITIES)
             .build(Item::new);
 
     public static final Supplier<PocketJukeboxItem> POCKET_JUKEBOX_ITEM = new Builder("pocket_jukebox")
-            .config(() -> Config.POCKET_JUKEBOX.get().enabled())
+            .config(Config.POCKET_JUKEBOX)
             .properties(p -> p
                     .stacksTo(1)
             )
@@ -232,12 +239,12 @@ public class AAItems {
             .build(PocketJukeboxItem::new);
 
     public static final Supplier<Item> ROSE_GOLD_INGOT = new Builder("rose_gold_ingot")
-            .config(() -> Config.ROSE_GOLD.get().enabled())
+            .config(Config.ROSE_GOLD)
             .creativeAfter(Items.GOLD_INGOT, CreativeModeTabs.INGREDIENTS)
             .build();
 
     public static final Supplier<Item> MUSIC_DISC_0308 = new Builder("music_disc_0308")
-            .config(() -> Config.MUSIC_DISC_0308.get().enabled())
+            .config(Config.MUSIC_DISC_0308)
             .properties(p -> p
                     .stacksTo(1)
                     .rarity(Rarity.RARE)
@@ -247,7 +254,7 @@ public class AAItems {
             .build();
 
     public static final Supplier<Item> MUSIC_DISC_1007 = new Builder("music_disc_1007")
-            .config(() -> Config.MUSIC_DISC_1007.get().enabled())
+            .config(Config.MUSIC_DISC_1007)
             .properties(p -> p
                     .stacksTo(1)
                     .rarity(Rarity.RARE)
@@ -257,7 +264,7 @@ public class AAItems {
             .build();
 
     public static final Supplier<Item> MUSIC_DISC_1507 = new Builder("music_disc_1507")
-            .config(() -> Config.MUSIC_DISC_1507.get().enabled())
+            .config(Config.MUSIC_DISC_1507)
             .properties(p -> p
                     .stacksTo(1)
                     .rarity(Rarity.RARE)
@@ -271,7 +278,7 @@ public class AAItems {
     public static final RoseGoldToolMaterial ROSE_GOLD_TOOL_MATERIAL = new RoseGoldToolMaterial();
 
     public static final Supplier<Item> ROSE_GOLD_HELMET = new Builder("rose_gold_helmet")
-            .config(() -> Config.ROSE_GOLD.get().enabled())
+            .config(Config.ROSE_GOLD)
             .properties(p -> p
                     .durability(Config.ROSE_GOLD_HELMET.get().durability())
             )
@@ -279,7 +286,7 @@ public class AAItems {
             .build(p -> new RoseGoldArmorItem(ArmorItem.Type.HELMET, p));
 
     public static final Supplier<Item> ROSE_GOLD_CHESTPLATE = new Builder("rose_gold_chestplate")
-            .config(() -> Config.ROSE_GOLD.get().enabled())
+            .config(Config.ROSE_GOLD)
             .properties(p -> p
                     .durability(Config.ROSE_GOLD_CHESTPLATE.get().durability())
             )
@@ -287,7 +294,7 @@ public class AAItems {
             .build(p -> new RoseGoldArmorItem(ArmorItem.Type.CHESTPLATE, p));
 
     public static final Supplier<Item> ROSE_GOLD_LEGGINGS = new Builder("rose_gold_leggings")
-            .config(() -> Config.ROSE_GOLD.get().enabled())
+            .config(Config.ROSE_GOLD)
             .properties(p -> p
                     .durability(Config.ROSE_GOLD_LEGGINGS.get().durability())
             )
@@ -295,7 +302,7 @@ public class AAItems {
             .build(p -> new RoseGoldArmorItem(ArmorItem.Type.LEGGINGS, p));
 
     public static final Supplier<Item> ROSE_GOLD_BOOTS = new Builder("rose_gold_boots")
-            .config(() -> Config.ROSE_GOLD.get().enabled())
+            .config(Config.ROSE_GOLD)
             .properties(p -> p
                     .durability(Config.ROSE_GOLD_BOOTS.get().durability())
             )
@@ -303,7 +310,7 @@ public class AAItems {
             .build(p -> new RoseGoldArmorItem(ArmorItem.Type.BOOTS, p));
 
     public static final Supplier<Item> ROSE_GOLD_HORSE_ARMOR = new Builder("rose_gold_horse_armor")
-            .config(() -> Config.ROSE_GOLD.get().enabled())
+            .config(Config.ROSE_GOLD)
             .properties(p -> p
                     .stacksTo(1)
             )
@@ -311,7 +318,7 @@ public class AAItems {
             .build(p -> new RoseGoldAnimalArmorItem(AnimalArmorItem.BodyType.EQUESTRIAN, false, p));
 
     public static final Supplier<Item> ROSE_GOLD_SWORD = new Builder("rose_gold_sword")
-            .config(() -> Config.ROSE_GOLD.get().enabled())
+            .config(Config.ROSE_GOLD)
             .properties(p -> p
                     .durability(Config.ROSE_GOLD_SWORD.get().durability())
                     .attributes(SwordItem.createAttributes(ROSE_GOLD_TOOL_MATERIAL, Config.ROSE_GOLD_SWORD.get().attackDamage(), Config.ROSE_GOLD_SWORD.get().attackSpeed()))
@@ -324,7 +331,7 @@ public class AAItems {
             }));
 
     public static final Supplier<Item> ROSE_GOLD_SHOVEL = new Builder("rose_gold_shovel")
-            .config(() -> Config.ROSE_GOLD.get().enabled())
+            .config(Config.ROSE_GOLD)
             .properties(p -> p
                     .durability(Config.ROSE_GOLD_SHOVEL.get().durability())
                     .attributes(ShovelItem.createAttributes(ROSE_GOLD_TOOL_MATERIAL, Config.ROSE_GOLD_SHOVEL.get().attackDamage(), Config.ROSE_GOLD_SHOVEL.get().attackSpeed()))
@@ -337,7 +344,7 @@ public class AAItems {
             }));
 
     public static final Supplier<Item> ROSE_GOLD_PICKAXE = new Builder("rose_gold_pickaxe")
-            .config(() -> Config.ROSE_GOLD.get().enabled())
+            .config(Config.ROSE_GOLD)
             .properties(p -> p
                     .durability(Config.ROSE_GOLD_PICKAXE.get().durability())
                     .attributes(PickaxeItem.createAttributes(ROSE_GOLD_TOOL_MATERIAL, Config.ROSE_GOLD_PICKAXE.get().attackDamage(), Config.ROSE_GOLD_PICKAXE.get().attackSpeed()))
@@ -350,7 +357,7 @@ public class AAItems {
             }));
 
     public static final Supplier<Item> ROSE_GOLD_AXE = new Builder("rose_gold_axe")
-            .config(() -> Config.ROSE_GOLD.get().enabled())
+            .config(Config.ROSE_GOLD)
             .properties(p -> p
                     .durability(Config.ROSE_GOLD_AXE.get().durability())
                     .attributes(AxeItem.createAttributes(ROSE_GOLD_TOOL_MATERIAL, Config.ROSE_GOLD_AXE.get().attackDamage(), Config.ROSE_GOLD_AXE.get().attackSpeed()))
@@ -364,7 +371,7 @@ public class AAItems {
             }));
 
     public static final Supplier<Item> ROSE_GOLD_HOE = new Builder("rose_gold_hoe")
-            .config(() -> Config.ROSE_GOLD.get().enabled())
+            .config(Config.ROSE_GOLD)
             .properties(p -> p
                     .durability(Config.ROSE_GOLD_HOE.get().durability())
                     .attributes(HoeItem.createAttributes(ROSE_GOLD_TOOL_MATERIAL, Config.ROSE_GOLD_HOE.get().attackDamage(), Config.ROSE_GOLD_HOE.get().attackSpeed()))
@@ -379,7 +386,7 @@ public class AAItems {
     // SUSPICIOUS DYE
 
     public static final Supplier<SuspiciousDyeItem> WHITE_SUSPICIOUS_DYE = new Builder("white_suspicious_dye")
-            .config(() -> Config.SUSPICIOUS_DYE.get().enabled())
+            .config(Config.SUSPICIOUS_DYE)
             .properties(p -> p
                     .stacksTo(1)
                     .component(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true)
@@ -389,7 +396,7 @@ public class AAItems {
             .build(p -> new SuspiciousDyeItem(DyeColor.WHITE, p));
 
     public static final Supplier<SuspiciousDyeItem> BROWN_SUSPICIOUS_DYE = new Builder("brown_suspicious_dye")
-            .config(() -> Config.SUSPICIOUS_DYE.get().enabled())
+            .config(Config.SUSPICIOUS_DYE)
             .properties(p -> p
                     .stacksTo(1)
                     .component(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true)
@@ -399,7 +406,7 @@ public class AAItems {
             .build(p -> new SuspiciousDyeItem(DyeColor.BROWN, p));
 
     public static final Supplier<SuspiciousDyeItem> RED_SUSPICIOUS_DYE = new Builder("red_suspicious_dye")
-            .config(() -> Config.SUSPICIOUS_DYE.get().enabled())
+            .config(Config.SUSPICIOUS_DYE)
             .properties(p -> p
                     .stacksTo(1)
                     .component(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true)
@@ -409,7 +416,7 @@ public class AAItems {
             .build(p -> new SuspiciousDyeItem(DyeColor.RED, p));
 
     public static final Supplier<SuspiciousDyeItem> ORANGE_SUSPICIOUS_DYE = new Builder("orange_suspicious_dye")
-            .config(() -> Config.SUSPICIOUS_DYE.get().enabled())
+            .config(Config.SUSPICIOUS_DYE)
             .properties(p -> p
                     .stacksTo(1)
                     .component(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true)
@@ -419,7 +426,7 @@ public class AAItems {
             .build(p -> new SuspiciousDyeItem(DyeColor.ORANGE, p));
 
     public static final Supplier<SuspiciousDyeItem> YELLOW_SUSPICIOUS_DYE = new Builder("yellow_suspicious_dye")
-            .config(() -> Config.SUSPICIOUS_DYE.get().enabled())
+            .config(Config.SUSPICIOUS_DYE)
             .properties(p -> p
                     .stacksTo(1)
                     .component(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true)
@@ -429,7 +436,7 @@ public class AAItems {
             .build(p -> new SuspiciousDyeItem(DyeColor.YELLOW, p));
 
     public static final Supplier<SuspiciousDyeItem> LIME_SUSPICIOUS_DYE = new Builder("lime_suspicious_dye")
-            .config(() -> Config.SUSPICIOUS_DYE.get().enabled())
+            .config(Config.SUSPICIOUS_DYE)
             .properties(p -> p
                     .stacksTo(1)
                     .component(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true)
@@ -439,7 +446,7 @@ public class AAItems {
             .build(p -> new SuspiciousDyeItem(DyeColor.LIME, p));
 
     public static final Supplier<SuspiciousDyeItem> GREEN_SUSPICIOUS_DYE = new Builder("green_suspicious_dye")
-            .config(() -> Config.SUSPICIOUS_DYE.get().enabled())
+            .config(Config.SUSPICIOUS_DYE)
             .properties(p -> p
                     .stacksTo(1)
                     .component(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true)
@@ -449,7 +456,7 @@ public class AAItems {
             .build(p -> new SuspiciousDyeItem(DyeColor.GREEN, p));
 
     public static final Supplier<SuspiciousDyeItem> CYAN_SUSPICIOUS_DYE = new Builder("cyan_suspicious_dye")
-            .config(() -> Config.SUSPICIOUS_DYE.get().enabled())
+            .config(Config.SUSPICIOUS_DYE)
             .properties(p -> p
                     .stacksTo(1)
                     .component(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true)
@@ -459,7 +466,7 @@ public class AAItems {
             .build(p -> new SuspiciousDyeItem(DyeColor.CYAN, p));
 
     public static final Supplier<SuspiciousDyeItem> LIGHT_BLUE_SUSPICIOUS_DYE = new Builder("light_blue_suspicious_dye")
-            .config(() -> Config.SUSPICIOUS_DYE.get().enabled())
+            .config(Config.SUSPICIOUS_DYE)
             .properties(p -> p
                     .stacksTo(1)
                     .component(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true)
@@ -469,7 +476,7 @@ public class AAItems {
             .build(p -> new SuspiciousDyeItem(DyeColor.LIGHT_BLUE, p));
 
     public static final Supplier<SuspiciousDyeItem> BLUE_SUSPICIOUS_DYE = new Builder("blue_suspicious_dye")
-            .config(() -> Config.SUSPICIOUS_DYE.get().enabled())
+            .config(Config.SUSPICIOUS_DYE)
             .properties(p -> p
                     .stacksTo(1)
                     .component(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true)
@@ -479,7 +486,7 @@ public class AAItems {
             .build(p -> new SuspiciousDyeItem(DyeColor.BLUE, p));
 
     public static final Supplier<SuspiciousDyeItem> PURPLE_SUSPICIOUS_DYE = new Builder("purple_suspicious_dye")
-            .config(() -> Config.SUSPICIOUS_DYE.get().enabled())
+            .config(Config.SUSPICIOUS_DYE)
             .properties(p -> p
                     .stacksTo(1)
                     .component(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true)
@@ -489,7 +496,7 @@ public class AAItems {
             .build(p -> new SuspiciousDyeItem(DyeColor.PURPLE, p));
 
     public static final Supplier<SuspiciousDyeItem> MAGENTA_SUSPICIOUS_DYE = new Builder("magenta_suspicious_dye")
-            .config(() -> Config.SUSPICIOUS_DYE.get().enabled())
+            .config(Config.SUSPICIOUS_DYE)
             .properties(p -> p
                     .stacksTo(1)
                     .component(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true)
@@ -499,7 +506,7 @@ public class AAItems {
             .build(p -> new SuspiciousDyeItem(DyeColor.MAGENTA, p));
 
     public static final Supplier<SuspiciousDyeItem> PINK_SUSPICIOUS_DYE = new Builder("pink_suspicious_dye")
-            .config(() -> Config.SUSPICIOUS_DYE.get().enabled())
+            .config(Config.SUSPICIOUS_DYE)
             .properties(p -> p
                     .stacksTo(1)
                     .component(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true)
@@ -511,43 +518,43 @@ public class AAItems {
     // OTHER
 
     public static final Supplier<RopeArrowItem> ROPE_ARROW = new Builder("rope_arrow")
-            .config(() -> Config.ROPE.get().enabled())
+            .config(Config.ROPE)
             .creativeAfter(Items.ARROW, CreativeModeTabs.COMBAT)
             .build(RopeArrowItem::new);
 
     // ALBUMS
 
     public static final Supplier<AlbumItem> ALBUM = new Builder("album")
-            .config(() -> Config.ALBUM.get().enabled())
+            .config(Config.ALBUM)
             .creativeBefore(Items.MUSIC_DISC_13, CreativeModeTabs.TOOLS_AND_UTILITIES)
             .properties(p -> p
                     .stacksTo(1)
                     .component(AAMisc.ALBUM_CONTENTS_COMPONENT.get(), AlbumContents.EMPTY)
             )
             .build(AlbumItem::new);
-    public static final Supplier<AlbumItem> WHITE_ALBUM = new Builder("white_album").config(() -> Config.ALBUM.get().enabled()).creativeBefore(Items.MUSIC_DISC_13, CreativeModeTabs.TOOLS_AND_UTILITIES).properties(p -> p.stacksTo(1).component(AAMisc.ALBUM_CONTENTS_COMPONENT.get(), AlbumContents.EMPTY)).build(AlbumItem::new);
-    public static final Supplier<AlbumItem> LIGHT_GRAY_ALBUM = new Builder("light_gray_album").config(() -> Config.ALBUM.get().enabled()).creativeBefore(Items.MUSIC_DISC_13, CreativeModeTabs.TOOLS_AND_UTILITIES).properties(p -> p.stacksTo(1).component(AAMisc.ALBUM_CONTENTS_COMPONENT.get(), AlbumContents.EMPTY)).build(AlbumItem::new);
-    public static final Supplier<AlbumItem> GRAY_ALBUM = new Builder("gray_album").config(() -> Config.ALBUM.get().enabled()).creativeBefore(Items.MUSIC_DISC_13, CreativeModeTabs.TOOLS_AND_UTILITIES).properties(p -> p.stacksTo(1).component(AAMisc.ALBUM_CONTENTS_COMPONENT.get(), AlbumContents.EMPTY)).build(AlbumItem::new);
-    public static final Supplier<AlbumItem> BLACK_ALBUM = new Builder("black_album").config(() -> Config.ALBUM.get().enabled()).creativeBefore(Items.MUSIC_DISC_13, CreativeModeTabs.TOOLS_AND_UTILITIES).properties(p -> p.stacksTo(1).component(AAMisc.ALBUM_CONTENTS_COMPONENT.get(), AlbumContents.EMPTY)).build(AlbumItem::new);
-    public static final Supplier<AlbumItem> BROWN_ALBUM = new Builder("brown_album").config(() -> Config.ALBUM.get().enabled()).creativeBefore(Items.MUSIC_DISC_13, CreativeModeTabs.TOOLS_AND_UTILITIES).properties(p -> p.stacksTo(1).component(AAMisc.ALBUM_CONTENTS_COMPONENT.get(), AlbumContents.EMPTY)).build(AlbumItem::new);
-    public static final Supplier<AlbumItem> RED_ALBUM = new Builder("red_album").config(() -> Config.ALBUM.get().enabled()).creativeBefore(Items.MUSIC_DISC_13, CreativeModeTabs.TOOLS_AND_UTILITIES).properties(p -> p.stacksTo(1).component(AAMisc.ALBUM_CONTENTS_COMPONENT.get(), AlbumContents.EMPTY)).build(AlbumItem::new);
-    public static final Supplier<AlbumItem> ORANGE_ALBUM = new Builder("orange_album").config(() -> Config.ALBUM.get().enabled()).creativeBefore(Items.MUSIC_DISC_13, CreativeModeTabs.TOOLS_AND_UTILITIES).properties(p -> p.stacksTo(1).component(AAMisc.ALBUM_CONTENTS_COMPONENT.get(), AlbumContents.EMPTY)).build(AlbumItem::new);
-    public static final Supplier<AlbumItem> YELLOW_ALBUM = new Builder("yellow_album").config(() -> Config.ALBUM.get().enabled()).creativeBefore(Items.MUSIC_DISC_13, CreativeModeTabs.TOOLS_AND_UTILITIES).properties(p -> p.stacksTo(1).component(AAMisc.ALBUM_CONTENTS_COMPONENT.get(), AlbumContents.EMPTY)).build(AlbumItem::new);
-    public static final Supplier<AlbumItem> LIME_ALBUM = new Builder("lime_album").config(() -> Config.ALBUM.get().enabled()).creativeBefore(Items.MUSIC_DISC_13, CreativeModeTabs.TOOLS_AND_UTILITIES).properties(p -> p.stacksTo(1).component(AAMisc.ALBUM_CONTENTS_COMPONENT.get(), AlbumContents.EMPTY)).build(AlbumItem::new);
-    public static final Supplier<AlbumItem> GREEN_ALBUM = new Builder("green_album").config(() -> Config.ALBUM.get().enabled()).creativeBefore(Items.MUSIC_DISC_13, CreativeModeTabs.TOOLS_AND_UTILITIES).properties(p -> p.stacksTo(1).component(AAMisc.ALBUM_CONTENTS_COMPONENT.get(), AlbumContents.EMPTY)).build(AlbumItem::new);
-    public static final Supplier<AlbumItem> CYAN_ALBUM = new Builder("cyan_album").config(() -> Config.ALBUM.get().enabled()).creativeBefore(Items.MUSIC_DISC_13, CreativeModeTabs.TOOLS_AND_UTILITIES).properties(p -> p.stacksTo(1).component(AAMisc.ALBUM_CONTENTS_COMPONENT.get(), AlbumContents.EMPTY)).build(AlbumItem::new);
-    public static final Supplier<AlbumItem> LIGHT_BLUE_ALBUM = new Builder("light_blue_album").config(() -> Config.ALBUM.get().enabled()).creativeBefore(Items.MUSIC_DISC_13, CreativeModeTabs.TOOLS_AND_UTILITIES).properties(p -> p.stacksTo(1).component(AAMisc.ALBUM_CONTENTS_COMPONENT.get(), AlbumContents.EMPTY)).build(AlbumItem::new);
-    public static final Supplier<AlbumItem> BLUE_ALBUM = new Builder("blue_album").config(() -> Config.ALBUM.get().enabled()).creativeBefore(Items.MUSIC_DISC_13, CreativeModeTabs.TOOLS_AND_UTILITIES).properties(p -> p.stacksTo(1).component(AAMisc.ALBUM_CONTENTS_COMPONENT.get(), AlbumContents.EMPTY)).build(AlbumItem::new);
-    public static final Supplier<AlbumItem> PURPLE_ALBUM = new Builder("purple_album").config(() -> Config.ALBUM.get().enabled()).creativeBefore(Items.MUSIC_DISC_13, CreativeModeTabs.TOOLS_AND_UTILITIES).properties(p -> p.stacksTo(1).component(AAMisc.ALBUM_CONTENTS_COMPONENT.get(), AlbumContents.EMPTY)).build(AlbumItem::new);
-    public static final Supplier<AlbumItem> MAGENTA_ALBUM = new Builder("magenta_album").config(() -> Config.ALBUM.get().enabled()).creativeBefore(Items.MUSIC_DISC_13, CreativeModeTabs.TOOLS_AND_UTILITIES).properties(p -> p.stacksTo(1).component(AAMisc.ALBUM_CONTENTS_COMPONENT.get(), AlbumContents.EMPTY)).build(AlbumItem::new);
-    public static final Supplier<AlbumItem> PINK_ALBUM = new Builder("pink_album").config(() -> Config.ALBUM.get().enabled()).creativeBefore(Items.MUSIC_DISC_13, CreativeModeTabs.TOOLS_AND_UTILITIES).properties(p -> p.stacksTo(1).component(AAMisc.ALBUM_CONTENTS_COMPONENT.get(), AlbumContents.EMPTY)).build(AlbumItem::new);
+    public static final Supplier<AlbumItem> WHITE_ALBUM = new Builder("white_album").config(Config.ALBUM).creativeBefore(Items.MUSIC_DISC_13, CreativeModeTabs.TOOLS_AND_UTILITIES).properties(p -> p.stacksTo(1).component(AAMisc.ALBUM_CONTENTS_COMPONENT.get(), AlbumContents.EMPTY)).build(AlbumItem::new);
+    public static final Supplier<AlbumItem> LIGHT_GRAY_ALBUM = new Builder("light_gray_album").config(Config.ALBUM).creativeBefore(Items.MUSIC_DISC_13, CreativeModeTabs.TOOLS_AND_UTILITIES).properties(p -> p.stacksTo(1).component(AAMisc.ALBUM_CONTENTS_COMPONENT.get(), AlbumContents.EMPTY)).build(AlbumItem::new);
+    public static final Supplier<AlbumItem> GRAY_ALBUM = new Builder("gray_album").config(Config.ALBUM).creativeBefore(Items.MUSIC_DISC_13, CreativeModeTabs.TOOLS_AND_UTILITIES).properties(p -> p.stacksTo(1).component(AAMisc.ALBUM_CONTENTS_COMPONENT.get(), AlbumContents.EMPTY)).build(AlbumItem::new);
+    public static final Supplier<AlbumItem> BLACK_ALBUM = new Builder("black_album").config(Config.ALBUM).creativeBefore(Items.MUSIC_DISC_13, CreativeModeTabs.TOOLS_AND_UTILITIES).properties(p -> p.stacksTo(1).component(AAMisc.ALBUM_CONTENTS_COMPONENT.get(), AlbumContents.EMPTY)).build(AlbumItem::new);
+    public static final Supplier<AlbumItem> BROWN_ALBUM = new Builder("brown_album").config(Config.ALBUM).creativeBefore(Items.MUSIC_DISC_13, CreativeModeTabs.TOOLS_AND_UTILITIES).properties(p -> p.stacksTo(1).component(AAMisc.ALBUM_CONTENTS_COMPONENT.get(), AlbumContents.EMPTY)).build(AlbumItem::new);
+    public static final Supplier<AlbumItem> RED_ALBUM = new Builder("red_album").config(Config.ALBUM).creativeBefore(Items.MUSIC_DISC_13, CreativeModeTabs.TOOLS_AND_UTILITIES).properties(p -> p.stacksTo(1).component(AAMisc.ALBUM_CONTENTS_COMPONENT.get(), AlbumContents.EMPTY)).build(AlbumItem::new);
+    public static final Supplier<AlbumItem> ORANGE_ALBUM = new Builder("orange_album").config(Config.ALBUM).creativeBefore(Items.MUSIC_DISC_13, CreativeModeTabs.TOOLS_AND_UTILITIES).properties(p -> p.stacksTo(1).component(AAMisc.ALBUM_CONTENTS_COMPONENT.get(), AlbumContents.EMPTY)).build(AlbumItem::new);
+    public static final Supplier<AlbumItem> YELLOW_ALBUM = new Builder("yellow_album").config(Config.ALBUM).creativeBefore(Items.MUSIC_DISC_13, CreativeModeTabs.TOOLS_AND_UTILITIES).properties(p -> p.stacksTo(1).component(AAMisc.ALBUM_CONTENTS_COMPONENT.get(), AlbumContents.EMPTY)).build(AlbumItem::new);
+    public static final Supplier<AlbumItem> LIME_ALBUM = new Builder("lime_album").config(Config.ALBUM).creativeBefore(Items.MUSIC_DISC_13, CreativeModeTabs.TOOLS_AND_UTILITIES).properties(p -> p.stacksTo(1).component(AAMisc.ALBUM_CONTENTS_COMPONENT.get(), AlbumContents.EMPTY)).build(AlbumItem::new);
+    public static final Supplier<AlbumItem> GREEN_ALBUM = new Builder("green_album").config(Config.ALBUM).creativeBefore(Items.MUSIC_DISC_13, CreativeModeTabs.TOOLS_AND_UTILITIES).properties(p -> p.stacksTo(1).component(AAMisc.ALBUM_CONTENTS_COMPONENT.get(), AlbumContents.EMPTY)).build(AlbumItem::new);
+    public static final Supplier<AlbumItem> CYAN_ALBUM = new Builder("cyan_album").config(Config.ALBUM).creativeBefore(Items.MUSIC_DISC_13, CreativeModeTabs.TOOLS_AND_UTILITIES).properties(p -> p.stacksTo(1).component(AAMisc.ALBUM_CONTENTS_COMPONENT.get(), AlbumContents.EMPTY)).build(AlbumItem::new);
+    public static final Supplier<AlbumItem> LIGHT_BLUE_ALBUM = new Builder("light_blue_album").config(Config.ALBUM).creativeBefore(Items.MUSIC_DISC_13, CreativeModeTabs.TOOLS_AND_UTILITIES).properties(p -> p.stacksTo(1).component(AAMisc.ALBUM_CONTENTS_COMPONENT.get(), AlbumContents.EMPTY)).build(AlbumItem::new);
+    public static final Supplier<AlbumItem> BLUE_ALBUM = new Builder("blue_album").config(Config.ALBUM).creativeBefore(Items.MUSIC_DISC_13, CreativeModeTabs.TOOLS_AND_UTILITIES).properties(p -> p.stacksTo(1).component(AAMisc.ALBUM_CONTENTS_COMPONENT.get(), AlbumContents.EMPTY)).build(AlbumItem::new);
+    public static final Supplier<AlbumItem> PURPLE_ALBUM = new Builder("purple_album").config(Config.ALBUM).creativeBefore(Items.MUSIC_DISC_13, CreativeModeTabs.TOOLS_AND_UTILITIES).properties(p -> p.stacksTo(1).component(AAMisc.ALBUM_CONTENTS_COMPONENT.get(), AlbumContents.EMPTY)).build(AlbumItem::new);
+    public static final Supplier<AlbumItem> MAGENTA_ALBUM = new Builder("magenta_album").config(Config.ALBUM).creativeBefore(Items.MUSIC_DISC_13, CreativeModeTabs.TOOLS_AND_UTILITIES).properties(p -> p.stacksTo(1).component(AAMisc.ALBUM_CONTENTS_COMPONENT.get(), AlbumContents.EMPTY)).build(AlbumItem::new);
+    public static final Supplier<AlbumItem> PINK_ALBUM = new Builder("pink_album").config(Config.ALBUM).creativeBefore(Items.MUSIC_DISC_13, CreativeModeTabs.TOOLS_AND_UTILITIES).properties(p -> p.stacksTo(1).component(AAMisc.ALBUM_CONTENTS_COMPONENT.get(), AlbumContents.EMPTY)).build(AlbumItem::new);
 
     private static class Builder {
         private final String id;
         private final Map<ResourceKey<CreativeModeTab>, List<ItemLike>> creativeAfter = new HashMap<>();
         private final Map<ResourceKey<CreativeModeTab>, List<ItemLike>> creativeBefore = new HashMap<>();
         private Consumer<Item.Properties> propertiesConfig = p -> {};
-        private Supplier<Boolean> config = () -> true;
+        private ConfigProperty<? extends Toggleable> config = null;
 
         public Builder(String id) {
             this.id = id;
@@ -558,7 +565,7 @@ public class AAItems {
             return this;
         }
 
-        public Builder config(Supplier<Boolean> config) {
+        public <T extends ConfigProperty<? extends Toggleable>> Builder config(T config) {
             this.config = config;
             return this;
         }
@@ -579,6 +586,7 @@ public class AAItems {
 
         public <T extends Item> Supplier<T> build(Function<Item.Properties, T> itemFactory) {
             ResourceLocation location = ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, id);
+            Supplier<Boolean> enabled = config != null ? config.get()::enabled : () -> true;
 
             Consumer<Item.Properties> deferredProperties = propertiesConfig;
             Supplier<T> item = AARegistries.ITEMS.register(location, () -> {
@@ -588,12 +596,16 @@ public class AAItems {
             });
 
             creativeAfter.forEach((tab, items) ->
-                items.forEach(anchor -> CreativeAdder.add(tab, config, anchor, item))
+                items.forEach(anchor -> CreativeAdder.add(tab, enabled, anchor, item))
             );
 
             creativeBefore.forEach((tab, items) ->
-                items.forEach(anchor -> CreativeAdder.addBefore(tab, config, anchor, item))
+                items.forEach(anchor -> CreativeAdder.addBefore(tab, enabled, anchor, item))
             );
+
+            if (config != null) {
+                CONFIG_TO_ITEM.computeIfAbsent(config.path(), k -> new HashSet<>()).add(item);
+            }
 
             return item;
         }

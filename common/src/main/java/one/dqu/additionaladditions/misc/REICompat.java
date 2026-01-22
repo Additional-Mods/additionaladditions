@@ -1,8 +1,11 @@
 package one.dqu.additionaladditions.misc;
 
+import me.shedaniel.rei.api.client.entry.filtering.base.BasicFilteringRule;
 import me.shedaniel.rei.api.client.plugins.REIClientPlugin;
 import me.shedaniel.rei.api.client.registry.display.DisplayRegistry;
 import me.shedaniel.rei.api.common.entry.EntryIngredient;
+import me.shedaniel.rei.api.common.entry.EntryStack;
+import me.shedaniel.rei.api.common.entry.type.VanillaEntryTypes;
 import me.shedaniel.rei.api.common.util.EntryIngredients;
 import me.shedaniel.rei.plugin.common.displays.brewing.DefaultBrewingDisplay;
 import me.shedaniel.rei.plugin.common.displays.crafting.DefaultCraftingDisplay;
@@ -14,6 +17,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.*;
 import one.dqu.additionaladditions.config.Config;
+import one.dqu.additionaladditions.config.ConfigProperty;
+import one.dqu.additionaladditions.config.Toggleable;
 import one.dqu.additionaladditions.feature.glint.GlintColor;
 import one.dqu.additionaladditions.item.SuspiciousDyeItem;
 import one.dqu.additionaladditions.registry.AAItems;
@@ -21,10 +26,8 @@ import one.dqu.additionaladditions.registry.AAMisc;
 import one.dqu.additionaladditions.util.ConventionalTags;
 import one.dqu.additionaladditions.util.ModCompatibility;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
+import java.util.function.Supplier;
 
 public class REICompat implements REIClientPlugin {
     @Override
@@ -39,6 +42,20 @@ public class REICompat implements REIClientPlugin {
         if (Config.SUSPICIOUS_DYE.get().enabled()) {
             suspiciousDye(registry);
         }
+    }
+
+    @Override
+    public void registerBasicEntryFiltering(BasicFilteringRule<?> rule) {
+        List<EntryStack<ItemStack>> toHide = ConfigProperty.getAll()
+                .stream()
+                .filter(property -> property.get() instanceof Toggleable toggleable && !toggleable.enabled())
+                .map(AAItems::fromConfigProperty)
+                .flatMap(Collection::stream)
+                .map(Supplier::get)
+                .map(ItemStack::new)
+                .map(s -> EntryStack.of(VanillaEntryTypes.ITEM, s))
+                .toList();
+        rule.hide(toHide);
     }
 
     // copy pasted from JEICompat
