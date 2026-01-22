@@ -1,0 +1,28 @@
+{
+  "parent": "minecraft:adventure/kill_a_mob",
+  "display": {
+    "title": {
+      "translate": "additionaladditions.advancements.use_tinted_redstone_lamp"
+    },
+    "description": {
+      "translate": "additionaladditions.advancements.use_tinted_redstone_lamp.desc"
+    },
+    "icon": {
+      "id": "additionaladditions:tinted_redstone_lamp",
+      "count": 1
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "activated": {
+      "trigger": "additionaladditions:activate_tinted_redstone_lamp",
+      "conditions": {}
+    }
+  },
+  "requirements": [
+    ["activated"]
+  ]
+}

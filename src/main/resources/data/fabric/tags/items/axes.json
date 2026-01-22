@@ -1,7 +1,0 @@
-{
-  "replace": false,
-  "values": [
-    {"id": "additionaladditions:rose_gold_axe", "required": false},
-    {"id": "additionaladditions:gilded_netherite_axe", "required": false}
-  ]
-}

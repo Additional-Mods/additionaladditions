@@ -1,0 +1,28 @@
+{
+  "parent": "minecraft:adventure/sleep_in_bed",
+  "display": {
+    "title": {
+      "translate": "additionaladditions.advancements.play_album"
+    },
+    "description": {
+      "translate": "additionaladditions.advancements.play_album.desc"
+    },
+    "icon": {
+      "id": "additionaladditions:album",
+      "count": 1
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "play_music": {
+      "trigger": "additionaladditions:play_album",
+      "conditions": {}
+    }
+  },
+  "requirements": [
+      ["play_music"]
+  ]
+}

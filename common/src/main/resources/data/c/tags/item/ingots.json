@@ -1,0 +1,6 @@
+{
+  "replace": false,
+  "values": [
+    {"id": "#c:ingots/rose_gold", "required": false}
+  ]
+}

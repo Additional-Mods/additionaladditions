@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    {"id": "additionaladditions:honeyed_apple", "required": false},
+    {"id": "additionaladditions:chicken_nugget", "required": false}
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "required": true,
+  "package": "one.dqu.additionaladditions.mixin.neoforge",
+  "compatibilityLevel": "JAVA_21",
+  "minVersion": "0.8",
+  "client": [
+    "glint.HumanoidArmorLayerMixin"
+  ],
+  "mixins": [
+    "AxeItemMixin",
+    "LootTableMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

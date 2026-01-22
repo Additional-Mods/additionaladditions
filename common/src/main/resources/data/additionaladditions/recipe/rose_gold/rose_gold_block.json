@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "RRR",
+    "RRR",
+    "RRR"
+  ],
+  "key": {
+    "R": {"item": "additionaladditions:rose_gold_ingot"}
+  },
+  "result": {
+    "id": "additionaladditions:rose_gold_block",
+    "count": 1
+  }
+}

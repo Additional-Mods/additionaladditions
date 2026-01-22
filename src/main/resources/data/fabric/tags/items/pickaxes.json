@@ -1,7 +1,0 @@
-{
-  "replace": false,
-  "values": [
-    {"id": "additionaladditions:rose_gold_pickaxe", "required": false},
-    {"id": "additionaladditions:gilded_netherite_pickaxe", "required": false}
-  ]
-}

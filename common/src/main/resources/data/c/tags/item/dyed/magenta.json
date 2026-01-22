@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "additionaladditions:magenta_album",
+      "required": false
+    }
+  ]
+}
+

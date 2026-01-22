@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "lit=false": {
+      "model": "additionaladditions:block/tinted_redstone_lamp"
+    },
+    "lit=true": {
+      "model": "additionaladditions:block/tinted_redstone_lamp_on"
+    }
+  }
+}

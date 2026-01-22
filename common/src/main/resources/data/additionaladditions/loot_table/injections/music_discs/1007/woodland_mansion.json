@@ -1,0 +1,16 @@
+{
+  "target": "minecraft:chests/woodland_mansion",
+  "entries": [
+    {
+      "type": "minecraft:item",
+      "name": "additionaladditions:music_disc_1007",
+      "weight": 5,
+      "conditions": [
+        {
+          "condition": "minecraft:random_chance",
+          "chance": 0.25
+        }
+      ]
+    }
+  ]
+}

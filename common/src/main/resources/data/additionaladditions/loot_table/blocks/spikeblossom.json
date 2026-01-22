@@ -1,0 +1,31 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "conditions": [
+            {
+              "block": "additionaladditions:spikeblossom",
+              "condition": "minecraft:block_state_property",
+              "properties": {
+                "half": "lower"
+              }
+            }
+          ],
+          "name": "additionaladditions:spikeblossom"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "additionaladditions:blocks/spikeblossom"
+}
+

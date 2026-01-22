@@ -1,0 +1,39 @@
+{
+	"ambientocclusion": false,
+	"textures": {
+		"1": "additionaladditions:block/wisteria_1",
+		"particle": "additionaladditions:block/wisteria_0",
+		"vine": "additionaladditions:block/wisteria_0"
+	},
+	"elements": [
+		{
+			"from": [0, 0, 0.05],
+			"to": [16, 16, 0.05],
+			"shade": false,
+			"faces": {
+				"north": {"uv": [16, 0, 0, 16], "texture": "#vine"},
+				"south": {"uv": [0, 0, 16, 16], "texture": "#vine"}
+			}
+		},
+		{
+			"from": [0, 8, 0.05],
+			"to": [16, 8, 9.05],
+			"shade": false,
+			"rotation": {"angle": 45, "axis": "x", "origin": [0, 8, 0]},
+			"faces": {
+				"up": {"uv": [0, 16, 16, 7], "texture": "#1"},
+				"down": {"uv": [0, 7, 16, 16], "texture": "#1"}
+			}
+		},
+		{
+			"from": [0, 8, 0.05],
+			"to": [16, 8, 9.05],
+			"shade": false,
+			"rotation": {"angle": -45, "axis": "x", "origin": [0, 8, 0]},
+			"faces": {
+                "up": {"uv": [16, 16, 0, 7], "texture": "#1"},
+                "down": {"uv": [16, 7, 0, 16], "texture": "#1"}
+			}
+		}
+	]
+}

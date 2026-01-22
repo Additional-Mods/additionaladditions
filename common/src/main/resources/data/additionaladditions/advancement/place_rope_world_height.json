@@ -1,0 +1,28 @@
+{
+  "parent": "minecraft:adventure/fall_from_world_height",
+  "display": {
+    "title": {
+      "translate": "additionaladditions.advancements.place_rope_world_height"
+    },
+    "description": {
+      "translate": "additionaladditions.advancements.place_rope_world_height.desc"
+    },
+    "icon": {
+      "id": "additionaladditions:rope",
+      "count": 1
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "rope": {
+      "trigger": "additionaladditions:rope_world_height",
+      "conditions": {}
+    }
+  },
+  "requirements": [
+      ["rope"]
+  ]
+}

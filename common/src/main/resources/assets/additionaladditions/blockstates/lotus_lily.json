@@ -1,0 +1,11 @@
+{
+  "variants": {
+    "": [
+      { "model": "additionaladditions:block/lotus_lily", "y": 0 },
+      { "model": "additionaladditions:block/lotus_lily", "y": 90 },
+      { "model": "additionaladditions:block/lotus_lily", "y": 180 },
+      { "model": "additionaladditions:block/lotus_lily", "y": 270 }
+    ]
+  }
+}
+

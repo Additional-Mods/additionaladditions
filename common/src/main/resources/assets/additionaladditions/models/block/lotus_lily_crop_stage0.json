@@ -1,0 +1,7 @@
+{
+  "parent": "additionaladditions:block/lotus_lily",
+  "textures": {
+    "1": "additionaladditions:block/lotus_lily_crop_stage0"
+  }
+}
+

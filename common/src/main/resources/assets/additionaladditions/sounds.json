@@ -1,0 +1,26 @@
+{
+  "music_disc.0308": {
+    "sounds": [
+      {
+        "name": "additionaladditions:records/0308",
+        "stream": true
+      }
+    ]
+  },
+  "music_disc.1007": {
+    "sounds": [
+      {
+        "name": "additionaladditions:records/1007",
+        "stream": true
+      }
+    ]
+  },
+  "music_disc.1507": {
+    "sounds": [
+      {
+        "name": "additionaladditions:records/1507",
+        "stream": true
+      }
+    ]
+  }
+}

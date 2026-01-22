@@ -1,0 +1,16 @@
+{
+  "replace": false,
+  "values": [
+    {"id": "additionaladditions:cottonshiver_crop", "required": false},
+    {"id": "additionaladditions:mudflower_crop", "required": false},
+    {"id": "additionaladditions:crimson_blossom_crop", "required": false},
+    {"id": "additionaladditions:amber_blossom_crop", "required": false},
+    {"id": "additionaladditions:bulbus_crop", "required": false},
+    {"id": "additionaladditions:sawtooth_fern_crop", "required": false},
+    {"id": "additionaladditions:frostleaf_crop", "required": false},
+    {"id": "additionaladditions:wisteria_crop", "required": false},
+    {"id": "additionaladditions:spikeblossom_crop", "required": false},
+    {"id": "additionaladditions:snapdragon_crop", "required": false},
+    {"id": "additionaladditions:lotus_lily_crop", "required": false}
+  ]
+}

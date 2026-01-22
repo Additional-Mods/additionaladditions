@@ -1,0 +1,11 @@
+{
+  "variants": {
+    "half=lower": {
+      "model": "additionaladditions:block/amber_blossom_bottom"
+    },
+    "half=upper": {
+      "model": "additionaladditions:block/amber_blossom_top"
+    }
+  }
+}
+

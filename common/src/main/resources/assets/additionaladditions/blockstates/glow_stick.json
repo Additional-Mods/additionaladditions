@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "": [
+        {"model": "additionaladditions:block/glow_stick", "y": 0},
+        {"model": "additionaladditions:block/glow_stick", "y": 90},
+        {"model": "additionaladditions:block/glow_stick", "y": 180},
+        {"model": "additionaladditions:block/glow_stick", "y": 270}
+    ]
+  }
+}

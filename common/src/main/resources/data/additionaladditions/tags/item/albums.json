@@ -1,0 +1,22 @@
+{
+  "replace": false,
+  "values": [
+    {"id": "additionaladditions:album", "required": false},
+    {"id": "additionaladditions:white_album", "required": false},
+    {"id": "additionaladditions:light_gray_album", "required": false},
+    {"id": "additionaladditions:gray_album", "required": false},
+    {"id": "additionaladditions:black_album", "required": false},
+    {"id": "additionaladditions:brown_album", "required": false},
+    {"id": "additionaladditions:red_album", "required": false},
+    {"id": "additionaladditions:orange_album", "required": false},
+    {"id": "additionaladditions:yellow_album", "required": false},
+    {"id": "additionaladditions:lime_album", "required": false},
+    {"id": "additionaladditions:green_album", "required": false},
+    {"id": "additionaladditions:cyan_album", "required": false},
+    {"id": "additionaladditions:light_blue_album", "required": false},
+    {"id": "additionaladditions:blue_album", "required": false},
+    {"id": "additionaladditions:purple_album", "required": false},
+    {"id": "additionaladditions:magenta_album", "required": false},
+    {"id": "additionaladditions:pink_album", "required": false}
+  ]
+}

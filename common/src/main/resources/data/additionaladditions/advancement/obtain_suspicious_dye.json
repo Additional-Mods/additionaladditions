@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:husbandry/plant_any_sniffer_seed",
+  "display": {
+    "title": {
+      "translate": "additionaladditions.advancements.obtain_suspicious_dye"
+    },
+    "description": {
+      "translate": "additionaladditions.advancements.obtain_suspicious_dye.desc"
+    },
+    "icon": {
+      "id": "additionaladditions:orange_suspicious_dye",
+      "count": 1
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "has_dye": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "#additionaladditions:suspicious_dyes"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+      ["has_dye"]
+  ]
+}

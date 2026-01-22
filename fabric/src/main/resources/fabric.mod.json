@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 1,
+  "id": "additionaladditions",
+  "version": "${version}",
+  "name": "Additional Additions",
+  "description": "A mod that expands on parts of Minecraft that feel incomplete, with additions that feel like they should already be part of vanilla.",
+  "authors": ["Dqu1J"],
+  "contributors": [
+    "Gabby42 (Textures, Romanian Translation)",
+    "MorganFreeguy (Textures)",
+    "houlstycraft (Textures)",
+    "Avila27 (Textures)",
+    "adoghr (Music)",
+    "ぷー (Simplified Chinese, Traditional Chinese Translations)",
+    "zrll12 (Simplified Chinese Translation)",
+    "wdnmdyaya (Simplified Chinese Translation)",
+    "Grape reprint (Simplified Chinese Translation)",
+    "DerTwitchLappen (German Translation)",
+    "ChromexUnderscore (German Translation)",
+    "Dinkelberg (German Translation)",
+    "RedDawn1984 (French Translation)",
+    "Salkonic (Danish Translation)",
+    "AndrejFish (Serbian Translation)",
+    "JustAnUmbreon (Polish Translation)",
+    "Alyson (Portuguese Translation)",
+    "kxkxrxtx (Spanish Translation)",
+    "baooduy (Vietnamese Translation)",
+    "nzuliaf (Indonesian Translation)",
+    "WolfBone4545 (Czech Translation)",
+    "aresociety (Korean Translation)"
+  ],
+  "contact": {
+    "homepage": "https://discord.com/invite/g5a7ZA62t3",
+    "issues": "https://github.com/Additional-Mods/additionaladditions/issues/new",
+    "sources": "https://github.com/Additional-Mods/additionaladditions"
+  },
+  "license": "LGPL-3.0",
+  "icon": "assets/additionaladditions/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "one.dqu.additionaladditions.fabric.AdditionalAdditionsFabric"
+    ],
+    "client": [
+      "one.dqu.additionaladditions.fabric.AdditionalAdditionsClientFabric"
+    ],
+    "fabric-gametest": [
+      "one.dqu.additionaladditions.gametest.ExampleTest",
+      "one.dqu.additionaladditions.gametest.TurkishLocaleTest",
+      "one.dqu.additionaladditions.gametest.WrenchPlayerTest",
+      "one.dqu.additionaladditions.gametest.WrenchDispenserTest",
+      "one.dqu.additionaladditions.gametest.WrenchPistonTest",
+      "one.dqu.additionaladditions.gametest.WrenchHopperTest",
+      "one.dqu.additionaladditions.gametest.CopperPatinaTransmitTest",
+      "one.dqu.additionaladditions.gametest.CopperPatinaDecayTest",
+      "one.dqu.additionaladditions.gametest.CopperPatinaInterferenceTest",
+      "one.dqu.additionaladditions.gametest.CopperPatinaWithCopperBlockTest",
+      "one.dqu.additionaladditions.gametest.RopeArrowPlacementTest",
+      "one.dqu.additionaladditions.gametest.RopeArrowPartialPlacementTest",
+      "one.dqu.additionaladditions.gametest.RopeArrowEntityHitTest",
+      "one.dqu.additionaladditions.gametest.RopeArrowBadPlacementTest"
+    ],
+    "jei_mod_plugin": [
+      "one.dqu.additionaladditions.misc.JEICompat"
+    ],
+    "rei_client": [
+      "one.dqu.additionaladditions.misc.REICompat"
+    ]
+  },
+  "mixins": [
+    "additionaladditions.mixins.json",
+    "additionaladditions.fabric.mixins.json"
+  ],
+  "accessWidener": "additionaladditions.accesswidener",
+  "depends": {
+    "fabricloader": ">=0.18.0",
+    "minecraft": "~1.21.1",
+    "java": ">=21",
+    "fabric-api": "*"
+  },
+  "custom": {
+    "lithium:options": {
+      "mixin.block.redstone_wire": false
+    }
+  }
+}

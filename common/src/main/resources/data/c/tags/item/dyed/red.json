@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "additionaladditions:red_album",
+      "required": false
+    }
+  ]
+}
+

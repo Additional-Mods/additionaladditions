@@ -1,0 +1,15 @@
+{
+  "target": "minecraft:chests/shipwreck_supply",
+  "entries": [
+    {
+      "type": "minecraft:item",
+      "name": "minecraft:spyglass",
+      "conditions": [
+        {
+          "condition": "minecraft:random_chance",
+          "chance": 0.5
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+    "parent": "item/generated",
+    "textures": {
+        "layer0": "additionaladditions:item/barometer_05"
+    },
+    "overrides": [
+        { "predicate": { "angle": 0.0 }, "model": "additionaladditions:item/barometer_00" },
+        { "predicate": { "angle": 0.0625 }, "model": "additionaladditions:item/barometer_01" },
+        { "predicate": { "angle": 0.125 }, "model": "additionaladditions:item/barometer_02" },
+        { "predicate": { "angle": 0.1875 }, "model": "additionaladditions:item/barometer_03" },
+        { "predicate": { "angle": 0.25 }, "model": "additionaladditions:item/barometer_04" },
+        { "predicate": { "angle": 0.3125 }, "model": "additionaladditions:item/barometer_05" },
+        { "predicate": { "angle": 0.375 }, "model": "additionaladditions:item/barometer_06" },
+        { "predicate": { "angle": 0.4375 }, "model": "additionaladditions:item/barometer_07" },
+        { "predicate": { "angle": 0.5 }, "model": "additionaladditions:item/barometer_08" },
+        { "predicate": { "angle": 0.5625 }, "model": "additionaladditions:item/barometer_09" },
+        { "predicate": { "angle": 0.625 }, "model": "additionaladditions:item/barometer_10" },
+        { "predicate": { "angle": 0.6875 }, "model": "additionaladditions:item/barometer_11" },
+        { "predicate": { "angle": 0.75 }, "model": "additionaladditions:item/barometer_12" },
+        { "predicate": { "angle": 0.8125 }, "model": "additionaladditions:item/barometer_13" },
+        { "predicate": { "angle": 0.875 }, "model": "additionaladditions:item/barometer_14" },
+        { "predicate": { "angle": 0.9375 }, "model": "additionaladditions:item/barometer_15" }
+    ]
+}

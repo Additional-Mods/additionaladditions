@@ -1,0 +1,8 @@
+{
+  "parent": "additionaladditions:block/tall_cross",
+  "textures": {
+    "0": "additionaladditions:block/mudflower_crop_stage1_bottom",
+    "1": "additionaladditions:block/mudflower_crop_stage1_top"
+  }
+}
+

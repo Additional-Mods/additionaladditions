@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    {"id": "additionaladditions:crimson_blossom", "required": false},
+    {"id": "additionaladditions:bulbus", "required": false},
+    {"id": "additionaladditions:frostleaf", "required": false}
+  ]
+}

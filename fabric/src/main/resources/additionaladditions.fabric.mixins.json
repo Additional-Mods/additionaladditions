@@ -1,0 +1,16 @@
+{
+  "required": true,
+  "package": "one.dqu.additionaladditions.mixin.fabric",
+  "compatibilityLevel": "JAVA_21",
+  "minVersion": "0.8",
+  "client": [
+    "glint.HumanoidArmorLayerMixin"
+  ],
+  "mixins": [
+    "AxeItemMixin",
+    "LootTableBuilderMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

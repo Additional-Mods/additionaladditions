@@ -1,0 +1,61 @@
+package one.dqu.additionaladditions.item;
+
+import net.minecraft.world.level.block.LevelEvent;
+import one.dqu.additionaladditions.config.Config;
+import net.minecraft.advancements.CriteriaTriggers;
+import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.WeatheringCopper;
+import net.minecraft.world.level.block.state.BlockState;
+
+import java.util.Optional;
+
+public class CopperPatinaItem extends BlockItem {
+    public CopperPatinaItem(Block block, Properties properties) {
+        super(block, properties);
+    }
+
+    @Override
+    public InteractionResult useOn(UseOnContext context) {
+        if (!Config.COPPER_PATINA.get().enabled()) return super.useOn(context);
+
+        Player player = context.getPlayer();
+        Level world = context.getLevel();
+        BlockPos pos = context.getClickedPos();
+        BlockState state = world.getBlockState(pos);
+
+        Optional<BlockState> optional = Optional.empty();
+        if (state.getBlock() instanceof WeatheringCopper weatheringCopper) {
+            optional = weatheringCopper.getNext(state);
+        }
+        if (optional.isEmpty()) {
+            return super.useOn(context);
+        }
+
+        if (context.isSecondaryUseActive()) {
+            InteractionResult interactionResult = state.useWithoutItem(world, player, context.getHitResult());
+            if (!interactionResult.consumesAction()) {
+                return super.useOn(context);
+            }
+        }
+
+        if (player instanceof ServerPlayer serverPlayer) {
+            CriteriaTriggers.USING_ITEM.trigger(serverPlayer, context.getItemInHand());
+        }
+
+        world.playSound(player, pos, SoundEvents.AXE_SCRAPE, SoundSource.BLOCKS, 1.0F, 1.0F);
+        world.levelEvent(player, LevelEvent.PARTICLES_SCRAPE, pos, 0);
+        world.setBlock(pos, optional.get(), Block.UPDATE_ALL_IMMEDIATE);
+        context.getItemInHand().shrink(1);
+
+        return InteractionResult.SUCCESS;
+    }
+}

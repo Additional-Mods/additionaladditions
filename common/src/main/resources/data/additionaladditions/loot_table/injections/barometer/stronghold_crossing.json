@@ -1,0 +1,16 @@
+{
+  "target": "minecraft:chests/stronghold_crossing",
+  "entries": [
+    {
+      "type": "minecraft:item",
+      "name": "additionaladditions:barometer",
+      "weight": 5,
+      "conditions": [
+        {
+          "condition": "minecraft:random_chance",
+          "chance": 0.1
+        }
+      ]
+    }
+  ]
+}

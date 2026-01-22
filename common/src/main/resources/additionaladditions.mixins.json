@@ -1,0 +1,28 @@
+{
+  "required": true,
+  "package": "one.dqu.additionaladditions.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "minVersion": "0.8",
+  "client": [
+    "GuiMixin",
+    "glint.ElytraLayerMixin",
+    "glint.ItemRendererMixin",
+    "glint.RenderBuffersMixin",
+    "glint.RenderTypeMixin"
+  ],
+  "mixins": [
+    "BrewingStandBlockEntityMixin",
+    "BrewingStandMenuMixin",
+    "ItemStackMixin",
+    "MobMixin",
+    "RecipeManagerMixin",
+    "RedstoneWireBlockMixin",
+    "ReloadableServerResourcesMixin",
+    "ServerAdvancementManagerMixin",
+    "album.JukeboxBlockEntityMixin",
+    "album.JukeboxBlockMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

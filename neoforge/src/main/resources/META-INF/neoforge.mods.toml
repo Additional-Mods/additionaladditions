@@ -1,0 +1,61 @@
+modLoader = "javafml"
+loaderVersion = "[4,)"
+license = "LGPL-3.0"
+issueTrackerURL = "https://github.com/Additional-Mods/additionaladditions/issues/new"
+
+[[mods]]
+modId = "additionaladditions"
+version = "${version}"
+displayName = "Additional Additions"
+authors = "Dqu1J"
+credits = '''
+Gabby42 (Textures, Romanian Translation)
+MorganFreeguy (Textures)
+houlstycraft (Textures)
+Avila27 (Textures)
+adoghr (Music)
+ぷー (Simplified Chinese, Traditional Chinese Translations)
+zrll12 (Simplified Chinese Translation)
+wdnmdyaya (Simplified Chinese Translation)
+Grape reprint (Simplified Chinese Translation)
+DerTwitchLappen (German Translation)
+ChromexUnderscore (German Translation)
+Dinkelberg (German Translation)
+RedDawn1984 (French Translation)
+Salkonic (Danish Translation)
+AndrejFish (Serbian Translation)
+JustAnUmbreon (Polish Translation)
+Alyson (Portuguese Translation)
+kxkxrxtx (Spanish Translation)
+baooduy (Vietnamese Translation)
+nzuliaf (Indonesian Translation)
+WolfBone4545 (Czech Translation)
+aresociety (Korean Translation)
+'''
+description = '''
+A mod that expands on parts of Minecraft that feel incomplete, with additions that feel like they should already be part of vanilla.
+'''
+logoFile = "assets/additionaladditions/icon.png"
+
+[[dependencies.additionaladditions]]
+modId = "neoforge"
+type = "required"
+versionRange = "[21.1,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.additionaladditions]]
+modId = "minecraft"
+type = "required"
+versionRange = "[1.21.1,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[mixins]]
+config = "additionaladditions.mixins.json"
+
+[[mixins]]
+config = "additionaladditions.neoforge.mixins.json"
+
+["lithium:options"]
+"mixin.block.redstone_wire" = false

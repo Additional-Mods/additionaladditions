@@ -1,0 +1,7 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "additionaladditions:item/lime_album",
+    "layer1": "additionaladditions:item/album_overlay"
+  }
+}

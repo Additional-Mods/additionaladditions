@@ -1,0 +1,20 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "additionaladditions:item/light_blue_album"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "additionaladditions:disc": 0
+      },
+      "model": "additionaladditions:item/album/light_blue_album_0"
+    },
+    {
+      "predicate": {
+        "additionaladditions:disc": 1
+      },
+      "model": "additionaladditions:item/album/light_blue_album_1"
+    }
+  ]
+}

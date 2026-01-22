@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/vine",
+  "textures": {
+    "vine": "additionaladditions:block/wisteria_crop_stage1"
+  }
+}
+

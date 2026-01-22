@@ -1,0 +1,20 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "additionaladditions:item/orange_album"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "additionaladditions:disc": 0
+      },
+      "model": "additionaladditions:item/album/orange_album_0"
+    },
+    {
+      "predicate": {
+        "additionaladditions:disc": 1
+      },
+      "model": "additionaladditions:item/album/orange_album_1"
+    }
+  ]
+}

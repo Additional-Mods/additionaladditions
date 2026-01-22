@@ -1,0 +1,205 @@
+{
+  "parent": "additionaladditions:obtain_suspicious_dye",
+  "display": {
+    "title": {
+      "translate": "additionaladditions.advancements.use_all_suspicious_dyes"
+    },
+    "description": {
+      "translate": "additionaladditions.advancements.use_all_suspicious_dyes.desc"
+    },
+    "icon": {
+      "id": "additionaladditions:magenta_suspicious_dye",
+      "count": 1
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "white": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "#c:enchantables",
+            "components": {
+              "additionaladditions:glint_color": "white"
+            }
+          }
+        ]
+      }
+    },
+    "red": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "#c:enchantables",
+            "components": {
+              "additionaladditions:glint_color": "red"
+            }
+          }
+        ]
+      }
+    },
+    "orange": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "#c:enchantables",
+            "components": {
+              "additionaladditions:glint_color": "orange"
+            }
+          }
+        ]
+      }
+    },
+    "yellow": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "#c:enchantables",
+            "components": {
+              "additionaladditions:glint_color": "yellow"
+            }
+          }
+        ]
+      }
+    },
+    "lime": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "#c:enchantables",
+            "components": {
+              "additionaladditions:glint_color": "lime"
+            }
+          }
+        ]
+      }
+    },
+    "green": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "#c:enchantables",
+            "components": {
+              "additionaladditions:glint_color": "green"
+            }
+          }
+        ]
+      }
+    },
+    "cyan": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "#c:enchantables",
+            "components": {
+              "additionaladditions:glint_color": "cyan"
+            }
+          }
+        ]
+      }
+    },
+    "blue": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "#c:enchantables",
+            "components": {
+              "additionaladditions:glint_color": "blue"
+            }
+          }
+        ]
+      }
+    },
+    "light_blue": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "#c:enchantables",
+            "components": {
+              "additionaladditions:glint_color": "light_blue"
+            }
+          }
+        ]
+      }
+    },
+    "purple": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "#c:enchantables",
+            "components": {
+              "additionaladditions:glint_color": "purple"
+            }
+          }
+        ]
+      }
+    },
+    "magenta": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "#c:enchantables",
+            "components": {
+              "additionaladditions:glint_color": "magenta"
+            }
+          }
+        ]
+      }
+    },
+    "pink": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "#c:enchantables",
+            "components": {
+              "additionaladditions:glint_color": "pink"
+            }
+          }
+        ]
+      }
+    },
+    "brown": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "#c:enchantables",
+            "components": {
+              "additionaladditions:glint_color": "brown"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+      ["white"],
+      ["red"],
+      ["orange"],
+      ["yellow"],
+      ["lime"],
+      ["green"],
+      ["cyan"],
+      ["blue"],
+      ["light_blue"],
+      ["purple"],
+      ["magenta"],
+      ["pink"],
+      ["brown"]
+  ]
+}

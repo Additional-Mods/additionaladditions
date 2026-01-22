@@ -1,0 +1,11 @@
+{
+  "variants": {
+    "half=lower": {
+      "model": "additionaladditions:block/sawtooth_fern_bottom"
+    },
+    "half=upper": {
+      "model": "additionaladditions:block/sawtooth_fern_top"
+    }
+  }
+}
+

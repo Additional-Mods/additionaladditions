@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    {"id": "additionaladditions:rose_gold_helmet", "required": false},
+    {"id": "additionaladditions:rose_gold_chestplate", "required": false},
+    {"id": "additionaladditions:rose_gold_leggings", "required": false},
+    {"id": "additionaladditions:rose_gold_boots", "required": false}
+  ]
+}
