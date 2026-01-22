@@ -1,5 +1,9 @@
 package one.dqu.additionaladditions.entity;
 
+import net.minecraft.tags.FluidTags;
+import net.minecraft.world.entity.item.FallingBlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
+import one.dqu.additionaladditions.block.GlowStickBlock;
 import one.dqu.additionaladditions.registry.AABlocks;
 import one.dqu.additionaladditions.registry.AAItems;
 import net.minecraft.core.BlockPos;
@@ -40,9 +44,19 @@ public class GlowStickEntity extends ThrowableItemProjectile {
             this.remove(RemovalReason.DISCARDED);
 
             BlockPos pos = BlockPos.containing(this.getX(), this.getY(), this.getZ());
+            BlockState state = this.level().getBlockState(pos);
 
-            if (this.level().getBlockState(pos).canBeReplaced()) {
-                this.level().setBlockAndUpdate(pos, AABlocks.GLOW_STICK_BLOCK.get().defaultBlockState());
+            BlockState toPlace = AABlocks.GLOW_STICK_BLOCK.get().defaultBlockState();
+
+            boolean canPlace = toPlace.canSurvive(this.level(), pos);
+            boolean canFall = this.level().getBlockState(pos.below()).canBeReplaced();
+
+            if (state.canBeReplaced() && (canPlace || canFall)) {
+                if (state.getFluidState().is(FluidTags.WATER)) {
+                    toPlace = toPlace.setValue(GlowStickBlock.WATERLOGGED, true);
+                }
+
+                this.level().setBlockAndUpdate(pos, toPlace);
                 this.level().playSound(null, pos.getX(), pos.getY(), pos.getZ(), SoundEvents.GLASS_PLACE, SoundSource.BLOCKS, 1.0f, 1.0f);
             } else {
                 ItemStack stack = new ItemStack(AAItems.GLOW_STICK_ITEM.get(), 1);
