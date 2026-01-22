@@ -17,7 +17,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class GlowStickBlock extends FallingBlock {
-    public static final VoxelShape shape = Block.box(2, 0, 2,14, 2, 14);
+    public static final VoxelShape shape = Block.box(0, 0, 0, 16, 1, 16);
     public static final MapCodec<GlowStickBlock> CODEC = simpleCodec(GlowStickBlock::new);
 
     public GlowStickBlock(Properties settings) {
