@@ -1,6 +1,8 @@
 package one.dqu.additionaladditions.block;
 
 import com.mojang.serialization.MapCodec;
+import net.minecraft.core.Direction;
+import net.minecraft.world.level.LevelReader;
 import one.dqu.additionaladditions.registry.AAItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.Item;
@@ -8,30 +10,25 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.FallingBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-@SuppressWarnings("deprecation")
 public class GlowStickBlock extends FallingBlock {
     public static final VoxelShape shape = Block.box(2, 0, 2,14, 2, 14);
-    public static final BooleanProperty FLIPPED = BooleanProperty.create("flipped");
     public static final MapCodec<GlowStickBlock> CODEC = simpleCodec(GlowStickBlock::new);
 
     public GlowStickBlock(Properties settings) {
         super(settings);
-        registerDefaultState(getStateDefinition().any().setValue(FLIPPED, false));
+    }
+
+    @Override
+    protected boolean canSurvive(BlockState blockState, LevelReader levelReader, BlockPos blockPos) {
+        return canSupportCenter(levelReader, blockPos.below(), Direction.UP);
     }
 
     @Override
     protected MapCodec<? extends FallingBlock> codec() {
         return CODEC;
-    }
-
-    @Override
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> stateManager) {
-        stateManager.add(FLIPPED);
     }
 
     @Override

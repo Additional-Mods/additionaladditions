@@ -1,7 +1,6 @@
 package one.dqu.additionaladditions.entity;
 
 import one.dqu.additionaladditions.registry.AABlocks;
-import one.dqu.additionaladditions.block.GlowStickBlock;
 import one.dqu.additionaladditions.registry.AAItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;
@@ -36,12 +35,14 @@ public class GlowStickEntity extends ThrowableItemProjectile {
 
     protected void onHit(HitResult hitResult) {
         super.onHit(hitResult);
+
         if (!this.level().isClientSide()) {
             this.remove(RemovalReason.DISCARDED);
+
             BlockPos pos = BlockPos.containing(this.getX(), this.getY(), this.getZ());
-            if (this.level().getBlockState(pos).isAir()) {
-                this.level().setBlockAndUpdate(pos, AABlocks.GLOW_STICK_BLOCK.get().defaultBlockState()
-                    .setValue(GlowStickBlock.FLIPPED, level().getRandom().nextBoolean()));
+
+            if (this.level().getBlockState(pos).canBeReplaced()) {
+                this.level().setBlockAndUpdate(pos, AABlocks.GLOW_STICK_BLOCK.get().defaultBlockState());
                 this.level().playSound(null, pos.getX(), pos.getY(), pos.getZ(), SoundEvents.GLASS_PLACE, SoundSource.BLOCKS, 1.0f, 1.0f);
             } else {
                 ItemStack stack = new ItemStack(AAItems.GLOW_STICK_ITEM.get(), 1);
