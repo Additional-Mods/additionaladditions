@@ -15,7 +15,7 @@ public class RoseGoldToolMaterial implements Tier {
 
     @Override
     public float getSpeed() {
-        return 0.0F;
+        return 4.0F;
     }
 
     @Override
