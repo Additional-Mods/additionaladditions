@@ -324,11 +324,7 @@ public class AAItems {
                     .attributes(SwordItem.createAttributes(ROSE_GOLD_TOOL_MATERIAL, Config.ROSE_GOLD_SWORD.get().attackDamage(), Config.ROSE_GOLD_SWORD.get().attackSpeed()))
             )
             .creativeAfter(Items.GOLDEN_SWORD, CreativeModeTabs.COMBAT)
-            .build(p -> new ConfigurableSwordItem(ROSE_GOLD_TOOL_MATERIAL, p, builder -> {
-                SwordItemConfig config = Config.ROSE_GOLD_SWORD.get();
-                builder.set(DataComponents.MAX_DAMAGE, config.durability());
-                builder.set(DataComponents.ATTRIBUTE_MODIFIERS, SwordItem.createAttributes(ROSE_GOLD_TOOL_MATERIAL, config.attackDamage(), config.attackSpeed()));
-            }));
+            .build(p -> new ConfigurableSwordItem(ROSE_GOLD_TOOL_MATERIAL, p, Config.ROSE_GOLD_SWORD::get));
 
     public static final Supplier<Item> ROSE_GOLD_SHOVEL = new Builder("rose_gold_shovel")
             .config(Config.ROSE_GOLD)
@@ -337,11 +333,7 @@ public class AAItems {
                     .attributes(ShovelItem.createAttributes(ROSE_GOLD_TOOL_MATERIAL, Config.ROSE_GOLD_SHOVEL.get().attackDamage(), Config.ROSE_GOLD_SHOVEL.get().attackSpeed()))
             )
             .creativeAfter(Items.GOLDEN_HOE, CreativeModeTabs.TOOLS_AND_UTILITIES)
-            .build(p -> new ConfigurableShovelItem(ROSE_GOLD_TOOL_MATERIAL, p, builder -> {
-                ToolItemConfig config = Config.ROSE_GOLD_SHOVEL.get();
-                builder.set(DataComponents.MAX_DAMAGE, config.durability());
-                builder.set(DataComponents.ATTRIBUTE_MODIFIERS, ShovelItem.createAttributes(ROSE_GOLD_TOOL_MATERIAL, config.attackDamage(), config.attackSpeed()));
-            }));
+            .build(p -> new ConfigurableShovelItem(ROSE_GOLD_TOOL_MATERIAL, p, Config.ROSE_GOLD_SHOVEL::get));
 
     public static final Supplier<Item> ROSE_GOLD_PICKAXE = new Builder("rose_gold_pickaxe")
             .config(Config.ROSE_GOLD)
@@ -350,11 +342,7 @@ public class AAItems {
                     .attributes(PickaxeItem.createAttributes(ROSE_GOLD_TOOL_MATERIAL, Config.ROSE_GOLD_PICKAXE.get().attackDamage(), Config.ROSE_GOLD_PICKAXE.get().attackSpeed()))
             )
             .creativeAfter(Items.GOLDEN_HOE, CreativeModeTabs.TOOLS_AND_UTILITIES)
-            .build(p -> new ConfigurablePickaxeItem(ROSE_GOLD_TOOL_MATERIAL, p, builder -> {
-                ToolItemConfig config = Config.ROSE_GOLD_PICKAXE.get();
-                builder.set(DataComponents.MAX_DAMAGE, config.durability());
-                builder.set(DataComponents.ATTRIBUTE_MODIFIERS, PickaxeItem.createAttributes(ROSE_GOLD_TOOL_MATERIAL, config.attackDamage(), config.attackSpeed()));
-            }));
+            .build(p -> new ConfigurablePickaxeItem(ROSE_GOLD_TOOL_MATERIAL, p, Config.ROSE_GOLD_PICKAXE::get));
 
     public static final Supplier<Item> ROSE_GOLD_AXE = new Builder("rose_gold_axe")
             .config(Config.ROSE_GOLD)
@@ -364,11 +352,7 @@ public class AAItems {
             )
             .creativeAfter(Items.GOLDEN_HOE, CreativeModeTabs.TOOLS_AND_UTILITIES)
             .creativeAfter(Items.GOLDEN_AXE, CreativeModeTabs.COMBAT)
-            .build(p -> new ConfigurableAxeItem(ROSE_GOLD_TOOL_MATERIAL, p, builder -> {
-                ToolItemConfig config = Config.ROSE_GOLD_AXE.get();
-                builder.set(DataComponents.MAX_DAMAGE, config.durability());
-                builder.set(DataComponents.ATTRIBUTE_MODIFIERS, AxeItem.createAttributes(ROSE_GOLD_TOOL_MATERIAL, config.attackDamage(), config.attackSpeed()));
-            }));
+            .build(p -> new ConfigurableAxeItem(ROSE_GOLD_TOOL_MATERIAL, p, Config.ROSE_GOLD_AXE::get));
 
     public static final Supplier<Item> ROSE_GOLD_HOE = new Builder("rose_gold_hoe")
             .config(Config.ROSE_GOLD)
@@ -377,11 +361,7 @@ public class AAItems {
                     .attributes(HoeItem.createAttributes(ROSE_GOLD_TOOL_MATERIAL, Config.ROSE_GOLD_HOE.get().attackDamage(), Config.ROSE_GOLD_HOE.get().attackSpeed()))
             )
             .creativeAfter(Items.GOLDEN_HOE, CreativeModeTabs.TOOLS_AND_UTILITIES)
-            .build(p -> new ConfigurableHoeItem(ROSE_GOLD_TOOL_MATERIAL, p, builder -> {
-                ToolItemConfig config = Config.ROSE_GOLD_HOE.get();
-                builder.set(DataComponents.MAX_DAMAGE, config.durability());
-                builder.set(DataComponents.ATTRIBUTE_MODIFIERS, HoeItem.createAttributes(ROSE_GOLD_TOOL_MATERIAL, config.attackDamage(), config.attackSpeed()));
-            }));
+            .build(p -> new ConfigurableHoeItem(ROSE_GOLD_TOOL_MATERIAL, p, Config.ROSE_GOLD_HOE::get));
 
     // SUSPICIOUS DYE
 

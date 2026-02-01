@@ -123,22 +123,22 @@ public class Config {
 
     public static final ConfigProperty<ToolItemConfig> ROSE_GOLD_SHOVEL = new ConfigProperty<>(
             "rose_gold/shovel", ToolItemConfig.CODEC,
-            new ToolItemConfig(1f, 4.5f, 900)
+            new ToolItemConfig(1f, 4.5f, 8f, 900)
     );
 
     public static final ConfigProperty<ToolItemConfig> ROSE_GOLD_PICKAXE = new ConfigProperty<>(
             "rose_gold/pickaxe", ToolItemConfig.CODEC,
-            new ToolItemConfig(1.2f, 4f, 900)
+            new ToolItemConfig(1.2f, 4f, 8f, 900)
     );
 
     public static final ConfigProperty<ToolItemConfig> ROSE_GOLD_AXE = new ConfigProperty<>(
             "rose_gold/axe", ToolItemConfig.CODEC,
-            new ToolItemConfig(0.9f, 9f, 900)
+            new ToolItemConfig(0.9f, 9f, 8f, 900)
     );
 
     public static final ConfigProperty<ToolItemConfig> ROSE_GOLD_HOE = new ConfigProperty<>(
             "rose_gold/hoe", ToolItemConfig.CODEC,
-            new ToolItemConfig(3f, 1f, 900)
+            new ToolItemConfig(3f, 1f, 8f, 900)
     );
 
     public static final ConfigProperty<FeatureConfig> MUSIC_DISC_0308 = new ConfigProperty<>(
