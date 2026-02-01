@@ -72,7 +72,9 @@ public class WateringCanItem extends ConfigurableItem {
         // watering
         if (waterLevel > 0 || player.isCreative()) {
             if (state.getBlock() instanceof BonemealableBlock fertilizable && !(state.getBlock() instanceof GrassBlock)) {
-                if (!fertilizable.isValidBonemealTarget(world, pos, state)) {
+                boolean canFertilize = fertilizable.isValidBonemealTarget(world, pos, state);
+
+                if (!canFertilize && !(stateBelow.getBlock() instanceof FarmBlock)) {
                     return InteractionResultHolder.pass(stack);
                 }
 
@@ -80,12 +82,16 @@ public class WateringCanItem extends ConfigurableItem {
                     return InteractionResultHolder.success(stack);
                 }
 
-                boolean shouldFertilize = world.random.nextFloat() < Config.WATERING_CAN.get().fertilizeChance();
-                if (shouldFertilize && fertilizable.isBonemealSuccess(world, world.random, pos, state)) {
-                    fertilizable.performBonemeal((ServerLevel) world, world.random, pos, state);
+                if (canFertilize) {
+                    boolean shouldFertilize = world.random.nextFloat() < Config.WATERING_CAN.get().fertilizeChance();
+                    if (shouldFertilize && fertilizable.isBonemealSuccess(world, world.random, pos, state)) {
+                        fertilizable.performBonemeal((ServerLevel) world, world.random, pos, state);
 
-                    AAMisc.FERTILIZE_WITH_WATERING_CAN_TRIGGER.get().trigger((ServerPlayer) player);
-                    world.playSound(null, pos, SoundEvents.BONE_MEAL_USE, SoundSource.BLOCKS);
+                        AAMisc.FERTILIZE_WITH_WATERING_CAN_TRIGGER.get().trigger((ServerPlayer) player);
+                        world.playSound(null, pos, SoundEvents.BONE_MEAL_USE, SoundSource.BLOCKS);
+                    } else {
+                        world.playSound(null, pos, SoundEvents.BOTTLE_EMPTY, SoundSource.BLOCKS);
+                    }
                 } else {
                     world.playSound(null, pos, SoundEvents.BOTTLE_EMPTY, SoundSource.BLOCKS);
                 }
