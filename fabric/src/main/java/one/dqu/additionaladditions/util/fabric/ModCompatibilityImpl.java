@@ -33,12 +33,14 @@ public class ModCompatibilityImpl {
 
         AdditionalAdditions.LOGGER.warn("[{}] ⚠️ IMPORTANT", AdditionalAdditions.NAMESPACE);
         AdditionalAdditions.LOGGER.warn("[{}] Mod Incompatibility: {}", AdditionalAdditions.NAMESPACE, description);
-        toasts.add(() -> SystemToast.multiline(
-                Minecraft.getInstance(),
-                SystemToast.SystemToastId.PACK_LOAD_FAILURE,
-                Component.literal("Additional Additions"),
-                Component.literal(description)
-        ));
+		if (isClientSide()) {
+			toasts.add( () -> SystemToast.multiline(
+				Minecraft.getInstance(),
+				SystemToast.SystemToastId.PACK_LOAD_FAILURE,
+				Component.literal( "Additional Additions" ),
+				Component.literal( description )
+			) );
+		}
     }
 
     public static boolean isModPresent(String... modids) {
@@ -51,6 +53,9 @@ public class ModCompatibilityImpl {
     }
 
     public static void showToasts() {
+		if (!isClientSide()) {
+			return;
+		}
         for (Supplier<SystemToast> toastSupplier : toasts) {
             Minecraft.getInstance().getToasts().addToast(toastSupplier.get());
         }
