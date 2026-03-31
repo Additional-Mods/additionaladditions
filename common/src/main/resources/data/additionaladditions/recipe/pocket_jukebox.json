@@ -6,9 +6,9 @@
     "CCC"
   ],
   "key": {
-    "C": {"item": "minecraft:copper_ingot"},
-    "R": {"item": "minecraft:redstone"},
-    "J": {"item": "minecraft:jukebox"}
+    "C": "minecraft:copper_ingot",
+    "R": "minecraft:redstone",
+    "J": "minecraft:jukebox"
   },
   "result": {
     "id": "additionaladditions:pocket_jukebox",

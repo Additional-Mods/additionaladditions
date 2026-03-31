@@ -6,9 +6,7 @@
       "minecraft:potion_contents": "minecraft:water"
     }
   },
-  "ingredient": {
-    "item": "additionaladditions:spikeblossom"
-  },
+  "ingredient": "additionaladditions:spikeblossom",
   "result": {
     "id": "additionaladditions:purple_suspicious_dye",
     "count": 1

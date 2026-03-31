@@ -6,9 +6,9 @@
     "CRC"
   ],
   "key": {
-    "S": {"item": "minecraft:stick"},
-    "R": {"item": "minecraft:redstone"},
-    "C": {"item": "minecraft:copper_ingot"}
+    "S": "minecraft:stick",
+    "R": "minecraft:redstone",
+    "C": "minecraft:copper_ingot"
   },
   "result": {
     "id": "minecraft:powered_rail",

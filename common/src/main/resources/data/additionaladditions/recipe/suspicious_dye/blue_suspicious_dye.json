@@ -6,9 +6,7 @@
       "minecraft:potion_contents": "minecraft:water"
     }
   },
-  "ingredient": {
-    "item": "additionaladditions:frostleaf"
-  },
+  "ingredient": "additionaladditions:frostleaf",
   "result": {
     "id": "additionaladditions:blue_suspicious_dye",
     "count": 1

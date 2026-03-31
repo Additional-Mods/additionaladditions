@@ -6,9 +6,7 @@
       "minecraft:potion_contents": "minecraft:water"
     }
   },
-  "ingredient": {
-    "item": "additionaladditions:crimson_blossom"
-  },
+  "ingredient": "additionaladditions:crimson_blossom",
   "result": {
     "id": "additionaladditions:red_suspicious_dye",
     "count": 1

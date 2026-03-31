@@ -6,9 +6,7 @@
       "minecraft:potion_contents": "minecraft:water"
     }
   },
-  "ingredient": {
-    "item": "additionaladditions:snapdragon"
-  },
+  "ingredient": "additionaladditions:snapdragon",
   "result": {
     "id": "additionaladditions:magenta_suspicious_dye",
     "count": 1

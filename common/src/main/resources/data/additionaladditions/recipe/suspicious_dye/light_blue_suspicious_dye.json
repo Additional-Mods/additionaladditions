@@ -6,9 +6,7 @@
       "minecraft:potion_contents": "minecraft:water"
     }
   },
-  "ingredient": {
-    "item": "additionaladditions:wisteria"
-  },
+  "ingredient": "additionaladditions:wisteria",
   "result": {
     "id": "additionaladditions:light_blue_suspicious_dye",
     "count": 1

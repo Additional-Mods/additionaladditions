@@ -1,8 +1,6 @@
 {
   "type": "minecraft:smelting",
-  "ingredient": {
-    "item": "minecraft:egg"
-  },
+  "ingredient": "minecraft:egg",
   "result": {
     "id": "additionaladditions:fried_egg"
   },

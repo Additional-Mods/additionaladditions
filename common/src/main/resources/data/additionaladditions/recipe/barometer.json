@@ -6,8 +6,8 @@
     "CCC"
   ],
   "key": {
-    "C": {"item": "minecraft:copper_ingot"},
-    "R": {"item": "minecraft:redstone"}
+    "C": "minecraft:copper_ingot",
+    "R": "minecraft:redstone"
   },
   "result": {
     "id": "additionaladditions:barometer",

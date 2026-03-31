@@ -3,9 +3,7 @@
   "category": "misc",
   "group": "blue_dye",
   "ingredients": [
-    {
-      "item": "additionaladditions:frostleaf"
-    }
+    "additionaladditions:frostleaf"
   ],
   "result": {
     "count": 1,

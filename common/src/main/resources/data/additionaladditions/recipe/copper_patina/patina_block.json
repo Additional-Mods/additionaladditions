@@ -5,7 +5,7 @@
     "PP"
   ],
   "key": {
-    "P": {"item": "additionaladditions:copper_patina"}
+    "P": "additionaladditions:copper_patina"
   },
   "result": {
     "id": "additionaladditions:patina_block",

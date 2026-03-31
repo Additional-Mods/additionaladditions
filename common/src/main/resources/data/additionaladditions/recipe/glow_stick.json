@@ -1,8 +1,8 @@
 {
   "type": "crafting_shapeless",
   "ingredients": [
-    {"item": "minecraft:stick"},
-    {"item": "minecraft:glow_ink_sac"}
+    "minecraft:stick",
+    "minecraft:glow_ink_sac"
   ],
   "result": {
     "id": "additionaladditions:glow_stick",

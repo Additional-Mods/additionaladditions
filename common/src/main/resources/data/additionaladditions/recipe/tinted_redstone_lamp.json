@@ -6,8 +6,8 @@
     " A "
   ],
   "key": {
-    "A": {"item": "minecraft:amethyst_shard"},
-    "L": {"item": "minecraft:redstone_lamp"}
+    "A": "minecraft:amethyst_shard",
+    "L": "minecraft:redstone_lamp"
   },
   "result": {
     "id": "additionaladditions:tinted_redstone_lamp",

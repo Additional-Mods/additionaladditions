@@ -6,9 +6,7 @@
       "minecraft:potion_contents": "minecraft:water"
     }
   },
-  "ingredient": {
-    "item": "additionaladditions:mudflower"
-  },
+  "ingredient": "additionaladditions:mudflower",
   "result": {
     "id": "additionaladditions:brown_suspicious_dye",
     "count": 1

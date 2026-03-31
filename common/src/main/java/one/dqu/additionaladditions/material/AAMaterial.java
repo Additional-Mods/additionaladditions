@@ -1,11 +1,13 @@
 package one.dqu.additionaladditions.material;
 
+import net.minecraft.core.HolderSet;
 import net.minecraft.core.component.DataComponentMap;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ToolMaterial;
 import net.minecraft.world.item.equipment.ArmorMaterial;
@@ -45,24 +47,15 @@ public class AAMaterial {
     }
 
     public void applyFor(DataComponentMap.Builder builder, ToolType toolType) {
-        Item.Properties properties = new Item.Properties();
         ToolMaterial material = toolMaterials.get(toolType);
         ToolLikeConfig config = toolConfigs.get(toolType).get();
+        DataComponentMap patch;
 
         if (toolType == ToolType.SWORD) {
-            material.applySwordProperties(properties, config.attackDamage(), config.attackSpeed());
+            patch = MaterialComponentPatcher.applySwordProperties(material, config.attackDamage(), config.attackSpeed());
         } else {
-            material.applyToolProperties(properties, toolType.mineableTag(), config.attackDamage(), config.attackSpeed());
+            patch = MaterialComponentPatcher.applyToolProperties(material, toolType.mineableTag(), config.attackDamage(), config.attackSpeed());
         }
-
-        DataComponentMap components = properties.buildAndValidateComponents(Component.literal(""), properties.effectiveModel());
-
-        final Set<DataComponentType<?>> validComponents = Set.of(
-                DataComponents.MAX_DAMAGE, DataComponents.ATTRIBUTE_MODIFIERS, DataComponents.TOOL, DataComponents.ENCHANTABLE,
-                DataComponents.EQUIPPABLE, DataComponents.REPAIRABLE, DataComponents.REPAIR_COST
-        );
-
-        DataComponentMap patch = components.filter(validComponents::contains);
 
         builder.addAll(patch);
     }
@@ -70,17 +63,14 @@ public class AAMaterial {
     public void applyFor(DataComponentMap.Builder builder, ArmorType armorType) {
         Item.Properties properties = new Item.Properties();
         ArmorMaterial material = armorMaterials.get(armorType);
+        DataComponentMap patch;
 
-        material.humanoidProperties(properties, armorType);
-
-        DataComponentMap components = properties.buildAndValidateComponents(Component.literal(""), properties.effectiveModel());
-
-        final Set<DataComponentType<?>> validComponents = Set.of(
-                DataComponents.MAX_DAMAGE, DataComponents.ATTRIBUTE_MODIFIERS, DataComponents.TOOL, DataComponents.ENCHANTABLE,
-                DataComponents.EQUIPPABLE, DataComponents.REPAIRABLE, DataComponents.REPAIR_COST
-        );
-
-        DataComponentMap patch = components.filter(validComponents::contains);
+        if (armorType == ArmorType.BODY) {
+            // horse is hardcoded
+            patch = MaterialComponentPatcher.animalProperties(material, HolderSet.direct(EntityType.HORSE.builtInRegistryHolder()));
+        } else {
+            patch = MaterialComponentPatcher.humanoidProperties(material, armorType);
+        }
 
         builder.addAll(patch);
     }

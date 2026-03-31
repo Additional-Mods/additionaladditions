@@ -3,9 +3,7 @@
   "category": "misc",
   "group": "pink_dye",
   "ingredients": [
-    {
-      "item": "additionaladditions:lotus_lily"
-    }
+    "additionaladditions:lotus_lily"
   ],
   "result": {
     "count": 1,

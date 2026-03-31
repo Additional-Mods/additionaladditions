@@ -3,9 +3,7 @@
   "category": "misc",
   "group": "green_dye",
   "ingredients": [
-    {
-      "item": "additionaladditions:sawtooth_fern"
-    }
+    "additionaladditions:sawtooth_fern"
   ],
   "result": {
     "count": 1,

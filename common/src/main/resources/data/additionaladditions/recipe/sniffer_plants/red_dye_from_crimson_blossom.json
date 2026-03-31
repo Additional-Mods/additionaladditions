@@ -3,9 +3,7 @@
   "category": "misc",
   "group": "red_dye",
   "ingredients": [
-    {
-      "item": "additionaladditions:crimson_blossom"
-    }
+    "additionaladditions:crimson_blossom"
   ],
   "result": {
     "count": 1,

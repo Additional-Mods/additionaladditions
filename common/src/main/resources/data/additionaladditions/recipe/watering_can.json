@@ -6,8 +6,8 @@
     " C "
   ],
   "key": {
-    "C": {"item": "minecraft:copper_ingot"},
-    "B": {"item": "minecraft:bucket"}
+    "C": "minecraft:copper_ingot",
+    "B": "minecraft:bucket"
   },
   "result": {
     "id": "additionaladditions:watering_can",

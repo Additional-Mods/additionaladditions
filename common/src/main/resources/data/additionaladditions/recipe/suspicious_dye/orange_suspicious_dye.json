@@ -6,9 +6,7 @@
       "minecraft:potion_contents": "minecraft:water"
     }
   },
-  "ingredient": {
-    "item": "minecraft:torchflower"
-  },
+  "ingredient": "minecraft:torchflower",
   "result": {
     "id": "additionaladditions:orange_suspicious_dye",
     "count": 1

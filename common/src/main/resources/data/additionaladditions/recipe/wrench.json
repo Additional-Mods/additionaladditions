@@ -6,7 +6,7 @@
     " C "
   ],
   "key": {
-    "C": {"item": "minecraft:copper_ingot"}
+    "C": "minecraft:copper_ingot"
   },
   "result": {
     "id": "additionaladditions:wrench",

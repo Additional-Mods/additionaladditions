@@ -6,9 +6,7 @@
       "minecraft:potion_contents": "minecraft:water"
     }
   },
-  "ingredient": {
-    "item": "minecraft:pitcher_plant"
-  },
+  "ingredient": "minecraft:pitcher_plant",
   "result": {
     "id": "additionaladditions:cyan_suspicious_dye",
     "count": 1

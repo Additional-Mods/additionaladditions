@@ -1,8 +1,8 @@
 {
   "type": "crafting_shapeless",
   "ingredients": [
-    {"item": "minecraft:honey_bottle"},
-    {"item": "minecraft:apple"}
+    "minecraft:honey_bottle",
+    "minecraft:apple"
   ],
   "result": {
     "id": "additionaladditions:honeyed_apple",

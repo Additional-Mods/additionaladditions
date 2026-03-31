@@ -6,9 +6,7 @@
       "minecraft:potion_contents": "minecraft:water"
     }
   },
-  "ingredient": {
-    "item": "additionaladditions:bulbus"
-  },
+  "ingredient": "additionaladditions:bulbus",
   "result": {
     "id": "additionaladditions:lime_suspicious_dye",
     "count": 1

@@ -6,7 +6,7 @@
     "RRR"
   ],
   "key": {
-    "R": {"item": "additionaladditions:rose_gold_ingot"}
+    "R": "additionaladditions:rose_gold_ingot"
   },
   "result": {
     "id": "additionaladditions:rose_gold_block",
