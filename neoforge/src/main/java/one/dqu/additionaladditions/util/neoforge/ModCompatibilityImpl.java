@@ -52,7 +52,7 @@ public class ModCompatibilityImpl {
 
     public static void showToasts() {
         for (Supplier<SystemToast> toastSupplier : toasts) {
-            Minecraft.getInstance().getToasts().addToast(toastSupplier.get());
+            Minecraft.getInstance().getToastManager().addToast(toastSupplier.get());
         }
         toasts.clear();
     }

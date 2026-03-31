@@ -83,12 +83,7 @@ public class RoseGoldTransmuteRecipe extends CustomRecipe {
     }
 
     @Override
-    public boolean canCraftInDimensions(int i, int j) {
-        return i * j >= 2;
-    }
-
-    @Override
-    public RecipeSerializer<?> getSerializer() {
+    public RecipeSerializer<? extends CustomRecipe> getSerializer() {
         return AAMisc.ROSE_GOLD_TRANSMUTE_RECIPE_SERIALIZER.get();
     }
 }

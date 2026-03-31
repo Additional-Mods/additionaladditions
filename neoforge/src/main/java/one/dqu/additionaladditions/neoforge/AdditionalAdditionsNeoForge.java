@@ -5,6 +5,7 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.packs.resources.SimplePreparableReloadListener;
 import net.minecraft.util.profiling.ProfilerFiller;
@@ -53,7 +54,7 @@ public final class AdditionalAdditionsNeoForge {
         if (FMLEnvironment.dist.isClient()) {
             NeoForge.EVENT_BUS.addListener(ClientPlayerNetworkEvent.LoggingOut.class, this::onClientLogout);
             NeoForge.EVENT_BUS.addListener(ClientTickEvent.Post.class, this::onClientEndTick);
-            modEventBus.addListener(RegisterClientReloadListenersEvent.class, this::onRegisterClientReloadListeners);
+            modEventBus.addListener(AddClientReloadListenersEvent.class, this::onRegisterClientReloadListeners);
             modEventBus.addListener(FMLClientSetupEvent.class, this::onClientSetup);
             modEventBus.addListener(EntityRenderersEvent.RegisterRenderers.class, this::onRegisterEntityRenderers);
             modEventBus.addListener(RegisterColorHandlersEvent.Block.class, this::registerBlockColors);
@@ -128,8 +129,8 @@ public final class AdditionalAdditionsNeoForge {
         AdditionalAdditions.LOGGER.info("[{}] Reverted to local config", AdditionalAdditions.NAMESPACE);
     }
 
-    private void onRegisterClientReloadListeners(RegisterClientReloadListenersEvent event) {
-        event.registerReloadListener(new SimplePreparableReloadListener<Void>() {
+    private void onRegisterClientReloadListeners(AddClientReloadListenersEvent event) {
+        event.addListener(ResourceLocation.fromNamespaceAndPath(AdditionalAdditions.NAMESPACE, "glint_resource_generator"), new SimplePreparableReloadListener<Void>() {
             @Override
             protected Void prepare(ResourceManager resourceManager, ProfilerFiller profiler) {
                 return null;

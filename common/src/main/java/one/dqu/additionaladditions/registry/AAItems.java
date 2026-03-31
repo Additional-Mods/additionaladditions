@@ -4,6 +4,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.dispenser.BlockSource;
 import net.minecraft.core.dispenser.DefaultDispenseItemBehavior;
+import net.minecraft.world.item.equipment.ArmorType;
 import net.minecraft.world.level.block.DispenserBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -11,12 +12,13 @@ import one.dqu.additionaladditions.AdditionalAdditions;
 import one.dqu.additionaladditions.config.Config;
 import one.dqu.additionaladditions.config.ConfigProperty;
 import one.dqu.additionaladditions.config.Toggleable;
-import one.dqu.additionaladditions.config.type.SwordItemConfig;
-import one.dqu.additionaladditions.config.type.ToolItemConfig;
 import one.dqu.additionaladditions.feature.glint.GlintColor;
 import one.dqu.additionaladditions.item.*;
 import one.dqu.additionaladditions.item.configurable.*;
 import one.dqu.additionaladditions.feature.album.AlbumContents;
+import one.dqu.additionaladditions.material.AAMaterial;
+import one.dqu.additionaladditions.material.AAMaterials;
+import one.dqu.additionaladditions.material.ToolType;
 import one.dqu.additionaladditions.util.CreativeAdder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
@@ -75,8 +77,9 @@ public class AAItems {
             .build(p -> new BlockItem(AABlocks.COTTONSHIVER.get(), p));
     public static final Supplier<Item> COTTONSHIVER_POD = new Builder("cottonshiver_pod")
             .config(Config.SNIFFER_PLANTS)
+            .properties(p -> p.useItemDescriptionPrefix())
             .creativeAfter(Items.PITCHER_POD, CreativeModeTabs.NATURAL_BLOCKS)
-            .build(p -> new ItemNameBlockItem(AABlocks.COTTONSHIVER_CROP.get(), p));
+            .build(p -> new BlockItem(AABlocks.COTTONSHIVER_CROP.get(), p));
 
     public static final Supplier<Item> MUDFLOWER = new Builder("mudflower")
             .config(Config.SNIFFER_PLANTS)
@@ -84,8 +87,9 @@ public class AAItems {
             .build(p -> new BlockItem(AABlocks.MUDFLOWER.get(), p));
     public static final Supplier<Item> MUDFLOWER_SEEDS = new Builder("mudflower_seeds")
             .config(Config.SNIFFER_PLANTS)
+            .properties(p -> p.useItemDescriptionPrefix())
             .creativeAfter(Items.PITCHER_POD, CreativeModeTabs.NATURAL_BLOCKS)
-            .build(p -> new ItemNameBlockItem(AABlocks.MUDFLOWER_CROP.get(), p));
+            .build(p -> new BlockItem(AABlocks.MUDFLOWER_CROP.get(), p));
 
     public static final Supplier<Item> CRIMSON_BLOSSOM = new Builder("crimson_blossom")
             .config(Config.SNIFFER_PLANTS)
@@ -93,8 +97,9 @@ public class AAItems {
             .build(p -> new BlockItem(AABlocks.CRIMSON_BLOSSOM.get(), p));
     public static final Supplier<Item> CRIMSON_BLOSSOM_SEEDS = new Builder("crimson_blossom_seeds")
             .config(Config.SNIFFER_PLANTS)
+            .properties(p -> p.useItemDescriptionPrefix())
             .creativeAfter(Items.PITCHER_POD, CreativeModeTabs.NATURAL_BLOCKS)
-            .build(p -> new ItemNameBlockItem(AABlocks.CRIMSON_BLOSSOM_CROP.get(), p));
+            .build(p -> new BlockItem(AABlocks.CRIMSON_BLOSSOM_CROP.get(), p));
 
     public static final Supplier<Item> AMBER_BLOSSOM = new Builder("amber_blossom")
             .config(Config.SNIFFER_PLANTS)
@@ -102,8 +107,9 @@ public class AAItems {
             .build(p -> new BlockItem(AABlocks.AMBER_BLOSSOM.get(), p));
     public static final Supplier<Item> AMBER_BLOSSOM_SEEDS = new Builder("amber_blossom_seeds")
             .config(Config.SNIFFER_PLANTS)
+            .properties(p -> p.useItemDescriptionPrefix())
             .creativeAfter(Items.PITCHER_POD, CreativeModeTabs.NATURAL_BLOCKS)
-            .build(p -> new ItemNameBlockItem(AABlocks.AMBER_BLOSSOM_CROP.get(), p));
+            .build(p -> new BlockItem(AABlocks.AMBER_BLOSSOM_CROP.get(), p));
 
     public static final Supplier<Item> BULBUS = new Builder("bulbus")
             .config(Config.SNIFFER_PLANTS)
@@ -111,8 +117,9 @@ public class AAItems {
             .build(p -> new BlockItem(AABlocks.BULBUS.get(), p));
     public static final Supplier<Item> BULBUS_POD = new Builder("bulbus_pod")
             .config(Config.SNIFFER_PLANTS)
+            .properties(p -> p.useItemDescriptionPrefix())
             .creativeAfter(Items.PITCHER_POD, CreativeModeTabs.NATURAL_BLOCKS)
-            .build(p -> new ItemNameBlockItem(AABlocks.BULBUS_CROP.get(), p));
+            .build(p -> new BlockItem(AABlocks.BULBUS_CROP.get(), p));
 
     public static final Supplier<Item> SAWTOOTH_FERN = new Builder("sawtooth_fern")
             .config(Config.SNIFFER_PLANTS)
@@ -120,8 +127,9 @@ public class AAItems {
             .build(p -> new BlockItem(AABlocks.SAWTOOTH_FERN.get(), p));
     public static final Supplier<Item> SAWTOOTH_FERN_FIDDLEHEAD = new Builder("sawtooth_fern_fiddlehead")
             .config(Config.SNIFFER_PLANTS)
+            .properties(p -> p.useItemDescriptionPrefix())
             .creativeAfter(Items.PITCHER_POD, CreativeModeTabs.NATURAL_BLOCKS)
-            .build(p -> new ItemNameBlockItem(AABlocks.SAWTOOTH_FERN_CROP.get(), p));
+            .build(p -> new BlockItem(AABlocks.SAWTOOTH_FERN_CROP.get(), p));
 
     public static final Supplier<Item> FROSTLEAF = new Builder("frostleaf")
             .config(Config.SNIFFER_PLANTS)
@@ -129,8 +137,9 @@ public class AAItems {
             .build(p -> new BlockItem(AABlocks.FROSTLEAF.get(), p));
     public static final Supplier<Item> FROSTLEAF_POD = new Builder("frostleaf_pod")
             .config(Config.SNIFFER_PLANTS)
+            .properties(p -> p.useItemDescriptionPrefix())
             .creativeAfter(Items.PITCHER_POD, CreativeModeTabs.NATURAL_BLOCKS)
-            .build(p -> new ItemNameBlockItem(AABlocks.FROSTLEAF_CROP.get(), p));
+            .build(p -> new BlockItem(AABlocks.FROSTLEAF_CROP.get(), p));
 
     public static final Supplier<Item> WISTERIA = new Builder("wisteria")
             .config(Config.SNIFFER_PLANTS)
@@ -138,8 +147,9 @@ public class AAItems {
             .build(p -> new BlockItem(AABlocks.WISTERIA.get(), p));
     public static final Supplier<Item> WISTERIA_VINES = new Builder("wisteria_vines")
             .config(Config.SNIFFER_PLANTS)
+            .properties(p -> p.useItemDescriptionPrefix())
             .creativeAfter(Items.PITCHER_POD, CreativeModeTabs.NATURAL_BLOCKS)
-            .build(p -> new ItemNameBlockItem(AABlocks.WISTERIA_CROP.get(), p));
+            .build(p -> new BlockItem(AABlocks.WISTERIA_CROP.get(), p));
 
     public static final Supplier<Item> SPIKEBLOSSOM = new Builder("spikeblossom")
             .config(Config.SNIFFER_PLANTS)
@@ -147,8 +157,9 @@ public class AAItems {
             .build(p -> new BlockItem(AABlocks.SPIKEBLOSSOM.get(), p));
     public static final Supplier<Item> SPIKEBLOSSOM_SEEDS = new Builder("spikeblossom_seeds")
             .config(Config.SNIFFER_PLANTS)
+            .properties(p -> p.useItemDescriptionPrefix())
             .creativeAfter(Items.PITCHER_POD, CreativeModeTabs.NATURAL_BLOCKS)
-            .build(p -> new ItemNameBlockItem(AABlocks.SPIKEBLOSSOM_CROP.get(), p));
+            .build(p -> new BlockItem(AABlocks.SPIKEBLOSSOM_CROP.get(), p));
 
     public static final Supplier<Item> SNAPDRAGON = new Builder("snapdragon")
             .config(Config.SNIFFER_PLANTS)
@@ -156,8 +167,9 @@ public class AAItems {
             .build(p -> new BlockItem(AABlocks.SNAPDRAGON.get(), p));
     public static final Supplier<Item> SNAPDRAGON_POD = new Builder("snapdragon_pod")
             .config(Config.SNIFFER_PLANTS)
+            .properties(p -> p.useItemDescriptionPrefix())
             .creativeAfter(Items.PITCHER_POD, CreativeModeTabs.NATURAL_BLOCKS)
-            .build(p -> new ItemNameBlockItem(AABlocks.SNAPDRAGON_CROP.get(), p));
+            .build(p -> new BlockItem(AABlocks.SNAPDRAGON_CROP.get(), p));
 
     public static final Supplier<Item> LOTUS_LILY = new Builder("lotus_lily")
             .config(Config.SNIFFER_PLANTS)
@@ -165,8 +177,9 @@ public class AAItems {
             .build(p -> new PlaceOnWaterBlockItem(AABlocks.LOTUS_LILY.get(), p));
     public static final Supplier<Item> LOTUS_LILY_POD = new Builder("lotus_lily_pod")
             .config(Config.SNIFFER_PLANTS)
+            .properties(p -> p.useItemDescriptionPrefix())
             .creativeAfter(Items.PITCHER_POD, CreativeModeTabs.NATURAL_BLOCKS)
-            .build(p -> new ItemNamePlaceOnWaterBlockItem(AABlocks.LOTUS_LILY_CROP.get(), p));
+            .build(p -> new BlockItem(AABlocks.LOTUS_LILY_CROP.get(), p));
 
     // FOOD
 
@@ -275,39 +288,25 @@ public class AAItems {
 
     // ROSE GOLD
 
-    public static final RoseGoldToolMaterial ROSE_GOLD_TOOL_MATERIAL = new RoseGoldToolMaterial();
-
     public static final Supplier<Item> ROSE_GOLD_HELMET = new Builder("rose_gold_helmet")
             .config(Config.ROSE_GOLD)
-            .properties(p -> p
-                    .durability(Config.ROSE_GOLD_HELMET.get().durability())
-            )
             .creativeAfter(Items.GOLDEN_BOOTS, CreativeModeTabs.COMBAT)
-            .build(p -> new RoseGoldArmorItem(ArmorItem.Type.HELMET, p));
+            .build(p -> new ConfigurableArmorItem(AAMaterials.ROSE_GOLD, ArmorType.HELMET, p));
 
     public static final Supplier<Item> ROSE_GOLD_CHESTPLATE = new Builder("rose_gold_chestplate")
             .config(Config.ROSE_GOLD)
-            .properties(p -> p
-                    .durability(Config.ROSE_GOLD_CHESTPLATE.get().durability())
-            )
             .creativeAfter(Items.GOLDEN_BOOTS, CreativeModeTabs.COMBAT)
-            .build(p -> new RoseGoldArmorItem(ArmorItem.Type.CHESTPLATE, p));
+            .build(p -> new ConfigurableArmorItem(AAMaterials.ROSE_GOLD, ArmorType.CHESTPLATE, p));
 
     public static final Supplier<Item> ROSE_GOLD_LEGGINGS = new Builder("rose_gold_leggings")
             .config(Config.ROSE_GOLD)
-            .properties(p -> p
-                    .durability(Config.ROSE_GOLD_LEGGINGS.get().durability())
-            )
             .creativeAfter(Items.GOLDEN_BOOTS, CreativeModeTabs.COMBAT)
-            .build(p -> new RoseGoldArmorItem(ArmorItem.Type.LEGGINGS, p));
+            .build(p -> new ConfigurableArmorItem(AAMaterials.ROSE_GOLD, ArmorType.LEGGINGS, p));
 
     public static final Supplier<Item> ROSE_GOLD_BOOTS = new Builder("rose_gold_boots")
             .config(Config.ROSE_GOLD)
-            .properties(p -> p
-                    .durability(Config.ROSE_GOLD_BOOTS.get().durability())
-            )
             .creativeAfter(Items.GOLDEN_BOOTS, CreativeModeTabs.COMBAT)
-            .build(p -> new RoseGoldArmorItem(ArmorItem.Type.BOOTS, p));
+            .build(p -> new ConfigurableArmorItem(AAMaterials.ROSE_GOLD, ArmorType.BOOTS, p));
 
     public static final Supplier<Item> ROSE_GOLD_HORSE_ARMOR = new Builder("rose_gold_horse_armor")
             .config(Config.ROSE_GOLD)
@@ -315,53 +314,33 @@ public class AAItems {
                     .stacksTo(1)
             )
             .creativeAfter(Items.GOLDEN_HORSE_ARMOR, CreativeModeTabs.COMBAT)
-            .build(p -> new RoseGoldAnimalArmorItem(AnimalArmorItem.BodyType.EQUESTRIAN, false, p));
+            .build(p -> new ConfigurableAnimalArmorItem(AAMaterials.ROSE_GOLD, AnimalArmorItem.BodyType.EQUESTRIAN, p));
 
     public static final Supplier<Item> ROSE_GOLD_SWORD = new Builder("rose_gold_sword")
             .config(Config.ROSE_GOLD)
-            .properties(p -> p
-                    .durability(Config.ROSE_GOLD_SWORD.get().durability())
-                    .attributes(SwordItem.createAttributes(ROSE_GOLD_TOOL_MATERIAL, Config.ROSE_GOLD_SWORD.get().attackDamage(), Config.ROSE_GOLD_SWORD.get().attackSpeed()))
-            )
             .creativeAfter(Items.GOLDEN_SWORD, CreativeModeTabs.COMBAT)
-            .build(p -> new ConfigurableSwordItem(ROSE_GOLD_TOOL_MATERIAL, p, Config.ROSE_GOLD_SWORD::get));
+            .build(p -> new ConfigurableToolItem(AAMaterials.ROSE_GOLD, ToolType.SWORD, p));
 
     public static final Supplier<Item> ROSE_GOLD_SHOVEL = new Builder("rose_gold_shovel")
             .config(Config.ROSE_GOLD)
-            .properties(p -> p
-                    .durability(Config.ROSE_GOLD_SHOVEL.get().durability())
-                    .attributes(ShovelItem.createAttributes(ROSE_GOLD_TOOL_MATERIAL, Config.ROSE_GOLD_SHOVEL.get().attackDamage(), Config.ROSE_GOLD_SHOVEL.get().attackSpeed()))
-            )
             .creativeAfter(Items.GOLDEN_HOE, CreativeModeTabs.TOOLS_AND_UTILITIES)
-            .build(p -> new ConfigurableShovelItem(ROSE_GOLD_TOOL_MATERIAL, p, Config.ROSE_GOLD_SHOVEL::get));
+            .build(p -> new ConfigurableToolItem(AAMaterials.ROSE_GOLD, ToolType.SHOVEL, p));
 
     public static final Supplier<Item> ROSE_GOLD_PICKAXE = new Builder("rose_gold_pickaxe")
             .config(Config.ROSE_GOLD)
-            .properties(p -> p
-                    .durability(Config.ROSE_GOLD_PICKAXE.get().durability())
-                    .attributes(PickaxeItem.createAttributes(ROSE_GOLD_TOOL_MATERIAL, Config.ROSE_GOLD_PICKAXE.get().attackDamage(), Config.ROSE_GOLD_PICKAXE.get().attackSpeed()))
-            )
             .creativeAfter(Items.GOLDEN_HOE, CreativeModeTabs.TOOLS_AND_UTILITIES)
-            .build(p -> new ConfigurablePickaxeItem(ROSE_GOLD_TOOL_MATERIAL, p, Config.ROSE_GOLD_PICKAXE::get));
+            .build(p -> new ConfigurableToolItem(AAMaterials.ROSE_GOLD, ToolType.PICKAXE, p));
 
     public static final Supplier<Item> ROSE_GOLD_AXE = new Builder("rose_gold_axe")
             .config(Config.ROSE_GOLD)
-            .properties(p -> p
-                    .durability(Config.ROSE_GOLD_AXE.get().durability())
-                    .attributes(AxeItem.createAttributes(ROSE_GOLD_TOOL_MATERIAL, Config.ROSE_GOLD_AXE.get().attackDamage(), Config.ROSE_GOLD_AXE.get().attackSpeed()))
-            )
             .creativeAfter(Items.GOLDEN_HOE, CreativeModeTabs.TOOLS_AND_UTILITIES)
             .creativeAfter(Items.GOLDEN_AXE, CreativeModeTabs.COMBAT)
-            .build(p -> new ConfigurableAxeItem(ROSE_GOLD_TOOL_MATERIAL, p, Config.ROSE_GOLD_AXE::get));
+            .build(p -> new ConfigurableToolItem(AAMaterials.ROSE_GOLD, ToolType.AXE, p));
 
     public static final Supplier<Item> ROSE_GOLD_HOE = new Builder("rose_gold_hoe")
             .config(Config.ROSE_GOLD)
-            .properties(p -> p
-                    .durability(Config.ROSE_GOLD_HOE.get().durability())
-                    .attributes(HoeItem.createAttributes(ROSE_GOLD_TOOL_MATERIAL, Config.ROSE_GOLD_HOE.get().attackDamage(), Config.ROSE_GOLD_HOE.get().attackSpeed()))
-            )
             .creativeAfter(Items.GOLDEN_HOE, CreativeModeTabs.TOOLS_AND_UTILITIES)
-            .build(p -> new ConfigurableHoeItem(ROSE_GOLD_TOOL_MATERIAL, p, Config.ROSE_GOLD_HOE::get));
+            .build(p -> new ConfigurableToolItem(AAMaterials.ROSE_GOLD, ToolType.HOE, p));
 
     // SUSPICIOUS DYE
 

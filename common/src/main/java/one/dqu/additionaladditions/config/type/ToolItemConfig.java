@@ -2,10 +2,13 @@ package one.dqu.additionaladditions.config.type;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.core.HolderGetter;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.tags.TagKey;
-import net.minecraft.world.item.Tier;
+import net.minecraft.world.item.ToolMaterial;
 import net.minecraft.world.item.component.Tool;
 import net.minecraft.world.level.block.Block;
+import one.dqu.additionaladditions.config.ToolLikeConfig;
 import one.dqu.additionaladditions.config.io.Comment;
 
 import java.util.List;
@@ -19,7 +22,7 @@ public record ToolItemConfig(
         float blockBreakSpeed,
 
         int durability
-) {
+) implements ToolLikeConfig {
     public static final Codec<ToolItemConfig> CODEC = RecordCodecBuilder.create(
             instance -> instance.group(
                     Codec.floatRange(0, Float.MAX_VALUE).fieldOf("attack_speed").forGetter(ToolItemConfig::rawAttackSpeed),
@@ -38,8 +41,9 @@ public record ToolItemConfig(
         return attackSpeed - 4f;
     }
 
-    public Tool toolProperties(Tier tier, TagKey<Block> tagKey) {
-        return new Tool(List.of(Tool.Rule.deniesDrops(tier.getIncorrectBlocksForDrops()), Tool.Rule.minesAndDrops(tagKey, this.blockBreakSpeed())), 1.0F, 1);
+    public Tool toolProperties(ToolMaterial material, TagKey<Block> tagKey) {
+        HolderGetter<Block> holderGetter = BuiltInRegistries.acquireBootstrapRegistrationLookup(BuiltInRegistries.BLOCK);
+        return new Tool(List.of(Tool.Rule.deniesDrops(holderGetter.getOrThrow(material.incorrectBlocksForDrops())), Tool.Rule.minesAndDrops(holderGetter.getOrThrow(tagKey), this.blockBreakSpeed())), 1.0F, 1);
     }
 }
 

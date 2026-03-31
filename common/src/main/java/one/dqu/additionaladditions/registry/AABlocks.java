@@ -215,7 +215,7 @@ public class AABlocks {
     public static void registerAll() {
         // amethyst lamp poi
         Registrar.defer(() -> {
-            Holder<PoiType> poi = BuiltInRegistries.POINT_OF_INTEREST_TYPE.getHolderOrThrow(AMETHYST_LAMP_POI_KEY);
+            Holder<PoiType> poi = BuiltInRegistries.POINT_OF_INTEREST_TYPE.getOrThrow(AMETHYST_LAMP_POI_KEY);
 
             // collect unregistered states. on neoforge they seem to get registered automatically, but not on fabric?
             Set<BlockState> states = AMETHYST_LAMP_POI_STATES.get().stream()

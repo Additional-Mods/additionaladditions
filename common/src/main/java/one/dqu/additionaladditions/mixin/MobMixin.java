@@ -19,13 +19,13 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(Mob.class)
 public abstract class MobMixin {
     @Inject(method = "checkMobSpawnRules", at = @At("TAIL"), cancellable = true)
-    private static void checkMobSpawnRules(EntityType<? extends Mob> entityType, LevelAccessor levelAccessor, MobSpawnType mobSpawnType, BlockPos blockPos, RandomSource randomSource, CallbackInfoReturnable<Boolean> cir) {
+    private static void checkMobSpawnRules(EntityType<? extends Mob> entityType, LevelAccessor levelAccessor, EntitySpawnReason entitySpawnReason, BlockPos blockPos, RandomSource randomSource, CallbackInfoReturnable<Boolean> cir) {
         if (!Config.TINTED_REDSTONE_LAMP.get().enabled()) return;
         if (!(levelAccessor instanceof ServerLevel level)) return;
         if (entityType.getCategory() != MobCategory.MONSTER) return;
-        if (mobSpawnType != MobSpawnType.NATURAL &&
-            mobSpawnType != MobSpawnType.CHUNK_GENERATION &&
-            mobSpawnType != MobSpawnType.PATROL
+        if (entitySpawnReason != EntitySpawnReason.NATURAL &&
+            entitySpawnReason != EntitySpawnReason.CHUNK_GENERATION &&
+            entitySpawnReason != EntitySpawnReason.PATROL
         ) return;
 
         float chance = Config.TINTED_REDSTONE_LAMP.get().despawnChance();

@@ -24,7 +24,7 @@ public record SoundEventUnitConfig(
     );
 
     private Holder<SoundEvent> toSoundEvent() {
-        return BuiltInRegistries.SOUND_EVENT.getHolderOrThrow(
+        return BuiltInRegistries.SOUND_EVENT.getOrThrow(
                 ResourceKey.create(Registries.SOUND_EVENT, ResourceLocation.parse(this.soundEvent))
         );
     }

@@ -1,5 +1,6 @@
 package one.dqu.additionaladditions.feature.glint;
 
+import net.minecraft.util.TriState;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.blaze3d.vertex.VertexFormat;
 import one.dqu.additionaladditions.AdditionalAdditions;
@@ -75,7 +76,7 @@ public class GlintRenderType {
     private static RenderType createGlintRenderType(ResourceLocation texture) {
         RenderType.CompositeState state = RenderType.CompositeState.builder()
                 .setShaderState(RenderStateShard.RENDERTYPE_GLINT_SHADER)
-                .setTextureState(new RenderStateShard.TextureStateShard(texture, true, false))
+                .setTextureState(new RenderStateShard.TextureStateShard(texture, TriState.TRUE, false))
                 .setWriteMaskState(RenderStateShard.COLOR_WRITE)
                 .setCullState(RenderStateShard.NO_CULL)
                 .setDepthTestState(RenderStateShard.EQUAL_DEPTH_TEST)
@@ -95,7 +96,7 @@ public class GlintRenderType {
     private static RenderType createArmorEntityGlintRenderType(ResourceLocation texture) {
         RenderType.CompositeState state = RenderType.CompositeState.builder()
                 .setShaderState(RenderStateShard.RENDERTYPE_ARMOR_ENTITY_GLINT_SHADER)
-                .setTextureState(new RenderStateShard.TextureStateShard(texture, true, false))
+                .setTextureState(new RenderStateShard.TextureStateShard(texture, TriState.TRUE, false))
                 .setWriteMaskState(RenderStateShard.COLOR_WRITE)
                 .setCullState(RenderStateShard.NO_CULL)
                 .setDepthTestState(RenderStateShard.EQUAL_DEPTH_TEST)
@@ -115,8 +116,8 @@ public class GlintRenderType {
 
     private static RenderType createEntityGlintDirect(ResourceLocation texture) {
         RenderType.CompositeState state = RenderType.CompositeState.builder()
-                .setShaderState(RenderStateShard.RENDERTYPE_ENTITY_GLINT_DIRECT_SHADER)
-                .setTextureState(new RenderStateShard.TextureStateShard(texture, true, false))
+                .setShaderState(RenderStateShard.RENDERTYPE_ENTITY_GLINT_SHADER)
+                .setTextureState(new RenderStateShard.TextureStateShard(texture, TriState.TRUE, false))
                 .setWriteMaskState(RenderStateShard.COLOR_WRITE)
                 .setCullState(RenderStateShard.NO_CULL)
                 .setDepthTestState(RenderStateShard.EQUAL_DEPTH_TEST)
@@ -136,7 +137,7 @@ public class GlintRenderType {
     private static RenderType createEntityGlint(ResourceLocation texture) {
         RenderType.CompositeState state = RenderType.CompositeState.builder()
                 .setShaderState(RenderStateShard.RENDERTYPE_ENTITY_GLINT_SHADER)
-                .setTextureState(new RenderStateShard.TextureStateShard(texture, true, false))
+                .setTextureState(new RenderStateShard.TextureStateShard(texture, TriState.TRUE, false))
                 .setWriteMaskState(RenderStateShard.COLOR_WRITE)
                 .setCullState(RenderStateShard.NO_CULL)
                 .setDepthTestState(RenderStateShard.EQUAL_DEPTH_TEST)
@@ -157,7 +158,7 @@ public class GlintRenderType {
     private static RenderType createGlintTranslucent(ResourceLocation texture) {
         RenderType.CompositeState state = RenderType.CompositeState.builder()
                 .setShaderState(RenderStateShard.RENDERTYPE_GLINT_TRANSLUCENT_SHADER)
-                .setTextureState(new RenderStateShard.TextureStateShard(texture, true, false))
+                .setTextureState(new RenderStateShard.TextureStateShard(texture, TriState.TRUE, false))
                 .setWriteMaskState(RenderStateShard.COLOR_WRITE)
                 .setCullState(RenderStateShard.NO_CULL)
                 .setDepthTestState(RenderStateShard.EQUAL_DEPTH_TEST)

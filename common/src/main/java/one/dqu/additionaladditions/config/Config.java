@@ -1,6 +1,9 @@
 package one.dqu.additionaladditions.config;
 
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -88,7 +91,7 @@ public class Config {
 
     public static final ConfigProperty<ArmorMaterialConfig> ROSE_GOLD_ARMOR_MATERIAL = new ConfigProperty<>(
             "rose_gold/armor_material", ArmorMaterialConfig.CODEC,
-            new ArmorMaterialConfig(0f, 0f, 17, SoundEvents.ARMOR_EQUIP_GOLD, () -> Ingredient.of(AAItems.ROSE_GOLD_INGOT.get()))
+            new ArmorMaterialConfig(0f, 0f, 17, SoundEvents.ARMOR_EQUIP_GOLD, TagKey.create(Registries.ITEM, BuiltInRegistries.ITEM.getKey(AAItems.ROSE_GOLD_INGOT.get())))
     );
 
     public static final ConfigProperty<ArmorItemConfig> ROSE_GOLD_HELMET = new ConfigProperty<>(

@@ -29,6 +29,11 @@ import java.util.Map;
 public class ConfigLoader {
     private static final String PATH = getConfigDirectory().resolve(AdditionalAdditions.NAMESPACE).toString();
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().setLenient().create();
+    private static final Map<ResourceLocation, Runnable> OBSERVERS = new HashMap<>();
+
+    public static void onPostReload(ResourceLocation id, Runnable observer) {
+        OBSERVERS.put(id, observer);
+    }
 
     /**
      * Handles config loading.
@@ -76,6 +81,14 @@ public class ConfigLoader {
         }
 
         apply(configFiles);
+
+        OBSERVERS.forEach((id, observer) -> {
+            try {
+                observer.run();
+            } catch (Exception e) {
+                AdditionalAdditions.LOGGER.error("[{}] Failed to run config observer for {}: {}", AdditionalAdditions.NAMESPACE, id, e);
+            }
+        });
 
         AdditionalAdditions.LOGGER.info("[{}] Config load complete.", AdditionalAdditions.NAMESPACE);
     }

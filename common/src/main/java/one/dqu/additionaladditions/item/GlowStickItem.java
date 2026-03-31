@@ -1,12 +1,12 @@
 package one.dqu.additionaladditions.item;
 
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.level.block.Block;
 import one.dqu.additionaladditions.config.Config;
 import one.dqu.additionaladditions.entity.GlowStickEntity;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -17,11 +17,11 @@ public class GlowStickItem extends BlockItem {
     }
 
     @Override
-    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
+    public InteractionResult use(Level level, Player player, InteractionHand hand) {
         ItemStack itemStack = player.getItemInHand(hand);
 
         if (!Config.GLOW_STICK.get().enabled()) {
-            return InteractionResultHolder.fail(itemStack);
+            return InteractionResult.FAIL;
         }
 
 
@@ -37,6 +37,6 @@ public class GlowStickItem extends BlockItem {
             itemStack.shrink(1);
         }
 
-        return InteractionResultHolder.sidedSuccess(itemStack, level.isClientSide());
+        return InteractionResult.SUCCESS_SERVER.withoutItem();
     }
 }

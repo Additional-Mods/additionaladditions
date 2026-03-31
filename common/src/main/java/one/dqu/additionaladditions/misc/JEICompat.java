@@ -19,9 +19,14 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.*;
+import net.minecraft.world.item.crafting.RecipeManager;
+import net.minecraft.world.item.crafting.display.SlotDisplay;
+import net.minecraft.world.item.crafting.display.SlotDisplay.TagSlotDisplay;
 import one.dqu.additionaladditions.AdditionalAdditions;
 import one.dqu.additionaladditions.config.Config;
 import one.dqu.additionaladditions.config.ConfigProperty;
@@ -118,9 +123,9 @@ public class JEICompat implements IModPlugin {
                     validAlbums.add(new ItemStack(albumItem.value()));
                 }
             }
-            Ingredient albumIngredient = Ingredient.of(validAlbums.toArray(new ItemStack[0]));
+            Ingredient albumIngredient = Ingredient.of(validAlbums.stream().map(ItemStack::getItem).toArray(Item[]::new));
 
-            NonNullList<Ingredient> inputs = NonNullList.of(Ingredient.EMPTY, albumIngredient, dyeIngredient);
+            NonNullList<Ingredient> inputs = NonNullList.of(albumIngredient, albumIngredient, dyeIngredient);
             ShapelessRecipe recipe = new ShapelessRecipe(
                     "additionaladditions:/jei_albums",
                     CraftingBookCategory.MISC,
@@ -129,7 +134,7 @@ public class JEICompat implements IModPlugin {
             );
 
             ResourceLocation location = ResourceLocation.fromNamespaceAndPath("additionaladditions", "/jei_album_" + color.getName());
-            recipes.add(new RecipeHolder<>(location, recipe));
+            recipes.add(new RecipeHolder<>(ResourceKey.create(Registries.RECIPE, location), recipe));
         }
 
         event.addRecipes(RecipeTypes.CRAFTING, recipes);
@@ -161,7 +166,7 @@ public class JEICompat implements IModPlugin {
             Ingredient ironIngredient = Ingredient.of(ironItem);
             Ingredient roseGoldIngotIngredient = Ingredient.of(AAItems.ROSE_GOLD_INGOT.get());
 
-            NonNullList<Ingredient> inputs = NonNullList.of(Ingredient.EMPTY, ironIngredient, roseGoldIngotIngredient);
+            NonNullList<Ingredient> inputs = NonNullList.of(ironIngredient, ironIngredient, roseGoldIngotIngredient);
             ShapelessRecipe recipe = new ShapelessRecipe(
                     "additionaladditions:/jei_rose_gold_transmute_" + ironId,
                     CraftingBookCategory.EQUIPMENT,
@@ -170,7 +175,7 @@ public class JEICompat implements IModPlugin {
             );
 
             ResourceLocation location = ResourceLocation.fromNamespaceAndPath("additionaladditions", "/jei_rose_gold_transmute_" + ironId);
-            recipes.add(new RecipeHolder<>(location, recipe));
+            recipes.add(new RecipeHolder<>(ResourceKey.create(Registries.RECIPE, location), recipe));
         }
 
         event.addRecipes(RecipeTypes.CRAFTING, recipes);
@@ -182,20 +187,29 @@ public class JEICompat implements IModPlugin {
 
         IVanillaRecipeFactory factory = event.getVanillaRecipeFactory();
 
-        List<RecipeHolder<BrewingRecipe>> recipes = ModCompatibility.Client.getClientLevel().getRecipeManager()
-                .getAllRecipesFor(AAMisc.BREWING_RECIPE_TYPE.get());
+        @SuppressWarnings("unchecked")
+        List<RecipeHolder<BrewingRecipe>> recipes = ((RecipeManager) ModCompatibility.Client.getClientLevel().recipeAccess()).getRecipes().stream()
+                .filter(h -> h.value().getType() == AAMisc.BREWING_RECIPE_TYPE.get())
+                .map(h -> (RecipeHolder<BrewingRecipe>) h)
+                .toList();
 
         List<IJeiBrewingRecipe> jeiRecipes = recipes
                 .stream()
                 .map(holder -> {
                     BrewingRecipe recipe = holder.value();
-                    ResourceLocation location = holder.id();
+                    ResourceLocation id = holder.id().location();
 
-                    List<ItemStack> inputs = List.of(recipe.getInput().getItems());
-                    List<ItemStack> ingredients = List.of(recipe.getIngredient().getItems());
+                    List<ItemStack> inputs = BuiltInRegistries.ITEM.stream()
+                            .map(ItemStack::new)
+                            .filter(recipe.getInput()::test)
+                            .toList();
+                    List<ItemStack> ingredients = BuiltInRegistries.ITEM.stream()
+                            .map(ItemStack::new)
+                            .filter(recipe.getIngredient()::test)
+                            .toList();
                     ItemStack output = recipe.getResult();
 
-                    return factory.createBrewingRecipe(ingredients, inputs, output, location);
+                    return factory.createBrewingRecipe(inputs, ingredients, output, id);
                 })
                 .toList();
 
@@ -204,6 +218,13 @@ public class JEICompat implements IModPlugin {
 
     private static class SuspiciousDyeExtension implements ICraftingCategoryExtension<SuspiciousDyeRecipe> {
         @Override
+        public List<SlotDisplay> getIngredients(RecipeHolder<SuspiciousDyeRecipe> recipeHolder) {
+            return List.of(
+                    new TagSlotDisplay(ConventionalTags.ENCHANTABLE),
+                    new TagSlotDisplay(AAMisc.SUSPICIOUS_DYES_TAG)
+            );
+        }
+
         public void setRecipe(RecipeHolder<SuspiciousDyeRecipe> recipeHolder, IRecipeLayoutBuilder builder, ICraftingGridHelper craftingGridHelper, IFocusGroup focuses) {
             List<ItemStack> validFoilItems = new ArrayList<>();
             for (Holder<Item> item : BuiltInRegistries.ITEM.getTagOrEmpty(ConventionalTags.ENCHANTABLE)) {

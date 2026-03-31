@@ -1,5 +1,7 @@
 package one.dqu.additionaladditions.registry;
 
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.Level;
 import one.dqu.additionaladditions.AdditionalAdditions;
 import one.dqu.additionaladditions.entity.GlowStickEntity;
@@ -19,7 +21,7 @@ public class AAEntities {
                                     MobCategory.MISC
                             )
                             .sized(0.25f, 0.25f).updateInterval(20)
-                            .clientTrackingRange(4).build("glow_stick")
+                            .clientTrackingRange(4).build(ResourceKey.create(Registries.ENTITY_TYPE, ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "glow_stick")))
             );
 
     public static final Supplier<EntityType<RopeArrow>> ROPE_ARROW =
@@ -30,7 +32,7 @@ public class AAEntities {
                                     MobCategory.MISC
                             )
                             .sized(0.5f, 0.5f).eyeHeight(0.13f).updateInterval(20)
-                            .clientTrackingRange(4).build("rope_arrow")
+                            .clientTrackingRange(4).build(ResourceKey.create(Registries.ENTITY_TYPE, ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "rope_arrow")))
             );
 
     public static void registerAll() {

@@ -59,12 +59,7 @@ public class SuspiciousDyeRecipe extends CustomRecipe {
     }
 
     @Override
-    public boolean canCraftInDimensions(int i, int j) {
-        return i * j >= 2;
-    }
-
-    @Override
-    public RecipeSerializer<?> getSerializer() {
+    public RecipeSerializer<? extends CustomRecipe> getSerializer() {
         return AAMisc.SUSPICIOUS_DYE_RECIPE_SERIALIZER.get();
     }
 }

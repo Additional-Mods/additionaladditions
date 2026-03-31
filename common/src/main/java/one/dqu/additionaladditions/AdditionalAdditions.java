@@ -7,6 +7,10 @@ import one.dqu.additionaladditions.util.ModCompatibility;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/*
+TODO:
+- "glint.ElytraLayerMixin" was removed temporarily to fix compile
+ */
 public final class AdditionalAdditions {
     public static final String NAMESPACE = "additionaladditions";
     public static final Logger LOGGER = LoggerFactory.getLogger(NAMESPACE);

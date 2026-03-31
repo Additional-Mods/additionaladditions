@@ -13,8 +13,11 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.*;
+import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.item.crafting.*;
 import one.dqu.additionaladditions.config.Config;
 import one.dqu.additionaladditions.config.ConfigProperty;
@@ -96,9 +99,9 @@ public class REICompat implements REIClientPlugin {
                     validAlbums.add(new ItemStack(albumItem.value()));
                 }
             }
-            Ingredient albumIngredient = Ingredient.of(validAlbums.toArray(new ItemStack[0]));
+            Ingredient albumIngredient = Ingredient.of(validAlbums.stream().map(ItemStack::getItem).toArray(Item[]::new));
 
-            NonNullList<Ingredient> inputs = NonNullList.of(Ingredient.EMPTY, albumIngredient, dyeIngredient);
+            NonNullList<Ingredient> inputs = NonNullList.of(albumIngredient, albumIngredient, dyeIngredient);
             ShapelessRecipe recipe = new ShapelessRecipe(
                     "additionaladditions:/jei_albums",
                     CraftingBookCategory.MISC,
@@ -107,7 +110,7 @@ public class REICompat implements REIClientPlugin {
             );
 
             ResourceLocation location = ResourceLocation.fromNamespaceAndPath("additionaladditions", "/jei_album_" + color.getName());
-            recipes.add(new RecipeHolder<>(location, recipe));
+            recipes.add(new RecipeHolder<>(ResourceKey.create(Registries.RECIPE, location), recipe));
         }
 
         for (RecipeHolder<CraftingRecipe> recipeHolder : recipes) {
@@ -141,7 +144,7 @@ public class REICompat implements REIClientPlugin {
             Ingredient ironIngredient = Ingredient.of(ironItem);
             Ingredient roseGoldIngotIngredient = Ingredient.of(AAItems.ROSE_GOLD_INGOT.get());
 
-            NonNullList<Ingredient> inputs = NonNullList.of(Ingredient.EMPTY, ironIngredient, roseGoldIngotIngredient);
+            NonNullList<Ingredient> inputs = NonNullList.of(ironIngredient, ironIngredient, roseGoldIngotIngredient);
             ShapelessRecipe recipe = new ShapelessRecipe(
                     "additionaladditions:/jei_rose_gold_transmute_" + ironId,
                     CraftingBookCategory.EQUIPMENT,
@@ -150,7 +153,7 @@ public class REICompat implements REIClientPlugin {
             );
 
             ResourceLocation location = ResourceLocation.fromNamespaceAndPath("additionaladditions", "/jei_rose_gold_transmute_" + ironId);
-            recipes.add(new RecipeHolder<>(location, recipe));
+            recipes.add(new RecipeHolder<>(ResourceKey.create(Registries.RECIPE, location), recipe));
         }
 
         for (RecipeHolder<CraftingRecipe> recipeHolder : recipes) {
@@ -161,10 +164,10 @@ public class REICompat implements REIClientPlugin {
     private void brewingRecipes(DisplayRegistry registry) {
         if (!ModCompatibility.isClientSide()) return;
 
-        List<BrewingRecipe> recipes = ModCompatibility.Client.getClientLevel().getRecipeManager()
-                .getAllRecipesFor(AAMisc.BREWING_RECIPE_TYPE.get())
-                .stream()
-                .map(RecipeHolder::value)
+        @SuppressWarnings("unchecked")
+        List<BrewingRecipe> recipes = ((RecipeManager) ModCompatibility.Client.getClientLevel().recipeAccess()).getRecipes().stream()
+                .filter(h -> h.value().getType() == AAMisc.BREWING_RECIPE_TYPE.get())
+                .map(h -> (BrewingRecipe) h.value())
                 .toList();
 
         for (BrewingRecipe recipe : recipes) {

@@ -3,6 +3,7 @@ package one.dqu.additionaladditions.mixin;
 import net.minecraft.world.Container;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BrewingStandBlockEntity;
 import one.dqu.additionaladditions.misc.BrewingRecipe;
@@ -31,10 +32,9 @@ public class BrewingStandMenuMixin {
         }
         if (level == null) return;
 
-        boolean isValidIngredient = level.getRecipeManager()
-                .getAllRecipesFor(AAMisc.BREWING_RECIPE_TYPE.get())
-                .stream()
-                .anyMatch(recipe -> recipe.value().getIngredient().test(itemStack));
+        boolean isValidIngredient = ((RecipeManager) level.recipeAccess()).getRecipes().stream()
+                .filter(h -> h.value().getType() == AAMisc.BREWING_RECIPE_TYPE.get())
+                .anyMatch(h -> ((BrewingRecipe) h.value()).getIngredient().test(itemStack));
 
         if (isValidIngredient) {
             cir.setReturnValue(true);

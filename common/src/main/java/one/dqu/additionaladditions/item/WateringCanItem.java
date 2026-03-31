@@ -3,6 +3,7 @@ package one.dqu.additionaladditions.item;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.InteractionResult;
 import one.dqu.additionaladditions.config.Config;
 import one.dqu.additionaladditions.item.configurable.ConfigurableItem;
 import one.dqu.additionaladditions.util.FluidHelper;
@@ -11,10 +12,8 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.util.FastColor;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ClipContext;
@@ -49,16 +48,16 @@ public class WateringCanItem extends ConfigurableItem {
     }
 
     @Override
-    public InteractionResultHolder<ItemStack> use(Level world, Player player, InteractionHand hand) {
+    public InteractionResult use(Level world, Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
 
         if (!Config.WATERING_CAN.get().enabled()) {
-            return InteractionResultHolder.fail(stack);
+            return InteractionResult.FAIL;
         }
 
         BlockHitResult hitResult = getPlayerPOVHitResult(world, player, ClipContext.Fluid.SOURCE_ONLY);
         if (hitResult.getType() != HitResult.Type.BLOCK) {
-            return InteractionResultHolder.fail(stack);
+            return InteractionResult.FAIL;
         }
 
         BlockPos pos = hitResult.getBlockPos();
@@ -75,11 +74,11 @@ public class WateringCanItem extends ConfigurableItem {
                 boolean canFertilize = fertilizable.isValidBonemealTarget(world, pos, state);
 
                 if (!canFertilize && !(stateBelow.getBlock() instanceof FarmBlock)) {
-                    return InteractionResultHolder.pass(stack);
+                    return InteractionResult.PASS;
                 }
 
                 if (world.isClientSide()) {
-                    return InteractionResultHolder.success(stack);
+                    return InteractionResult.SUCCESS.withoutItem();
                 }
 
                 if (canFertilize) {
@@ -104,12 +103,12 @@ public class WateringCanItem extends ConfigurableItem {
                 if (!player.isCreative()) {
                     setWaterLevel(stack, waterLevel - 1);
                 }
-                return InteractionResultHolder.success(stack);
+                return InteractionResult.SUCCESS.withoutItem();
             }
 
             if (state.getBlock() instanceof FarmBlock) {
                 if (world.isClientSide()) {
-                    return InteractionResultHolder.success(stack);
+                    return InteractionResult.SUCCESS.withoutItem();
                 }
 
                 world.setBlockAndUpdate(pos, state.setValue(BlockStateProperties.MOISTURE, FarmBlock.MAX_MOISTURE));
@@ -119,7 +118,7 @@ public class WateringCanItem extends ConfigurableItem {
                 if (!player.isCreative()) {
                     setWaterLevel(stack, waterLevel - 1);
                 }
-                return InteractionResultHolder.success(stack);
+                return InteractionResult.SUCCESS.withoutItem();
             }
         }
 
@@ -137,11 +136,11 @@ public class WateringCanItem extends ConfigurableItem {
                     transaction.commitAmount(waterGained * volumePerLevel);
                     setWaterLevel(stack, waterLevel + waterGained);
                 }
-                return InteractionResultHolder.success(stack);
+                return InteractionResult.SUCCESS.withoutItem();
             }
         }
 
-        return InteractionResultHolder.fail(stack);
+        return InteractionResult.FAIL;
     }
 
     @Override
@@ -151,7 +150,7 @@ public class WateringCanItem extends ConfigurableItem {
 
     @Override
     public int getBarColor(ItemStack stack) {
-        return Config.WATERING_CAN.get().enabled() ? FastColor.ARGB32.color(0, 65, 135, 235) : Mth.color(235, 135, 65);
+        return Config.WATERING_CAN.get().enabled() ? 4294635 : 15435585;
     }
 
     @Override

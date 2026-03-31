@@ -55,23 +55,23 @@ public class BrewingRecipe implements Recipe<BrewingRecipe.BrewingRecipeInput> {
     }
 
     @Override
-    public boolean canCraftInDimensions(int i, int j) {
-        return i * j >= 2;
-    }
-
-    @Override
-    public ItemStack getResultItem(HolderLookup.Provider provider) {
-        return result.copy();
-    }
-
-    @Override
-    public RecipeSerializer<?> getSerializer() {
+    public RecipeSerializer<? extends Recipe<BrewingRecipeInput>> getSerializer() {
         return AAMisc.BREWING_RECIPE_SERIALIZER.get();
     }
 
     @Override
-    public RecipeType<?> getType() {
+    public RecipeType<? extends Recipe<BrewingRecipeInput>> getType() {
         return AAMisc.BREWING_RECIPE_TYPE.get();
+    }
+
+    @Override
+    public PlacementInfo placementInfo() {
+        return PlacementInfo.NOT_PLACEABLE;
+    }
+
+    @Override
+    public RecipeBookCategory recipeBookCategory() {
+        return RecipeBookCategories.CRAFTING_MISC;
     }
 
     public ItemStack getResult() {
@@ -103,8 +103,8 @@ public class BrewingRecipe implements Recipe<BrewingRecipe.BrewingRecipeInput> {
     public static class BrewingRecipeSerializer implements RecipeSerializer<BrewingRecipe> {
         public static final MapCodec<BrewingRecipe> CODEC = RecordCodecBuilder.mapCodec(
                 instance -> instance.group(
-                        Ingredient.CODEC_NONEMPTY.fieldOf("input").forGetter(BrewingRecipe::getInput),
-                        Ingredient.CODEC_NONEMPTY.fieldOf("ingredient").forGetter(BrewingRecipe::getIngredient),
+                        Ingredient.CODEC.fieldOf("input").forGetter(BrewingRecipe::getInput),
+                        Ingredient.CODEC.fieldOf("ingredient").forGetter(BrewingRecipe::getIngredient),
                         ItemStack.CODEC.fieldOf("result").forGetter(BrewingRecipe::getResult)
                 ).apply(instance, BrewingRecipe::new)
         );

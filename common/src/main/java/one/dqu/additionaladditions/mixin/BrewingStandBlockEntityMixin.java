@@ -6,6 +6,7 @@ import net.minecraft.world.Containers;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.alchemy.PotionBrewing;
 import net.minecraft.world.item.crafting.RecipeHolder;
+import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.LevelEvent;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -49,7 +50,7 @@ public class BrewingStandBlockEntityMixin {
         for (int i = 0; i < 3; i++) {
             ItemStack input = items.get(i);
             if (!input.isEmpty()) {
-                Optional<RecipeHolder<BrewingRecipe>> recipe = level.getRecipeManager().getRecipeFor(
+                Optional<RecipeHolder<BrewingRecipe>> recipe = ((RecipeManager) level.recipeAccess()).getRecipeFor(
                         AAMisc.BREWING_RECIPE_TYPE.get(),
                         new BrewingRecipe.BrewingRecipeInput(input, ingredient),
                         level
@@ -75,7 +76,7 @@ public class BrewingStandBlockEntityMixin {
             if (!input.isEmpty()) {
                 BrewingRecipe.BrewingRecipeInput recipeInput = new BrewingRecipe.BrewingRecipeInput(input, ingredient);
 
-                Optional<RecipeHolder<BrewingRecipe>> recipe = level.getRecipeManager().getRecipeFor(
+                Optional<RecipeHolder<BrewingRecipe>> recipe = ((RecipeManager) level.recipeAccess()).getRecipeFor(
                         AAMisc.BREWING_RECIPE_TYPE.get(), recipeInput, level
                 );
 
@@ -90,10 +91,10 @@ public class BrewingStandBlockEntityMixin {
             return;
         }
 
+        ItemStack remainder = ingredient.getItem().getCraftingRemainder();
         ingredient.shrink(1);
 
-        if (ingredient.getItem().hasCraftingRemainingItem()) {
-            ItemStack remainder = new ItemStack(ingredient.getItem().getCraftingRemainingItem());
+        if (!remainder.isEmpty()) {
             if (ingredient.isEmpty()) {
                 ingredient = remainder;
             } else {
@@ -115,10 +116,9 @@ public class BrewingStandBlockEntityMixin {
 
         Level level = ((BlockEntity) (Object) this).getLevel();
 
-        boolean isCustomIngredient = level.getRecipeManager()
-                .getAllRecipesFor(AAMisc.BREWING_RECIPE_TYPE.get())
-                .stream()
-                .anyMatch(recipe -> recipe.value().getIngredient().test(stack));
+        boolean isCustomIngredient = ((RecipeManager) level.recipeAccess()).getRecipes().stream()
+                .filter(h -> h.value().getType() == AAMisc.BREWING_RECIPE_TYPE.get())
+                .anyMatch(h -> ((BrewingRecipe) h.value()).getIngredient().test(stack));
 
         if (isCustomIngredient) {
             cir.setReturnValue(true);

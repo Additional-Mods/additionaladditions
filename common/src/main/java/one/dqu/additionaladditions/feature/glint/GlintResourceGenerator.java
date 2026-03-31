@@ -68,7 +68,7 @@ public class GlintResourceGenerator {
 
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
-                int pixel = image.getPixelRGBA(x, y);
+                int pixel = image.getPixel(x, y);
                 int alpha = (pixel >> 24) & 0xFF;
 
                 int pixelR = (pixel >> 16) & 0xFF;
@@ -82,7 +82,7 @@ public class GlintResourceGenerator {
                 int tintedB = Math.min(255, (int) ((gray * tintB * fiddle) / 255));
 
                 int tintedPixel = (alpha << 24) | (tintedB << 16) | (tintedG << 8) | tintedR;
-                tintedImage.setPixelRGBA(x, y, tintedPixel);
+                tintedImage.setPixel(x, y, tintedPixel);
             }
         }
 

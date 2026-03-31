@@ -3,8 +3,9 @@ package one.dqu.additionaladditions.block;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.ItemInteractionResult;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.SimpleWaterloggedBlock;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.material.FluidState;
@@ -18,10 +19,6 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
@@ -171,24 +168,24 @@ public class RopeBlock extends Block implements SimpleWaterloggedBlock {
     }
 
     @Override
-    public BlockState updateShape(BlockState state, Direction direction, BlockState neighborState, LevelAccessor world, BlockPos pos, BlockPos neighborPos) {
-        if (!world.isClientSide()) {
-            world.getBlockTicks().schedule(ScheduledTick.probe(this, pos));
+    protected BlockState updateShape(BlockState state, LevelReader levelReader, ScheduledTickAccess scheduledTickAccess, BlockPos blockPos, Direction direction, BlockPos neighborPos, BlockState neighborState, RandomSource randomSource) {
+        if (!levelReader.isClientSide()) {
+            scheduledTickAccess.getBlockTicks().schedule(ScheduledTick.probe(this, blockPos));
         }
         if (state.getValue(WATERLOGGED)) {
-            world.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(world));
+            scheduledTickAccess.scheduleTick(blockPos, Fluids.WATER, Fluids.WATER.getTickDelay(levelReader));
         }
-        return super.updateShape(state, direction, neighborState, world, pos, neighborPos);
+        return super.updateShape(state, levelReader, scheduledTickAccess, blockPos, direction, neighborPos, neighborState, randomSource);
     }
 
     @Override
-    protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+    protected InteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
         if (!state.is(this)) {
-            return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+            return InteractionResult.PASS;
         }
 
         if (!stack.is(this.asItem())) {
-            return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+            return InteractionResult.PASS;
         }
 
         BlockPos currentPos = pos.relative(Direction.DOWN);
@@ -214,7 +211,7 @@ public class RopeBlock extends Block implements SimpleWaterloggedBlock {
             // Advancement trigger
             if (!level.isClientSide() && player instanceof ServerPlayer serverPlayer) {
                 // +10 to account for bedrock
-                if (currentPos.getY() <= level.getMinBuildHeight() + 10) {
+                if (currentPos.getY() <= level.getMinY() + 10) {
                     BlockPos topPos = pos.relative(Direction.UP);
                     BlockState topState = level.getBlockState(topPos);
 
@@ -224,15 +221,15 @@ public class RopeBlock extends Block implements SimpleWaterloggedBlock {
                     }
 
                     // topPos is one above actual so we don't need to -1 build height
-                    if (topPos.getY() == level.getMaxBuildHeight()) {
+                    if (topPos.getY() == level.getMaxY()) {
                         AAMisc.ROPE_WORLD_HEIGHT.get().trigger(serverPlayer);
                     }
                 }
             }
 
-            return ItemInteractionResult.sidedSuccess(level.isClientSide());
+            return InteractionResult.SUCCESS_SERVER.withoutItem();
         }
 
-        return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+        return InteractionResult.PASS;
     }
 }

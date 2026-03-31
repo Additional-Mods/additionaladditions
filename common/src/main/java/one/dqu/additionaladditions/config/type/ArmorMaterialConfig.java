@@ -4,6 +4,8 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.Holder;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import one.dqu.additionaladditions.config.io.Comment;
@@ -18,7 +20,7 @@ public record ArmorMaterialConfig(
         float knockbackResistance,
         int enchantability,
         Holder<SoundEvent> equipSound,
-        Supplier<Ingredient> repairIngredient
+        TagKey<Item> repairIngredient
 ) {
     public static final Codec<ArmorMaterialConfig> CODEC = RecordCodecBuilder.create(
             instance -> instance.group(
@@ -26,10 +28,7 @@ public record ArmorMaterialConfig(
                     Codec.floatRange(0.0f, Float.MAX_VALUE).fieldOf("knockback_resistance").forGetter(ArmorMaterialConfig::knockbackResistance),
                     Codec.intRange(0, Integer.MAX_VALUE).fieldOf("enchantability").forGetter(ArmorMaterialConfig::enchantability),
                     SoundEventUnitConfig.CODEC.fieldOf("equip_sound").forGetter(ArmorMaterialConfig::equipSound),
-                    ItemUnitConfig.CODEC.xmap(
-                            item -> (Supplier<Ingredient>) () -> Ingredient.of(item.get()),
-                            supplier -> () -> Arrays.stream(supplier.get().getItems()).map(ItemStack::getItem).findFirst().orElse(null)
-                    ).fieldOf("repair_ingredient").forGetter(ArmorMaterialConfig::repairIngredient)
+                    ItemUnitConfig.CODEC.fieldOf("repair_ingredient").forGetter(ArmorMaterialConfig::repairIngredient)
             ).apply(instance, ArmorMaterialConfig::new)
     );
 }
