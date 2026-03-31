@@ -1,30 +1,34 @@
 package one.dqu.additionaladditions.mixin;
 
-import com.google.gson.JsonElement;
+import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
+import net.minecraft.world.item.crafting.RecipeHolder;
+import net.minecraft.world.item.crafting.RecipeMap;
 import one.dqu.additionaladditions.AdditionalAdditions;
 import one.dqu.additionaladditions.config.ConfigProperty;
 import one.dqu.additionaladditions.config.Toggleable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-
-import java.util.*;
 
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.packs.resources.ResourceManager;
-import net.minecraft.util.profiling.ProfilerFiller;
 import net.minecraft.world.item.crafting.RecipeManager;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Removes recipes when their corresponding features are disabled in the config.
  */
 @Mixin(RecipeManager.class)
 public class RecipeManagerMixin {
-    @Inject(method = "apply", at = @At("HEAD"))
-    private void removeRecipes(Map<ResourceLocation, JsonElement> map, ResourceManager resourceManager, ProfilerFiller profiler, CallbackInfo ci) {
-        map.entrySet().removeIf(entry -> {
-            ResourceLocation identifier = entry.getKey();
+    @ModifyExpressionValue(
+            method = "prepare(Lnet/minecraft/server/packs/resources/ResourceManager;Lnet/minecraft/util/profiling/ProfilerFiller;)Lnet/minecraft/world/item/crafting/RecipeMap;",
+            at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/crafting/RecipeMap;create(Ljava/lang/Iterable;)Lnet/minecraft/world/item/crafting/RecipeMap;")
+    )
+    private RecipeMap removeRecipes(RecipeMap recipes) {
+        List<RecipeHolder<?>> list = new ArrayList<>(recipes.values());
+
+        list.removeIf(holder -> {
+            ResourceLocation identifier = holder.id().location();
             if (!identifier.getNamespace().equals(AdditionalAdditions.NAMESPACE)) {
                 return false;
             }
@@ -46,5 +50,7 @@ public class RecipeManagerMixin {
 
             return false;
         });
+
+        return RecipeMap.create(list);
     }
 }

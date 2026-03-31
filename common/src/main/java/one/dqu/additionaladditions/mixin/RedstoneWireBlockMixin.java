@@ -78,7 +78,7 @@ public abstract class RedstoneWireBlockMixin {
     }
 
     @Inject(
-            method = "calculateTargetStrength",
+            method = "getBlockSignal",
             at = @At("HEAD")
     )
     private void unsetShouldSignal(Level level, BlockPos blockPos, CallbackInfoReturnable<Integer> cir) {
@@ -91,12 +91,8 @@ public abstract class RedstoneWireBlockMixin {
     }
 
     @Inject(
-            method = "calculateTargetStrength",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/world/level/Level;getBestNeighborSignal(Lnet/minecraft/core/BlockPos;)I",
-                    shift = At.Shift.AFTER
-            )
+            method = "getBlockSignal",
+            at = @At("RETURN")
     )
     private void setShouldSignal(Level level, BlockPos blockPos, CallbackInfoReturnable<Integer> cir) {
         Block self = (Block) (Object) this;
@@ -108,7 +104,7 @@ public abstract class RedstoneWireBlockMixin {
     }
 
     @WrapOperation(
-            method = "calculateTargetStrength",
+            method = "getBlockSignal",
             at = @At(
                     value = "INVOKE",
                     target = "Lnet/minecraft/world/level/Level;getBestNeighborSignal(Lnet/minecraft/core/BlockPos;)I"

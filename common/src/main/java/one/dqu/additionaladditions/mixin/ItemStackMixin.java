@@ -39,7 +39,7 @@ public abstract class ItemStackMixin {
             ),
             locals = LocalCapture.CAPTURE_FAILHARD
     )
-    private void addGlintColor(Item.TooltipContext tooltipContext, @Nullable Player player, TooltipFlag tooltipFlag, CallbackInfoReturnable<List<Component>> cir, List<Component> list) {
+    private void addGlintColor(Item.TooltipContext tooltipContext, @Nullable Player player, TooltipFlag tooltipFlag, CallbackInfoReturnable<List<Component>> cir, boolean bl, List<Component> list) {
         if (this.hasFoil()) {
             addToTooltip(AAMisc.GLINT_COLOR_COMPONENT.get(), tooltipContext, list::add, tooltipFlag);
         }

@@ -16,189 +16,171 @@ import one.dqu.additionaladditions.AdditionalAdditions;
 import one.dqu.additionaladditions.block.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.ai.village.poi.PoiType;
-import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
 import one.dqu.additionaladditions.util.Registrar;
 
 import java.util.Set;
+import java.util.function.Consumer;
+import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 @SuppressWarnings("unused")
 public class AABlocks {
-    public static final Supplier<RopeBlock> ROPE_BLOCK = AARegistries.BLOCKS.register(
-                    ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "rope"),
-                    () -> new RopeBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BROWN).pushReaction(PushReaction.DESTROY).noCollission().sound(SoundType.WOOL).explosionResistance(0f).destroyTime(0.2f))
-            );
-
-    public static final Supplier<TintedRedstoneLampBlock> TINTED_REDSTONE_LAMP = AARegistries.BLOCKS.register(
-            ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "tinted_redstone_lamp"),
-            () -> new TintedRedstoneLampBlock(BlockBehaviour.Properties.of().mapColor(MapColor.TERRACOTTA_PURPLE).pushReaction(PushReaction.NORMAL).sound(SoundType.GLASS).strength(0.3f))
+    public static final Supplier<RopeBlock> ROPE_BLOCK = register(
+            "rope", RopeBlock::new,
+            (p) -> p.mapColor(MapColor.COLOR_BROWN).pushReaction(PushReaction.DESTROY).noCollission().sound(SoundType.WOOL).explosionResistance(0f).destroyTime(0.2f)
     );
 
-    public static final Supplier<CopperPatinaBlock> COPPER_PATINA = AARegistries.BLOCKS.register(
-            ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "copper_patina"),
-            () -> new CopperPatinaBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_CYAN).pushReaction(PushReaction.DESTROY).noCollission().sound(SoundType.TUFF).instabreak())
+    public static final Supplier<TintedRedstoneLampBlock> TINTED_REDSTONE_LAMP = register(
+            "tinted_redstone_lamp", TintedRedstoneLampBlock::new,
+            (p) -> p.mapColor(MapColor.TERRACOTTA_PURPLE).pushReaction(PushReaction.NORMAL).sound(SoundType.GLASS).strength(0.3f)
     );
 
-    public static final Supplier<GlowStickBlock> GLOW_STICK_BLOCK = AARegistries.BLOCKS.register(
-            ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "glow_stick"),
-            () -> new GlowStickBlock(BlockBehaviour.Properties.of().mapColor(MapColor.NONE).pushReaction(PushReaction.DESTROY).noCollission().lightLevel((state) -> 12).instabreak())
+    public static final Supplier<CopperPatinaBlock> COPPER_PATINA = register(
+            "copper_patina", CopperPatinaBlock::new,
+            (p) -> p.mapColor(MapColor.COLOR_CYAN).pushReaction(PushReaction.DESTROY).noCollission().sound(SoundType.TUFF).instabreak()
     );
 
-    public static final Supplier<PatinaBlock> PATINA_BLOCK = AARegistries.BLOCKS.register(
-            ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "patina_block"),
-            () -> new PatinaBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_CYAN).pushReaction(PushReaction.NORMAL).sound(SoundType.ROOTED_DIRT).strength(0.5f))
+    public static final Supplier<GlowStickBlock> GLOW_STICK_BLOCK = register(
+            "glow_stick", GlowStickBlock::new,
+            (p) -> p.mapColor(MapColor.NONE).pushReaction(PushReaction.DESTROY).noCollission().lightLevel((state) -> 12).instabreak()
     );
 
-    public static final Supplier<Block> ROSE_GOLD_BLOCK = AARegistries.BLOCKS.register(
-            ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "rose_gold_block"),
-            () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_PINK).requiresCorrectToolForDrops().strength(3.0f, 6.0f).sound(SoundType.METAL))
+    public static final Supplier<PatinaBlock> PATINA_BLOCK = register(
+            "patina_block", PatinaBlock::new,
+            (p) -> p.mapColor(MapColor.COLOR_CYAN).pushReaction(PushReaction.NORMAL).sound(SoundType.ROOTED_DIRT).strength(0.5f)
+    );
+
+    public static final Supplier<Block> ROSE_GOLD_BLOCK = register(
+            "rose_gold_block", Block::new,
+            (p) -> p.mapColor(MapColor.COLOR_PINK).requiresCorrectToolForDrops().strength(3.0f, 6.0f).sound(SoundType.METAL)
     );
 
     // sniffer plantws
 
-    public static final Supplier<Block> COTTONSHIVER = AARegistries.BLOCKS.register(
-            ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "cottonshiver"),
-            () -> new DoublePlantBlock(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).noCollission().instabreak().sound(SoundType.GRASS).offsetType(BlockBehaviour.OffsetType.XZ).pushReaction(PushReaction.DESTROY))
+    public static final Supplier<Block> COTTONSHIVER = register(
+            "cottonshiver", DoublePlantBlock::new,
+            (p) -> p.mapColor(MapColor.PLANT).noCollission().instabreak().sound(SoundType.GRASS).offsetType(BlockBehaviour.OffsetType.XZ).pushReaction(PushReaction.DESTROY)
     );
 
-    public static final Supplier<Block> COTTONSHIVER_CROP = AARegistries.BLOCKS.register(
-            ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "cottonshiver_crop"),
-            () -> new FlowerCropBlock(
-                    COTTONSHIVER, 2, new VoxelShape[]{Block.box(4d, 0d, 4d, 12d, 8d, 12d), Block.box(4d, 0d, 4d, 12d, 15d, 12d), Shapes.block()},
-                    BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.CROP).pushReaction(PushReaction.DESTROY)
-            )
+    public static final Supplier<Block> COTTONSHIVER_CROP = register(
+            "cottonshiver_crop",
+            (p) -> new FlowerCropBlock(COTTONSHIVER, 2, new VoxelShape[]{Block.box(4d, 0d, 4d, 12d, 8d, 12d), Block.box(4d, 0d, 4d, 12d, 15d, 12d), Shapes.block()}, p),
+            (p) -> p.mapColor(MapColor.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.CROP).pushReaction(PushReaction.DESTROY)
     );
 
-    public static final Supplier<Block> MUDFLOWER = AARegistries.BLOCKS.register(
-            ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "mudflower"),
-            () -> new DoublePlantBlock(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).noCollission().instabreak().sound(SoundType.GRASS).offsetType(BlockBehaviour.OffsetType.XZ).pushReaction(PushReaction.DESTROY))
+    public static final Supplier<Block> MUDFLOWER = register(
+            "mudflower", DoublePlantBlock::new,
+            (p) -> p.mapColor(MapColor.PLANT).noCollission().instabreak().sound(SoundType.GRASS).offsetType(BlockBehaviour.OffsetType.XZ).pushReaction(PushReaction.DESTROY)
     );
 
-    public static final Supplier<Block> MUDFLOWER_CROP = AARegistries.BLOCKS.register(
-            ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "mudflower_crop"),
-            () -> new FlowerCropBlock(
-                    MUDFLOWER, 2, new VoxelShape[]{Block.box(5d, 0d, 5d, 11d, 9d, 11d), Block.box(4d, 0d, 4d, 12d, 15d, 12d), Shapes.block()},
-                    BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.CROP).pushReaction(PushReaction.DESTROY)
-            )
+    public static final Supplier<Block> MUDFLOWER_CROP = register(
+            "mudflower_crop",
+            (p) -> new FlowerCropBlock(MUDFLOWER, 2, new VoxelShape[]{Block.box(5d, 0d, 5d, 11d, 9d, 11d), Block.box(4d, 0d, 4d, 12d, 15d, 12d), Shapes.block()}, p),
+            (p) -> p.mapColor(MapColor.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.CROP).pushReaction(PushReaction.DESTROY)
     );
 
-    public static final Supplier<Block> CRIMSON_BLOSSOM = AARegistries.BLOCKS.register(
-            ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "crimson_blossom"),
-            () -> new FlowerBlock(MobEffects.DAMAGE_BOOST, 5f, BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).noCollission().instabreak().sound(SoundType.GRASS).offsetType(BlockBehaviour.OffsetType.XZ).pushReaction(PushReaction.DESTROY))
+    public static final Supplier<Block> CRIMSON_BLOSSOM = register(
+            "crimson_blossom",
+            (p) -> new FlowerBlock(MobEffects.DAMAGE_BOOST, 5f, p),
+            (p) -> p.mapColor(MapColor.PLANT).noCollission().instabreak().sound(SoundType.GRASS).offsetType(BlockBehaviour.OffsetType.XZ).pushReaction(PushReaction.DESTROY)
     );
 
-    public static final Supplier<Block> CRIMSON_BLOSSOM_CROP = AARegistries.BLOCKS.register(
-            ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "crimson_blossom_crop"),
-            () -> new FlowerCropBlock(
-                    CRIMSON_BLOSSOM, 2, new VoxelShape[]{Block.box(3d, 0d, 3d, 13d, 10d, 13d), Block.box(3d, 0d, 3d, 13d, 12d, 13d), Shapes.block()},
-                    BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.CROP).pushReaction(PushReaction.DESTROY)
-            )
+    public static final Supplier<Block> CRIMSON_BLOSSOM_CROP = register(
+            "crimson_blossom_crop",
+            (p) -> new FlowerCropBlock(CRIMSON_BLOSSOM, 2, new VoxelShape[]{Block.box(3d, 0d, 3d, 13d, 10d, 13d), Block.box(3d, 0d, 3d, 13d, 12d, 13d), Shapes.block()}, p),
+            (p) -> p.mapColor(MapColor.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.CROP).pushReaction(PushReaction.DESTROY)
     );
 
-    public static final Supplier<Block> AMBER_BLOSSOM = AARegistries.BLOCKS.register(
-            ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "amber_blossom"),
-            () -> new DoublePlantBlock(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).noCollission().instabreak().sound(SoundType.GRASS).offsetType(BlockBehaviour.OffsetType.XZ).pushReaction(PushReaction.DESTROY))
+    public static final Supplier<Block> AMBER_BLOSSOM = register(
+            "amber_blossom", DoublePlantBlock::new,
+            (p) -> p.mapColor(MapColor.PLANT).noCollission().instabreak().sound(SoundType.GRASS).offsetType(BlockBehaviour.OffsetType.XZ).pushReaction(PushReaction.DESTROY)
     );
 
-    public static final Supplier<Block> AMBER_BLOSSOM_CROP = AARegistries.BLOCKS.register(
-            ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "amber_blossom_crop"),
-            () -> new FlowerCropBlock(
-                    AMBER_BLOSSOM, 2, new VoxelShape[]{Block.box(5d, 0d, 5d, 11d, 7d, 11d), Block.box(4d, 0d, 4d, 12d, 12d, 12d), Shapes.block()},
-                    BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.CROP).pushReaction(PushReaction.DESTROY)
-            )
+    public static final Supplier<Block> AMBER_BLOSSOM_CROP = register(
+            "amber_blossom_crop",
+            (p) -> new FlowerCropBlock(AMBER_BLOSSOM, 2, new VoxelShape[]{Block.box(5d, 0d, 5d, 11d, 7d, 11d), Block.box(4d, 0d, 4d, 12d, 12d, 12d), Shapes.block()}, p),
+            (p) -> p.mapColor(MapColor.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.CROP).pushReaction(PushReaction.DESTROY)
     );
 
-    public static final Supplier<Block> BULBUS = AARegistries.BLOCKS.register(
-            ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "bulbus"),
-            () -> new FlowerBlock(MobEffects.NIGHT_VISION, 5f, BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).noCollission().instabreak().sound(SoundType.GRASS).offsetType(BlockBehaviour.OffsetType.XZ).pushReaction(PushReaction.DESTROY))
+    public static final Supplier<Block> BULBUS = register(
+            "bulbus",
+            (p) -> new FlowerBlock(MobEffects.NIGHT_VISION, 5f, p),
+            (p) -> p.mapColor(MapColor.PLANT).noCollission().instabreak().sound(SoundType.GRASS).offsetType(BlockBehaviour.OffsetType.XZ).pushReaction(PushReaction.DESTROY)
     );
 
-    public static final Supplier<Block> BULBUS_CROP = AARegistries.BLOCKS.register(
-            ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "bulbus_crop"),
-            () -> new FlowerCropBlock(
-                    BULBUS, 2, new VoxelShape[]{Block.box(5d, 0d, 5d, 11d, 10d, 11d), Block.box(4d, 0d, 4d, 12d, 15d, 12d), Shapes.block()},
-                    BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.CROP).pushReaction(PushReaction.DESTROY)
-            )
+    public static final Supplier<Block> BULBUS_CROP = register(
+            "bulbus_crop",
+            (p) -> new FlowerCropBlock(BULBUS, 2, new VoxelShape[]{Block.box(5d, 0d, 5d, 11d, 10d, 11d), Block.box(4d, 0d, 4d, 12d, 15d, 12d), Shapes.block()}, p),
+            (p) -> p.mapColor(MapColor.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.CROP).pushReaction(PushReaction.DESTROY)
     );
 
-    public static final Supplier<Block> SAWTOOTH_FERN = AARegistries.BLOCKS.register(
-            ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "sawtooth_fern"),
-            () -> new DoublePlantBlock(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).noCollission().instabreak().sound(SoundType.GRASS).offsetType(BlockBehaviour.OffsetType.XZ).pushReaction(PushReaction.DESTROY))
+    public static final Supplier<Block> SAWTOOTH_FERN = register(
+            "sawtooth_fern", DoublePlantBlock::new,
+            (p) -> p.mapColor(MapColor.PLANT).noCollission().instabreak().sound(SoundType.GRASS).offsetType(BlockBehaviour.OffsetType.XZ).pushReaction(PushReaction.DESTROY)
     );
 
-    public static final Supplier<Block> SAWTOOTH_FERN_CROP = AARegistries.BLOCKS.register(
-            ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "sawtooth_fern_crop"),
-            () -> new FlowerCropBlock(
-                    SAWTOOTH_FERN, 3, new VoxelShape[]{Block.box(5d, 0d, 5d, 11d, 10d, 11d), Block.box(5d, 0d, 5d, 11d, 10d, 11d), Block.box(4d, 0d, 4d, 12d, 15d, 12d), Shapes.block()},
-                    BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.CROP).pushReaction(PushReaction.DESTROY)
-            )
+    public static final Supplier<Block> SAWTOOTH_FERN_CROP = register(
+            "sawtooth_fern_crop",
+            (p) -> new FlowerCropBlock(SAWTOOTH_FERN, 3, new VoxelShape[]{Block.box(5d, 0d, 5d, 11d, 10d, 11d), Block.box(5d, 0d, 5d, 11d, 10d, 11d), Block.box(4d, 0d, 4d, 12d, 15d, 12d), Shapes.block()}, p),
+            (p) -> p.mapColor(MapColor.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.CROP).pushReaction(PushReaction.DESTROY)
     );
 
-    public static final Supplier<Block> FROSTLEAF = AARegistries.BLOCKS.register(
-            ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "frostleaf"),
-            () -> new FlowerBlock(MobEffects.MOVEMENT_SPEED, 5f, BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).noCollission().instabreak().sound(SoundType.GRASS).offsetType(BlockBehaviour.OffsetType.XZ).pushReaction(PushReaction.DESTROY))
+    public static final Supplier<Block> FROSTLEAF = register(
+            "frostleaf",
+            (p) -> new FlowerBlock(MobEffects.MOVEMENT_SPEED, 5f, p),
+            (p) -> p.mapColor(MapColor.PLANT).noCollission().instabreak().sound(SoundType.GRASS).offsetType(BlockBehaviour.OffsetType.XZ).pushReaction(PushReaction.DESTROY)
     );
 
-    public static final Supplier<Block> FROSTLEAF_CROP = AARegistries.BLOCKS.register(
-            ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "frostleaf_crop"),
-            () -> new FlowerCropBlock(
-                    FROSTLEAF, 2, new VoxelShape[]{Block.box(1d, 0d, 1d, 14d, 6d, 14d), Block.box(1d, 0d, 1d, 14d, 6d, 14d), Shapes.block()},
-                    BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.CROP).pushReaction(PushReaction.DESTROY)
-            )
+    public static final Supplier<Block> FROSTLEAF_CROP = register(
+            "frostleaf_crop",
+            (p) -> new FlowerCropBlock(FROSTLEAF, 2, new VoxelShape[]{Block.box(1d, 0d, 1d, 14d, 6d, 14d), Block.box(1d, 0d, 1d, 14d, 6d, 14d), Shapes.block()}, p),
+            (p) -> p.mapColor(MapColor.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.CROP).pushReaction(PushReaction.DESTROY)
     );
 
-    public static final Supplier<Block> WISTERIA = AARegistries.BLOCKS.register(
-            ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "wisteria"),
-            () -> new WisteriaBlock(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).noCollission().instabreak().sound(SoundType.VINE).strength(0.2F).pushReaction(PushReaction.DESTROY))
+    public static final Supplier<Block> WISTERIA = register(
+            "wisteria", WisteriaBlock::new,
+            (p) -> p.mapColor(MapColor.PLANT).noCollission().instabreak().sound(SoundType.VINE).strength(0.2F).pushReaction(PushReaction.DESTROY)
     );
 
-    public static final Supplier<Block> WISTERIA_CROP = AARegistries.BLOCKS.register(
-            ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "wisteria_crop"),
-            () -> new WisteriaCropBlock(
-                    BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.VINE).pushReaction(PushReaction.DESTROY)
-            )
+    public static final Supplier<Block> WISTERIA_CROP = register(
+            "wisteria_crop", WisteriaCropBlock::new,
+            (p) -> p.mapColor(MapColor.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.VINE).pushReaction(PushReaction.DESTROY)
     );
 
-    public static final Supplier<Block> SPIKEBLOSSOM = AARegistries.BLOCKS.register(
-            ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "spikeblossom"),
-            () -> new DoublePlantBlock(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).noCollission().instabreak().sound(SoundType.GRASS).offsetType(BlockBehaviour.OffsetType.XZ).pushReaction(PushReaction.DESTROY))
+    public static final Supplier<Block> SPIKEBLOSSOM = register(
+            "spikeblossom", DoublePlantBlock::new,
+            (p) -> p.mapColor(MapColor.PLANT).noCollission().instabreak().sound(SoundType.GRASS).offsetType(BlockBehaviour.OffsetType.XZ).pushReaction(PushReaction.DESTROY)
     );
 
-    public static final Supplier<Block> SPIKEBLOSSOM_CROP = AARegistries.BLOCKS.register(
-            ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "spikeblossom_crop"),
-            () -> new FlowerCropBlock(
-                    SPIKEBLOSSOM, 2, new VoxelShape[]{Block.box(5d, 0d, 5d, 11d, 7d, 11d), Block.box(4d, 0d, 4d, 12d, 11d, 12d), Shapes.block()},
-                    BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.CROP).pushReaction(PushReaction.DESTROY)
-            )
+    public static final Supplier<Block> SPIKEBLOSSOM_CROP = register(
+            "spikeblossom_crop",
+            (p) -> new FlowerCropBlock(SPIKEBLOSSOM, 2, new VoxelShape[]{Block.box(5d, 0d, 5d, 11d, 7d, 11d), Block.box(4d, 0d, 4d, 12d, 11d, 12d), Shapes.block()}, p),
+            (p) -> p.mapColor(MapColor.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.CROP).pushReaction(PushReaction.DESTROY)
     );
 
-    public static final Supplier<Block> SNAPDRAGON = AARegistries.BLOCKS.register(
-            ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "snapdragon"),
-            () -> new DoublePlantBlock(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).noCollission().instabreak().sound(SoundType.GRASS).offsetType(BlockBehaviour.OffsetType.XZ).pushReaction(PushReaction.DESTROY))
+    public static final Supplier<Block> SNAPDRAGON = register(
+            "snapdragon", DoublePlantBlock::new,
+            (p) -> p.mapColor(MapColor.PLANT).noCollission().instabreak().sound(SoundType.GRASS).offsetType(BlockBehaviour.OffsetType.XZ).pushReaction(PushReaction.DESTROY)
     );
 
-    public static final Supplier<Block> SNAPDRAGON_CROP = AARegistries.BLOCKS.register(
-            ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "snapdragon_crop"),
-            () -> new FlowerCropBlock(
-                    SNAPDRAGON, 2, new VoxelShape[]{Block.box(5d, 0d, 5d, 11d, 8d, 11d), Block.box(4d, 0d, 4d, 12d, 15d, 12d), Shapes.block()},
-                    BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.CROP).pushReaction(PushReaction.DESTROY)
-            )
+    public static final Supplier<Block> SNAPDRAGON_CROP = register(
+            "snapdragon_crop",
+            (p) -> new FlowerCropBlock(SNAPDRAGON, 2, new VoxelShape[]{Block.box(5d, 0d, 5d, 11d, 8d, 11d), Block.box(4d, 0d, 4d, 12d, 15d, 12d), Shapes.block()}, p),
+            (p) -> p.mapColor(MapColor.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.CROP).pushReaction(PushReaction.DESTROY)
     );
 
-    public static final Supplier<Block> LOTUS_LILY = AARegistries.BLOCKS.register(
-            ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "lotus_lily"),
-            () -> new WaterlilyBlock(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).instabreak().sound(SoundType.LILY_PAD).noOcclusion().pushReaction(PushReaction.DESTROY))
+    public static final Supplier<Block> LOTUS_LILY = register(
+            "lotus_lily", WaterlilyBlock::new,
+            (p) -> p.mapColor(MapColor.PLANT).instabreak().sound(SoundType.LILY_PAD).noOcclusion().pushReaction(PushReaction.DESTROY)
     );
 
-    public static final Supplier<Block> LOTUS_LILY_CROP = AARegistries.BLOCKS.register(
-            ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "lotus_lily_crop"),
-            () -> new LotusLilyCropBlock(
-                    BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).randomTicks().instabreak().sound(SoundType.LILY_PAD).noOcclusion().pushReaction(PushReaction.DESTROY)
-            )
+    public static final Supplier<Block> LOTUS_LILY_CROP = register(
+            "lotus_lily_crop", LotusLilyCropBlock::new,
+            (p) -> p.mapColor(MapColor.PLANT).randomTicks().instabreak().sound(SoundType.LILY_PAD).noOcclusion().pushReaction(PushReaction.DESTROY)
     );
 
     // amethyst lamp poi
@@ -211,6 +193,16 @@ public class AABlocks {
             AMETHYST_LAMP_POI_KEY.location(),
             () -> new PoiType(AMETHYST_LAMP_POI_STATES.get(), 0, 0)
     );
+
+    // register helper method
+
+    private static <T extends Block> Supplier<T> register(String id, Function<BlockBehaviour.Properties, T> blockFactory, Consumer<BlockBehaviour.Properties> props) {
+        ResourceLocation location = ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, id);
+        BlockBehaviour.Properties properties = BlockBehaviour.Properties.of();
+        properties.setId(ResourceKey.create(Registries.BLOCK, location));
+        props.accept(properties);
+        return AARegistries.BLOCKS.register(location, () -> blockFactory.apply(properties));
+    }
 
     public static void registerAll() {
         // amethyst lamp poi

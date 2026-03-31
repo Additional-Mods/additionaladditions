@@ -31,15 +31,6 @@ public class RenderTypeMixin {
         }
     }
 
-    @Inject(method = "entityGlintDirect", at = @At("HEAD"), cancellable = true)
-    private static void getEntityGlintDirectInject(CallbackInfoReturnable<RenderType> cir) {
-        RenderType renderType = GlintRenderType.getEntityGlintDirect(GlintContext.getDyeColor());
-        if (renderType != null) {
-            cir.setReturnValue(renderType);
-            GlintContext.setCurrentItem(null);
-        }
-    }
-
     @Inject(method = "entityGlint", at = @At("HEAD"), cancellable = true)
     private static void getEntityGlintInject(CallbackInfoReturnable<RenderType> cir) {
         RenderType renderType = GlintRenderType.getEntityGlint(GlintContext.getDyeColor());

@@ -550,6 +550,7 @@ public class AAItems {
             Consumer<Item.Properties> deferredProperties = propertiesConfig;
             Supplier<T> item = AARegistries.ITEMS.register(location, () -> {
                 Item.Properties props = new Item.Properties();
+                props.setId(ResourceKey.create(Registries.ITEM, location));
                 deferredProperties.accept(props);
                 return itemFactory.apply(props);
             });

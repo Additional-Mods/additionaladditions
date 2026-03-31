@@ -20,7 +20,8 @@ public class AAMaterials {
                     ArmorType.HELMET, Config.ROSE_GOLD_HELMET::get,
                     ArmorType.CHESTPLATE, Config.ROSE_GOLD_CHESTPLATE::get,
                     ArmorType.LEGGINGS, Config.ROSE_GOLD_LEGGINGS::get,
-                    ArmorType.BOOTS, Config.ROSE_GOLD_BOOTS::get
+                    ArmorType.BOOTS, Config.ROSE_GOLD_BOOTS::get,
+                    ArmorType.BODY, Config.ROSE_GOLD_BODY_ARMOR::get
             )
     );
 }

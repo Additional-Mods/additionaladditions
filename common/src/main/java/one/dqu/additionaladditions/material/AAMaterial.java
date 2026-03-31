@@ -11,6 +11,7 @@ import net.minecraft.world.item.ToolMaterial;
 import net.minecraft.world.item.equipment.ArmorMaterial;
 import net.minecraft.world.item.equipment.ArmorType;
 import one.dqu.additionaladditions.AdditionalAdditions;
+import one.dqu.additionaladditions.config.ArmorLikeConfig;
 import one.dqu.additionaladditions.config.ToolLikeConfig;
 import one.dqu.additionaladditions.config.io.ConfigLoader;
 import one.dqu.additionaladditions.config.type.ArmorItemConfig;
@@ -23,14 +24,14 @@ import java.util.function.Supplier;
 
 public class AAMaterial {
     private final EnumMap<ToolType, Supplier<ToolLikeConfig>> toolConfigs = new EnumMap<>(ToolType.class);
-    private final EnumMap<ArmorType, Supplier<ArmorItemConfig>> armorConfigs = new EnumMap<>(ArmorType.class);
+    private final EnumMap<ArmorType, Supplier<ArmorLikeConfig>> armorConfigs = new EnumMap<>(ArmorType.class);
     private final Supplier<ArmorMaterialConfig> materialConfig;
     private final String name;
 
     private final EnumMap<ToolType, ToolMaterial> toolMaterials = new EnumMap<>(ToolType.class);
     private final EnumMap<ArmorType, ArmorMaterial> armorMaterials = new EnumMap<>(ArmorType.class);
 
-    public AAMaterial(String name, Supplier<ArmorMaterialConfig> materialConfigSupplier, Map<ToolType, Supplier<ToolLikeConfig>> toolConfigSuppliers, Map<ArmorType, Supplier<ArmorItemConfig>> armorConfigSuppliers) {
+    public AAMaterial(String name, Supplier<ArmorMaterialConfig> materialConfigSupplier, Map<ToolType, Supplier<ToolLikeConfig>> toolConfigSuppliers, Map<ArmorType, Supplier<ArmorLikeConfig>> armorConfigSuppliers) {
         this.name = name;
         this.materialConfig = materialConfigSupplier;
         this.toolConfigs.putAll(toolConfigSuppliers);
@@ -116,11 +117,16 @@ public class AAMaterial {
     }
 
     private ArmorMaterial createArmorMaterialFor(ArmorType type) {
-        ArmorItemConfig config = armorConfigs.get(type).get();
+        ArmorLikeConfig config = armorConfigs.get(type).get();
         ArmorMaterialConfig materialConfig = this.materialConfig.get();
+        int durability = 1; // horse armor has no durability. BodyArmorItemConfig is used for horse armor only and doesnt have a durability field.
+
+        if (config instanceof ArmorItemConfig armorItemConfig) {
+            durability = armorItemConfig.durability();
+        }
 
         return new ArmorMaterial(
-                config.durability(),
+                durability,
                 new EnumMap<>(Map.of(
                         type, config.protection()
                 )),
