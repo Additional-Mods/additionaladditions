@@ -25,7 +25,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class JukeboxBlockMixin {
     @Inject(method = "useItemOn", at = @At("RETURN"), cancellable = true)
     private void useItemOn(ItemStack itemStack, BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult, CallbackInfoReturnable<InteractionResult> cir) {
-        if (cir.getReturnValue() != InteractionResult.PASS) {
+        if (cir.getReturnValue() != InteractionResult.TRY_WITH_EMPTY_HAND) {
             return;
         }
 
@@ -33,21 +33,23 @@ public class JukeboxBlockMixin {
             return;
         }
 
-        cir.setReturnValue(InteractionResult.SUCCESS_SERVER.withoutItem());
-
-        if (blockState.is(Blocks.JUKEBOX) && !blockState.getValue(JukeboxBlock.HAS_RECORD)) {
-            if (level.isClientSide) {
-                return;
-            }
-
-            ItemStack itemStack2 = itemStack.consumeAndReturn(1, player);
-            BlockEntity blockEntity = level.getBlockEntity(blockPos);
-            if (blockEntity instanceof JukeboxBlockEntity jukebox) {
-                jukebox.setTheItem(itemStack2);
-                level.gameEvent(GameEvent.BLOCK_CHANGE, blockPos, GameEvent.Context.of(player, blockState));
-                AAMisc.PLAY_ALBUM_TRIGGER.get().trigger((ServerPlayer) player);
-            }
-            player.awardStat(Stats.PLAY_RECORD);
+        if (blockState.is(Blocks.JUKEBOX) && blockState.getValue(JukeboxBlock.HAS_RECORD)) {
+            return;
         }
+
+        cir.setReturnValue(InteractionResult.SUCCESS);
+
+        if (level.isClientSide) {
+            return;
+        }
+
+        ItemStack itemStack2 = itemStack.consumeAndReturn(1, player);
+        BlockEntity blockEntity = level.getBlockEntity(blockPos);
+        if (blockEntity instanceof JukeboxBlockEntity jukebox) {
+            jukebox.setTheItem(itemStack2);
+            level.gameEvent(GameEvent.BLOCK_CHANGE, blockPos, GameEvent.Context.of(player, blockState));
+            AAMisc.PLAY_ALBUM_TRIGGER.get().trigger((ServerPlayer) player);
+        }
+        player.awardStat(Stats.PLAY_RECORD);
     }
 }

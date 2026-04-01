@@ -19,7 +19,6 @@ TODO:
 - check if all rose gold stuff is correct
 - some translation keys are messed up
 - using some items eg wrench doesnt trigger hand swing
-- cannot put an album into a jukebox
  */
 public final class AdditionalAdditions {
     public static final String NAMESPACE = "additionaladditions";
