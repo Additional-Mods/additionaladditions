@@ -1,0 +1,14 @@
+{
+  "model": {
+    "type": "minecraft:condition",
+    "property": "additionaladditions:has_disc",
+    "on_true": {
+      "type": "minecraft:model",
+      "model": "additionaladditions:item/pocket_jukebox_1"
+    },
+    "on_false": {
+      "type": "minecraft:model",
+      "model": "additionaladditions:item/pocket_jukebox_0"
+    }
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "model": {
+    "type": "minecraft:condition",
+    "property": "additionaladditions:has_disc",
+    "on_true": {
+      "type": "minecraft:model",
+      "model": "additionaladditions:item/album/magenta_album_1"
+    },
+    "on_false": {
+      "type": "minecraft:model",
+      "model": "additionaladditions:item/album/magenta_album_0"
+    }
+  }
+}

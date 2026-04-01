@@ -35,3 +35,6 @@ accessible method net/minecraft/world/item/context/UseOnContext getHitResult ()L
 accessible method net/minecraft/world/item/Item$Properties buildAndValidateComponents (Lnet/minecraft/network/chat/Component;Lnet/minecraft/resources/ResourceLocation;)Lnet/minecraft/core/component/DataComponentMap;
 
 accessible field net/minecraft/world/level/block/RedStoneWireBlock shouldSignal Z
+
+accessible field net/minecraft/client/renderer/item/properties/conditional/ConditionalItemModelProperties ID_MAPPER Lnet/minecraft/util/ExtraCodecs$LateBoundIdMapper;
+accessible field net/minecraft/client/renderer/item/properties/numeric/RangeSelectItemModelProperties ID_MAPPER Lnet/minecraft/util/ExtraCodecs$LateBoundIdMapper;

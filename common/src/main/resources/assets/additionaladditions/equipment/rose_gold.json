@@ -1,0 +1,19 @@
+{
+  "layers": {
+    "horse_body": [
+      {
+        "texture": "additionaladditions:rose_gold"
+      }
+    ],
+    "humanoid": [
+      {
+        "texture": "additionaladditions:rose_gold"
+      }
+    ],
+    "humanoid_leggings": [
+      {
+        "texture": "additionaladditions:rose_gold"
+      }
+    ]
+  }
+}

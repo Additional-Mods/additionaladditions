@@ -2,13 +2,9 @@ package one.dqu.additionaladditions.material;
 
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.component.DataComponentMap;
-import net.minecraft.core.component.DataComponentType;
-import net.minecraft.core.component.DataComponents;
-import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ToolMaterial;
 import net.minecraft.world.item.equipment.ArmorMaterial;
 import net.minecraft.world.item.equipment.ArmorType;
@@ -21,7 +17,6 @@ import one.dqu.additionaladditions.config.type.ArmorMaterialConfig;
 
 import java.util.EnumMap;
 import java.util.Map;
-import java.util.Set;
 import java.util.function.Supplier;
 
 public class AAMaterial {
@@ -61,7 +56,6 @@ public class AAMaterial {
     }
 
     public void applyFor(DataComponentMap.Builder builder, ArmorType armorType) {
-        Item.Properties properties = new Item.Properties();
         ArmorMaterial material = armorMaterials.get(armorType);
         DataComponentMap patch;
 
