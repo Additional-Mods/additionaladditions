@@ -17,7 +17,6 @@ TODO:
 - pocket jukebox bug : stops playback when picked into cursor
 - gametests for copper patina are broken (them themselves)
 - check if all rose gold stuff is correct
-- some translation keys are messed up
 - using some items eg wrench doesnt trigger hand swing
  */
 public final class AdditionalAdditions {
