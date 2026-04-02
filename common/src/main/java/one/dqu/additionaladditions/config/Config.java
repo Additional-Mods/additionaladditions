@@ -1,6 +1,7 @@
 package one.dqu.additionaladditions.config;
 
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.DyeColor;
 import one.dqu.additionaladditions.config.datafixer.ConfigFixerUpper;
@@ -85,9 +86,9 @@ public class Config {
             new FeatureConfig(true)
     );
 
-    public static final ConfigProperty<ArmorMaterialConfig> ROSE_GOLD_ARMOR_MATERIAL = new ConfigProperty<>(
-            "rose_gold/armor_material", ArmorMaterialConfig.CODEC,
-            new ArmorMaterialConfig(0f, 0f, 17, SoundEvents.ARMOR_EQUIP_GOLD, AAMisc.REPAIRS_ROSE_GOLD_ARMOR_TAG)
+    public static final ConfigProperty<MaterialConfig> ROSE_GOLD_MATERIAL = new ConfigProperty<>(
+            "rose_gold/material", MaterialConfig.CODEC,
+            new MaterialConfig(0f, 0f, 17, SoundEvents.ARMOR_EQUIP_GOLD, AAMisc.REPAIRS_ROSE_GOLD_ARMOR_TAG, BlockTags.INCORRECT_FOR_IRON_TOOL)
     );
 
     public static final ConfigProperty<ArmorItemConfig> ROSE_GOLD_HELMET = new ConfigProperty<>(

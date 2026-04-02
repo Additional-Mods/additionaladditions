@@ -8,7 +8,7 @@ import java.util.Map;
 public class AAMaterials {
     public static final AAMaterial ROSE_GOLD = new AAMaterial(
             "rose_gold",
-            Config.ROSE_GOLD_ARMOR_MATERIAL::get,
+            Config.ROSE_GOLD_MATERIAL::get,
             Map.of(
                     ToolType.SWORD, Config.ROSE_GOLD_SWORD::get,
                     ToolType.PICKAXE, Config.ROSE_GOLD_PICKAXE::get,

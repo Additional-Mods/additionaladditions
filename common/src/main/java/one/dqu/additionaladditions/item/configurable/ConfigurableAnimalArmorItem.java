@@ -9,6 +9,9 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Consumer;
 
+/**
+ * Implements {@link ConfigurableItem} pattern for {@link AnimalArmorItem}.
+ */
 public class ConfigurableAnimalArmorItem extends AnimalArmorItem {
     private final Consumer<DataComponentMap.Builder> configurer;
 

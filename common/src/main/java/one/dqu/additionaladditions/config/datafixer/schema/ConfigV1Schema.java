@@ -83,21 +83,17 @@ public class ConfigV1Schema extends Schema {
                 )
         );
 
-        schema.registerType(false, ConfigProperty.typeReference(ArmorMaterialConfig.class), () ->
-                DSL.and(
-                        DSL.fields(
-                                "toughness", DSL.constType(DSL.floatType()),
-                                "knockback_resistance", DSL.constType(DSL.floatType()),
-                                "enchantability", DSL.constType(DSL.intType())
-                        ),
-                        DSL.fields(
-                                "equip_sound", DSL.fields(
-                                        "name", DSL.constType(DSL.string())
-                                ),
-                                "repair_ingredient", DSL.fields(
-                                        "item", DSL.constType(DSL.string())
-                                )
-                        )
+        schema.registerType(false, ConfigProperty.typeReference(MaterialConfig.class), () ->
+                DSL.allWithRemainder(
+                        DSL.field("toughness", DSL.constType(DSL.floatType())),
+                        DSL.field("knockback_resistance", DSL.constType(DSL.floatType())),
+                        DSL.field("enchantability", DSL.constType(DSL.intType())),
+                        DSL.field("equip_sound", DSL.fields(
+                                "sound_event", DSL.constType(DSL.string())
+                        )),
+                        DSL.field("repair_ingredient", DSL.fields(
+                                "item", DSL.constType(DSL.string())
+                        ))
                 )
         );
 

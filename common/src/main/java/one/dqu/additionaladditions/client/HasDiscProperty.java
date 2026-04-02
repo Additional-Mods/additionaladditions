@@ -1,4 +1,4 @@
-package one.dqu.additionaladditions.client.itemmodel;
+package one.dqu.additionaladditions.client;
 
 import com.mojang.serialization.MapCodec;
 import net.fabricmc.api.EnvType;

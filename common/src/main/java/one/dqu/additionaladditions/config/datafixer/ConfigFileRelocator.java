@@ -15,6 +15,7 @@ import java.util.List;
  */
 public class ConfigFileRelocator {
     private static final List<Migration> MIGRATIONS = List.of(
+            new Migration(3, move("rose_gold/armor_material", "rose_gold/material"))
     );
 
     public static void update(Path path, int version) {

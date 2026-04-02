@@ -16,7 +16,6 @@ import one.dqu.additionaladditions.feature.glint.GlintColor;
 import one.dqu.additionaladditions.item.*;
 import one.dqu.additionaladditions.item.configurable.*;
 import one.dqu.additionaladditions.feature.album.AlbumContents;
-import one.dqu.additionaladditions.material.AAMaterial;
 import one.dqu.additionaladditions.material.AAMaterials;
 import one.dqu.additionaladditions.material.ToolType;
 import one.dqu.additionaladditions.util.CreativeAdder;
@@ -319,28 +318,28 @@ public class AAItems {
     public static final Supplier<Item> ROSE_GOLD_SWORD = new Builder("rose_gold_sword")
             .config(Config.ROSE_GOLD)
             .creativeAfter(Items.GOLDEN_SWORD, CreativeModeTabs.COMBAT)
-            .build(p -> new ConfigurableToolItem(AAMaterials.ROSE_GOLD, ToolType.SWORD, p));
+            .build(p -> new ConfigurableSwordItem(AAMaterials.ROSE_GOLD, ToolType.SWORD, p));
 
     public static final Supplier<Item> ROSE_GOLD_SHOVEL = new Builder("rose_gold_shovel")
             .config(Config.ROSE_GOLD)
             .creativeAfter(Items.GOLDEN_HOE, CreativeModeTabs.TOOLS_AND_UTILITIES)
-            .build(p -> new ConfigurableToolItem(AAMaterials.ROSE_GOLD, ToolType.SHOVEL, p));
+            .build(p -> new ConfigurableShovelItem(AAMaterials.ROSE_GOLD, ToolType.SHOVEL, p));
 
     public static final Supplier<Item> ROSE_GOLD_PICKAXE = new Builder("rose_gold_pickaxe")
             .config(Config.ROSE_GOLD)
             .creativeAfter(Items.GOLDEN_HOE, CreativeModeTabs.TOOLS_AND_UTILITIES)
-            .build(p -> new ConfigurableToolItem(AAMaterials.ROSE_GOLD, ToolType.PICKAXE, p));
+            .build(p -> new ConfigurablePickaxeItem(AAMaterials.ROSE_GOLD, ToolType.PICKAXE, p));
 
     public static final Supplier<Item> ROSE_GOLD_AXE = new Builder("rose_gold_axe")
             .config(Config.ROSE_GOLD)
             .creativeAfter(Items.GOLDEN_HOE, CreativeModeTabs.TOOLS_AND_UTILITIES)
             .creativeAfter(Items.GOLDEN_AXE, CreativeModeTabs.COMBAT)
-            .build(p -> new ConfigurableToolItem(AAMaterials.ROSE_GOLD, ToolType.AXE, p));
+            .build(p -> new ConfigurableAxeItem(AAMaterials.ROSE_GOLD, ToolType.AXE, p));
 
     public static final Supplier<Item> ROSE_GOLD_HOE = new Builder("rose_gold_hoe")
             .config(Config.ROSE_GOLD)
             .creativeAfter(Items.GOLDEN_HOE, CreativeModeTabs.TOOLS_AND_UTILITIES)
-            .build(p -> new ConfigurableToolItem(AAMaterials.ROSE_GOLD, ToolType.HOE, p));
+            .build(p -> new ConfigurableHoeItem(AAMaterials.ROSE_GOLD, ToolType.HOE, p));
 
     // SUSPICIOUS DYE
 

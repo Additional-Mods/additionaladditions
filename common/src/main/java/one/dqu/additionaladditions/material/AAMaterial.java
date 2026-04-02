@@ -13,7 +13,7 @@ import one.dqu.additionaladditions.config.ArmorLikeConfig;
 import one.dqu.additionaladditions.config.ToolLikeConfig;
 import one.dqu.additionaladditions.config.io.ConfigLoader;
 import one.dqu.additionaladditions.config.type.ArmorItemConfig;
-import one.dqu.additionaladditions.config.type.ArmorMaterialConfig;
+import one.dqu.additionaladditions.config.type.MaterialConfig;
 
 import java.util.EnumMap;
 import java.util.Map;
@@ -22,13 +22,13 @@ import java.util.function.Supplier;
 public class AAMaterial {
     private final EnumMap<ToolType, Supplier<ToolLikeConfig>> toolConfigs = new EnumMap<>(ToolType.class);
     private final EnumMap<ArmorType, Supplier<ArmorLikeConfig>> armorConfigs = new EnumMap<>(ArmorType.class);
-    private final Supplier<ArmorMaterialConfig> materialConfig;
+    private final Supplier<MaterialConfig> materialConfig;
     private final String name;
 
     private final EnumMap<ToolType, ToolMaterial> toolMaterials = new EnumMap<>(ToolType.class);
     private final EnumMap<ArmorType, ArmorMaterial> armorMaterials = new EnumMap<>(ArmorType.class);
 
-    public AAMaterial(String name, Supplier<ArmorMaterialConfig> materialConfigSupplier, Map<ToolType, Supplier<ToolLikeConfig>> toolConfigSuppliers, Map<ArmorType, Supplier<ArmorLikeConfig>> armorConfigSuppliers) {
+    public AAMaterial(String name, Supplier<MaterialConfig> materialConfigSupplier, Map<ToolType, Supplier<ToolLikeConfig>> toolConfigSuppliers, Map<ArmorType, Supplier<ArmorLikeConfig>> armorConfigSuppliers) {
         this.name = name;
         this.materialConfig = materialConfigSupplier;
         this.toolConfigs.putAll(toolConfigSuppliers);
@@ -88,10 +88,10 @@ public class AAMaterial {
 
     private ToolMaterial createToolMaterialFor(ToolType type) {
         ToolLikeConfig config = toolConfigs.get(type).get();
-        ArmorMaterialConfig materialConfig = this.materialConfig.get();
+        MaterialConfig materialConfig = this.materialConfig.get();
 
         return new ToolMaterial(
-                type.mineableTag(),
+                materialConfig.incorrectBlocksForDrops(),
                 config.durability(),
                 config.blockBreakSpeed(),
                 -1.0F,
@@ -102,7 +102,7 @@ public class AAMaterial {
 
     private ArmorMaterial createArmorMaterialFor(ArmorType type) {
         ArmorLikeConfig config = armorConfigs.get(type).get();
-        ArmorMaterialConfig materialConfig = this.materialConfig.get();
+        MaterialConfig materialConfig = this.materialConfig.get();
         int durability = 1; // horse armor has no durability. BodyArmorItemConfig is used for horse armor only and doesnt have a durability field.
 
         if (config instanceof ArmorItemConfig armorItemConfig) {

@@ -5,8 +5,8 @@ import net.fabricmc.api.Environment;
 import net.minecraft.client.renderer.item.properties.conditional.ConditionalItemModelProperties;
 import net.minecraft.client.renderer.item.properties.numeric.RangeSelectItemModelProperties;
 import net.minecraft.resources.ResourceLocation;
-import one.dqu.additionaladditions.client.itemmodel.BarometerAngleProperty;
-import one.dqu.additionaladditions.client.itemmodel.HasDiscProperty;
+import one.dqu.additionaladditions.client.BarometerAngleProperty;
+import one.dqu.additionaladditions.client.HasDiscProperty;
 
 @Environment(EnvType.CLIENT)
 public final class AdditionalAdditionsClient {

@@ -38,6 +38,7 @@ public class MaterialComponentPatcher {
 
     private static void applyCommonProperties(ToolMaterial material, DataComponentMap.Builder builder) {
         builder.set(DataComponents.MAX_DAMAGE, material.durability());
+        builder.set(DataComponents.DAMAGE, 0);
         builder.set(DataComponents.MAX_STACK_SIZE, 1);
         builder.set(DataComponents.REPAIRABLE, repairable(material.repairItems()));
         builder.set(DataComponents.ENCHANTABLE, new Enchantable(material.enchantmentValue()));

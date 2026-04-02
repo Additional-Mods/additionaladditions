@@ -5,13 +5,12 @@ import com.mojang.datafixers.DataFixer;
 import com.mojang.datafixers.DataFixerBuilder;
 import com.mojang.datafixers.schemas.Schema;
 import com.mojang.serialization.Dynamic;
-import one.dqu.additionaladditions.config.datafixer.fixer.ConfigV1V2ToolItemConfigFixer;
-import one.dqu.additionaladditions.config.datafixer.schema.ConfigV1Schema;
-import one.dqu.additionaladditions.config.datafixer.schema.ConfigV2Schema;
+import one.dqu.additionaladditions.config.datafixer.fixer.*;
+import one.dqu.additionaladditions.config.datafixer.schema.*;
 
 public class ConfigFixerUpper implements DataFixer {
     public static final DataFixer INSTANCE = new ConfigFixerUpper();
-    public static final int CURRENT_VERSION = 2;
+    public static final int CURRENT_VERSION = 3;
 
     private final DataFixer fixer;
 
@@ -22,6 +21,9 @@ public class ConfigFixerUpper implements DataFixer {
 
         var V2 = builder.addSchema(2, ConfigV2Schema::new);
         builder.addFixer(new ConfigV1V2ToolItemConfigFixer(V2));
+
+        var V3 = builder.addSchema(3, ConfigV3Schema::new);
+        builder.addFixer(new ConfigV2V3MaterialConfigFixer(V3));
 
         this.fixer = builder.build().fixer();
     }

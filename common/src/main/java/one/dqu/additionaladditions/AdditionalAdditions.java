@@ -16,7 +16,6 @@ TODO:
 - migrate tags to v2 (fabric log warn)
 - pocket jukebox bug : stops playback when picked into cursor
 - gametests for copper patina are broken (them themselves)
-- check if all rose gold stuff is correct
 - using some items eg wrench doesnt trigger hand swing
  */
 public final class AdditionalAdditions {
