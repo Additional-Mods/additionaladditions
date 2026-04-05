@@ -16,7 +16,6 @@ TODO:
 - pocket jukebox bug : stops playback when picked into cursor
 - gametests for copper patina are broken (them themselves)
 - using some items eg wrench doesnt trigger hand swing
-- update album / pocket jukebox interactions to match that of a vanilla bundle
  */
 public final class AdditionalAdditions {
     public static final String NAMESPACE = "additionaladditions";

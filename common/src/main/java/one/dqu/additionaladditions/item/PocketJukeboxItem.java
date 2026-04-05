@@ -48,59 +48,71 @@ public class PocketJukeboxItem extends Item {
         return contents != null && !contents.stream().toList().isEmpty();
     }
 
+    private boolean insertDisc(ItemStack stack, ItemStack discStack, Player player) {
+        AlbumContents contents = null;
+        if (discStack.is(AAMisc.ALBUMS_TAG)) {
+            contents = discStack.getOrDefault(AAMisc.ALBUM_CONTENTS_COMPONENT.get(), AlbumContents.EMPTY);
+        } else if (AlbumContents.isValidItem(discStack)) {
+            contents = new AlbumContents(List.of(discStack));
+        }
+
+        if (contents == null || contents.items().isEmpty()) return false;
+
+        storeDisc(stack, discStack);
+
+        if (player.level().isClientSide()) {
+            PocketJukeboxPlayer.INSTANCE.play(contents, player, stack);
+        } else {
+            AAMisc.PLAY_POCKET_JUKEBOX_TRIGGER.get().trigger((ServerPlayer) player);
+            if (discStack.is(AAMisc.ALBUMS_TAG)) {
+                AAMisc.PLAY_ALBUM_TRIGGER.get().trigger((ServerPlayer) player);
+            }
+        }
+        return true;
+    }
+
     @Override
     public boolean overrideOtherStackedOnMe(ItemStack stack, ItemStack otherStack, Slot slot, ClickAction clickType, Player player, SlotAccess cursorStackReference) {
         if (!Config.POCKET_JUKEBOX.get().enabled()) return false;
-        if (clickType != ClickAction.SECONDARY) return false;
 
-        if (!hasDisc(stack)) {
+        if (clickType == ClickAction.PRIMARY && !otherStack.isEmpty() && !hasDisc(stack)) {
             ItemStack cursor = cursorStackReference.get();
-            if (cursor.isEmpty()) return false;
-
-            AlbumContents contents = null;
-
-            if (cursor.is(AAMisc.ALBUMS_TAG)) {
-                contents = cursor.getOrDefault(AAMisc.ALBUM_CONTENTS_COMPONENT.get(), AlbumContents.EMPTY);
-            } else if (AlbumContents.isValidItem(cursor)) {
-                contents = new AlbumContents(List.of(cursor));
-            }
-
-            if (contents != null && !contents.items().isEmpty()) {
-                storeDisc(stack, cursor);
-                cursorStackReference.set(ItemStack.EMPTY); //todo this might need to be .shrink(1) just in case
-
-                if (player.level().isClientSide()) {
-                    PocketJukeboxPlayer.INSTANCE.play(contents, player, stack);
-                } else {
-                    AAMisc.PLAY_POCKET_JUKEBOX_TRIGGER.get().trigger((ServerPlayer) player);
-                    if (cursor.is(AAMisc.ALBUMS_TAG)) {
-                        AAMisc.PLAY_ALBUM_TRIGGER.get().trigger((ServerPlayer) player);
-                    }
-                }
-
-                return true;
-            }
-            return false;
-        } else {
-            ItemStack cursor = cursorStackReference.get();
-            if (!cursor.isEmpty()) return false;
-
-            ItemStack storedDisc = getStoredDisc(stack);
-            cursorStackReference.set(storedDisc);
-
-            if (player.level().isClientSide()) {
-                PocketJukeboxPlayer.INSTANCE.stop();
-            }
-
+            if (!insertDisc(stack, cursor, player)) return false;
+            cursor.shrink(1);
+            return true;
+        } else if (clickType == ClickAction.SECONDARY && otherStack.isEmpty() && hasDisc(stack)) {
+            if (!cursorStackReference.get().isEmpty()) return false;
+            cursorStackReference.set(getStoredDisc(stack));
+            if (player.level().isClientSide()) PocketJukeboxPlayer.INSTANCE.stop();
             removeStoredDisc(stack);
             return true;
         }
+        return false;
+    }
+
+    @Override
+    public boolean overrideStackedOnOther(ItemStack stack, Slot slot, ClickAction clickAction, Player player) {
+        if (!Config.POCKET_JUKEBOX.get().enabled()) return false;
+        if (!slot.allowModification(player)) return false;
+
+        if (clickAction == ClickAction.PRIMARY && !slot.getItem().isEmpty() && !hasDisc(stack)) {
+            ItemStack slotItem = slot.getItem();
+            if (!insertDisc(stack, slotItem, player)) return false;
+            slot.set(ItemStack.EMPTY);
+            return true;
+        } else if (clickAction == ClickAction.SECONDARY && hasDisc(stack)) {
+            ItemStack leftover = slot.safeInsert(getStoredDisc(stack));
+            if (!leftover.isEmpty()) return false;
+            if (player.level().isClientSide()) PocketJukeboxPlayer.INSTANCE.stop();
+            removeStoredDisc(stack);
+            return true;
+        }
+        return false;
     }
 
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag flag) {
         if (!hasDisc(stack)) {
-            tooltip.add(MutableComponent.create(new TranslatableContents("additionaladditions.gui.pocket_jukebox.tooltip", null, new String[]{})).withStyle(ChatFormatting.GRAY));
             return;
         }
 

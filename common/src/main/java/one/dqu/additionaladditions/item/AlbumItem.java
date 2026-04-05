@@ -90,22 +90,19 @@ public class AlbumItem extends Item {
 
     @Override
     public boolean overrideStackedOnOther(ItemStack album, Slot slot, ClickAction clickAction, Player player) {
-        if (clickAction != ClickAction.SECONDARY) {
-            return false;
-        }
+        if (!slot.allowModification(player)) return false;
 
-        ItemStack other = slot.getItem();
-
-        if (other.isEmpty()) {
-            Optional<ItemStack> disc = popDisc(album);
-            if (disc.isPresent()) {
-                slot.safeInsert(disc.get());
-                return true;
-            }
-        } else {
+        if (clickAction == ClickAction.PRIMARY && !slot.getItem().isEmpty()) {
+            ItemStack other = slot.getItem();
             if (addDisc(album, other)) {
                 other.shrink(1);
                 checkFillAlbumSameDiscAdvancement(album, player);
+                return true;
+            }
+        } else if (clickAction == ClickAction.SECONDARY && slot.getItem().isEmpty()) {
+            Optional<ItemStack> disc = popDisc(album);
+            if (disc.isPresent()) {
+                slot.safeInsert(disc.get());
                 return true;
             }
         }
@@ -114,20 +111,16 @@ public class AlbumItem extends Item {
 
     @Override
     public boolean overrideOtherStackedOnMe(ItemStack album, ItemStack cursor, Slot slot, ClickAction clickAction, Player player, SlotAccess slotAccess) {
-        if (clickAction != ClickAction.SECONDARY || !slot.allowModification(player)) {
-            return false;
-        }
-
-        if (cursor.isEmpty()) {
-            Optional<ItemStack> disc = popDisc(album);
-            if (disc.isPresent()) {
-                slotAccess.set(disc.get());
-                return true;
-            }
-        } else {
+        if (clickAction == ClickAction.PRIMARY && !cursor.isEmpty()) {
             if (addDisc(album, cursor)) {
                 cursor.shrink(1);
                 checkFillAlbumSameDiscAdvancement(album, player);
+                return true;
+            }
+        } else if (clickAction == ClickAction.SECONDARY && cursor.isEmpty()) {
+            Optional<ItemStack> disc = popDisc(album);
+            if (disc.isPresent()) {
+                slotAccess.set(disc.get());
                 return true;
             }
         }
