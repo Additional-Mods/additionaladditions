@@ -35,7 +35,7 @@ public class PocketJukeboxPlayer {
 
         this.album = album;
         this.player = player;
-        this.jukeboxStack = jukeboxStack;
+        this.jukeboxStack = jukeboxStack.copy();
         this.currentTrack = -1;
         this.isPlaying = true;
 

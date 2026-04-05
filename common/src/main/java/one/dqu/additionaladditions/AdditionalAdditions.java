@@ -13,7 +13,6 @@ TODO:
 - glint rendering for items isnt working
 - use crafting_transmute for rose gold and album dyeing recipes
 - migrate tags to v2 (fabric log warn)
-- pocket jukebox bug : stops playback when picked into cursor
 - gametests for copper patina are broken (them themselves)
 - using some items eg wrench doesnt trigger hand swing
  */
