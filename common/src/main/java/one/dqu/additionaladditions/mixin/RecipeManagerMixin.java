@@ -1,25 +1,29 @@
 package one.dqu.additionaladditions.mixin;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
-import net.minecraft.world.item.crafting.RecipeHolder;
-import net.minecraft.world.item.crafting.RecipeMap;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.flag.FeatureFlagSet;
+import net.minecraft.world.item.crafting.*;
 import one.dqu.additionaladditions.AdditionalAdditions;
 import one.dqu.additionaladditions.config.ConfigProperty;
 import one.dqu.additionaladditions.config.Toggleable;
+import one.dqu.additionaladditions.misc.BrewingRecipe;
+import one.dqu.additionaladditions.registry.AAMisc;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.crafting.RecipeManager;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
-/**
- * Removes recipes when their corresponding features are disabled in the config.
- */
 @Mixin(RecipeManager.class)
 public class RecipeManagerMixin {
+    /**
+     * Removes recipes when their corresponding features are disabled in the config.
+     */
     @ModifyExpressionValue(
             method = "prepare(Lnet/minecraft/server/packs/resources/ResourceManager;Lnet/minecraft/util/profiling/ProfilerFiller;)Lnet/minecraft/world/item/crafting/RecipeMap;",
             at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/crafting/RecipeMap;create(Ljava/lang/Iterable;)Lnet/minecraft/world/item/crafting/RecipeMap;")
@@ -52,5 +56,24 @@ public class RecipeManagerMixin {
         });
 
         return RecipeMap.create(list);
+    }
+
+    @Shadow
+    private Map<ResourceKey<RecipePropertySet>, RecipePropertySet> propertySets;
+
+    /**
+     * Registers custom recipe property sets.
+     * They are used to tell client which ingredients are valid to be inserted into slots.
+     */
+    @Inject(method = "finalizeRecipeLoading", at = @At("RETURN"))
+    private void additionaladditions$addPropertySets(FeatureFlagSet featureFlagSet, CallbackInfo ci) {
+        List<Ingredient> ingredients = ((RecipeManager)(Object)this).getRecipes().stream()
+                .filter(h -> h.value().getType() == AAMisc.BREWING_RECIPE_TYPE.get())
+                .map(h -> ((BrewingRecipe) h.value()).getIngredient())
+                .toList();
+
+        var newMap = new HashMap<>(this.propertySets);
+        newMap.put(AAMisc.BREWING_RECIPE_PROPERTY_SET, RecipePropertySet.create(ingredients));
+        this.propertySets = Collections.unmodifiableMap(newMap);
     }
 }

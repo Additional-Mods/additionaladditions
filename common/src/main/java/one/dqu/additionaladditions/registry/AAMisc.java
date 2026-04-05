@@ -4,10 +4,12 @@ import com.mojang.serialization.Codec;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.CustomRecipe;
+import net.minecraft.world.item.crafting.RecipePropertySet;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.Block;
@@ -75,6 +77,9 @@ public class AAMisc {
                 }
             }
     );
+
+    public static final ResourceKey<RecipePropertySet> BREWING_RECIPE_PROPERTY_SET =
+            ResourceKey.create(RecipePropertySet.TYPE_KEY, ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "brewing"));
 
     /* ADVANCEMENT TRIGGERS */
 

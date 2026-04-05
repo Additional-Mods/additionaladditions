@@ -38,3 +38,5 @@ accessible field net/minecraft/world/level/block/RedStoneWireBlock shouldSignal 
 
 accessible field net/minecraft/client/renderer/item/properties/conditional/ConditionalItemModelProperties ID_MAPPER Lnet/minecraft/util/ExtraCodecs$LateBoundIdMapper;
 accessible field net/minecraft/client/renderer/item/properties/numeric/RangeSelectItemModelProperties ID_MAPPER Lnet/minecraft/util/ExtraCodecs$LateBoundIdMapper;
+
+accessible method net/minecraft/world/item/crafting/RecipePropertySet create (Ljava/util/Collection;)Lnet/minecraft/world/item/crafting/RecipePropertySet;

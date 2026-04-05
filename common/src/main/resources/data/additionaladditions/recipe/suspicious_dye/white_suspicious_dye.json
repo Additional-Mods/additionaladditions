@@ -1,11 +1,6 @@
 {
   "type": "additionaladditions:brewing",
-  "input": {
-    "item": "minecraft:potion",
-    "components": {
-      "minecraft:potion_contents": "minecraft:water"
-    }
-  },
+  "potion": "minecraft:water",
   "ingredient": "additionaladditions:cottonshiver",
   "result": {
     "id": "additionaladditions:white_suspicious_dye",

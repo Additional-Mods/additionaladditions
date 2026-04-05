@@ -23,6 +23,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.*;
+import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.item.crafting.display.SlotDisplay;
@@ -199,17 +200,14 @@ public class JEICompat implements IModPlugin {
                     BrewingRecipe recipe = holder.value();
                     ResourceLocation id = holder.id().location();
 
-                    List<ItemStack> inputs = BuiltInRegistries.ITEM.stream()
-                            .map(ItemStack::new)
-                            .filter(recipe.getInput()::test)
-                            .toList();
+                    ItemStack input = PotionContents.createItemStack(Items.POTION, recipe.getPotion());
                     List<ItemStack> ingredients = BuiltInRegistries.ITEM.stream()
                             .map(ItemStack::new)
                             .filter(recipe.getIngredient()::test)
                             .toList();
                     ItemStack output = recipe.getResult();
 
-                    return factory.createBrewingRecipe(inputs, ingredients, output, id);
+                    return factory.createBrewingRecipe(List.of(input), ingredients, output, id);
                 })
                 .toList();
 

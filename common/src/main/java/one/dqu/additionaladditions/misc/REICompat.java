@@ -7,6 +7,7 @@ import me.shedaniel.rei.api.common.entry.EntryIngredient;
 import me.shedaniel.rei.api.common.entry.EntryStack;
 import me.shedaniel.rei.api.common.entry.type.VanillaEntryTypes;
 import me.shedaniel.rei.api.common.util.EntryIngredients;
+import me.shedaniel.rei.api.common.util.EntryStacks;
 import me.shedaniel.rei.plugin.common.displays.brewing.DefaultBrewingDisplay;
 import me.shedaniel.rei.plugin.common.displays.crafting.DefaultCraftingDisplay;
 import net.minecraft.core.Holder;
@@ -17,6 +18,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.*;
+import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.item.crafting.*;
 import one.dqu.additionaladditions.config.Config;
@@ -171,7 +173,12 @@ public class REICompat implements REIClientPlugin {
                 .toList();
 
         for (BrewingRecipe recipe : recipes) {
-            registry.add(new DefaultBrewingDisplay(recipe.getInput(), recipe.getIngredient(), recipe.getResult()));
+            ItemStack input = PotionContents.createItemStack(Items.POTION, recipe.getPotion());
+            registry.add(new DefaultBrewingDisplay(
+                    EntryIngredients.of(input),
+                    EntryIngredients.ofIngredient(recipe.getIngredient()),
+                    EntryStacks.of(recipe.getResult())
+            ));
         }
     }
 

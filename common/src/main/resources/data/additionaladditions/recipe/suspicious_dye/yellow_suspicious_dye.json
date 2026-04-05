@@ -1,11 +1,6 @@
 {
   "type": "additionaladditions:brewing",
-  "input": {
-    "item": "minecraft:potion",
-    "components": {
-      "minecraft:potion_contents": "minecraft:water"
-    }
-  },
+  "potion": "minecraft:water",
   "ingredient": "additionaladditions:amber_blossom",
   "result": {
     "id": "additionaladditions:yellow_suspicious_dye",

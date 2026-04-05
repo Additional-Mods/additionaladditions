@@ -1,11 +1,6 @@
 {
   "type": "additionaladditions:brewing",
-  "input": {
-    "item": "minecraft:potion",
-    "components": {
-      "minecraft:potion_contents": "minecraft:water"
-    }
-  },
+  "potion": "minecraft:water",
   "ingredient": "additionaladditions:wisteria",
   "result": {
     "id": "additionaladditions:light_blue_suspicious_dye",

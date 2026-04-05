@@ -11,12 +11,12 @@ import org.slf4j.LoggerFactory;
 TODO:
 - "glint.ElytraLayerMixin" was removed temporarily to fix compile
 - glint rendering for items isnt working
-- suspicious dye recipes
-- item unit config / tag / armor material config stuff
+- use crafting_transmute for rose gold and album dyeing recipes
 - migrate tags to v2 (fabric log warn)
 - pocket jukebox bug : stops playback when picked into cursor
 - gametests for copper patina are broken (them themselves)
 - using some items eg wrench doesnt trigger hand swing
+- update album / pocket jukebox interactions to match that of a vanilla bundle
  */
 public final class AdditionalAdditions {
     public static final String NAMESPACE = "additionaladditions";

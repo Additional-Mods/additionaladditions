@@ -32,9 +32,9 @@ public class BrewingStandMenuMixin {
         }
         if (level == null) return;
 
-        boolean isValidIngredient = ((RecipeManager) level.recipeAccess()).getRecipes().stream()
-                .filter(h -> h.value().getType() == AAMisc.BREWING_RECIPE_TYPE.get())
-                .anyMatch(h -> ((BrewingRecipe) h.value()).getIngredient().test(itemStack));
+        boolean isValidIngredient = level.recipeAccess()
+                .propertySet(AAMisc.BREWING_RECIPE_PROPERTY_SET)
+                .test(itemStack);
 
         if (isValidIngredient) {
             cir.setReturnValue(true);

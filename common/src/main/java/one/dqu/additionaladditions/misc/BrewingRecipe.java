@@ -2,10 +2,14 @@ package one.dqu.additionaladditions.misc;
 
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.alchemy.Potion;
+import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 import one.dqu.additionaladditions.registry.AAMisc;
@@ -22,31 +26,32 @@ import one.dqu.additionaladditions.registry.AAMisc;
  * <pre>{@code
  * {
  *   "type": "additionaladditions:brewing",
- *   "input": { "item": "minecraft:potion" },
- *   "ingredient": { "item": "minecraft:nether_wart" },
+ *   "potion": "minecraft:water",
+ *   "ingredient": "minecraft:nether_wart",
  *   "result": { "id": "minecraft:golden_apple" }
  * }
  * }</pre>
  */
 public class BrewingRecipe implements Recipe<BrewingRecipe.BrewingRecipeInput> {
-    private final Ingredient input;
+    private final Holder<Potion> potion;
     private final Ingredient ingredient;
     private final ItemStack result;
 
     /**
-     * @param input item in the three bottom slots (bottles)
+     * @param potion potion component of the item in the three bottom slots (bottles)
      * @param ingredient item in the top slot, the brewing ingredient
      * @param result the resulting item in the bottom slot
      */
-    public BrewingRecipe(Ingredient input, Ingredient ingredient, ItemStack result) {
-        this.input = input;
+    public BrewingRecipe(Holder<Potion> potion, Ingredient ingredient, ItemStack result) {
+        this.potion = potion;
         this.ingredient = ingredient;
         this.result = result;
     }
 
     @Override
     public boolean matches(BrewingRecipeInput recipeInput, Level level) {
-        return input.test(recipeInput.input()) && ingredient.test(recipeInput.ingredient());
+        PotionContents contents = recipeInput.input().get(DataComponents.POTION_CONTENTS);
+        return contents != null && contents.is(potion) && ingredient.test(recipeInput.ingredient());
     }
 
     @Override
@@ -74,6 +79,12 @@ public class BrewingRecipe implements Recipe<BrewingRecipe.BrewingRecipeInput> {
         return RecipeBookCategories.CRAFTING_MISC;
     }
 
+    // prevents console warns from recipe book validation
+    @Override
+    public boolean isSpecial() {
+        return true;
+    }
+
     public ItemStack getResult() {
         return result;
     }
@@ -82,8 +93,8 @@ public class BrewingRecipe implements Recipe<BrewingRecipe.BrewingRecipeInput> {
         return ingredient;
     }
 
-    public Ingredient getInput() {
-        return input;
+    public Holder<Potion> getPotion() {
+        return potion;
     }
 
     public record BrewingRecipeInput(
@@ -103,14 +114,14 @@ public class BrewingRecipe implements Recipe<BrewingRecipe.BrewingRecipeInput> {
     public static class BrewingRecipeSerializer implements RecipeSerializer<BrewingRecipe> {
         public static final MapCodec<BrewingRecipe> CODEC = RecordCodecBuilder.mapCodec(
                 instance -> instance.group(
-                        Ingredient.CODEC.fieldOf("input").forGetter(BrewingRecipe::getInput),
+                        Potion.CODEC.fieldOf("potion").forGetter(BrewingRecipe::getPotion),
                         Ingredient.CODEC.fieldOf("ingredient").forGetter(BrewingRecipe::getIngredient),
                         ItemStack.CODEC.fieldOf("result").forGetter(BrewingRecipe::getResult)
                 ).apply(instance, BrewingRecipe::new)
         );
 
         public static final StreamCodec<RegistryFriendlyByteBuf, BrewingRecipe> STREAM_CODEC = StreamCodec.composite(
-                Ingredient.CONTENTS_STREAM_CODEC, BrewingRecipe::getInput,
+                Potion.STREAM_CODEC, BrewingRecipe::getPotion,
                 Ingredient.CONTENTS_STREAM_CODEC, BrewingRecipe::getIngredient,
                 ItemStack.STREAM_CODEC, BrewingRecipe::getResult,
                 BrewingRecipe::new
