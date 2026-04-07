@@ -16,7 +16,7 @@ import one.dqu.additionaladditions.registry.AAItems;
 public class WrenchHopperTest {
     @GameTest(template = "additionaladditions:empty")
     public void test(GameTestHelper ctx) {
-        BlockPos hopperPos = new BlockPos(2, 2, 2);
+        BlockPos hopperPos = new BlockPos(2, 1, 2);
         BlockPos chestEastPos = hopperPos.east();
         BlockPos chestWestPos = hopperPos.west();
         BlockPos dispenserPos = hopperPos.north();

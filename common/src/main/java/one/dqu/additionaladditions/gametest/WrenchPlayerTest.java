@@ -19,7 +19,7 @@ import one.dqu.additionaladditions.registry.AAItems;
 public class WrenchPlayerTest {
     @GameTest(template = "additionaladditions:empty")
     public void test(GameTestHelper ctx) {
-        BlockPos pos = new BlockPos(0, 2, 0);
+        BlockPos pos = new BlockPos(0, 1, 0);
         Player player = ctx.makeMockPlayer(GameType.SURVIVAL);
         player.setItemInHand(InteractionHand.MAIN_HAND, AAItems.WRENCH_ITEM.get().getDefaultInstance());
         player.setShiftKeyDown(true);

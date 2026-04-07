@@ -14,7 +14,7 @@ import one.dqu.additionaladditions.registry.AAItems;
 public class WrenchPistonTest {
     @GameTest(template = "additionaladditions:empty")
     public void test(GameTestHelper ctx) {
-        BlockPos pistonBasePos = new BlockPos(0, 2, 0);
+        BlockPos pistonBasePos = new BlockPos(0, 1, 0);
         BlockPos pistonHeadPos = pistonBasePos.above();
         BlockPos redstoneBlockPos = pistonBasePos.east();
         BlockPos dispenserPos = pistonBasePos.south();

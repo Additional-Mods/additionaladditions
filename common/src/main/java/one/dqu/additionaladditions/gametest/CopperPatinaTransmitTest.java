@@ -13,10 +13,10 @@ import one.dqu.additionaladditions.registry.AABlocks;
 public class CopperPatinaTransmitTest {
     @GameTest(template = "additionaladditions:empty")
     public void test(GameTestHelper ctx) {
-        BlockPos lampOne = new BlockPos(0, 3, 0);
-        BlockPos lampTwo = new BlockPos(1, 3, 0);
-        BlockPos pulseOne = new BlockPos(0, 2, 4);
-        BlockPos pulseTwo = new BlockPos(1, 2, 4);
+        BlockPos lampOne = new BlockPos(0, 2, 0);
+        BlockPos lampTwo = new BlockPos(1, 2, 0);
+        BlockPos pulseOne = new BlockPos(0, 1, 4);
+        BlockPos pulseTwo = new BlockPos(1, 1, 4);
 
         ctx.setBlock(lampOne, Blocks.REDSTONE_LAMP);
         ctx.setBlock(lampOne.below(), Blocks.STONE);
@@ -24,8 +24,8 @@ public class CopperPatinaTransmitTest {
         ctx.setBlock(lampTwo.below(), Blocks.STONE);
 
         for (int i = 1; i < 4; i++) {
-            ctx.setBlock(new BlockPos(0, 2, i), Blocks.REDSTONE_WIRE);
-            ctx.setBlock(new BlockPos(1, 2, i), AABlocks.COPPER_PATINA.get());
+            ctx.setBlock(new BlockPos(0, 1, i), Blocks.REDSTONE_WIRE);
+            ctx.setBlock(new BlockPos(1, 1, i), AABlocks.COPPER_PATINA.get());
         }
 
         ctx.startSequence()

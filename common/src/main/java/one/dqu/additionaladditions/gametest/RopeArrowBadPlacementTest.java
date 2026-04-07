@@ -19,8 +19,8 @@ import java.util.List;
 public class RopeArrowBadPlacementTest {
     @GameTest(template = "additionaladditions:empty_big")
     public void pickup(GameTestHelper ctx) {
-        BlockPos targetPos = new BlockPos(5, 10, 5);
-        BlockPos arrowStartPos = new BlockPos(5, 7, 5);
+        BlockPos targetPos = new BlockPos(5, 9, 5);
+        BlockPos arrowStartPos = new BlockPos(5, 6, 5);
 
         ctx.setBlock(targetPos, Blocks.CAKE);
 

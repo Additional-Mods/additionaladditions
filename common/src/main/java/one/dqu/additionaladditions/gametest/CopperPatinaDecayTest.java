@@ -12,10 +12,10 @@ import one.dqu.additionaladditions.registry.AABlocks;
 public class CopperPatinaDecayTest {
     @GameTest(template = "additionaladditions:empty")
     public void test(GameTestHelper ctx) {
-        BlockPos powerSource = new BlockPos(0, 2, 0);
-        BlockPos patina1 = new BlockPos(1, 2, 0);
-        BlockPos patina2 = new BlockPos(2, 2, 0);
-        BlockPos patina3 = new BlockPos(3, 2, 0);
+        BlockPos powerSource = new BlockPos(0, 1, 0);
+        BlockPos patina1 = new BlockPos(1, 1, 0);
+        BlockPos patina2 = new BlockPos(2, 1, 0);
+        BlockPos patina3 = new BlockPos(3, 1, 0);
 
         ctx.pulseRedstone(powerSource, 10);
 

@@ -16,8 +16,8 @@ import one.dqu.additionaladditions.registry.AAItems;
 public class RopeArrowEntityHitTest {
     @GameTest(template = "additionaladditions:empty")
     public void pickup(GameTestHelper ctx) {
-        BlockPos pigPos = new BlockPos(2, 2, 2);
-        BlockPos arrowStartPos = new BlockPos(2, 2, 0);
+        BlockPos pigPos = new BlockPos(2, 1, 2);
+        BlockPos arrowStartPos = new BlockPos(2, 1, 0);
 
         ctx.runAtTickTime(5, () -> {
             Pig pig = ctx.spawnWithNoFreeWill(EntityType.PIG, pigPos);
@@ -35,8 +35,8 @@ public class RopeArrowEntityHitTest {
 
     @GameTest(template = "additionaladditions:empty")
     public void noPickup(GameTestHelper ctx) {
-        BlockPos pigPos = new BlockPos(2, 2, 2);
-        BlockPos arrowStartPos = new BlockPos(2, 2, 0);
+        BlockPos pigPos = new BlockPos(2, 1, 2);
+        BlockPos arrowStartPos = new BlockPos(2, 1, 0);
 
         ctx.runAtTickTime(5, () -> {
             Pig pig = ctx.spawnWithNoFreeWill(EntityType.PIG, pigPos);

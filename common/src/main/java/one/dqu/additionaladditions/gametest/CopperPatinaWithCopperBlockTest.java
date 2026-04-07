@@ -17,7 +17,7 @@ import one.dqu.additionaladditions.registry.AABlocks;
 public class CopperPatinaWithCopperBlockTest {
     @GameTest(template = "additionaladditions:empty")
     public void scrape(GameTestHelper ctx) {
-        BlockPos copper = new BlockPos(2, 2, 2);
+        BlockPos copper = new BlockPos(2, 1, 2);
 
         ctx.setBlock(copper, Blocks.OXIDIZED_COPPER);
 
@@ -33,7 +33,7 @@ public class CopperPatinaWithCopperBlockTest {
 
     @GameTest(template = "additionaladditions:empty")
     public void oxidize(GameTestHelper ctx) {
-        BlockPos copper = new BlockPos(2, 2, 2);
+        BlockPos copper = new BlockPos(2, 1, 2);
 
         ctx.setBlock(copper, Blocks.COPPER_BLOCK);
 

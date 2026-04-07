@@ -9,11 +9,8 @@ import org.slf4j.LoggerFactory;
 
 /*
 TODO:
-- "glint.ElytraLayerMixin" was removed temporarily to fix compile
-- glint rendering for items isnt working
 - use crafting_transmute for rose gold and album dyeing recipes
 - migrate tags to v2 (fabric log warn)
-- gametests for copper patina are broken (them themselves)
  */
 public final class AdditionalAdditions {
     public static final String NAMESPACE = "additionaladditions";

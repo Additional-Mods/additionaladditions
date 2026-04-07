@@ -14,7 +14,7 @@ import one.dqu.additionaladditions.registry.AAItems;
 public class WrenchDispenserTest {
     @GameTest(template = "additionaladditions:empty")
     public void test(GameTestHelper ctx) {
-        BlockPos pos = new BlockPos(0, 2, 0);
+        BlockPos pos = new BlockPos(0, 1, 0);
         BlockPos dispenserPos = pos.east();
         ctx.setBlock(dispenserPos, Blocks.DISPENSER.defaultBlockState().setValue(BlockStateProperties.FACING, Direction.WEST));
         ctx.setBlock(dispenserPos.above(), Blocks.HOPPER.defaultBlockState().setValue(BlockStateProperties.FACING_HOPPER, Direction.DOWN));
