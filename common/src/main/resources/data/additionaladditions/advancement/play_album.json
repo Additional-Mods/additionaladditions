@@ -18,8 +18,23 @@
   },
   "criteria": {
     "play_music": {
-      "trigger": "additionaladditions:play_album",
-      "conditions": {}
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "additionaladditions:pocket_jukebox",
+            "predicates": {
+              "minecraft:container": {
+                "items": {
+                  "contains": [
+                    {"items": "#additionaladditions:albums"}
+                  ]
+                }
+              }
+            }
+          }
+        ]
+      }
     }
   },
   "requirements": [

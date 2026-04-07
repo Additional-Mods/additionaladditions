@@ -13,6 +13,7 @@
   "mixins": [
     "BrewingStandBlockEntityMixin",
     "BrewingStandMenuMixin",
+    "InventoryChangeTriggerMixin",
     "ItemStackMixin",
     "MobMixin",
     "RecipeManagerMixin",

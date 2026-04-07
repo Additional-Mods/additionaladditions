@@ -83,18 +83,8 @@ public class AAMisc {
 
     /* ADVANCEMENT TRIGGERS */
 
-    public static final Supplier<SimplePlayerTrigger> PLAY_POCKET_JUKEBOX_TRIGGER = AARegistries.TRIGGERS.register(
-            ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "play_pocket_jukebox"),
-            SimplePlayerTrigger::new
-    );
-
     public static final Supplier<SimplePlayerTrigger> FERTILIZE_WITH_WATERING_CAN_TRIGGER = AARegistries.TRIGGERS.register(
             ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "fertilize_with_watering_can"),
-            SimplePlayerTrigger::new
-    );
-
-    public static final Supplier<SimplePlayerTrigger> PLAY_ALBUM_TRIGGER = AARegistries.TRIGGERS.register(
-            ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "play_album"),
             SimplePlayerTrigger::new
     );
 
