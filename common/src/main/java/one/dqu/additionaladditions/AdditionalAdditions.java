@@ -14,7 +14,6 @@ TODO:
 - use crafting_transmute for rose gold and album dyeing recipes
 - migrate tags to v2 (fabric log warn)
 - gametests for copper patina are broken (them themselves)
-- using some items eg wrench doesnt trigger hand swing
  */
 public final class AdditionalAdditions {
     public static final String NAMESPACE = "additionaladditions";

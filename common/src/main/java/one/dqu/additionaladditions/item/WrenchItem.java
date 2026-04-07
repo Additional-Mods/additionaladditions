@@ -58,9 +58,7 @@ public class WrenchItem extends ConfigurableItem {
     }
 
     private InteractionResult rotate(BlockPos pos, BlockState state, Level world, ItemStack stack, Optional<Player> player, Optional<InteractionHand> hand) {
-        if (!Config.WRENCH.get().enabled()) { return InteractionResult.FAIL; }
-
-        if (world.isClientSide()) return InteractionResult.PASS;
+        if (!Config.WRENCH.get().enabled()) return InteractionResult.FAIL;
 
         if (state.is(AAMisc.WRENCH_BLACKLIST_TAG)) return InteractionResult.PASS;
 
