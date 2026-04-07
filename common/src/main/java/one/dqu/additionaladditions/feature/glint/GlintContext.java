@@ -5,24 +5,25 @@ import net.fabricmc.api.Environment;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
 import one.dqu.additionaladditions.registry.AAMisc;
+import org.jetbrains.annotations.Nullable;
 
 @Environment(EnvType.CLIENT)
 public class GlintContext {
-    private static final ThreadLocal<ItemStack> currentItem = new ThreadLocal<>();
+    private static final ThreadLocal<DyeColor> currentDyeColor = new ThreadLocal<>();
 
-    public static void setCurrentItem(ItemStack itemStack) {
-        currentItem.set(itemStack);
-    }
-
-    public static ItemStack getCurrentItem() {
-        return currentItem.get();
-    }
-
-    public static DyeColor getDyeColor() {
-        ItemStack itemStack = getCurrentItem();
+    public static void setCurrentItem(@Nullable ItemStack itemStack) {
         if (itemStack != null && itemStack.has(AAMisc.GLINT_COLOR_COMPONENT.get())) {
-            return itemStack.get(AAMisc.GLINT_COLOR_COMPONENT.get()).color();
+            currentDyeColor.set(itemStack.get(AAMisc.GLINT_COLOR_COMPONENT.get()).color());
+        } else {
+            currentDyeColor.set(null);
         }
-        return null;
+    }
+
+    public static void setDyeColor(@Nullable DyeColor color) {
+        currentDyeColor.set(color);
+    }
+
+    public static @Nullable DyeColor getDyeColor() {
+        return currentDyeColor.get();
     }
 }

@@ -1,9 +1,12 @@
 package one.dqu.additionaladditions.mixin.glint;
 
-import com.mojang.blaze3d.vertex.PoseStack;
+import one.dqu.additionaladditions.feature.glint.GlintColorHolder;
 import one.dqu.additionaladditions.feature.glint.GlintContext;
-import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.entity.ItemRenderer;
+import one.dqu.additionaladditions.registry.AAMisc;
+import net.minecraft.client.renderer.item.ItemModelResolver;
+import net.minecraft.client.renderer.item.ItemStackRenderState;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -14,12 +17,17 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 /**
- * Stores the currently rendered itemstack in GlintContext.
+ * Stores the glint dye color in GlintContext and on the ItemStackRenderState.
  */
-@Mixin(ItemRenderer.class)
+@Mixin(ItemModelResolver.class)
 public class ItemRendererMixin {
-    @Inject(method = "renderStatic(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/item/ItemDisplayContext;IILcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;Lnet/minecraft/world/level/Level;I)V", at = @At("HEAD"))
-    private void store(ItemStack itemStack, ItemDisplayContext itemDisplayContext, int i, int j, PoseStack poseStack, MultiBufferSource multiBufferSource, @Nullable Level level, int k, CallbackInfo ci) {
-        GlintContext.setCurrentItem(itemStack);
+    @Inject(method = "updateForTopItem", at = @At("HEAD"))
+    private void store(ItemStackRenderState itemStackRenderState, ItemStack itemStack, ItemDisplayContext itemDisplayContext, boolean bl, @Nullable Level level, @Nullable LivingEntity livingEntity, int i, CallbackInfo ci) {
+        DyeColor color = null;
+        if (itemStack.has(AAMisc.GLINT_COLOR_COMPONENT.get())) {
+            color = itemStack.get(AAMisc.GLINT_COLOR_COMPONENT.get()).color();
+        }
+        GlintContext.setDyeColor(color);
+        ((GlintColorHolder) itemStackRenderState).additionaladditions$setGlintColor(color);
     }
 }

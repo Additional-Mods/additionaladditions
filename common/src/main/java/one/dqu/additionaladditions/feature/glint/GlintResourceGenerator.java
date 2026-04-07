@@ -81,7 +81,7 @@ public class GlintResourceGenerator {
                 int tintedG = Math.min(255, (int) ((gray * tintG * fiddle) / 255));
                 int tintedB = Math.min(255, (int) ((gray * tintB * fiddle) / 255));
 
-                int tintedPixel = (alpha << 24) | (tintedB << 16) | (tintedG << 8) | tintedR;
+                int tintedPixel = (alpha << 24) | (tintedR << 16) | (tintedG << 8) | tintedB;
                 tintedImage.setPixel(x, y, tintedPixel);
             }
         }

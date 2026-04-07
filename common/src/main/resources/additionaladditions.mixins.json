@@ -7,8 +7,10 @@
     "GuiMixin",
     "glint.HumanoidArmorLayerMixin",
     "glint.ItemRendererMixin",
+    "glint.ItemStackRenderStateMixin",
     "glint.RenderBuffersMixin",
-    "glint.RenderTypeMixin"
+    "glint.RenderTypeMixin",
+    "glint.WingsLayerMixin"
   ],
   "mixins": [
     "BrewingStandBlockEntityMixin",
