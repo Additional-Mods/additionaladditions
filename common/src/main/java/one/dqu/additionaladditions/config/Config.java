@@ -200,4 +200,10 @@ public class Config {
             "powered_rails_copper_recipe", FeatureConfig.CODEC,
             new FeatureConfig(true)
     );
+
+    // i believe this will not be needed on 1.21.4
+    public static final ConfigProperty<RecipeViewerCompatConfig> RECIPE_VIEWER = new ConfigProperty<>(
+            "compat/recipe_viewers", RecipeViewerCompatConfig.CODEC,
+            new RecipeViewerCompatConfig(true, true, true)
+    );
 }

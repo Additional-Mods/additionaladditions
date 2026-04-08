@@ -34,14 +34,14 @@ import java.util.function.Supplier;
 public class REICompat implements REIClientPlugin {
     @Override
     public void registerDisplays(DisplayRegistry registry) {
-        if (Config.ALBUM.get().enabled()) {
+        if (Config.ALBUM.get().enabled() && Config.RECIPE_VIEWER.get().albumDyeing()) {
             registerAlbumRecipes(registry);
         }
-        if (Config.ROSE_GOLD.get().enabled()) {
+        if (Config.ROSE_GOLD.get().enabled() && Config.RECIPE_VIEWER.get().roseGold()) {
             roseGoldTransmuteRecipe(registry);
         }
         brewingRecipes(registry);
-        if (Config.SUSPICIOUS_DYE.get().enabled()) {
+        if (Config.SUSPICIOUS_DYE.get().enabled() && Config.RECIPE_VIEWER.get().suspiciousDyeing()) {
             registry.registerDisplayGenerator(BuiltinPlugin.CRAFTING, new SuspiciousDyeDisplayGenerator());
         }
     }

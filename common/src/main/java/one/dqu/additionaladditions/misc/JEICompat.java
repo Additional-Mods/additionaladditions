@@ -47,18 +47,23 @@ public class JEICompat implements IModPlugin {
     @Override
     public void registerVanillaCategoryExtensions(IVanillaCategoryExtensionRegistration event) {
         // its bugged with emi so
+
         // noinspection ConstantValue
-        if (Config.SUSPICIOUS_DYE.get().enabled() && !ModCompatibility.isModPresent("emi")) {
+        if (ModCompatibility.isModPresent("emi")) {
+            return;
+        }
+
+        if (Config.SUSPICIOUS_DYE.get().enabled() && Config.RECIPE_VIEWER.get().suspiciousDyeing()) {
             event.getCraftingCategory().addExtension(SuspiciousDyeRecipe.class, new SuspiciousDyeExtension());
         }
     }
 
     @Override
     public void registerRecipes(IRecipeRegistration event) {
-        if (Config.ALBUM.get().enabled()) {
+        if (Config.ALBUM.get().enabled() && Config.RECIPE_VIEWER.get().albumDyeing()) {
             albumDyeRecipe(event);
         }
-        if (Config.ROSE_GOLD.get().enabled()) {
+        if (Config.ROSE_GOLD.get().enabled() && Config.RECIPE_VIEWER.get().roseGold()) {
             roseGoldTransmuteRecipe(event);
         }
         brewingRecipes(event);
