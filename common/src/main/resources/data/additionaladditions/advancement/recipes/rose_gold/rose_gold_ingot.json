@@ -13,23 +13,16 @@
           }
         ]
       }
-    },
-    "has_the_recipe": {
-      "trigger": "minecraft:recipe_unlocked",
-      "conditions": {
-        "recipe": "additionaladditions:rose_gold/rose_gold"
-      }
     }
   },
   "requirements": [
     [
-      "has_ingredients",
-      "has_the_recipe"
+      "has_ingredients"
     ]
   ],
   "rewards": {
     "recipes": [
-      "additionaladditions:rose_gold/rose_gold"
+      "additionaladditions:rose_gold/rose_gold_ingot"
     ]
   }
 }

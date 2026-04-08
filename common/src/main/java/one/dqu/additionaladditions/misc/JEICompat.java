@@ -16,16 +16,13 @@ import mezz.jei.api.registration.IVanillaCategoryExtensionRegistration;
 import mezz.jei.api.runtime.IIngredientManager;
 import mezz.jei.api.runtime.IJeiRuntime;
 import net.minecraft.core.Holder;
-import net.minecraft.core.NonNullList;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.alchemy.PotionContents;
-import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.item.crafting.RecipeManager;
+import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.item.crafting.display.SlotDisplay;
 import net.minecraft.world.item.crafting.display.SlotDisplay.TagSlotDisplay;
 import one.dqu.additionaladditions.AdditionalAdditions;
@@ -61,12 +58,6 @@ public class JEICompat implements IModPlugin {
 
     @Override
     public void registerRecipes(IRecipeRegistration event) {
-        if (Config.ALBUM.get().enabled()) {
-            albumDyeRecipe(event);
-        }
-        if (Config.ROSE_GOLD.get().enabled()) {
-            roseGoldTransmuteRecipe(event);
-        }
         brewingRecipes(event);
     }
 
@@ -84,102 +75,6 @@ public class JEICompat implements IModPlugin {
                 .toList();
 
         manager.removeIngredientsAtRuntime(VanillaTypes.ITEM_STACK, toHide);
-    }
-
-    // AlbumDyeRecipe
-    private void albumDyeRecipe(IRecipeRegistration event) {
-        List<RecipeHolder<CraftingRecipe>> recipes = new ArrayList<>();
-
-        // copied from albumdyerecipe
-        final Map<DyeColor, Item> dyeToAlbumMap = Map.ofEntries(
-                Map.entry(DyeColor.WHITE, AAItems.WHITE_ALBUM.get()),
-                Map.entry(DyeColor.LIGHT_GRAY, AAItems.LIGHT_GRAY_ALBUM.get()),
-                Map.entry(DyeColor.GRAY, AAItems.GRAY_ALBUM.get()),
-                Map.entry(DyeColor.BLACK, AAItems.BLACK_ALBUM.get()),
-                Map.entry(DyeColor.BROWN, AAItems.BROWN_ALBUM.get()),
-                Map.entry(DyeColor.RED, AAItems.RED_ALBUM.get()),
-                Map.entry(DyeColor.ORANGE, AAItems.ORANGE_ALBUM.get()),
-                Map.entry(DyeColor.YELLOW, AAItems.YELLOW_ALBUM.get()),
-                Map.entry(DyeColor.LIME, AAItems.LIME_ALBUM.get()),
-                Map.entry(DyeColor.GREEN, AAItems.GREEN_ALBUM.get()),
-                Map.entry(DyeColor.CYAN, AAItems.CYAN_ALBUM.get()),
-                Map.entry(DyeColor.LIGHT_BLUE, AAItems.LIGHT_BLUE_ALBUM.get()),
-                Map.entry(DyeColor.BLUE, AAItems.BLUE_ALBUM.get()),
-                Map.entry(DyeColor.PURPLE, AAItems.PURPLE_ALBUM.get()),
-                Map.entry(DyeColor.MAGENTA, AAItems.MAGENTA_ALBUM.get()),
-                Map.entry(DyeColor.PINK, AAItems.PINK_ALBUM.get())
-        );
-
-        for (Map.Entry<DyeColor, Item> entry : dyeToAlbumMap.entrySet()) {
-            DyeColor color = entry.getKey();
-            Item result = entry.getValue();
-
-            Ingredient dyeIngredient = Ingredient.of(DyeItem.byColor(color));
-
-            // list of albums excluding the result album (cant dye to same color)
-            List<ItemStack> validAlbums = new ArrayList<>();
-            var albums = BuiltInRegistries.ITEM.getTagOrEmpty(AAMisc.ALBUMS_TAG);
-            for (Holder<Item> albumItem : albums) {
-                if (albumItem.value() != result) {
-                    validAlbums.add(new ItemStack(albumItem.value()));
-                }
-            }
-            Ingredient albumIngredient = Ingredient.of(validAlbums.stream().map(ItemStack::getItem).toArray(Item[]::new));
-
-            NonNullList<Ingredient> inputs = NonNullList.of(albumIngredient, albumIngredient, dyeIngredient);
-            ShapelessRecipe recipe = new ShapelessRecipe(
-                    "additionaladditions:/jei_albums",
-                    CraftingBookCategory.MISC,
-                    new ItemStack(result),
-                    inputs
-            );
-
-            ResourceLocation location = ResourceLocation.fromNamespaceAndPath("additionaladditions", "/jei_album_" + color.getName());
-            recipes.add(new RecipeHolder<>(ResourceKey.create(Registries.RECIPE, location), recipe));
-        }
-
-        event.addRecipes(RecipeTypes.CRAFTING, recipes);
-    }
-
-    // RoseGoldTransmuteRecipe
-    private void roseGoldTransmuteRecipe(IRecipeRegistration event) {
-        List<RecipeHolder<CraftingRecipe>> recipes = new ArrayList<>();
-
-        // copied from RoseGoldTransmuteRecipe
-        final Map<Item, Item> transmuteMap = Map.of(
-                Items.IRON_SWORD, AAItems.ROSE_GOLD_SWORD.get(),
-                Items.IRON_SHOVEL, AAItems.ROSE_GOLD_SHOVEL.get(),
-                Items.IRON_PICKAXE, AAItems.ROSE_GOLD_PICKAXE.get(),
-                Items.IRON_AXE, AAItems.ROSE_GOLD_AXE.get(),
-                Items.IRON_HOE, AAItems.ROSE_GOLD_HOE.get(),
-                Items.IRON_HELMET, AAItems.ROSE_GOLD_HELMET.get(),
-                Items.IRON_CHESTPLATE, AAItems.ROSE_GOLD_CHESTPLATE.get(),
-                Items.IRON_LEGGINGS, AAItems.ROSE_GOLD_LEGGINGS.get(),
-                Items.IRON_BOOTS, AAItems.ROSE_GOLD_BOOTS.get(),
-                Items.IRON_HORSE_ARMOR, AAItems.ROSE_GOLD_HORSE_ARMOR.get()
-        );
-
-        for (Map.Entry<Item, Item> entry : transmuteMap.entrySet()) {
-            Item ironItem = entry.getKey();
-            String ironId = BuiltInRegistries.ITEM.getKey(ironItem).getPath();
-            Item roseGoldItem = entry.getValue();
-
-            Ingredient ironIngredient = Ingredient.of(ironItem);
-            Ingredient roseGoldIngotIngredient = Ingredient.of(AAItems.ROSE_GOLD_INGOT.get());
-
-            NonNullList<Ingredient> inputs = NonNullList.of(ironIngredient, ironIngredient, roseGoldIngotIngredient);
-            ShapelessRecipe recipe = new ShapelessRecipe(
-                    "additionaladditions:/jei_rose_gold_transmute_" + ironId,
-                    CraftingBookCategory.EQUIPMENT,
-                    new ItemStack(roseGoldItem),
-                    inputs
-            );
-
-            ResourceLocation location = ResourceLocation.fromNamespaceAndPath("additionaladditions", "/jei_rose_gold_transmute_" + ironId);
-            recipes.add(new RecipeHolder<>(ResourceKey.create(Registries.RECIPE, location), recipe));
-        }
-
-        event.addRecipes(RecipeTypes.CRAFTING, recipes);
     }
 
    // BrewingRecipe

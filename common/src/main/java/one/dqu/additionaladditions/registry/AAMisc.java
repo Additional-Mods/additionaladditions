@@ -15,7 +15,6 @@ import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.Block;
 import one.dqu.additionaladditions.AdditionalAdditions;
 import one.dqu.additionaladditions.feature.album.AlbumContents;
-import one.dqu.additionaladditions.feature.album.AlbumDyeRecipe;
 import one.dqu.additionaladditions.feature.glint.GlintColor;
 import one.dqu.additionaladditions.misc.*;
 
@@ -48,19 +47,9 @@ public class AAMisc {
 
     /* RECIPE SERIALIZERS AND TYPES */
 
-    public static final Supplier<RecipeSerializer<RoseGoldTransmuteRecipe>> ROSE_GOLD_TRANSMUTE_RECIPE_SERIALIZER = AARegistries.RECIPE_SERIALIZERS.register(
-            ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "rose_gold_transmute"),
-            () -> new CustomRecipe.Serializer<>(RoseGoldTransmuteRecipe::new)
-    );
-
     public static final Supplier<RecipeSerializer<SuspiciousDyeRecipe>> SUSPICIOUS_DYE_RECIPE_SERIALIZER = AARegistries.RECIPE_SERIALIZERS.register(
             ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "suspicious_dye"),
             () -> new CustomRecipe.Serializer<>(SuspiciousDyeRecipe::new)
-    );
-
-    public static final Supplier<RecipeSerializer<AlbumDyeRecipe>> ALBUM_DYE_RECIPE_SERIALIZER = AARegistries.RECIPE_SERIALIZERS.register(
-            ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "album_dye"),
-            () -> new CustomRecipe.Serializer<>(AlbumDyeRecipe::new)
     );
 
     public static final Supplier<RecipeSerializer<BrewingRecipe>> BREWING_RECIPE_SERIALIZER = AARegistries.RECIPE_SERIALIZERS.register(

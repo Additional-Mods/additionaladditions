@@ -1,0 +1,25 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_rose_gold_block": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "additionaladditions:rose_gold_block"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_rose_gold_block"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "additionaladditions:rose_gold/rose_gold_ingot_from_block"
+    ]
+  }
+}

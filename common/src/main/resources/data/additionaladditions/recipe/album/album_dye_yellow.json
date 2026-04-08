@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:crafting_transmute",
+  "group": "additionaladditions:album_dye",
+  "category": "misc",
+  "input": "#additionaladditions:albums",
+  "material": "minecraft:yellow_dye",
+  "result": "additionaladditions:yellow_album"
+}

@@ -1,0 +1,40 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_album": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "#additionaladditions:albums"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_album"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "additionaladditions:album/album_dye_white",
+      "additionaladditions:album/album_dye_light_gray",
+      "additionaladditions:album/album_dye_gray",
+      "additionaladditions:album/album_dye_black",
+      "additionaladditions:album/album_dye_brown",
+      "additionaladditions:album/album_dye_red",
+      "additionaladditions:album/album_dye_orange",
+      "additionaladditions:album/album_dye_yellow",
+      "additionaladditions:album/album_dye_lime",
+      "additionaladditions:album/album_dye_green",
+      "additionaladditions:album/album_dye_cyan",
+      "additionaladditions:album/album_dye_light_blue",
+      "additionaladditions:album/album_dye_blue",
+      "additionaladditions:album/album_dye_purple",
+      "additionaladditions:album/album_dye_magenta",
+      "additionaladditions:album/album_dye_pink"
+    ]
+  }
+}

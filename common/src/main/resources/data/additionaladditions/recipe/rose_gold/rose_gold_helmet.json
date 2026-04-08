@@ -1,0 +1,7 @@
+{
+  "type": "minecraft:crafting_transmute",
+  "category": "equipment",
+  "input": "minecraft:iron_helmet",
+  "material": "additionaladditions:rose_gold_ingot",
+  "result": "additionaladditions:rose_gold_helmet"
+}

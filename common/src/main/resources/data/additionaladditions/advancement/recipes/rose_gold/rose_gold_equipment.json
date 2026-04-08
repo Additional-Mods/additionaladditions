@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_rose_gold_ingot": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "additionaladditions:rose_gold_ingot"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_rose_gold_ingot"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "additionaladditions:rose_gold/rose_gold_sword",
+      "additionaladditions:rose_gold/rose_gold_shovel",
+      "additionaladditions:rose_gold/rose_gold_pickaxe",
+      "additionaladditions:rose_gold/rose_gold_axe",
+      "additionaladditions:rose_gold/rose_gold_hoe",
+      "additionaladditions:rose_gold/rose_gold_helmet",
+      "additionaladditions:rose_gold/rose_gold_chestplate",
+      "additionaladditions:rose_gold/rose_gold_leggings",
+      "additionaladditions:rose_gold/rose_gold_boots",
+      "additionaladditions:rose_gold/rose_gold_horse_armor",
+      "additionaladditions:rose_gold/rose_gold_block"
+    ]
+  }
+}

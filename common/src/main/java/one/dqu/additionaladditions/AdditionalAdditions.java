@@ -9,7 +9,6 @@ import org.slf4j.LoggerFactory;
 
 /*
 TODO:
-- use crafting_transmute for rose gold and album dyeing recipes
 - migrate tags to v2 (fabric log warn)
  */
 public final class AdditionalAdditions {
