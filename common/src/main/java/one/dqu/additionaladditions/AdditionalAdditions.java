@@ -7,10 +7,6 @@ import one.dqu.additionaladditions.util.ModCompatibility;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/*
-TODO:
-- migrate tags to v2 (fabric log warn)
- */
 public final class AdditionalAdditions {
     public static final String NAMESPACE = "additionaladditions";
     public static final Logger LOGGER = LoggerFactory.getLogger(NAMESPACE);
