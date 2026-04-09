@@ -62,13 +62,13 @@
       "one.dqu.additionaladditions.gametest.RopeArrowBadPlacementTest"
     ],
     "jei_mod_plugin": [
-      "one.dqu.additionaladditions.misc.JEICompat"
+      "one.dqu.additionaladditions.recipe.JEICompat"
     ],
     "rei_client": [
-      "one.dqu.additionaladditions.misc.REICompat"
+      "one.dqu.additionaladditions.recipe.REICompat"
     ],
     "rei_common": [
-      "one.dqu.additionaladditions.misc.REICommonCompat"
+      "one.dqu.additionaladditions.recipe.REICommonCompat"
     ]
   },
   "mixins": [
