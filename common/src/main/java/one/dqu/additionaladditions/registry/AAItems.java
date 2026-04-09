@@ -544,7 +544,8 @@ public class AAItems {
 
         public <T extends Item> Supplier<T> build(Function<Item.Properties, T> itemFactory) {
             ResourceLocation location = ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, id);
-            Supplier<Boolean> enabled = config != null ? config.get()::enabled : () -> true;
+            ConfigProperty<? extends Toggleable> capturedConfig = config;
+            Supplier<Boolean> enabled = capturedConfig != null ? () -> capturedConfig.get().enabled() : () -> true;
 
             Consumer<Item.Properties> deferredProperties = propertiesConfig;
             Supplier<T> item = AARegistries.ITEMS.register(location, () -> {

@@ -82,19 +82,11 @@ public class ConfigLoader {
 
         apply(configFiles);
 
-        OBSERVERS.forEach((id, observer) -> {
-            try {
-                observer.run();
-            } catch (Exception e) {
-                AdditionalAdditions.LOGGER.error("[{}] Failed to run config observer for {}: {}", AdditionalAdditions.NAMESPACE, id, e);
-            }
-        });
-
         AdditionalAdditions.LOGGER.info("[{}] Config load complete.", AdditionalAdditions.NAMESPACE);
     }
 
     /**
-     * Applies the given config files to their respective ConfigProperty instances.
+     * Applies the given config files to their respective ConfigProperty instances and notifies config observers.
      */
     public static void apply(Map<ResourceLocation, JsonElement> configFiles) {
         for (Map.Entry<ResourceLocation, JsonElement> entry : configFiles.entrySet()) {
@@ -108,6 +100,14 @@ public class ConfigLoader {
 
             parseAndSet(property, json);
         }
+
+        OBSERVERS.forEach((id, observer) -> {
+            try {
+                observer.run();
+            } catch (Exception e) {
+                AdditionalAdditions.LOGGER.error("[{}] Failed to run config observer for {}: {}", AdditionalAdditions.NAMESPACE, id, e);
+            }
+        });
     }
 
     /**
