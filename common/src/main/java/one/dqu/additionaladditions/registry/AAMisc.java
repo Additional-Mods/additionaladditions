@@ -16,7 +16,8 @@ import net.minecraft.world.level.block.Block;
 import one.dqu.additionaladditions.AdditionalAdditions;
 import one.dqu.additionaladditions.feature.album.AlbumContents;
 import one.dqu.additionaladditions.feature.glint.GlintColor;
-import one.dqu.additionaladditions.misc.*;
+import one.dqu.additionaladditions.recipe.*;
+import one.dqu.additionaladditions.util.SimplePlayerTrigger;
 
 import java.util.function.Supplier;
 

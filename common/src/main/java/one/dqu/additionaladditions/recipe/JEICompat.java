@@ -1,11 +1,10 @@
-package one.dqu.additionaladditions.misc;
+package one.dqu.additionaladditions.recipe;
 
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.constants.RecipeTypes;
 import mezz.jei.api.constants.VanillaTypes;
-import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
-import mezz.jei.api.gui.ingredient.ICraftingGridHelper;
+import mezz.jei.api.gui.ingredient.IRecipeSlotDrawable;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.category.extensions.vanilla.crafting.ICraftingCategoryExtension;
@@ -19,12 +18,13 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.DyeColor;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.alchemy.PotionContents;
-import net.minecraft.world.item.crafting.RecipeManager;
-import net.minecraft.world.item.crafting.*;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.display.SlotDisplay;
-import net.minecraft.world.item.crafting.display.SlotDisplay.TagSlotDisplay;
 import one.dqu.additionaladditions.AdditionalAdditions;
 import one.dqu.additionaladditions.config.Config;
 import one.dqu.additionaladditions.config.ConfigProperty;
@@ -74,7 +74,9 @@ public class JEICompat implements IModPlugin {
                 .map(ItemStack::new)
                 .toList();
 
-        manager.removeIngredientsAtRuntime(VanillaTypes.ITEM_STACK, toHide);
+        if (!toHide.isEmpty()) {
+            manager.removeIngredientsAtRuntime(VanillaTypes.ITEM_STACK, toHide);
+        }
     }
 
    // BrewingRecipe
@@ -83,13 +85,7 @@ public class JEICompat implements IModPlugin {
 
         IVanillaRecipeFactory factory = event.getVanillaRecipeFactory();
 
-        @SuppressWarnings("unchecked")
-        List<RecipeHolder<BrewingRecipe>> recipes = ((RecipeManager) ModCompatibility.Client.getClientLevel().recipeAccess()).getRecipes().stream()
-                .filter(h -> h.value().getType() == AAMisc.BREWING_RECIPE_TYPE.get())
-                .map(h -> (RecipeHolder<BrewingRecipe>) h)
-                .toList();
-
-        List<IJeiBrewingRecipe> jeiRecipes = recipes
+        List<IJeiBrewingRecipe> jeiRecipes = BrewingRecipeCache.get()
                 .stream()
                 .map(holder -> {
                     BrewingRecipe recipe = holder.value();
@@ -112,77 +108,51 @@ public class JEICompat implements IModPlugin {
     private static class SuspiciousDyeExtension implements ICraftingCategoryExtension<SuspiciousDyeRecipe> {
         @Override
         public List<SlotDisplay> getIngredients(RecipeHolder<SuspiciousDyeRecipe> recipeHolder) {
-            return List.of(
-                    new TagSlotDisplay(ConventionalTags.ENCHANTABLE),
-                    new TagSlotDisplay(AAMisc.SUSPICIOUS_DYES_TAG)
-            );
-        }
-
-        public void setRecipe(RecipeHolder<SuspiciousDyeRecipe> recipeHolder, IRecipeLayoutBuilder builder, ICraftingGridHelper craftingGridHelper, IFocusGroup focuses) {
-            List<ItemStack> validFoilItems = new ArrayList<>();
+            List<SlotDisplay> foilStacks = new ArrayList<>();
             for (Holder<Item> item : BuiltInRegistries.ITEM.getTagOrEmpty(ConventionalTags.ENCHANTABLE)) {
                 ItemStack stack = new ItemStack(item);
                 if (stack.is(AAMisc.SUSPICIOUS_DYES_TAG)) continue;
                 stack.set(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true);
-                validFoilItems.add(stack);
+                foilStacks.add(new SlotDisplay.ItemStackSlotDisplay(stack));
             }
 
-            List<ItemStack> allDyes = new ArrayList<>();
-            var dyeTag = BuiltInRegistries.ITEM.getTagOrEmpty(AAMisc.SUSPICIOUS_DYES_TAG);
-            for (var h : dyeTag) {
-                allDyes.add(new ItemStack(h));
-            }
+            return List.of(
+                    new SlotDisplay.Composite(foilStacks),
+                    new SlotDisplay.TagSlotDisplay(AAMisc.SUSPICIOUS_DYES_TAG)
+            );
+        }
 
-            List<ItemStack> foilInputs = new ArrayList<>(validFoilItems);
-            List<ItemStack> dyeInputs = new ArrayList<>(allDyes);
+        @Override
+        public void onDisplayedIngredientsUpdate(
+                RecipeHolder<SuspiciousDyeRecipe> recipeHolder,
+                List<IRecipeSlotDrawable> recipeSlots,
+                IFocusGroup focuses
+        ) {
+            ItemStack foil = ItemStack.EMPTY;
+            ItemStack dye = ItemStack.EMPTY;
 
-            focuses.getItemStackFocuses(RecipeIngredientRole.INPUT).forEach(focus -> {
-                ItemStack focusStack = focus.getTypedValue().getIngredient();
-                if (focusStack.is(AAMisc.SUSPICIOUS_DYES_TAG)) {
-                    dyeInputs.removeIf(s -> !ItemStack.isSameItem(s, focusStack));
+            for (IRecipeSlotDrawable slot : recipeSlots) {
+                if (slot.getRole() != RecipeIngredientRole.INPUT) continue;
+                ItemStack stack = slot.getDisplayedIngredient(VanillaTypes.ITEM_STACK).orElse(ItemStack.EMPTY);
+                if (stack.isEmpty()) continue;
+                if (stack.is(AAMisc.SUSPICIOUS_DYES_TAG)) {
+                    dye = stack;
                 } else {
-                    foilInputs.removeIf(s -> !ItemStack.isSameItem(s, focusStack));
-                }
-            });
-
-            focuses.getItemStackFocuses(RecipeIngredientRole.OUTPUT).forEach(focus -> {
-                ItemStack focusStack = focus.getTypedValue().getIngredient();
-                foilInputs.removeIf(s -> !ItemStack.isSameItem(s, focusStack));
-            });
-
-            Set<ItemStack> finalFoilInputs = new LinkedHashSet<>();
-            List<ItemStack> finalDyeInputs = new ArrayList<>();
-            List<ItemStack> finalOutputs = new ArrayList<>();
-
-            for (ItemStack dye : dyeInputs) {
-                if (dye.getItem() instanceof SuspiciousDyeItem dyeItem) {
-                    DyeColor color = dyeItem.getDyeColor();
-
-                    finalDyeInputs.add(dye);
-
-                    for (ItemStack foil : foilInputs) {
-                        finalFoilInputs.add(foil);
-                        ItemStack result = foil.copy();
-                        result.set(AAMisc.GLINT_COLOR_COMPONENT.get(), new GlintColor(color));
-                        finalOutputs.add(result);
-                    }
+                    foil = stack;
                 }
             }
 
-            List<List<ItemStack>> inputs = Arrays.asList(new ArrayList<>(finalFoilInputs), finalDyeInputs);
+            if (foil.isEmpty() || dye.isEmpty()) return;
+            if (!(dye.getItem() instanceof SuspiciousDyeItem dyeItem)) return;
 
-            craftingGridHelper.createAndSetInputs(builder, VanillaTypes.ITEM_STACK, inputs, 0, 0);
-            craftingGridHelper.createAndSetOutputs(builder, VanillaTypes.ITEM_STACK, finalOutputs);
-        }
+            DyeColor color = dyeItem.getDyeColor();
+            ItemStack result = foil.copy();
+            result.set(AAMisc.GLINT_COLOR_COMPONENT.get(), new GlintColor(color));
 
-        @Override
-        public int getWidth(RecipeHolder recipeHolder) {
-            return 2;
-        }
-
-        @Override
-        public int getHeight(RecipeHolder recipeHolder) {
-            return 2;
+            for (IRecipeSlotDrawable slot : recipeSlots) {
+                if (slot.getRole() != RecipeIngredientRole.OUTPUT) continue;
+                slot.createDisplayOverrides().add(result);
+            }
         }
     }
 }

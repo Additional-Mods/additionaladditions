@@ -5,7 +5,7 @@ import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BrewingStandBlockEntity;
-import one.dqu.additionaladditions.misc.BrewingRecipe;
+import one.dqu.additionaladditions.recipe.BrewingRecipe;
 import one.dqu.additionaladditions.registry.AAMisc;
 import one.dqu.additionaladditions.util.ModCompatibility;
 import org.spongepowered.asm.mixin.Mixin;

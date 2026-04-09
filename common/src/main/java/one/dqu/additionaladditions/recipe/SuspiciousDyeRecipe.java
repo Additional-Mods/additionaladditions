@@ -1,14 +1,20 @@
-package one.dqu.additionaladditions.misc;
+package one.dqu.additionaladditions.recipe;
 
 import one.dqu.additionaladditions.feature.glint.GlintColor;
 import one.dqu.additionaladditions.item.SuspiciousDyeItem;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.world.item.DyeColor;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
+import net.minecraft.world.item.crafting.display.RecipeDisplay;
+import net.minecraft.world.item.crafting.display.ShapelessCraftingRecipeDisplay;
+import net.minecraft.world.item.crafting.display.SlotDisplay;
 import net.minecraft.world.level.Level;
 import one.dqu.additionaladditions.registry.AAMisc;
 import one.dqu.additionaladditions.util.ConventionalTags;
+
+import java.util.List;
 
 public class SuspiciousDyeRecipe extends CustomRecipe {
     public SuspiciousDyeRecipe(CraftingBookCategory craftingBookCategory) {
@@ -61,5 +67,17 @@ public class SuspiciousDyeRecipe extends CustomRecipe {
     @Override
     public RecipeSerializer<? extends CustomRecipe> getSerializer() {
         return AAMisc.SUSPICIOUS_DYE_RECIPE_SERIALIZER.get();
+    }
+
+    @Override
+    public List<RecipeDisplay> display() {
+        return List.of(new ShapelessCraftingRecipeDisplay(
+                List.of(
+                        new SlotDisplay.TagSlotDisplay(ConventionalTags.ENCHANTABLE),
+                        new SlotDisplay.TagSlotDisplay(AAMisc.SUSPICIOUS_DYES_TAG)
+                ),
+                SlotDisplay.Empty.INSTANCE,
+                new SlotDisplay.ItemSlotDisplay(Items.CRAFTING_TABLE)
+        ));
     }
 }

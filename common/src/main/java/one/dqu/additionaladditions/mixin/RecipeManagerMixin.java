@@ -7,7 +7,7 @@ import net.minecraft.world.item.crafting.*;
 import one.dqu.additionaladditions.AdditionalAdditions;
 import one.dqu.additionaladditions.config.ConfigProperty;
 import one.dqu.additionaladditions.config.Toggleable;
-import one.dqu.additionaladditions.misc.BrewingRecipe;
+import one.dqu.additionaladditions.recipe.BrewingRecipe;
 import one.dqu.additionaladditions.registry.AAMisc;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;

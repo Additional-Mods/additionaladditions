@@ -33,6 +33,7 @@ import one.dqu.additionaladditions.config.network.neoforge.ConfigSyncTask;
 import one.dqu.additionaladditions.entity.RopeArrowRenderer;
 import one.dqu.additionaladditions.feature.glint.GlintResourceGenerator;
 import one.dqu.additionaladditions.feature.PocketJukeboxPlayer;
+import one.dqu.additionaladditions.recipe.neoforge.JEIBrewingRecipeSync;
 import one.dqu.additionaladditions.registry.AABlocks;
 import one.dqu.additionaladditions.registry.AAEntities;
 import one.dqu.additionaladditions.util.CreativeAdder;
@@ -62,6 +63,8 @@ public final class AdditionalAdditionsNeoForge {
             modEventBus.addListener(RegisterConditionalItemModelPropertyEvent.class, this::onRegisterConditionalProperty);
             modEventBus.addListener(RegisterRangeSelectItemModelPropertyEvent.class, this::onRegisterRangeSelectProperty);
         }
+
+        JEIBrewingRecipeSync.register();
 
         RegistrarImpl.registerAll(modEventBus);
     }
