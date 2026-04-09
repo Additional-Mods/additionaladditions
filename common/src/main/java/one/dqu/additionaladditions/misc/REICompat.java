@@ -8,16 +8,14 @@ import me.shedaniel.rei.api.common.entry.EntryIngredient;
 import me.shedaniel.rei.api.common.entry.EntryStack;
 import me.shedaniel.rei.api.common.entry.type.VanillaEntryTypes;
 import me.shedaniel.rei.api.common.util.EntryIngredients;
-import me.shedaniel.rei.api.common.util.EntryStacks;
 import me.shedaniel.rei.plugin.common.BuiltinPlugin;
-import me.shedaniel.rei.plugin.common.displays.brewing.DefaultBrewingDisplay;
+import me.shedaniel.rei.api.common.display.Display;
+import me.shedaniel.rei.api.common.display.DisplaySerializer;
+import me.shedaniel.rei.plugin.common.displays.crafting.CraftingDisplay;
 import me.shedaniel.rei.plugin.common.displays.crafting.DefaultCraftingDisplay;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.*;
-import net.minecraft.world.item.alchemy.PotionContents;
-import net.minecraft.world.item.crafting.RecipeManager;
-import net.minecraft.world.item.crafting.*;
 import one.dqu.additionaladditions.config.Config;
 import one.dqu.additionaladditions.config.ConfigProperty;
 import one.dqu.additionaladditions.config.Toggleable;
@@ -26,7 +24,6 @@ import one.dqu.additionaladditions.item.SuspiciousDyeItem;
 import one.dqu.additionaladditions.registry.AAItems;
 import one.dqu.additionaladditions.registry.AAMisc;
 import one.dqu.additionaladditions.util.ConventionalTags;
-import one.dqu.additionaladditions.util.ModCompatibility;
 
 import java.util.*;
 import java.util.function.Supplier;
@@ -34,7 +31,6 @@ import java.util.function.Supplier;
 public class REICompat implements REIClientPlugin {
     @Override
     public void registerDisplays(DisplayRegistry registry) {
-        brewingRecipes(registry);
         if (Config.SUSPICIOUS_DYE.get().enabled()) {
             registry.registerDisplayGenerator(BuiltinPlugin.CRAFTING, new SuspiciousDyeDisplayGenerator());
         }
@@ -54,26 +50,7 @@ public class REICompat implements REIClientPlugin {
         rule.hide(toHide);
     }
 
-    private void brewingRecipes(DisplayRegistry registry) {
-        if (!ModCompatibility.isClientSide()) return;
-
-        @SuppressWarnings("unchecked")
-        List<BrewingRecipe> recipes = ((RecipeManager) ModCompatibility.Client.getClientLevel().recipeAccess()).getRecipes().stream()
-                .filter(h -> h.value().getType() == AAMisc.BREWING_RECIPE_TYPE.get())
-                .map(h -> (BrewingRecipe) h.value())
-                .toList();
-
-        for (BrewingRecipe recipe : recipes) {
-            ItemStack input = PotionContents.createItemStack(Items.POTION, recipe.getPotion());
-            registry.add(new DefaultBrewingDisplay(
-                    EntryIngredients.of(input),
-                    EntryIngredients.ofIngredient(recipe.getIngredient()),
-                    EntryStacks.of(recipe.getResult())
-            ));
-        }
-    }
-
-    private static class SuspiciousDyeDisplayGenerator implements DynamicDisplayGenerator<DefaultCraftingDisplay<?>> {
+    private static class SuspiciousDyeDisplayGenerator implements DynamicDisplayGenerator<CraftingDisplay> {
 
         private List<ItemStack> getValidFoilItems() {
             List<ItemStack> items = new ArrayList<>();
@@ -96,7 +73,7 @@ public class REICompat implements REIClientPlugin {
         }
 
         @Override
-        public Optional<List<DefaultCraftingDisplay<?>>> getRecipeFor(EntryStack<?> entry) {
+        public Optional<List<CraftingDisplay>> getRecipeFor(EntryStack<?> entry) {
             if (!(entry.getValue() instanceof ItemStack output)) return Optional.empty();
             if (output.getItem() instanceof SuspiciousDyeItem) return Optional.empty();
 
@@ -131,7 +108,7 @@ public class REICompat implements REIClientPlugin {
         }
 
         @Override
-        public Optional<List<DefaultCraftingDisplay<?>>> getUsageFor(EntryStack<?> entry) {
+        public Optional<List<CraftingDisplay>> getUsageFor(EntryStack<?> entry) {
             if (!(entry.getValue() instanceof ItemStack stack)) return Optional.empty();
 
             // looking up usage of a suspicious dye
@@ -179,7 +156,7 @@ public class REICompat implements REIClientPlugin {
             return Optional.empty();
         }
 
-        private DefaultCraftingDisplay<?> createDisplay(List<EntryIngredient> inputs, List<EntryIngredient> outputs) {
+        private CraftingDisplay createDisplay(List<EntryIngredient> inputs, List<EntryIngredient> outputs) {
             return new DefaultCraftingDisplay(inputs, outputs, Optional.empty()) {
                 @Override
                 public int getWidth() {
@@ -190,9 +167,17 @@ public class REICompat implements REIClientPlugin {
                 public int getHeight() {
                     return 1;
                 }
+
+                @Override
+                public boolean isShapeless() {
+                    return true;
+                }
+
+                @Override
+                public DisplaySerializer<? extends Display> getSerializer() {
+                    return null;
+                }
             };
         }
     }
-
-
 }

@@ -66,6 +66,9 @@
     ],
     "rei_client": [
       "one.dqu.additionaladditions.misc.REICompat"
+    ],
+    "rei_common": [
+      "one.dqu.additionaladditions.misc.REICommonCompat"
     ]
   },
   "mixins": [
