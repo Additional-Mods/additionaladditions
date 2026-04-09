@@ -98,7 +98,7 @@ public class JEICompat implements IModPlugin {
                             .toList();
                     ItemStack output = recipe.getResult();
 
-                    return factory.createBrewingRecipe(List.of(input), ingredients, output, id);
+                    return factory.createBrewingRecipe(ingredients, List.of(input), output, id);
                 })
                 .toList();
 
