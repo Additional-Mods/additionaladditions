@@ -4,8 +4,8 @@ import com.mojang.datafixers.DSL;
 import com.mojang.datafixers.schemas.Schema;
 import com.mojang.datafixers.types.templates.TypeTemplate;
 import one.dqu.additionaladditions.config.ConfigProperty;
+import one.dqu.additionaladditions.config.type.FoodConfig;
 import one.dqu.additionaladditions.config.type.MaterialConfig;
-import one.dqu.additionaladditions.config.type.ToolItemConfig;
 
 import java.util.Map;
 import java.util.function.Supplier;
@@ -27,12 +27,20 @@ public class ConfigV3Schema extends Schema {
                         DSL.field("equip_sound", DSL.fields(
                                 "sound_event", DSL.constType(DSL.string())
                         )),
-                        DSL.field("repair_ingredient", DSL.fields(
-                                "item_tag", DSL.constType(DSL.string())
-                        )),
                         DSL.field("incorrect_blocks_for_drops", DSL.fields(
                                 "block_tag", DSL.constType(DSL.string())
                         ))
+                )
+        );
+
+        schema.registerType(false, ConfigProperty.typeReference(FoodConfig.class), () ->
+                DSL.fields(
+                        "enabled", DSL.constType(DSL.bool()),
+                        "food", DSL.allWithRemainder(
+                                DSL.field("nutrition", DSL.constType(DSL.intType())),
+                                DSL.field("saturation", DSL.constType(DSL.floatType())),
+                                DSL.optional(DSL.field("can_always_eat", DSL.constType(DSL.bool())))
+                        )
                 )
         );
     }

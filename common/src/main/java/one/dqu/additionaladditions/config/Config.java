@@ -6,7 +6,6 @@ import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.DyeColor;
 import one.dqu.additionaladditions.config.datafixer.ConfigFixerUpper;
 import one.dqu.additionaladditions.config.type.*;
-import one.dqu.additionaladditions.registry.AAMisc;
 
 import java.util.Map;
 
@@ -88,7 +87,7 @@ public class Config {
 
     public static final ConfigProperty<MaterialConfig> ROSE_GOLD_MATERIAL = new ConfigProperty<>(
             "rose_gold/material", MaterialConfig.CODEC,
-            new MaterialConfig(0f, 0f, 17, SoundEvents.ARMOR_EQUIP_GOLD, AAMisc.REPAIRS_ROSE_GOLD_ARMOR_TAG, BlockTags.INCORRECT_FOR_IRON_TOOL)
+            new MaterialConfig(0f, 0f, 17, SoundEvents.ARMOR_EQUIP_GOLD, BlockTags.INCORRECT_FOR_IRON_TOOL)
     );
 
     public static final ConfigProperty<ArmorItemConfig> ROSE_GOLD_HELMET = new ConfigProperty<>(

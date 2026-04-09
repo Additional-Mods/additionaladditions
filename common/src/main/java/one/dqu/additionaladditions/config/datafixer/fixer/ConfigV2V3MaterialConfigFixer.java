@@ -4,7 +4,6 @@ import com.mojang.datafixers.DSL;
 import com.mojang.datafixers.DataFix;
 import com.mojang.datafixers.TypeRewriteRule;
 import com.mojang.datafixers.schemas.Schema;
-import com.mojang.serialization.Dynamic;
 import net.minecraft.tags.BlockTags;
 import one.dqu.additionaladditions.config.ConfigProperty;
 import one.dqu.additionaladditions.config.type.MaterialConfig;
@@ -23,11 +22,8 @@ public class ConfigV2V3MaterialConfigFixer extends DataFix {
                 getInputSchema().getType(typeRef),
                 getOutputSchema().getType(typeRef),
                 dynamic -> {
-                    // Rename repair_ingredient.item -> repair_ingredient.item_tag
-                    Dynamic<?> repairIngredient = dynamic.get("repair_ingredient").orElseEmptyMap();
-                    repairIngredient = repairIngredient.remove("item")
-                            .set("item_tag", repairIngredient.createString("#additionaladditions:repairs_rose_gold_armor"));
-                    dynamic = dynamic.set("repair_ingredient", repairIngredient);
+                    // Remove repair_ingredient field
+                    dynamic = dynamic.remove("repair_ingredient");
 
                     // Add incorrect_blocks_for_drops with default
                     dynamic = dynamic.set("incorrect_blocks_for_drops",

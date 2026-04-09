@@ -2,6 +2,7 @@ package one.dqu.additionaladditions.material;
 
 import net.minecraft.world.item.equipment.ArmorType;
 import one.dqu.additionaladditions.config.Config;
+import one.dqu.additionaladditions.registry.AAMisc;
 
 import java.util.Map;
 
@@ -9,6 +10,7 @@ public class AAMaterials {
     public static final AAMaterial ROSE_GOLD = new AAMaterial(
             "rose_gold",
             Config.ROSE_GOLD_MATERIAL::get,
+            AAMisc.REPAIRS_ROSE_GOLD_ARMOR_TAG,
             Map.of(
                     ToolType.SWORD, Config.ROSE_GOLD_SWORD::get,
                     ToolType.PICKAXE, Config.ROSE_GOLD_PICKAXE::get,

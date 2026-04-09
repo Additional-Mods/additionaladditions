@@ -24,6 +24,7 @@ public class ConfigFixerUpper implements DataFixer {
 
         var V3 = builder.addSchema(3, ConfigV3Schema::new);
         builder.addFixer(new ConfigV2V3MaterialConfigFixer(V3));
+        builder.addFixer(new ConfigV2V3FoodConfigFixer(V3));
 
         this.fixer = builder.build().fixer();
     }

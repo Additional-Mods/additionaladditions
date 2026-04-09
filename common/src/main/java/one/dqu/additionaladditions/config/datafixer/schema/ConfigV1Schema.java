@@ -21,17 +21,12 @@ public class ConfigV1Schema extends Schema {
         schema.registerType(false, ConfigProperty.typeReference(FoodConfig.class), () ->
                 DSL.fields(
                         "enabled", DSL.constType(DSL.bool()),
-                        "food", DSL.and(
-                                DSL.fields(
-                                        "nutrition", DSL.constType(DSL.intType()),
-                                        "saturation", DSL.constType(DSL.floatType())
-                                ),
-                                DSL.optionalFields(
-                                        "can_always_eat", DSL.constType(DSL.bool()),
-                                        "eat_seconds", DSL.constType(DSL.floatType())
-                                )
+                        "food", DSL.allWithRemainder(
+                                DSL.field("nutrition", DSL.constType(DSL.intType())),
+                                DSL.field("saturation", DSL.constType(DSL.floatType())),
+                                DSL.optional(DSL.field("can_always_eat", DSL.constType(DSL.bool()))),
+                                DSL.optional(DSL.field("eat_seconds", DSL.constType(DSL.floatType())))
                         )
-
                 )
         );
 

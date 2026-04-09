@@ -4,7 +4,9 @@ import net.minecraft.core.HolderSet;
 import net.minecraft.core.component.DataComponentMap;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ToolMaterial;
 import net.minecraft.world.item.equipment.ArmorMaterial;
 import net.minecraft.world.item.equipment.ArmorType;
@@ -23,14 +25,16 @@ public class AAMaterial {
     private final EnumMap<ToolType, Supplier<ToolLikeConfig>> toolConfigs = new EnumMap<>(ToolType.class);
     private final EnumMap<ArmorType, Supplier<ArmorLikeConfig>> armorConfigs = new EnumMap<>(ArmorType.class);
     private final Supplier<MaterialConfig> materialConfig;
+    private final TagKey<Item> repairIngredient;
     private final String name;
 
     private final EnumMap<ToolType, ToolMaterial> toolMaterials = new EnumMap<>(ToolType.class);
     private final EnumMap<ArmorType, ArmorMaterial> armorMaterials = new EnumMap<>(ArmorType.class);
 
-    public AAMaterial(String name, Supplier<MaterialConfig> materialConfigSupplier, Map<ToolType, Supplier<ToolLikeConfig>> toolConfigSuppliers, Map<ArmorType, Supplier<ArmorLikeConfig>> armorConfigSuppliers) {
+    public AAMaterial(String name, Supplier<MaterialConfig> materialConfigSupplier, TagKey<Item> repairIngredient, Map<ToolType, Supplier<ToolLikeConfig>> toolConfigSuppliers, Map<ArmorType, Supplier<ArmorLikeConfig>> armorConfigSuppliers) {
         this.name = name;
         this.materialConfig = materialConfigSupplier;
+        this.repairIngredient = repairIngredient;
         this.toolConfigs.putAll(toolConfigSuppliers);
         this.armorConfigs.putAll(armorConfigSuppliers);
 
@@ -96,7 +100,7 @@ public class AAMaterial {
                 config.blockBreakSpeed(),
                 -1.0F,
                 materialConfig.enchantability(),
-                materialConfig.repairIngredient()
+                repairIngredient
         );
     }
 
@@ -118,7 +122,7 @@ public class AAMaterial {
                 materialConfig.equipSound(),
                 materialConfig.toughness(),
                 materialConfig.knockbackResistance(),
-                materialConfig.repairIngredient(),
+                repairIngredient,
                 ResourceKey.create(
                         ResourceKey.createRegistryKey(ResourceLocation.withDefaultNamespace("equipment_asset")),
                         ResourceLocation.fromNamespaceAndPath(AdditionalAdditions.NAMESPACE, name)
