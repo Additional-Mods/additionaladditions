@@ -24,7 +24,8 @@ import net.neoforged.neoforge.network.event.RegisterConfigurationTasksEvent;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 import one.dqu.additionaladditions.AdditionalAdditions;
-import one.dqu.additionaladditions.AdditionalAdditionsClient;
+import one.dqu.additionaladditions.client.BarometerAngleProperty;
+import one.dqu.additionaladditions.client.HasDiscProperty;
 import one.dqu.additionaladditions.config.Config;
 import one.dqu.additionaladditions.config.io.ConfigLoader;
 import one.dqu.additionaladditions.config.network.ConfigSyncS2CPayload;
@@ -58,6 +59,8 @@ public final class AdditionalAdditionsNeoForge {
             modEventBus.addListener(FMLClientSetupEvent.class, this::onClientSetup);
             modEventBus.addListener(EntityRenderersEvent.RegisterRenderers.class, this::onRegisterEntityRenderers);
             modEventBus.addListener(RegisterColorHandlersEvent.Block.class, this::registerBlockColors);
+            modEventBus.addListener(RegisterConditionalItemModelPropertyEvent.class, this::onRegisterConditionalProperty);
+            modEventBus.addListener(RegisterRangeSelectItemModelPropertyEvent.class, this::onRegisterRangeSelectProperty);
         }
 
         RegistrarImpl.registerAll(modEventBus);
@@ -155,10 +158,21 @@ public final class AdditionalAdditionsNeoForge {
         );
     }
 
-    private void onClientSetup(FMLClientSetupEvent event) {
-        // common client init
-        AdditionalAdditionsClient.init();
+    private void onRegisterConditionalProperty(RegisterConditionalItemModelPropertyEvent event) {
+        event.register(
+            ResourceLocation.fromNamespaceAndPath(AdditionalAdditions.NAMESPACE, "has_disc"),
+            HasDiscProperty.MAP_CODEC
+        );
+    }
 
+    private void onRegisterRangeSelectProperty(RegisterRangeSelectItemModelPropertyEvent event) {
+        event.register(
+            ResourceLocation.fromNamespaceAndPath(AdditionalAdditions.NAMESPACE, "barometer_angle"),
+            BarometerAngleProperty.MAP_CODEC
+        );
+    }
+
+    private void onClientSetup(FMLClientSetupEvent event) {
         // Block render layers
         ItemBlockRenderTypes.setRenderLayer(AABlocks.COPPER_PATINA.get(), RenderType.cutout());
         ItemBlockRenderTypes.setRenderLayer(AABlocks.ROPE_BLOCK.get(), RenderType.cutout());

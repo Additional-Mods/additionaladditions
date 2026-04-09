@@ -16,8 +16,11 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.PackType;
 import net.minecraft.server.packs.resources.ResourceManager;
+import net.minecraft.client.renderer.item.properties.conditional.ConditionalItemModelProperties;
+import net.minecraft.client.renderer.item.properties.numeric.RangeSelectItemModelProperties;
 import one.dqu.additionaladditions.AdditionalAdditions;
-import one.dqu.additionaladditions.AdditionalAdditionsClient;
+import one.dqu.additionaladditions.client.BarometerAngleProperty;
+import one.dqu.additionaladditions.client.HasDiscProperty;
 import one.dqu.additionaladditions.config.Config;
 import one.dqu.additionaladditions.config.io.ConfigLoader;
 import one.dqu.additionaladditions.config.network.ConfigSyncS2CPayload;
@@ -31,8 +34,15 @@ import one.dqu.additionaladditions.util.fabric.ModCompatibilityImpl;
 public final class AdditionalAdditionsClientFabric implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
-        // common client init
-        AdditionalAdditionsClient.init();
+        // item model properties
+        ConditionalItemModelProperties.ID_MAPPER.put(
+            ResourceLocation.fromNamespaceAndPath(AdditionalAdditions.NAMESPACE, "has_disc"),
+            HasDiscProperty.MAP_CODEC
+        );
+        RangeSelectItemModelProperties.ID_MAPPER.put(
+            ResourceLocation.fromNamespaceAndPath(AdditionalAdditions.NAMESPACE, "barometer_angle"),
+            BarometerAngleProperty.MAP_CODEC
+        );
 
         // pocket jukebox
         ClientTickEvents.END_CLIENT_TICK.register((blah) -> PocketJukeboxPlayer.INSTANCE.tick());
