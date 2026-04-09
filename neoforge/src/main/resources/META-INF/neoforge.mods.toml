@@ -41,14 +41,14 @@ logoFile = "assets/additionaladditions/icon.png"
 [[dependencies.additionaladditions]]
 modId = "neoforge"
 type = "required"
-versionRange = "[21.1,)"
+versionRange = "[21.4,)"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.additionaladditions]]
 modId = "minecraft"
 type = "required"
-versionRange = "[1.21.1,)"
+versionRange = "[1.21.4,)"
 ordering = "NONE"
 side = "BOTH"
 
