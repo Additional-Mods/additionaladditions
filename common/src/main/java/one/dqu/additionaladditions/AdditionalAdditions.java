@@ -11,7 +11,6 @@ import org.slf4j.LoggerFactory;
  * TODO:
  *  - implement gametests
  *  - implement glint rendering
- *  - cutout render type for blocks
  *  - new neoforge transaction api
  *  - 1.21.11 stuff (nautilus armor, spear)
  */

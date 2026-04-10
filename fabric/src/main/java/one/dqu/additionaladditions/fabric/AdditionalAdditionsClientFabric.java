@@ -5,10 +5,12 @@ import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientLifecycleEvents;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.networking.v1.ClientConfigurationNetworking;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
+import net.fabricmc.fabric.api.client.rendering.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.fabricmc.fabric.api.resource.SimpleSynchronousResourceReloadListener;
+import net.minecraft.client.renderer.chunk.ChunkSectionLayer;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
@@ -65,6 +67,33 @@ public final class AdditionalAdditionsClientFabric implements ClientModInitializ
                 AdditionalAdditions.LOGGER.info("[{}] Reverted to local config", AdditionalAdditions.NAMESPACE);
             });
         });
+
+        // block render layers
+        BlockRenderLayerMap.putBlock(AABlocks.COPPER_PATINA.get(), ChunkSectionLayer.CUTOUT);
+        BlockRenderLayerMap.putBlock(AABlocks.ROPE_BLOCK.get(), ChunkSectionLayer.CUTOUT);
+        BlockRenderLayerMap.putBlock(AABlocks.GLOW_STICK_BLOCK.get(), ChunkSectionLayer.CUTOUT);
+        BlockRenderLayerMap.putBlock(AABlocks.COTTONSHIVER.get(), ChunkSectionLayer.CUTOUT);
+        BlockRenderLayerMap.putBlock(AABlocks.COTTONSHIVER_CROP.get(), ChunkSectionLayer.CUTOUT);
+        BlockRenderLayerMap.putBlock(AABlocks.MUDFLOWER.get(), ChunkSectionLayer.CUTOUT);
+        BlockRenderLayerMap.putBlock(AABlocks.MUDFLOWER_CROP.get(), ChunkSectionLayer.CUTOUT);
+        BlockRenderLayerMap.putBlock(AABlocks.CRIMSON_BLOSSOM.get(), ChunkSectionLayer.CUTOUT);
+        BlockRenderLayerMap.putBlock(AABlocks.CRIMSON_BLOSSOM_CROP.get(), ChunkSectionLayer.CUTOUT);
+        BlockRenderLayerMap.putBlock(AABlocks.AMBER_BLOSSOM.get(), ChunkSectionLayer.CUTOUT);
+        BlockRenderLayerMap.putBlock(AABlocks.AMBER_BLOSSOM_CROP.get(), ChunkSectionLayer.CUTOUT);
+        BlockRenderLayerMap.putBlock(AABlocks.BULBUS.get(), ChunkSectionLayer.CUTOUT);
+        BlockRenderLayerMap.putBlock(AABlocks.BULBUS_CROP.get(), ChunkSectionLayer.CUTOUT);
+        BlockRenderLayerMap.putBlock(AABlocks.SAWTOOTH_FERN.get(), ChunkSectionLayer.CUTOUT);
+        BlockRenderLayerMap.putBlock(AABlocks.SAWTOOTH_FERN_CROP.get(), ChunkSectionLayer.CUTOUT);
+        BlockRenderLayerMap.putBlock(AABlocks.FROSTLEAF.get(), ChunkSectionLayer.CUTOUT);
+        BlockRenderLayerMap.putBlock(AABlocks.FROSTLEAF_CROP.get(), ChunkSectionLayer.CUTOUT);
+        BlockRenderLayerMap.putBlock(AABlocks.WISTERIA.get(), ChunkSectionLayer.CUTOUT);
+        BlockRenderLayerMap.putBlock(AABlocks.WISTERIA_CROP.get(), ChunkSectionLayer.CUTOUT);
+        BlockRenderLayerMap.putBlock(AABlocks.SPIKEBLOSSOM.get(), ChunkSectionLayer.CUTOUT);
+        BlockRenderLayerMap.putBlock(AABlocks.SPIKEBLOSSOM_CROP.get(), ChunkSectionLayer.CUTOUT);
+        BlockRenderLayerMap.putBlock(AABlocks.SNAPDRAGON.get(), ChunkSectionLayer.CUTOUT);
+        BlockRenderLayerMap.putBlock(AABlocks.SNAPDRAGON_CROP.get(), ChunkSectionLayer.CUTOUT);
+        BlockRenderLayerMap.putBlock(AABlocks.LOTUS_LILY.get(), ChunkSectionLayer.CUTOUT);
+        BlockRenderLayerMap.putBlock(AABlocks.LOTUS_LILY_CROP.get(), ChunkSectionLayer.CUTOUT);
 
         // color providers
         ColorProviderRegistry.BLOCK.register((state, getter, pos, tintIndex) -> {

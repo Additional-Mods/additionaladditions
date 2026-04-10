@@ -1,5 +1,7 @@
 package one.dqu.additionaladditions.neoforge;
 
+import net.minecraft.client.renderer.ItemBlockRenderTypes;
+import net.minecraft.client.renderer.chunk.ChunkSectionLayer;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
@@ -174,6 +176,33 @@ public final class AdditionalAdditionsNeoForge {
     }
 
     private void onClientSetup(FMLClientSetupEvent event) {
+        // block render layers
+        ItemBlockRenderTypes.setRenderLayer(AABlocks.COPPER_PATINA.get(), ChunkSectionLayer.CUTOUT);
+        ItemBlockRenderTypes.setRenderLayer(AABlocks.ROPE_BLOCK.get(), ChunkSectionLayer.CUTOUT);
+        ItemBlockRenderTypes.setRenderLayer(AABlocks.GLOW_STICK_BLOCK.get(), ChunkSectionLayer.CUTOUT);
+        ItemBlockRenderTypes.setRenderLayer(AABlocks.COTTONSHIVER.get(), ChunkSectionLayer.CUTOUT);
+        ItemBlockRenderTypes.setRenderLayer(AABlocks.COTTONSHIVER_CROP.get(), ChunkSectionLayer.CUTOUT);
+        ItemBlockRenderTypes.setRenderLayer(AABlocks.MUDFLOWER.get(), ChunkSectionLayer.CUTOUT);
+        ItemBlockRenderTypes.setRenderLayer(AABlocks.MUDFLOWER_CROP.get(), ChunkSectionLayer.CUTOUT);
+        ItemBlockRenderTypes.setRenderLayer(AABlocks.CRIMSON_BLOSSOM.get(), ChunkSectionLayer.CUTOUT);
+        ItemBlockRenderTypes.setRenderLayer(AABlocks.CRIMSON_BLOSSOM_CROP.get(), ChunkSectionLayer.CUTOUT);
+        ItemBlockRenderTypes.setRenderLayer(AABlocks.AMBER_BLOSSOM.get(), ChunkSectionLayer.CUTOUT);
+        ItemBlockRenderTypes.setRenderLayer(AABlocks.AMBER_BLOSSOM_CROP.get(), ChunkSectionLayer.CUTOUT);
+        ItemBlockRenderTypes.setRenderLayer(AABlocks.BULBUS.get(), ChunkSectionLayer.CUTOUT);
+        ItemBlockRenderTypes.setRenderLayer(AABlocks.BULBUS_CROP.get(), ChunkSectionLayer.CUTOUT);
+        ItemBlockRenderTypes.setRenderLayer(AABlocks.SAWTOOTH_FERN.get(), ChunkSectionLayer.CUTOUT);
+        ItemBlockRenderTypes.setRenderLayer(AABlocks.SAWTOOTH_FERN_CROP.get(), ChunkSectionLayer.CUTOUT);
+        ItemBlockRenderTypes.setRenderLayer(AABlocks.FROSTLEAF.get(), ChunkSectionLayer.CUTOUT);
+        ItemBlockRenderTypes.setRenderLayer(AABlocks.FROSTLEAF_CROP.get(), ChunkSectionLayer.CUTOUT);
+        ItemBlockRenderTypes.setRenderLayer(AABlocks.WISTERIA.get(), ChunkSectionLayer.CUTOUT);
+        ItemBlockRenderTypes.setRenderLayer(AABlocks.WISTERIA_CROP.get(), ChunkSectionLayer.CUTOUT);
+        ItemBlockRenderTypes.setRenderLayer(AABlocks.SPIKEBLOSSOM.get(), ChunkSectionLayer.CUTOUT);
+        ItemBlockRenderTypes.setRenderLayer(AABlocks.SPIKEBLOSSOM_CROP.get(), ChunkSectionLayer.CUTOUT);
+        ItemBlockRenderTypes.setRenderLayer(AABlocks.SNAPDRAGON.get(), ChunkSectionLayer.CUTOUT);
+        ItemBlockRenderTypes.setRenderLayer(AABlocks.SNAPDRAGON_CROP.get(), ChunkSectionLayer.CUTOUT);
+        ItemBlockRenderTypes.setRenderLayer(AABlocks.LOTUS_LILY.get(), ChunkSectionLayer.CUTOUT);
+        ItemBlockRenderTypes.setRenderLayer(AABlocks.LOTUS_LILY_CROP.get(), ChunkSectionLayer.CUTOUT);
+
         // mod compatibility
         event.enqueueWork(ModCompatibilityImpl::showToasts);
     }
