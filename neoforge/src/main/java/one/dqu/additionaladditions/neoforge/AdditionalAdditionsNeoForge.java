@@ -1,11 +1,9 @@
 package one.dqu.additionaladditions.neoforge;
 
-import net.minecraft.client.renderer.ItemBlockRenderTypes;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.packs.resources.SimplePreparableReloadListener;
 import net.minecraft.util.profiling.ProfilerFiller;
@@ -53,7 +51,7 @@ public final class AdditionalAdditionsNeoForge {
         modEventBus.addListener(RegisterPayloadHandlersEvent.class, this::onRegisterPayloadHandlers);
         modEventBus.addListener(RegisterConfigurationTasksEvent.class, this::onRegisterConfigurationTasks);
 
-        if (FMLEnvironment.dist.isClient()) {
+        if (FMLEnvironment.getDist().isClient()) {
             NeoForge.EVENT_BUS.addListener(ClientPlayerNetworkEvent.LoggingOut.class, this::onClientLogout);
             NeoForge.EVENT_BUS.addListener(ClientTickEvent.Post.class, this::onClientEndTick);
             modEventBus.addListener(AddClientReloadListenersEvent.class, this::onRegisterClientReloadListeners);
@@ -103,7 +101,7 @@ public final class AdditionalAdditionsNeoForge {
 
     private void onLootTableLoad(LootTableLoadEvent event) {
         LootAdder.INSTANCE.inject(
-                event.getKey().location(), event.getRegistries(), event.getTable()::addPool, () -> ((LootTableExtension) event.getTable()).additionaladditions$clearPools()
+                event.getKey().identifier(), event.getRegistries(), event.getTable()::addPool, () -> ((LootTableExtension) event.getTable()).additionaladditions$clearPools()
         );
     }
 
@@ -136,7 +134,7 @@ public final class AdditionalAdditionsNeoForge {
     }
 
     private void onRegisterClientReloadListeners(AddClientReloadListenersEvent event) {
-        event.addListener(ResourceLocation.fromNamespaceAndPath(AdditionalAdditions.NAMESPACE, "glint_resource_generator"), new SimplePreparableReloadListener<Void>() {
+        event.addListener(Identifier.fromNamespaceAndPath(AdditionalAdditions.NAMESPACE, "glint_resource_generator"), new SimplePreparableReloadListener<Void>() {
             @Override
             protected Void prepare(ResourceManager resourceManager, ProfilerFiller profiler) {
                 return null;
@@ -163,46 +161,19 @@ public final class AdditionalAdditionsNeoForge {
 
     private void onRegisterConditionalProperty(RegisterConditionalItemModelPropertyEvent event) {
         event.register(
-            ResourceLocation.fromNamespaceAndPath(AdditionalAdditions.NAMESPACE, "has_disc"),
+            Identifier.fromNamespaceAndPath(AdditionalAdditions.NAMESPACE, "has_disc"),
             HasDiscProperty.MAP_CODEC
         );
     }
 
     private void onRegisterRangeSelectProperty(RegisterRangeSelectItemModelPropertyEvent event) {
         event.register(
-            ResourceLocation.fromNamespaceAndPath(AdditionalAdditions.NAMESPACE, "barometer_angle"),
+            Identifier.fromNamespaceAndPath(AdditionalAdditions.NAMESPACE, "barometer_angle"),
             BarometerAngleProperty.MAP_CODEC
         );
     }
 
     private void onClientSetup(FMLClientSetupEvent event) {
-        // Block render layers
-        ItemBlockRenderTypes.setRenderLayer(AABlocks.COPPER_PATINA.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(AABlocks.ROPE_BLOCK.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(AABlocks.GLOW_STICK_BLOCK.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(AABlocks.COTTONSHIVER.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(AABlocks.COTTONSHIVER_CROP.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(AABlocks.MUDFLOWER.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(AABlocks.MUDFLOWER_CROP.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(AABlocks.CRIMSON_BLOSSOM.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(AABlocks.CRIMSON_BLOSSOM_CROP.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(AABlocks.AMBER_BLOSSOM.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(AABlocks.AMBER_BLOSSOM_CROP.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(AABlocks.BULBUS.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(AABlocks.BULBUS_CROP.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(AABlocks.SAWTOOTH_FERN.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(AABlocks.SAWTOOTH_FERN_CROP.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(AABlocks.FROSTLEAF.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(AABlocks.FROSTLEAF_CROP.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(AABlocks.WISTERIA.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(AABlocks.WISTERIA_CROP.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(AABlocks.SPIKEBLOSSOM.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(AABlocks.SPIKEBLOSSOM_CROP.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(AABlocks.SNAPDRAGON.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(AABlocks.SNAPDRAGON_CROP.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(AABlocks.LOTUS_LILY.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(AABlocks.LOTUS_LILY_CROP.get(), RenderType.cutout());
-
         // mod compatibility
         event.enqueueWork(ModCompatibilityImpl::showToasts);
     }

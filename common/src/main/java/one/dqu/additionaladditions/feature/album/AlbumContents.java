@@ -2,6 +2,7 @@ package one.dqu.additionaladditions.feature.album;
 
 import com.mojang.serialization.Codec;
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.component.DataComponentGetter;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.CommonComponents;
@@ -54,7 +55,7 @@ public record AlbumContents(List<ItemStack> items) implements TooltipProvider {
     }
 
     @Override
-    public void addToTooltip(Item.TooltipContext tooltipContext, Consumer<Component> consumer, TooltipFlag tooltipFlag) {
+    public void addToTooltip(Item.TooltipContext tooltipContext, Consumer<Component> consumer, TooltipFlag tooltipFlag, DataComponentGetter dataComponentGetter) {
         addToTooltip(tooltipContext, consumer, tooltipFlag, null, null);
     }
 
@@ -110,7 +111,8 @@ public record AlbumContents(List<ItemStack> items) implements TooltipProvider {
                                     CommonComponents.space().append(song)
                             );
                         },
-                        tooltipFlag
+                        tooltipFlag,
+                        disc
                 );
             }
         }

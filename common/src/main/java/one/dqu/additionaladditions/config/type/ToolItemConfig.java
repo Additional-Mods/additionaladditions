@@ -43,7 +43,7 @@ public record ToolItemConfig(
 
     public Tool toolProperties(ToolMaterial material, TagKey<Block> tagKey) {
         HolderGetter<Block> holderGetter = BuiltInRegistries.acquireBootstrapRegistrationLookup(BuiltInRegistries.BLOCK);
-        return new Tool(List.of(Tool.Rule.deniesDrops(holderGetter.getOrThrow(material.incorrectBlocksForDrops())), Tool.Rule.minesAndDrops(holderGetter.getOrThrow(tagKey), this.blockBreakSpeed())), 1.0F, 1);
+        return new Tool(List.of(Tool.Rule.deniesDrops(holderGetter.getOrThrow(material.incorrectBlocksForDrops())), Tool.Rule.minesAndDrops(holderGetter.getOrThrow(tagKey), this.blockBreakSpeed())), 1.0F, 1, true);
     }
 }
 

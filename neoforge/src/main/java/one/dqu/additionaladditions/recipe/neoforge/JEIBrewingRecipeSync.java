@@ -20,7 +20,7 @@ public final class JEIBrewingRecipeSync {
         if (!ModCompatibility.isModPresent("jei")) return;
 
         NeoForge.EVENT_BUS.addListener(OnDatapackSyncEvent.class, JEIBrewingRecipeSync::onDatapackSync);
-        if (FMLEnvironment.dist.isClient()) {
+        if (FMLEnvironment.getDist().isClient()) {
             NeoForge.EVENT_BUS.addListener(RecipesReceivedEvent.class, JEIBrewingRecipeSync::onRecipesReceived);
         }
     }

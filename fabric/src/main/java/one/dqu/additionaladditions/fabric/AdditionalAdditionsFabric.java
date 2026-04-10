@@ -9,7 +9,7 @@ import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 import net.fabricmc.fabric.api.networking.v1.ServerConfigurationConnectionEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerConfigurationNetworking;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import one.dqu.additionaladditions.AdditionalAdditions;
 import one.dqu.additionaladditions.config.ConfigProperty;
 import one.dqu.additionaladditions.config.network.ConfigSyncS2CPayload;
@@ -43,13 +43,13 @@ public final class AdditionalAdditionsFabric implements ModInitializer {
 
         // loot handler
         LootTableEvents.MODIFY.register(((resourceKey, builder, lootTableSource, provider) -> {
-            LootAdder.INSTANCE.inject(resourceKey.location(), provider, builder::pool, () -> ((LootTableExtension) builder).additionaladditions$clearPools());
+            LootAdder.INSTANCE.inject(resourceKey.identifier(), provider, builder::pool, () -> ((LootTableExtension) builder).additionaladditions$clearPools());
         }));
 
         // config sync
         PayloadTypeRegistry.configurationS2C().register(ConfigSyncS2CPayload.TYPE, ConfigSyncS2CPayload.STREAM_CODEC);
         ServerConfigurationConnectionEvents.CONFIGURE.register((listener, server) -> {
-            Map<ResourceLocation, JsonElement> map = ConfigProperty.getAll().stream()
+            Map<Identifier, JsonElement> map = ConfigProperty.getAll().stream()
                     .collect(Collectors.toMap(
                             ConfigProperty::path,
                             property -> property.serialize().getOrThrow()

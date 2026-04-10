@@ -4,13 +4,7 @@
   "compatibilityLevel": "JAVA_21",
   "minVersion": "0.8",
   "client": [
-    "GuiMixin",
-    "glint.HumanoidArmorLayerMixin",
-    "glint.ItemRendererMixin",
-    "glint.ItemStackRenderStateMixin",
-    "glint.RenderBuffersMixin",
-    "glint.RenderTypeMixin",
-    "glint.WingsLayerMixin"
+    "GuiMixin"
   ],
   "mixins": [
     "BrewingStandBlockEntityMixin",

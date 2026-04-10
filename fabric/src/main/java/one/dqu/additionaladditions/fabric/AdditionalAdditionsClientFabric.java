@@ -1,7 +1,6 @@
 package one.dqu.additionaladditions.fabric;
 
 import net.fabricmc.api.ClientModInitializer;
-import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientLifecycleEvents;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.networking.v1.ClientConfigurationNetworking;
@@ -10,10 +9,9 @@ import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.fabricmc.fabric.api.resource.SimpleSynchronousResourceReloadListener;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.packs.PackType;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.client.renderer.item.properties.conditional.ConditionalItemModelProperties;
@@ -36,11 +34,11 @@ public final class AdditionalAdditionsClientFabric implements ClientModInitializ
     public void onInitializeClient() {
         // item model properties
         ConditionalItemModelProperties.ID_MAPPER.put(
-            ResourceLocation.fromNamespaceAndPath(AdditionalAdditions.NAMESPACE, "has_disc"),
+            Identifier.fromNamespaceAndPath(AdditionalAdditions.NAMESPACE, "has_disc"),
             HasDiscProperty.MAP_CODEC
         );
         RangeSelectItemModelProperties.ID_MAPPER.put(
-            ResourceLocation.fromNamespaceAndPath(AdditionalAdditions.NAMESPACE, "barometer_angle"),
+            Identifier.fromNamespaceAndPath(AdditionalAdditions.NAMESPACE, "barometer_angle"),
             BarometerAngleProperty.MAP_CODEC
         );
 
@@ -68,33 +66,6 @@ public final class AdditionalAdditionsClientFabric implements ClientModInitializ
             });
         });
 
-        // render types
-        BlockRenderLayerMap.INSTANCE.putBlock(AABlocks.COPPER_PATINA.get(), RenderType.cutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(AABlocks.ROPE_BLOCK.get(), RenderType.cutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(AABlocks.GLOW_STICK_BLOCK.get(), RenderType.cutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(AABlocks.COTTONSHIVER.get(), RenderType.cutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(AABlocks.COTTONSHIVER_CROP.get(), RenderType.cutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(AABlocks.MUDFLOWER.get(), RenderType.cutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(AABlocks.MUDFLOWER_CROP.get(), RenderType.cutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(AABlocks.CRIMSON_BLOSSOM.get(), RenderType.cutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(AABlocks.CRIMSON_BLOSSOM_CROP.get(), RenderType.cutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(AABlocks.AMBER_BLOSSOM.get(), RenderType.cutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(AABlocks.AMBER_BLOSSOM_CROP.get(), RenderType.cutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(AABlocks.BULBUS.get(), RenderType.cutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(AABlocks.BULBUS_CROP.get(), RenderType.cutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(AABlocks.SAWTOOTH_FERN.get(), RenderType.cutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(AABlocks.SAWTOOTH_FERN_CROP.get(), RenderType.cutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(AABlocks.FROSTLEAF.get(), RenderType.cutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(AABlocks.FROSTLEAF_CROP.get(), RenderType.cutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(AABlocks.WISTERIA.get(), RenderType.cutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(AABlocks.WISTERIA_CROP.get(), RenderType.cutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(AABlocks.SPIKEBLOSSOM.get(), RenderType.cutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(AABlocks.SPIKEBLOSSOM_CROP.get(), RenderType.cutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(AABlocks.SNAPDRAGON.get(), RenderType.cutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(AABlocks.SNAPDRAGON_CROP.get(), RenderType.cutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(AABlocks.LOTUS_LILY.get(), RenderType.cutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(AABlocks.LOTUS_LILY_CROP.get(), RenderType.cutout());
-
         // color providers
         ColorProviderRegistry.BLOCK.register((state, getter, pos, tintIndex) -> {
             return getter != null && pos != null ? -14647248 : -9321636;
@@ -112,8 +83,8 @@ public final class AdditionalAdditionsClientFabric implements ClientModInitializ
             }
 
             @Override
-            public ResourceLocation getFabricId() {
-                return ResourceLocation.fromNamespaceAndPath(AdditionalAdditions.NAMESPACE, "glint_resource_generator");
+            public Identifier getFabricId() {
+                return Identifier.fromNamespaceAndPath(AdditionalAdditions.NAMESPACE, "glint_resource_generator");
             }
         });
 

@@ -63,6 +63,6 @@ public class ModCompatibilityImpl {
     }
 
     public static boolean isClientSide() {
-        return FMLEnvironment.dist.isClient();
+        return FMLEnvironment.getDist().isClient();
     }
 }

@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.Map;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.ServerAdvancementManager;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.util.profiling.ProfilerFiller;
@@ -22,9 +22,9 @@ import net.minecraft.util.profiling.ProfilerFiller;
 @Mixin(ServerAdvancementManager.class)
 public class ServerAdvancementManagerMixin {
     @Inject(method = "apply", at = @At("HEAD"))
-    private void removeAdvancements(Map<ResourceLocation, JsonElement> map, ResourceManager resourceManager, ProfilerFiller profiler, CallbackInfo ci) {
+    private void removeAdvancements(Map<Identifier, JsonElement> map, ResourceManager resourceManager, ProfilerFiller profiler, CallbackInfo ci) {
         map.entrySet().removeIf(entry -> {
-            ResourceLocation identifier = entry.getKey();
+            Identifier identifier = entry.getKey();
             if (!identifier.getNamespace().equals(AdditionalAdditions.NAMESPACE)) {
                 return false;
             }

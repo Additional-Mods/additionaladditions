@@ -21,7 +21,7 @@ import one.dqu.additionaladditions.material.ToolType;
 import one.dqu.additionaladditions.util.CreativeAdder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.ItemLike;
 import one.dqu.additionaladditions.util.Registrar;
@@ -33,7 +33,7 @@ import java.util.function.Supplier;
 
 @SuppressWarnings("unused")
 public class AAItems {
-    private static final Map<ResourceLocation, Set<Supplier<? extends Item>>> CONFIG_TO_ITEM = new HashMap<>();
+    private static final Map<Identifier, Set<Supplier<? extends Item>>> CONFIG_TO_ITEM = new HashMap<>();
 
     public static Collection<Supplier<? extends Item>> fromConfigProperty(ConfigProperty<?> configProperty) {
         return CONFIG_TO_ITEM.get(configProperty.path());
@@ -260,7 +260,7 @@ public class AAItems {
             .properties(p -> p
                     .stacksTo(1)
                     .rarity(Rarity.RARE)
-                    .jukeboxPlayable(ResourceKey.create(Registries.JUKEBOX_SONG, ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "0308")))
+                    .jukeboxPlayable(ResourceKey.create(Registries.JUKEBOX_SONG, Identifier.tryBuild(AdditionalAdditions.NAMESPACE, "0308")))
             )
             .creativeAfter(Items.MUSIC_DISC_WARD, CreativeModeTabs.TOOLS_AND_UTILITIES)
             .build();
@@ -270,7 +270,7 @@ public class AAItems {
             .properties(p -> p
                     .stacksTo(1)
                     .rarity(Rarity.RARE)
-                    .jukeboxPlayable(ResourceKey.create(Registries.JUKEBOX_SONG, ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "1007")))
+                    .jukeboxPlayable(ResourceKey.create(Registries.JUKEBOX_SONG, Identifier.tryBuild(AdditionalAdditions.NAMESPACE, "1007")))
             )
             .creativeAfter(Items.MUSIC_DISC_WARD, CreativeModeTabs.TOOLS_AND_UTILITIES)
             .build();
@@ -280,7 +280,7 @@ public class AAItems {
             .properties(p -> p
                     .stacksTo(1)
                     .rarity(Rarity.RARE)
-                    .jukeboxPlayable(ResourceKey.create(Registries.JUKEBOX_SONG, ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "1507")))
+                    .jukeboxPlayable(ResourceKey.create(Registries.JUKEBOX_SONG, Identifier.tryBuild(AdditionalAdditions.NAMESPACE, "1507")))
             )
             .creativeAfter(Items.MUSIC_DISC_WARD, CreativeModeTabs.TOOLS_AND_UTILITIES)
             .build();
@@ -290,22 +290,22 @@ public class AAItems {
     public static final Supplier<Item> ROSE_GOLD_HELMET = new Builder("rose_gold_helmet")
             .config(Config.ROSE_GOLD)
             .creativeAfter(Items.GOLDEN_BOOTS, CreativeModeTabs.COMBAT)
-            .build(p -> new ConfigurableArmorItem(AAMaterials.ROSE_GOLD, ArmorType.HELMET, p));
+            .build(p -> new ArmorItem(AAMaterials.ROSE_GOLD, ArmorType.HELMET, p));
 
     public static final Supplier<Item> ROSE_GOLD_CHESTPLATE = new Builder("rose_gold_chestplate")
             .config(Config.ROSE_GOLD)
             .creativeAfter(Items.GOLDEN_BOOTS, CreativeModeTabs.COMBAT)
-            .build(p -> new ConfigurableArmorItem(AAMaterials.ROSE_GOLD, ArmorType.CHESTPLATE, p));
+            .build(p -> new ArmorItem(AAMaterials.ROSE_GOLD, ArmorType.CHESTPLATE, p));
 
     public static final Supplier<Item> ROSE_GOLD_LEGGINGS = new Builder("rose_gold_leggings")
             .config(Config.ROSE_GOLD)
             .creativeAfter(Items.GOLDEN_BOOTS, CreativeModeTabs.COMBAT)
-            .build(p -> new ConfigurableArmorItem(AAMaterials.ROSE_GOLD, ArmorType.LEGGINGS, p));
+            .build(p -> new ArmorItem(AAMaterials.ROSE_GOLD, ArmorType.LEGGINGS, p));
 
     public static final Supplier<Item> ROSE_GOLD_BOOTS = new Builder("rose_gold_boots")
             .config(Config.ROSE_GOLD)
             .creativeAfter(Items.GOLDEN_BOOTS, CreativeModeTabs.COMBAT)
-            .build(p -> new ConfigurableArmorItem(AAMaterials.ROSE_GOLD, ArmorType.BOOTS, p));
+            .build(p -> new ArmorItem(AAMaterials.ROSE_GOLD, ArmorType.BOOTS, p));
 
     public static final Supplier<Item> ROSE_GOLD_HORSE_ARMOR = new Builder("rose_gold_horse_armor")
             .config(Config.ROSE_GOLD)
@@ -313,33 +313,33 @@ public class AAItems {
                     .stacksTo(1)
             )
             .creativeAfter(Items.GOLDEN_HORSE_ARMOR, CreativeModeTabs.COMBAT)
-            .build(p -> new ConfigurableAnimalArmorItem(AAMaterials.ROSE_GOLD, AnimalArmorItem.BodyType.EQUESTRIAN, p));
+            .build(p -> new ArmorItem(AAMaterials.ROSE_GOLD, ArmorType.BODY, p));
 
     public static final Supplier<Item> ROSE_GOLD_SWORD = new Builder("rose_gold_sword")
             .config(Config.ROSE_GOLD)
             .creativeAfter(Items.GOLDEN_SWORD, CreativeModeTabs.COMBAT)
-            .build(p -> new ConfigurableSwordItem(AAMaterials.ROSE_GOLD, ToolType.SWORD, p));
+            .build(p -> new ToolItem(AAMaterials.ROSE_GOLD, ToolType.SWORD, p));
 
     public static final Supplier<Item> ROSE_GOLD_SHOVEL = new Builder("rose_gold_shovel")
             .config(Config.ROSE_GOLD)
             .creativeAfter(Items.GOLDEN_HOE, CreativeModeTabs.TOOLS_AND_UTILITIES)
-            .build(p -> new ConfigurableShovelItem(AAMaterials.ROSE_GOLD, ToolType.SHOVEL, p));
+            .build(p -> new ToolItem(AAMaterials.ROSE_GOLD, ToolType.SHOVEL, p));
 
     public static final Supplier<Item> ROSE_GOLD_PICKAXE = new Builder("rose_gold_pickaxe")
             .config(Config.ROSE_GOLD)
             .creativeAfter(Items.GOLDEN_HOE, CreativeModeTabs.TOOLS_AND_UTILITIES)
-            .build(p -> new ConfigurablePickaxeItem(AAMaterials.ROSE_GOLD, ToolType.PICKAXE, p));
+            .build(p -> new ToolItem(AAMaterials.ROSE_GOLD, ToolType.PICKAXE, p));
 
     public static final Supplier<Item> ROSE_GOLD_AXE = new Builder("rose_gold_axe")
             .config(Config.ROSE_GOLD)
             .creativeAfter(Items.GOLDEN_HOE, CreativeModeTabs.TOOLS_AND_UTILITIES)
             .creativeAfter(Items.GOLDEN_AXE, CreativeModeTabs.COMBAT)
-            .build(p -> new ConfigurableAxeItem(AAMaterials.ROSE_GOLD, ToolType.AXE, p));
+            .build(p -> new ToolItem(AAMaterials.ROSE_GOLD, ToolType.AXE, p));
 
     public static final Supplier<Item> ROSE_GOLD_HOE = new Builder("rose_gold_hoe")
             .config(Config.ROSE_GOLD)
             .creativeAfter(Items.GOLDEN_HOE, CreativeModeTabs.TOOLS_AND_UTILITIES)
-            .build(p -> new ConfigurableHoeItem(AAMaterials.ROSE_GOLD, ToolType.HOE, p));
+            .build(p -> new ToolItem(AAMaterials.ROSE_GOLD, ToolType.HOE, p));
 
     // SUSPICIOUS DYE
 
@@ -543,7 +543,7 @@ public class AAItems {
         }
 
         public <T extends Item> Supplier<T> build(Function<Item.Properties, T> itemFactory) {
-            ResourceLocation location = ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, id);
+            Identifier location = Identifier.tryBuild(AdditionalAdditions.NAMESPACE, id);
             ConfigProperty<? extends Toggleable> capturedConfig = config;
             Supplier<Boolean> enabled = capturedConfig != null ? () -> capturedConfig.get().enabled() : () -> true;
 

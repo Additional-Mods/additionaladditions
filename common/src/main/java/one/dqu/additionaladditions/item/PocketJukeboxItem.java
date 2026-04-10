@@ -8,12 +8,14 @@ import net.minecraft.world.inventory.ClickAction;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.component.ItemContainerContents;
+import net.minecraft.world.item.component.TooltipDisplay;
 import one.dqu.additionaladditions.config.Config;
 import one.dqu.additionaladditions.feature.album.AlbumContents;
 import one.dqu.additionaladditions.feature.PocketJukeboxPlayer;
 import one.dqu.additionaladditions.registry.AAMisc;
 
 import java.util.List;
+import java.util.function.Consumer;
 
 public class PocketJukeboxItem extends Item {
     public PocketJukeboxItem(Properties settings) {
@@ -102,7 +104,7 @@ public class PocketJukeboxItem extends Item {
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag flag) {
+    public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay tooltipDisplay, Consumer<Component> consumer, TooltipFlag flag) {
         if (!hasDisc(stack)) {
             return;
         }
@@ -116,11 +118,11 @@ public class PocketJukeboxItem extends Item {
                     ? PocketJukeboxPlayer.INSTANCE.getCurrentTrack()
                     : -1;
 
-            contents.addToTooltip(context, tooltip::add, flag, storedDisc.getHoverName(), index);
+            contents.addToTooltip(context, consumer, flag, storedDisc.getHoverName(), index);
         } else {
             JukeboxPlayable jukeboxPlayable = storedDisc.get(DataComponents.JUKEBOX_PLAYABLE);
             if (jukeboxPlayable != null) {
-                jukeboxPlayable.addToTooltip(context, tooltip::add, flag);
+                jukeboxPlayable.addToTooltip(context, consumer, flag, storedDisc);
             }
         }
     }

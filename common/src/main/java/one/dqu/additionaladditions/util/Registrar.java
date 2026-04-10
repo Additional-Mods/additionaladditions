@@ -2,7 +2,7 @@ package one.dqu.additionaladditions.util;
 
 import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.minecraft.core.Registry;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 import java.util.function.Supplier;
 
@@ -17,5 +17,5 @@ public abstract class Registrar<T> {
         throw new AssertionError();
     }
 
-    public abstract <I extends T> Supplier<I> register(ResourceLocation id, Supplier<I> supplier);
+    public abstract <I extends T> Supplier<I> register(Identifier id, Supplier<I> supplier);
 }

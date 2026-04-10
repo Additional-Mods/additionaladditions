@@ -38,7 +38,7 @@ public class JukeboxBlockMixin {
 
         cir.setReturnValue(InteractionResult.SUCCESS);
 
-        if (level.isClientSide) {
+        if (level.isClientSide()) {
             return;
         }
 

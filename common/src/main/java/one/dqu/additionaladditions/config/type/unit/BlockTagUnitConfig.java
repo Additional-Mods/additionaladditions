@@ -3,7 +3,7 @@ package one.dqu.additionaladditions.config.type.unit;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.Block;
 
@@ -24,7 +24,7 @@ public record BlockTagUnitConfig(
     private TagKey<Block> toBlock() {
         String block = this.blockTag;
         if (block.startsWith("#")) block = block.substring(1);
-        return TagKey.create(Registries.BLOCK, ResourceLocation.tryParse(block));
+        return TagKey.create(Registries.BLOCK, Identifier.tryParse(block));
     }
 
     private static BlockTagUnitConfig fromBlock(TagKey<Block> block) {

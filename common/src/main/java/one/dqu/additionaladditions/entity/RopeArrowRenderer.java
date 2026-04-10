@@ -6,7 +6,7 @@ import net.minecraft.client.renderer.entity.ArrowRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.TippableArrowRenderer;
 import net.minecraft.client.renderer.entity.state.ArrowRenderState;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 @Environment(EnvType.CLIENT)
 public class RopeArrowRenderer extends ArrowRenderer<RopeArrow, ArrowRenderState> {
@@ -20,7 +20,7 @@ public class RopeArrowRenderer extends ArrowRenderer<RopeArrow, ArrowRenderState
     }
 
     @Override
-    protected ResourceLocation getTextureLocation(ArrowRenderState arrowRenderState) {
+    protected Identifier getTextureLocation(ArrowRenderState arrowRenderState) {
         return TippableArrowRenderer.NORMAL_ARROW_LOCATION;
     }
 }

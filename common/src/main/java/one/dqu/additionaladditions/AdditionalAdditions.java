@@ -7,6 +7,14 @@ import one.dqu.additionaladditions.util.ModCompatibility;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/*
+ * TODO:
+ *  - implement gametests
+ *  - implement glint rendering
+ *  - cutout render type for blocks
+ *  - new neoforge transaction api
+ *  - 1.21.11 stuff (nautilus armor, spear)
+ */
 public final class AdditionalAdditions {
     public static final String NAMESPACE = "additionaladditions";
     public static final Logger LOGGER = LoggerFactory.getLogger(NAMESPACE);

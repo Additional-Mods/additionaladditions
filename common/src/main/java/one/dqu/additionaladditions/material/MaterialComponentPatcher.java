@@ -6,7 +6,7 @@ import net.minecraft.core.HolderSet;
 import net.minecraft.core.component.DataComponentMap;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
@@ -20,7 +20,6 @@ import net.minecraft.world.item.ToolMaterial;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.minecraft.world.item.component.Tool;
 import net.minecraft.world.item.enchantment.Enchantable;
-import net.minecraft.world.item.enchantment.Repairable;
 import net.minecraft.world.item.equipment.ArmorMaterial;
 import net.minecraft.world.item.equipment.ArmorType;
 import net.minecraft.world.item.equipment.Equippable;
@@ -40,7 +39,6 @@ public class MaterialComponentPatcher {
         builder.set(DataComponents.MAX_DAMAGE, material.durability());
         builder.set(DataComponents.DAMAGE, 0);
         builder.set(DataComponents.MAX_STACK_SIZE, 1);
-        builder.set(DataComponents.REPAIRABLE, repairable(material.repairItems()));
         builder.set(DataComponents.ENCHANTABLE, new Enchantable(material.enchantmentValue()));
     }
 
@@ -52,7 +50,7 @@ public class MaterialComponentPatcher {
         builder.set(DataComponents.TOOL, new Tool(List.of(
                 Tool.Rule.deniesDrops(holderGetter.getOrThrow(material.incorrectBlocksForDrops())),
                 Tool.Rule.minesAndDrops(holderGetter.getOrThrow(tagKey), material.speed())
-        ), 1.0F, 1));
+        ), 1.0F, 1, true));
 
         builder.set(DataComponents.ATTRIBUTE_MODIFIERS, createToolAttributes(material, f, g));
 
@@ -74,7 +72,7 @@ public class MaterialComponentPatcher {
         builder.set(DataComponents.TOOL, new Tool(List.of(
                 Tool.Rule.minesAndDrops(HolderSet.direct(Blocks.COBWEB.builtInRegistryHolder()), 15.0F),
                 Tool.Rule.overrideSpeed(holderGetter.getOrThrow(BlockTags.SWORD_EFFICIENT), 1.5F)
-        ), 1.0F, 2));
+        ), 1.0F, 2, true));
 
         builder.set(DataComponents.ATTRIBUTE_MODIFIERS, createSwordAttributes(material, f, g));
 
@@ -95,7 +93,6 @@ public class MaterialComponentPatcher {
 
         builder.set(DataComponents.MAX_DAMAGE, armorType.getDurability(material.durability()));
         builder.set(DataComponents.MAX_STACK_SIZE, 1);
-        builder.set(DataComponents.REPAIRABLE, repairable(material.repairIngredient()));
         builder.set(DataComponents.ENCHANTABLE, new Enchantable(material.enchantmentValue()));
         builder.set(DataComponents.ATTRIBUTE_MODIFIERS, createAttributes(material, armorType));
 
@@ -112,7 +109,6 @@ public class MaterialComponentPatcher {
 
         builder.set(DataComponents.MAX_DAMAGE, ArmorType.BODY.getDurability(material.durability()));
         builder.set(DataComponents.MAX_STACK_SIZE, 1);
-        builder.set(DataComponents.REPAIRABLE, repairable(material.repairIngredient()));
         builder.set(DataComponents.ATTRIBUTE_MODIFIERS, createAttributes(material, ArmorType.BODY));
 
         builder.set(DataComponents.EQUIPPABLE, Equippable.builder(EquipmentSlot.BODY)
@@ -130,7 +126,6 @@ public class MaterialComponentPatcher {
         if (bl) {
             builder.set(DataComponents.MAX_DAMAGE, ArmorType.BODY.getDurability(material.durability()));
             builder.set(DataComponents.MAX_STACK_SIZE, 1);
-            builder.set(DataComponents.REPAIRABLE, repairable(material.repairIngredient()));
         }
 
         builder.set(DataComponents.ATTRIBUTE_MODIFIERS, createAttributes(material, ArmorType.BODY));
@@ -149,7 +144,7 @@ public class MaterialComponentPatcher {
         int i = material.defense().getOrDefault(armorType, 0);
         ItemAttributeModifiers.Builder builder = ItemAttributeModifiers.builder();
         EquipmentSlotGroup equipmentSlotGroup = EquipmentSlotGroup.bySlot(armorType.getSlot());
-        ResourceLocation resourceLocation = ResourceLocation.withDefaultNamespace("armor." + armorType.getName());
+        Identifier resourceLocation = Identifier.withDefaultNamespace("armor." + armorType.getName());
 
         builder.add(Attributes.ARMOR, new AttributeModifier(resourceLocation, i, AttributeModifier.Operation.ADD_VALUE), equipmentSlotGroup);
         builder.add(Attributes.ARMOR_TOUGHNESS, new AttributeModifier(resourceLocation, material.toughness(), AttributeModifier.Operation.ADD_VALUE), equipmentSlotGroup);
@@ -161,10 +156,4 @@ public class MaterialComponentPatcher {
         return builder.build();
     }
 
-    // helpers
-
-    private static Repairable repairable(TagKey<Item> arg) {
-        HolderGetter<Item> holdergetter = BuiltInRegistries.ITEM;
-        return new Repairable(holdergetter.getOrThrow(arg));
-    }
 }

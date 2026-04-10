@@ -8,16 +8,19 @@ import net.minecraft.world.level.material.Fluid;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
+import net.neoforged.neoforge.transfer.fluid.FluidResource;
+import net.neoforged.neoforge.transfer.ResourceHandler;
 import one.dqu.additionaladditions.util.FluidHelper;
 
 public class FluidHelperImpl {
     public static FluidHelper.Transaction modded(Player player, BlockPos pos, Direction side, int amount, Fluid fluid) {
         Level level = player.level();
 
-        var capability = level.getCapability(Capabilities.FluidHandler.BLOCK, pos, side);
-        if (capability == null) {
+        ResourceHandler<FluidResource> handler = level.getCapability(Capabilities.Fluid.BLOCK, pos, side);
+        if (handler == null) {
             return new FluidHelper.Transaction(0, (committed) -> {});
         }
+        IFluidHandler capability = IFluidHandler.of(handler);
 
         FluidStack fluidStack = new FluidStack(fluid, amount);
         FluidStack drained = capability.drain(fluidStack, IFluidHandler.FluidAction.SIMULATE);

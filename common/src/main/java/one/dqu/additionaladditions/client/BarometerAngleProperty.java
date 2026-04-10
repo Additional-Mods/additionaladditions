@@ -5,6 +5,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.item.properties.numeric.RangeSelectItemModelProperty;
+import net.minecraft.world.entity.ItemOwner;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
@@ -16,8 +17,10 @@ public record BarometerAngleProperty() implements RangeSelectItemModelProperty {
     private static final float DEFAULT_ANGLE = 0.3125F;
 
     @Override
-    public float get(ItemStack stack, @Nullable ClientLevel level, @Nullable LivingEntity entity, int seed) {
-        if (entity == null || level == null) return DEFAULT_ANGLE;
+    public float get(ItemStack stack, @Nullable ClientLevel level, @Nullable ItemOwner owner, int seed) {
+        if (owner == null || owner.asLivingEntity() == null || level == null) return DEFAULT_ANGLE;
+
+        LivingEntity entity = owner.asLivingEntity();
 
         float sea = level.getSeaLevel();
         float height = entity.getBlockY();

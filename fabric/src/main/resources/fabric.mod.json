@@ -45,22 +45,6 @@
     "client": [
       "one.dqu.additionaladditions.fabric.AdditionalAdditionsClientFabric"
     ],
-    "fabric-gametest": [
-      "one.dqu.additionaladditions.gametest.ExampleTest",
-      "one.dqu.additionaladditions.gametest.TurkishLocaleTest",
-      "one.dqu.additionaladditions.gametest.WrenchPlayerTest",
-      "one.dqu.additionaladditions.gametest.WrenchDispenserTest",
-      "one.dqu.additionaladditions.gametest.WrenchPistonTest",
-      "one.dqu.additionaladditions.gametest.WrenchHopperTest",
-      "one.dqu.additionaladditions.gametest.CopperPatinaTransmitTest",
-      "one.dqu.additionaladditions.gametest.CopperPatinaDecayTest",
-      "one.dqu.additionaladditions.gametest.CopperPatinaInterferenceTest",
-      "one.dqu.additionaladditions.gametest.CopperPatinaWithCopperBlockTest",
-      "one.dqu.additionaladditions.gametest.RopeArrowPlacementTest",
-      "one.dqu.additionaladditions.gametest.RopeArrowPartialPlacementTest",
-      "one.dqu.additionaladditions.gametest.RopeArrowEntityHitTest",
-      "one.dqu.additionaladditions.gametest.RopeArrowBadPlacementTest"
-    ],
     "jei_mod_plugin": [
       "one.dqu.additionaladditions.recipe.JEICompat"
     ],

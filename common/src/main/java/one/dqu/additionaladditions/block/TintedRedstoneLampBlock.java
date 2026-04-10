@@ -17,7 +17,7 @@ public class TintedRedstoneLampBlock extends RedstoneLampBlock {
 
     @Override
     protected void neighborChanged(BlockState blockState, Level level, BlockPos blockPos, Block block, Orientation orientation, boolean bl) {
-        if (level.isClientSide) return;
+        if (level.isClientSide()) return;
 
         boolean lit = blockState.getValue(LIT);
         if (lit != level.hasNeighborSignal(blockPos)) {

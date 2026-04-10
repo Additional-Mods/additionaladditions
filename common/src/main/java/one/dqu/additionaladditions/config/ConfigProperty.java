@@ -6,30 +6,30 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.DataResult;
 import com.mojang.serialization.JsonOps;
 import one.dqu.additionaladditions.AdditionalAdditions;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class ConfigProperty<T> {
-    private static final Map<ResourceLocation, ConfigProperty<?>> PROPERTIES = new HashMap<>();
+    private static final Map<Identifier, ConfigProperty<?>> PROPERTIES = new HashMap<>();
     private static final Map<String, DSL.TypeReference> TYPE_REFERENCES = new HashMap<>();
 
-    private final ResourceLocation path;
+    private final Identifier path;
     private final Codec<T> codec;
     private final DSL.TypeReference typeReference;
     private T value;
 
     protected ConfigProperty(String path, Codec<T> codec, T defaultValue) {
-        this.path = ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, path);
+        this.path = Identifier.tryBuild(AdditionalAdditions.NAMESPACE, path);
         this.codec = codec;
         this.value = defaultValue;
         this.typeReference = TYPE_REFERENCES.computeIfAbsent(defaultValue.getClass().getSimpleName(), name -> () -> name);
         PROPERTIES.put(this.path, this);
     }
 
-    public static ConfigProperty<?> getByPath(ResourceLocation location) {
+    public static ConfigProperty<?> getByPath(Identifier location) {
         return PROPERTIES.get(location);
     }
 
@@ -37,7 +37,7 @@ public class ConfigProperty<T> {
         return List.copyOf(PROPERTIES.values());
     }
 
-    public ResourceLocation path() {
+    public Identifier path() {
         return path;
     }
 

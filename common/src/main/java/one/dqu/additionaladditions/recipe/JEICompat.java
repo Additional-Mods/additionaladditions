@@ -17,7 +17,7 @@ import mezz.jei.api.runtime.IJeiRuntime;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
@@ -43,8 +43,8 @@ import java.util.function.Supplier;
 @JeiPlugin
 public class JEICompat implements IModPlugin {
     @Override
-    public @NotNull ResourceLocation getPluginUid() {
-        return ResourceLocation.fromNamespaceAndPath(AdditionalAdditions.NAMESPACE, "jei_plugin");
+    public @NotNull Identifier getPluginUid() {
+        return Identifier.fromNamespaceAndPath(AdditionalAdditions.NAMESPACE, "jei_plugin");
     }
 
     @Override
@@ -89,7 +89,7 @@ public class JEICompat implements IModPlugin {
                 .stream()
                 .map(holder -> {
                     BrewingRecipe recipe = holder.value();
-                    ResourceLocation id = holder.id().location();
+                    Identifier id = holder.id().identifier();
 
                     ItemStack input = PotionContents.createItemStack(Items.POTION, recipe.getPotion());
                     List<ItemStack> ingredients = BuiltInRegistries.ITEM.stream()

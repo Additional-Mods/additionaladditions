@@ -11,6 +11,7 @@ import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.core.component.DataComponentGetter;
 import net.minecraft.world.item.component.TooltipProvider;
 
 import java.util.function.Consumer;
@@ -28,7 +29,7 @@ public record GlintColor(DyeColor color) implements StringRepresentable, Tooltip
     }
 
     @Override
-    public void addToTooltip(Item.TooltipContext context, Consumer<Component> consumer, TooltipFlag flag) {
+    public void addToTooltip(Item.TooltipContext context, Consumer<Component> consumer, TooltipFlag flag, DataComponentGetter dataComponentGetter) {
         String key = "additionaladditions.gui.glint." + color.getSerializedName();
         consumer.accept(
                 MutableComponent.create(new TranslatableContents(key, null, new String[]{}))

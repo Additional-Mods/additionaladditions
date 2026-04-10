@@ -9,7 +9,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.RegistryOps;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.packs.resources.Resource;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.level.storage.loot.LootPool;
@@ -57,31 +57,31 @@ public class LootAdder {
             LootPoolEntryType::codec
     );
 
-    public record LootInjection(ResourceLocation target, boolean replaceOtherPools, List<LootPoolEntryContainer> entries) {
+    public record LootInjection(Identifier target, boolean replaceOtherPools, List<LootPoolEntryContainer> entries) {
         public static final Codec<LootInjection> CODEC = RecordCodecBuilder.create(instance ->
                 instance.group(
-                        ResourceLocation.CODEC.fieldOf("target").forGetter(LootInjection::target),
+                        Identifier.CODEC.fieldOf("target").forGetter(LootInjection::target),
                         Codec.BOOL.optionalFieldOf("replace_other_pools", false).forGetter(LootInjection::replaceOtherPools),
                         Codec.list(ENTRY_CODEC).fieldOf("entries").forGetter(LootInjection::entries)
                 ).apply(instance, LootInjection::new)
         );
     }
 
-    private Map<ResourceLocation, List<JsonElement>> injections = new HashMap<>();
+    private Map<Identifier, List<JsonElement>> injections = new HashMap<>();
 
     /**
      * Loads loot table injection file JSONs from the resource manager.
      * Disabled features are filtered out based on {@link Toggleable} properties.
      */
     public void prepare(ResourceManager resourceManager) {
-        Map<ResourceLocation, List<JsonElement>> map = new HashMap<>();
+        Map<Identifier, List<JsonElement>> map = new HashMap<>();
 
-        Map<ResourceLocation, Resource> resources = resourceManager.listResources("loot_table/injections", location ->
+        Map<Identifier, Resource> resources = resourceManager.listResources("loot_table/injections", location ->
                 location.getNamespace().equals(AdditionalAdditions.NAMESPACE) && location.getPath().endsWith(".json")
         );
 
         for (var entry : resources.entrySet()) {
-            ResourceLocation location = entry.getKey();
+            Identifier location = entry.getKey();
             Resource resource = entry.getValue();
             String path = location.getPath().substring("loot_table/injections/".length(), location.getPath().length() - ".json".length());
 
@@ -113,13 +113,13 @@ public class LootAdder {
                     continue;
                 }
 
-                DataResult<ResourceLocation> targetResult = ResourceLocation.CODEC.parse(JsonOps.INSTANCE, json.getAsJsonObject().get("target"));
+                DataResult<Identifier> targetResult = Identifier.CODEC.parse(JsonOps.INSTANCE, json.getAsJsonObject().get("target"));
                 if (targetResult.result().isEmpty()) {
                     AdditionalAdditions.LOGGER.error("[{}] Invalid target in loot injection file: {}: {}", AdditionalAdditions.NAMESPACE, location, targetResult.error().get().message());
                     continue;
                 }
 
-                ResourceLocation target = targetResult.result().get();
+                Identifier target = targetResult.result().get();
                 map.computeIfAbsent(target, k -> new ArrayList<>()).add(json);
             } catch (IOException e) {
                 AdditionalAdditions.LOGGER.error("[{}] Failed to read loot injection file: {}", AdditionalAdditions.NAMESPACE, location, e);
@@ -140,7 +140,7 @@ public class LootAdder {
      * @param consumer receives the created loot pool
      * @param cleanPools runnable to clear existing pools of the target loot table
      */
-    public void inject(ResourceLocation target, HolderLookup.Provider registries, Consumer<LootPool> consumer, Runnable cleanPools) {
+    public void inject(Identifier target, HolderLookup.Provider registries, Consumer<LootPool> consumer, Runnable cleanPools) {
         List<JsonElement> injections = this.injections.get(target);
 
         if (injections == null) {

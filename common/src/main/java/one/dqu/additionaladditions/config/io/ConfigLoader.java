@@ -9,7 +9,7 @@ import com.mojang.serialization.JsonOps;
 import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.minecraft.world.food.FoodProperties;
 import one.dqu.additionaladditions.AdditionalAdditions;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import one.dqu.additionaladditions.config.Config;
 import one.dqu.additionaladditions.config.ConfigProperty;
 import one.dqu.additionaladditions.config.datafixer.ConfigFileRelocator;
@@ -29,9 +29,9 @@ import java.util.Map;
 public class ConfigLoader {
     private static final String PATH = getConfigDirectory().resolve(AdditionalAdditions.NAMESPACE).toString();
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().setLenient().create();
-    private static final Map<ResourceLocation, Runnable> OBSERVERS = new HashMap<>();
+    private static final Map<Identifier, Runnable> OBSERVERS = new HashMap<>();
 
-    public static void onPostReload(ResourceLocation id, Runnable observer) {
+    public static void onPostReload(Identifier id, Runnable observer) {
         OBSERVERS.put(id, observer);
     }
 
@@ -88,9 +88,9 @@ public class ConfigLoader {
     /**
      * Applies the given config files to their respective ConfigProperty instances and notifies config observers.
      */
-    public static void apply(Map<ResourceLocation, JsonElement> configFiles) {
-        for (Map.Entry<ResourceLocation, JsonElement> entry : configFiles.entrySet()) {
-            ResourceLocation location = entry.getKey();
+    public static void apply(Map<Identifier, JsonElement> configFiles) {
+        for (Map.Entry<Identifier, JsonElement> entry : configFiles.entrySet()) {
+            Identifier location = entry.getKey();
             JsonElement json = entry.getValue();
             ConfigProperty<?> property = ConfigProperty.getByPath(location);
             if (property == null) {
@@ -113,15 +113,15 @@ public class ConfigLoader {
     /**
      * Updates config property format to the latest version.
      */
-    private static void datafix(Map<ResourceLocation, JsonElement> configFiles) {
+    private static void datafix(Map<Identifier, JsonElement> configFiles) {
         int version = Config.VERSION.get().version();
 
         // Remove version from the map as we don't need to datafix it
         configFiles.remove(Config.VERSION.path());
 
         // Run DFU
-        for (Map.Entry<ResourceLocation, JsonElement> entry : configFiles.entrySet().stream().toList()) {
-            ResourceLocation location = entry.getKey();
+        for (Map.Entry<Identifier, JsonElement> entry : configFiles.entrySet().stream().toList()) {
+            Identifier location = entry.getKey();
             JsonElement json = entry.getValue();
 
             JsonElement result;
@@ -147,8 +147,8 @@ public class ConfigLoader {
         );
 
         // Write all files
-        for (Map.Entry<ResourceLocation, JsonElement> entry : configFiles.entrySet()) {
-            ResourceLocation location = entry.getKey();
+        for (Map.Entry<Identifier, JsonElement> entry : configFiles.entrySet()) {
+            Identifier location = entry.getKey();
             JsonElement json = entry.getValue();
             Path path = Paths.get(PATH).resolve(location.getPath() + ".json5");
 
@@ -167,8 +167,8 @@ public class ConfigLoader {
      * Reads all given config properties from given directory and serializes them into JSON.
      * If a file does not exist, creates it with default values after the registries are ready.
      */
-    private static Map<ResourceLocation, JsonElement> readFiles(Path directory, List<ConfigProperty<?>> properties) {
-        Map<ResourceLocation, JsonElement> configFiles = new HashMap<>();
+    private static Map<Identifier, JsonElement> readFiles(Path directory, List<ConfigProperty<?>> properties) {
+        Map<Identifier, JsonElement> configFiles = new HashMap<>();
         for (ConfigProperty<?> property : properties) {
             Path path = directory.resolve(property.path().getPath() + ".json5");
 
@@ -196,7 +196,7 @@ public class ConfigLoader {
         return configFiles;
     }
 
-    public static VersionConfig readVersion(Map<ResourceLocation, JsonElement> configFiles) {
+    public static VersionConfig readVersion(Map<Identifier, JsonElement> configFiles) {
         JsonElement json = configFiles.get(Config.VERSION.path());
         if (json == null) {
             return new VersionConfig(-1);

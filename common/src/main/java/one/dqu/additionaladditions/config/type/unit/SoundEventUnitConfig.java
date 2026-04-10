@@ -6,7 +6,7 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvent;
 
 public record SoundEventUnitConfig(
@@ -25,7 +25,7 @@ public record SoundEventUnitConfig(
 
     private Holder<SoundEvent> toSoundEvent() {
         return BuiltInRegistries.SOUND_EVENT.getOrThrow(
-                ResourceKey.create(Registries.SOUND_EVENT, ResourceLocation.parse(this.soundEvent))
+                ResourceKey.create(Registries.SOUND_EVENT, Identifier.parse(this.soundEvent))
         );
     }
 

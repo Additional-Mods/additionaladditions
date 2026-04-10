@@ -3,7 +3,7 @@ package one.dqu.additionaladditions.material;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.component.DataComponentMap;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
@@ -40,7 +40,7 @@ public class AAMaterial {
 
         refreshMaps();
         ConfigLoader.onPostReload(
-                ResourceLocation.fromNamespaceAndPath(AdditionalAdditions.NAMESPACE, name + "_material"),
+                Identifier.fromNamespaceAndPath(AdditionalAdditions.NAMESPACE, name + "_material"),
                 this::refreshMaps
         );
     }
@@ -79,6 +79,10 @@ public class AAMaterial {
 
     public ArmorMaterial getArmorMaterial(ArmorType type) {
         return armorMaterials.get(type);
+    }
+
+    public TagKey<Item> getRepairTag() {
+        return repairIngredient;
     }
 
     private void refreshMaps() {
@@ -124,8 +128,8 @@ public class AAMaterial {
                 materialConfig.knockbackResistance(),
                 repairIngredient,
                 ResourceKey.create(
-                        ResourceKey.createRegistryKey(ResourceLocation.withDefaultNamespace("equipment_asset")),
-                        ResourceLocation.fromNamespaceAndPath(AdditionalAdditions.NAMESPACE, name)
+                        ResourceKey.createRegistryKey(Identifier.withDefaultNamespace("equipment_asset")),
+                        Identifier.fromNamespaceAndPath(AdditionalAdditions.NAMESPACE, name)
                 )
         );
     }

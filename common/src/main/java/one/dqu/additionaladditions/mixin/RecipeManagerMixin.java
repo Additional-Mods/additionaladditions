@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
@@ -32,7 +32,7 @@ public class RecipeManagerMixin {
         List<RecipeHolder<?>> list = new ArrayList<>(recipes.values());
 
         list.removeIf(holder -> {
-            ResourceLocation identifier = holder.id().location();
+            Identifier identifier = holder.id().identifier();
             if (!identifier.getNamespace().equals(AdditionalAdditions.NAMESPACE)) {
                 return false;
             }

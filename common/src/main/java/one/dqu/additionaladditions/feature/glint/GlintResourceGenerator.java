@@ -8,7 +8,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.renderer.texture.DynamicTexture;
 import net.minecraft.client.renderer.texture.TextureManager;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.packs.resources.Resource;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.item.DyeColor;
@@ -26,24 +26,24 @@ public class GlintResourceGenerator {
 
         try {
             Resource itemResource = resourceManager.getResource(ItemRenderer.ENCHANTED_GLINT_ITEM).orElseThrow();
-            Resource entityResource = resourceManager.getResource(ItemRenderer.ENCHANTED_GLINT_ENTITY).orElseThrow();
+            Resource entityResource = resourceManager.getResource(ItemRenderer.ENCHANTED_GLINT_ARMOR).orElseThrow();
             NativeImage itemImage = NativeImage.read(itemResource.open());
             NativeImage entityImage = NativeImage.read(entityResource.open());
 
             for (DyeColor color : DyeColor.values()) {
                 NativeImage tintedItem = generateTintedTexture(itemImage, color, false);
-                ResourceLocation tintedItemLocation = ResourceLocation.tryBuild(
+                Identifier tintedItemLocation = Identifier.tryBuild(
                         AdditionalAdditions.NAMESPACE,
                         "textures/util/enchanted_item_glint_" + color.getName().toLowerCase(Locale.ROOT) + ".png"
                 );
-                textureManager.register(tintedItemLocation, new DynamicTexture(tintedItem));
+                textureManager.register(tintedItemLocation, new DynamicTexture(() -> "glint_item_" + color.getName(), tintedItem));
 
                 NativeImage tintedEntity = generateTintedTexture(entityImage, color, true);
-                ResourceLocation tintedEntityLocation = ResourceLocation.tryBuild(
+                Identifier tintedEntityLocation = Identifier.tryBuild(
                         AdditionalAdditions.NAMESPACE,
                         "textures/util/enchanted_entity_glint_" + color.getName().toLowerCase(Locale.ROOT) + ".png"
                 );
-                textureManager.register(tintedEntityLocation, new DynamicTexture(tintedEntity));
+                textureManager.register(tintedEntityLocation, new DynamicTexture(() -> "glint_entity_" + color.getName(), tintedEntity));
             }
         } catch (Exception e) {
             throw new RuntimeException("Failed to generate colored enchantment glint resources", e);

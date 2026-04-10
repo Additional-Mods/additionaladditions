@@ -8,12 +8,13 @@ import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.component.TooltipDisplay;
 import one.dqu.additionaladditions.config.Config;
 import one.dqu.additionaladditions.feature.album.AlbumContents;
 import one.dqu.additionaladditions.registry.AAMisc;
 
-import java.util.List;
 import java.util.Optional;
+import java.util.function.Consumer;
 
 public class AlbumItem extends Item {
     public AlbumItem(Properties properties) {
@@ -60,10 +61,11 @@ public class AlbumItem extends Item {
 
     // TOOLTIP
 
+
     @Override
-    public void appendHoverText(ItemStack itemStack, TooltipContext tooltipContext, List<Component> list, TooltipFlag tooltipFlag) {
-        getContents(itemStack).addToTooltip(tooltipContext, list::add, tooltipFlag);
-        super.appendHoverText(itemStack, tooltipContext, list, tooltipFlag);
+    public void appendHoverText(ItemStack itemStack, TooltipContext tooltipContext, TooltipDisplay tooltipDisplay, Consumer<Component> consumer, TooltipFlag tooltipFlag) {
+        getContents(itemStack).addToTooltip(tooltipContext, consumer, tooltipFlag, itemStack);
+        super.appendHoverText(itemStack, tooltipContext, tooltipDisplay, consumer, tooltipFlag);
     }
 
 

@@ -3,7 +3,7 @@ package one.dqu.additionaladditions.config.network.neoforge;
 import com.google.gson.JsonElement;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.network.protocol.configuration.ServerConfigurationPacketListener;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.network.ConfigurationTask;
 import net.neoforged.neoforge.network.configuration.ICustomConfigurationTask;
 import one.dqu.additionaladditions.config.ConfigProperty;
@@ -18,7 +18,7 @@ public record ConfigSyncTask(ServerConfigurationPacketListener listener) impleme
 
     @Override
     public void run(Consumer<CustomPacketPayload> consumer) {
-        Map<ResourceLocation, JsonElement> map = ConfigProperty.getAll().stream()
+        Map<Identifier, JsonElement> map = ConfigProperty.getAll().stream()
                 .collect(Collectors.toMap(
                         ConfigProperty::path,
                         property -> property.serialize().getOrThrow()

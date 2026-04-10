@@ -1,7 +1,7 @@
 package one.dqu.additionaladditions.util.fabric;
 
 import net.minecraft.core.Registry;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import one.dqu.additionaladditions.util.Registrar;
 
 import java.util.ArrayList;
@@ -34,7 +34,7 @@ public class RegistrarImpl {
         }
 
         @Override
-        public <I extends T> Supplier<I> register(ResourceLocation id, Supplier<I> supplier) {
+        public <I extends T> Supplier<I> register(Identifier id, Supplier<I> supplier) {
             I instance = supplier.get();
             Registry.register(this.registry, id, instance);
             return () -> instance;

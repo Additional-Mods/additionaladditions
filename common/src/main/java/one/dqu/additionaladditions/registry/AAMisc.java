@@ -5,7 +5,7 @@ import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.CustomRecipe;
@@ -25,41 +25,41 @@ public class AAMisc {
     /* DATA COMPONENTS */
 
     public static final Supplier<DataComponentType<GlintColor>> GLINT_COLOR_COMPONENT = AARegistries.DATA_COMPONENT_TYPES.register(
-            ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "glint_color"),
+            Identifier.tryBuild(AdditionalAdditions.NAMESPACE, "glint_color"),
             () -> DataComponentType.<GlintColor>builder().persistent(GlintColor.CODEC).networkSynchronized(GlintColor.STREAM_CODEC).build()
     );
 
     public static final Supplier<DataComponentType<AlbumContents>> ALBUM_CONTENTS_COMPONENT = AARegistries.DATA_COMPONENT_TYPES.register(
-            ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "album_contents"),
+            Identifier.tryBuild(AdditionalAdditions.NAMESPACE, "album_contents"),
             () -> DataComponentType.<AlbumContents>builder().persistent(AlbumContents.CODEC).networkSynchronized(AlbumContents.STREAM_CODEC).cacheEncoding().build()
     );
 
     public static final Supplier<DataComponentType<Integer>> WATER_LEVEL_COMPONENT = AARegistries.DATA_COMPONENT_TYPES.register(
-            ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "water_level"),
+            Identifier.tryBuild(AdditionalAdditions.NAMESPACE, "water_level"),
             () -> DataComponentType.<Integer>builder().persistent(Codec.INT).networkSynchronized(ByteBufCodecs.INT).build()
     );
 
     /* TAGS */
 
-    public static final TagKey<Item> SUSPICIOUS_DYES_TAG = TagKey.create(Registries.ITEM, ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "suspicious_dyes"));
-    public static final TagKey<Block> WRENCH_BLACKLIST_TAG = TagKey.create(Registries.BLOCK, ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "wrench_blacklisted"));
-    public static final TagKey<Item> ALBUMS_TAG = TagKey.create(Registries.ITEM, ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "albums"));
-    public static final TagKey<Item> REPAIRS_ROSE_GOLD_ARMOR_TAG = TagKey.create(Registries.ITEM, ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "repairs_rose_gold_armor"));
+    public static final TagKey<Item> SUSPICIOUS_DYES_TAG = TagKey.create(Registries.ITEM, Identifier.tryBuild(AdditionalAdditions.NAMESPACE, "suspicious_dyes"));
+    public static final TagKey<Block> WRENCH_BLACKLIST_TAG = TagKey.create(Registries.BLOCK, Identifier.tryBuild(AdditionalAdditions.NAMESPACE, "wrench_blacklisted"));
+    public static final TagKey<Item> ALBUMS_TAG = TagKey.create(Registries.ITEM, Identifier.tryBuild(AdditionalAdditions.NAMESPACE, "albums"));
+    public static final TagKey<Item> REPAIRS_ROSE_GOLD_ARMOR_TAG = TagKey.create(Registries.ITEM, Identifier.tryBuild(AdditionalAdditions.NAMESPACE, "repairs_rose_gold_armor"));
 
     /* RECIPE SERIALIZERS AND TYPES */
 
     public static final Supplier<RecipeSerializer<SuspiciousDyeRecipe>> SUSPICIOUS_DYE_RECIPE_SERIALIZER = AARegistries.RECIPE_SERIALIZERS.register(
-            ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "suspicious_dye"),
+            Identifier.tryBuild(AdditionalAdditions.NAMESPACE, "suspicious_dye"),
             () -> new CustomRecipe.Serializer<>(SuspiciousDyeRecipe::new)
     );
 
     public static final Supplier<RecipeSerializer<BrewingRecipe>> BREWING_RECIPE_SERIALIZER = AARegistries.RECIPE_SERIALIZERS.register(
-            ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "brewing"),
+            Identifier.tryBuild(AdditionalAdditions.NAMESPACE, "brewing"),
             BrewingRecipe.BrewingRecipeSerializer::new
     );
 
     public static final Supplier<RecipeType<BrewingRecipe>> BREWING_RECIPE_TYPE = AARegistries.RECIPE_TYPES.register(
-            ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "brewing"),
+            Identifier.tryBuild(AdditionalAdditions.NAMESPACE, "brewing"),
             () -> new RecipeType<>() {
                 @Override
                 public String toString() {
@@ -69,27 +69,27 @@ public class AAMisc {
     );
 
     public static final ResourceKey<RecipePropertySet> BREWING_RECIPE_PROPERTY_SET =
-            ResourceKey.create(RecipePropertySet.TYPE_KEY, ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "brewing"));
+            ResourceKey.create(RecipePropertySet.TYPE_KEY, Identifier.tryBuild(AdditionalAdditions.NAMESPACE, "brewing"));
 
     /* ADVANCEMENT TRIGGERS */
 
     public static final Supplier<SimplePlayerTrigger> FERTILIZE_WITH_WATERING_CAN_TRIGGER = AARegistries.TRIGGERS.register(
-            ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "fertilize_with_watering_can"),
+            Identifier.tryBuild(AdditionalAdditions.NAMESPACE, "fertilize_with_watering_can"),
             SimplePlayerTrigger::new
     );
 
     public static final Supplier<SimplePlayerTrigger> FILL_ALBUM_SAME_DISC_TRIGGER = AARegistries.TRIGGERS.register(
-            ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "fill_album_same_disc"),
+            Identifier.tryBuild(AdditionalAdditions.NAMESPACE, "fill_album_same_disc"),
             SimplePlayerTrigger::new
     );
 
     public static final Supplier<SimplePlayerTrigger> ACTIVATE_TINTED_LAMP_TRIGGER = AARegistries.TRIGGERS.register(
-            ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "activate_tinted_redstone_lamp"),
+            Identifier.tryBuild(AdditionalAdditions.NAMESPACE, "activate_tinted_redstone_lamp"),
             SimplePlayerTrigger::new
     );
 
     public static final Supplier<SimplePlayerTrigger> ROPE_WORLD_HEIGHT = AARegistries.TRIGGERS.register(
-            ResourceLocation.tryBuild(AdditionalAdditions.NAMESPACE, "rope_world_height"),
+            Identifier.tryBuild(AdditionalAdditions.NAMESPACE, "rope_world_height"),
             SimplePlayerTrigger::new
     );
 

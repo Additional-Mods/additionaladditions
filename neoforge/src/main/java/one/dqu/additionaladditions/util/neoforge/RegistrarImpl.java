@@ -1,7 +1,7 @@
 package one.dqu.additionaladditions.util.neoforge;
 
 import net.minecraft.core.Registry;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import one.dqu.additionaladditions.AdditionalAdditions;
@@ -43,7 +43,7 @@ public class RegistrarImpl {
         }
 
         @Override
-        public <I extends T> Supplier<I> register(ResourceLocation id, Supplier<I> supplier) {
+        public <I extends T> Supplier<I> register(Identifier id, Supplier<I> supplier) {
             return this.register.register(id.getPath(), supplier);
         }
 
