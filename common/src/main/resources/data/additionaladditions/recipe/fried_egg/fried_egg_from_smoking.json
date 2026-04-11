@@ -1,6 +1,6 @@
 {
   "type": "minecraft:smoking",
-  "ingredient": "minecraft:egg",
+  "ingredient": "#c:eggs",
   "result": {
     "id": "additionaladditions:fried_egg"
   },

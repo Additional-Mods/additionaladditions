@@ -1,6 +1,6 @@
 {
   "type": "minecraft:campfire_cooking",
-  "ingredient": "minecraft:egg",
+  "ingredient": "#c:eggs",
   "result": {
     "id": "additionaladditions:fried_egg"
   },
