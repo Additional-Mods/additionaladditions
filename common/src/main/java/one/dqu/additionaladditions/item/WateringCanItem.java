@@ -6,7 +6,7 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionResult;
 import one.dqu.additionaladditions.config.Config;
 import one.dqu.additionaladditions.item.configurable.ConfigurableItem;
-import one.dqu.additionaladditions.util.FluidHelper;
+import one.dqu.additionaladditions.core.util.FluidHelper;
 import one.dqu.additionaladditions.registry.AAMisc;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

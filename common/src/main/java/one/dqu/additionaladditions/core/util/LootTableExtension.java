@@ -1,4 +1,4 @@
-package one.dqu.additionaladditions.util;
+package one.dqu.additionaladditions.core.util;
 
 /**
  * Provides a method to clear the loot table pools

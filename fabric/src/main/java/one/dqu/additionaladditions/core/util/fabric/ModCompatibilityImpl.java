@@ -1,10 +1,10 @@
-package one.dqu.additionaladditions.util.neoforge;
+package one.dqu.additionaladditions.core.util.fabric;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.toasts.SystemToast;
 import net.minecraft.network.chat.Component;
-import net.neoforged.fml.ModList;
-import net.neoforged.fml.loading.FMLEnvironment;
 import one.dqu.additionaladditions.AdditionalAdditions;
 
 import java.util.ArrayList;
@@ -21,7 +21,7 @@ public class ModCompatibilityImpl {
 
         boolean found = false;
         for (String modid : modids) {
-            if (ModList.get().isLoaded(modid)) {
+            if (FabricLoader.getInstance().isModLoaded(modid)) {
                 found = true;
                 break;
             }
@@ -45,7 +45,7 @@ public class ModCompatibilityImpl {
 
     public static boolean isModPresent(String... modids) {
         for (String modid : modids) {
-            if (ModList.get().isLoaded(modid)) {
+            if (FabricLoader.getInstance().isModLoaded(modid)) {
                 return true;
             }
         }
@@ -63,6 +63,6 @@ public class ModCompatibilityImpl {
     }
 
     public static boolean isClientSide() {
-        return FMLEnvironment.getDist().isClient();
+        return FabricLoader.getInstance().getEnvironmentType() == EnvType.CLIENT;
     }
 }

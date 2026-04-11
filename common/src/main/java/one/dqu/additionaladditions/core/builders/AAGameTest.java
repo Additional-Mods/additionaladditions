@@ -1,4 +1,4 @@
-package one.dqu.additionaladditions.registry.builders;
+package one.dqu.additionaladditions.core.builders;
 
 import net.minecraft.core.registries.Registries;
 import net.minecraft.gametest.framework.GameTestHelper;
@@ -7,7 +7,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.gametest.framework.TestEnvironmentDefinition;
 import net.minecraft.gametest.framework.GameTestEnvironments;
 import one.dqu.additionaladditions.AdditionalAdditions;
-import one.dqu.additionaladditions.datagen.AAGameTestDatagen;
+import one.dqu.additionaladditions.core.datagen.AAGameTestDatagen;
 import one.dqu.additionaladditions.registry.AARegistries;
 
 import java.util.function.Consumer;

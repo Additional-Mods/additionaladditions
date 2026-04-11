@@ -1,4 +1,4 @@
-package one.dqu.additionaladditions.util;
+package one.dqu.additionaladditions.core.util;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;

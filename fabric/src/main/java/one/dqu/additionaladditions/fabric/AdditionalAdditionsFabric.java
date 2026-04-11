@@ -13,10 +13,10 @@ import net.minecraft.resources.Identifier;
 import one.dqu.additionaladditions.AdditionalAdditions;
 import one.dqu.additionaladditions.config.ConfigProperty;
 import one.dqu.additionaladditions.config.network.ConfigSyncS2CPayload;
-import one.dqu.additionaladditions.util.CreativeAdder;
-import one.dqu.additionaladditions.util.LootAdder;
-import one.dqu.additionaladditions.util.LootTableExtension;
-import one.dqu.additionaladditions.util.fabric.RegistrarImpl;
+import one.dqu.additionaladditions.core.util.CreativeAdder;
+import one.dqu.additionaladditions.core.util.LootAdder;
+import one.dqu.additionaladditions.core.util.LootTableExtension;
+import one.dqu.additionaladditions.core.util.fabric.RegistrarImpl;
 
 import java.util.Map;
 import java.util.stream.Collectors;

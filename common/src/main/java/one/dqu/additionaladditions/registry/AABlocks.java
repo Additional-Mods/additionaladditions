@@ -19,7 +19,7 @@ import net.minecraft.world.entity.ai.village.poi.PoiType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
-import one.dqu.additionaladditions.util.Registrar;
+import one.dqu.additionaladditions.core.util.Registrar;
 
 import java.util.Set;
 import java.util.function.Consumer;

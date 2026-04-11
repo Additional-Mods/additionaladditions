@@ -4,7 +4,7 @@ import one.dqu.additionaladditions.gametest.CopperPatinaTests;
 import one.dqu.additionaladditions.gametest.MiscTests;
 import one.dqu.additionaladditions.gametest.RopeArrowTests;
 import one.dqu.additionaladditions.gametest.WrenchTests;
-import one.dqu.additionaladditions.registry.builders.AAGameTest;
+import one.dqu.additionaladditions.core.builders.AAGameTest;
 
 public class AAGameTests {
     public static void registerAll() {

@@ -8,7 +8,7 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;
 import one.dqu.additionaladditions.AdditionalAdditions;
-import one.dqu.additionaladditions.datagen.AAGameTestDatagen;
+import one.dqu.additionaladditions.core.datagen.AAGameTestDatagen;
 
 import java.util.concurrent.CompletableFuture;
 

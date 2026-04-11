@@ -23,7 +23,7 @@ import one.dqu.additionaladditions.feature.glint.GlintColor;
 import one.dqu.additionaladditions.item.SuspiciousDyeItem;
 import one.dqu.additionaladditions.registry.AAItems;
 import one.dqu.additionaladditions.registry.AAMisc;
-import one.dqu.additionaladditions.util.ConventionalTags;
+import one.dqu.additionaladditions.core.util.ConventionalTags;
 
 import java.util.*;
 import java.util.function.Supplier;

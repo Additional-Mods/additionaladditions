@@ -10,7 +10,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.Block;
-import one.dqu.additionaladditions.util.Registrar;
+import one.dqu.additionaladditions.core.util.Registrar;
 
 import java.util.function.Consumer;
 

@@ -16,7 +16,7 @@ import one.dqu.additionaladditions.config.datafixer.ConfigFileRelocator;
 import one.dqu.additionaladditions.config.datafixer.ConfigFixerUpper;
 import one.dqu.additionaladditions.config.type.VersionConfig;
 import one.dqu.additionaladditions.config.type.unit.FoodUnitConfig;
-import one.dqu.additionaladditions.util.Registrar;
+import one.dqu.additionaladditions.core.util.Registrar;
 
 import java.io.IOException;
 import java.nio.file.Files;
