@@ -129,8 +129,13 @@
         "rotation": [0, 90, 0],
         "translation": [1, 6, -4],
         "scale": [1.5, 1.5, 1.5]
+      },
+      "on_shelf": {
+        "rotation": [0, 90, 0],
+        "translation": [1.5, 0, 0.5],
+        "scale": [1.5, 1.5, 1.5]
       }
-	},
+    },
 	"groups": [0, 1, 2,
 		{
 			"name": "handle",
