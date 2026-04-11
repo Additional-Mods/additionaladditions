@@ -13,6 +13,7 @@ public class AAMaterials {
             AAMisc.REPAIRS_ROSE_GOLD_ARMOR_TAG,
             Map.of(
                     ToolType.SWORD, Config.ROSE_GOLD_SWORD::get,
+                    ToolType.SPEAR, Config.ROSE_GOLD_SPEAR::get,
                     ToolType.PICKAXE, Config.ROSE_GOLD_PICKAXE::get,
                     ToolType.AXE, Config.ROSE_GOLD_AXE::get,
                     ToolType.SHOVEL, Config.ROSE_GOLD_SHOVEL::get,

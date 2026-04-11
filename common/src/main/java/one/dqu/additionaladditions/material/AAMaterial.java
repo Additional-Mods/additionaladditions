@@ -9,15 +9,16 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.item.EitherHolder;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.component.ItemAttributeModifiers;
-import net.minecraft.world.item.component.Tool;
-import net.minecraft.world.item.component.Weapon;
+import net.minecraft.world.item.SwingAnimationType;
+import net.minecraft.world.item.component.*;
 import net.minecraft.world.item.enchantment.Enchantable;
 import net.minecraft.world.item.equipment.ArmorType;
 import net.minecraft.world.item.equipment.EquipmentAsset;
@@ -29,6 +30,7 @@ import one.dqu.additionaladditions.config.ArmorLikeConfig;
 import one.dqu.additionaladditions.config.ToolLikeConfig;
 import one.dqu.additionaladditions.config.type.ArmorItemConfig;
 import one.dqu.additionaladditions.config.type.MaterialConfig;
+import one.dqu.additionaladditions.config.type.SpearItemConfig;
 
 import java.util.List;
 import java.util.Map;
@@ -42,11 +44,13 @@ public record AAMaterial(
         Map<ArmorType, Supplier<ArmorLikeConfig>> armorConfigs
 ) {
     public void applyFor(DataComponentMap.Builder builder, ToolType toolType) {
-        var patch = AAMaterial.toolProperties(
-                toolType,
-                materialConfig.get(),
-                toolConfigs.get(toolType).get()
-        );
+        DataComponentMap patch;
+
+        if (toolType == ToolType.SPEAR) {
+            patch = spearProperties(name, materialConfig.get(), toolConfigs.get(toolType).get());
+        } else {
+            patch = toolProperties(toolType, materialConfig.get(), toolConfigs.get(toolType).get());
+        }
 
         builder.addAll(patch);
     }
@@ -86,9 +90,8 @@ public record AAMaterial(
         builder.set(DataComponents.MAX_STACK_SIZE, 1);
         builder.set(DataComponents.ENCHANTABLE, new Enchantable(material.enchantability()));
 
-        Tool toolComponent;
         if (type == ToolType.SWORD) {
-            toolComponent = new Tool(
+            Tool toolComponent = new Tool(
                     List.of(
                             Tool.Rule.minesAndDrops(HolderSet.direct(Blocks.COBWEB.builtInRegistryHolder()), 15.0F),
                             Tool.Rule.overrideSpeed(registry.getOrThrow(BlockTags.SWORD_INSTANTLY_MINES), Float.MAX_VALUE),
@@ -96,18 +99,19 @@ public record AAMaterial(
                     ),
                     1.0F, 2, false
             );
-        } else {
-            toolComponent = new Tool(
+            builder.set(DataComponents.TOOL, toolComponent);
+        } else if (!type.isWeapon()) {
+            Tool toolComponent = new Tool(
                     List.of(
                             Tool.Rule.deniesDrops(registry.getOrThrow(material.incorrectBlocksForDrops())),
                             Tool.Rule.minesAndDrops(registry.getOrThrow(type.mineableTag()), toolLike.blockBreakSpeed())
                     ),
                     1.0F, 1, true
             );
+            builder.set(DataComponents.TOOL, toolComponent);
         }
-        builder.set(DataComponents.TOOL, toolComponent);
 
-        if (type == ToolType.SWORD) {
+        if (type.isWeapon()) {
             builder.set(DataComponents.WEAPON, new Weapon(1));
         } else {
             //todo maybe make this configurable
@@ -136,6 +140,29 @@ public record AAMaterial(
                 )
                 .build();
         builder.set(DataComponents.ATTRIBUTE_MODIFIERS, attributes);
+
+        return builder.build();
+    }
+
+    private static DataComponentMap spearProperties(String name, MaterialConfig material, ToolLikeConfig toolLike) {
+        if (!(toolLike instanceof SpearItemConfig spear)) {
+            throw new IllegalArgumentException("ToolLike of tool type SPEAR of material " + name + " is not an instance of SpearItemConfig.");
+        }
+
+        DataComponentMap.Builder builder = DataComponentMap.builder();
+
+        DataComponentMap tool = toolProperties(ToolType.SPEAR, material, toolLike);
+        builder.addAll(tool);
+
+        builder.set(DataComponents.DAMAGE_TYPE, new EitherHolder<>(DamageTypes.SPEAR));
+        builder.set(DataComponents.KINETIC_WEAPON, spear.kineticWeapon());
+        builder.set(DataComponents.PIERCING_WEAPON, spear.piercingWeapon());
+        builder.set(DataComponents.SWING_ANIMATION, new SwingAnimation(SwingAnimationType.STAB, spear.swingAnimationTicks()));
+
+        // constant values from Item.Properties#spear
+        builder.set(DataComponents.ATTACK_RANGE, new AttackRange(2.0F, 4.5F, 2.0F, 6.5F, 0.125F, 0.5F));
+        builder.set(DataComponents.MINIMUM_ATTACK_CHARGE, 1.0F);
+        builder.set(DataComponents.USE_EFFECTS, new UseEffects(true, false, 1.0F));
 
         return builder.build();
     }

@@ -4,10 +4,13 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.DyeColor;
+import net.minecraft.world.item.component.KineticWeapon;
+import net.minecraft.world.item.component.PiercingWeapon;
 import one.dqu.additionaladditions.config.datafixer.ConfigFixerUpper;
 import one.dqu.additionaladditions.config.type.*;
 
 import java.util.Map;
+import java.util.Optional;
 
 public class Config {
     public static void init() { /* forces static init */ }
@@ -118,6 +121,22 @@ public class Config {
     public static final ConfigProperty<SwordItemConfig> ROSE_GOLD_SWORD = new ConfigProperty<>(
             "rose_gold/sword", SwordItemConfig.CODEC,
             new SwordItemConfig(1.6f, 7, 900)
+    );
+
+    public static final ConfigProperty<SpearItemConfig> ROSE_GOLD_SPEAR = new ConfigProperty<>(
+            "rose_gold/spear", SpearItemConfig.CODEC,
+            new SpearItemConfig(
+                    0.95f, 4, 900,
+                    new KineticWeapon(
+                            10, 10, KineticWeapon.Condition.ofAttackerSpeed(60, 7.5f),
+                            KineticWeapon.Condition.ofAttackerSpeed(130, 5.1f),
+                            KineticWeapon.Condition.ofRelativeSpeed(200, 4.6f),
+                            0.38f, 1.075f, Optional.of(SoundEvents.SPEAR_USE), Optional.of(SoundEvents.SPEAR_HIT)
+                    ),
+                    new PiercingWeapon(
+                            true, false, Optional.of(SoundEvents.SPEAR_ATTACK), Optional.of(SoundEvents.SPEAR_USE)
+                    )
+            )
     );
 
     public static final ConfigProperty<ToolItemConfig> ROSE_GOLD_SHOVEL = new ConfigProperty<>(

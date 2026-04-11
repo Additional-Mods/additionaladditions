@@ -14,6 +14,11 @@
       {
         "texture": "additionaladditions:rose_gold"
       }
+    ],
+    "nautilus_body": [
+      {
+        "texture": "additionaladditions:rose_gold"
+      }
     ]
   }
 }

@@ -316,10 +316,23 @@ public class AAItems {
             .creativeAfter(Items.GOLDEN_HORSE_ARMOR, CreativeModeTabs.COMBAT)
             .build(p -> new ArmorItem(AAMaterials.ROSE_GOLD, AnimalArmorType.HORSE, p));
 
+    public static final Supplier<Item> ROSE_GOLD_NAUTILUS_ARMOR = new Builder("rose_gold_nautilus_armor")
+            .config(Config.ROSE_GOLD)
+            .properties(p -> p
+                    .stacksTo(1)
+            )
+            .creativeAfter(Items.GOLDEN_NAUTILUS_ARMOR, CreativeModeTabs.COMBAT)
+            .build(p -> new ArmorItem(AAMaterials.ROSE_GOLD, AnimalArmorType.NAUTILUS, p));
+
     public static final Supplier<Item> ROSE_GOLD_SWORD = new Builder("rose_gold_sword")
             .config(Config.ROSE_GOLD)
             .creativeAfter(Items.GOLDEN_SWORD, CreativeModeTabs.COMBAT)
             .build(p -> new ToolItem(AAMaterials.ROSE_GOLD, ToolType.SWORD, p));
+
+    public static final Supplier<Item> ROSE_GOLD_SPEAR = new Builder("rose_gold_spear")
+            .config(Config.ROSE_GOLD)
+            .creativeAfter(Items.GOLDEN_SPEAR, CreativeModeTabs.COMBAT)
+            .build(p -> new ToolItem(AAMaterials.ROSE_GOLD, ToolType.SPEAR, p));
 
     public static final Supplier<Item> ROSE_GOLD_SHOVEL = new Builder("rose_gold_shovel")
             .config(Config.ROSE_GOLD)
