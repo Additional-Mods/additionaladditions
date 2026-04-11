@@ -126,12 +126,12 @@ public class Config {
     public static final ConfigProperty<SpearItemConfig> ROSE_GOLD_SPEAR = new ConfigProperty<>(
             "rose_gold/spear", SpearItemConfig.CODEC,
             new SpearItemConfig(
-                    0.95f, 4, 900,
+                    1f, 3.5f, 900,
                     new KineticWeapon(
                             10, 10, KineticWeapon.Condition.ofAttackerSpeed(60, 7.5f),
                             KineticWeapon.Condition.ofAttackerSpeed(130, 5.1f),
                             KineticWeapon.Condition.ofRelativeSpeed(200, 4.6f),
-                            0.38f, 1.075f, Optional.of(SoundEvents.SPEAR_USE), Optional.of(SoundEvents.SPEAR_HIT)
+                            0.38f, 1f, Optional.of(SoundEvents.SPEAR_USE), Optional.of(SoundEvents.SPEAR_HIT)
                     ),
                     new PiercingWeapon(
                             true, false, Optional.of(SoundEvents.SPEAR_ATTACK), Optional.of(SoundEvents.SPEAR_USE)
