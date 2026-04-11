@@ -6,6 +6,6 @@ import one.dqu.additionaladditions.material.ToolType;
 
 public class ToolItem extends ConfigurableItem {
     public ToolItem(AAMaterial material, ToolType toolType, Properties properties) {
-        super(properties.repairable(material.getRepairTag()), builder -> material.applyFor(builder, toolType));
+        super(properties.repairable(material.repairIngredient()), builder -> material.applyFor(builder, toolType));
     }
 }

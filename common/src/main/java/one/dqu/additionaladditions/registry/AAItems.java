@@ -17,6 +17,7 @@ import one.dqu.additionaladditions.item.*;
 import one.dqu.additionaladditions.item.configurable.*;
 import one.dqu.additionaladditions.feature.album.AlbumContents;
 import one.dqu.additionaladditions.material.AAMaterials;
+import one.dqu.additionaladditions.material.AnimalArmorType;
 import one.dqu.additionaladditions.material.ToolType;
 import one.dqu.additionaladditions.util.CreativeAdder;
 import net.minecraft.core.registries.Registries;
@@ -313,7 +314,7 @@ public class AAItems {
                     .stacksTo(1)
             )
             .creativeAfter(Items.GOLDEN_HORSE_ARMOR, CreativeModeTabs.COMBAT)
-            .build(p -> new ArmorItem(AAMaterials.ROSE_GOLD, ArmorType.BODY, p));
+            .build(p -> new ArmorItem(AAMaterials.ROSE_GOLD, AnimalArmorType.HORSE, p));
 
     public static final Supplier<Item> ROSE_GOLD_SWORD = new Builder("rose_gold_sword")
             .config(Config.ROSE_GOLD)
@@ -323,7 +324,7 @@ public class AAItems {
     public static final Supplier<Item> ROSE_GOLD_SHOVEL = new Builder("rose_gold_shovel")
             .config(Config.ROSE_GOLD)
             .creativeAfter(Items.GOLDEN_HOE, CreativeModeTabs.TOOLS_AND_UTILITIES)
-            .build(p -> new ToolItem(AAMaterials.ROSE_GOLD, ToolType.SHOVEL, p));
+            .build(p -> new AAShovelItem(AAMaterials.ROSE_GOLD, p));
 
     public static final Supplier<Item> ROSE_GOLD_PICKAXE = new Builder("rose_gold_pickaxe")
             .config(Config.ROSE_GOLD)
@@ -334,12 +335,12 @@ public class AAItems {
             .config(Config.ROSE_GOLD)
             .creativeAfter(Items.GOLDEN_HOE, CreativeModeTabs.TOOLS_AND_UTILITIES)
             .creativeAfter(Items.GOLDEN_AXE, CreativeModeTabs.COMBAT)
-            .build(p -> new ToolItem(AAMaterials.ROSE_GOLD, ToolType.AXE, p));
+            .build(p -> new AAAxeItem(AAMaterials.ROSE_GOLD, p));
 
     public static final Supplier<Item> ROSE_GOLD_HOE = new Builder("rose_gold_hoe")
             .config(Config.ROSE_GOLD)
             .creativeAfter(Items.GOLDEN_HOE, CreativeModeTabs.TOOLS_AND_UTILITIES)
-            .build(p -> new ToolItem(AAMaterials.ROSE_GOLD, ToolType.HOE, p));
+            .build(p -> new AAHoeItem(AAMaterials.ROSE_GOLD, p));
 
     // SUSPICIOUS DYE
 

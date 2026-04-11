@@ -5,6 +5,6 @@ public interface ToolLikeConfig {
     float attackDamage();
     int durability();
     default float blockBreakSpeed() {
-        return 1.5F; //todo CHECK IF VALUE IS RIGHT; default speed value for swords, other tools should override this
+        return 1.5F;
     }
 }
