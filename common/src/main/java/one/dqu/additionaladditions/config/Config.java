@@ -134,7 +134,7 @@ public class Config {
                             0.38f, 1f, Optional.of(SoundEvents.SPEAR_USE), Optional.of(SoundEvents.SPEAR_HIT)
                     ),
                     new PiercingWeapon(
-                            true, false, Optional.of(SoundEvents.SPEAR_ATTACK), Optional.of(SoundEvents.SPEAR_USE)
+                            true, false, Optional.of(SoundEvents.SPEAR_ATTACK), Optional.of(SoundEvents.SPEAR_HIT)
                     )
             )
     );
