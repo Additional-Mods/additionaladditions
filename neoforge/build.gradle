@@ -13,6 +13,23 @@ loom {
     }
 
     accessWidenerPath = project(":common").file("src/main/resources/additionaladditions.accesswidener")
+
+    runs {
+        data {
+            serverData()
+            programArgs "--all", "--mod", "additionaladditions"
+            programArgs "--output", file("src/main/generated").absolutePath
+            vmArg "-Dadditionaladditions.datagen=true"
+        }
+    }
+}
+
+sourceSets {
+    main {
+        resources {
+            srcDir file("src/main/generated")
+        }
+    }
 }
 
 configurations {

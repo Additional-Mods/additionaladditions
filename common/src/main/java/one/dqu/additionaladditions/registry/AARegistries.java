@@ -3,6 +3,7 @@ package one.dqu.additionaladditions.registry;
 import net.minecraft.advancements.CriterionTrigger;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.village.poi.PoiType;
 import net.minecraft.world.item.Item;
@@ -10,6 +11,8 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.Block;
 import one.dqu.additionaladditions.util.Registrar;
+
+import java.util.function.Consumer;
 
 public class AARegistries {
     public static final Registrar<DataComponentType<?>> DATA_COMPONENT_TYPES = Registrar.wrap(BuiltInRegistries.DATA_COMPONENT_TYPE);
@@ -20,4 +23,5 @@ public class AARegistries {
     public static final Registrar<EntityType<?>> ENTITY_TYPES = Registrar.wrap(BuiltInRegistries.ENTITY_TYPE);
     public static final Registrar<PoiType> POI = Registrar.wrap(BuiltInRegistries.POINT_OF_INTEREST_TYPE);
     public static final Registrar<CriterionTrigger<?>> TRIGGERS = Registrar.wrap(BuiltInRegistries.TRIGGER_TYPES);
+    public static final Registrar<Consumer<GameTestHelper>> TEST_FUNCTIONS = Registrar.wrap(BuiltInRegistries.TEST_FUNCTION);
 }

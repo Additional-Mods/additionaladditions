@@ -53,6 +53,9 @@
     ],
     "rei_common": [
       "one.dqu.additionaladditions.recipe.REICommonCompat"
+    ],
+    "fabric-datagen": [
+      "one.dqu.additionaladditions.fabric.AdditionalAdditionsDatagenFabric"
     ]
   },
   "mixins": [

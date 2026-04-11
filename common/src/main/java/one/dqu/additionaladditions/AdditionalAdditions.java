@@ -7,15 +7,11 @@ import one.dqu.additionaladditions.util.ModCompatibility;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/*
- * TODO:
- *  - implement gametests
- *  - new neoforge transaction api
- *  - 1.21.11 stuff (nautilus armor, spear)
- */
 public final class AdditionalAdditions {
     public static final String NAMESPACE = "additionaladditions";
     public static final Logger LOGGER = LoggerFactory.getLogger(NAMESPACE);
+    public static final boolean DATAGEN = System.getProperty("fabric-api.datagen") != null
+            || System.getProperty("additionaladditions.datagen") != null;
 
     public static void init() {
         ConfigLoader.load();
@@ -24,6 +20,7 @@ public final class AdditionalAdditions {
         AAEntities.registerAll();
         AAItems.registerAll();
         AABlocks.registerAll();
+        AAGameTests.registerAll();
 
         ModCompatibility.add(
                 () -> Config.COPPER_PATINA.get().enabled(),

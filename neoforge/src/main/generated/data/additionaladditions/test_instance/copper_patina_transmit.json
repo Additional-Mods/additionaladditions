@@ -1,0 +1,7 @@
+{
+  "type": "minecraft:function",
+  "environment": "minecraft:default",
+  "function": "additionaladditions:copper_patina_transmit",
+  "max_ticks": 200,
+  "structure": "additionaladditions:empty"
+}

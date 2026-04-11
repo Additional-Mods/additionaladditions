@@ -1,0 +1,7 @@
+{
+  "type": "minecraft:function",
+  "environment": "minecraft:default",
+  "function": "additionaladditions:rope_arrow_entity_hit_no_pickup",
+  "max_ticks": 100,
+  "structure": "additionaladditions:empty"
+}

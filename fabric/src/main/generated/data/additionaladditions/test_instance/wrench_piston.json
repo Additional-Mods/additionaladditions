@@ -1,0 +1,7 @@
+{
+  "type": "minecraft:function",
+  "environment": "minecraft:default",
+  "function": "additionaladditions:wrench_piston",
+  "max_ticks": 100,
+  "structure": "additionaladditions:empty"
+}

@@ -11,6 +11,20 @@ loom {
     accessWidenerPath = project(":common").file("src/main/resources/additionaladditions.accesswidener")
 }
 
+sourceSets {
+    main {
+        resources {
+            srcDir "src/main/generated"
+        }
+    }
+}
+
+fabricApi {
+    configureDataGeneration() {
+        client = true
+    }
+}
+
 configurations {
     common {
         canBeResolved = true

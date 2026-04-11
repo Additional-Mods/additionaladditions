@@ -1,0 +1,7 @@
+{
+  "type": "minecraft:function",
+  "environment": "minecraft:default",
+  "function": "additionaladditions:copper_patina_oxidize",
+  "max_ticks": 100,
+  "structure": "additionaladditions:empty"
+}
