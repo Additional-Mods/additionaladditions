@@ -110,6 +110,11 @@ public class GlowStickBlock extends FallingBlock implements SimpleWaterloggedBlo
 
     @Override
     public int getDustColor(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos) {
-        return 0; //todo
+        return 0;
+    }
+
+    @Override
+    public void animateTick(BlockState blockState, Level level, BlockPos blockPos, RandomSource randomSource) {
+        // prevent dust particles
     }
 }
