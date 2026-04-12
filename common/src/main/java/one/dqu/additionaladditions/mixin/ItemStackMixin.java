@@ -32,8 +32,15 @@ public abstract class ItemStackMixin {
     @Shadow
     public abstract <T extends TooltipProvider> void addToTooltip(DataComponentType<T> dataComponentType, Item.TooltipContext tooltipContext, TooltipDisplay tooltipDisplay, Consumer<Component> consumer, TooltipFlag tooltipFlag);
 
-    //todo make sure its positioned fine
-    @Inject(method = "addDetailsToTooltip", at = @At("HEAD"))
+    @Inject(
+            method = "addDetailsToTooltip",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/world/item/ItemStack;addToTooltip(Lnet/minecraft/core/component/DataComponentType;Lnet/minecraft/world/item/Item$TooltipContext;Lnet/minecraft/world/item/component/TooltipDisplay;Ljava/util/function/Consumer;Lnet/minecraft/world/item/TooltipFlag;)V",
+                    ordinal = 15, // after TRIM
+                    shift = At.Shift.AFTER
+            )
+    )
     private void additionaladditions$addCustomTooltipLines(Item.TooltipContext tooltipContext, TooltipDisplay tooltipDisplay, @Nullable Player player, TooltipFlag tooltipFlag, Consumer<Component> consumer, CallbackInfo ci) {
         if (this.hasFoil()) {
             addToTooltip(AAMisc.GLINT_COLOR_COMPONENT.get(), tooltipContext, tooltipDisplay, consumer, tooltipFlag);
