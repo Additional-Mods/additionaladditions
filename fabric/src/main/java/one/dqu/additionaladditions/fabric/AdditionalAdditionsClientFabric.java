@@ -5,6 +5,7 @@ import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientLifecycleEvents;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.networking.v1.ClientConfigurationNetworking;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
+import net.fabricmc.fabric.api.client.recipe.v1.sync.ClientRecipeSynchronizedEvent;
 import net.fabricmc.fabric.api.client.rendering.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
@@ -18,6 +19,8 @@ import net.minecraft.server.packs.PackType;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.client.renderer.item.properties.conditional.ConditionalItemModelProperties;
 import net.minecraft.client.renderer.item.properties.numeric.RangeSelectItemModelProperties;
+import net.minecraft.world.item.crafting.RecipeHolder;
+import net.minecraft.world.item.crafting.RecipeType;
 import one.dqu.additionaladditions.AdditionalAdditions;
 import one.dqu.additionaladditions.client.BarometerAngleProperty;
 import one.dqu.additionaladditions.client.HasDiscProperty;
@@ -27,9 +30,15 @@ import one.dqu.additionaladditions.config.network.ConfigSyncS2CPayload;
 import one.dqu.additionaladditions.entity.RopeArrowRenderer;
 import one.dqu.additionaladditions.feature.glint.GlintResourceGenerator;
 import one.dqu.additionaladditions.feature.PocketJukeboxPlayer;
+import one.dqu.additionaladditions.recipe.ClientRecipeCache;
 import one.dqu.additionaladditions.registry.AABlocks;
 import one.dqu.additionaladditions.registry.AAEntities;
+import one.dqu.additionaladditions.registry.AAMisc;
 import one.dqu.additionaladditions.util.fabric.ModCompatibilityImpl;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public final class AdditionalAdditionsClientFabric implements ClientModInitializer {
     @Override
@@ -66,6 +75,15 @@ public final class AdditionalAdditionsClientFabric implements ClientModInitializ
                 ConfigLoader.load();
                 AdditionalAdditions.LOGGER.info("[{}] Reverted to local config", AdditionalAdditions.NAMESPACE);
             });
+        });
+
+        // recipe sync
+        ClientRecipeSynchronizedEvent.EVENT.register((client, recipes) -> {
+            List<? extends RecipeHolder<?>> brewing = List.copyOf(recipes.getAllOfType(AAMisc.BREWING_RECIPE_TYPE.get()));
+            Map<RecipeType<?>, List<RecipeHolder<?>>> map = new HashMap<>();
+            //noinspection unchecked
+            map.put(AAMisc.BREWING_RECIPE_TYPE.get(), (List<RecipeHolder<?>>) brewing);
+            ClientRecipeCache.set(map);
         });
 
         // block render layers

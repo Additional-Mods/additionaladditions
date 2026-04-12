@@ -8,11 +8,13 @@ import net.fabricmc.fabric.api.loot.v3.LootTableEvents;
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 import net.fabricmc.fabric.api.networking.v1.ServerConfigurationConnectionEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerConfigurationNetworking;
+import net.fabricmc.fabric.api.recipe.v1.sync.RecipeSynchronization;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
 import one.dqu.additionaladditions.AdditionalAdditions;
 import one.dqu.additionaladditions.config.ConfigProperty;
 import one.dqu.additionaladditions.config.network.ConfigSyncS2CPayload;
+import one.dqu.additionaladditions.registry.AAMisc;
 import one.dqu.additionaladditions.util.CreativeAdder;
 import one.dqu.additionaladditions.util.LootAdder;
 import one.dqu.additionaladditions.util.LootTableExtension;
@@ -56,5 +58,9 @@ public final class AdditionalAdditionsFabric implements ModInitializer {
                     ));
             ServerConfigurationNetworking.send(listener, new ConfigSyncS2CPayload(map));
         });
+
+        // recipe sync
+        RecipeSynchronization.synchronizeRecipeSerializer(AAMisc.BREWING_RECIPE_SERIALIZER.get());
+        RecipeSynchronization.synchronizeRecipeSerializer(AAMisc.SUSPICIOUS_DYE_RECIPE_SERIALIZER.get());
     }
 }

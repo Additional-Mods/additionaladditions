@@ -85,24 +85,26 @@ public class JEICompat implements IModPlugin {
 
         IVanillaRecipeFactory factory = event.getVanillaRecipeFactory();
 
-        List<IJeiBrewingRecipe> jeiRecipes = BrewingRecipeCache.get()
-                .stream()
-                .map(holder -> {
-                    BrewingRecipe recipe = holder.value();
-                    Identifier id = holder.id().identifier();
+        ClientRecipeCache.onceAvailable(() -> {
+            List<IJeiBrewingRecipe> jeiRecipes = ClientRecipeCache.get(AAMisc.BREWING_RECIPE_TYPE.get())
+                    .stream()
+                    .map(holder -> {
+                        BrewingRecipe recipe = holder.value();
+                        Identifier id = holder.id().identifier();
 
-                    ItemStack input = PotionContents.createItemStack(Items.POTION, recipe.getPotion());
-                    List<ItemStack> ingredients = BuiltInRegistries.ITEM.stream()
-                            .map(ItemStack::new)
-                            .filter(recipe.getIngredient()::test)
-                            .toList();
-                    ItemStack output = recipe.getResult();
+                        ItemStack input = PotionContents.createItemStack(Items.POTION, recipe.getPotion());
+                        List<ItemStack> ingredients = BuiltInRegistries.ITEM.stream()
+                                .map(ItemStack::new)
+                                .filter(recipe.getIngredient()::test)
+                                .toList();
+                        ItemStack output = recipe.getResult();
 
-                    return factory.createBrewingRecipe(ingredients, List.of(input), output, id);
-                })
-                .toList();
+                        return factory.createBrewingRecipe(ingredients, List.of(input), output, id);
+                    })
+                    .toList();
 
-        event.addRecipes(RecipeTypes.BREWING, jeiRecipes);
+            event.addRecipes(RecipeTypes.BREWING, jeiRecipes);
+        });
     }
 
     private static class SuspiciousDyeExtension implements ICraftingCategoryExtension<SuspiciousDyeRecipe> {
