@@ -29,7 +29,7 @@ import one.dqu.additionaladditions.feature.glint.GlintResourceGenerator;
 import one.dqu.additionaladditions.feature.PocketJukeboxPlayer;
 import one.dqu.additionaladditions.registry.AABlocks;
 import one.dqu.additionaladditions.registry.AAEntities;
-import one.dqu.additionaladditions.core.util.fabric.ModCompatibilityImpl;
+import one.dqu.additionaladditions.util.fabric.ModCompatibilityImpl;
 
 public final class AdditionalAdditionsClientFabric implements ClientModInitializer {
     @Override

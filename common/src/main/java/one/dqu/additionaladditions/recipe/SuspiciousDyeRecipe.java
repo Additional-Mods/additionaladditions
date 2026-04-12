@@ -12,7 +12,7 @@ import net.minecraft.world.item.crafting.display.ShapelessCraftingRecipeDisplay;
 import net.minecraft.world.item.crafting.display.SlotDisplay;
 import net.minecraft.world.level.Level;
 import one.dqu.additionaladditions.registry.AAMisc;
-import one.dqu.additionaladditions.core.util.ConventionalTags;
+import one.dqu.additionaladditions.util.ConventionalTags;
 
 import java.util.List;
 

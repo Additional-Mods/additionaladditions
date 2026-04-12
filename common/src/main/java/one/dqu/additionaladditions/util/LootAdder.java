@@ -1,4 +1,4 @@
-package one.dqu.additionaladditions.core.util;
+package one.dqu.additionaladditions.util;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;

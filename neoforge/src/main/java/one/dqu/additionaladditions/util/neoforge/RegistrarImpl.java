@@ -1,11 +1,11 @@
-package one.dqu.additionaladditions.core.util.neoforge;
+package one.dqu.additionaladditions.util.neoforge;
 
 import net.minecraft.core.Registry;
 import net.minecraft.resources.Identifier;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import one.dqu.additionaladditions.AdditionalAdditions;
-import one.dqu.additionaladditions.core.util.Registrar;
+import one.dqu.additionaladditions.util.Registrar;
 
 import java.util.ArrayList;
 import java.util.List;

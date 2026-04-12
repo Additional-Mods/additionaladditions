@@ -1,8 +1,8 @@
-package one.dqu.additionaladditions.core.util.fabric;
+package one.dqu.additionaladditions.util.fabric;
 
 import net.minecraft.core.Registry;
 import net.minecraft.resources.Identifier;
-import one.dqu.additionaladditions.core.util.Registrar;
+import one.dqu.additionaladditions.util.Registrar;
 
 import java.util.ArrayList;
 import java.util.List;

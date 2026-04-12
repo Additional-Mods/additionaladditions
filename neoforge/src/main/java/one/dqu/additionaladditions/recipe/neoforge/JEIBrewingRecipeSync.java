@@ -7,7 +7,7 @@ import net.neoforged.neoforge.event.OnDatapackSyncEvent;
 import one.dqu.additionaladditions.recipe.BrewingRecipe;
 import one.dqu.additionaladditions.recipe.BrewingRecipeCache;
 import one.dqu.additionaladditions.registry.AAMisc;
-import one.dqu.additionaladditions.core.util.ModCompatibility;
+import one.dqu.additionaladditions.util.ModCompatibility;
 
 /**
  * Syncs custom {@link BrewingRecipe}s from the server to the client so that JEI can display them.

@@ -3,7 +3,7 @@ package one.dqu.additionaladditions.mixin.fabric;
 import com.google.common.collect.ImmutableList;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
-import one.dqu.additionaladditions.core.util.LootTableExtension;
+import one.dqu.additionaladditions.util.LootTableExtension;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Mutable;

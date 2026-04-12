@@ -1,4 +1,4 @@
-package one.dqu.additionaladditions.core.util;
+package one.dqu.additionaladditions.util;
 
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;

@@ -1,4 +1,4 @@
-package one.dqu.additionaladditions.core.datagen;
+package one.dqu.additionaladditions.gametest.datagen;
 
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderGetter;

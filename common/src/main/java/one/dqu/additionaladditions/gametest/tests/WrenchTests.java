@@ -1,4 +1,4 @@
-package one.dqu.additionaladditions.gametest;
+package one.dqu.additionaladditions.gametest.tests;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

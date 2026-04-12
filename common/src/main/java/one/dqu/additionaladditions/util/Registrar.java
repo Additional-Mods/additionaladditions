@@ -1,4 +1,4 @@
-package one.dqu.additionaladditions.core.util;
+package one.dqu.additionaladditions.util;
 
 import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.minecraft.core.Registry;

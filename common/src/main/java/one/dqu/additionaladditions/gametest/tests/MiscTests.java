@@ -1,4 +1,4 @@
-package one.dqu.additionaladditions.gametest;
+package one.dqu.additionaladditions.gametest.tests;
 
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.network.chat.Component;

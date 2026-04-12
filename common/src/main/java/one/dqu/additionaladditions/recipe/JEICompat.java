@@ -33,8 +33,8 @@ import one.dqu.additionaladditions.feature.glint.GlintColor;
 import one.dqu.additionaladditions.item.SuspiciousDyeItem;
 import one.dqu.additionaladditions.registry.AAItems;
 import one.dqu.additionaladditions.registry.AAMisc;
-import one.dqu.additionaladditions.core.util.ConventionalTags;
-import one.dqu.additionaladditions.core.util.ModCompatibility;
+import one.dqu.additionaladditions.util.ConventionalTags;
+import one.dqu.additionaladditions.util.ModCompatibility;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;

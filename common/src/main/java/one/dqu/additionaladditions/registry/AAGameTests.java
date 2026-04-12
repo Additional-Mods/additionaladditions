@@ -1,10 +1,10 @@
 package one.dqu.additionaladditions.registry;
 
-import one.dqu.additionaladditions.gametest.CopperPatinaTests;
-import one.dqu.additionaladditions.gametest.MiscTests;
-import one.dqu.additionaladditions.gametest.RopeArrowTests;
-import one.dqu.additionaladditions.gametest.WrenchTests;
-import one.dqu.additionaladditions.core.builders.AAGameTest;
+import one.dqu.additionaladditions.gametest.tests.CopperPatinaTests;
+import one.dqu.additionaladditions.gametest.tests.MiscTests;
+import one.dqu.additionaladditions.gametest.tests.RopeArrowTests;
+import one.dqu.additionaladditions.gametest.tests.WrenchTests;
+import one.dqu.additionaladditions.gametest.AAGameTest;
 
 public class AAGameTests {
     public static void registerAll() {
