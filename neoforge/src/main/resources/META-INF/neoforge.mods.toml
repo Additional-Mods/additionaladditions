@@ -48,7 +48,7 @@ side = "BOTH"
 [[dependencies.additionaladditions]]
 modId = "minecraft"
 type = "required"
-versionRange = "[1.21.4,)"
+versionRange = "[1.21.11]"
 ordering = "NONE"
 side = "BOTH"
 

@@ -65,7 +65,7 @@
   "accessWidener": "additionaladditions.accesswidener",
   "depends": {
     "fabricloader": ">=0.18.0",
-    "minecraft": "~1.21.4",
+    "minecraft": "1.21.11",
     "java": ">=21",
     "fabric-api": "*"
   },
