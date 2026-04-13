@@ -1,7 +1,6 @@
 package one.dqu.additionaladditions.material;
 
-import net.minecraft.core.HolderGetter;
-import net.minecraft.core.HolderSet;
+import net.minecraft.core.*;
 import net.minecraft.core.component.DataComponentMap;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -83,7 +82,7 @@ public record AAMaterial(
 
     private static DataComponentMap toolProperties(ToolType type, MaterialConfig material, ToolLikeConfig toolLike) {
         DataComponentMap.Builder builder = DataComponentMap.builder();
-        HolderGetter<Block> registry = BuiltInRegistries.BLOCK;
+        HolderGetter<Block> registry = acquireRegistry(BuiltInRegistries.BLOCK);
 
         builder.set(DataComponents.MAX_DAMAGE, toolLike.durability());
         builder.set(DataComponents.DAMAGE, 0);
@@ -243,7 +242,7 @@ public record AAMaterial(
 
         builder.set(DataComponents.ATTRIBUTE_MODIFIERS, createArmorAttributes(ArmorType.BODY, material, armorLike));
 
-        HolderGetter<EntityType<?>> registry = BuiltInRegistries.ENTITY_TYPE;
+        HolderGetter<EntityType<?>> registry = acquireRegistry(BuiltInRegistries.ENTITY_TYPE);
 
         ResourceKey<EquipmentAsset> assetId = ResourceKey.create(
                 ResourceKey.createRegistryKey(Identifier.withDefaultNamespace("equipment_asset")),
@@ -262,5 +261,24 @@ public record AAMaterial(
         builder.set(DataComponents.EQUIPPABLE, equippable);
 
         return builder.build();
+    }
+
+    /**
+     * Some mods access {@link Item#components()} during bootstrap phase, for example using
+     * Fabric's DefaultItemComponentEvents. In that case, registries should be accessed using
+     * {@link BuiltInRegistries#acquireBootstrapRegistrationLookup(Registry)}.
+     * <p>
+     * TODO: On Minecraft 26.1, this should be done differently!!!
+     */
+    private static <T> HolderGetter<T> acquireRegistry(Registry<T> registry) {
+        if (registry instanceof MappedRegistry<T> mappedRegistry) {
+            if (mappedRegistry.frozen) {
+                return registry;
+            } else {
+                return BuiltInRegistries.acquireBootstrapRegistrationLookup(registry);
+            }
+        } else {
+            throw new IllegalStateException("Registry " + registry.key() + " is not a MappedRegistry, cannot acquire HolderGetter.");
+        }
     }
 }
