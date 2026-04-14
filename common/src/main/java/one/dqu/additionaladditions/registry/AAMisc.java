@@ -50,12 +50,12 @@ public class AAMisc {
 
     public static final Supplier<RecipeSerializer<SuspiciousDyeRecipe>> SUSPICIOUS_DYE_RECIPE_SERIALIZER = AARegistries.RECIPE_SERIALIZERS.register(
             Identifier.tryBuild(AdditionalAdditions.NAMESPACE, "suspicious_dye"),
-            () -> new CustomRecipe.Serializer<>(SuspiciousDyeRecipe::new)
+            () -> SuspiciousDyeRecipe.SERIALIZER
     );
 
     public static final Supplier<RecipeSerializer<BrewingRecipe>> BREWING_RECIPE_SERIALIZER = AARegistries.RECIPE_SERIALIZERS.register(
             Identifier.tryBuild(AdditionalAdditions.NAMESPACE, "brewing"),
-            BrewingRecipe.BrewingRecipeSerializer::new
+            () -> BrewingRecipe.SERIALIZER
     );
 
     public static final Supplier<RecipeType<BrewingRecipe>> BREWING_RECIPE_TYPE = AARegistries.RECIPE_TYPES.register(

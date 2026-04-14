@@ -81,7 +81,7 @@ public class BrewingStandBlockEntityMixin {
                 );
 
                 if (recipe.isPresent()) {
-                    items.set(i, recipe.get().value().assemble(recipeInput, level.registryAccess()));
+                    items.set(i, recipe.get().value().assemble(recipeInput));
                     brewed = true;
                 }
             }

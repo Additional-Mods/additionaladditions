@@ -3,7 +3,6 @@ package one.dqu.additionaladditions.recipe;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.Holder;
-import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
@@ -33,6 +32,23 @@ import one.dqu.additionaladditions.registry.AAMisc;
  * }</pre>
  */
 public class BrewingRecipe implements Recipe<BrewingRecipe.BrewingRecipeInput> {
+    public static final MapCodec<BrewingRecipe> CODEC = RecordCodecBuilder.mapCodec(
+            instance -> instance.group(
+                    Potion.CODEC.fieldOf("potion").forGetter(BrewingRecipe::getPotion),
+                    Ingredient.CODEC.fieldOf("ingredient").forGetter(BrewingRecipe::getIngredient),
+                    ItemStack.CODEC.fieldOf("result").forGetter(BrewingRecipe::getResult)
+            ).apply(instance, BrewingRecipe::new)
+    );
+
+    public static final StreamCodec<RegistryFriendlyByteBuf, BrewingRecipe> STREAM_CODEC = StreamCodec.composite(
+            Potion.STREAM_CODEC, BrewingRecipe::getPotion,
+            Ingredient.CONTENTS_STREAM_CODEC, BrewingRecipe::getIngredient,
+            ItemStack.STREAM_CODEC, BrewingRecipe::getResult,
+            BrewingRecipe::new
+    );
+
+    public static final RecipeSerializer<BrewingRecipe> SERIALIZER = new RecipeSerializer<>(CODEC, STREAM_CODEC);
+
     private final Holder<Potion> potion;
     private final Ingredient ingredient;
     private final ItemStack result;
@@ -55,13 +71,13 @@ public class BrewingRecipe implements Recipe<BrewingRecipe.BrewingRecipeInput> {
     }
 
     @Override
-    public ItemStack assemble(BrewingRecipeInput recipeInput, HolderLookup.Provider provider) {
+    public ItemStack assemble(BrewingRecipeInput recipeInput) {
         return result.copy();
     }
 
     @Override
     public RecipeSerializer<? extends Recipe<BrewingRecipeInput>> getSerializer() {
-        return AAMisc.BREWING_RECIPE_SERIALIZER.get();
+        return SERIALIZER;
     }
 
     @Override
@@ -77,6 +93,16 @@ public class BrewingRecipe implements Recipe<BrewingRecipe.BrewingRecipeInput> {
     @Override
     public RecipeBookCategory recipeBookCategory() {
         return RecipeBookCategories.CRAFTING_MISC;
+    }
+
+    @Override
+    public String group() {
+        return "";
+    }
+
+    @Override
+    public boolean showNotification() {
+        return false;
     }
 
     // prevents console warns from recipe book validation
@@ -111,30 +137,4 @@ public class BrewingRecipe implements Recipe<BrewingRecipe.BrewingRecipeInput> {
         }
     }
 
-    public static class BrewingRecipeSerializer implements RecipeSerializer<BrewingRecipe> {
-        public static final MapCodec<BrewingRecipe> CODEC = RecordCodecBuilder.mapCodec(
-                instance -> instance.group(
-                        Potion.CODEC.fieldOf("potion").forGetter(BrewingRecipe::getPotion),
-                        Ingredient.CODEC.fieldOf("ingredient").forGetter(BrewingRecipe::getIngredient),
-                        ItemStack.CODEC.fieldOf("result").forGetter(BrewingRecipe::getResult)
-                ).apply(instance, BrewingRecipe::new)
-        );
-
-        public static final StreamCodec<RegistryFriendlyByteBuf, BrewingRecipe> STREAM_CODEC = StreamCodec.composite(
-                Potion.STREAM_CODEC, BrewingRecipe::getPotion,
-                Ingredient.CONTENTS_STREAM_CODEC, BrewingRecipe::getIngredient,
-                ItemStack.STREAM_CODEC, BrewingRecipe::getResult,
-                BrewingRecipe::new
-        );
-
-        @Override
-        public MapCodec<BrewingRecipe> codec() {
-            return CODEC;
-        }
-
-        @Override
-        public StreamCodec<RegistryFriendlyByteBuf, BrewingRecipe> streamCodec() {
-            return STREAM_CODEC;
-        }
-    }
 }

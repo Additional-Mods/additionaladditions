@@ -1,8 +1,10 @@
 package one.dqu.additionaladditions.recipe;
 
+import com.mojang.serialization.MapCodec;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.StreamCodec;
 import one.dqu.additionaladditions.feature.glint.GlintColor;
 import one.dqu.additionaladditions.item.SuspiciousDyeItem;
-import net.minecraft.core.HolderLookup;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.ItemStack;
@@ -17,8 +19,12 @@ import one.dqu.additionaladditions.util.ConventionalTags;
 import java.util.List;
 
 public class SuspiciousDyeRecipe extends CustomRecipe {
-    public SuspiciousDyeRecipe(CraftingBookCategory craftingBookCategory) {
-        super(craftingBookCategory);
+    public static final RecipeSerializer<SuspiciousDyeRecipe> SERIALIZER = new RecipeSerializer<>(
+            MapCodec.unit(SuspiciousDyeRecipe::new),
+            StreamCodec.unit(new SuspiciousDyeRecipe())
+    );
+
+    public SuspiciousDyeRecipe() {
     }
 
     @Override
@@ -46,7 +52,7 @@ public class SuspiciousDyeRecipe extends CustomRecipe {
     }
 
     @Override
-    public ItemStack assemble(CraftingInput recipeInput, HolderLookup.Provider provider) {
+    public ItemStack assemble(CraftingInput recipeInput) {
         ItemStack itemStack = recipeInput.items().stream().filter(item -> !item.isEmpty() && !item.is(AAMisc.SUSPICIOUS_DYES_TAG)).findFirst().orElse(ItemStack.EMPTY);
         ItemStack dye = recipeInput.items().stream().filter(item -> !item.isEmpty() && item.is(AAMisc.SUSPICIOUS_DYES_TAG)).findFirst().orElse(ItemStack.EMPTY);
 

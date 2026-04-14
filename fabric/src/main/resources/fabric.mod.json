@@ -48,12 +48,6 @@
     "jei_mod_plugin": [
       "one.dqu.additionaladditions.recipe.JEICompat"
     ],
-    "rei_client": [
-      "one.dqu.additionaladditions.recipe.REICompat"
-    ],
-    "rei_common": [
-      "one.dqu.additionaladditions.recipe.REICommonCompat"
-    ],
     "fabric-datagen": [
       "one.dqu.additionaladditions.fabric.AdditionalAdditionsDatagenFabric"
     ]

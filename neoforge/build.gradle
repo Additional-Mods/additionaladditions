@@ -59,10 +59,8 @@ repositories {
 dependencies {
     neoForge "net.neoforged:neoforge:$rootProject.neoforge_version"
 
-    common(project(path: ':common', configuration: 'namedElements')) { transitive = false }
+    common(project(path: ":common")) { transitive false }
     shadowBundle project(path: ':common', configuration: 'transformProductionNeoForge')
-
-    modCompileOnly "me.shedaniel:RoughlyEnoughItems-api-neoforge:${rei_api_version}"
 }
 
 processResources {
@@ -78,7 +76,11 @@ shadowJar {
     archiveClassifier = 'dev-shadow'
 }
 
-remapJar {
-    inputFile.set shadowJar.archiveFile
-    atAccessWideners.add("additionaladditions.accesswidener")
+jar {
+    archiveClassifier = "raw"
 }
+
+//remapJar {
+//    inputFile.set shadowJar.archiveFile
+//    atAccessWideners.add("additionaladditions.accesswidener")
+//}

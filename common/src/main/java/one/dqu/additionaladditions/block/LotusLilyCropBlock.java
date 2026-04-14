@@ -12,7 +12,7 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import one.dqu.additionaladditions.registry.AABlocks;
 
-public class LotusLilyCropBlock extends WaterlilyBlock implements BonemealableBlock {
+public class LotusLilyCropBlock extends LilyPadBlock implements BonemealableBlock {
     public static final IntegerProperty AGE = BlockStateProperties.AGE_1;
 
     public LotusLilyCropBlock(Properties properties) {

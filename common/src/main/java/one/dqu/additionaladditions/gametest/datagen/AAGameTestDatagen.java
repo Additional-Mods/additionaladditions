@@ -22,7 +22,7 @@ public class AAGameTestDatagen {
             ResourceKey<Consumer<GameTestHelper>> function,
             Identifier structure,
             int maxTicks,
-            ResourceKey<TestEnvironmentDefinition> environment
+            ResourceKey<TestEnvironmentDefinition<?>> environment
     ) {}
 
     public static void register(Entry entry) {
@@ -33,14 +33,14 @@ public class AAGameTestDatagen {
     public static void bootstrap(BootstrapContext<GameTestInstance> context) {
         if (entries == null) return;
 
-        HolderGetter<TestEnvironmentDefinition> environments = context.lookup(Registries.TEST_ENVIRONMENT);
+        HolderGetter<TestEnvironmentDefinition<?>> environments = context.lookup(Registries.TEST_ENVIRONMENT);
 
         for (Entry entry : entries) {
             AdditionalAdditions.LOGGER.info("[{}] GameTestDatagen: generating {}", AdditionalAdditions.NAMESPACE, entry.id());
 
             ResourceKey<GameTestInstance> key = ResourceKey.create(Registries.TEST_INSTANCE, entry.id());
 
-            TestData<Holder<TestEnvironmentDefinition>> data = new TestData<>(
+            TestData<Holder<TestEnvironmentDefinition<?>>> data = new TestData<>(
                     environments.getOrThrow(entry.environment()),
                     entry.structure(),
                     entry.maxTicks(),

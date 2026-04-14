@@ -174,7 +174,7 @@ public class AABlocks {
     );
 
     public static final Supplier<Block> LOTUS_LILY = register(
-            "lotus_lily", WaterlilyBlock::new,
+            "lotus_lily", LilyPadBlock::new,
             (p) -> p.mapColor(MapColor.PLANT).instabreak().sound(SoundType.LILY_PAD).noOcclusion().pushReaction(PushReaction.DESTROY)
     );
 

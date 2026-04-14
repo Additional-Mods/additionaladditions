@@ -16,7 +16,7 @@ public class AAGameTest {
     private Consumer<GameTestHelper> function = null;
     private String structure = "empty";
     private int maxTicks = 100;
-    private ResourceKey<TestEnvironmentDefinition> environment = GameTestEnvironments.DEFAULT_KEY;
+    private ResourceKey<TestEnvironmentDefinition<?>> environment = GameTestEnvironments.DEFAULT_KEY;
 
     public void create(String name) {
         if (function == null) {
@@ -50,7 +50,7 @@ public class AAGameTest {
         return this;
     }
 
-    public AAGameTest environment(ResourceKey<TestEnvironmentDefinition> environment) {
+    public AAGameTest environment(ResourceKey<TestEnvironmentDefinition<?>> environment) {
         this.environment = environment;
         return this;
     }

@@ -4,8 +4,7 @@ import one.dqu.additionaladditions.config.Config;
 import one.dqu.additionaladditions.registry.AAItems;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
-import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.network.chat.contents.TranslatableContents;
+import net.minecraft.network.chat.Component;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -26,7 +25,7 @@ public abstract class GuiMixin {
         if (minecraft.player.isHolding(AAItems.BAROMETER.get())) {
             if (Config.BAROMETER.get().displayElevationHud()) {
                 String level = String.valueOf((int) minecraft.player.getY());
-                minecraft.player.displayClientMessage(MutableComponent.create(new TranslatableContents("additionaladditions.gui.barometer.elevation", null, new String[]{level})), true);
+                minecraft.player.displayClientMessage(Component.translatable("additionaladditions.gui.barometer.elevation", level), true);
             }
         }
     }
