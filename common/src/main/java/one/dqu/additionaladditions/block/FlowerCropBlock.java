@@ -1,5 +1,6 @@
 package one.dqu.additionaladditions.block;
 
+import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
@@ -61,6 +62,12 @@ public class FlowerCropBlock extends CropBlock {
         return i >= MAX_AGE ? GROWN_BLOCK.get().defaultBlockState() : super.getStateForAge(i);
     }
 
+    // method signature is different on neoforge and fabric
+    @ExpectPlatform
+    private static float getGrowthSpeedPlatform(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos) {
+        throw new AssertionError();
+    }
+
     // based on super.randomTick and TorchflowerCropBlock
     @Override
     protected void randomTick(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, RandomSource randomSource) {
@@ -68,8 +75,8 @@ public class FlowerCropBlock extends CropBlock {
             if (serverLevel.getRawBrightness(blockPos, 0) >= 9) {
                 int i = this.getAge(blockState);
                 if (i < this.getMaxAge()) {
-                    float f = getGrowthSpeed(this, serverLevel, blockPos);
-                    if (randomSource.nextInt((int)(25.0F / f) + 1) == 0) {
+                    float f = getGrowthSpeedPlatform(blockState, serverLevel, blockPos);
+                    if (randomSource.nextInt((int) (25.0F / f) + 1) == 0) {
                         placeFlower(i + 1, serverLevel, blockPos);
                     }
                 }

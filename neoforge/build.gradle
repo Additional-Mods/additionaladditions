@@ -7,12 +7,21 @@ architectury {
     neoForge()
 }
 
+def mergedAccessWidener = layout.buildDirectory.file("generated/accesswidener/additionaladditions.accesswidener").get().asFile
+mergedAccessWidener.parentFile.mkdirs()
+def commonAw = project(":common").file("src/main/resources/additionaladditions.accesswidener")
+def platformAw = project(":common").file("src/main/resources/additionaladditions.neoforge.accesswidener")
+def header = commonAw.readLines().find { it.trim().startsWith("accessWidener") } ?: "accessWidener v2 named"
+def commonBody = commonAw.readLines().findAll { !it.trim().startsWith("accessWidener") }
+def platformBody = platformAw.readLines().findAll { !it.trim().startsWith("accessWidener") }
+mergedAccessWidener.text = ([header] + commonBody + platformBody).join("\n") + "\n"
+
 loom {
     neoForge {
 
     }
 
-    accessWidenerPath = project(":common").file("src/main/resources/additionaladditions.accesswidener")
+    accessWidenerPath = mergedAccessWidener
 }
 
 configurations {
@@ -54,6 +63,8 @@ processResources {
     filesMatching('META-INF/neoforge.mods.toml') {
         expand version: inputs.properties.version
     }
+
+    from(mergedAccessWidener)
 }
 
 shadowJar {
@@ -63,5 +74,5 @@ shadowJar {
 
 remapJar {
     inputFile.set shadowJar.archiveFile
-    atAccessWideners.add("additionaladditions.accesswidener")
+    atAccessWideners.add(mergedAccessWidener.name)
 }
