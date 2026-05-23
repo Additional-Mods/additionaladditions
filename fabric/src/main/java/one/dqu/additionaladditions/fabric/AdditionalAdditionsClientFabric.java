@@ -6,19 +6,19 @@ import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.networking.v1.ClientConfigurationNetworking;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
 import net.fabricmc.fabric.api.client.recipe.v1.sync.ClientRecipeSynchronizedEvent;
-import net.fabricmc.fabric.api.client.rendering.v1.BlockRenderLayerMap;
-import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
+import net.fabricmc.fabric.api.client.rendering.v1.BlockColorRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.fabricmc.fabric.api.resource.SimpleSynchronousResourceReloadListener;
-import net.minecraft.client.renderer.chunk.ChunkSectionLayer;
+import net.minecraft.client.color.block.BlockTintSource;
+import net.minecraft.client.color.block.BlockTintSources;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
+import net.minecraft.client.renderer.item.properties.conditional.ConditionalItemModelProperties;
+import net.minecraft.client.renderer.item.properties.numeric.RangeSelectItemModelProperties;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.packs.PackType;
 import net.minecraft.server.packs.resources.ResourceManager;
-import net.minecraft.client.renderer.item.properties.conditional.ConditionalItemModelProperties;
-import net.minecraft.client.renderer.item.properties.numeric.RangeSelectItemModelProperties;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeType;
 import one.dqu.additionaladditions.AdditionalAdditions;
@@ -28,8 +28,8 @@ import one.dqu.additionaladditions.config.Config;
 import one.dqu.additionaladditions.config.io.ConfigLoader;
 import one.dqu.additionaladditions.config.network.ConfigSyncS2CPayload;
 import one.dqu.additionaladditions.entity.RopeArrowRenderer;
-import one.dqu.additionaladditions.feature.glint.GlintResourceGenerator;
 import one.dqu.additionaladditions.feature.PocketJukeboxPlayer;
+import one.dqu.additionaladditions.feature.glint.GlintResourceGenerator;
 import one.dqu.additionaladditions.recipe.ClientRecipeCache;
 import one.dqu.additionaladditions.registry.AABlocks;
 import one.dqu.additionaladditions.registry.AAEntities;
@@ -45,12 +45,12 @@ public final class AdditionalAdditionsClientFabric implements ClientModInitializ
     public void onInitializeClient() {
         // item model properties
         ConditionalItemModelProperties.ID_MAPPER.put(
-            Identifier.fromNamespaceAndPath(AdditionalAdditions.NAMESPACE, "has_disc"),
-            HasDiscProperty.MAP_CODEC
+                Identifier.fromNamespaceAndPath(AdditionalAdditions.NAMESPACE, "has_disc"),
+                HasDiscProperty.MAP_CODEC
         );
         RangeSelectItemModelProperties.ID_MAPPER.put(
-            Identifier.fromNamespaceAndPath(AdditionalAdditions.NAMESPACE, "barometer_angle"),
-            BarometerAngleProperty.MAP_CODEC
+                Identifier.fromNamespaceAndPath(AdditionalAdditions.NAMESPACE, "barometer_angle"),
+                BarometerAngleProperty.MAP_CODEC
         );
 
         // pocket jukebox
@@ -86,37 +86,9 @@ public final class AdditionalAdditionsClientFabric implements ClientModInitializ
             ClientRecipeCache.set(map);
         });
 
-        // block render layers
-        BlockRenderLayerMap.putBlock(AABlocks.COPPER_PATINA.get(), ChunkSectionLayer.CUTOUT);
-        BlockRenderLayerMap.putBlock(AABlocks.ROPE_BLOCK.get(), ChunkSectionLayer.CUTOUT);
-        BlockRenderLayerMap.putBlock(AABlocks.GLOW_STICK_BLOCK.get(), ChunkSectionLayer.CUTOUT);
-        BlockRenderLayerMap.putBlock(AABlocks.COTTONSHIVER.get(), ChunkSectionLayer.CUTOUT);
-        BlockRenderLayerMap.putBlock(AABlocks.COTTONSHIVER_CROP.get(), ChunkSectionLayer.CUTOUT);
-        BlockRenderLayerMap.putBlock(AABlocks.MUDFLOWER.get(), ChunkSectionLayer.CUTOUT);
-        BlockRenderLayerMap.putBlock(AABlocks.MUDFLOWER_CROP.get(), ChunkSectionLayer.CUTOUT);
-        BlockRenderLayerMap.putBlock(AABlocks.CRIMSON_BLOSSOM.get(), ChunkSectionLayer.CUTOUT);
-        BlockRenderLayerMap.putBlock(AABlocks.CRIMSON_BLOSSOM_CROP.get(), ChunkSectionLayer.CUTOUT);
-        BlockRenderLayerMap.putBlock(AABlocks.AMBER_BLOSSOM.get(), ChunkSectionLayer.CUTOUT);
-        BlockRenderLayerMap.putBlock(AABlocks.AMBER_BLOSSOM_CROP.get(), ChunkSectionLayer.CUTOUT);
-        BlockRenderLayerMap.putBlock(AABlocks.BULBUS.get(), ChunkSectionLayer.CUTOUT);
-        BlockRenderLayerMap.putBlock(AABlocks.BULBUS_CROP.get(), ChunkSectionLayer.CUTOUT);
-        BlockRenderLayerMap.putBlock(AABlocks.SAWTOOTH_FERN.get(), ChunkSectionLayer.CUTOUT);
-        BlockRenderLayerMap.putBlock(AABlocks.SAWTOOTH_FERN_CROP.get(), ChunkSectionLayer.CUTOUT);
-        BlockRenderLayerMap.putBlock(AABlocks.FROSTLEAF.get(), ChunkSectionLayer.CUTOUT);
-        BlockRenderLayerMap.putBlock(AABlocks.FROSTLEAF_CROP.get(), ChunkSectionLayer.CUTOUT);
-        BlockRenderLayerMap.putBlock(AABlocks.WISTERIA.get(), ChunkSectionLayer.CUTOUT);
-        BlockRenderLayerMap.putBlock(AABlocks.WISTERIA_CROP.get(), ChunkSectionLayer.CUTOUT);
-        BlockRenderLayerMap.putBlock(AABlocks.SPIKEBLOSSOM.get(), ChunkSectionLayer.CUTOUT);
-        BlockRenderLayerMap.putBlock(AABlocks.SPIKEBLOSSOM_CROP.get(), ChunkSectionLayer.CUTOUT);
-        BlockRenderLayerMap.putBlock(AABlocks.SNAPDRAGON.get(), ChunkSectionLayer.CUTOUT);
-        BlockRenderLayerMap.putBlock(AABlocks.SNAPDRAGON_CROP.get(), ChunkSectionLayer.CUTOUT);
-        BlockRenderLayerMap.putBlock(AABlocks.LOTUS_LILY.get(), ChunkSectionLayer.CUTOUT);
-        BlockRenderLayerMap.putBlock(AABlocks.LOTUS_LILY_CROP.get(), ChunkSectionLayer.CUTOUT);
-
         // color providers
-        ColorProviderRegistry.BLOCK.register((state, getter, pos, tintIndex) -> {
-            return getter != null && pos != null ? -14647248 : -9321636;
-        }, AABlocks.LOTUS_LILY.get(), AABlocks.LOTUS_LILY_CROP.get());
+        BlockTintSource lotusTint = BlockTintSources.constant(-9321636, -14647248);
+        BlockColorRegistry.register(List.of(lotusTint), AABlocks.LOTUS_LILY.get(), AABlocks.LOTUS_LILY_CROP.get());
 
         // entity renderers
         EntityRendererRegistry.register(AAEntities.GLOW_STICK.get(), ThrownItemRenderer::new);

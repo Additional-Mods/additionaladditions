@@ -2,6 +2,7 @@ package one.dqu.additionaladditions.registry;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.core.dispenser.BlockSource;
 import net.minecraft.core.dispenser.DefaultDispenseItemBehavior;
 import net.minecraft.world.item.component.TooltipDisplay;
@@ -333,6 +334,7 @@ public class AAItems {
 
     public static final Supplier<Item> ROSE_GOLD_SPEAR = new Builder("rose_gold_spear")
             .config(Config.ROSE_GOLD)
+            .properties(p -> p.delayedHolderComponent(DataComponents.DAMAGE_TYPE, DamageTypes.SPEAR))
             .creativeAfter(Items.GOLDEN_SPEAR, CreativeModeTabs.COMBAT)
             .build(p -> new ToolItem(AAMaterials.ROSE_GOLD, ToolType.SPEAR, p));
 

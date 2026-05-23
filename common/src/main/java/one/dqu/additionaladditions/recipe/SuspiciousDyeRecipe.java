@@ -19,9 +19,10 @@ import one.dqu.additionaladditions.util.ConventionalTags;
 import java.util.List;
 
 public class SuspiciousDyeRecipe extends CustomRecipe {
+    public static final SuspiciousDyeRecipe INSTANCE = new SuspiciousDyeRecipe();
     public static final RecipeSerializer<SuspiciousDyeRecipe> SERIALIZER = new RecipeSerializer<>(
-            MapCodec.unit(SuspiciousDyeRecipe::new),
-            StreamCodec.unit(new SuspiciousDyeRecipe())
+            MapCodec.unit(INSTANCE),
+            StreamCodec.unit(INSTANCE)
     );
 
     public SuspiciousDyeRecipe() {

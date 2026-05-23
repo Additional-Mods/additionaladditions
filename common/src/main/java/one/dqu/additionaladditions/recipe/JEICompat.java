@@ -20,6 +20,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.alchemy.PotionContents;
@@ -97,7 +98,7 @@ public class JEICompat implements IModPlugin {
                                 .map(ItemStack::new)
                                 .filter(recipe.getIngredient()::test)
                                 .toList();
-                        ItemStack output = recipe.getResult();
+                        ItemStack output = recipe.getResult().create();
 
                         return factory.createBrewingRecipe(ingredients, List.of(input), output, id);
                     })
@@ -115,7 +116,7 @@ public class JEICompat implements IModPlugin {
                 ItemStack stack = new ItemStack(item);
                 if (stack.is(AAMisc.SUSPICIOUS_DYES_TAG)) continue;
                 stack.set(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true);
-                foilStacks.add(new SlotDisplay.ItemStackSlotDisplay(stack));
+                foilStacks.add(new SlotDisplay.ItemStackSlotDisplay(ItemStackTemplate.fromNonEmptyStack(stack)));
             }
 
             return List.of(

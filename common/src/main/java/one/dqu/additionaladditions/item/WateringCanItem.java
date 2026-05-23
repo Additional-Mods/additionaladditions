@@ -73,7 +73,7 @@ public class WateringCanItem extends ConfigurableItem {
             if (state.getBlock() instanceof BonemealableBlock fertilizable && !(state.getBlock() instanceof GrassBlock)) {
                 boolean canFertilize = fertilizable.isValidBonemealTarget(world, pos, state);
 
-                if (!canFertilize && !(stateBelow.getBlock() instanceof FarmBlock)) {
+                if (!canFertilize && !(stateBelow.getBlock() instanceof FarmlandBlock)) {
                     return InteractionResult.PASS;
                 }
 
@@ -96,8 +96,8 @@ public class WateringCanItem extends ConfigurableItem {
                 }
                 splashParticles((ServerLevel) world, pos);
 
-                if (stateBelow.getBlock() instanceof FarmBlock) {
-                    world.setBlockAndUpdate(posBelow, stateBelow.setValue(BlockStateProperties.MOISTURE, FarmBlock.MAX_MOISTURE));
+                if (stateBelow.getBlock() instanceof FarmlandBlock) {
+                    world.setBlockAndUpdate(posBelow, stateBelow.setValue(BlockStateProperties.MOISTURE, FarmlandBlock.MAX_MOISTURE));
                 }
 
                 if (!player.isCreative()) {
@@ -106,12 +106,12 @@ public class WateringCanItem extends ConfigurableItem {
                 return InteractionResult.SUCCESS.withoutItem();
             }
 
-            if (state.getBlock() instanceof FarmBlock) {
+            if (state.getBlock() instanceof FarmlandBlock) {
                 if (world.isClientSide()) {
                     return InteractionResult.SUCCESS.withoutItem();
                 }
 
-                world.setBlockAndUpdate(pos, state.setValue(BlockStateProperties.MOISTURE, FarmBlock.MAX_MOISTURE));
+                world.setBlockAndUpdate(pos, state.setValue(BlockStateProperties.MOISTURE, FarmlandBlock.MAX_MOISTURE));
                 world.playSound(null, pos, SoundEvents.BOTTLE_EMPTY, SoundSource.BLOCKS);
                 splashParticles((ServerLevel) world, pos.above());
 

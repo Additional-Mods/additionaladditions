@@ -23,6 +23,8 @@ accessible field net/minecraft/client/renderer/item/properties/numeric/RangeSele
 
 accessible method net/minecraft/world/item/crafting/RecipePropertySet create (Ljava/util/Collection;)Lnet/minecraft/world/item/crafting/RecipePropertySet;
 
+accessible method net/minecraft/world/level/block/LilyPadBlock <init> (Lnet/minecraft/world/level/block/state/BlockBehaviour$Properties;)V
+
 accessible field net/minecraft/core/MappedRegistry frozen Z
 
 accessible field net/minecraft/world/level/Level random Lnet/minecraft/util/RandomSource;

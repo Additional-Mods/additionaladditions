@@ -130,8 +130,7 @@ public class PocketJukeboxPlayer {
             return null;
         }
 
-        var songOptional = jukeboxPlayable.song().unwrap(player.level().registryAccess());
-        return songOptional.map(holder -> holder.value()).orElse(null);
+        return jukeboxPlayable.song().value();
     }
 
     private static class SoundInstance extends AbstractTickableSoundInstance {

@@ -13,6 +13,7 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.server.packs.resources.Resource;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.level.storage.loot.LootPool;
+import net.minecraft.world.level.storage.loot.entries.LootPoolEntries;
 import net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
@@ -50,11 +51,7 @@ import java.util.function.Consumer;
 public class LootAdder {
     public static final LootAdder INSTANCE = new LootAdder();
 
-    public static final Codec<LootPoolEntryContainer> ENTRY_CODEC = BuiltInRegistries.LOOT_POOL_ENTRY_TYPE.byNameCodec().dispatch(
-            "type",
-            LootPoolEntryContainer::getType,
-            LootPoolEntryType::codec
-    );
+    public static final Codec<LootPoolEntryContainer> ENTRY_CODEC = LootPoolEntries.CODEC;
 
     public record LootInjection(Identifier target, boolean replaceOtherPools, List<LootPoolEntryContainer> entries) {
         public static final Codec<LootInjection> CODEC = RecordCodecBuilder.create(instance ->

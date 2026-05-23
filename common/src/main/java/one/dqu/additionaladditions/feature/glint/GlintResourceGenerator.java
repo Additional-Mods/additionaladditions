@@ -5,7 +5,7 @@ import one.dqu.additionaladditions.AdditionalAdditions;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.entity.ItemRenderer;
+import net.minecraft.client.renderer.feature.ItemFeatureRenderer;
 import net.minecraft.client.renderer.texture.DynamicTexture;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.resources.Identifier;
@@ -25,8 +25,8 @@ public class GlintResourceGenerator {
         TextureManager textureManager = Minecraft.getInstance().getTextureManager();
 
         try {
-            Resource itemResource = resourceManager.getResource(ItemRenderer.ENCHANTED_GLINT_ITEM).orElseThrow();
-            Resource entityResource = resourceManager.getResource(ItemRenderer.ENCHANTED_GLINT_ARMOR).orElseThrow();
+            Resource itemResource = resourceManager.getResource(ItemFeatureRenderer.ENCHANTED_GLINT_ITEM).orElseThrow();
+            Resource entityResource = resourceManager.getResource(ItemFeatureRenderer.ENCHANTED_GLINT_ARMOR).orElseThrow();
             NativeImage itemImage = NativeImage.read(itemResource.open());
             NativeImage entityImage = NativeImage.read(entityResource.open());
 

@@ -4,6 +4,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.world.Containers;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.item.alchemy.PotionBrewing;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeManager;
@@ -91,7 +92,8 @@ public class BrewingStandBlockEntityMixin {
             return;
         }
 
-        ItemStack remainder = ingredient.getItem().getCraftingRemainder();
+        ItemStackTemplate remainderTemplate = ingredient.getItem().getCraftingRemainder();
+        ItemStack remainder = remainderTemplate == null ? ItemStack.EMPTY : remainderTemplate.create();
         ingredient.shrink(1);
 
         if (!remainder.isEmpty()) {

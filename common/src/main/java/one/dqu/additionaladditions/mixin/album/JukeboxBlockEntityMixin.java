@@ -51,7 +51,7 @@ public class JukeboxBlockEntityMixin implements AlbumJukeboxExtension {
                 ItemStack nextRecord = album.items().get(nextTrack);
                 jukebox.getSongPlayer().play(
                         level,
-                        nextRecord.get(DataComponents.JUKEBOX_PLAYABLE).song().unwrap(level.registryAccess()).orElseThrow()
+                        nextRecord.get(DataComponents.JUKEBOX_PLAYABLE).song()
                 );
                 albumJukebox.additionaladditions$setTrack(nextTrack);
             }

@@ -24,8 +24,8 @@ public class PocketJukeboxItem extends Item {
 
     public static ItemStack getStoredDisc(ItemStack stack) {
         ItemContainerContents contents = stack.get(DataComponents.CONTAINER);
-        if (contents != null && !contents.stream().toList().isEmpty()) {
-            return contents.stream().toList().getFirst();
+        if (contents != null) {
+            return contents.copyOne();
         }
         return ItemStack.EMPTY;
     }
@@ -43,7 +43,7 @@ public class PocketJukeboxItem extends Item {
 
     public static boolean hasDisc(ItemStack stack) {
         ItemContainerContents contents = stack.get(DataComponents.CONTAINER);
-        return contents != null && !contents.stream().toList().isEmpty();
+        return contents != null && !contents.copyOne().isEmpty();
     }
 
     private boolean insertDisc(ItemStack stack, ItemStack discStack, Player player) {

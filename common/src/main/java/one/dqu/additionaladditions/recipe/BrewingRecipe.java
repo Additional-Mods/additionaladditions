@@ -7,6 +7,7 @@ import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.item.crafting.*;
@@ -36,14 +37,14 @@ public class BrewingRecipe implements Recipe<BrewingRecipe.BrewingRecipeInput> {
             instance -> instance.group(
                     Potion.CODEC.fieldOf("potion").forGetter(BrewingRecipe::getPotion),
                     Ingredient.CODEC.fieldOf("ingredient").forGetter(BrewingRecipe::getIngredient),
-                    ItemStack.CODEC.fieldOf("result").forGetter(BrewingRecipe::getResult)
+                    ItemStackTemplate.CODEC.fieldOf("result").forGetter(BrewingRecipe::getResult)
             ).apply(instance, BrewingRecipe::new)
     );
 
     public static final StreamCodec<RegistryFriendlyByteBuf, BrewingRecipe> STREAM_CODEC = StreamCodec.composite(
             Potion.STREAM_CODEC, BrewingRecipe::getPotion,
             Ingredient.CONTENTS_STREAM_CODEC, BrewingRecipe::getIngredient,
-            ItemStack.STREAM_CODEC, BrewingRecipe::getResult,
+            ItemStackTemplate.STREAM_CODEC, BrewingRecipe::getResult,
             BrewingRecipe::new
     );
 
@@ -51,14 +52,14 @@ public class BrewingRecipe implements Recipe<BrewingRecipe.BrewingRecipeInput> {
 
     private final Holder<Potion> potion;
     private final Ingredient ingredient;
-    private final ItemStack result;
+    private final ItemStackTemplate result;
 
     /**
      * @param potion potion component of the item in the three bottom slots (bottles)
      * @param ingredient item in the top slot, the brewing ingredient
      * @param result the resulting item in the bottom slot
      */
-    public BrewingRecipe(Holder<Potion> potion, Ingredient ingredient, ItemStack result) {
+    public BrewingRecipe(Holder<Potion> potion, Ingredient ingredient, ItemStackTemplate result) {
         this.potion = potion;
         this.ingredient = ingredient;
         this.result = result;
@@ -72,7 +73,7 @@ public class BrewingRecipe implements Recipe<BrewingRecipe.BrewingRecipeInput> {
 
     @Override
     public ItemStack assemble(BrewingRecipeInput recipeInput) {
-        return result.copy();
+        return result.create();
     }
 
     @Override
@@ -111,7 +112,7 @@ public class BrewingRecipe implements Recipe<BrewingRecipe.BrewingRecipeInput> {
         return true;
     }
 
-    public ItemStack getResult() {
+    public ItemStackTemplate getResult() {
         return result;
     }
 

@@ -1,6 +1,9 @@
 package one.dqu.additionaladditions.material;
 
-import net.minecraft.core.*;
+import net.minecraft.core.HolderGetter;
+import net.minecraft.core.HolderSet;
+import net.minecraft.core.MappedRegistry;
+import net.minecraft.core.Registry;
 import net.minecraft.core.component.DataComponentMap;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -8,13 +11,11 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
-import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.item.EitherHolder;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.SwingAnimationType;
 import net.minecraft.world.item.component.*;
@@ -153,7 +154,6 @@ public record AAMaterial(
         DataComponentMap tool = toolProperties(ToolType.SPEAR, material, toolLike);
         builder.addAll(tool);
 
-        builder.set(DataComponents.DAMAGE_TYPE, new EitherHolder<>(DamageTypes.SPEAR));
         builder.set(DataComponents.KINETIC_WEAPON, spear.kineticWeapon());
         builder.set(DataComponents.PIERCING_WEAPON, spear.piercingWeapon());
         builder.set(DataComponents.SWING_ANIMATION, new SwingAnimation(SwingAnimationType.STAB, spear.swingAnimationTicks()));
