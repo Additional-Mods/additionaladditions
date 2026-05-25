@@ -19,7 +19,6 @@ public class RenderTypesMixin {
         RenderType renderType = GlintRenderTypes.getGlint(GlintContext.getDyeColor());
         if (renderType != null) {
             cir.setReturnValue(renderType);
-            GlintContext.setDyeColor(null);
         }
     }
 
@@ -28,7 +27,6 @@ public class RenderTypesMixin {
         RenderType renderType = GlintRenderTypes.getArmorEntityGlint(GlintContext.getDyeColor());
         if (renderType != null) {
             cir.setReturnValue(renderType);
-            GlintContext.setDyeColor(null);
         }
     }
 
@@ -37,7 +35,6 @@ public class RenderTypesMixin {
         RenderType renderType = GlintRenderTypes.getEntityGlint(GlintContext.getDyeColor());
         if (renderType != null) {
             cir.setReturnValue(renderType);
-            GlintContext.setDyeColor(null);
         }
     }
 
@@ -46,7 +43,6 @@ public class RenderTypesMixin {
         RenderType renderType = GlintRenderTypes.getGlintTranslucent(GlintContext.getDyeColor());
         if (renderType != null) {
             cir.setReturnValue(renderType);
-            GlintContext.setDyeColor(null);
         }
     }
 }

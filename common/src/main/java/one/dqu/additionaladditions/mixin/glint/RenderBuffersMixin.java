@@ -4,6 +4,7 @@ import com.mojang.blaze3d.vertex.ByteBufferBuilder;
 import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
 import net.minecraft.client.renderer.RenderBuffers;
 import net.minecraft.client.renderer.rendertype.RenderType;
+import net.minecraft.client.renderer.rendertype.RenderTypes;
 import one.dqu.additionaladditions.feature.glint.GlintRenderTypes;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -24,9 +25,10 @@ public class RenderBuffersMixin {
     @Unique
     private static final Set<Object> additionaladditions$injectedMaps = Collections.newSetFromMap(new IdentityHashMap<>());
 
-    @Inject(method = "put", at = @At("HEAD"))
+    // inject our render types after vanilla entityGlint
+    @Inject(method = "put", at = @At("RETURN"))
     private static void put(Object2ObjectLinkedOpenHashMap<RenderType, ByteBufferBuilder> object2ObjectLinkedOpenHashMap, RenderType renderType, CallbackInfo ci) {
-        if (additionaladditions$injectedMaps.add(object2ObjectLinkedOpenHashMap)) {
+        if (renderType == RenderTypes.entityGlint() && additionaladditions$injectedMaps.add(object2ObjectLinkedOpenHashMap)) {
             for (RenderType type : GlintRenderTypes.getRenderTypes()) {
                 object2ObjectLinkedOpenHashMap.put(type, new ByteBufferBuilder(type.bufferSize()));
             }

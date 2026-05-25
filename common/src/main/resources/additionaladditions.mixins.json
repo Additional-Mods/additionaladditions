@@ -7,7 +7,7 @@
     "GuiMixin",
     "glint.HumanoidArmorLayerMixin",
     "glint.ItemModelResolverMixin",
-    "glint.ItemRendererMixin",
+    "glint.ItemFeatureRendererMixin",
     "glint.ItemStackRenderStateMixin",
     "glint.RenderBuffersMixin",
     "glint.RenderTypesMixin",
