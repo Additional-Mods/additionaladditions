@@ -4,8 +4,8 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.item.Item;
 import one.dqu.additionaladditions.config.Config;
-import one.dqu.additionaladditions.item.configurable.ConfigurableItem;
 import one.dqu.additionaladditions.util.FluidHelper;
 import one.dqu.additionaladditions.registry.AAMisc;
 import net.minecraft.core.BlockPos;
@@ -25,9 +25,9 @@ import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 
-public class WateringCanItem extends ConfigurableItem {
+public class WateringCanItem extends Item {
     public WateringCanItem(Properties settings) {
-        super(settings, builder -> {});
+        super(settings);
     }
 
     private int getWaterLevel(ItemStack stack) {

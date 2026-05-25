@@ -1,16 +1,17 @@
 package one.dqu.additionaladditions.material;
 
 import net.minecraft.core.HolderGetter;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.HolderSet;
-import net.minecraft.core.MappedRegistry;
-import net.minecraft.core.Registry;
+import net.minecraft.core.component.DataComponentInitializers;
 import net.minecraft.core.component.DataComponentMap;
 import net.minecraft.core.component.DataComponents;
-import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.EquipmentSlotGroup;
@@ -43,48 +44,44 @@ public record AAMaterial(
         Map<ToolType, Supplier<ToolLikeConfig>> toolConfigs,
         Map<ArmorType, Supplier<ArmorLikeConfig>> armorConfigs
 ) {
-    public void applyFor(DataComponentMap.Builder builder, ToolType toolType) {
-        DataComponentMap patch;
+    public DataComponentInitializers.Initializer<Item> initializerFor(ToolType toolType) {
+        return (builder, registries, key) -> {
+            HolderGetter<Block> blocks = registries.lookupOrThrow(Registries.BLOCK);
+            MaterialConfig material = materialConfig.get();
+            ToolLikeConfig toolLike = toolConfigs.get(toolType).get();
 
-        if (toolType == ToolType.SPEAR) {
-            patch = spearProperties(name, materialConfig.get(), toolConfigs.get(toolType).get());
-        } else {
-            patch = toolProperties(toolType, materialConfig.get(), toolConfigs.get(toolType).get());
-        }
+            applyToolComponents(builder, toolType, material, toolLike, blocks);
 
-        builder.addAll(patch);
+            if (toolType == ToolType.SPEAR) {
+                applySpearComponents(builder, toolLike, registries);
+            }
+        };
     }
 
-    public void applyFor(DataComponentMap.Builder builder, ArmorType armorType) {
+    public DataComponentInitializers.Initializer<Item> initializerFor(ArmorType armorType) {
         if (armorType == ArmorType.BODY) {
             throw new IllegalArgumentException("BODY armor type not supported by this method. Material: " + name);
         }
 
-        var patch = AAMaterial.humanoidArmorProperties(
-                name,
-                armorType,
-                materialConfig.get(),
-                armorConfigs.get(armorType).get()
+        return (builder, registries, key) -> applyHumanoidArmorComponents(
+                builder, armorType, materialConfig.get(), armorConfigs.get(armorType).get()
         );
-
-        builder.addAll(patch);
     }
 
-    public void applyFor(DataComponentMap.Builder builder, AnimalArmorType armorType) {
-        var patch = AAMaterial.animalArmorProperties(
-                name,
-                armorType,
-                materialConfig.get(),
-                armorConfigs.get(ArmorType.BODY).get()
-        );
-
-        builder.addAll(patch);
+    public DataComponentInitializers.Initializer<Item> initializerFor(AnimalArmorType armorType) {
+        return (builder, registries, key) -> {
+            HolderGetter<EntityType<?>> entityTypes = registries.lookupOrThrow(Registries.ENTITY_TYPE);
+            applyAnimalArmorComponents(builder, armorType, materialConfig.get(), armorConfigs.get(ArmorType.BODY).get(), entityTypes);
+        };
     }
 
-    private static DataComponentMap toolProperties(ToolType type, MaterialConfig material, ToolLikeConfig toolLike) {
-        DataComponentMap.Builder builder = DataComponentMap.builder();
-        HolderGetter<Block> registry = acquireRegistry(BuiltInRegistries.BLOCK);
-
+    private void applyToolComponents(
+            DataComponentMap.Builder builder,
+            ToolType type,
+            MaterialConfig material,
+            ToolLikeConfig toolLike,
+            HolderGetter<Block> blocks
+    ) {
         builder.set(DataComponents.MAX_DAMAGE, toolLike.durability());
         builder.set(DataComponents.DAMAGE, 0);
         builder.set(DataComponents.MAX_STACK_SIZE, 1);
@@ -94,8 +91,8 @@ public record AAMaterial(
             Tool toolComponent = new Tool(
                     List.of(
                             Tool.Rule.minesAndDrops(HolderSet.direct(Blocks.COBWEB.builtInRegistryHolder()), 15.0F),
-                            Tool.Rule.overrideSpeed(registry.getOrThrow(BlockTags.SWORD_INSTANTLY_MINES), Float.MAX_VALUE),
-                            Tool.Rule.overrideSpeed(registry.getOrThrow(BlockTags.SWORD_EFFICIENT), 1.5F)
+                            Tool.Rule.overrideSpeed(blocks.getOrThrow(BlockTags.SWORD_INSTANTLY_MINES), Float.MAX_VALUE),
+                            Tool.Rule.overrideSpeed(blocks.getOrThrow(BlockTags.SWORD_EFFICIENT), 1.5F)
                     ),
                     1.0F, 2, false
             );
@@ -103,8 +100,8 @@ public record AAMaterial(
         } else if (!type.isWeapon()) {
             Tool toolComponent = new Tool(
                     List.of(
-                            Tool.Rule.deniesDrops(registry.getOrThrow(material.incorrectBlocksForDrops())),
-                            Tool.Rule.minesAndDrops(registry.getOrThrow(type.mineableTag()), toolLike.blockBreakSpeed())
+                            Tool.Rule.deniesDrops(blocks.getOrThrow(material.incorrectBlocksForDrops())),
+                            Tool.Rule.minesAndDrops(blocks.getOrThrow(type.mineableTag()), toolLike.blockBreakSpeed())
                     ),
                     1.0F, 1, true
             );
@@ -122,38 +119,28 @@ public record AAMaterial(
         ItemAttributeModifiers attributes = ItemAttributeModifiers.builder()
                 .add(
                         Attributes.ATTACK_DAMAGE,
-                        new AttributeModifier(
-                                Item.BASE_ATTACK_DAMAGE_ID,
-                                toolLike.attackDamage() - 1,
-                                AttributeModifier.Operation.ADD_VALUE
-                        ),
+                        new AttributeModifier(Item.BASE_ATTACK_DAMAGE_ID, toolLike.attackDamage() - 1, AttributeModifier.Operation.ADD_VALUE),
                         EquipmentSlotGroup.MAINHAND
                 )
                 .add(
                         Attributes.ATTACK_SPEED,
-                        new AttributeModifier(
-                                Item.BASE_ATTACK_SPEED_ID,
-                                toolLike.attackSpeed(),
-                                AttributeModifier.Operation.ADD_VALUE
-                        ),
+                        new AttributeModifier(Item.BASE_ATTACK_SPEED_ID, toolLike.attackSpeed(), AttributeModifier.Operation.ADD_VALUE),
                         EquipmentSlotGroup.MAINHAND
                 )
                 .build();
         builder.set(DataComponents.ATTRIBUTE_MODIFIERS, attributes);
-
-        return builder.build();
     }
 
-    private static DataComponentMap spearProperties(String name, MaterialConfig material, ToolLikeConfig toolLike) {
+    private void applySpearComponents(
+            DataComponentMap.Builder builder,
+            ToolLikeConfig toolLike,
+            HolderLookup.Provider registries
+    ) {
         if (!(toolLike instanceof SpearItemConfig spear)) {
             throw new IllegalArgumentException("ToolLike of tool type SPEAR of material " + name + " is not an instance of SpearItemConfig.");
         }
 
-        DataComponentMap.Builder builder = DataComponentMap.builder();
-
-        DataComponentMap tool = toolProperties(ToolType.SPEAR, material, toolLike);
-        builder.addAll(tool);
-
+        builder.set(DataComponents.DAMAGE_TYPE, registries.lookupOrThrow(Registries.DAMAGE_TYPE).getOrThrow(DamageTypes.SPEAR));
         builder.set(DataComponents.KINETIC_WEAPON, spear.kineticWeapon());
         builder.set(DataComponents.PIERCING_WEAPON, spear.piercingWeapon());
         builder.set(DataComponents.SWING_ANIMATION, new SwingAnimation(SwingAnimationType.STAB, spear.swingAnimationTicks()));
@@ -162,8 +149,6 @@ public record AAMaterial(
         builder.set(DataComponents.ATTACK_RANGE, new AttackRange(2.0F, 4.5F, 2.0F, 6.5F, 0.125F, 0.5F));
         builder.set(DataComponents.MINIMUM_ATTACK_CHARGE, 1.0F);
         builder.set(DataComponents.USE_EFFECTS, new UseEffects(true, false, 1.0F));
-
-        return builder.build();
     }
 
     private static ItemAttributeModifiers createArmorAttributes(ArmorType armorType, MaterialConfig material, ArmorLikeConfig armorLike) {
@@ -171,33 +156,13 @@ public record AAMaterial(
         Identifier identifier = Identifier.withDefaultNamespace("armor." + armorType.getName());
 
         ItemAttributeModifiers.Builder attributes = ItemAttributeModifiers.builder()
-                .add(
-                        Attributes.ARMOR,
-                        new AttributeModifier(
-                                identifier,
-                                armorLike.protection(),
-                                AttributeModifier.Operation.ADD_VALUE
-                        ),
-                        slotGroup
-                )
-                .add(
-                        Attributes.ARMOR_TOUGHNESS,
-                        new AttributeModifier(
-                                identifier,
-                                material.toughness(),
-                                AttributeModifier.Operation.ADD_VALUE
-                        ),
-                        slotGroup
-                );
+                .add(Attributes.ARMOR, new AttributeModifier(identifier, armorLike.protection(), AttributeModifier.Operation.ADD_VALUE), slotGroup)
+                .add(Attributes.ARMOR_TOUGHNESS, new AttributeModifier(identifier, material.toughness(), AttributeModifier.Operation.ADD_VALUE), slotGroup);
 
         if (material.knockbackResistance() > 0) {
             attributes.add(
                     Attributes.KNOCKBACK_RESISTANCE,
-                    new AttributeModifier(
-                            identifier,
-                            material.knockbackResistance(),
-                            AttributeModifier.Operation.ADD_VALUE
-                    ),
+                    new AttributeModifier(identifier, material.knockbackResistance(), AttributeModifier.Operation.ADD_VALUE),
                     slotGroup
             );
         }
@@ -205,9 +170,12 @@ public record AAMaterial(
         return attributes.build();
     }
 
-    private static DataComponentMap humanoidArmorProperties(String name, ArmorType type, MaterialConfig material, ArmorLikeConfig armorLike) {
-        DataComponentMap.Builder builder = DataComponentMap.builder();
-
+    private void applyHumanoidArmorComponents(
+            DataComponentMap.Builder builder,
+            ArmorType type,
+            MaterialConfig material,
+            ArmorLikeConfig armorLike
+    ) {
         if (armorLike instanceof ArmorItemConfig armorItemConfig) {
             builder.set(DataComponents.MAX_DAMAGE, armorItemConfig.durability());
             builder.set(DataComponents.DAMAGE, 0);
@@ -217,7 +185,6 @@ public record AAMaterial(
 
         builder.set(DataComponents.MAX_STACK_SIZE, 1);
         builder.set(DataComponents.ENCHANTABLE, new Enchantable(material.enchantability()));
-
         builder.set(DataComponents.ATTRIBUTE_MODIFIERS, createArmorAttributes(type, material, armorLike));
 
         ResourceKey<EquipmentAsset> assetId = ResourceKey.create(
@@ -230,19 +197,18 @@ public record AAMaterial(
                 .setAsset(assetId)
                 .build();
         builder.set(DataComponents.EQUIPPABLE, equippable);
-
-        return builder.build();
     }
 
-    private static DataComponentMap animalArmorProperties(String name, AnimalArmorType armorType, MaterialConfig material, ArmorLikeConfig armorLike) {
-        DataComponentMap.Builder builder = DataComponentMap.builder();
-
+    private void applyAnimalArmorComponents(
+            DataComponentMap.Builder builder,
+            AnimalArmorType armorType,
+            MaterialConfig material,
+            ArmorLikeConfig armorLike,
+            HolderGetter<EntityType<?>> entityTypes
+    ) {
         builder.set(DataComponents.MAX_STACK_SIZE, 1);
         builder.set(DataComponents.ENCHANTABLE, new Enchantable(material.enchantability()));
-
         builder.set(DataComponents.ATTRIBUTE_MODIFIERS, createArmorAttributes(ArmorType.BODY, material, armorLike));
-
-        HolderGetter<EntityType<?>> registry = acquireRegistry(BuiltInRegistries.ENTITY_TYPE);
 
         ResourceKey<EquipmentAsset> assetId = ResourceKey.create(
                 ResourceKey.createRegistryKey(Identifier.withDefaultNamespace("equipment_asset")),
@@ -252,33 +218,12 @@ public record AAMaterial(
         Equippable equippable = Equippable.builder(EquipmentSlot.BODY)
                 .setEquipSound(armorType.equipSound())
                 .setAsset(assetId)
-                .setAllowedEntities(registry.getOrThrow(armorType.canWearTag()))
+                .setAllowedEntities(entityTypes.getOrThrow(armorType.canWearTag()))
                 .setDamageOnHurt(false)
                 .setEquipOnInteract(true)
                 .setCanBeSheared(true)
                 .setShearingSound(armorType.unequipSound())
                 .build();
         builder.set(DataComponents.EQUIPPABLE, equippable);
-
-        return builder.build();
-    }
-
-    /**
-     * Some mods access {@link Item#components()} during bootstrap phase, for example using
-     * Fabric's DefaultItemComponentEvents. In that case, registries should be accessed using
-     * {@link BuiltInRegistries#acquireBootstrapRegistrationLookup(Registry)}.
-     * <p>
-     * TODO: On Minecraft 26.1, this should be done differently!!!
-     */
-    private static <T> HolderGetter<T> acquireRegistry(Registry<T> registry) {
-        if (registry instanceof MappedRegistry<T> mappedRegistry) {
-            if (mappedRegistry.frozen) {
-                return registry;
-            } else {
-                return BuiltInRegistries.acquireBootstrapRegistrationLookup(registry);
-            }
-        } else {
-            throw new IllegalStateException("Registry " + registry.key() + " is not a MappedRegistry, cannot acquire HolderGetter.");
-        }
     }
 }
