@@ -8,7 +8,8 @@
   ],
   "mixins": [
     "AxeItemMixin",
-    "LootTableBuilderMixin"
+    "LootTableBuilderMixin",
+    "RedstoneWireBlockMixin"
   ],
   "injectors": {
     "defaultRequire": 1
