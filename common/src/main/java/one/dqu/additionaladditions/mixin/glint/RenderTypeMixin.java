@@ -1,8 +1,8 @@
 package one.dqu.additionaladditions.mixin.glint;
 
+import net.minecraft.client.renderer.RenderType;
 import one.dqu.additionaladditions.feature.glint.GlintContext;
 import one.dqu.additionaladditions.feature.glint.GlintRenderType;
-import net.minecraft.client.renderer.RenderType;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -18,7 +18,6 @@ public class RenderTypeMixin {
         RenderType renderType = GlintRenderType.getGlint(GlintContext.getDyeColor());
         if (renderType != null) {
             cir.setReturnValue(renderType);
-            GlintContext.setCurrentItem(null);
         }
     }
 
@@ -27,7 +26,6 @@ public class RenderTypeMixin {
         RenderType renderType = GlintRenderType.getArmorEntityGlint(GlintContext.getDyeColor());
         if (renderType != null) {
             cir.setReturnValue(renderType);
-            GlintContext.setCurrentItem(null);
         }
     }
 
@@ -36,7 +34,6 @@ public class RenderTypeMixin {
         RenderType renderType = GlintRenderType.getEntityGlintDirect(GlintContext.getDyeColor());
         if (renderType != null) {
             cir.setReturnValue(renderType);
-            GlintContext.setCurrentItem(null);
         }
     }
 
@@ -45,7 +42,6 @@ public class RenderTypeMixin {
         RenderType renderType = GlintRenderType.getEntityGlint(GlintContext.getDyeColor());
         if (renderType != null) {
             cir.setReturnValue(renderType);
-            GlintContext.setCurrentItem(null);
         }
     }
 
@@ -54,7 +50,6 @@ public class RenderTypeMixin {
         RenderType renderType = GlintRenderType.getGlintTranslucent(GlintContext.getDyeColor());
         if (renderType != null) {
             cir.setReturnValue(renderType);
-            GlintContext.setCurrentItem(null);
         }
     }
 }
