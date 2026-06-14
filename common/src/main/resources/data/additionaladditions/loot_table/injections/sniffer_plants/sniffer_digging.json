@@ -49,6 +49,10 @@
     {
       "type": "minecraft:item",
       "name": "additionaladditions:lotus_lily_pod"
+    },
+    {
+      "type": "minecraft:item",
+      "name": "additionaladditions:mudflower_seeds"
     }
   ]
 }
