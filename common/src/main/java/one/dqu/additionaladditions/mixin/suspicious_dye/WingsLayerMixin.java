@@ -1,10 +1,10 @@
-package one.dqu.additionaladditions.mixin.glint;
+package one.dqu.additionaladditions.mixin.suspicious_dye;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.entity.layers.WingsLayer;
 import net.minecraft.client.renderer.entity.state.HumanoidRenderState;
-import one.dqu.additionaladditions.feature.glint.GlintContext;
+import one.dqu.additionaladditions.feature.suspicious_dye.glint.GlintContext;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;

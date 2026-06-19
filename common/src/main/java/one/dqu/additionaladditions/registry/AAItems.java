@@ -19,8 +19,6 @@ import one.dqu.additionaladditions.feature.album.AlbumItem;
 import one.dqu.additionaladditions.feature.barometer.BarometerContent;
 import one.dqu.additionaladditions.feature.copper_patina.CopperPatinaContent;
 import one.dqu.additionaladditions.feature.copper_patina.CopperPatinaItem;
-import one.dqu.additionaladditions.feature.dye.SuspiciousDyeItem;
-import one.dqu.additionaladditions.feature.dye.SuspiciousDyes;
 import one.dqu.additionaladditions.feature.food.FoodContent;
 import one.dqu.additionaladditions.feature.glow_stick.GlowStickContent;
 import one.dqu.additionaladditions.feature.music_disc.MusicDiscContent;
@@ -31,6 +29,8 @@ import one.dqu.additionaladditions.feature.rope.RopeArrowItem;
 import one.dqu.additionaladditions.feature.rope.RopeContent;
 import one.dqu.additionaladditions.feature.rose_gold.RoseGoldContent;
 import one.dqu.additionaladditions.feature.sniffer_plants.SnifferPlantsContent;
+import one.dqu.additionaladditions.feature.suspicious_dye.SuspiciousDyeContent;
+import one.dqu.additionaladditions.feature.suspicious_dye.SuspiciousDyeItem;
 import one.dqu.additionaladditions.feature.trident.TridentShardContent;
 import one.dqu.additionaladditions.feature.watering_can.WateringCanContent;
 import one.dqu.additionaladditions.feature.watering_can.WateringCanItem;
@@ -152,19 +152,19 @@ public class AAItems {
 
     // SUSPICIOUS DYE
 
-    public static final Supplier<SuspiciousDyeItem> WHITE_SUSPICIOUS_DYE = SuspiciousDyes.suspiciousDye(DyeColor.WHITE);
-    public static final Supplier<SuspiciousDyeItem> BROWN_SUSPICIOUS_DYE = SuspiciousDyes.suspiciousDye(DyeColor.BROWN);
-    public static final Supplier<SuspiciousDyeItem> RED_SUSPICIOUS_DYE = SuspiciousDyes.suspiciousDye(DyeColor.RED);
-    public static final Supplier<SuspiciousDyeItem> ORANGE_SUSPICIOUS_DYE = SuspiciousDyes.suspiciousDye(DyeColor.ORANGE);
-    public static final Supplier<SuspiciousDyeItem> YELLOW_SUSPICIOUS_DYE = SuspiciousDyes.suspiciousDye(DyeColor.YELLOW);
-    public static final Supplier<SuspiciousDyeItem> LIME_SUSPICIOUS_DYE = SuspiciousDyes.suspiciousDye(DyeColor.LIME);
-    public static final Supplier<SuspiciousDyeItem> GREEN_SUSPICIOUS_DYE = SuspiciousDyes.suspiciousDye(DyeColor.GREEN);
-    public static final Supplier<SuspiciousDyeItem> CYAN_SUSPICIOUS_DYE = SuspiciousDyes.suspiciousDye(DyeColor.CYAN);
-    public static final Supplier<SuspiciousDyeItem> LIGHT_BLUE_SUSPICIOUS_DYE = SuspiciousDyes.suspiciousDye(DyeColor.LIGHT_BLUE);
-    public static final Supplier<SuspiciousDyeItem> BLUE_SUSPICIOUS_DYE = SuspiciousDyes.suspiciousDye(DyeColor.BLUE);
-    public static final Supplier<SuspiciousDyeItem> PURPLE_SUSPICIOUS_DYE = SuspiciousDyes.suspiciousDye(DyeColor.PURPLE);
-    public static final Supplier<SuspiciousDyeItem> MAGENTA_SUSPICIOUS_DYE = SuspiciousDyes.suspiciousDye(DyeColor.MAGENTA);
-    public static final Supplier<SuspiciousDyeItem> PINK_SUSPICIOUS_DYE = SuspiciousDyes.suspiciousDye(DyeColor.PINK);
+    public static final Supplier<SuspiciousDyeItem> WHITE_SUSPICIOUS_DYE = SuspiciousDyeContent.suspiciousDye(DyeColor.WHITE);
+    public static final Supplier<SuspiciousDyeItem> BROWN_SUSPICIOUS_DYE = SuspiciousDyeContent.suspiciousDye(DyeColor.BROWN);
+    public static final Supplier<SuspiciousDyeItem> RED_SUSPICIOUS_DYE = SuspiciousDyeContent.suspiciousDye(DyeColor.RED);
+    public static final Supplier<SuspiciousDyeItem> ORANGE_SUSPICIOUS_DYE = SuspiciousDyeContent.suspiciousDye(DyeColor.ORANGE);
+    public static final Supplier<SuspiciousDyeItem> YELLOW_SUSPICIOUS_DYE = SuspiciousDyeContent.suspiciousDye(DyeColor.YELLOW);
+    public static final Supplier<SuspiciousDyeItem> LIME_SUSPICIOUS_DYE = SuspiciousDyeContent.suspiciousDye(DyeColor.LIME);
+    public static final Supplier<SuspiciousDyeItem> GREEN_SUSPICIOUS_DYE = SuspiciousDyeContent.suspiciousDye(DyeColor.GREEN);
+    public static final Supplier<SuspiciousDyeItem> CYAN_SUSPICIOUS_DYE = SuspiciousDyeContent.suspiciousDye(DyeColor.CYAN);
+    public static final Supplier<SuspiciousDyeItem> LIGHT_BLUE_SUSPICIOUS_DYE = SuspiciousDyeContent.suspiciousDye(DyeColor.LIGHT_BLUE);
+    public static final Supplier<SuspiciousDyeItem> BLUE_SUSPICIOUS_DYE = SuspiciousDyeContent.suspiciousDye(DyeColor.BLUE);
+    public static final Supplier<SuspiciousDyeItem> PURPLE_SUSPICIOUS_DYE = SuspiciousDyeContent.suspiciousDye(DyeColor.PURPLE);
+    public static final Supplier<SuspiciousDyeItem> MAGENTA_SUSPICIOUS_DYE = SuspiciousDyeContent.suspiciousDye(DyeColor.MAGENTA);
+    public static final Supplier<SuspiciousDyeItem> PINK_SUSPICIOUS_DYE = SuspiciousDyeContent.suspiciousDye(DyeColor.PINK);
 
     // OTHER
 

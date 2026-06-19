@@ -1,7 +1,6 @@
-package one.dqu.additionaladditions.feature.glint;
+package one.dqu.additionaladditions.feature.suspicious_dye.glint;
 
 import com.mojang.blaze3d.platform.NativeImage;
-import one.dqu.additionaladditions.AdditionalAdditions;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;
@@ -12,6 +11,7 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.server.packs.resources.Resource;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.item.DyeColor;
+import one.dqu.additionaladditions.AdditionalAdditions;
 import one.dqu.additionaladditions.config.Config;
 
 import java.util.Locale;

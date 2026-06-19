@@ -1,4 +1,4 @@
-package one.dqu.additionaladditions.feature.glint;
+package one.dqu.additionaladditions.feature.suspicious_dye.glint;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;

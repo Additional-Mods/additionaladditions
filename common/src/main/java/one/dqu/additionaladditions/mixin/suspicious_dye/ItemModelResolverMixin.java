@@ -1,4 +1,4 @@
-package one.dqu.additionaladditions.mixin.glint;
+package one.dqu.additionaladditions.mixin.suspicious_dye;
 
 import net.minecraft.client.renderer.item.ItemModelResolver;
 import net.minecraft.client.renderer.item.ItemStackRenderState;
@@ -7,7 +7,7 @@ import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import one.dqu.additionaladditions.feature.glint.GlintColorHolder;
+import one.dqu.additionaladditions.feature.suspicious_dye.glint.GlintColorHolder;
 import one.dqu.additionaladditions.registry.AAMisc;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;

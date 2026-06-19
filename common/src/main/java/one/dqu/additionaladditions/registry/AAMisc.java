@@ -11,7 +11,7 @@ import net.minecraft.world.item.crafting.RecipeType;
 import one.dqu.additionaladditions.AdditionalAdditions;
 import one.dqu.additionaladditions.core.util.SimplePlayerTrigger;
 import one.dqu.additionaladditions.feature.album.AlbumContents;
-import one.dqu.additionaladditions.feature.glint.GlintColor;
+import one.dqu.additionaladditions.feature.suspicious_dye.glint.GlintColor;
 import one.dqu.additionaladditions.recipe.BrewingRecipe;
 import one.dqu.additionaladditions.recipe.SuspiciousDyeRecipe;
 

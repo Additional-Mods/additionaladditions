@@ -1,4 +1,4 @@
-package one.dqu.additionaladditions.feature.glint;
+package one.dqu.additionaladditions.feature.suspicious_dye.glint;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.textures.AddressMode;
@@ -7,11 +7,7 @@ import com.mojang.blaze3d.textures.GpuSampler;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.renderer.RenderPipelines;
-import net.minecraft.client.renderer.rendertype.LayeringTransform;
-import net.minecraft.client.renderer.rendertype.OutputTarget;
-import net.minecraft.client.renderer.rendertype.RenderSetup;
-import net.minecraft.client.renderer.rendertype.RenderType;
-import net.minecraft.client.renderer.rendertype.TextureTransform;
+import net.minecraft.client.renderer.rendertype.*;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.DyeColor;
 import one.dqu.additionaladditions.AdditionalAdditions;
@@ -54,6 +50,7 @@ public class GlintRenderTypes {
         types.addAll(GLINT_TRANSLUCENT.values());
         return types;
     }
+
     static {
         for (DyeColor color : DyeColor.values()) {
             Identifier itemTexture = Identifier.tryBuild(

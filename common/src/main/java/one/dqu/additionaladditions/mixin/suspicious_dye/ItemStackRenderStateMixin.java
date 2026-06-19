@@ -1,11 +1,11 @@
-package one.dqu.additionaladditions.mixin.glint;
+package one.dqu.additionaladditions.mixin.suspicious_dye;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.item.ItemStackRenderState;
 import net.minecraft.world.item.DyeColor;
-import one.dqu.additionaladditions.feature.glint.GlintColorHolder;
-import one.dqu.additionaladditions.feature.glint.GlintContext;
+import one.dqu.additionaladditions.feature.suspicious_dye.glint.GlintColorHolder;
+import one.dqu.additionaladditions.feature.suspicious_dye.glint.GlintContext;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;

@@ -1,4 +1,4 @@
-package one.dqu.additionaladditions.feature.dye;
+package one.dqu.additionaladditions.feature.suspicious_dye;
 
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.CreativeModeTabs;
@@ -8,13 +8,13 @@ import one.dqu.additionaladditions.config.Config;
 import one.dqu.additionaladditions.core.builder.AAReg;
 import one.dqu.additionaladditions.core.builder.CreativePosition;
 import one.dqu.additionaladditions.core.datagen.template.Models;
-import one.dqu.additionaladditions.feature.glint.GlintColor;
+import one.dqu.additionaladditions.feature.suspicious_dye.glint.GlintColor;
 import one.dqu.additionaladditions.registry.AAMisc;
 import one.dqu.additionaladditions.registry.AATags;
 
 import java.util.function.Supplier;
 
-public class SuspiciousDyes {
+public class SuspiciousDyeContent {
     public static Supplier<SuspiciousDyeItem> suspiciousDye(DyeColor color) {
         return AAReg.item(p -> new SuspiciousDyeItem(color, p))
                 .config(Config.SUSPICIOUS_DYE)

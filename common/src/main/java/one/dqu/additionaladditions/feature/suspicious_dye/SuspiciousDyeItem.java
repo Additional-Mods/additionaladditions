@@ -1,4 +1,4 @@
-package one.dqu.additionaladditions.feature.dye;
+package one.dqu.additionaladditions.feature.suspicious_dye;
 
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;

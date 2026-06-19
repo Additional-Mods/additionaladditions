@@ -1,11 +1,11 @@
-package one.dqu.additionaladditions.mixin.glint;
+package one.dqu.additionaladditions.mixin.suspicious_dye;
 
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.OutlineBufferSource;
 import net.minecraft.client.renderer.SubmitNodeStorage;
 import net.minecraft.client.renderer.feature.ItemFeatureRenderer;
 import net.minecraft.world.item.DyeColor;
-import one.dqu.additionaladditions.feature.glint.GlintContext;
+import one.dqu.additionaladditions.feature.suspicious_dye.glint.GlintContext;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;

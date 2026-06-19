@@ -5,13 +5,13 @@
   "minVersion": "0.8",
   "client": [
     "GuiMixin",
-    "glint.HumanoidArmorLayerMixin",
-    "glint.ItemModelResolverMixin",
-    "glint.ItemFeatureRendererMixin",
-    "glint.ItemStackRenderStateMixin",
-    "glint.RenderBuffersMixin",
-    "glint.RenderTypesMixin",
-    "glint.WingsLayerMixin"
+    "suspicious_dye.HumanoidArmorLayerMixin",
+    "suspicious_dye.ItemFeatureRendererMixin",
+    "suspicious_dye.ItemModelResolverMixin",
+    "suspicious_dye.ItemStackRenderStateMixin",
+    "suspicious_dye.RenderBuffersMixin",
+    "suspicious_dye.RenderTypesMixin",
+    "suspicious_dye.WingsLayerMixin"
   ],
   "mixins": [
     "BrewingStandBlockEntityMixin",

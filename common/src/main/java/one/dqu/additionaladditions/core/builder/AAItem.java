@@ -47,16 +47,6 @@ public class AAItem<T extends Item> {
         this.factory = (Function<Item.Properties, T>) (Function<Item.Properties, ? extends Item>) Item::new;
     }
 
-    public AAItem(AAItem<T> template) {
-        this.config = template.config;
-        this.factory = template.factory;
-        this.props = template.props;
-        this.initializer = template.initializer;
-        this.tags.addAll(template.tags);
-        this.model = template.model;
-        this.recipe = template.recipe;
-    }
-
     public AAItem<T> config(ConfigProperty<? extends Toggleable> config) {
         this.config = config;
         return this;

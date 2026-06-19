@@ -12,8 +12,8 @@ import net.minecraft.world.item.crafting.display.RecipeDisplay;
 import net.minecraft.world.item.crafting.display.ShapelessCraftingRecipeDisplay;
 import net.minecraft.world.item.crafting.display.SlotDisplay;
 import net.minecraft.world.level.Level;
-import one.dqu.additionaladditions.feature.dye.SuspiciousDyeItem;
-import one.dqu.additionaladditions.feature.glint.GlintColor;
+import one.dqu.additionaladditions.feature.suspicious_dye.SuspiciousDyeItem;
+import one.dqu.additionaladditions.feature.suspicious_dye.glint.GlintColor;
 import one.dqu.additionaladditions.registry.AAMisc;
 import one.dqu.additionaladditions.registry.AATags;
 

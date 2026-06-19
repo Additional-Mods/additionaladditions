@@ -1,8 +1,9 @@
-package one.dqu.additionaladditions.feature.glint;
+package one.dqu.additionaladditions.feature.suspicious_dye.glint;
 
 import com.mojang.serialization.Codec;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.component.DataComponentGetter;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.contents.TranslatableContents;
@@ -11,7 +12,6 @@ import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.core.component.DataComponentGetter;
 import net.minecraft.world.item.component.TooltipProvider;
 
 import java.util.function.Consumer;
@@ -33,7 +33,7 @@ public record GlintColor(DyeColor color) implements StringRepresentable, Tooltip
         String key = "additionaladditions.gui.glint." + color.getSerializedName();
         consumer.accept(
                 MutableComponent.create(new TranslatableContents(key, null, new String[]{}))
-                .withStyle(ChatFormatting.GRAY)
+                        .withStyle(ChatFormatting.GRAY)
         );
     }
 }
