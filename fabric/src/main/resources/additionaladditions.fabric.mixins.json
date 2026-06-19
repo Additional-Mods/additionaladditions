@@ -5,7 +5,8 @@
   "minVersion": "0.8",
   "mixins": [
     "AxeItemMixin",
-    "LootTableBuilderMixin"
+    "LootTableBuilderMixin",
+    "RedstoneWireBlockMixin"
   ],
   "injectors": {
     "defaultRequire": 1

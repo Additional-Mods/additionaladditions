@@ -7,8 +7,17 @@ architectury {
     fabric()
 }
 
+def mergedAccessWidener = layout.buildDirectory.file("generated/accesswidener/additionaladditions.accesswidener").get().asFile
+mergedAccessWidener.parentFile.mkdirs()
+def commonAw = project(":common").file("src/main/resources/additionaladditions.accesswidener")
+def platformAw = project(":common").file("src/main/resources/additionaladditions.fabric.accesswidener")
+def header = commonAw.readLines().find { it.trim().startsWith("accessWidener") } ?: "accessWidener v2 official"
+def commonBody = commonAw.readLines().findAll { !it.trim().startsWith("accessWidener") }
+def platformBody = platformAw.readLines().findAll { !it.trim().startsWith("accessWidener") }
+mergedAccessWidener.text = ([header] + commonBody + platformBody).join("\n") + "\n"
+
 loom {
-    accessWidenerPath = project(":common").file("src/main/resources/additionaladditions.accesswidener")
+    accessWidenerPath = mergedAccessWidener
 }
 
 sourceSets {
@@ -59,9 +68,7 @@ processResources {
         expand version: inputs.properties.version
     }
 
-    from(project(":common").file("src/main/resources")) {
-        include "additionaladditions.accesswidener"
-    }
+    from(mergedAccessWidener)
 }
 
 shadowJar {
