@@ -18,7 +18,7 @@ mergedAccessWidener.text = ([header] + commonBody + platformBody).join("\n") + "
 
 loom {
     neoForge {
-
+        convertAccessWideners(tasks.named('jar', Jar), 'additionaladditions.accesswidener')
     }
 
     accessWidenerPath = mergedAccessWidener
@@ -90,13 +90,3 @@ shadowJar {
 jar {
     archiveClassifier = "raw"
 }
-
-//remapJar {
-//    inputFile.set shadowJar.archiveFile
-//    atAccessWideners.add(mergedAccessWidener.name)
-//}
-
-//remapJar {
-//    inputFile.set shadowJar.archiveFile
-//    atAccessWideners.add("additionaladditions.accesswidener")
-//}
