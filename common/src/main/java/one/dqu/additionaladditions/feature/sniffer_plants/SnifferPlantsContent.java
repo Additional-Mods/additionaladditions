@@ -44,9 +44,13 @@ public class SnifferPlantsContent {
     }
 
     private static Supplier<Block> flower(String id, Holder<MobEffect> effect) {
+        return flower(id, effect, Models::cross);
+    }
+
+    private static Supplier<Block> flower(String id, Holder<MobEffect> effect, Consumer<Block> model) {
         return AAReg.<Block>block(p -> new FlowerBlock(effect, 5f, p)).props(PLANT_PROPS)
                 .tags(AATags.C_FLOWERS_SMALL_BLOCK, BlockTags.BEE_ATTRACTIVE, BlockTags.MAINTAINS_FARMLAND)
-                .model(Models::cross)
+                .model(model)
                 .make(id);
     }
 
@@ -124,7 +128,7 @@ public class SnifferPlantsContent {
     }
 
     public static Supplier<Block> bulbus() {
-        return flower("bulbus", MobEffects.NIGHT_VISION);
+        return flower("bulbus", MobEffects.NIGHT_VISION, Models::tallCross);
     }
 
     public static Supplier<Block> bulbusCrop() {

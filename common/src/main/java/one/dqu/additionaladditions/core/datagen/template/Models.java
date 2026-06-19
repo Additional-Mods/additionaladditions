@@ -6,6 +6,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import one.dqu.additionaladditions.core.datagen.AABlockDatagen;
 import one.dqu.additionaladditions.core.datagen.AAItemDatagen;
+import one.dqu.additionaladditions.core.datagen.template.model.TallCrossModelTemplate;
 
 /**
  * Datagen template presets for blocks and items.
@@ -27,6 +28,10 @@ public final class Models {
 
     public static void doublePlant(Block block) {
         AABlockDatagen.currentGen().createDoublePlant(block, BlockModelGenerators.PlantType.NOT_TINTED);
+    }
+
+    public static void tallCross(Block block) {
+        TallCrossModelTemplate.createTallCrossBlock(AABlockDatagen.currentGen(), block);
     }
 
     // Items
