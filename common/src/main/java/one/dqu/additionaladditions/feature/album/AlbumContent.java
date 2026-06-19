@@ -7,6 +7,7 @@ import one.dqu.additionaladditions.config.Config;
 import one.dqu.additionaladditions.core.builder.AAItem;
 import one.dqu.additionaladditions.core.builder.AAReg;
 import one.dqu.additionaladditions.core.builder.CreativePosition;
+import one.dqu.additionaladditions.core.datagen.template.Models;
 import one.dqu.additionaladditions.registry.AAMisc;
 import one.dqu.additionaladditions.registry.AATags;
 
@@ -20,6 +21,7 @@ public class AlbumContent {
                 .props(p -> p
                         .stacksTo(1)
                         .component(AAMisc.ALBUM_CONTENTS_COMPONENT.get(), AlbumContents.EMPTY))
+                .model(Models::album)
                 .tags(AATags.ALBUMS);
     }
 

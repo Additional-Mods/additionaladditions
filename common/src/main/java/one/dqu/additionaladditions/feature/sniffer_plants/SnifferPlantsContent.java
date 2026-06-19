@@ -73,11 +73,12 @@ public class SnifferPlantsContent {
     private static Supplier<Item> podItem(String id, Supplier<? extends Block> block, ItemLike anchor) {
         return itemBuilder(p -> new BlockItem(block.get(), p), anchor, true)
                 .tags(AATags.C_SEEDS)
+                .model(Models::flat)
                 .make(id);
     }
 
-    private static Supplier<Item> vineItem(String id, Supplier<? extends Block> block, ItemLike anchor) {
-        return itemBuilder(p -> new BlockItem(block.get(), p), anchor, true).make(id);
+    private static Supplier<Item> vineItem(String id, Supplier<? extends Block> block, ItemLike anchor, Consumer<Item> model) {
+        return itemBuilder(p -> new BlockItem(block.get(), p), anchor, true).model(model).make(id);
     }
 
     private static AAItem<Item> itemBuilder(Function<Item.Properties, Item> factory, ItemLike anchor, boolean pod) {
@@ -267,7 +268,7 @@ public class SnifferPlantsContent {
     }
 
     public static Supplier<Item> wisteriaVines() {
-        return vineItem("wisteria_vines", AABlocks.WISTERIA_CROP, Items.PITCHER_POD);
+        return vineItem("wisteria_vines", AABlocks.WISTERIA_CROP, Items.PITCHER_POD, null);
     }
 
     public static Supplier<Item> spikeblossomItem() {
@@ -295,6 +296,6 @@ public class SnifferPlantsContent {
     }
 
     public static Supplier<Item> lotusLilyPod() {
-        return vineItem("lotus_lily_pod", AABlocks.LOTUS_LILY_CROP, Items.PITCHER_POD);
+        return vineItem("lotus_lily_pod", AABlocks.LOTUS_LILY_CROP, Items.PITCHER_POD, Models::flat);
     }
 }

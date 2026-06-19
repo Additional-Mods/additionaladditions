@@ -7,6 +7,7 @@ import net.minecraft.world.item.Items;
 import one.dqu.additionaladditions.config.Config;
 import one.dqu.additionaladditions.core.builder.AAReg;
 import one.dqu.additionaladditions.core.builder.CreativePosition;
+import one.dqu.additionaladditions.core.datagen.template.Models;
 import one.dqu.additionaladditions.core.datagen.template.Recipes;
 import one.dqu.additionaladditions.registry.AATags;
 
@@ -23,6 +24,7 @@ public class WrenchContent {
                         .component(DataComponents.DAMAGE, 0))
                 .creative(Items.BONE_MEAL, CreativeModeTabs.TOOLS_AND_UTILITIES, CreativePosition.AFTER)
                 .creative(Items.TARGET, CreativeModeTabs.REDSTONE_BLOCKS, CreativePosition.AFTER)
+                .model(Models::handheld)
                 .tags(AATags.C_TOOLS_WRENCH)
                 .recipe(Recipes.shaped("C C", " C ", " C ", Map.of('C', Items.COPPER_INGOT), RecipeCategory.TOOLS).unlockedBy(Items.COPPER_INGOT))
                 .make("wrench");

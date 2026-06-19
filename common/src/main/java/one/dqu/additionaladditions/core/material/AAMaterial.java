@@ -58,6 +58,13 @@ public record AAMaterial(
         };
     }
 
+    public ResourceKey<EquipmentAsset> equipmentAsset() {
+        return ResourceKey.create(
+                ResourceKey.createRegistryKey(Identifier.withDefaultNamespace("equipment_asset")),
+                Identifier.fromNamespaceAndPath(AdditionalAdditions.NAMESPACE, name)
+        );
+    }
+
     public DataComponentInitializers.Initializer<Item> initializerFor(ArmorType armorType) {
         if (armorType == ArmorType.BODY) {
             throw new IllegalArgumentException("BODY armor type not supported by this method. Material: " + name);
@@ -187,14 +194,9 @@ public record AAMaterial(
         builder.set(DataComponents.ENCHANTABLE, new Enchantable(material.enchantability()));
         builder.set(DataComponents.ATTRIBUTE_MODIFIERS, createArmorAttributes(type, material, armorLike));
 
-        ResourceKey<EquipmentAsset> assetId = ResourceKey.create(
-                ResourceKey.createRegistryKey(Identifier.withDefaultNamespace("equipment_asset")),
-                Identifier.fromNamespaceAndPath(AdditionalAdditions.NAMESPACE, name)
-        );
-
         Equippable equippable = Equippable.builder(type.getSlot())
                 .setEquipSound(material.equipSound())
-                .setAsset(assetId)
+                .setAsset(equipmentAsset())
                 .build();
         builder.set(DataComponents.EQUIPPABLE, equippable);
     }
@@ -210,14 +212,9 @@ public record AAMaterial(
         builder.set(DataComponents.ENCHANTABLE, new Enchantable(material.enchantability()));
         builder.set(DataComponents.ATTRIBUTE_MODIFIERS, createArmorAttributes(ArmorType.BODY, material, armorLike));
 
-        ResourceKey<EquipmentAsset> assetId = ResourceKey.create(
-                ResourceKey.createRegistryKey(Identifier.withDefaultNamespace("equipment_asset")),
-                Identifier.fromNamespaceAndPath(AdditionalAdditions.NAMESPACE, name)
-        );
-
         Equippable equippable = Equippable.builder(EquipmentSlot.BODY)
                 .setEquipSound(armorType.equipSound())
-                .setAsset(assetId)
+                .setAsset(equipmentAsset())
                 .setAllowedEntities(entityTypes.getOrThrow(armorType.canWearTag()))
                 .setDamageOnHurt(false)
                 .setEquipOnInteract(true)

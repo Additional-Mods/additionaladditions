@@ -66,6 +66,7 @@ public class RoseGoldContent {
                 .config(Config.ROSE_GOLD)
                 .material(AAMaterials.ROSE_GOLD, armorType)
                 .creative(anchor, CreativeModeTabs.COMBAT, CreativePosition.AFTER)
+                .model(item -> Models.armorTrim(item, AAMaterials.ROSE_GOLD.equipmentAsset(), armorType))
                 .tags(slotTag, ItemTags.TRIMMABLE_ARMOR)
                 .make(id);
     }
@@ -111,6 +112,7 @@ public class RoseGoldContent {
                 .config(Config.ROSE_GOLD)
                 .material(AAMaterials.ROSE_GOLD, ToolType.SWORD)
                 .creative(Items.GOLDEN_SWORD, CreativeModeTabs.COMBAT, CreativePosition.AFTER)
+                .model(Models::handheld)
                 .tags(ItemTags.SWORDS)
                 .make("rose_gold_sword");
     }
@@ -120,6 +122,7 @@ public class RoseGoldContent {
                 .config(Config.ROSE_GOLD)
                 .material(AAMaterials.ROSE_GOLD, ToolType.SPEAR)
                 .creative(Items.GOLDEN_SPEAR, CreativeModeTabs.COMBAT, CreativePosition.AFTER)
+                .model(Models::spear)
                 .tags(ItemTags.SPEARS)
                 .make("rose_gold_spear");
     }
@@ -129,6 +132,7 @@ public class RoseGoldContent {
                 .config(Config.ROSE_GOLD)
                 .material(AAMaterials.ROSE_GOLD, ToolType.SHOVEL)
                 .creative(Items.GOLDEN_HOE, CreativeModeTabs.TOOLS_AND_UTILITIES, CreativePosition.AFTER)
+                .model(Models::handheld)
                 .tags(ItemTags.SHOVELS)
                 .make("rose_gold_shovel");
     }
@@ -138,6 +142,7 @@ public class RoseGoldContent {
                 .config(Config.ROSE_GOLD)
                 .material(AAMaterials.ROSE_GOLD, ToolType.PICKAXE)
                 .creative(Items.GOLDEN_HOE, CreativeModeTabs.TOOLS_AND_UTILITIES, CreativePosition.AFTER)
+                .model(Models::handheld)
                 .tags(ItemTags.PICKAXES)
                 .make("rose_gold_pickaxe");
     }
@@ -148,6 +153,7 @@ public class RoseGoldContent {
                 .material(AAMaterials.ROSE_GOLD, ToolType.AXE)
                 .creative(Items.GOLDEN_HOE, CreativeModeTabs.TOOLS_AND_UTILITIES, CreativePosition.AFTER)
                 .creative(Items.GOLDEN_AXE, CreativeModeTabs.COMBAT, CreativePosition.AFTER)
+                .model(Models::handheld)
                 .tags(ItemTags.AXES)
                 .make("rose_gold_axe");
     }
@@ -157,6 +163,7 @@ public class RoseGoldContent {
                 .config(Config.ROSE_GOLD)
                 .material(AAMaterials.ROSE_GOLD, ToolType.HOE)
                 .creative(Items.GOLDEN_HOE, CreativeModeTabs.TOOLS_AND_UTILITIES, CreativePosition.AFTER)
+                .model(Models::handheld)
                 .tags(ItemTags.HOES)
                 .make("rose_gold_hoe");
     }

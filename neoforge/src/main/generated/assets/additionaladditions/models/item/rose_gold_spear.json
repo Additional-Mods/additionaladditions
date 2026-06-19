@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "additionaladditions:item/rose_gold_spear"
+  }
+}

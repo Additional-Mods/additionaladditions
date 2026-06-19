@@ -37,5 +37,9 @@ accessible field net/minecraft/client/data/models/BlockModelGenerators blockStat
 accessible field net/minecraft/client/data/models/BlockModelGenerators modelOutput Ljava/util/function/BiConsumer;
 accessible method net/minecraft/client/data/models/model/TextureSlot create (Ljava/lang/String;)Lnet/minecraft/client/data/models/model/TextureSlot;
 accessible method net/minecraft/client/data/models/ItemModelGenerators generateFlatItem (Lnet/minecraft/world/item/Item;Lnet/minecraft/client/data/models/model/ModelTemplate;)V
+accessible method net/minecraft/client/data/models/ItemModelGenerators generateSpear (Lnet/minecraft/world/item/Item;)V
+accessible method net/minecraft/client/data/models/ItemModelGenerators generateTrimmableItem (Lnet/minecraft/world/item/Item;Lnet/minecraft/resources/ResourceKey;Lnet/minecraft/resources/Identifier;Z)V
+accessible field net/minecraft/client/data/models/ItemModelGenerators itemModelOutput Lnet/minecraft/client/data/models/ItemModelOutput;
+accessible field net/minecraft/client/data/models/ItemModelGenerators modelOutput Ljava/util/function/BiConsumer;
 accessible method net/minecraft/client/data/models/ItemModelGenerators declareCustomModelItem (Lnet/minecraft/world/item/Item;)V
 accessible field net/minecraft/data/recipes/RecipeProvider items Lnet/minecraft/core/HolderGetter;
