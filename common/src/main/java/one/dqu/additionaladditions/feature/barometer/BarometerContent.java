@@ -7,6 +7,7 @@ import net.minecraft.world.item.Items;
 import one.dqu.additionaladditions.config.Config;
 import one.dqu.additionaladditions.core.builder.AAReg;
 import one.dqu.additionaladditions.core.builder.CreativePosition;
+import one.dqu.additionaladditions.core.datagen.template.Models;
 import one.dqu.additionaladditions.core.datagen.template.Recipes;
 
 import java.util.Map;
@@ -17,6 +18,7 @@ public class BarometerContent {
         return AAReg.item()
                 .config(Config.BAROMETER)
                 .creative(Items.CLOCK, CreativeModeTabs.TOOLS_AND_UTILITIES, CreativePosition.AFTER)
+                .model(Models::barometer)
                 .recipe(Recipes.shaped(" C ", "CRC", "CCC", Map.of('C', Items.COPPER_INGOT, 'R', Items.REDSTONE), RecipeCategory.TOOLS).unlockedBy(Items.REDSTONE))
                 .make("barometer");
     }

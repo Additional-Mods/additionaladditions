@@ -12,6 +12,7 @@ import net.minecraft.world.level.block.Block;
 import one.dqu.additionaladditions.core.datagen.AABlockDatagen;
 import one.dqu.additionaladditions.core.datagen.AAItemDatagen;
 import one.dqu.additionaladditions.core.datagen.template.model.AlbumModelTemplate;
+import one.dqu.additionaladditions.core.datagen.template.model.BarometerModelTemplate;
 import one.dqu.additionaladditions.core.datagen.template.model.TallCrossModelTemplate;
 
 /**
@@ -60,6 +61,10 @@ public final class Models {
 
     public static void album(Item item) {
         AlbumModelTemplate.createAlbum(AAItemDatagen.currentGen(), item);
+    }
+
+    public static void barometer(Item item) {
+        BarometerModelTemplate.createBarometer(AAItemDatagen.currentGen(), item);
     }
 
     // armor with a trim_material dispatch
