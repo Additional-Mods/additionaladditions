@@ -16,7 +16,7 @@ import one.dqu.additionaladditions.config.datafixer.ConfigFileRelocator;
 import one.dqu.additionaladditions.config.datafixer.ConfigFixerUpper;
 import one.dqu.additionaladditions.config.type.VersionConfig;
 import one.dqu.additionaladditions.config.type.unit.FoodUnitConfig;
-import one.dqu.additionaladditions.util.Registrar;
+import one.dqu.additionaladditions.core.util.Registrar;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -38,8 +38,8 @@ public class ConfigLoader {
     /**
      * Handles config loading.
      * In order: init config -> create config directory -> load config version
-     *           -> run relocator -> read or create config files
-     *           -> datafix if version is outdated -> apply config values
+     * -> run relocator -> read or create config files
+     * -> datafix if version is outdated -> apply config values
      */
     public static void load() {
         AdditionalAdditions.LOGGER.info("[{}] Loading config files...", AdditionalAdditions.NAMESPACE);

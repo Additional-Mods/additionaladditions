@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "C": "minecraft:copper_ingot"
+  },
+  "pattern": [
+    "C C",
+    " C ",
+    " C "
+  ],
+  "result": {
+    "id": "additionaladditions:wrench"
+  }
+}

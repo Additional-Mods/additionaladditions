@@ -6,6 +6,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.equipment.ArmorType;
@@ -13,16 +14,16 @@ import net.minecraft.world.level.ItemLike;
 import one.dqu.additionaladditions.AdditionalAdditions;
 import one.dqu.additionaladditions.config.ConfigProperty;
 import one.dqu.additionaladditions.config.Toggleable;
-import one.dqu.additionaladditions.material.AAMaterial;
-import one.dqu.additionaladditions.material.AnimalArmorType;
-import one.dqu.additionaladditions.material.ToolType;
+import one.dqu.additionaladditions.core.datagen.AAItemDatagen;
+import one.dqu.additionaladditions.core.datagen.template.Recipes;
+import one.dqu.additionaladditions.core.material.AAMaterial;
+import one.dqu.additionaladditions.core.material.AnimalArmorType;
+import one.dqu.additionaladditions.core.material.ToolType;
+import one.dqu.additionaladditions.core.util.CreativeAdder;
+import one.dqu.additionaladditions.registry.AAItems;
 import one.dqu.additionaladditions.registry.AARegistries;
-import one.dqu.additionaladditions.util.CreativeAdder;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -32,8 +33,13 @@ public class AAItem<T extends Item> {
     Function<Item.Properties, T> factory;
     private Consumer<Item.Properties> props = p -> {
     };
-    private final Map<ResourceKey<CreativeModeTab>, List<Pair<ItemLike, Boolean>>> creative = new HashMap<>();
+    private final Map<ResourceKey<CreativeModeTab>, List<Pair<ItemLike, CreativePosition>>> creative = new HashMap<>();
     private DataComponentInitializers.Initializer<Item> initializer; // extra component initializer on top of vanilla's (in item properties)
+
+    // datagen data
+    private final List<TagKey<Item>> tags = new ArrayList<>();
+    private Consumer<Item> model = null;
+    private Recipes.RecipeEntry recipe = null;
 
     @SuppressWarnings("unchecked")
     public AAItem() {
@@ -46,6 +52,9 @@ public class AAItem<T extends Item> {
         this.factory = template.factory;
         this.props = template.props;
         this.initializer = template.initializer;
+        this.tags.addAll(template.tags);
+        this.model = template.model;
+        this.recipe = template.recipe;
     }
 
     public AAItem<T> config(ConfigProperty<? extends Toggleable> config) {
@@ -58,15 +67,35 @@ public class AAItem<T extends Item> {
         return this;
     }
 
-    public AAItem<T> properties(Consumer<Item.Properties> props) {
+    public AAItem<T> props(Consumer<Item.Properties> props) {
         this.props = this.props.andThen(props);
         return this;
     }
 
-    public AAItem<T> creative(ItemLike anchor, ResourceKey<CreativeModeTab> category, boolean isBefore) {
-        creative.computeIfAbsent(category, _ -> new ArrayList<>()).add(Pair.of(anchor, isBefore));
+    public AAItem<T> creative(ItemLike anchor, ResourceKey<CreativeModeTab> category, CreativePosition position) {
+        creative.computeIfAbsent(category, _ -> new ArrayList<>()).add(Pair.of(anchor, position));
         return this;
     }
+
+    // Datagen
+
+    @SafeVarargs
+    public final AAItem<T> tags(TagKey<Item>... tags) {
+        this.tags.addAll(Arrays.asList(tags));
+        return this;
+    }
+
+    public AAItem<T> model(Consumer<Item> model) {
+        this.model = model;
+        return this;
+    }
+
+    public AAItem<T> recipe(Recipes.RecipeEntry recipe) {
+        this.recipe = recipe;
+        return this;
+    }
+
+    //
 
     public AAItem<T> initializer(DataComponentInitializers.Initializer<Item> step) {
         this.initializer = this.initializer == null ? step : this.initializer.andThen(step);
@@ -74,17 +103,17 @@ public class AAItem<T extends Item> {
     }
 
     public AAItem<T> material(AAMaterial material, ToolType toolType) {
-        return properties(p -> p.repairable(material.repairIngredient()))
+        return props(p -> p.repairable(material.repairIngredient()))
                 .initializer(material.initializerFor(toolType));
     }
 
     public AAItem<T> material(AAMaterial material, ArmorType armorType) {
-        return properties(p -> p.repairable(material.repairIngredient()))
+        return props(p -> p.repairable(material.repairIngredient()))
                 .initializer(material.initializerFor(armorType));
     }
 
     public AAItem<T> material(AAMaterial material, AnimalArmorType armorType) {
-        return properties(p -> p.repairable(material.repairIngredient()))
+        return props(p -> p.repairable(material.repairIngredient()))
                 .initializer(material.initializerFor(armorType));
     }
 
@@ -111,14 +140,22 @@ public class AAItem<T extends Item> {
         creative.forEach((tab, items) -> {
             items.forEach(pair -> {
                 ItemLike anchor = pair.getFirst();
-                boolean isBefore = pair.getSecond();
-                if (isBefore) {
+                CreativePosition position = pair.getSecond();
+                if (position == CreativePosition.BEFORE) {
                     CreativeAdder.addBefore(tab, enabled, anchor, item);
                 } else {
                     CreativeAdder.add(tab, enabled, anchor, item);
                 }
             });
         });
+
+        if (config != null) {
+            AAItems.addConfigItem(config, item);
+        }
+
+        if (AdditionalAdditions.DATAGEN) {
+            AAItemDatagen.register(new AAItemDatagen.Entry(location, item, model, recipe, List.copyOf(tags)));
+        }
 
         return item;
     }

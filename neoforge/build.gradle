@@ -16,7 +16,7 @@ loom {
 
     runs {
         data {
-            serverData()
+            clientData()
             programArgs "--all", "--mod", "additionaladditions"
             programArgs "--output", file("src/main/generated").absolutePath
             vmArg "-Dadditionaladditions.datagen=true"

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "C": "minecraft:copper_ingot",
+    "R": "minecraft:redstone"
+  },
+  "pattern": [
+    " C ",
+    "CRC",
+    "CCC"
+  ],
+  "result": {
+    "id": "additionaladditions:barometer"
+  }
+}

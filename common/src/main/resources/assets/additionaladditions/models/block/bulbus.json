@@ -1,8 +1,0 @@
-{
-  "parent": "additionaladditions:block/tall_cross",
-  "textures": {
-    "0": "additionaladditions:block/bulbus_bottom",
-    "1": "additionaladditions:block/bulbus_top"
-  }
-}
-

@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "minecraft:arrow",
+    "additionaladditions:rope",
+    "additionaladditions:rope",
+    "additionaladditions:rope",
+    "additionaladditions:rope",
+    "additionaladditions:rope",
+    "additionaladditions:rope",
+    "additionaladditions:rope",
+    "additionaladditions:rope"
+  ],
+  "result": {
+    "id": "additionaladditions:rope_arrow"
+  }
+}

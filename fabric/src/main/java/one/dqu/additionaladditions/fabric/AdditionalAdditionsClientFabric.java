@@ -27,14 +27,14 @@ import one.dqu.additionaladditions.client.HasDiscProperty;
 import one.dqu.additionaladditions.config.Config;
 import one.dqu.additionaladditions.config.io.ConfigLoader;
 import one.dqu.additionaladditions.config.network.ConfigSyncS2CPayload;
-import one.dqu.additionaladditions.entity.RopeArrowRenderer;
-import one.dqu.additionaladditions.feature.PocketJukeboxPlayer;
+import one.dqu.additionaladditions.core.util.fabric.ModCompatibilityImpl;
 import one.dqu.additionaladditions.feature.glint.GlintResourceGenerator;
+import one.dqu.additionaladditions.feature.pocket_jukebox.PocketJukeboxPlayer;
+import one.dqu.additionaladditions.feature.rope.RopeArrowRenderer;
 import one.dqu.additionaladditions.recipe.ClientRecipeCache;
 import one.dqu.additionaladditions.registry.AABlocks;
 import one.dqu.additionaladditions.registry.AAEntities;
 import one.dqu.additionaladditions.registry.AAMisc;
-import one.dqu.additionaladditions.util.fabric.ModCompatibilityImpl;
 
 import java.util.HashMap;
 import java.util.List;

@@ -2,11 +2,20 @@ package one.dqu.additionaladditions;
 
 import one.dqu.additionaladditions.config.Config;
 import one.dqu.additionaladditions.config.io.ConfigLoader;
+import one.dqu.additionaladditions.core.util.ModCompatibility;
 import one.dqu.additionaladditions.registry.*;
-import one.dqu.additionaladditions.util.ModCompatibility;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/*
+TODOs:
+- make sure datagen generates stuff properly
+- make sure All old manual data that datagen handles is removed
+- maybe loottable datagen
+- maybe furnace/cooking recipes datagen
+
+- test for any remaining issues on 26.1 port
+ */
 public final class AdditionalAdditions {
     public static final String NAMESPACE = "additionaladditions";
     public static final Logger LOGGER = LoggerFactory.getLogger(NAMESPACE);
@@ -16,6 +25,7 @@ public final class AdditionalAdditions {
     public static void init() {
         ConfigLoader.load();
 
+        AATags.registerAll();
         AAMisc.registerAll();
         AAEntities.registerAll();
         AAItems.registerAll();

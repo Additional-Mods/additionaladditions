@@ -29,17 +29,17 @@ import one.dqu.additionaladditions.config.Config;
 import one.dqu.additionaladditions.config.io.ConfigLoader;
 import one.dqu.additionaladditions.config.network.ConfigSyncS2CPayload;
 import one.dqu.additionaladditions.config.network.neoforge.ConfigSyncTask;
-import one.dqu.additionaladditions.entity.RopeArrowRenderer;
-import one.dqu.additionaladditions.feature.PocketJukeboxPlayer;
+import one.dqu.additionaladditions.core.util.CreativeAdder;
+import one.dqu.additionaladditions.core.util.LootAdder;
+import one.dqu.additionaladditions.core.util.LootTableExtension;
+import one.dqu.additionaladditions.core.util.neoforge.ModCompatibilityImpl;
+import one.dqu.additionaladditions.core.util.neoforge.RegistrarImpl;
 import one.dqu.additionaladditions.feature.glint.GlintResourceGenerator;
+import one.dqu.additionaladditions.feature.pocket_jukebox.PocketJukeboxPlayer;
+import one.dqu.additionaladditions.feature.rope.RopeArrowRenderer;
 import one.dqu.additionaladditions.recipe.neoforge.JEIBrewingRecipeSync;
 import one.dqu.additionaladditions.registry.AABlocks;
 import one.dqu.additionaladditions.registry.AAEntities;
-import one.dqu.additionaladditions.util.CreativeAdder;
-import one.dqu.additionaladditions.util.LootAdder;
-import one.dqu.additionaladditions.util.LootTableExtension;
-import one.dqu.additionaladditions.util.neoforge.ModCompatibilityImpl;
-import one.dqu.additionaladditions.util.neoforge.RegistrarImpl;
 
 @Mod(AdditionalAdditions.NAMESPACE)
 public final class AdditionalAdditionsNeoForge {

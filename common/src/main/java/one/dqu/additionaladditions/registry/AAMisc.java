@@ -2,28 +2,24 @@ package one.dqu.additionaladditions.registry;
 
 import com.mojang.serialization.Codec;
 import net.minecraft.core.component.DataComponentType;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.tags.TagKey;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.RecipePropertySet;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
-import net.minecraft.world.level.block.Block;
 import one.dqu.additionaladditions.AdditionalAdditions;
+import one.dqu.additionaladditions.core.util.SimplePlayerTrigger;
 import one.dqu.additionaladditions.feature.album.AlbumContents;
 import one.dqu.additionaladditions.feature.glint.GlintColor;
 import one.dqu.additionaladditions.recipe.BrewingRecipe;
 import one.dqu.additionaladditions.recipe.SuspiciousDyeRecipe;
-import one.dqu.additionaladditions.util.SimplePlayerTrigger;
 
 import java.util.function.Supplier;
 
 public class AAMisc {
     /* DATA COMPONENTS */
-    
+
     public static final Supplier<DataComponentType<GlintColor>> GLINT_COLOR_COMPONENT = AARegistries.DATA_COMPONENT_TYPES.register(
             Identifier.tryBuild(AdditionalAdditions.NAMESPACE, "glint_color"),
             () -> DataComponentType.<GlintColor>builder().persistent(GlintColor.CODEC).networkSynchronized(GlintColor.STREAM_CODEC).build()
@@ -38,13 +34,6 @@ public class AAMisc {
             Identifier.tryBuild(AdditionalAdditions.NAMESPACE, "water_level"),
             () -> DataComponentType.<Integer>builder().persistent(Codec.INT).networkSynchronized(ByteBufCodecs.INT).build()
     );
-
-    /* TAGS */
-
-    public static final TagKey<Item> SUSPICIOUS_DYES_TAG = TagKey.create(Registries.ITEM, Identifier.tryBuild(AdditionalAdditions.NAMESPACE, "suspicious_dyes"));
-    public static final TagKey<Block> WRENCH_BLACKLIST_TAG = TagKey.create(Registries.BLOCK, Identifier.tryBuild(AdditionalAdditions.NAMESPACE, "wrench_blacklisted"));
-    public static final TagKey<Item> ALBUMS_TAG = TagKey.create(Registries.ITEM, Identifier.tryBuild(AdditionalAdditions.NAMESPACE, "albums"));
-    public static final TagKey<Item> REPAIRS_ROSE_GOLD_ARMOR_TAG = TagKey.create(Registries.ITEM, Identifier.tryBuild(AdditionalAdditions.NAMESPACE, "repairs_rose_gold_armor"));
 
     /* RECIPE SERIALIZERS AND TYPES */
 

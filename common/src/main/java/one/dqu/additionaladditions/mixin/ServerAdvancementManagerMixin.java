@@ -1,6 +1,10 @@
 package one.dqu.additionaladditions.mixin;
 
 import com.google.gson.JsonElement;
+import net.minecraft.resources.Identifier;
+import net.minecraft.server.ServerAdvancementManager;
+import net.minecraft.server.packs.resources.ResourceManager;
+import net.minecraft.util.profiling.ProfilerFiller;
 import one.dqu.additionaladditions.AdditionalAdditions;
 import one.dqu.additionaladditions.config.Config;
 import one.dqu.additionaladditions.config.ConfigProperty;
@@ -11,10 +15,6 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.Map;
-import net.minecraft.resources.Identifier;
-import net.minecraft.server.ServerAdvancementManager;
-import net.minecraft.server.packs.resources.ResourceManager;
-import net.minecraft.util.profiling.ProfilerFiller;
 
 /**
  * Removes advancements when their corresponding features are disabled in the config.
@@ -41,11 +41,15 @@ public class ServerAdvancementManagerMixin {
                 case "use_tinted_redstone_lamp" -> Config.TINTED_REDSTONE_LAMP.get().enabled();
                 case "use_watering_can" -> Config.WATERING_CAN.get().enabled();
                 case "recipes" -> {
-                    String feature = identifier.getPath().split("/")[1];
-
-                    ConfigProperty<?> property = ConfigProperty.getAll().stream()
-                            .filter((p) -> p.path().getPath().split("/")[0].equals(feature))
-                            .findFirst().orElse(null);
+                    // datagenned recipe advancements are recipes/<category>/<feature>/<name>, the ones i wrote manually aren't (recipes/<feature>/<name>)
+                    String[] parts = identifier.getPath().split("/");
+                    ConfigProperty<?> property = null;
+                    for (int i = 1; i < parts.length && property == null; i++) {
+                        String part = parts[i];
+                        property = ConfigProperty.getAll().stream()
+                                .filter((p) -> p.path().getPath().split("/")[0].equals(part))
+                                .findFirst().orElse(null);
+                    }
 
                     if (property == null) {
                         AdditionalAdditions.LOGGER.warn("[{}] Could not find a matching config property for advancement '{}'!", AdditionalAdditions.NAMESPACE, identifier);
