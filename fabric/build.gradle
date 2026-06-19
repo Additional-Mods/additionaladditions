@@ -71,11 +71,17 @@ processResources {
     from(mergedAccessWidener)
 }
 
-shadowJar {
-    configurations = [project.configurations.shadowBundle]
-    archiveClassifier = 'dev-shadow'
-}
-
 jar {
     archiveClassifier = "raw"
 }
+
+shadowJar {
+    dependsOn(jar)
+    mainSpec.sourcePaths.clear()
+    from(zipTree(jar.archiveFile))
+
+    configurations = [project.configurations.shadowBundle]
+    archiveClassifier = null
+}
+
+assemble.dependsOn shadowJar
