@@ -5,6 +5,7 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import one.dqu.additionaladditions.AdditionalAdditions;
 import one.dqu.additionaladditions.core.datagen.template.Recipes;
@@ -12,10 +13,8 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class AAItemDatagen {
@@ -31,7 +30,7 @@ public class AAItemDatagen {
 
             // recipes are associated with item entries. used by AARecipeDatagenProvider
             @Nullable Recipes.RecipeEntry recipe,
-            
+
             List<TagKey<Item>> tags
     ) {
     }
@@ -52,9 +51,9 @@ public class AAItemDatagen {
     // for neoforge
     public static Stream<? extends Holder<Item>> knownItems() {
         if (entries == null) return Stream.empty();
-        Set<Identifier> generatedBlocks = generatedBlockIds();
         return entries.stream()
-                .filter(e -> e.model != null || generatedBlocks.contains(e.id()))
+                // keep block items so that ModelProvider handles them in finalizeAndValidate
+                .filter(e -> e.model() != null || BuiltInRegistries.ITEM.getValue(e.id()) instanceof BlockItem)
                 .map(e -> BuiltInRegistries.ITEM.getValue(e.id()).builtInRegistryHolder());
     }
 
@@ -62,22 +61,10 @@ public class AAItemDatagen {
         if (entries == null) return;
         currentGen = gen;
 
-        Set<Identifier> generatedBlocks = generatedBlockIds();
         for (Entry entry : entries) {
             if (entry.model() != null) {
                 entry.model().accept(entry.item().get());
             }
-            // block models are generated in AABlockDatagen, but need an item template def to reference them
-            if (generatedBlocks.contains(entry.id())) {
-                gen.declareCustomModelItem(entry.item().get());
-            }
         }
-    }
-
-    private static Set<Identifier> generatedBlockIds() {
-        return AABlockDatagen.entries().stream()
-                .filter(e -> e.model() != null)
-                .map(AABlockDatagen.Entry::id)
-                .collect(Collectors.toSet());
     }
 }

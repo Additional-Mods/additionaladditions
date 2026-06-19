@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "additionaladditions:item/frostleaf"
+    "model": "additionaladditions:block/frostleaf"
   }
 }

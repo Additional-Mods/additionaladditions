@@ -39,6 +39,7 @@ public class CopperPatinaContent {
                         .sound(SoundType.ROOTED_DIRT)
                         .strength(0.5f))
                 .tags(BlockTags.MINEABLE_WITH_SHOVEL)
+                .model(Models::cube)
                 .make("patina_block");
     }
 

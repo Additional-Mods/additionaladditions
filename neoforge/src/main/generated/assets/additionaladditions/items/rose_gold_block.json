@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "additionaladditions:item/rose_gold_block"
+    "model": "additionaladditions:block/rose_gold_block"
   }
 }

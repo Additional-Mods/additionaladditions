@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "additionaladditions:item/crimson_blossom"
+    "model": "additionaladditions:block/crimson_blossom"
   }
 }

@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "additionaladditions:item/cottonshiver"
+    "model": "additionaladditions:block/cottonshiver"
   }
 }
