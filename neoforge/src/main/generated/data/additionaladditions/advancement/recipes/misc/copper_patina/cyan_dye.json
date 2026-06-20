@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_copper_patina": {
+      "conditions": {
+        "items": [
+          {
+            "items": "additionaladditions:copper_patina"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "additionaladditions:copper_patina/cyan_dye"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_copper_patina"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "additionaladditions:copper_patina/cyan_dye"
+    ]
+  }
+}

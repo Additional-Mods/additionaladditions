@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_sawtooth_fern": {
+      "conditions": {
+        "items": [
+          {
+            "items": "additionaladditions:sawtooth_fern"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "additionaladditions:sniffer_plants/green_dye_from_sawtooth_fern"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_sawtooth_fern"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "additionaladditions:sniffer_plants/green_dye_from_sawtooth_fern"
+    ]
+  }
+}

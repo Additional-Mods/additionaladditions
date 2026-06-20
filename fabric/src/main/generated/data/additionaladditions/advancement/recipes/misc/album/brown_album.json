@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_album": {
+      "conditions": {
+        "items": [
+          {
+            "items": "additionaladditions:album"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "additionaladditions:album/brown_album"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_album"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "additionaladditions:album/brown_album"
+    ]
+  }
+}

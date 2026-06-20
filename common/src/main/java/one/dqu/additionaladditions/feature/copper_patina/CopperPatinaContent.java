@@ -5,6 +5,7 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
@@ -44,10 +45,14 @@ public class CopperPatinaContent {
     }
 
     public static Supplier<CopperPatinaItem> copperPatina() {
+        //noinspection Convert2MethodRef - item is null at this point, would crash
+        ItemLike patina = () -> AAItems.COPPER_PATINA.get();
+
         return AAReg.item(p -> new CopperPatinaItem(AABlocks.COPPER_PATINA.get(), p))
                 .config(Config.COPPER_PATINA)
                 .creative(Items.REDSTONE, CreativeModeTabs.REDSTONE_BLOCKS, CreativePosition.AFTER)
                 .model(Models::flat)
+                .recipeFor(Items.CYAN_DYE, Recipes.shapeless(RecipeCategory.MISC, 2, patina).unlockedBy(patina).group("cyan_dye"))
                 .make("copper_patina");
     }
 

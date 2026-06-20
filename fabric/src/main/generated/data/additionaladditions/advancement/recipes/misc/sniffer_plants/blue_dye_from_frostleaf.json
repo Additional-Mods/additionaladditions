@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_frostleaf": {
+      "conditions": {
+        "items": [
+          {
+            "items": "additionaladditions:frostleaf"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "additionaladditions:sniffer_plants/blue_dye_from_frostleaf"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_frostleaf"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "additionaladditions:sniffer_plants/blue_dye_from_frostleaf"
+    ]
+  }
+}

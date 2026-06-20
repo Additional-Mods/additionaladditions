@@ -30,7 +30,9 @@ public class FoodContent {
     }
 
     public static Supplier<Item> friedEgg() {
-        return food(Config.FRIED_EGG, Items.COOKED_RABBIT).make("fried_egg");
+        return food(Config.FRIED_EGG, Items.COOKED_RABBIT)
+                .recipe(Recipes.foodCooking(AATags.C_EGGS))
+                .make("fried_egg");
     }
 
     public static Supplier<Item> berryPie() {

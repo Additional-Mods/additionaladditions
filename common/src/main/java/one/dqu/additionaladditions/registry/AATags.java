@@ -37,6 +37,7 @@ public class AATags {
     public static final TagKey<Item> C_SEEDS = citem("seeds");
     public static final TagKey<Item> C_FOODS = citem("foods");
     public static final TagKey<Item> C_FOODS_PIE = citem("foods/pie");
+    public static final TagKey<Item> C_EGGS = citem("eggs");
     public static final TagKey<Item> C_MUSIC_DISCS = citem("music_discs");
     public static final TagKey<Item> C_TOOLS_WRENCH = citem("tools/wrench");
     public static final TagKey<Item> C_INGOTS_ROSE_GOLD = citem("ingots/rose_gold");
@@ -66,6 +67,6 @@ public class AATags {
     }
 
     public static void registerAll() {
-        
+
     }
 }

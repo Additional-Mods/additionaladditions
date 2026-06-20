@@ -15,7 +15,7 @@ import one.dqu.additionaladditions.AdditionalAdditions;
 import one.dqu.additionaladditions.config.ConfigProperty;
 import one.dqu.additionaladditions.config.Toggleable;
 import one.dqu.additionaladditions.core.datagen.AAItemDatagen;
-import one.dqu.additionaladditions.core.datagen.template.Recipes;
+import one.dqu.additionaladditions.core.datagen.template.recipe.RecipeEntry;
 import one.dqu.additionaladditions.core.material.AAMaterial;
 import one.dqu.additionaladditions.core.material.AnimalArmorType;
 import one.dqu.additionaladditions.core.material.ToolType;
@@ -39,7 +39,7 @@ public class AAItem<T extends Item> {
     // datagen data
     private final List<TagKey<Item>> tags = new ArrayList<>();
     private Consumer<Item> model = null;
-    private Recipes.RecipeEntry recipe = null;
+    private final List<RecipeEntry> recipes = new ArrayList<>();
 
     @SuppressWarnings("unchecked")
     public AAItem() {
@@ -80,8 +80,24 @@ public class AAItem<T extends Item> {
         return this;
     }
 
-    public AAItem<T> recipe(Recipes.RecipeEntry recipe) {
-        this.recipe = recipe;
+    public AAItem<T> recipe(RecipeEntry recipe) {
+        this.recipes.add(recipe);
+        return this;
+    }
+
+    public AAItem<T> recipe(RecipeEntry... recipes) {
+        Collections.addAll(this.recipes, recipes);
+        return this;
+    }
+
+    public AAItem<T> recipe(List<RecipeEntry> recipes) {
+        this.recipes.addAll(recipes);
+        return this;
+    }
+
+    // recipe that produces a different item than this one
+    public AAItem<T> recipeFor(ItemLike result, RecipeEntry recipe) {
+        this.recipes.add(recipe.result(result));
         return this;
     }
 
@@ -144,7 +160,7 @@ public class AAItem<T extends Item> {
         }
 
         if (AdditionalAdditions.DATAGEN) {
-            AAItemDatagen.register(new AAItemDatagen.Entry(location, item, model, recipe, List.copyOf(tags)));
+            AAItemDatagen.register(new AAItemDatagen.Entry(location, item, model, List.copyOf(recipes), List.copyOf(tags)));
         }
 
         return item;

@@ -1,0 +1,43 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_jukebox": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:jukebox"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_leather": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:leather"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "additionaladditions:album/album"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_leather",
+      "has_jukebox"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "additionaladditions:album/album"
+    ]
+  }
+}

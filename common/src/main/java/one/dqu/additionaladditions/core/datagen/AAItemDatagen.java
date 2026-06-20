@@ -8,7 +8,7 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import one.dqu.additionaladditions.AdditionalAdditions;
-import one.dqu.additionaladditions.core.datagen.template.Recipes;
+import one.dqu.additionaladditions.core.datagen.template.recipe.RecipeEntry;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -29,7 +29,7 @@ public class AAItemDatagen {
             @Nullable Consumer<Item> model,
 
             // recipes are associated with item entries. used by AARecipeDatagenProvider
-            @Nullable Recipes.RecipeEntry recipe,
+            List<RecipeEntry> recipes,
 
             List<TagKey<Item>> tags
     ) {

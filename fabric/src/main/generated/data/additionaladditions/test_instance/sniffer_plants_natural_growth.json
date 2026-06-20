@@ -1,0 +1,7 @@
+{
+  "type": "minecraft:function",
+  "environment": "additionaladditions:fast_growth",
+  "function": "additionaladditions:sniffer_plants_natural_growth",
+  "max_ticks": 2000,
+  "structure": "additionaladditions:empty_big"
+}

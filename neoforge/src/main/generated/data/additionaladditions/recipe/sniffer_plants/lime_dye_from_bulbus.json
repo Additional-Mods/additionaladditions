@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "lime_dye",
+  "ingredients": [
+    "additionaladditions:bulbus"
+  ],
+  "result": {
+    "id": "minecraft:lime_dye"
+  }
+}

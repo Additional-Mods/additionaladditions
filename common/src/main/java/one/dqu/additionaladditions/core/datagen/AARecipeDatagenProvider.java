@@ -8,12 +8,15 @@ import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.ItemLike;
 import one.dqu.additionaladditions.AdditionalAdditions;
-import one.dqu.additionaladditions.core.datagen.template.Recipes;
+import one.dqu.additionaladditions.core.datagen.template.recipe.RecipeEntry;
+import one.dqu.additionaladditions.core.datagen.template.recipe.RecipeInput;
 import one.dqu.additionaladditions.registry.AAItems;
+import org.jetbrains.annotations.Nullable;
 
 public class AARecipeDatagenProvider extends RecipeProvider {
     public AARecipeDatagenProvider(HolderLookup.Provider registries, RecipeOutput output) {
@@ -23,26 +26,36 @@ public class AARecipeDatagenProvider extends RecipeProvider {
     @Override
     protected void buildRecipes() {
         for (AAItemDatagen.Entry entry : AAItemDatagen.entries()) {
-            Recipes.RecipeEntry recipe = entry.recipe();
-            if (recipe == null) {
-                continue;
-            }
+            Item owner = BuiltInRegistries.ITEM.getValue(entry.id());
 
-            Item result = BuiltInRegistries.ITEM.getValue(entry.id());
-            RecipeBuilder builder = recipe.builder(this.items, result);
-            for (ItemLike unlock : recipe.unlocks()) {
-                builder.unlockedBy(getHasName(unlock), has(unlock));
+            for (RecipeEntry recipe : entry.recipes()) {
+                ItemLike result = recipe.result() != null ? recipe.result() : owner;
+
+                RecipeBuilder builder = recipe.builder(this.items, result);
+                if (recipe.group() != null) {
+                    builder.group(recipe.group());
+                }
+                for (RecipeInput unlock : recipe.unlocks()) {
+                    switch (unlock) {
+                        case RecipeInput.OfItem(ItemLike item) -> builder.unlockedBy(getHasName(item), has(item));
+                        case RecipeInput.OfTag(TagKey<Item> tag) ->
+                                builder.unlockedBy("has_" + tag.location().getPath(), has(tag));
+                    }
+                }
+                builder.save(this.output, recipeKey(owner, result, recipe.name()));
             }
-            builder.save(this.output, recipeKey(entry.id(), result));
         }
     }
 
-    // need <feature>/<item> path for RecipeManagerMixin, so that recipes can be disabled with config
-    private static ResourceKey<Recipe<?>> recipeKey(Identifier itemId, Item result) {
-        Identifier configPath = AAItems.configPathFor(result);
+    // need <feature>/<recipe>.json path for RecipeManagerMixin, so that recipes can be disabled with config
+    // %s in the name is replaced with the result path (e.g. %s_smoking)
+    private static ResourceKey<Recipe<?>> recipeKey(Item owner, ItemLike result, @Nullable String name) {
+        String resultPath = BuiltInRegistries.ITEM.getKey(result.asItem()).getPath();
+        String path = name != null ? name.replace("%s", resultPath) : resultPath;
+        Identifier configPath = AAItems.configPathFor(owner);
         Identifier id = configPath != null
-                ? Identifier.tryBuild(AdditionalAdditions.NAMESPACE, configPath.getPath().split("/")[0] + "/" + itemId.getPath())
-                : itemId;
+                ? Identifier.tryBuild(AdditionalAdditions.NAMESPACE, configPath.getPath().split("/")[0] + "/" + path)
+                : Identifier.tryBuild(AdditionalAdditions.NAMESPACE, path);
         return ResourceKey.create(Registries.RECIPE, id);
     }
 }

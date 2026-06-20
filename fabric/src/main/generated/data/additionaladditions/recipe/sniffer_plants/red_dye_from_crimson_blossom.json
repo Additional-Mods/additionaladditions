@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "red_dye",
+  "ingredients": [
+    "additionaladditions:crimson_blossom"
+  ],
+  "result": {
+    "id": "minecraft:red_dye"
+  }
+}

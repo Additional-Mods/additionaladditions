@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "magenta_dye",
+  "ingredients": [
+    "additionaladditions:snapdragon"
+  ],
+  "result": {
+    "id": "minecraft:magenta_dye"
+  }
+}
