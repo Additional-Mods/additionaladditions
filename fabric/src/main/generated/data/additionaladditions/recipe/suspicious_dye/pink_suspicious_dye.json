@@ -1,9 +1,8 @@
 {
   "type": "additionaladditions:brewing",
-  "potion": "minecraft:water",
   "ingredient": "additionaladditions:lotus_lily",
+  "potion": "minecraft:water",
   "result": {
-    "id": "additionaladditions:pink_suspicious_dye",
-    "count": 1
+    "id": "additionaladditions:pink_suspicious_dye"
   }
 }

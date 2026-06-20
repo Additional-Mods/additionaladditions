@@ -1,13 +1,18 @@
 package one.dqu.additionaladditions.core.datagen.template;
 
+import net.minecraft.core.Holder;
 import net.minecraft.data.recipes.*;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStackTemplate;
+import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.crafting.CookingBookCategory;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import one.dqu.additionaladditions.core.datagen.template.recipe.RecipeEntry;
 import one.dqu.additionaladditions.core.datagen.template.recipe.RecipeInput;
+import one.dqu.additionaladditions.core.datagen.template.recipe.SpecialRecipeBuilder;
+import one.dqu.additionaladditions.recipe.BrewingRecipe;
 
 import java.util.List;
 import java.util.Map;
@@ -120,5 +125,20 @@ public class Recipes {
 
     public static List<RecipeEntry> foodCooking(TagKey<Item> ingredient) {
         return foodCooking(RecipeInput.of(ingredient));
+    }
+
+    // Brewing
+
+    public static RecipeEntry brewing(Holder<Potion> potion, RecipeInput ingredient, int count) {
+        return new RecipeEntry((registries, result) -> new SpecialRecipeBuilder(
+                new BrewingRecipe(potion, ingredient.ingredient(registries), new ItemStackTemplate(result.asItem(), count))));
+    }
+
+    public static RecipeEntry brewing(Holder<Potion> potion, ItemLike ingredient) {
+        return brewing(potion, RecipeInput.of(ingredient), 1);
+    }
+
+    public static RecipeEntry brewing(Holder<Potion> potion, TagKey<Item> ingredient) {
+        return brewing(potion, RecipeInput.of(ingredient), 1);
     }
 }

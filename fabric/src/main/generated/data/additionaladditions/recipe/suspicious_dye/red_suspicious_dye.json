@@ -1,9 +1,8 @@
 {
   "type": "additionaladditions:brewing",
-  "potion": "minecraft:water",
   "ingredient": "additionaladditions:crimson_blossom",
+  "potion": "minecraft:water",
   "result": {
-    "id": "additionaladditions:red_suspicious_dye",
-    "count": 1
+    "id": "additionaladditions:red_suspicious_dye"
   }
 }

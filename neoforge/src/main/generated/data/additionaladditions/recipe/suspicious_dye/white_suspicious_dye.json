@@ -1,0 +1,8 @@
+{
+  "type": "additionaladditions:brewing",
+  "ingredient": "additionaladditions:cottonshiver",
+  "potion": "minecraft:water",
+  "result": {
+    "id": "additionaladditions:white_suspicious_dye"
+  }
+}
