@@ -1,0 +1,7 @@
+{
+  "type": "minecraft:function",
+  "environment": "minecraft:default",
+  "function": "additionaladditions:config_rose_gold_pickaxe_reload",
+  "max_ticks": 100,
+  "structure": "additionaladditions:empty"
+}

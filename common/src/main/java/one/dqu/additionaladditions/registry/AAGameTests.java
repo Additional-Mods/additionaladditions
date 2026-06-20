@@ -49,6 +49,10 @@ public class AAGameTests {
         new AAGameTest().structure("empty_big").maxTicks(2000).environment(FAST_GROWTH)
                 .function(SnifferPlantsTests::naturalGrowth).create("sniffer_plants_natural_growth");
 
+        // config
+        new AAGameTest().function(ConfigTests::roseGoldPickaxeReload).create("config_rose_gold_pickaxe_reload");
+        new AAGameTest().function(ConfigTests::roseGoldArmorReload).create("config_rose_gold_armor_reload");
+
         // watering can
         new AAGameTest().structure("empty_big").function(WateringCanTests::fillWaterFull).create("watering_can_fill_water_full");
         new AAGameTest().structure("empty_big").function(WateringCanTests::fillWaterPartial).create("watering_can_fill_water_partial");
