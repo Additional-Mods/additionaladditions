@@ -48,6 +48,7 @@ public class AdditionalAdditionsDatagenFabric implements DataGeneratorEntrypoint
 
     @Override
     public void buildRegistry(RegistrySetBuilder registryBuilder) {
+        registryBuilder.add(Registries.TEST_ENVIRONMENT, AAGameTestDatagen::bootstrapEnvironments);
         registryBuilder.add(Registries.TEST_INSTANCE, AAGameTestDatagen::bootstrap);
     }
 

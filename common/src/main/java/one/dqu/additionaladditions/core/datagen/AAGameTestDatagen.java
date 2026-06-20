@@ -11,11 +11,14 @@ import net.minecraft.resources.ResourceKey;
 import one.dqu.additionaladditions.AdditionalAdditions;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.function.Consumer;
 
 public class AAGameTestDatagen {
     private static List<Entry> entries = AdditionalAdditions.DATAGEN ? new ArrayList<>() : null;
+    private static final Set<ResourceKey<TestEnvironmentDefinition<?>>> environments = AdditionalAdditions.DATAGEN ? new HashSet<>() : null;
 
     public record Entry(
             Identifier id,
@@ -27,8 +30,9 @@ public class AAGameTestDatagen {
     }
 
     public static void register(Entry entry) {
-        if (entries == null) return;
+        if (entries == null || environments == null) return;
         entries.add(entry);
+        environments.add(entry.environment());
     }
 
     public static void bootstrap(BootstrapContext<GameTestInstance> context) {
@@ -53,6 +57,18 @@ public class AAGameTestDatagen {
         }
 
         entries = null;
+    }
+
+    // for fabric
+    // register empty test environments just so the test instance references resolve
+    // because fabric doesnt load datapack jsons during datagen
+    // actual definitions are manual in common/src/main/resources/...
+    public static void bootstrapEnvironments(BootstrapContext<TestEnvironmentDefinition<?>> context) {
+        for (ResourceKey<TestEnvironmentDefinition<?>> environment : environments) {
+            if (environment.identifier().getNamespace().equals(AdditionalAdditions.NAMESPACE)) {
+                context.register(environment, new TestEnvironmentDefinition.AllOf(List.of()));
+            }
+        }
     }
 
     public static RegistrySetBuilder registryBuilder() {
