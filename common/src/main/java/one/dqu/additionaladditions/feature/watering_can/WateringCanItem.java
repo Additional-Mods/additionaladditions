@@ -1,29 +1,31 @@
 package one.dqu.additionaladditions.feature.watering_can;
 
-import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.InteractionResult;
-import net.minecraft.world.item.Item;
-import one.dqu.additionaladditions.config.Config;
-import one.dqu.additionaladditions.core.util.FluidHelper;
-import one.dqu.additionaladditions.registry.AAMisc;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.BonemealableBlock;
+import net.minecraft.world.level.block.FarmlandBlock;
+import net.minecraft.world.level.block.GrassBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
+import one.dqu.additionaladditions.config.Config;
+import one.dqu.additionaladditions.core.util.FluidHelper;
+import one.dqu.additionaladditions.registry.AAMisc;
 
 public class WateringCanItem extends Item {
     public WateringCanItem(Properties settings) {
@@ -85,9 +87,11 @@ public class WateringCanItem extends Item {
                     boolean shouldFertilize = world.random.nextFloat() < Config.WATERING_CAN.get().fertilizeChance();
                     if (shouldFertilize && fertilizable.isBonemealSuccess(world, world.random, pos, state)) {
                         fertilizable.performBonemeal((ServerLevel) world, world.random, pos, state);
-
-                        AAMisc.FERTILIZE_WITH_WATERING_CAN_TRIGGER.get().trigger((ServerPlayer) player);
                         world.playSound(null, pos, SoundEvents.BONE_MEAL_USE, SoundSource.BLOCKS);
+
+                        if (player instanceof ServerPlayer serverPlayer) {
+                            AAMisc.FERTILIZE_WITH_WATERING_CAN_TRIGGER.get().trigger(serverPlayer);
+                        }
                     } else {
                         world.playSound(null, pos, SoundEvents.BOTTLE_EMPTY, SoundSource.BLOCKS);
                     }

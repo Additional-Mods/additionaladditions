@@ -1,12 +1,20 @@
 package one.dqu.additionaladditions.registry;
 
+import net.minecraft.core.registries.Registries;
+import net.minecraft.gametest.framework.TestEnvironmentDefinition;
+import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
+import one.dqu.additionaladditions.AdditionalAdditions;
 import one.dqu.additionaladditions.core.builder.AAGameTest;
-import one.dqu.additionaladditions.gametest.CopperPatinaTests;
-import one.dqu.additionaladditions.gametest.MiscTests;
-import one.dqu.additionaladditions.gametest.RopeArrowTests;
-import one.dqu.additionaladditions.gametest.WrenchTests;
+import one.dqu.additionaladditions.gametest.*;
 
 public class AAGameTests {
+    // data/additionaladditions/test_environment/fast_growth.json
+    private static final ResourceKey<TestEnvironmentDefinition<?>> FAST_GROWTH = ResourceKey.create(
+            Registries.TEST_ENVIRONMENT,
+            Identifier.fromNamespaceAndPath(AdditionalAdditions.NAMESPACE, "fast_growth")
+    );
+
     public static void registerAll() {
         // misc
         new AAGameTest().function(MiscTests::example).create("example");
@@ -35,5 +43,19 @@ public class AAGameTests {
         new AAGameTest().maxTicks(200).function(WrenchTests::hopper).create("wrench_hopper");
         new AAGameTest().function(WrenchTests::piston).create("wrench_piston");
         new AAGameTest().function(WrenchTests::player).create("wrench_player");
+
+        // sniffer plants
+        new AAGameTest().structure("empty_big").function(SnifferPlantsTests::stages).create("sniffer_plants_stages");
+        new AAGameTest().structure("empty_big").maxTicks(2000).environment(FAST_GROWTH)
+                .function(SnifferPlantsTests::naturalGrowth).create("sniffer_plants_natural_growth");
+
+        // watering can
+        new AAGameTest().structure("empty_big").function(WateringCanTests::fillWaterFull).create("watering_can_fill_water_full");
+        new AAGameTest().structure("empty_big").function(WateringCanTests::fillWaterPartial).create("watering_can_fill_water_partial");
+        new AAGameTest().structure("empty_big").function(WateringCanTests::fillWaterCauldron).create("watering_can_fill_water_cauldron");
+        new AAGameTest().structure("empty_big").function(WateringCanTests::interactFarmland).create("watering_can_interact_farmland");
+        new AAGameTest().structure("empty_big").function(WateringCanTests::interactCrop).create("watering_can_interact_crop");
+        new AAGameTest().structure("empty_big").function(WateringCanTests::interactGrownCrop).create("watering_can_interact_grown_crop");
+        new AAGameTest().structure("empty_big").function(WateringCanTests::interactNoFarmland).create("watering_can_interact_no_farmland");
     }
 }
