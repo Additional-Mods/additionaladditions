@@ -37,6 +37,12 @@ loom {
             programArgs "--output", file("src/main/generated").absolutePath
             vmArg "-Dadditionaladditions.datagen=true"
         }
+        gameTest {
+            environment "server"
+            forgeTemplate "gameTestServer"
+            name "Game Test"
+            property 'neoforge.enableGameTest', 'true'
+        }
     }
 }
 

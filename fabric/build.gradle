@@ -25,6 +25,15 @@ def generateMergedAccessWidener = tasks.register('generateMergedAccessWidener') 
 
 loom {
     accessWidenerPath = mergedAccessWidener
+
+    runs {
+        gameTest {
+            server()
+            name "Game Test"
+            vmArg "-DbundlerMainClass=net.minecraft.gametest.Main"
+            vmArg "-Dfabric-api.gametest"
+        }
+    }
 }
 
 sourceSets {
