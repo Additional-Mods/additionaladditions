@@ -2,18 +2,26 @@ package one.dqu.additionaladditions.core.datagen.template;
 
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.ItemModelGenerators;
+import net.minecraft.client.data.models.model.ItemModelUtils;
+import net.minecraft.client.data.models.model.ModelLocationUtils;
 import net.minecraft.client.data.models.model.ModelTemplates;
+import net.minecraft.client.data.models.model.TextureMapping;
+import net.minecraft.client.resources.model.sprite.Material;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.equipment.ArmorType;
 import net.minecraft.world.item.equipment.EquipmentAsset;
 import net.minecraft.world.level.block.Block;
+import one.dqu.additionaladditions.AdditionalAdditions;
 import one.dqu.additionaladditions.core.datagen.AABlockDatagen;
 import one.dqu.additionaladditions.core.datagen.AAItemDatagen;
 import one.dqu.additionaladditions.core.datagen.template.model.AlbumModelTemplate;
 import one.dqu.additionaladditions.core.datagen.template.model.BarometerModelTemplate;
 import one.dqu.additionaladditions.core.datagen.template.model.TallCrossModelTemplate;
+
+import java.util.function.Consumer;
 
 /**
  * Datagen template presets for blocks and items.
@@ -45,6 +53,26 @@ public final class Models {
 
     public static void flat(Item item) {
         AAItemDatagen.currentGen().generateFlatItem(item, ModelTemplates.FLAT_ITEM);
+    }
+
+    /**
+     * Flat item model that uses a block texture.
+     *
+     * @param format Texture path, %s is replaced with the item identifier.
+     */
+    public static Consumer<Item> flatBlock(String format) {
+        return item -> {
+            ItemModelGenerators gen = AAItemDatagen.currentGen();
+            String texture = format.formatted(BuiltInRegistries.ITEM.getKey(item).getPath());
+            Material mat = new Material(Identifier.fromNamespaceAndPath(AdditionalAdditions.NAMESPACE, "block/" + texture));
+            Identifier model = ModelLocationUtils.getModelLocation(item);
+            ModelTemplates.FLAT_ITEM.create(model, TextureMapping.layer0(mat), gen.modelOutput);
+            gen.itemModelOutput.accept(item, ItemModelUtils.plainModel(model));
+        };
+    }
+
+    public static void flatBlock(Item item) {
+        flatBlock("%s").accept(item);
     }
 
     public static void handheld(Item item) {

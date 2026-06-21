@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "additionaladditions:block/sawtooth_fern"
+    "model": "additionaladditions:item/sawtooth_fern"
   }
 }

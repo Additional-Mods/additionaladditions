@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "additionaladditions:block/snapdragon"
+    "model": "additionaladditions:item/snapdragon"
   }
 }

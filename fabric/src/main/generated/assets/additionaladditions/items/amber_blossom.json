@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "additionaladditions:block/amber_blossom"
+    "model": "additionaladditions:item/amber_blossom"
   }
 }
