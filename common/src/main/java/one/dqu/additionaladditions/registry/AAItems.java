@@ -1,19 +1,10 @@
 package one.dqu.additionaladditions.registry;
 
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.dispenser.BlockSource;
-import net.minecraft.core.dispenser.DefaultDispenseItemBehavior;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.block.DispenserBlock;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import one.dqu.additionaladditions.config.Config;
 import one.dqu.additionaladditions.config.ConfigProperty;
-import one.dqu.additionaladditions.core.util.Registrar;
 import one.dqu.additionaladditions.feature.album.AlbumContent;
 import one.dqu.additionaladditions.feature.album.AlbumItem;
 import one.dqu.additionaladditions.feature.barometer.BarometerContent;
@@ -192,21 +183,6 @@ public class AAItems {
 
 
     public static void registerAll() {
-        if (Config.WRENCH.get().enabled()) {
-            Registrar.defer(() -> {
-                DispenserBlock.registerBehavior(WRENCH_ITEM.get(), new DefaultDispenseItemBehavior() {
-                    public ItemStack execute(BlockSource pointer, ItemStack stack) {
-                        WrenchItem wrench = (WrenchItem) stack.getItem();
 
-                        BlockState dstate = pointer.state();
-                        BlockPos pos = pointer.pos().relative(dstate.getValue(BlockStateProperties.FACING));
-                        BlockState state = pointer.level().getBlockState(pos);
-
-                        wrench.dispenserUse(pointer.level(), pos, state, stack);
-                        return stack;
-                    }
-                });
-            });
-        }
     }
 }
