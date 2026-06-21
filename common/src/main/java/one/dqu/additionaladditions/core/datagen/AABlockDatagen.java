@@ -35,6 +35,11 @@ public class AABlockDatagen {
         return entries == null ? List.of() : entries;
     }
 
+    public static boolean isManuallyModeled(Identifier id) {
+        if (entries == null) return false;
+        return entries.stream().anyMatch(e -> e.id().equals(id) && e.model() == null);
+    }
+
     public static BlockModelGenerators currentGen() {
         return currentGen;
     }

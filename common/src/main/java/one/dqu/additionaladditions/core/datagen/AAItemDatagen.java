@@ -53,7 +53,8 @@ public class AAItemDatagen {
         if (entries == null) return Stream.empty();
         return entries.stream()
                 // keep block items so that ModelProvider handles them in finalizeAndValidate
-                .filter(e -> e.model() != null || BuiltInRegistries.ITEM.getValue(e.id()) instanceof BlockItem)
+                .filter(e -> e.model() != null
+                        || (BuiltInRegistries.ITEM.getValue(e.id()) instanceof BlockItem && !AABlockDatagen.isManuallyModeled(e.id())))
                 .map(e -> BuiltInRegistries.ITEM.getValue(e.id()).builtInRegistryHolder());
     }
 
