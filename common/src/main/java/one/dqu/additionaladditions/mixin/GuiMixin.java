@@ -3,7 +3,6 @@ package one.dqu.additionaladditions.mixin;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
-import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.network.chat.Component;
 import one.dqu.additionaladditions.config.Config;
 import one.dqu.additionaladditions.registry.AAItems;
@@ -24,7 +23,7 @@ public abstract class GuiMixin {
     private Minecraft minecraft;
 
     @Inject(method = "extractRenderState", at = @At("TAIL"))
-    private void depthMeterMessage(GuiGraphicsExtractor extractor, DeltaTracker deltaTracker, CallbackInfo ci) {
+    private void depthMeterMessage(DeltaTracker deltaTracker, boolean shouldRenderLevel, boolean resourcesLoaded, CallbackInfo ci) {
         if (!Config.BAROMETER.get().enabled()) return;
         if (minecraft.player == null) return;
         if (minecraft.player.isHolding(AAItems.BAROMETER.get())) {

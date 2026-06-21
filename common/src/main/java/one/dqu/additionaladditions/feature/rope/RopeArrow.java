@@ -1,6 +1,7 @@
 package one.dqu.additionaladditions.feature.rope;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.phys.Vec3;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.FluidTags;
@@ -124,7 +125,8 @@ public class RopeArrow extends AbstractArrow {
                     ItemStack stack = AAItems.ROPE.get().getDefaultInstance();
                     stack.setCount(remaining);
                     int up = canReplace ? 0 : 1;
-                    ItemEntity itemEntity = new ItemEntity(this.level(), downPos.getCenter().x, downPos.getCenter().y + up, downPos.getCenter().z, stack);
+                    Vec3 center = Vec3.atCenterOf(downPos);
+                    ItemEntity itemEntity = new ItemEntity(this.level(), center.x, center.y + up, center.z, stack);
                     this.level().addFreshEntity(itemEntity);
                 }
                 isPlacingRopes = false;

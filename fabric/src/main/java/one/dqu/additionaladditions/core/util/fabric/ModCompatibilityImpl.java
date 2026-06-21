@@ -4,6 +4,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.toasts.SystemToast;
+import net.minecraft.client.gui.components.toasts.ToastManager;
 import net.minecraft.network.chat.Component;
 import one.dqu.additionaladditions.AdditionalAdditions;
 
@@ -12,7 +13,7 @@ import java.util.List;
 import java.util.function.Supplier;
 
 public class ModCompatibilityImpl {
-    private static final List<Supplier<SystemToast>> toasts = new ArrayList<>();
+    private static final List<String> toasts = new ArrayList<>();
 
     public static void add(Supplier<Boolean> condition, String description, String... modids) {
         if (!condition.get()) {
@@ -34,12 +35,7 @@ public class ModCompatibilityImpl {
         AdditionalAdditions.LOGGER.warn("[{}] ⚠️ IMPORTANT", AdditionalAdditions.NAMESPACE);
         AdditionalAdditions.LOGGER.warn("[{}] Mod Incompatibility: {}", AdditionalAdditions.NAMESPACE, description);
         if (isClientSide()) {
-            toasts.add(() -> SystemToast.multiline(
-                    Minecraft.getInstance(),
-                    SystemToast.SystemToastId.PACK_LOAD_FAILURE,
-                    Component.literal("Additional Additions"),
-                    Component.literal(description)
-            ));
+            toasts.add(description);
         }
     }
 
@@ -56,8 +52,14 @@ public class ModCompatibilityImpl {
         if (!isClientSide()) {
             return;
         }
-        for (Supplier<SystemToast> toastSupplier : toasts) {
-            Minecraft.getInstance().getToastManager().addToast(toastSupplier.get());
+        ToastManager toastManager = Minecraft.getInstance().gui.toastManager();
+        for (String description : toasts) {
+            SystemToast.add(
+                    toastManager,
+                    SystemToast.SystemToastId.PACK_LOAD_FAILURE,
+                    Component.literal("Additional Additions"),
+                    Component.literal(description)
+            );
         }
         toasts.clear();
     }

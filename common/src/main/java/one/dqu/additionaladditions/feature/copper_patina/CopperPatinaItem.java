@@ -2,7 +2,7 @@ package one.dqu.additionaladditions.feature.copper_patina;
 
 import net.minecraft.world.level.block.LevelEvent;
 import one.dqu.additionaladditions.config.Config;
-import net.minecraft.advancements.CriteriaTriggers;
+import net.minecraft.advancements.triggers.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;

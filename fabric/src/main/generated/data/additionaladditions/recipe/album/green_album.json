@@ -1,6 +1,5 @@
 {
   "type": "minecraft:crafting_transmute",
-  "category": "misc",
   "group": "album_dye",
   "input": "#additionaladditions:albums",
   "material": "minecraft:green_dye",

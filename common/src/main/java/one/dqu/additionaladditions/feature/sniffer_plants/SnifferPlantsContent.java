@@ -236,7 +236,7 @@ public class SnifferPlantsContent {
     // Items
 
     public static Supplier<Item> cottonshiverItem() {
-        return plantItem("cottonshiver", AABlocks.COTTONSHIVER, Items.PITCHER_PLANT, AATags.C_FLOWERS_TALL_ITEM, Items.WHITE_DYE, "%s_top");
+        return plantItem("cottonshiver", AABlocks.COTTONSHIVER, Items.PITCHER_PLANT, AATags.C_FLOWERS_TALL_ITEM, Items.DYE.white(), "%s_top");
     }
 
     public static Supplier<Item> cottonshiverPod() {
@@ -244,7 +244,7 @@ public class SnifferPlantsContent {
     }
 
     public static Supplier<Item> mudflowerItem() {
-        return plantItem("mudflower", AABlocks.MUDFLOWER, Items.PITCHER_PLANT, AATags.C_FLOWERS_TALL_ITEM, Items.BROWN_DYE, "%s_top");
+        return plantItem("mudflower", AABlocks.MUDFLOWER, Items.PITCHER_PLANT, AATags.C_FLOWERS_TALL_ITEM, Items.DYE.brown(), "%s_top");
     }
 
     public static Supplier<Item> mudflowerSeeds() {
@@ -252,7 +252,7 @@ public class SnifferPlantsContent {
     }
 
     public static Supplier<Item> crimsonBlossomItem() {
-        return plantItem("crimson_blossom", AABlocks.CRIMSON_BLOSSOM, Items.TORCHFLOWER, AATags.C_FLOWERS_SMALL_ITEM, Items.RED_DYE);
+        return plantItem("crimson_blossom", AABlocks.CRIMSON_BLOSSOM, Items.TORCHFLOWER, AATags.C_FLOWERS_SMALL_ITEM, Items.DYE.red());
     }
 
     public static Supplier<Item> crimsonBlossomSeeds() {
@@ -260,7 +260,7 @@ public class SnifferPlantsContent {
     }
 
     public static Supplier<Item> amberBlossomItem() {
-        return plantItem("amber_blossom", AABlocks.AMBER_BLOSSOM, Items.PITCHER_PLANT, AATags.C_FLOWERS_TALL_ITEM, Items.YELLOW_DYE, "%s_bottom");
+        return plantItem("amber_blossom", AABlocks.AMBER_BLOSSOM, Items.PITCHER_PLANT, AATags.C_FLOWERS_TALL_ITEM, Items.DYE.yellow(), "%s_bottom");
     }
 
     public static Supplier<Item> amberBlossomSeeds() {
@@ -268,7 +268,7 @@ public class SnifferPlantsContent {
     }
 
     public static Supplier<Item> bulbusItem() {
-        return plantItem("bulbus", AABlocks.BULBUS, Items.TORCHFLOWER, AATags.C_FLOWERS_SMALL_ITEM, Items.LIME_DYE, "%s_bottom");
+        return plantItem("bulbus", AABlocks.BULBUS, Items.TORCHFLOWER, AATags.C_FLOWERS_SMALL_ITEM, Items.DYE.lime(), "%s_bottom");
     }
 
     public static Supplier<Item> bulbusPod() {
@@ -276,7 +276,7 @@ public class SnifferPlantsContent {
     }
 
     public static Supplier<Item> sawtoothFernItem() {
-        return plantItem("sawtooth_fern", AABlocks.SAWTOOTH_FERN, Items.PITCHER_PLANT, AATags.C_FLOWERS_TALL_ITEM, Items.GREEN_DYE, "%s_bottom");
+        return plantItem("sawtooth_fern", AABlocks.SAWTOOTH_FERN, Items.PITCHER_PLANT, AATags.C_FLOWERS_TALL_ITEM, Items.DYE.green(), "%s_bottom");
     }
 
     public static Supplier<Item> sawtoothFernFiddlehead() {
@@ -284,7 +284,7 @@ public class SnifferPlantsContent {
     }
 
     public static Supplier<Item> frostleafItem() {
-        return plantItem("frostleaf", AABlocks.FROSTLEAF, Items.TORCHFLOWER, AATags.C_FLOWERS_SMALL_ITEM, Items.BLUE_DYE);
+        return plantItem("frostleaf", AABlocks.FROSTLEAF, Items.TORCHFLOWER, AATags.C_FLOWERS_SMALL_ITEM, Items.DYE.blue());
     }
 
     public static Supplier<Item> frostleafPod() {
@@ -292,7 +292,7 @@ public class SnifferPlantsContent {
     }
 
     public static Supplier<Item> wisteriaItem() {
-        return plantItem("wisteria", AABlocks.WISTERIA, Items.TORCHFLOWER, AATags.C_FLOWERS_ITEM, Items.LIGHT_BLUE_DYE, "%s_crop_stage1");
+        return plantItem("wisteria", AABlocks.WISTERIA, Items.TORCHFLOWER, AATags.C_FLOWERS_ITEM, Items.DYE.lightBlue(), "%s_crop_stage1");
     }
 
     public static Supplier<Item> wisteriaVines() {
@@ -300,7 +300,7 @@ public class SnifferPlantsContent {
     }
 
     public static Supplier<Item> spikeblossomItem() {
-        return plantItem("spikeblossom", AABlocks.SPIKEBLOSSOM, Items.PITCHER_PLANT, AATags.C_FLOWERS_TALL_ITEM, Items.PURPLE_DYE, "%s_bottom");
+        return plantItem("spikeblossom", AABlocks.SPIKEBLOSSOM, Items.PITCHER_PLANT, AATags.C_FLOWERS_TALL_ITEM, Items.DYE.purple(), "%s_bottom");
     }
 
     public static Supplier<Item> spikeblossomSeeds() {
@@ -308,7 +308,7 @@ public class SnifferPlantsContent {
     }
 
     public static Supplier<Item> snapdragonItem() {
-        return plantItem("snapdragon", AABlocks.SNAPDRAGON, Items.PITCHER_PLANT, AATags.C_FLOWERS_TALL_ITEM, Items.MAGENTA_DYE, "%s_bottom");
+        return plantItem("snapdragon", AABlocks.SNAPDRAGON, Items.PITCHER_PLANT, AATags.C_FLOWERS_TALL_ITEM, Items.DYE.magenta(), "%s_bottom");
     }
 
     public static Supplier<Item> snapdragonPod() {
@@ -321,7 +321,7 @@ public class SnifferPlantsContent {
                 .creative(Items.TORCHFLOWER, CreativeModeTabs.NATURAL_BLOCKS, CreativePosition.AFTER)
                 .tags(AATags.C_FLOWERS_ITEM, ItemTags.BEE_FOOD)
                 .model(Models::flatBlock)
-                .recipeFor(Items.PINK_DYE, dyeRecipe("lotus_lily", Items.PINK_DYE))
+                .recipeFor(Items.DYE.pink(), dyeRecipe("lotus_lily", Items.DYE.pink()))
                 .andThen(item -> Composting.add(item, 0.85f), false)
                 .make("lotus_lily");
     }

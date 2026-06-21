@@ -52,14 +52,14 @@ public class CopperPatinaContent {
                 .config(Config.COPPER_PATINA)
                 .creative(Items.REDSTONE, CreativeModeTabs.REDSTONE_BLOCKS, CreativePosition.AFTER)
                 .model(Models::flat)
-                .recipeFor(Items.CYAN_DYE, Recipes.shapeless(RecipeCategory.MISC, 2, patina).unlockedBy(patina).group("cyan_dye"))
+                .recipeFor(Items.DYE.cyan(), Recipes.shapeless(RecipeCategory.MISC, 2, patina).unlockedBy(patina).group("cyan_dye"))
                 .make("copper_patina");
     }
 
     public static Supplier<BlockItem> patinaBlockItem() {
         return AAReg.blockItem(AABlocks.PATINA_BLOCK)
                 .config(Config.COPPER_PATINA)
-                .creative(Items.COPPER_BLOCK, CreativeModeTabs.BUILDING_BLOCKS, CreativePosition.BEFORE)
+                .creative(Items.COPPER_BLOCK.weathering().unaffected(), CreativeModeTabs.BUILDING_BLOCKS, CreativePosition.BEFORE)
                 .recipe(Recipes.shaped("PP", "PP", Map.of('P', AAItems.COPPER_PATINA::get), RecipeCategory.BUILDING_BLOCKS).unlockedBy(AAItems.COPPER_PATINA::get))
                 .make("patina_block");
     }

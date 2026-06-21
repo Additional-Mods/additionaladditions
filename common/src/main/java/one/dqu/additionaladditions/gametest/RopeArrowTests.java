@@ -3,7 +3,7 @@ package one.dqu.additionaladditions.gametest;
 import net.minecraft.core.BlockPos;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.projectile.arrow.AbstractArrow;
 import net.minecraft.world.level.block.Blocks;
@@ -76,7 +76,7 @@ public class RopeArrowTests {
                 ctx.assertBlockNotPresent(AABlocks.ROPE_BLOCK.get(), ropePos);
             }
 
-            List<ItemEntity> entities = ctx.getEntities(EntityType.ITEM);
+            List<ItemEntity> entities = ctx.getEntities(EntityTypes.ITEM);
             ctx.assertTrue(entities.size() == 1, Component.literal("Expected one item entity to be dropped"));
             ctx.assertTrue(entities.getFirst().getItem().getCount() == 8, Component.literal("Expected 8 rope items to be dropped"));
             ctx.succeed();
@@ -88,7 +88,7 @@ public class RopeArrowTests {
         BlockPos arrowStartPos = new BlockPos(2, 1, 0);
 
         ctx.runAtTickTime(5, () -> {
-            var pig = ctx.spawnWithNoFreeWill(EntityType.PIG, pigPos);
+            var pig = ctx.spawnWithNoFreeWill(EntityTypes.PIG, pigPos);
 
             RopeArrow arrow = ctx.spawn(AAEntities.ROPE_ARROW.get(), arrowStartPos);
             arrow.pickup = AbstractArrow.Pickup.ALLOWED;
@@ -106,7 +106,7 @@ public class RopeArrowTests {
         BlockPos arrowStartPos = new BlockPos(2, 1, 0);
 
         ctx.runAtTickTime(5, () -> {
-            var pig = ctx.spawnWithNoFreeWill(EntityType.PIG, pigPos);
+            var pig = ctx.spawnWithNoFreeWill(EntityTypes.PIG, pigPos);
 
             RopeArrow arrow = ctx.spawn(AAEntities.ROPE_ARROW.get(), arrowStartPos);
             arrow.pickup = AbstractArrow.Pickup.DISALLOWED;
@@ -140,7 +140,7 @@ public class RopeArrowTests {
             }
             ctx.assertBlockPresent(Blocks.STONE, obstaclePos);
 
-            List<ItemEntity> entities = ctx.getEntities(EntityType.ITEM);
+            List<ItemEntity> entities = ctx.getEntities(EntityTypes.ITEM);
             ctx.assertTrue(entities.size() == 1, Component.literal("Expected one item entity to be dropped"));
             ctx.assertTrue(entities.getFirst().getItem().getCount() == 5, Component.literal("Expected 5 rope items to be dropped"));
             ctx.succeed();

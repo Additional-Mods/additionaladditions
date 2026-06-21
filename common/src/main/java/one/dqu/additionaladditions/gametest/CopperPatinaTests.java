@@ -147,14 +147,14 @@ public class CopperPatinaTests {
     public static void scrape(GameTestHelper ctx) {
         BlockPos copper = new BlockPos(2, 1, 2);
 
-        ctx.setBlock(copper, Blocks.OXIDIZED_COPPER);
+        ctx.setBlock(copper, Blocks.COPPER_BLOCK.weathering().oxidized());
 
         Player player = ctx.makeMockPlayer(GameType.SURVIVAL);
         player.setItemInHand(InteractionHand.MAIN_HAND, Items.IRON_AXE.getDefaultInstance());
 
         ctx.useBlock(copper, player);
-        ctx.assertBlockNotPresent(Blocks.OXIDIZED_COPPER, copper);
-        ctx.assertBlockPresent(Blocks.WEATHERED_COPPER, copper);
+        ctx.assertBlockNotPresent(Blocks.COPPER_BLOCK.weathering().oxidized(), copper);
+        ctx.assertBlockPresent(Blocks.COPPER_BLOCK.weathering().weathered(), copper);
         ctx.assertItemEntityPresent(AABlocks.COPPER_PATINA.get().asItem());
         ctx.succeed();
     }
@@ -162,14 +162,14 @@ public class CopperPatinaTests {
     public static void oxidize(GameTestHelper ctx) {
         BlockPos copper = new BlockPos(2, 1, 2);
 
-        ctx.setBlock(copper, Blocks.COPPER_BLOCK);
+        ctx.setBlock(copper, Blocks.COPPER_BLOCK.weathering().unaffected());
 
         Player player = ctx.makeMockPlayer(GameType.SURVIVAL);
         player.setItemInHand(InteractionHand.MAIN_HAND, AABlocks.COPPER_PATINA.get().asItem().getDefaultInstance());
 
         ctx.useBlock(copper, player);
-        ctx.assertBlockNotPresent(Blocks.COPPER_BLOCK, copper);
-        ctx.assertBlockPresent(Blocks.EXPOSED_COPPER, copper);
+        ctx.assertBlockNotPresent(Blocks.COPPER_BLOCK.weathering().unaffected(), copper);
+        ctx.assertBlockPresent(Blocks.COPPER_BLOCK.weathering().exposed(), copper);
         ctx.succeed();
     }
 }

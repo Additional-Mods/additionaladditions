@@ -14,7 +14,12 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
 import one.dqu.additionaladditions.AdditionalAdditions;
-import one.dqu.additionaladditions.core.datagen.*;
+import one.dqu.additionaladditions.core.datagen.AABlockDatagen;
+import one.dqu.additionaladditions.core.datagen.AAGameTestDatagen;
+import one.dqu.additionaladditions.core.datagen.AAItemDatagen;
+import one.dqu.additionaladditions.core.datagen.AARecipeDatagenProvider;
+import one.dqu.additionaladditions.fabric.datagen.AABlockTagDatagenProviderFabric;
+import one.dqu.additionaladditions.fabric.datagen.AAItemTagDatagenProviderFabric;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -25,8 +30,8 @@ public class AdditionalAdditionsDatagenFabric implements DataGeneratorEntrypoint
         pack.addProvider(RegistryProvider::new);
 
         pack.addProvider(ModelProvider::new);
-        pack.addProvider(AAItemTagDatagenProvider::new);
-        pack.addProvider(AABlockTagDatagenProvider::new);
+        pack.addProvider(AAItemTagDatagenProviderFabric::new);
+        pack.addProvider(AABlockTagDatagenProviderFabric::new);
         pack.addProvider(RecipeProviderRunner::new);
     }
 

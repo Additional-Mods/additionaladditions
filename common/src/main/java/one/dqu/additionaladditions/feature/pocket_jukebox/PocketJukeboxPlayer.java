@@ -156,7 +156,7 @@ public class PocketJukeboxPlayer {
         static SoundInstance playFor(JukeboxSong song, Player player) {
             SoundInstance music = new SoundInstance(song, player);
             Minecraft.getInstance().getSoundManager().play(music);
-            Minecraft.getInstance().gui.setNowPlaying(song.description());
+            Minecraft.getInstance().gui.hud.setNowPlaying(song.description());
             return music;
         }
 

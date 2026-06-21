@@ -1,6 +1,5 @@
 {
   "type": "minecraft:crafting_shapeless",
-  "category": "misc",
   "group": "rose_gold_ingot",
   "ingredients": [
     "additionaladditions:rose_gold_block"
