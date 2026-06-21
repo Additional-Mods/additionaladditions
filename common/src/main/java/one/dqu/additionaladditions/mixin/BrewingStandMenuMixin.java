@@ -7,7 +7,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BrewingStandBlockEntity;
 import one.dqu.additionaladditions.recipe.BrewingRecipe;
 import one.dqu.additionaladditions.registry.AAMisc;
-import one.dqu.additionaladditions.util.ModCompatibility;
+import one.dqu.additionaladditions.core.util.ModCompatibility;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;

@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "C": "minecraft:copper_ingot",
+    "J": "minecraft:jukebox",
+    "R": "minecraft:redstone"
+  },
+  "pattern": [
+    "CRC",
+    "CJC",
+    "CCC"
+  ],
+  "result": {
+    "id": "additionaladditions:pocket_jukebox"
+  }
+}

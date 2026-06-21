@@ -2,8 +2,8 @@ package one.dqu.additionaladditions;
 
 import one.dqu.additionaladditions.config.Config;
 import one.dqu.additionaladditions.config.io.ConfigLoader;
+import one.dqu.additionaladditions.core.util.ModCompatibility;
 import one.dqu.additionaladditions.registry.*;
-import one.dqu.additionaladditions.util.ModCompatibility;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -16,6 +16,7 @@ public final class AdditionalAdditions {
     public static void init() {
         ConfigLoader.load();
 
+        AATags.registerAll();
         AAMisc.registerAll();
         AAEntities.registerAll();
         AAItems.registerAll();

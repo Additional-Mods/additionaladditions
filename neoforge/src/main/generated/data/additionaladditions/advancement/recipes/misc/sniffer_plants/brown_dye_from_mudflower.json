@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_mudflower": {
+      "conditions": {
+        "items": [
+          {
+            "items": "additionaladditions:mudflower"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "additionaladditions:sniffer_plants/brown_dye_from_mudflower"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_mudflower"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "additionaladditions:sniffer_plants/brown_dye_from_mudflower"
+    ]
+  }
+}

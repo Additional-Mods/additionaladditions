@@ -9,6 +9,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import one.dqu.additionaladditions.feature.album.AlbumContents;
 import one.dqu.additionaladditions.feature.album.AlbumJukeboxExtension;
 import one.dqu.additionaladditions.registry.AAMisc;
+import one.dqu.additionaladditions.registry.AATags;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -25,7 +26,7 @@ public class JukeboxBlockEntityMixin implements AlbumJukeboxExtension {
     @Inject(method = "setTheItem", at = @At("TAIL"))
     private void setTheItem(ItemStack stack, CallbackInfo ci) {
         additionaladditions$track = -1;
-        if (!stack.is(AAMisc.ALBUMS_TAG)) {
+        if (!stack.is(AATags.ALBUMS)) {
             return;
         }
         additionaladditions$playing = true;
@@ -46,12 +47,11 @@ public class JukeboxBlockEntityMixin implements AlbumJukeboxExtension {
             int nextTrack = albumJukebox.additionaladditions$getTrack() + 1;
             if (nextTrack >= album.items().size()) {
                 albumJukebox.additionaladditions$setPlaying(false);
-                return;
             } else {
                 ItemStack nextRecord = album.items().get(nextTrack);
                 jukebox.getSongPlayer().play(
                         level,
-                        nextRecord.get(DataComponents.JUKEBOX_PLAYABLE).song().unwrap(level.registryAccess()).orElseThrow()
+                        nextRecord.get(DataComponents.JUKEBOX_PLAYABLE).song()
                 );
                 albumJukebox.additionaladditions$setTrack(nextTrack);
             }

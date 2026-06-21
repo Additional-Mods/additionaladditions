@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:crafting_transmute",
+  "category": "equipment",
+  "input": "minecraft:iron_chestplate",
+  "material": "additionaladditions:rose_gold_ingot",
+  "result": {
+    "id": "additionaladditions:rose_gold_chestplate"
+  }
+}

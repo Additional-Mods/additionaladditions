@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "brown_dye",
+  "ingredients": [
+    "additionaladditions:mudflower"
+  ],
+  "result": {
+    "id": "minecraft:brown_dye"
+  }
+}

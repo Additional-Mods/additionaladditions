@@ -1,9 +1,0 @@
-{
-  "type": "additionaladditions:brewing",
-  "potion": "minecraft:water",
-  "ingredient": "additionaladditions:sawtooth_fern",
-  "result": {
-    "id": "additionaladditions:green_suspicious_dye",
-    "count": 1
-  }
-}

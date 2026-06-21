@@ -18,10 +18,7 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
-import net.minecraft.world.item.DyeColor;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.*;
 import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.display.SlotDisplay;
@@ -29,15 +26,17 @@ import one.dqu.additionaladditions.AdditionalAdditions;
 import one.dqu.additionaladditions.config.Config;
 import one.dqu.additionaladditions.config.ConfigProperty;
 import one.dqu.additionaladditions.config.Toggleable;
-import one.dqu.additionaladditions.feature.glint.GlintColor;
-import one.dqu.additionaladditions.item.SuspiciousDyeItem;
+import one.dqu.additionaladditions.core.util.ModCompatibility;
+import one.dqu.additionaladditions.feature.suspicious_dye.SuspiciousDyeItem;
+import one.dqu.additionaladditions.feature.suspicious_dye.glint.GlintColor;
 import one.dqu.additionaladditions.registry.AAItems;
 import one.dqu.additionaladditions.registry.AAMisc;
-import one.dqu.additionaladditions.util.ConventionalTags;
-import one.dqu.additionaladditions.util.ModCompatibility;
+import one.dqu.additionaladditions.registry.AATags;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import java.util.function.Supplier;
 
 @JeiPlugin
@@ -79,7 +78,7 @@ public class JEICompat implements IModPlugin {
         }
     }
 
-   // BrewingRecipe
+    // BrewingRecipe
     private void brewingRecipes(IRecipeRegistration event) {
         if (!ModCompatibility.isClientSide()) return;
 
@@ -97,7 +96,7 @@ public class JEICompat implements IModPlugin {
                                 .map(ItemStack::new)
                                 .filter(recipe.getIngredient()::test)
                                 .toList();
-                        ItemStack output = recipe.getResult();
+                        ItemStack output = recipe.getResult().create();
 
                         return factory.createBrewingRecipe(ingredients, List.of(input), output, id);
                     })
@@ -111,16 +110,16 @@ public class JEICompat implements IModPlugin {
         @Override
         public List<SlotDisplay> getIngredients(RecipeHolder<SuspiciousDyeRecipe> recipeHolder) {
             List<SlotDisplay> foilStacks = new ArrayList<>();
-            for (Holder<Item> item : BuiltInRegistries.ITEM.getTagOrEmpty(ConventionalTags.ENCHANTABLE)) {
+            for (Holder<Item> item : BuiltInRegistries.ITEM.getTagOrEmpty(AATags.C_ENCHANTABLE)) {
                 ItemStack stack = new ItemStack(item);
-                if (stack.is(AAMisc.SUSPICIOUS_DYES_TAG)) continue;
+                if (stack.is(AATags.SUSPICIOUS_DYES)) continue;
                 stack.set(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true);
-                foilStacks.add(new SlotDisplay.ItemStackSlotDisplay(stack));
+                foilStacks.add(new SlotDisplay.ItemStackSlotDisplay(ItemStackTemplate.fromNonEmptyStack(stack)));
             }
 
             return List.of(
                     new SlotDisplay.Composite(foilStacks),
-                    new SlotDisplay.TagSlotDisplay(AAMisc.SUSPICIOUS_DYES_TAG)
+                    new SlotDisplay.TagSlotDisplay(AATags.SUSPICIOUS_DYES)
             );
         }
 
@@ -137,7 +136,7 @@ public class JEICompat implements IModPlugin {
                 if (slot.getRole() != RecipeIngredientRole.INPUT) continue;
                 ItemStack stack = slot.getDisplayedIngredient(VanillaTypes.ITEM_STACK).orElse(ItemStack.EMPTY);
                 if (stack.isEmpty()) continue;
-                if (stack.is(AAMisc.SUSPICIOUS_DYES_TAG)) {
+                if (stack.is(AATags.SUSPICIOUS_DYES)) {
                     dye = stack;
                 } else {
                     foil = stack;

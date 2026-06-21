@@ -1,0 +1,6 @@
+{
+  "type": "minecraft:game_rules",
+  "rules": {
+    "minecraft:random_tick_speed": 4096
+  }
+}

@@ -18,7 +18,7 @@ public class REICommonCompat implements REICommonPlugin {
                     return new DefaultBrewingDisplay(
                             EntryIngredients.of(PotionContents.createItemStack(Items.POTION, recipe.getPotion())),
                             EntryIngredients.ofIngredient(recipe.getIngredient()),
-                            EntryIngredients.of(recipe.getResult())
+                            EntryIngredients.of(recipe.getResult().create())
                     );
                 });
     }

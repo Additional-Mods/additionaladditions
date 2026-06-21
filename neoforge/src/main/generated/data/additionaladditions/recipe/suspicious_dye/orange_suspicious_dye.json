@@ -1,0 +1,8 @@
+{
+  "type": "additionaladditions:brewing",
+  "ingredient": "minecraft:torchflower",
+  "potion": "minecraft:water",
+  "result": {
+    "id": "additionaladditions:orange_suspicious_dye"
+  }
+}

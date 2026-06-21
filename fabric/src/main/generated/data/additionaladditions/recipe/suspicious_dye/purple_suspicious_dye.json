@@ -1,0 +1,8 @@
+{
+  "type": "additionaladditions:brewing",
+  "ingredient": "additionaladditions:spikeblossom",
+  "potion": "minecraft:water",
+  "result": {
+    "id": "additionaladditions:purple_suspicious_dye"
+  }
+}

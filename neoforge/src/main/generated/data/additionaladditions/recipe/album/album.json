@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "L": "minecraft:leather",
+    "S": "minecraft:string"
+  },
+  "pattern": [
+    "SS",
+    "LL"
+  ],
+  "result": {
+    "id": "additionaladditions:album"
+  }
+}

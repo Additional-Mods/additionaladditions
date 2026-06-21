@@ -7,6 +7,7 @@ import net.minecraft.world.item.ItemStack;
 import one.dqu.additionaladditions.config.Config;
 import one.dqu.additionaladditions.feature.album.AlbumContents;
 import one.dqu.additionaladditions.registry.AAMisc;
+import one.dqu.additionaladditions.registry.AATags;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -20,7 +21,7 @@ public class InventoryChangeTriggerMixin {
     @Inject(method = "trigger(Lnet/minecraft/server/level/ServerPlayer;Lnet/minecraft/world/entity/player/Inventory;Lnet/minecraft/world/item/ItemStack;)V", at = @At("TAIL"))
     private void additionaladditions$onTrigger(ServerPlayer player, Inventory inventory, ItemStack stack, CallbackInfo ci) {
         if (!Config.ALBUM.get().enabled()) return;
-        if (!stack.is(AAMisc.ALBUMS_TAG)) return;
+        if (!stack.is(AATags.ALBUMS)) return;
 
         AlbumContents contents = stack.getOrDefault(AAMisc.ALBUM_CONTENTS_COMPONENT.get(), AlbumContents.EMPTY);
         int capacity = Config.ALBUM.get().capacity();

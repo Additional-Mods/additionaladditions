@@ -6,10 +6,9 @@ import net.neoforged.fml.loading.FMLEnvironment;
 import net.neoforged.neoforge.client.event.RecipesReceivedEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.OnDatapackSyncEvent;
-import one.dqu.additionaladditions.recipe.BrewingRecipe;
 import one.dqu.additionaladditions.recipe.ClientRecipeCache;
 import one.dqu.additionaladditions.registry.AAMisc;
-import one.dqu.additionaladditions.util.ModCompatibility;
+import one.dqu.additionaladditions.core.util.ModCompatibility;
 
 import java.util.HashMap;
 import java.util.List;
@@ -17,10 +16,12 @@ import java.util.Map;
 
 /**
  * Syncs custom recipes from the server to the client so that JEI can display them.
+ *
  * @see ClientRecipeCache
  */
 public final class JEIBrewingRecipeSync {
-    private JEIBrewingRecipeSync() {}
+    private JEIBrewingRecipeSync() {
+    }
 
     public static void register() {
         if (!ModCompatibility.isModPresent("jei")) return;

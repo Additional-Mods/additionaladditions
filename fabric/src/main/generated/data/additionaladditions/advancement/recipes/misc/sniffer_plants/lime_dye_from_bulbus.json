@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_bulbus": {
+      "conditions": {
+        "items": [
+          {
+            "items": "additionaladditions:bulbus"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "additionaladditions:sniffer_plants/lime_dye_from_bulbus"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_bulbus"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "additionaladditions:sniffer_plants/lime_dye_from_bulbus"
+    ]
+  }
+}

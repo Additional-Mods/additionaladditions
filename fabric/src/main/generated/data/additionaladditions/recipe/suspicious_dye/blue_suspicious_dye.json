@@ -1,0 +1,8 @@
+{
+  "type": "additionaladditions:brewing",
+  "ingredient": "additionaladditions:frostleaf",
+  "potion": "minecraft:water",
+  "result": {
+    "id": "additionaladditions:blue_suspicious_dye"
+  }
+}

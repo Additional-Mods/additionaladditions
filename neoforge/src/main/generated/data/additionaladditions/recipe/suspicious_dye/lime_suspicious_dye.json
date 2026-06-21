@@ -1,0 +1,8 @@
+{
+  "type": "additionaladditions:brewing",
+  "ingredient": "additionaladditions:bulbus",
+  "potion": "minecraft:water",
+  "result": {
+    "id": "additionaladditions:lime_suspicious_dye"
+  }
+}

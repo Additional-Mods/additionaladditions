@@ -19,11 +19,11 @@ import net.minecraft.world.item.*;
 import one.dqu.additionaladditions.config.Config;
 import one.dqu.additionaladditions.config.ConfigProperty;
 import one.dqu.additionaladditions.config.Toggleable;
-import one.dqu.additionaladditions.feature.glint.GlintColor;
-import one.dqu.additionaladditions.item.SuspiciousDyeItem;
+import one.dqu.additionaladditions.feature.suspicious_dye.SuspiciousDyeItem;
+import one.dqu.additionaladditions.feature.suspicious_dye.glint.GlintColor;
 import one.dqu.additionaladditions.registry.AAItems;
 import one.dqu.additionaladditions.registry.AAMisc;
-import one.dqu.additionaladditions.util.ConventionalTags;
+import one.dqu.additionaladditions.registry.AATags;
 
 import java.util.*;
 import java.util.function.Supplier;
@@ -54,9 +54,9 @@ public class REICompat implements REIClientPlugin {
 
         private List<ItemStack> getValidFoilItems() {
             List<ItemStack> items = new ArrayList<>();
-            for (var holder : BuiltInRegistries.ITEM.getTagOrEmpty(ConventionalTags.ENCHANTABLE)) {
+            for (var holder : BuiltInRegistries.ITEM.getTagOrEmpty(AATags.C_ENCHANTABLE)) {
                 ItemStack stack = new ItemStack(holder);
-                if (!stack.is(AAMisc.SUSPICIOUS_DYES_TAG)) {
+                if (!stack.is(AATags.SUSPICIOUS_DYES)) {
                     stack.set(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true);
                     items.add(stack);
                 }
@@ -66,7 +66,7 @@ public class REICompat implements REIClientPlugin {
 
         private List<ItemStack> getAllDyes() {
             List<ItemStack> dyes = new ArrayList<>();
-            for (var holder : BuiltInRegistries.ITEM.getTagOrEmpty(AAMisc.SUSPICIOUS_DYES_TAG)) {
+            for (var holder : BuiltInRegistries.ITEM.getTagOrEmpty(AATags.SUSPICIOUS_DYES)) {
                 dyes.add(new ItemStack(holder));
             }
             return dyes;
@@ -131,7 +131,7 @@ public class REICompat implements REIClientPlugin {
             }
 
             // looking up usage of an enchantable item
-            if (stack.is(ConventionalTags.ENCHANTABLE) && !stack.is(AAMisc.SUSPICIOUS_DYES_TAG)) {
+            if (stack.is(AATags.C_ENCHANTABLE) && !stack.is(AATags.SUSPICIOUS_DYES)) {
                 List<ItemStack> dyes = getAllDyes();
 
                 ItemStack foilStack = stack.copy();

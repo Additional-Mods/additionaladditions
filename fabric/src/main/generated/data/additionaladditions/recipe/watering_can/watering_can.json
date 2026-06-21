@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "B": "minecraft:bucket",
+    "C": "minecraft:copper_ingot"
+  },
+  "pattern": [
+    "C  ",
+    "CBC",
+    " C "
+  ],
+  "result": {
+    "id": "additionaladditions:watering_can"
+  }
+}

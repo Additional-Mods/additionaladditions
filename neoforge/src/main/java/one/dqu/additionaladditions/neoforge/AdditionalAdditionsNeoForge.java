@@ -1,7 +1,7 @@
 package one.dqu.additionaladditions.neoforge;
 
-import net.minecraft.client.renderer.ItemBlockRenderTypes;
-import net.minecraft.client.renderer.chunk.ChunkSectionLayer;
+import net.minecraft.client.color.block.BlockTintSource;
+import net.minecraft.client.color.block.BlockTintSources;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
@@ -12,7 +12,6 @@ import net.minecraft.util.profiling.ProfilerFiller;
 import net.minecraft.world.item.CreativeModeTab;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
-
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.fml.loading.FMLEnvironment;
@@ -30,17 +29,17 @@ import one.dqu.additionaladditions.config.Config;
 import one.dqu.additionaladditions.config.io.ConfigLoader;
 import one.dqu.additionaladditions.config.network.ConfigSyncS2CPayload;
 import one.dqu.additionaladditions.config.network.neoforge.ConfigSyncTask;
-import one.dqu.additionaladditions.entity.RopeArrowRenderer;
-import one.dqu.additionaladditions.feature.glint.GlintResourceGenerator;
-import one.dqu.additionaladditions.feature.PocketJukeboxPlayer;
+import one.dqu.additionaladditions.core.util.CreativeAdder;
+import one.dqu.additionaladditions.core.util.LootAdder;
+import one.dqu.additionaladditions.core.util.LootTableExtension;
+import one.dqu.additionaladditions.core.util.neoforge.ModCompatibilityImpl;
+import one.dqu.additionaladditions.core.util.neoforge.RegistrarImpl;
+import one.dqu.additionaladditions.feature.pocket_jukebox.PocketJukeboxPlayer;
+import one.dqu.additionaladditions.feature.rope.RopeArrowRenderer;
+import one.dqu.additionaladditions.feature.suspicious_dye.glint.GlintResourceGenerator;
 import one.dqu.additionaladditions.recipe.neoforge.JEIBrewingRecipeSync;
 import one.dqu.additionaladditions.registry.AABlocks;
 import one.dqu.additionaladditions.registry.AAEntities;
-import one.dqu.additionaladditions.util.CreativeAdder;
-import one.dqu.additionaladditions.util.LootAdder;
-import one.dqu.additionaladditions.util.LootTableExtension;
-import one.dqu.additionaladditions.util.neoforge.ModCompatibilityImpl;
-import one.dqu.additionaladditions.util.neoforge.RegistrarImpl;
 
 @Mod(AdditionalAdditions.NAMESPACE)
 public final class AdditionalAdditionsNeoForge {
@@ -59,7 +58,7 @@ public final class AdditionalAdditionsNeoForge {
             modEventBus.addListener(AddClientReloadListenersEvent.class, this::onRegisterClientReloadListeners);
             modEventBus.addListener(FMLClientSetupEvent.class, this::onClientSetup);
             modEventBus.addListener(EntityRenderersEvent.RegisterRenderers.class, this::onRegisterEntityRenderers);
-            modEventBus.addListener(RegisterColorHandlersEvent.Block.class, this::registerBlockColors);
+            modEventBus.addListener(RegisterColorHandlersEvent.BlockTintSources.class, this::registerBlockColors);
             modEventBus.addListener(RegisterConditionalItemModelPropertyEvent.class, this::onRegisterConditionalProperty);
             modEventBus.addListener(RegisterRangeSelectItemModelPropertyEvent.class, this::onRegisterRangeSelectProperty);
         }
@@ -81,9 +80,9 @@ public final class AdditionalAdditionsNeoForge {
 
     private void onBuildCreativeTabContents(BuildCreativeModeTabContentsEvent event) {
         BuiltInRegistries.CREATIVE_MODE_TAB.getResourceKey(event.getTab()).ifPresentOrElse(
-            key -> CreativeAdder.getEntries(key).forEach(entry -> addCreativeTabEntry(event, entry)),
-            () -> AdditionalAdditions.LOGGER.warn("[{}] Unknown creative tab: {}",
-                AdditionalAdditions.NAMESPACE, event.getTab().getDisplayName())
+                key -> CreativeAdder.getEntries(key).forEach(entry -> addCreativeTabEntry(event, entry)),
+                () -> AdditionalAdditions.LOGGER.warn("[{}] Unknown creative tab: {}",
+                        AdditionalAdditions.NAMESPACE, event.getTab().getDisplayName())
         );
     }
 
@@ -110,19 +109,19 @@ public final class AdditionalAdditionsNeoForge {
     private void onRegisterPayloadHandlers(RegisterPayloadHandlersEvent event) {
         final PayloadRegistrar registrar = event.registrar("1");
         registrar.configurationToClient(
-            ConfigSyncS2CPayload.TYPE,
-            ConfigSyncS2CPayload.STREAM_CODEC,
-            (payload, context) -> context.enqueueWork(() -> {
-                var config = payload.config();
-                int version = ConfigLoader.readVersion(config).version();
-                if (version != Config.VERSION.get().version()) {
-                    AdditionalAdditions.LOGGER.warn("[{}] Received incompatible config version from server, disconnecting. (server: {}, client: {})", AdditionalAdditions.NAMESPACE, version, Config.VERSION.get().version());
-                    context.disconnect(Component.translatable("additionaladditions.gui.config.disconnect"));
-                    return;
-                }
-                ConfigLoader.apply(config);
-                AdditionalAdditions.LOGGER.info("[{}] Loaded config from server", AdditionalAdditions.NAMESPACE);
-            })
+                ConfigSyncS2CPayload.TYPE,
+                ConfigSyncS2CPayload.STREAM_CODEC,
+                (payload, context) -> context.enqueueWork(() -> {
+                    var config = payload.config();
+                    int version = ConfigLoader.readVersion(config).version();
+                    if (version != Config.VERSION.get().version()) {
+                        AdditionalAdditions.LOGGER.warn("[{}] Received incompatible config version from server, disconnecting. (server: {}, client: {})", AdditionalAdditions.NAMESPACE, version, Config.VERSION.get().version());
+                        context.disconnect(Component.translatable("additionaladditions.gui.config.disconnect"));
+                        return;
+                    }
+                    ConfigLoader.apply(config);
+                    AdditionalAdditions.LOGGER.info("[{}] Loaded config from server", AdditionalAdditions.NAMESPACE);
+                })
         );
     }
 
@@ -151,65 +150,37 @@ public final class AdditionalAdditionsNeoForge {
 
     private void onRegisterEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
         event.registerEntityRenderer(
-            AAEntities.GLOW_STICK.get(),
-            ThrownItemRenderer::new
+                AAEntities.GLOW_STICK.get(),
+                ThrownItemRenderer::new
         );
 
         event.registerEntityRenderer(
-            AAEntities.ROPE_ARROW.get(),
-            RopeArrowRenderer::new
+                AAEntities.ROPE_ARROW.get(),
+                RopeArrowRenderer::new
         );
     }
 
     private void onRegisterConditionalProperty(RegisterConditionalItemModelPropertyEvent event) {
         event.register(
-            Identifier.fromNamespaceAndPath(AdditionalAdditions.NAMESPACE, "has_disc"),
-            HasDiscProperty.MAP_CODEC
+                Identifier.fromNamespaceAndPath(AdditionalAdditions.NAMESPACE, "has_disc"),
+                HasDiscProperty.MAP_CODEC
         );
     }
 
     private void onRegisterRangeSelectProperty(RegisterRangeSelectItemModelPropertyEvent event) {
         event.register(
-            Identifier.fromNamespaceAndPath(AdditionalAdditions.NAMESPACE, "barometer_angle"),
-            BarometerAngleProperty.MAP_CODEC
+                Identifier.fromNamespaceAndPath(AdditionalAdditions.NAMESPACE, "barometer_angle"),
+                BarometerAngleProperty.MAP_CODEC
         );
     }
 
     private void onClientSetup(FMLClientSetupEvent event) {
-        // block render layers
-        ItemBlockRenderTypes.setRenderLayer(AABlocks.COPPER_PATINA.get(), ChunkSectionLayer.CUTOUT);
-        ItemBlockRenderTypes.setRenderLayer(AABlocks.ROPE_BLOCK.get(), ChunkSectionLayer.CUTOUT);
-        ItemBlockRenderTypes.setRenderLayer(AABlocks.GLOW_STICK_BLOCK.get(), ChunkSectionLayer.CUTOUT);
-        ItemBlockRenderTypes.setRenderLayer(AABlocks.COTTONSHIVER.get(), ChunkSectionLayer.CUTOUT);
-        ItemBlockRenderTypes.setRenderLayer(AABlocks.COTTONSHIVER_CROP.get(), ChunkSectionLayer.CUTOUT);
-        ItemBlockRenderTypes.setRenderLayer(AABlocks.MUDFLOWER.get(), ChunkSectionLayer.CUTOUT);
-        ItemBlockRenderTypes.setRenderLayer(AABlocks.MUDFLOWER_CROP.get(), ChunkSectionLayer.CUTOUT);
-        ItemBlockRenderTypes.setRenderLayer(AABlocks.CRIMSON_BLOSSOM.get(), ChunkSectionLayer.CUTOUT);
-        ItemBlockRenderTypes.setRenderLayer(AABlocks.CRIMSON_BLOSSOM_CROP.get(), ChunkSectionLayer.CUTOUT);
-        ItemBlockRenderTypes.setRenderLayer(AABlocks.AMBER_BLOSSOM.get(), ChunkSectionLayer.CUTOUT);
-        ItemBlockRenderTypes.setRenderLayer(AABlocks.AMBER_BLOSSOM_CROP.get(), ChunkSectionLayer.CUTOUT);
-        ItemBlockRenderTypes.setRenderLayer(AABlocks.BULBUS.get(), ChunkSectionLayer.CUTOUT);
-        ItemBlockRenderTypes.setRenderLayer(AABlocks.BULBUS_CROP.get(), ChunkSectionLayer.CUTOUT);
-        ItemBlockRenderTypes.setRenderLayer(AABlocks.SAWTOOTH_FERN.get(), ChunkSectionLayer.CUTOUT);
-        ItemBlockRenderTypes.setRenderLayer(AABlocks.SAWTOOTH_FERN_CROP.get(), ChunkSectionLayer.CUTOUT);
-        ItemBlockRenderTypes.setRenderLayer(AABlocks.FROSTLEAF.get(), ChunkSectionLayer.CUTOUT);
-        ItemBlockRenderTypes.setRenderLayer(AABlocks.FROSTLEAF_CROP.get(), ChunkSectionLayer.CUTOUT);
-        ItemBlockRenderTypes.setRenderLayer(AABlocks.WISTERIA.get(), ChunkSectionLayer.CUTOUT);
-        ItemBlockRenderTypes.setRenderLayer(AABlocks.WISTERIA_CROP.get(), ChunkSectionLayer.CUTOUT);
-        ItemBlockRenderTypes.setRenderLayer(AABlocks.SPIKEBLOSSOM.get(), ChunkSectionLayer.CUTOUT);
-        ItemBlockRenderTypes.setRenderLayer(AABlocks.SPIKEBLOSSOM_CROP.get(), ChunkSectionLayer.CUTOUT);
-        ItemBlockRenderTypes.setRenderLayer(AABlocks.SNAPDRAGON.get(), ChunkSectionLayer.CUTOUT);
-        ItemBlockRenderTypes.setRenderLayer(AABlocks.SNAPDRAGON_CROP.get(), ChunkSectionLayer.CUTOUT);
-        ItemBlockRenderTypes.setRenderLayer(AABlocks.LOTUS_LILY.get(), ChunkSectionLayer.CUTOUT);
-        ItemBlockRenderTypes.setRenderLayer(AABlocks.LOTUS_LILY_CROP.get(), ChunkSectionLayer.CUTOUT);
-
         // mod compatibility
         event.enqueueWork(ModCompatibilityImpl::showToasts);
     }
 
-    private void registerBlockColors(RegisterColorHandlersEvent.Block event) {
-        event.register((state, getter, pos, tintIndex) -> {
-            return getter != null && pos != null ? -14647248 : -9321636;
-        }, AABlocks.LOTUS_LILY.get(), AABlocks.LOTUS_LILY_CROP.get());
+    private void registerBlockColors(RegisterColorHandlersEvent.BlockTintSources event) {
+        BlockTintSource lotusTint = BlockTintSources.constant(-9321636, -14647248);
+        event.register(java.util.List.of(lotusTint), AABlocks.LOTUS_LILY.get(), AABlocks.LOTUS_LILY_CROP.get());
     }
 }

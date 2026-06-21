@@ -1,0 +1,8 @@
+{
+  "type": "additionaladditions:brewing",
+  "ingredient": "minecraft:pitcher_plant",
+  "potion": "minecraft:water",
+  "result": {
+    "id": "additionaladditions:cyan_suspicious_dye"
+  }
+}

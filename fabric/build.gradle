@@ -8,16 +8,38 @@ architectury {
 }
 
 def mergedAccessWidener = layout.buildDirectory.file("generated/accesswidener/additionaladditions.accesswidener").get().asFile
-mergedAccessWidener.parentFile.mkdirs()
 def commonAw = project(":common").file("src/main/resources/additionaladditions.accesswidener")
 def platformAw = project(":common").file("src/main/resources/additionaladditions.fabric.accesswidener")
-def header = commonAw.readLines().find { it.trim().startsWith("accessWidener") } ?: "accessWidener v2 named"
-def commonBody = commonAw.readLines().findAll { !it.trim().startsWith("accessWidener") }
-def platformBody = platformAw.readLines().findAll { !it.trim().startsWith("accessWidener") }
-mergedAccessWidener.text = ([header] + commonBody + platformBody).join("\n") + "\n"
+
+def writeMergedAccessWidener = {
+    def header = commonAw.readLines().find { it.trim().startsWith("accessWidener") } ?: "accessWidener v2 official"
+    def commonBody = commonAw.readLines().findAll { !it.trim().startsWith("accessWidener") }
+    def platformBody = platformAw.readLines().findAll { !it.trim().startsWith("accessWidener") }
+    mergedAccessWidener.parentFile.mkdirs()
+    mergedAccessWidener.text = ([header] + commonBody + platformBody).join("\n") + "\n"
+}
+
+writeMergedAccessWidener()
+
+def generateMergedAccessWidener = tasks.register('generateMergedAccessWidener') {
+    inputs.files(commonAw, platformAw)
+    outputs.file(mergedAccessWidener)
+    doLast {
+        writeMergedAccessWidener()
+    }
+}
 
 loom {
     accessWidenerPath = mergedAccessWidener
+
+    runs {
+        gameTest {
+            server()
+            name "Game Test"
+            vmArg "-DbundlerMainClass=net.minecraft.gametest.Main"
+            vmArg "-Dfabric-api.gametest"
+        }
+    }
 }
 
 sourceSets {
@@ -52,12 +74,12 @@ configurations {
 }
 
 dependencies {
-    modImplementation "net.fabricmc:fabric-loader:$rootProject.fabric_loader_version"
+    implementation "net.fabricmc:fabric-loader:$rootProject.fabric_loader_version"
 
     // Fabric API. This is technically optional, but you probably want it anyway.
-    modImplementation "net.fabricmc.fabric-api:fabric-api:$rootProject.fabric_api_version"
+    implementation "net.fabricmc.fabric-api:fabric-api:$rootProject.fabric_api_version"
 
-    common(project(path: ':common', configuration: 'namedElements')) { transitive = false }
+    common(project(path: ":common")) { transitive false }
     shadowBundle project(path: ':common', configuration: 'transformProductionFabric')
 }
 
@@ -68,14 +90,26 @@ processResources {
         expand version: inputs.properties.version
     }
 
+    dependsOn(generateMergedAccessWidener)
     from(mergedAccessWidener)
 }
 
-shadowJar {
-    configurations = [project.configurations.shadowBundle]
-    archiveClassifier = 'dev-shadow'
+jar {
+    dependsOn(generateMergedAccessWidener)
+    archiveClassifier = "raw"
 }
 
-remapJar {
-    inputFile.set shadowJar.archiveFile
+tasks.named('validateAccessWidener') {
+    dependsOn(generateMergedAccessWidener)
 }
+
+shadowJar {
+    dependsOn(jar)
+    mainSpec.sourcePaths.clear()
+    from(zipTree(jar.archiveFile))
+
+    configurations = [project.configurations.shadowBundle]
+    archiveClassifier = null
+}
+
+assemble.dependsOn shadowJar

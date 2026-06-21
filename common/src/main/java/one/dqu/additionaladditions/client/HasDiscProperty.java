@@ -9,7 +9,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import one.dqu.additionaladditions.feature.album.AlbumContents;
-import one.dqu.additionaladditions.item.PocketJukeboxItem;
+import one.dqu.additionaladditions.feature.pocket_jukebox.PocketJukeboxItem;
 import one.dqu.additionaladditions.registry.AAMisc;
 import org.jetbrains.annotations.Nullable;
 

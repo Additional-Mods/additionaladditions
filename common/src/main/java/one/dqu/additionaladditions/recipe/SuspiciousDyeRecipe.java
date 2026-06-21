@@ -1,24 +1,32 @@
 package one.dqu.additionaladditions.recipe;
 
-import one.dqu.additionaladditions.feature.glint.GlintColor;
-import one.dqu.additionaladditions.item.SuspiciousDyeItem;
-import net.minecraft.core.HolderLookup;
+import com.mojang.serialization.MapCodec;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.DyeColor;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.*;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.CraftingInput;
+import net.minecraft.world.item.crafting.CustomRecipe;
+import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.display.RecipeDisplay;
 import net.minecraft.world.item.crafting.display.ShapelessCraftingRecipeDisplay;
 import net.minecraft.world.item.crafting.display.SlotDisplay;
 import net.minecraft.world.level.Level;
+import one.dqu.additionaladditions.feature.suspicious_dye.SuspiciousDyeItem;
+import one.dqu.additionaladditions.feature.suspicious_dye.glint.GlintColor;
 import one.dqu.additionaladditions.registry.AAMisc;
-import one.dqu.additionaladditions.util.ConventionalTags;
+import one.dqu.additionaladditions.registry.AATags;
 
 import java.util.List;
 
 public class SuspiciousDyeRecipe extends CustomRecipe {
-    public SuspiciousDyeRecipe(CraftingBookCategory craftingBookCategory) {
-        super(craftingBookCategory);
+    public static final SuspiciousDyeRecipe INSTANCE = new SuspiciousDyeRecipe();
+    public static final RecipeSerializer<SuspiciousDyeRecipe> SERIALIZER = new RecipeSerializer<>(
+            MapCodec.unit(INSTANCE),
+            StreamCodec.unit(INSTANCE)
+    );
+
+    public SuspiciousDyeRecipe() {
     }
 
     @Override
@@ -29,11 +37,11 @@ public class SuspiciousDyeRecipe extends CustomRecipe {
         for (int i = 0; i < recipeInput.size(); i++) {
             ItemStack stack = recipeInput.getItem(i);
             if (!stack.isEmpty()) {
-                if (stack.is(AAMisc.SUSPICIOUS_DYES_TAG)) {
+                if (stack.is(AATags.SUSPICIOUS_DYES)) {
                     dye++;
                     continue;
                 }
-                if (stack.hasFoil() && stack.is(ConventionalTags.ENCHANTABLE)) {
+                if (stack.hasFoil() && stack.is(AATags.C_ENCHANTABLE)) {
                     glint++;
                     continue;
                 }
@@ -46,9 +54,9 @@ public class SuspiciousDyeRecipe extends CustomRecipe {
     }
 
     @Override
-    public ItemStack assemble(CraftingInput recipeInput, HolderLookup.Provider provider) {
-        ItemStack itemStack = recipeInput.items().stream().filter(item -> !item.isEmpty() && !item.is(AAMisc.SUSPICIOUS_DYES_TAG)).findFirst().orElse(ItemStack.EMPTY);
-        ItemStack dye = recipeInput.items().stream().filter(item -> !item.isEmpty() && item.is(AAMisc.SUSPICIOUS_DYES_TAG)).findFirst().orElse(ItemStack.EMPTY);
+    public ItemStack assemble(CraftingInput recipeInput) {
+        ItemStack itemStack = recipeInput.items().stream().filter(item -> !item.isEmpty() && !item.is(AATags.SUSPICIOUS_DYES)).findFirst().orElse(ItemStack.EMPTY);
+        ItemStack dye = recipeInput.items().stream().filter(item -> !item.isEmpty() && item.is(AATags.SUSPICIOUS_DYES)).findFirst().orElse(ItemStack.EMPTY);
 
         if (itemStack.isEmpty() || dye.isEmpty()) {
             return ItemStack.EMPTY;
@@ -73,8 +81,8 @@ public class SuspiciousDyeRecipe extends CustomRecipe {
     public List<RecipeDisplay> display() {
         return List.of(new ShapelessCraftingRecipeDisplay(
                 List.of(
-                        new SlotDisplay.TagSlotDisplay(ConventionalTags.ENCHANTABLE),
-                        new SlotDisplay.TagSlotDisplay(AAMisc.SUSPICIOUS_DYES_TAG)
+                        new SlotDisplay.TagSlotDisplay(AATags.C_ENCHANTABLE),
+                        new SlotDisplay.TagSlotDisplay(AATags.SUSPICIOUS_DYES)
                 ),
                 SlotDisplay.Empty.INSTANCE,
                 new SlotDisplay.ItemSlotDisplay(Items.CRAFTING_TABLE)

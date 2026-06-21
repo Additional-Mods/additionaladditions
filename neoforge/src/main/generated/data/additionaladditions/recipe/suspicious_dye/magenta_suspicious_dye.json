@@ -1,0 +1,8 @@
+{
+  "type": "additionaladditions:brewing",
+  "ingredient": "additionaladditions:snapdragon",
+  "potion": "minecraft:water",
+  "result": {
+    "id": "additionaladditions:magenta_suspicious_dye"
+  }
+}

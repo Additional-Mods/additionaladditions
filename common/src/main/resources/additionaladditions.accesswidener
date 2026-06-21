@@ -1,4 +1,4 @@
-accessWidener v2 named
+accessWidener v2 official
 
 accessible class net/minecraft/client/renderer/ItemInHandRenderer$HandRenderSelection
 
@@ -23,4 +23,23 @@ accessible field net/minecraft/client/renderer/item/properties/numeric/RangeSele
 
 accessible method net/minecraft/world/item/crafting/RecipePropertySet create (Ljava/util/Collection;)Lnet/minecraft/world/item/crafting/RecipePropertySet;
 
-accessible field net/minecraft/core/MappedRegistry frozen Z
+accessible method net/minecraft/world/level/block/LilyPadBlock <init> (Lnet/minecraft/world/level/block/state/BlockBehaviour$Properties;)V
+
+accessible field net/minecraft/world/level/Level random Lnet/minecraft/util/RandomSource;
+accessible method net/minecraft/client/renderer/rendertype/RenderType create (Ljava/lang/String;Lnet/minecraft/client/renderer/rendertype/RenderSetup;)Lnet/minecraft/client/renderer/rendertype/RenderType;
+
+accessible class net/minecraft/client/data/models/BlockModelGenerators$PlantType
+accessible method net/minecraft/client/data/models/BlockModelGenerators createTrivialCube (Lnet/minecraft/world/level/block/Block;)V
+accessible method net/minecraft/client/data/models/BlockModelGenerators createCrossBlock (Lnet/minecraft/world/level/block/Block;Lnet/minecraft/client/data/models/BlockModelGenerators$PlantType;)V
+accessible method net/minecraft/client/data/models/BlockModelGenerators createDoublePlant (Lnet/minecraft/world/level/block/Block;Lnet/minecraft/client/data/models/BlockModelGenerators$PlantType;)V
+accessible method net/minecraft/client/data/models/BlockModelGenerators plainVariant (Lnet/minecraft/resources/Identifier;)Lnet/minecraft/client/data/models/MultiVariant;
+accessible field net/minecraft/client/data/models/BlockModelGenerators blockStateOutput Ljava/util/function/Consumer;
+accessible field net/minecraft/client/data/models/BlockModelGenerators modelOutput Ljava/util/function/BiConsumer;
+accessible method net/minecraft/client/data/models/model/TextureSlot create (Ljava/lang/String;)Lnet/minecraft/client/data/models/model/TextureSlot;
+accessible method net/minecraft/client/data/models/ItemModelGenerators generateFlatItem (Lnet/minecraft/world/item/Item;Lnet/minecraft/client/data/models/model/ModelTemplate;)V
+accessible method net/minecraft/client/data/models/ItemModelGenerators generateSpear (Lnet/minecraft/world/item/Item;)V
+accessible method net/minecraft/client/data/models/ItemModelGenerators generateTrimmableItem (Lnet/minecraft/world/item/Item;Lnet/minecraft/resources/ResourceKey;Lnet/minecraft/resources/Identifier;Z)V
+accessible field net/minecraft/client/data/models/ItemModelGenerators itemModelOutput Lnet/minecraft/client/data/models/ItemModelOutput;
+accessible field net/minecraft/client/data/models/ItemModelGenerators modelOutput Ljava/util/function/BiConsumer;
+accessible method net/minecraft/client/data/models/ItemModelGenerators declareCustomModelItem (Lnet/minecraft/world/item/Item;)V
+accessible field net/minecraft/data/recipes/RecipeProvider items Lnet/minecraft/core/HolderGetter;

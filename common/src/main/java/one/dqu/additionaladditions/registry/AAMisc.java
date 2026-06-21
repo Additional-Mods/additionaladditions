@@ -2,22 +2,18 @@ package one.dqu.additionaladditions.registry;
 
 import com.mojang.serialization.Codec;
 import net.minecraft.core.component.DataComponentType;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.network.codec.ByteBufCodecs;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.Identifier;
-import net.minecraft.tags.TagKey;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.crafting.CustomRecipe;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.crafting.RecipePropertySet;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
-import net.minecraft.world.level.block.Block;
 import one.dqu.additionaladditions.AdditionalAdditions;
+import one.dqu.additionaladditions.core.util.SimplePlayerTrigger;
 import one.dqu.additionaladditions.feature.album.AlbumContents;
-import one.dqu.additionaladditions.feature.glint.GlintColor;
-import one.dqu.additionaladditions.recipe.*;
-import one.dqu.additionaladditions.util.SimplePlayerTrigger;
+import one.dqu.additionaladditions.feature.suspicious_dye.glint.GlintColor;
+import one.dqu.additionaladditions.recipe.BrewingRecipe;
+import one.dqu.additionaladditions.recipe.SuspiciousDyeRecipe;
 
 import java.util.function.Supplier;
 
@@ -39,23 +35,16 @@ public class AAMisc {
             () -> DataComponentType.<Integer>builder().persistent(Codec.INT).networkSynchronized(ByteBufCodecs.INT).build()
     );
 
-    /* TAGS */
-
-    public static final TagKey<Item> SUSPICIOUS_DYES_TAG = TagKey.create(Registries.ITEM, Identifier.tryBuild(AdditionalAdditions.NAMESPACE, "suspicious_dyes"));
-    public static final TagKey<Block> WRENCH_BLACKLIST_TAG = TagKey.create(Registries.BLOCK, Identifier.tryBuild(AdditionalAdditions.NAMESPACE, "wrench_blacklisted"));
-    public static final TagKey<Item> ALBUMS_TAG = TagKey.create(Registries.ITEM, Identifier.tryBuild(AdditionalAdditions.NAMESPACE, "albums"));
-    public static final TagKey<Item> REPAIRS_ROSE_GOLD_ARMOR_TAG = TagKey.create(Registries.ITEM, Identifier.tryBuild(AdditionalAdditions.NAMESPACE, "repairs_rose_gold_armor"));
-
     /* RECIPE SERIALIZERS AND TYPES */
 
     public static final Supplier<RecipeSerializer<SuspiciousDyeRecipe>> SUSPICIOUS_DYE_RECIPE_SERIALIZER = AARegistries.RECIPE_SERIALIZERS.register(
             Identifier.tryBuild(AdditionalAdditions.NAMESPACE, "suspicious_dye"),
-            () -> new CustomRecipe.Serializer<>(SuspiciousDyeRecipe::new)
+            () -> SuspiciousDyeRecipe.SERIALIZER
     );
 
     public static final Supplier<RecipeSerializer<BrewingRecipe>> BREWING_RECIPE_SERIALIZER = AARegistries.RECIPE_SERIALIZERS.register(
             Identifier.tryBuild(AdditionalAdditions.NAMESPACE, "brewing"),
-            BrewingRecipe.BrewingRecipeSerializer::new
+            () -> BrewingRecipe.SERIALIZER
     );
 
     public static final Supplier<RecipeType<BrewingRecipe>> BREWING_RECIPE_TYPE = AARegistries.RECIPE_TYPES.register(

@@ -1,11 +1,12 @@
 package one.dqu.additionaladditions.mixin;
 
-import one.dqu.additionaladditions.config.Config;
-import one.dqu.additionaladditions.registry.AAItems;
+import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
-import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.network.chat.contents.TranslatableContents;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
+import net.minecraft.network.chat.Component;
+import one.dqu.additionaladditions.config.Config;
+import one.dqu.additionaladditions.registry.AAItems;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -18,15 +19,18 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
  */
 @Mixin(Gui.class)
 public abstract class GuiMixin {
-    @Shadow @Final private Minecraft minecraft;
+    @Shadow
+    @Final
+    private Minecraft minecraft;
 
-    @Inject(method = "render", at = @At("TAIL"))
-    private void depthMeterMessage(CallbackInfo ci) {
+    @Inject(method = "extractRenderState", at = @At("TAIL"))
+    private void depthMeterMessage(GuiGraphicsExtractor extractor, DeltaTracker deltaTracker, CallbackInfo ci) {
         if (!Config.BAROMETER.get().enabled()) return;
+        if (minecraft.player == null) return;
         if (minecraft.player.isHolding(AAItems.BAROMETER.get())) {
             if (Config.BAROMETER.get().displayElevationHud()) {
                 String level = String.valueOf((int) minecraft.player.getY());
-                minecraft.player.displayClientMessage(MutableComponent.create(new TranslatableContents("additionaladditions.gui.barometer.elevation", null, new String[]{level})), true);
+                minecraft.player.sendOverlayMessage(Component.translatable("additionaladditions.gui.barometer.elevation", level));
             }
         }
     }
