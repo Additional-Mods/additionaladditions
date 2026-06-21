@@ -20,6 +20,7 @@ import one.dqu.additionaladditions.core.material.AAMaterial;
 import one.dqu.additionaladditions.core.material.AnimalArmorType;
 import one.dqu.additionaladditions.core.material.ToolType;
 import one.dqu.additionaladditions.core.util.CreativeAdder;
+import one.dqu.additionaladditions.core.util.Registrar;
 import one.dqu.additionaladditions.registry.AAItems;
 import one.dqu.additionaladditions.registry.AARegistries;
 
@@ -40,6 +41,8 @@ public class AAItem<T extends Item> {
     private final List<TagKey<Item>> tags = new ArrayList<>();
     private Consumer<Item> model = null;
     private final List<RecipeEntry> recipes = new ArrayList<>();
+    private Consumer<Supplier<T>> onRegister = item -> {
+    };
 
     @SuppressWarnings("unchecked")
     public AAItem() {
@@ -65,6 +68,23 @@ public class AAItem<T extends Item> {
     public AAItem<T> creative(ItemLike anchor, ResourceKey<CreativeModeTab> category, CreativePosition position) {
         creative.computeIfAbsent(category, _ -> new ArrayList<>()).add(Pair.of(anchor, position));
         return this;
+    }
+
+    public AAItem<T> andThen(Consumer<Supplier<T>> consumer, boolean defer) {
+        this.onRegister = this.onRegister.andThen(
+                item -> {
+                    if (defer) {
+                        Registrar.defer(() -> consumer.accept(item));
+                    } else {
+                        consumer.accept(item);
+                    }
+                }
+        );
+        return this;
+    }
+
+    public AAItem<T> andThen(Consumer<Supplier<T>> consumer) {
+        return andThen(consumer, true);
     }
 
     // Datagen
@@ -162,6 +182,8 @@ public class AAItem<T extends Item> {
         if (AdditionalAdditions.DATAGEN) {
             AAItemDatagen.register(new AAItemDatagen.Entry(location, item, model, List.copyOf(recipes), List.copyOf(tags)));
         }
+
+        this.onRegister.accept(item);
 
         return item;
     }

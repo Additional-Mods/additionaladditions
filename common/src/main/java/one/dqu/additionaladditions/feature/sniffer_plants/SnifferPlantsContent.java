@@ -25,6 +25,7 @@ import one.dqu.additionaladditions.core.builder.CreativePosition;
 import one.dqu.additionaladditions.core.datagen.template.Models;
 import one.dqu.additionaladditions.core.datagen.template.Recipes;
 import one.dqu.additionaladditions.core.datagen.template.recipe.RecipeEntry;
+import one.dqu.additionaladditions.core.util.Composting;
 import one.dqu.additionaladditions.registry.AABlocks;
 import one.dqu.additionaladditions.registry.AATags;
 
@@ -79,6 +80,7 @@ public class SnifferPlantsContent {
                 .tags(flowerTag, ItemTags.BEE_FOOD)
                 .model(Models.flatBlock(textureFormat))
                 .recipeFor(dye, dyeRecipe(id, dye))
+                .andThen(item -> Composting.add(item, 0.85f), false)
                 .make(id);
     }
 
@@ -96,11 +98,15 @@ public class SnifferPlantsContent {
         return itemBuilder(p -> new BlockItem(block.get(), p), anchor, true)
                 .tags(AATags.C_SEEDS)
                 .model(Models::flat)
+                .andThen(item -> Composting.add(item, 0.30f), false)
                 .make(id);
     }
 
     private static Supplier<Item> vineItem(String id, Supplier<? extends Block> block, ItemLike anchor, Consumer<Item> model) {
-        return itemBuilder(p -> new BlockItem(block.get(), p), anchor, true).model(model).make(id);
+        return itemBuilder(p -> new BlockItem(block.get(), p), anchor, true)
+                .andThen(item -> Composting.add(item, 0.30f), false)
+                .model(model)
+                .make(id);
     }
 
     private static AAItem<Item> itemBuilder(Function<Item.Properties, Item> factory, ItemLike anchor, boolean pod) {
@@ -316,12 +322,14 @@ public class SnifferPlantsContent {
                 .tags(AATags.C_FLOWERS_ITEM, ItemTags.BEE_FOOD)
                 .model(Models::flatBlock)
                 .recipeFor(Items.PINK_DYE, dyeRecipe("lotus_lily", Items.PINK_DYE))
+                .andThen(item -> Composting.add(item, 0.85f), false)
                 .make("lotus_lily");
     }
 
     public static Supplier<Item> lotusLilyPod() {
         return itemBuilder(p -> new PlaceOnWaterBlockItem(AABlocks.LOTUS_LILY_CROP.get(), p), Items.PITCHER_POD, true)
                 .model(Models::flat)
+                .andThen(item -> Composting.add(item, 0.30f), false)
                 .make("lotus_lily_pod");
     }
 }

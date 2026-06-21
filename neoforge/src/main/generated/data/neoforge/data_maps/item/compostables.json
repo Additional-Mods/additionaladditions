@@ -1,0 +1,70 @@
+{
+  "values": {
+    "additionaladditions:amber_blossom": {
+      "chance": 0.85
+    },
+    "additionaladditions:amber_blossom_seeds": {
+      "chance": 0.3
+    },
+    "additionaladditions:bulbus": {
+      "chance": 0.85
+    },
+    "additionaladditions:bulbus_pod": {
+      "chance": 0.3
+    },
+    "additionaladditions:cottonshiver": {
+      "chance": 0.85
+    },
+    "additionaladditions:cottonshiver_pod": {
+      "chance": 0.3
+    },
+    "additionaladditions:crimson_blossom": {
+      "chance": 0.85
+    },
+    "additionaladditions:crimson_blossom_seeds": {
+      "chance": 0.3
+    },
+    "additionaladditions:frostleaf": {
+      "chance": 0.85
+    },
+    "additionaladditions:frostleaf_pod": {
+      "chance": 0.3
+    },
+    "additionaladditions:lotus_lily": {
+      "chance": 0.85
+    },
+    "additionaladditions:lotus_lily_pod": {
+      "chance": 0.3
+    },
+    "additionaladditions:mudflower": {
+      "chance": 0.85
+    },
+    "additionaladditions:mudflower_seeds": {
+      "chance": 0.3
+    },
+    "additionaladditions:sawtooth_fern": {
+      "chance": 0.85
+    },
+    "additionaladditions:sawtooth_fern_fiddlehead": {
+      "chance": 0.3
+    },
+    "additionaladditions:snapdragon": {
+      "chance": 0.85
+    },
+    "additionaladditions:snapdragon_pod": {
+      "chance": 0.3
+    },
+    "additionaladditions:spikeblossom": {
+      "chance": 0.85
+    },
+    "additionaladditions:spikeblossom_seeds": {
+      "chance": 0.3
+    },
+    "additionaladditions:wisteria": {
+      "chance": 0.85
+    },
+    "additionaladditions:wisteria_vines": {
+      "chance": 0.3
+    }
+  }
+}
