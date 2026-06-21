@@ -50,6 +50,10 @@ public class AAGameTests {
         new AAGameTest().structure("empty_big").maxTicks(2000).environment(FAST_GROWTH)
                 .function(SnifferPlantsTests::naturalGrowth).create("sniffer_plants_natural_growth");
 
+        // custom recipes
+        new AAGameTest().maxTicks(600).function(CustomRecipeTests::brewing).create("brewing_recipe");
+        new AAGameTest().function(CustomRecipeTests::suspiciousDyeing).create("suspicious_dye_recipe");
+
         // config
         new AAGameTest().function(ConfigTests::roseGoldPickaxeReload).create("config_rose_gold_pickaxe_reload");
         new AAGameTest().function(ConfigTests::roseGoldArmorReload).create("config_rose_gold_armor_reload");

@@ -1,0 +1,7 @@
+{
+  "type": "minecraft:function",
+  "environment": "minecraft:default",
+  "function": "additionaladditions:brewing_recipe",
+  "max_ticks": 600,
+  "structure": "additionaladditions:empty"
+}
