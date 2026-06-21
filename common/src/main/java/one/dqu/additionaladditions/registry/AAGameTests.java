@@ -46,6 +46,7 @@ public class AAGameTests {
 
         // sniffer plants
         new AAGameTest().structure("empty_big").function(SnifferPlantsTests::stages).create("sniffer_plants_stages");
+        new AAGameTest().structure("empty_big").function(SnifferPlantsTests::planting).create("sniffer_plants_planting");
         new AAGameTest().structure("empty_big").maxTicks(2000).environment(FAST_GROWTH)
                 .function(SnifferPlantsTests::naturalGrowth).create("sniffer_plants_natural_growth");
 

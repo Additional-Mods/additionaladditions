@@ -320,6 +320,8 @@ public class SnifferPlantsContent {
     }
 
     public static Supplier<Item> lotusLilyPod() {
-        return vineItem("lotus_lily_pod", AABlocks.LOTUS_LILY_CROP, Items.PITCHER_POD, Models::flat);
+        return itemBuilder(p -> new PlaceOnWaterBlockItem(AABlocks.LOTUS_LILY_CROP.get(), p), Items.PITCHER_POD, true)
+                .model(Models::flat)
+                .make("lotus_lily_pod");
     }
 }
