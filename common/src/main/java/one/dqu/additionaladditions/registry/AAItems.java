@@ -4,8 +4,13 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.dispenser.BlockSource;
 import net.minecraft.core.dispenser.DefaultDispenseItemBehavior;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.item.*;
 import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.item.equipment.ArmorType;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.DispenserBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -13,19 +18,13 @@ import one.dqu.additionaladditions.AdditionalAdditions;
 import one.dqu.additionaladditions.config.Config;
 import one.dqu.additionaladditions.config.ConfigProperty;
 import one.dqu.additionaladditions.config.Toggleable;
+import one.dqu.additionaladditions.feature.album.AlbumContents;
 import one.dqu.additionaladditions.feature.glint.GlintColor;
 import one.dqu.additionaladditions.item.*;
-import one.dqu.additionaladditions.item.configurable.*;
-import one.dqu.additionaladditions.feature.album.AlbumContents;
 import one.dqu.additionaladditions.material.AAMaterials;
 import one.dqu.additionaladditions.material.AnimalArmorType;
 import one.dqu.additionaladditions.material.ToolType;
 import one.dqu.additionaladditions.util.CreativeAdder;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.Identifier;
-import net.minecraft.world.item.*;
-import net.minecraft.world.level.ItemLike;
 import one.dqu.additionaladditions.util.Registrar;
 
 import java.util.*;
@@ -180,7 +179,7 @@ public class AAItems {
             .config(Config.SNIFFER_PLANTS)
             .properties(p -> p.useItemDescriptionPrefix())
             .creativeAfter(Items.PITCHER_POD, CreativeModeTabs.NATURAL_BLOCKS)
-            .build(p -> new BlockItem(AABlocks.LOTUS_LILY_CROP.get(), p));
+            .build(p -> new PlaceOnWaterBlockItem(AABlocks.LOTUS_LILY_CROP.get(), p));
 
     // FOOD
 
@@ -527,7 +526,8 @@ public class AAItems {
         private final String id;
         private final Map<ResourceKey<CreativeModeTab>, List<ItemLike>> creativeAfter = new HashMap<>();
         private final Map<ResourceKey<CreativeModeTab>, List<ItemLike>> creativeBefore = new HashMap<>();
-        private Consumer<Item.Properties> propertiesConfig = p -> {};
+        private Consumer<Item.Properties> propertiesConfig = p -> {
+        };
         private ConfigProperty<? extends Toggleable> config = null;
 
         public Builder(String id) {
@@ -572,11 +572,11 @@ public class AAItems {
             });
 
             creativeAfter.forEach((tab, items) ->
-                items.forEach(anchor -> CreativeAdder.add(tab, enabled, anchor, item))
+                    items.forEach(anchor -> CreativeAdder.add(tab, enabled, anchor, item))
             );
 
             creativeBefore.forEach((tab, items) ->
-                items.forEach(anchor -> CreativeAdder.addBefore(tab, enabled, anchor, item))
+                    items.forEach(anchor -> CreativeAdder.addBefore(tab, enabled, anchor, item))
             );
 
             if (config != null) {
