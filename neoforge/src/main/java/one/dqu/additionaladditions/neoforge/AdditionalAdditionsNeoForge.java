@@ -84,9 +84,9 @@ public final class AdditionalAdditionsNeoForge {
     }
 
     private void onRegisterTooltipAppenders(RegisterTooltipAppendersEvent event) {
-        event.registerComponentAppenderAfter(
+        event.registerComponentAppenderBefore(
                 AAMisc.GLINT_COLOR_COMPONENT,
-                DataComponents.TRIM,
+                DataComponents.STORED_ENCHANTMENTS,
                 TooltipAppender.createComponentAppender(AAMisc.GLINT_COLOR_COMPONENT.get())
         );
     }
