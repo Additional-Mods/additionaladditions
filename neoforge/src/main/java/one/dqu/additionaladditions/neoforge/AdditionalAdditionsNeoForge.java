@@ -3,6 +3,7 @@ package one.dqu.additionaladditions.neoforge;
 import net.minecraft.client.color.block.BlockTintSource;
 import net.minecraft.client.color.block.BlockTintSources;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
@@ -16,9 +17,11 @@ import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.fml.loading.FMLEnvironment;
 import net.neoforged.neoforge.client.event.*;
+import net.neoforged.neoforge.common.tooltip.TooltipAppender;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.LootTableLoadEvent;
+import net.neoforged.neoforge.event.RegisterTooltipAppendersEvent;
 import net.neoforged.neoforge.network.event.RegisterConfigurationTasksEvent;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;
@@ -40,6 +43,7 @@ import one.dqu.additionaladditions.feature.suspicious_dye.glint.GlintResourceGen
 import one.dqu.additionaladditions.recipe.neoforge.JEIBrewingRecipeSync;
 import one.dqu.additionaladditions.registry.AABlocks;
 import one.dqu.additionaladditions.registry.AAEntities;
+import one.dqu.additionaladditions.registry.AAMisc;
 
 @Mod(AdditionalAdditions.NAMESPACE)
 public final class AdditionalAdditionsNeoForge {
@@ -51,6 +55,7 @@ public final class AdditionalAdditionsNeoForge {
         modEventBus.addListener(BuildCreativeModeTabContentsEvent.class, this::onBuildCreativeTabContents);
         modEventBus.addListener(RegisterPayloadHandlersEvent.class, this::onRegisterPayloadHandlers);
         modEventBus.addListener(RegisterConfigurationTasksEvent.class, this::onRegisterConfigurationTasks);
+        modEventBus.addListener(RegisterTooltipAppendersEvent.class, this::onRegisterTooltipAppenders);
 
         if (FMLEnvironment.getDist().isClient()) {
             NeoForge.EVENT_BUS.addListener(ClientPlayerNetworkEvent.LoggingOut.class, this::onClientLogout);
@@ -76,6 +81,14 @@ public final class AdditionalAdditionsNeoForge {
 
     private void onSetupEvent(FMLCommonSetupEvent event) {
         RegistrarImpl.runDeferred();
+    }
+
+    private void onRegisterTooltipAppenders(RegisterTooltipAppendersEvent event) {
+        event.registerComponentAppenderAfter(
+                AAMisc.GLINT_COLOR_COMPONENT,
+                DataComponents.TRIM,
+                TooltipAppender.createComponentAppender(AAMisc.GLINT_COLOR_COMPONENT.get())
+        );
     }
 
     private void onBuildCreativeTabContents(BuildCreativeModeTabContentsEvent event) {

@@ -3,12 +3,14 @@ package one.dqu.additionaladditions.fabric;
 import com.google.gson.JsonElement;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
+import net.fabricmc.fabric.api.item.v1.ItemComponentTooltipProviderRegistry;
 import net.fabricmc.fabric.api.loot.v3.LootTableEvents;
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 import net.fabricmc.fabric.api.networking.v1.ServerConfigurationConnectionEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerConfigurationNetworking;
 import net.fabricmc.fabric.api.recipe.v1.sync.RecipeSynchronization;
 import net.fabricmc.fabric.api.registry.CompostableRegistry;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
 import one.dqu.additionaladditions.AdditionalAdditions;
@@ -29,6 +31,8 @@ public final class AdditionalAdditionsFabric implements ModInitializer {
     public void onInitialize() {
         AdditionalAdditions.init();
         RegistrarImpl.runDeferred();
+
+        ItemComponentTooltipProviderRegistry.addAfter(DataComponents.TRIM, AAMisc.GLINT_COLOR_COMPONENT.get());
 
         // creative adder
         CreativeModeTabEvents.MODIFY_OUTPUT_ALL.register((tab, entries) -> {
