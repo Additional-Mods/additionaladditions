@@ -41,7 +41,7 @@ logoFile = "assets/additionaladditions/icon.png"
 [[dependencies.additionaladditions]]
 modId = "neoforge"
 type = "required"
-versionRange = "[26.2,)"
+versionRange = "[26.2.0.19-beta,)"
 ordering = "NONE"
 side = "BOTH"
 
