@@ -4,7 +4,9 @@
   "version": "${version}",
   "name": "Additional Additions",
   "description": "A mod that expands on parts of Minecraft that feel incomplete, with additions that feel like they should already be part of vanilla.",
-  "authors": ["Dqu1J"],
+  "authors": [
+    "Dqu1J"
+  ],
   "contributors": [
     "Gabby42 (Textures, Romanian Translation)",
     "MorganFreeguy (Textures)",
@@ -12,6 +14,7 @@
     "Avila27 (Textures)",
     "adoghr (Music)",
     "ぷー (Simplified Chinese, Traditional Chinese Translations)",
+    "Ylite-cola (Traditional Chinese Translation)",
     "zrll12 (Simplified Chinese Translation)",
     "wdnmdyaya (Simplified Chinese Translation)",
     "Grape reprint (Simplified Chinese Translation)",
