@@ -37,6 +37,7 @@ public class AAGameTests {
         new AAGameTest().function(RopeArrowTests::entityHitNoPickup).create("rope_arrow_entity_hit_no_pickup");
         new AAGameTest().structure("empty_big").function(RopeArrowTests::partialPlacementPickup).create("rope_arrow_partial_placement_pickup");
         new AAGameTest().structure("empty_big").function(RopeArrowTests::partialPlacementNoPickup).create("rope_arrow_partial_placement_no_pickup");
+        new AAGameTest().structure("empty_big").function(RopeArrowTests::gravityBlockDupe).create("rope_arrow_gravity_block_dupe");
 
         // wrench
         new AAGameTest().function(WrenchTests::dispenser).create("wrench_dispenser");

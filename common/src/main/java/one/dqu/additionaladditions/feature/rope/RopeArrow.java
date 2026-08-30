@@ -15,6 +15,8 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import one.dqu.additionaladditions.registry.AABlocks;
@@ -57,6 +59,22 @@ public class RopeArrow extends AbstractArrow {
     }
 
     @Override
+    protected void addAdditionalSaveData(ValueOutput output) {
+        super.addAdditionalSaveData(output);
+        output.putBoolean("PlacingRopes", isPlacingRopes);
+        output.putInt("RopesPlaced", ropesPlaced);
+        output.storeNullable("RopeStartPos", BlockPos.CODEC, startPos);
+    }
+
+    @Override
+    protected void readAdditionalSaveData(ValueInput input) {
+        super.readAdditionalSaveData(input);
+        this.isPlacingRopes = input.getBooleanOr("PlacingRopes", false);
+        this.ropesPlaced = input.getIntOr("RopesPlaced", 0);
+        this.startPos = input.read("RopeStartPos", BlockPos.CODEC).orElse(null);
+    }
+
+    @Override
     protected void onHitBlock(BlockHitResult hitResult) {
         super.onHitBlock(hitResult);
 
@@ -64,14 +82,13 @@ public class RopeArrow extends AbstractArrow {
             return;
         }
 
-        if (isPlacingRopes) {
+        if (isPlacingRopes || ropesPlaced >= 8) {
             return;
         }
 
         // start placing ropes
         this.startPos = hitResult.getBlockPos().relative(hitResult.getDirection());
         this.isPlacingRopes = true;
-        this.ropesPlaced = 0;
         this.tickCounter = 0;
     }
 
@@ -127,6 +144,7 @@ public class RopeArrow extends AbstractArrow {
                     ItemEntity itemEntity = new ItemEntity(this.level(), downPos.getCenter().x, downPos.getCenter().y + up, downPos.getCenter().z, stack);
                     this.level().addFreshEntity(itemEntity);
                 }
+                ropesPlaced = 8;
                 isPlacingRopes = false;
                 return;
             }
