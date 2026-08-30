@@ -1,6 +1,8 @@
 package one.dqu.additionaladditions.entity;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtUtils;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.FluidTags;
@@ -57,6 +59,24 @@ public class RopeArrow extends AbstractArrow {
     }
 
     @Override
+    public void addAdditionalSaveData(CompoundTag tag) {
+        super.addAdditionalSaveData(tag);
+        tag.putBoolean("PlacingRopes", isPlacingRopes);
+        tag.putInt("RopesPlaced", ropesPlaced);
+        if (startPos != null) {
+            tag.put("RopeStartPos", NbtUtils.writeBlockPos(startPos));
+        }
+    }
+
+    @Override
+    public void readAdditionalSaveData(CompoundTag tag) {
+        super.readAdditionalSaveData(tag);
+        this.isPlacingRopes = tag.getBoolean("PlacingRopes");
+        this.ropesPlaced = tag.getInt("RopesPlaced");
+        this.startPos = NbtUtils.readBlockPos(tag, "RopeStartPos").orElse(null);
+    }
+
+    @Override
     protected void onHitBlock(BlockHitResult hitResult) {
         super.onHitBlock(hitResult);
 
@@ -64,14 +84,13 @@ public class RopeArrow extends AbstractArrow {
             return;
         }
 
-        if (isPlacingRopes) {
+        if (isPlacingRopes || ropesPlaced >= 8) {
             return;
         }
 
         // start placing ropes
         this.startPos = hitResult.getBlockPos().relative(hitResult.getDirection());
         this.isPlacingRopes = true;
-        this.ropesPlaced = 0;
         this.tickCounter = 0;
     }
 
@@ -127,6 +146,7 @@ public class RopeArrow extends AbstractArrow {
                     ItemEntity itemEntity = new ItemEntity(this.level(), downPos.getCenter().x, downPos.getCenter().y + up, downPos.getCenter().z, stack);
                     this.level().addFreshEntity(itemEntity);
                 }
+                ropesPlaced = 8;
                 isPlacingRopes = false;
                 return;
             }
