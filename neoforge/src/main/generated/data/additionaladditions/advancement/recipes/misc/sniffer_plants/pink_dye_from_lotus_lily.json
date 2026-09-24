@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "additionaladditions:sniffer_plants/pink_dye_from_lotus_lily"
+        "recipes": "additionaladditions:sniffer_plants/pink_dye_from_lotus_lily"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

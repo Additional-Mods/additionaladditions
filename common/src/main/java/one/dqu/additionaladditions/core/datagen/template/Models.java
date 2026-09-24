@@ -9,10 +9,8 @@ import net.minecraft.client.data.models.model.TextureMapping;
 import net.minecraft.client.resources.model.sprite.Material;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.equipment.ArmorType;
-import net.minecraft.world.item.equipment.EquipmentAsset;
 import net.minecraft.world.level.block.Block;
 import one.dqu.additionaladditions.AdditionalAdditions;
 import one.dqu.additionaladditions.core.datagen.AABlockDatagen;
@@ -21,6 +19,7 @@ import one.dqu.additionaladditions.core.datagen.template.model.AlbumModelTemplat
 import one.dqu.additionaladditions.core.datagen.template.model.BarometerModelTemplate;
 import one.dqu.additionaladditions.core.datagen.template.model.TallCrossModelTemplate;
 
+import java.util.Map;
 import java.util.function.Consumer;
 
 /**
@@ -96,7 +95,7 @@ public final class Models {
     }
 
     // armor with a trim_material dispatch
-    public static void armorTrim(Item item, ResourceKey<EquipmentAsset> asset, ArmorType armorType) {
+    public static void armorTrim(Item item, ArmorType armorType) {
         Identifier slotTrimPrefix = switch (armorType) {
             case HELMET -> ItemModelGenerators.TRIM_PREFIX_HELMET;
             case CHESTPLATE -> ItemModelGenerators.TRIM_PREFIX_CHESTPLATE;
@@ -104,6 +103,6 @@ public final class Models {
             case BOOTS -> ItemModelGenerators.TRIM_PREFIX_BOOTS;
             default -> throw new IllegalArgumentException("Invalid armor slot: " + armorType);
         };
-        AAItemDatagen.currentGen().generateTrimmableItem(item, asset, slotTrimPrefix, false);
+        AAItemDatagen.currentGen().generateTrimmableItem(item, slotTrimPrefix, false, Map.of());
     }
 }

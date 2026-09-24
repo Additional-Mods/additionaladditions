@@ -4,15 +4,11 @@ import com.mojang.serialization.Codec;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.resources.Identifier;
-import net.minecraft.resources.ResourceKey;
-import net.minecraft.world.item.crafting.RecipePropertySet;
 import net.minecraft.world.item.crafting.RecipeSerializer;
-import net.minecraft.world.item.crafting.RecipeType;
 import one.dqu.additionaladditions.AdditionalAdditions;
 import one.dqu.additionaladditions.core.util.SimplePlayerTrigger;
 import one.dqu.additionaladditions.feature.album.AlbumContents;
 import one.dqu.additionaladditions.feature.suspicious_dye.glint.GlintColor;
-import one.dqu.additionaladditions.recipe.BrewingRecipe;
 import one.dqu.additionaladditions.recipe.SuspiciousDyeRecipe;
 
 import java.util.function.Supplier;
@@ -41,24 +37,6 @@ public class AAMisc {
             Identifier.tryBuild(AdditionalAdditions.NAMESPACE, "suspicious_dye"),
             () -> SuspiciousDyeRecipe.SERIALIZER
     );
-
-    public static final Supplier<RecipeSerializer<BrewingRecipe>> BREWING_RECIPE_SERIALIZER = AARegistries.RECIPE_SERIALIZERS.register(
-            Identifier.tryBuild(AdditionalAdditions.NAMESPACE, "brewing"),
-            () -> BrewingRecipe.SERIALIZER
-    );
-
-    public static final Supplier<RecipeType<BrewingRecipe>> BREWING_RECIPE_TYPE = AARegistries.RECIPE_TYPES.register(
-            Identifier.tryBuild(AdditionalAdditions.NAMESPACE, "brewing"),
-            () -> new RecipeType<>() {
-                @Override
-                public String toString() {
-                    return "additionaladditions:brewing";
-                }
-            }
-    );
-
-    public static final ResourceKey<RecipePropertySet> BREWING_RECIPE_PROPERTY_SET =
-            ResourceKey.create(RecipePropertySet.TYPE_KEY, Identifier.tryBuild(AdditionalAdditions.NAMESPACE, "brewing"));
 
     /* ADVANCEMENT TRIGGERS */
 

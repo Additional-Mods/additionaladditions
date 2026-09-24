@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "additionaladditions:album/white_album"
+        "recipes": "additionaladditions:album/white_album"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

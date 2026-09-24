@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "additionaladditions:rope/rope"
+        "recipes": "additionaladditions:rope/rope"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

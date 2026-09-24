@@ -51,7 +51,7 @@ public class CopperPatinaItem extends BlockItem {
             CriteriaTriggers.USING_ITEM.trigger(serverPlayer, context.getItemInHand());
         }
 
-        world.playSound(player, pos, SoundEvents.AXE_SCRAPE, SoundSource.BLOCKS, 1.0F, 1.0F);
+        world.playSound(player, pos, SoundEvents.AXE_SCRAPE.value(), SoundSource.BLOCKS, 1.0F, 1.0F);
         world.levelEvent(player, LevelEvent.PARTICLES_SCRAPE, pos, 0);
         world.setBlock(pos, optional.get(), Block.UPDATE_ALL_IMMEDIATE);
         context.getItemInHand().shrink(1);

@@ -1,19 +1,27 @@
 package one.dqu.additionaladditions.registry;
 
 import net.minecraft.core.registries.Registries;
+import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.gametest.framework.TestEnvironmentDefinition;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.level.gamerules.GameRuleMap;
+import net.minecraft.world.level.gamerules.GameRules;
 import one.dqu.additionaladditions.AdditionalAdditions;
 import one.dqu.additionaladditions.core.builder.AAGameTest;
 import one.dqu.additionaladditions.gametest.*;
 
 public class AAGameTests {
-    // data/additionaladditions/test_environment/fast_growth.json
     private static final ResourceKey<TestEnvironmentDefinition<?>> FAST_GROWTH = ResourceKey.create(
             Registries.TEST_ENVIRONMENT,
             Identifier.fromNamespaceAndPath(AdditionalAdditions.NAMESPACE, "fast_growth")
     );
+
+    public static void bootstrapEnvironments(BootstrapContext<TestEnvironmentDefinition<?>> context) {
+        context.register(FAST_GROWTH, new TestEnvironmentDefinition.SetGameRules(
+                new GameRuleMap.Builder().set(GameRules.RANDOM_TICK_SPEED, 4096).build()
+        ));
+    }
 
     public static void registerAll() {
         // misc
@@ -52,7 +60,6 @@ public class AAGameTests {
                 .function(SnifferPlantsTests::naturalGrowth).create("sniffer_plants_natural_growth");
 
         // custom recipes
-        new AAGameTest().maxTicks(600).function(CustomRecipeTests::brewing).create("brewing_recipe");
         new AAGameTest().function(CustomRecipeTests::suspiciousDyeing).create("suspicious_dye_recipe");
 
         // config

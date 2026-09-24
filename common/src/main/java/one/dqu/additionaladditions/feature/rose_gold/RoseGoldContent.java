@@ -93,7 +93,7 @@ public class RoseGoldContent {
                 .config(Config.ROSE_GOLD)
                 .material(AAMaterials.ROSE_GOLD, armorType)
                 .creative(anchor, CreativeModeTabs.COMBAT, CreativePosition.AFTER)
-                .model(item -> Models.armorTrim(item, AAMaterials.ROSE_GOLD.equipmentAsset(), armorType))
+                .model(item -> Models.armorTrim(item, armorType))
                 .tags(slotTag, ItemTags.TRIMMABLE_ARMOR)
                 .recipe(Recipes.transmute(RecipeCategory.COMBAT, inputItem, rosegold).unlockedBy(rosegold))
                 .make(id);
@@ -165,7 +165,7 @@ public class RoseGoldContent {
 
     public static Supplier<Item> shovel() {
         ItemLike rosegold = () -> AAItems.ROSE_GOLD_INGOT.get();
-        return AAReg.<Item>item(AAShovelItem::new)
+        return AAReg.item()
                 .config(Config.ROSE_GOLD)
                 .material(AAMaterials.ROSE_GOLD, ToolType.SHOVEL)
                 .creative(Items.GOLDEN_HOE, CreativeModeTabs.TOOLS_AND_UTILITIES, CreativePosition.AFTER)
@@ -189,7 +189,7 @@ public class RoseGoldContent {
 
     public static Supplier<Item> axe() {
         ItemLike rosegold = () -> AAItems.ROSE_GOLD_INGOT.get();
-        return AAReg.<Item>item(AAAxeItem::new)
+        return AAReg.item()
                 .config(Config.ROSE_GOLD)
                 .material(AAMaterials.ROSE_GOLD, ToolType.AXE)
                 .creative(Items.GOLDEN_HOE, CreativeModeTabs.TOOLS_AND_UTILITIES, CreativePosition.AFTER)
@@ -202,7 +202,7 @@ public class RoseGoldContent {
 
     public static Supplier<Item> hoe() {
         ItemLike rosegold = () -> AAItems.ROSE_GOLD_INGOT.get();
-        return AAReg.<Item>item(AAHoeItem::new)
+        return AAReg.item()
                 .config(Config.ROSE_GOLD)
                 .material(AAMaterials.ROSE_GOLD, ToolType.HOE)
                 .creative(Items.GOLDEN_HOE, CreativeModeTabs.TOOLS_AND_UTILITIES, CreativePosition.AFTER)

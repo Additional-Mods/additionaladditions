@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "additionaladditions:berry_pie/berry_pie"
+        "recipes": "additionaladditions:berry_pie/berry_pie"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

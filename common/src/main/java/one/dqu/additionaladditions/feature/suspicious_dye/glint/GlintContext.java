@@ -7,38 +7,23 @@ import net.minecraft.world.item.ItemStack;
 import one.dqu.additionaladditions.registry.AAMisc;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.IdentityHashMap;
-import java.util.Map;
-
+/**
+ * Glint color of the item stack currently being submitted for rendering.
+ */
 @Environment(EnvType.CLIENT)
 public class GlintContext {
-    private static final ThreadLocal<DyeColor> currentDyeColor = new ThreadLocal<>();
+    private static @Nullable DyeColor current;
 
-    private static final Map<Object, DyeColor> pendingQuadColors = new IdentityHashMap<>();
-
-    public static void setCurrentItem(@Nullable ItemStack itemStack) {
-        if (itemStack != null && itemStack.has(AAMisc.GLINT_COLOR_COMPONENT.get())) {
-            currentDyeColor.set(itemStack.get(AAMisc.GLINT_COLOR_COMPONENT.get()).color());
-        } else {
-            currentDyeColor.set(null);
-        }
+    public static @Nullable DyeColor get() {
+        return current;
     }
 
-    public static void setDyeColor(@Nullable DyeColor color) {
-        currentDyeColor.set(color);
+    public static void set(@Nullable DyeColor color) {
+        current = color;
     }
 
-    public static @Nullable DyeColor getDyeColor() {
-        return currentDyeColor.get();
-    }
-
-    public static void setColorForQuads(Object quads, @Nullable DyeColor color) {
-        if (color != null) {
-            pendingQuadColors.put(quads, color);
-        }
-    }
-
-    public static @Nullable DyeColor getAndClearColorForQuads(Object quads) {
-        return pendingQuadColors.remove(quads);
+    public static @Nullable DyeColor colorOf(ItemStack stack) {
+        GlintColor glintColor = stack.get(AAMisc.GLINT_COLOR_COMPONENT.get());
+        return glintColor != null ? glintColor.color() : null;
     }
 }

@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "additionaladditions:barometer/barometer"
+        "recipes": "additionaladditions:barometer/barometer"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

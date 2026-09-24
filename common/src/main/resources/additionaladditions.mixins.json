@@ -5,22 +5,22 @@
   "minVersion": "0.8",
   "client": [
     "GuiMixin",
-    "suspicious_dye.HumanoidArmorLayerMixin",
+    "suspicious_dye.EquipmentLayerRendererMixin",
     "suspicious_dye.ItemFeatureRendererMixin",
+    "suspicious_dye.ItemFeatureRendererSubmitMixin",
     "suspicious_dye.ItemModelResolverMixin",
     "suspicious_dye.ItemStackRenderStateMixin",
     "suspicious_dye.RenderTypesMixin",
-    "suspicious_dye.WingsLayerMixin"
+    "suspicious_dye.ShieldSpecialRendererMixin",
+    "suspicious_dye.TridentSpecialRendererMixin"
   ],
   "mixins": [
-    "BrewingStandBlockEntityMixin",
-    "BrewingStandMenuMixin",
+    "BlockTransformerMixin",
+    "FileToIdConverterMixin",
     "InventoryChangeTriggerMixin",
     "MobMixin",
-    "RecipeManagerMixin",
     "RedstoneWireBlockMixin",
     "ReloadableServerResourcesMixin",
-    "ServerAdvancementManagerMixin",
     "album.JukeboxBlockEntityMixin",
     "album.JukeboxBlockMixin"
   ],

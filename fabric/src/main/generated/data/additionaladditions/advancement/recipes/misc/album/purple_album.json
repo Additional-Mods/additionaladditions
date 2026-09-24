@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "additionaladditions:album/purple_album"
+        "recipes": "additionaladditions:album/purple_album"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

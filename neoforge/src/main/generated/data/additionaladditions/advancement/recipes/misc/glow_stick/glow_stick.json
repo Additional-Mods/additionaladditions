@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "additionaladditions:glow_stick/glow_stick"
+        "recipes": "additionaladditions:glow_stick/glow_stick"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

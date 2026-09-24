@@ -3,7 +3,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "additionaladditions:trident_shard/trident"
+        "recipes": "additionaladditions:trident_shard/trident"
       },
       "trigger": "minecraft:recipe_unlocked"
     },

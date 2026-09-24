@@ -1,0 +1,13 @@
+{
+  "target": "minecraft:entities/elder_guardian",
+  "entries": [
+    {
+      "type": "minecraft:item",
+      "name": "additionaladditions:trident_shard",
+      "condition": {
+        "type": "minecraft:random_chance",
+        "chance": 0.33
+      }
+    }
+  ]
+}

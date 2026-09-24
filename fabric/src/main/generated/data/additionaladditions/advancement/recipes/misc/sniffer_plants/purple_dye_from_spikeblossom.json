@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "additionaladditions:sniffer_plants/purple_dye_from_spikeblossom"
+        "recipes": "additionaladditions:sniffer_plants/purple_dye_from_spikeblossom"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

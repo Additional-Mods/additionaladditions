@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "additionaladditions:sniffer_plants/blue_dye_from_frostleaf"
+        "recipes": "additionaladditions:sniffer_plants/blue_dye_from_frostleaf"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

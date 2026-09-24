@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "additionaladditions:wrench/wrench"
+        "recipes": "additionaladditions:wrench/wrench"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

@@ -25,7 +25,7 @@ public class CopperPatinaContent {
         return AAReg.block(CopperPatinaBlock::new)
                 .props(p -> p
                         .mapColor(MapColor.COLOR_CYAN)
-                        .pushReaction(PushReaction.DESTROY)
+                        .pushReaction(PushReaction.POPPED)
                         .noCollision()
                         .sound(SoundType.TUFF)
                         .instabreak())
@@ -36,7 +36,7 @@ public class CopperPatinaContent {
         return AAReg.block(PatinaBlock::new)
                 .props(p -> p
                         .mapColor(MapColor.COLOR_CYAN)
-                        .pushReaction(PushReaction.NORMAL)
+                        .pushReaction(PushReaction.PUSH_PULL)
                         .sound(SoundType.ROOTED_DIRT)
                         .strength(0.5f))
                 .tags(BlockTags.MINEABLE_WITH_SHOVEL)

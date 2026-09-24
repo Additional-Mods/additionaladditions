@@ -25,7 +25,7 @@ import one.dqu.additionaladditions.core.builder.CreativePosition;
 import one.dqu.additionaladditions.core.datagen.template.Models;
 import one.dqu.additionaladditions.core.datagen.template.Recipes;
 import one.dqu.additionaladditions.core.datagen.template.recipe.RecipeEntry;
-import one.dqu.additionaladditions.core.util.Composting;
+import net.minecraft.world.level.storage.loot.providers.number.ints.ContextIntProviders;
 import one.dqu.additionaladditions.registry.AABlocks;
 import one.dqu.additionaladditions.registry.AATags;
 
@@ -36,10 +36,10 @@ import java.util.function.Supplier;
 public class SnifferPlantsContent {
     private static final Consumer<BlockBehaviour.Properties> PLANT_PROPS = p -> p
             .mapColor(MapColor.PLANT).noCollision().instabreak().sound(SoundType.GRASS)
-            .offsetType(BlockBehaviour.OffsetType.XZ).pushReaction(PushReaction.DESTROY);
+            .offsetType(BlockBehaviour.OffsetType.XZ).pushReaction(PushReaction.POPPED);
     private static final Consumer<BlockBehaviour.Properties> CROP_PROPS = p -> p
             .mapColor(MapColor.PLANT).noCollision().randomTicks().instabreak().sound(SoundType.CROP)
-            .pushReaction(PushReaction.DESTROY);
+            .pushReaction(PushReaction.POPPED);
 
     // Helpers
 
@@ -80,7 +80,7 @@ public class SnifferPlantsContent {
                 .tags(flowerTag, ItemTags.BEE_FOOD)
                 .model(Models.flatBlock(textureFormat))
                 .recipeFor(dye, dyeRecipe(id, dye))
-                .andThen(item -> Composting.add(item, 0.85f), false)
+                .props(p -> p.compostable(ContextIntProviders.COMPOSTABLE_MEDIUM_HIGH))
                 .make(id);
     }
 
@@ -98,13 +98,13 @@ public class SnifferPlantsContent {
         return itemBuilder(p -> new BlockItem(block.get(), p), anchor, true)
                 .tags(AATags.C_SEEDS)
                 .model(Models::flat)
-                .andThen(item -> Composting.add(item, 0.30f), false)
+                .props(p -> p.compostable(ContextIntProviders.COMPOSTABLE_LOW))
                 .make(id);
     }
 
     private static Supplier<Item> vineItem(String id, Supplier<? extends Block> block, ItemLike anchor, Consumer<Item> model) {
         return itemBuilder(p -> new BlockItem(block.get(), p), anchor, true)
-                .andThen(item -> Composting.add(item, 0.30f), false)
+                .props(p -> p.compostable(ContextIntProviders.COMPOSTABLE_LOW))
                 .model(model)
                 .make(id);
     }
@@ -186,7 +186,7 @@ public class SnifferPlantsContent {
     public static Supplier<Block> wisteria() {
         return AAReg.<Block>block(WisteriaBlock::new)
                 .props(p -> p.mapColor(MapColor.PLANT).noCollision().instabreak().sound(SoundType.VINE)
-                        .strength(0.2F).pushReaction(PushReaction.DESTROY))
+                        .strength(0.2F).pushReaction(PushReaction.POPPED))
                 .tags(AATags.C_FLOWERS_BLOCK, BlockTags.BEE_ATTRACTIVE, BlockTags.MAINTAINS_FARMLAND)
                 .make("wisteria");
     }
@@ -194,7 +194,7 @@ public class SnifferPlantsContent {
     public static Supplier<Block> wisteriaCrop() {
         return AAReg.<Block>block(WisteriaCropBlock::new)
                 .props(p -> p.mapColor(MapColor.PLANT).noCollision().randomTicks().instabreak().sound(SoundType.VINE)
-                        .pushReaction(PushReaction.DESTROY))
+                        .pushReaction(PushReaction.POPPED))
                 .tags(BlockTags.CROPS, BlockTags.MAINTAINS_FARMLAND)
                 .make("wisteria_crop");
     }
@@ -220,7 +220,7 @@ public class SnifferPlantsContent {
     public static Supplier<Block> lotusLily() {
         return AAReg.<Block>block(LilyPadBlock::new)
                 .props(p -> p.mapColor(MapColor.PLANT).instabreak().sound(SoundType.LILY_PAD).noOcclusion()
-                        .pushReaction(PushReaction.DESTROY))
+                        .pushReaction(PushReaction.POPPED))
                 .tags(AATags.C_FLOWERS_BLOCK, BlockTags.BEE_ATTRACTIVE, BlockTags.MAINTAINS_FARMLAND)
                 .make("lotus_lily");
     }
@@ -228,7 +228,7 @@ public class SnifferPlantsContent {
     public static Supplier<Block> lotusLilyCrop() {
         return AAReg.<Block>block(LotusLilyCropBlock::new)
                 .props(p -> p.mapColor(MapColor.PLANT).randomTicks().instabreak().sound(SoundType.LILY_PAD).noOcclusion()
-                        .pushReaction(PushReaction.DESTROY))
+                        .pushReaction(PushReaction.POPPED))
                 .tags(BlockTags.CROPS, BlockTags.MAINTAINS_FARMLAND)
                 .make("lotus_lily_crop");
     }
@@ -322,14 +322,14 @@ public class SnifferPlantsContent {
                 .tags(AATags.C_FLOWERS_ITEM, ItemTags.BEE_FOOD)
                 .model(Models::flatBlock)
                 .recipeFor(Items.DYE.pink(), dyeRecipe("lotus_lily", Items.DYE.pink()))
-                .andThen(item -> Composting.add(item, 0.85f), false)
+                .props(p -> p.compostable(ContextIntProviders.COMPOSTABLE_MEDIUM_HIGH))
                 .make("lotus_lily");
     }
 
     public static Supplier<Item> lotusLilyPod() {
         return itemBuilder(p -> new PlaceOnWaterBlockItem(AABlocks.LOTUS_LILY_CROP.get(), p), Items.PITCHER_POD, true)
                 .model(Models::flat)
-                .andThen(item -> Composting.add(item, 0.30f), false)
+                .props(p -> p.compostable(ContextIntProviders.COMPOSTABLE_LOW))
                 .make("lotus_lily_pod");
     }
 }

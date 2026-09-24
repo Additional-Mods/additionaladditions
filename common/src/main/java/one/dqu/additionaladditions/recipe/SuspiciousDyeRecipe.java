@@ -1,6 +1,7 @@
 package one.dqu.additionaladditions.recipe;
 
 import com.mojang.serialization.MapCodec;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
@@ -81,8 +82,8 @@ public class SuspiciousDyeRecipe extends CustomRecipe {
     public List<RecipeDisplay> display() {
         return List.of(new ShapelessCraftingRecipeDisplay(
                 List.of(
-                        new SlotDisplay.TagSlotDisplay(AATags.C_ENCHANTABLE),
-                        new SlotDisplay.TagSlotDisplay(AATags.SUSPICIOUS_DYES)
+                        new SlotDisplay.TagSlotDisplay(BuiltInRegistries.ITEM.getOrThrow(AATags.C_ENCHANTABLE)),
+                        new SlotDisplay.TagSlotDisplay(BuiltInRegistries.ITEM.getOrThrow(AATags.SUSPICIOUS_DYES))
                 ),
                 SlotDisplay.Empty.INSTANCE,
                 new SlotDisplay.ItemSlotDisplay(Items.CRAFTING_TABLE)

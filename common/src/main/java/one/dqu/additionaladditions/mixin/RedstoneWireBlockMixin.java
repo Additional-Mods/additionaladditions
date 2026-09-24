@@ -4,13 +4,16 @@ import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.RedStoneWireBlock;
+import net.minecraft.world.level.block.RedstoneWireBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import one.dqu.additionaladditions.registry.AABlocks;
+import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
@@ -18,7 +21,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 /**
  * Prevents redstone wire and copper patina from connecting to each other.
  */
-@Mixin(RedStoneWireBlock.class)
+@Mixin(RedstoneWireBlock.class)
 public abstract class RedstoneWireBlockMixin {
     @Inject(
             method = "getBlockSignal",
@@ -30,7 +33,7 @@ public abstract class RedstoneWireBlockMixin {
         boolean isRedstoneWire = self == Blocks.REDSTONE_WIRE;
 
         if (isRedstoneWire) AABlocks.COPPER_PATINA.get().shouldSignal = false;
-        if (isCopperPatina) ((RedStoneWireBlock) Blocks.REDSTONE_WIRE).shouldSignal = false;
+        if (isCopperPatina) ((RedstoneWireBlock) Blocks.REDSTONE_WIRE).shouldSignal = false;
     }
 
     @Inject(
@@ -43,7 +46,7 @@ public abstract class RedstoneWireBlockMixin {
         boolean isRedstoneWire = self == Blocks.REDSTONE_WIRE;
 
         if (isRedstoneWire) AABlocks.COPPER_PATINA.get().shouldSignal = true;
-        if (isCopperPatina) ((RedStoneWireBlock) Blocks.REDSTONE_WIRE).shouldSignal = true;
+        if (isCopperPatina) ((RedstoneWireBlock) Blocks.REDSTONE_WIRE).shouldSignal = true;
     }
 
     @WrapOperation(
@@ -81,5 +84,43 @@ public abstract class RedstoneWireBlockMixin {
             }
         }
         return i;
+    }
+
+    @Unique
+    @Nullable
+    private Boolean additionaladditions$shouldConnect(BlockState state) {
+        Block self = (Block) (Object) this;
+        boolean isRedstoneWire = self == Blocks.REDSTONE_WIRE;
+        boolean isCopperPatina = self == AABlocks.COPPER_PATINA.get();
+        if (!isRedstoneWire && !isCopperPatina) return null;
+
+        if (state.is(AABlocks.COPPER_PATINA.get())) return isCopperPatina;
+        if (state.is(Blocks.REDSTONE_WIRE)) return isRedstoneWire;
+
+        return null;
+    }
+
+    @WrapOperation(
+            method = "getConnectingSide(Lnet/minecraft/world/level/BlockGetter;Lnet/minecraft/core/BlockPos;Lnet/minecraft/core/Direction;Z)Lnet/minecraft/world/level/block/state/properties/RedstoneSide;",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/world/level/block/RedstoneWireBlock;shouldConnectTo(Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/world/level/BlockGetter;Lnet/minecraft/core/BlockPos;Lnet/minecraft/core/Direction;)Z"
+            )
+    )
+    private boolean sideCheck(BlockState blockState, BlockGetter level, BlockPos pos, Direction direction, Operation<Boolean> original) {
+        Boolean shouldConnect = additionaladditions$shouldConnect(blockState);
+        return shouldConnect != null ? shouldConnect : original.call(blockState, level, pos, direction);
+    }
+
+    @WrapOperation(
+            method = "getConnectingSide(Lnet/minecraft/world/level/BlockGetter;Lnet/minecraft/core/BlockPos;Lnet/minecraft/core/Direction;Z)Lnet/minecraft/world/level/block/state/properties/RedstoneSide;",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/world/level/block/RedstoneWireBlock;shouldConnectTo(Lnet/minecraft/world/level/BlockGetter;Lnet/minecraft/core/BlockPos;)Z"
+            )
+    )
+    private boolean verticalCheck(BlockGetter level, BlockPos pos, Operation<Boolean> original) {
+        Boolean shouldConnect = additionaladditions$shouldConnect(level.getBlockState(pos));
+        return shouldConnect != null ? shouldConnect : original.call(level, pos);
     }
 }

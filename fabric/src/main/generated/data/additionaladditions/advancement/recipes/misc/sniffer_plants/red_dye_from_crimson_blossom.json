@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "additionaladditions:sniffer_plants/red_dye_from_crimson_blossom"
+        "recipes": "additionaladditions:sniffer_plants/red_dye_from_crimson_blossom"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

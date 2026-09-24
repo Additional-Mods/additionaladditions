@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "additionaladditions:sniffer_plants/yellow_dye_from_amber_blossom"
+        "recipes": "additionaladditions:sniffer_plants/yellow_dye_from_amber_blossom"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

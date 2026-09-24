@@ -7,6 +7,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.BonemealSource;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.CropBlock;
 import net.minecraft.world.level.block.DoublePlantBlock;
@@ -122,15 +123,15 @@ public class FlowerCropBlock extends CropBlock {
     }
 
     @Override
-    public boolean isValidBonemealTarget(LevelReader levelReader, BlockPos blockPos, BlockState blockState) {
+    public boolean isValidBonemealTarget(LevelReader levelReader, BlockPos blockPos, BlockState blockState, BonemealSource bonemealSource) {
         int newAge = this.getAge(blockState) + 1;
         if (newAge >= MAX_AGE && GROWN_BLOCK.get() instanceof DoublePlantBlock) {
             BlockPos abovePos = blockPos.above();
             BlockState aboveState = levelReader.getBlockState(abovePos);
-            return super.isValidBonemealTarget(levelReader, blockPos, blockState) &&
+            return super.isValidBonemealTarget(levelReader, blockPos, blockState, bonemealSource) &&
                     !levelReader.isOutsideBuildHeight(abovePos) && aboveState.isAir();
         } else {
-            return super.isValidBonemealTarget(levelReader, blockPos, blockState);
+            return super.isValidBonemealTarget(levelReader, blockPos, blockState, bonemealSource);
         }
     }
 }

@@ -21,14 +21,15 @@ import net.neoforged.neoforge.common.tooltip.TooltipAppender;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.LootTableLoadEvent;
+import net.neoforged.neoforge.event.OnDatapackSyncEvent;
 import net.neoforged.neoforge.event.RegisterTooltipAppendersEvent;
+import net.neoforged.neoforge.network.PacketDistributor;
 import net.neoforged.neoforge.network.event.RegisterConfigurationTasksEvent;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 import one.dqu.additionaladditions.AdditionalAdditions;
 import one.dqu.additionaladditions.client.BarometerAngleProperty;
 import one.dqu.additionaladditions.client.HasDiscProperty;
-import one.dqu.additionaladditions.config.Config;
 import one.dqu.additionaladditions.config.io.ConfigLoader;
 import one.dqu.additionaladditions.config.network.ConfigSyncS2CPayload;
 import one.dqu.additionaladditions.config.network.neoforge.ConfigSyncTask;
@@ -40,7 +41,6 @@ import one.dqu.additionaladditions.core.util.neoforge.RegistrarImpl;
 import one.dqu.additionaladditions.feature.pocket_jukebox.PocketJukeboxPlayer;
 import one.dqu.additionaladditions.feature.rope.RopeArrowRenderer;
 import one.dqu.additionaladditions.feature.suspicious_dye.glint.GlintResourceGenerator;
-import one.dqu.additionaladditions.recipe.neoforge.JEIBrewingRecipeSync;
 import one.dqu.additionaladditions.registry.AABlocks;
 import one.dqu.additionaladditions.registry.AAEntities;
 import one.dqu.additionaladditions.registry.AAMisc;
@@ -51,6 +51,7 @@ public final class AdditionalAdditionsNeoForge {
         AdditionalAdditions.init();
 
         NeoForge.EVENT_BUS.addListener(LootTableLoadEvent.class, this::onLootTableLoad);
+        NeoForge.EVENT_BUS.addListener(OnDatapackSyncEvent.class, this::onDatapackSync);
         modEventBus.addListener(FMLCommonSetupEvent.class, this::onSetupEvent);
         modEventBus.addListener(BuildCreativeModeTabContentsEvent.class, this::onBuildCreativeTabContents);
         modEventBus.addListener(RegisterPayloadHandlersEvent.class, this::onRegisterPayloadHandlers);
@@ -67,8 +68,6 @@ public final class AdditionalAdditionsNeoForge {
             modEventBus.addListener(RegisterConditionalItemModelPropertyEvent.class, this::onRegisterConditionalProperty);
             modEventBus.addListener(RegisterRangeSelectItemModelPropertyEvent.class, this::onRegisterRangeSelectProperty);
         }
-
-        JEIBrewingRecipeSync.register();
 
         RegistrarImpl.registerAll(modEventBus);
     }
@@ -121,21 +120,21 @@ public final class AdditionalAdditionsNeoForge {
 
     private void onRegisterPayloadHandlers(RegisterPayloadHandlersEvent event) {
         final PayloadRegistrar registrar = event.registrar("1");
-        registrar.configurationToClient(
+        registrar.commonToClient(
                 ConfigSyncS2CPayload.TYPE,
                 ConfigSyncS2CPayload.STREAM_CODEC,
                 (payload, context) -> context.enqueueWork(() -> {
-                    var config = payload.config();
-                    int version = ConfigLoader.readVersion(config).version();
-                    if (version != Config.VERSION.get().version()) {
-                        AdditionalAdditions.LOGGER.warn("[{}] Received incompatible config version from server, disconnecting. (server: {}, client: {})", AdditionalAdditions.NAMESPACE, version, Config.VERSION.get().version());
+                    if (!ConfigLoader.applyFromServer(payload.config())) {
                         context.disconnect(Component.translatable("additionaladditions.gui.config.disconnect"));
-                        return;
                     }
-                    ConfigLoader.apply(config);
-                    AdditionalAdditions.LOGGER.info("[{}] Loaded config from server", AdditionalAdditions.NAMESPACE);
                 })
         );
+    }
+
+    private void onDatapackSync(OnDatapackSyncEvent event) {
+        if (event.getPlayer() != null) return;
+        ConfigSyncS2CPayload payload = ConfigSyncS2CPayload.create();
+        event.getRelevantPlayers().forEach(player -> PacketDistributor.sendToPlayer(player, payload));
     }
 
     private void onRegisterConfigurationTasks(RegisterConfigurationTasksEvent event) {

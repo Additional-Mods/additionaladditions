@@ -35,7 +35,7 @@ public class RopeContent {
         return AAReg.block(RopeBlock::new)
                 .props(p -> p
                         .mapColor(MapColor.COLOR_BROWN)
-                        .pushReaction(PushReaction.DESTROY)
+                        .pushReaction(PushReaction.POPPED)
                         .noCollision()
                         .sound(SoundType.WOOL)
                         .explosionResistance(0f)

@@ -1,6 +1,5 @@
 package one.dqu.additionaladditions.feature.glow_stick;
 
-import com.mojang.serialization.MapCodec;
 import net.minecraft.core.Direction;
 import net.minecraft.world.entity.item.FallingBlockEntity;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -30,8 +29,6 @@ import org.jetbrains.annotations.Nullable;
 public class GlowStickBlock extends FallingBlock implements SimpleWaterloggedBlock {
     public static final VoxelShape shape = Block.box(0, 0, 0, 16, 1, 16);
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
-    public static final MapCodec<GlowStickBlock> CODEC = simpleCodec(GlowStickBlock::new);
-
     public GlowStickBlock(Properties settings) {
         super(settings);
         registerDefaultState(getStateDefinition().any().setValue(WATERLOGGED, false));
@@ -45,11 +42,6 @@ public class GlowStickBlock extends FallingBlock implements SimpleWaterloggedBlo
     @Override
     protected boolean canSurvive(BlockState blockState, LevelReader levelReader, BlockPos blockPos) {
         return canSupportCenter(levelReader, blockPos.below(), Direction.UP);
-    }
-
-    @Override
-    protected MapCodec<? extends FallingBlock> codec() {
-        return CODEC;
     }
 
     @Override

@@ -6,13 +6,15 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
+import net.minecraft.advancements.Advancement;
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.ItemModelGenerators;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
+import net.minecraft.data.worldgen.BootstrapContext;
+import net.minecraft.world.item.crafting.Recipe;
 import one.dqu.additionaladditions.AdditionalAdditions;
 import one.dqu.additionaladditions.core.datagen.AABlockDatagen;
 import one.dqu.additionaladditions.core.datagen.AAGameTestDatagen;
@@ -20,6 +22,7 @@ import one.dqu.additionaladditions.core.datagen.AAItemDatagen;
 import one.dqu.additionaladditions.core.datagen.AARecipeDatagenProvider;
 import one.dqu.additionaladditions.fabric.datagen.AABlockTagDatagenProviderFabric;
 import one.dqu.additionaladditions.fabric.datagen.AAItemTagDatagenProviderFabric;
+import one.dqu.additionaladditions.registry.AAGameTests;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -53,7 +56,7 @@ public class AdditionalAdditionsDatagenFabric implements DataGeneratorEntrypoint
 
     @Override
     public void buildRegistry(RegistrySetBuilder registryBuilder) {
-        registryBuilder.add(Registries.TEST_ENVIRONMENT, AAGameTestDatagen::bootstrapEnvironments);
+        registryBuilder.add(Registries.TEST_ENVIRONMENT, AAGameTests::bootstrapEnvironments);
         registryBuilder.add(Registries.TEST_INSTANCE, AAGameTestDatagen::bootstrap);
     }
 
@@ -63,8 +66,8 @@ public class AdditionalAdditionsDatagenFabric implements DataGeneratorEntrypoint
         }
 
         @Override
-        protected RecipeProvider createRecipeProvider(HolderLookup.Provider registries, RecipeOutput output) {
-            return new AARecipeDatagenProvider(registries, output);
+        protected RecipeProvider createRecipeProvider(HolderLookup.Provider registries, BootstrapContext<Recipe<?>> recipeOutput, BootstrapContext<Advancement> advancementOutput) {
+            return new AARecipeDatagenProvider(recipeOutput, advancementOutput);
         }
 
         @Override
@@ -80,6 +83,7 @@ public class AdditionalAdditionsDatagenFabric implements DataGeneratorEntrypoint
 
         @Override
         protected void configure(HolderLookup.Provider registries, Entries entries) {
+            entries.addAll(registries.lookupOrThrow(Registries.TEST_ENVIRONMENT));
             entries.addAll(registries.lookupOrThrow(Registries.TEST_INSTANCE));
         }
 

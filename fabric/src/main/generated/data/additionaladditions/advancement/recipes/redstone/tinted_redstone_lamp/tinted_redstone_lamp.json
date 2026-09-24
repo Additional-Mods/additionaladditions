@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "additionaladditions:tinted_redstone_lamp/tinted_redstone_lamp"
+        "recipes": "additionaladditions:tinted_redstone_lamp/tinted_redstone_lamp"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

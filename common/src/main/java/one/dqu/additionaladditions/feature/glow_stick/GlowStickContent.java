@@ -36,7 +36,7 @@ public class GlowStickContent {
         return AAReg.block(GlowStickBlock::new)
                 .props(p -> p
                         .mapColor(MapColor.NONE)
-                        .pushReaction(PushReaction.DESTROY)
+                        .pushReaction(PushReaction.POPPED)
                         .noCollision()
                         .lightLevel(state -> 12)
                         .instabreak())

@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "additionaladditions:honeyed_apple/honeyed_apple"
+        "recipes": "additionaladditions:honeyed_apple/honeyed_apple"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

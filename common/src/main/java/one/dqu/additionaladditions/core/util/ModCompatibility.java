@@ -1,8 +1,6 @@
 package one.dqu.additionaladditions.core.util;
 
 import dev.architectury.injectables.annotations.ExpectPlatform;
-import net.minecraft.client.Minecraft;
-import net.minecraft.world.level.Level;
 
 import java.util.function.Supplier;
 
@@ -20,11 +18,5 @@ public class ModCompatibility {
     @ExpectPlatform
     public static boolean isClientSide() {
         throw new AssertionError();
-    }
-
-    public static class Client {
-        public static Level getClientLevel() {
-            return Minecraft.getInstance().level;
-        }
     }
 }

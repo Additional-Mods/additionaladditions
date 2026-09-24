@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "additionaladditions:pocket_jukebox/pocket_jukebox"
+        "recipes": "additionaladditions:pocket_jukebox/pocket_jukebox"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

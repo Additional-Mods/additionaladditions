@@ -9,15 +9,13 @@
           "name": "additionaladditions:wisteria_vines"
         }
       ],
-      "conditions": [
-        {
-          "condition": "minecraft:block_state_property",
-          "block": "additionaladditions:wisteria_crop",
-          "properties": {
-            "north": "true"
-          }
+      "condition": {
+        "type": "minecraft:match_block",
+        "blocks": "additionaladditions:wisteria_crop",
+        "state": {
+          "north": "true"
         }
-      ]
+      }
     },
     {
       "rolls": 1,
@@ -27,15 +25,13 @@
           "name": "additionaladditions:wisteria_vines"
         }
       ],
-      "conditions": [
-        {
-          "condition": "minecraft:block_state_property",
-          "block": "additionaladditions:wisteria_crop",
-          "properties": {
-            "south": "true"
-          }
+      "condition": {
+        "type": "minecraft:match_block",
+        "blocks": "additionaladditions:wisteria_crop",
+        "state": {
+          "south": "true"
         }
-      ]
+      }
     },
     {
       "rolls": 1,
@@ -45,15 +41,13 @@
           "name": "additionaladditions:wisteria_vines"
         }
       ],
-      "conditions": [
-        {
-          "condition": "minecraft:block_state_property",
-          "block": "additionaladditions:wisteria_crop",
-          "properties": {
-            "east": "true"
-          }
+      "condition": {
+        "type": "minecraft:match_block",
+        "blocks": "additionaladditions:wisteria_crop",
+        "state": {
+          "east": "true"
         }
-      ]
+      }
     },
     {
       "rolls": 1,
@@ -63,15 +57,13 @@
           "name": "additionaladditions:wisteria_vines"
         }
       ],
-      "conditions": [
-        {
-          "condition": "minecraft:block_state_property",
-          "block": "additionaladditions:wisteria_crop",
-          "properties": {
-            "west": "true"
-          }
+      "condition": {
+        "type": "minecraft:match_block",
+        "blocks": "additionaladditions:wisteria_crop",
+        "state": {
+          "west": "true"
         }
-      ]
+      }
     },
     {
       "rolls": 1,
@@ -81,16 +73,13 @@
           "name": "additionaladditions:wisteria_vines"
         }
       ],
-      "conditions": [
-        {
-          "condition": "minecraft:block_state_property",
-          "block": "additionaladditions:wisteria_crop",
-          "properties": {
-            "up": "true"
-          }
+      "condition": {
+        "type": "minecraft:match_block",
+        "blocks": "additionaladditions:wisteria_crop",
+        "state": {
+          "up": "true"
         }
-      ]
+      }
     }
   ]
 }
-

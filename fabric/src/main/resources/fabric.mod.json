@@ -54,9 +54,6 @@
     "rei_client": [
       "one.dqu.additionaladditions.recipe.REICompat"
     ],
-    "rei_common": [
-      "one.dqu.additionaladditions.recipe.REICommonCompat"
-    ],
     "fabric-datagen": [
       "one.dqu.additionaladditions.fabric.AdditionalAdditionsDatagenFabric"
     ]
@@ -68,7 +65,7 @@
   "accessWidener": "additionaladditions.accesswidener",
   "depends": {
     "fabricloader": ">=0.18.0",
-    "minecraft": "26.2",
+    "minecraft": "26.3",
     "java": ">=21",
     "fabric-api": "*"
   },

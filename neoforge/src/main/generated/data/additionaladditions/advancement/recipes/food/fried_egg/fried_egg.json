@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "additionaladditions:fried_egg/fried_egg"
+        "recipes": "additionaladditions:fried_egg/fried_egg"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

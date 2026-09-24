@@ -3,23 +3,19 @@
   "pools": [
     {
       "bonus_rolls": 0.0,
-      "conditions": [
-        {
-          "condition": "minecraft:survives_explosion"
-        }
-      ],
+      "condition": {
+        "type": "minecraft:survives_explosion"
+      },
       "entries": [
         {
           "type": "minecraft:item",
-          "conditions": [
-            {
-              "block": "additionaladditions:spikeblossom",
-              "condition": "minecraft:block_state_property",
-              "properties": {
-                "half": "lower"
-              }
+          "condition": {
+            "blocks": "additionaladditions:spikeblossom",
+            "type": "minecraft:match_block",
+            "state": {
+              "half": "lower"
             }
-          ],
+          },
           "name": "additionaladditions:spikeblossom"
         }
       ],
@@ -28,4 +24,3 @@
   ],
   "random_sequence": "additionaladditions:blocks/spikeblossom"
 }
-

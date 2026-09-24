@@ -11,10 +11,8 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.server.packs.resources.Resource;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.item.DyeColor;
-import one.dqu.additionaladditions.AdditionalAdditions;
 import one.dqu.additionaladditions.config.Config;
 
-import java.util.Locale;
 
 @Environment(EnvType.CLIENT)
 public class GlintResourceGenerator {
@@ -32,17 +30,11 @@ public class GlintResourceGenerator {
 
             for (DyeColor color : DyeColor.values()) {
                 NativeImage tintedItem = generateTintedTexture(itemImage, color, false);
-                Identifier tintedItemLocation = Identifier.tryBuild(
-                        AdditionalAdditions.NAMESPACE,
-                        "textures/util/enchanted_item_glint_" + color.getName().toLowerCase(Locale.ROOT) + ".png"
-                );
+                Identifier tintedItemLocation = GlintRenderTypes.itemTexture(color);
                 textureManager.register(tintedItemLocation, new DynamicTexture(() -> "glint_item_" + color.getName(), tintedItem));
 
                 NativeImage tintedEntity = generateTintedTexture(entityImage, color, true);
-                Identifier tintedEntityLocation = Identifier.tryBuild(
-                        AdditionalAdditions.NAMESPACE,
-                        "textures/util/enchanted_entity_glint_" + color.getName().toLowerCase(Locale.ROOT) + ".png"
-                );
+                Identifier tintedEntityLocation = GlintRenderTypes.entityTexture(color);
                 textureManager.register(tintedEntityLocation, new DynamicTexture(() -> "glint_entity_" + color.getName(), tintedEntity));
             }
         } catch (Exception e) {

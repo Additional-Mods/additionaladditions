@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "additionaladditions:copper_patina/patina_block"
+        "recipes": "additionaladditions:copper_patina/patina_block"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "additionaladditions:rose_gold/rose_gold_axe"
+        "recipes": "additionaladditions:rose_gold/rose_gold_axe"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

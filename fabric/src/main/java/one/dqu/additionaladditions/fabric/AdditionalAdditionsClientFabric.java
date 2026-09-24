@@ -5,7 +5,7 @@ import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientLifecycleEvents;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.networking.v1.ClientConfigurationNetworking;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
-import net.fabricmc.fabric.api.client.recipe.v1.sync.ClientRecipeSynchronizedEvent;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.client.rendering.v1.BlockColorRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
@@ -19,26 +19,19 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.packs.PackType;
 import net.minecraft.server.packs.resources.ResourceManager;
-import net.minecraft.world.item.crafting.RecipeHolder;
-import net.minecraft.world.item.crafting.RecipeType;
 import one.dqu.additionaladditions.AdditionalAdditions;
 import one.dqu.additionaladditions.client.BarometerAngleProperty;
 import one.dqu.additionaladditions.client.HasDiscProperty;
-import one.dqu.additionaladditions.config.Config;
 import one.dqu.additionaladditions.config.io.ConfigLoader;
 import one.dqu.additionaladditions.config.network.ConfigSyncS2CPayload;
 import one.dqu.additionaladditions.core.util.fabric.ModCompatibilityImpl;
 import one.dqu.additionaladditions.feature.pocket_jukebox.PocketJukeboxPlayer;
 import one.dqu.additionaladditions.feature.rope.RopeArrowRenderer;
 import one.dqu.additionaladditions.feature.suspicious_dye.glint.GlintResourceGenerator;
-import one.dqu.additionaladditions.recipe.ClientRecipeCache;
 import one.dqu.additionaladditions.registry.AABlocks;
 import one.dqu.additionaladditions.registry.AAEntities;
-import one.dqu.additionaladditions.registry.AAMisc;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public final class AdditionalAdditionsClientFabric implements ClientModInitializer {
     @Override
@@ -59,15 +52,16 @@ public final class AdditionalAdditionsClientFabric implements ClientModInitializ
         // config sync
         ClientConfigurationNetworking.registerGlobalReceiver(ConfigSyncS2CPayload.TYPE, (packet, context) -> {
             context.client().execute(() -> {
-                var config = packet.config();
-                int version = ConfigLoader.readVersion(config).version();
-                if (version != Config.VERSION.get().version()) {
-                    AdditionalAdditions.LOGGER.warn("[{}] Received incompatible config version from server, disconnecting. (server: {}, client: {})", AdditionalAdditions.NAMESPACE, version, Config.VERSION.get().version());
+                if (!ConfigLoader.applyFromServer(packet.config())) {
                     context.responseSender().disconnect(Component.translatable("additionaladditions.gui.config.disconnect"));
-                    return;
                 }
-                ConfigLoader.apply(config);
-                AdditionalAdditions.LOGGER.info("[{}] Loaded config from server", AdditionalAdditions.NAMESPACE);
+            });
+        });
+        ClientPlayNetworking.registerGlobalReceiver(ConfigSyncS2CPayload.TYPE, (packet, context) -> {
+            context.client().execute(() -> {
+                if (!ConfigLoader.applyFromServer(packet.config())) {
+                    context.responseSender().disconnect(Component.translatable("additionaladditions.gui.config.disconnect"));
+                }
             });
         });
         ClientPlayConnectionEvents.DISCONNECT.register((handler, client) -> {
@@ -75,15 +69,6 @@ public final class AdditionalAdditionsClientFabric implements ClientModInitializ
                 ConfigLoader.load();
                 AdditionalAdditions.LOGGER.info("[{}] Reverted to local config", AdditionalAdditions.NAMESPACE);
             });
-        });
-
-        // recipe sync
-        ClientRecipeSynchronizedEvent.EVENT.register((client, recipes) -> {
-            List<? extends RecipeHolder<?>> brewing = List.copyOf(recipes.getAllOfType(AAMisc.BREWING_RECIPE_TYPE.get()));
-            Map<RecipeType<?>, List<RecipeHolder<?>>> map = new HashMap<>();
-            //noinspection unchecked
-            map.put(AAMisc.BREWING_RECIPE_TYPE.get(), (List<RecipeHolder<?>>) brewing);
-            ClientRecipeCache.set(map);
         });
 
         // color providers

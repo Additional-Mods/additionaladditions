@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "additionaladditions:rose_gold/rose_gold_ingot"
+        "recipes": "additionaladditions:rose_gold/rose_gold_ingot"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

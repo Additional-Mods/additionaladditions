@@ -5,6 +5,7 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.component.DataComponentInitializers;
 import net.minecraft.core.component.DataComponentMap;
+import net.minecraft.core.component.BlockTransformer;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
@@ -51,6 +52,16 @@ public record AAMaterial(
             ToolLikeConfig toolLike = toolConfigs.get(toolType).get();
 
             applyToolComponents(builder, toolType, material, toolLike, blocks);
+
+            ResourceKey<BlockTransformer> transformer = switch (toolType) {
+                case AXE -> BlockTransformers.AXE;
+                case HOE -> BlockTransformers.HOE;
+                case SHOVEL -> BlockTransformers.SHOVEL;
+                default -> null;
+            };
+            if (transformer != null) {
+                builder.set(DataComponents.BLOCK_TRANSFORMER, registries.lookupOrThrow(Registries.BLOCK_TRANSFORMER).getOrThrow(transformer));
+            }
 
             if (toolType == ToolType.SPEAR) {
                 applySpearComponents(builder, toolLike, registries);
@@ -150,7 +161,7 @@ public record AAMaterial(
         builder.set(DataComponents.DAMAGE_TYPE, registries.lookupOrThrow(Registries.DAMAGE_TYPE).getOrThrow(DamageTypes.SPEAR));
         builder.set(DataComponents.KINETIC_WEAPON, spear.kineticWeapon());
         builder.set(DataComponents.PIERCING_WEAPON, spear.piercingWeapon());
-        builder.set(DataComponents.SWING_ANIMATION, new SwingAnimation(SwingAnimationType.STAB, spear.swingAnimationTicks()));
+        builder.set(DataComponents.ATTACK_ANIMATION, new SwingAnimation(SwingAnimationType.STAB, spear.swingAnimationTicks()));
 
         // constant values from Item.Properties#spear
         builder.set(DataComponents.ATTACK_RANGE, new AttackRange(2.0F, 4.5F, 2.0F, 6.5F, 0.125F, 0.5F));

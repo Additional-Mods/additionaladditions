@@ -37,19 +37,19 @@ PJ (Dutch Translation)
 description = '''
 A mod that expands on parts of Minecraft that feel incomplete, with additions that feel like they should already be part of vanilla.
 '''
-logoFile = "assets/additionaladditions/icon.png"
+iconFile = "assets/additionaladditions/icon.png"
 
 [[dependencies.additionaladditions]]
 modId = "neoforge"
 type = "required"
-versionRange = "[26.2.0.19-beta,)"
+versionRange = "[26.3.0.10-beta,)"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.additionaladditions]]
 modId = "minecraft"
 type = "required"
-versionRange = "[26.2]"
+versionRange = "[26.3]"
 ordering = "NONE"
 side = "BOTH"
 

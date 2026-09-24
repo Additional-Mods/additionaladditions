@@ -6,16 +6,17 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.DataResult;
 import com.mojang.serialization.JsonOps;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.core.HolderLookup;
+import net.minecraft.core.HolderGetter;
+import net.minecraft.core.Registry;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.RegistryOps;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.packs.resources.Resource;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.entries.LootPoolEntries;
 import net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer;
-import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
-import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
+import net.minecraft.world.level.storage.loot.providers.number.ints.ContextIntProviders;
 import one.dqu.additionaladditions.AdditionalAdditions;
 import one.dqu.additionaladditions.config.ConfigProperty;
 import one.dqu.additionaladditions.config.Toggleable;
@@ -26,6 +27,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.function.Consumer;
 
 /**
@@ -34,7 +36,7 @@ import java.util.function.Consumer;
  * Not using Global Loot Modifiers because Fabric doesn't have an equivalent and is code based.
  * This is a shared solution that still has injections data driven.
  * <p>
- * The injection files are loaded from "data/additionaladditions/loot_table/injections/".
+ * The injection files are loaded from "data/additionaladditions/loot_injection/".
  * <p>
  * Format:
  * ```
@@ -74,14 +76,14 @@ public class LootAdder {
     public void prepare(ResourceManager resourceManager) {
         Map<Identifier, List<JsonElement>> map = new HashMap<>();
 
-        Map<Identifier, Resource> resources = resourceManager.listResources("loot_table/injections", location ->
+        Map<Identifier, Resource> resources = resourceManager.listResources("loot_injection", location ->
                 location.getNamespace().equals(AdditionalAdditions.NAMESPACE) && location.getPath().endsWith(".json")
         );
 
         for (var entry : resources.entrySet()) {
             Identifier location = entry.getKey();
             Resource resource = entry.getValue();
-            String path = location.getPath().substring("loot_table/injections/".length(), location.getPath().length() - ".json".length());
+            String path = location.getPath().substring("loot_injection/".length(), location.getPath().length() - ".json".length());
 
             // check if the feature is enabled based on path
 
@@ -134,28 +136,34 @@ public class LootAdder {
      * This creates a new loot pool containing all injected entries and passes it to the consumer.
      *
      * @param target     the loot table to inject into
-     * @param registries holder lookup provider for registry access
+     * @param registries holder getter provider for registry access
      * @param consumer   receives the created loot pool
      * @param cleanPools runnable to clear existing pools of the target loot table
      */
-    public void inject(Identifier target, HolderLookup.Provider registries, Consumer<LootPool> consumer, Runnable cleanPools) {
+    public void inject(Identifier target, HolderGetter.Provider registries, Consumer<LootPool> consumer, Runnable cleanPools) {
         List<JsonElement> injections = this.injections.get(target);
 
         if (injections == null) {
             return;
         }
 
+        RegistryOps<JsonElement> ops = RegistryOps.create(JsonOps.INSTANCE, new RegistryOps.RegistryInfoLookup() {
+            @Override
+            public <T> Optional<HolderGetter<T>> lookup(ResourceKey<? extends Registry<? extends T>> registryKey) {
+                return registries.lookup(registryKey).map(getter -> getter);
+            }
+        });
         boolean cleaned = false;
         LootPool.Builder pool = LootPool.lootPool();
 
         if (target.getPath().startsWith("chests/")) {
-            pool.setRolls(UniformGenerator.between(1.0F, 3.0F));
+            pool.setRolls(ContextIntProviders.between(1, 3));
         } else {
-            pool.setRolls(ConstantValue.exactly(1.0F));
+            pool.setRolls(ContextIntProviders.exactly(1));
         }
 
         for (JsonElement json : injections) {
-            DataResult<LootInjection> injection = LootInjection.CODEC.parse(RegistryOps.create(JsonOps.INSTANCE, registries), json);
+            DataResult<LootInjection> injection = LootInjection.CODEC.parse(ops, json);
             if (injection.result().isEmpty()) {
                 AdditionalAdditions.LOGGER.error("[{}] Failed to parse loot injection for target {}: {}", AdditionalAdditions.NAMESPACE, target, injection.error().get().message());
                 continue;

@@ -9,15 +9,13 @@
           "name": "additionaladditions:wisteria"
         }
       ],
-      "conditions": [
-        {
-          "condition": "minecraft:block_state_property",
-          "block": "additionaladditions:wisteria",
-          "properties": {
-            "north": "true"
-          }
+      "condition": {
+        "type": "minecraft:match_block",
+        "blocks": "additionaladditions:wisteria",
+        "state": {
+          "north": "true"
         }
-      ]
+      }
     },
     {
       "rolls": 1,
@@ -27,15 +25,13 @@
           "name": "additionaladditions:wisteria"
         }
       ],
-      "conditions": [
-        {
-          "condition": "minecraft:block_state_property",
-          "block": "additionaladditions:wisteria",
-          "properties": {
-            "south": "true"
-          }
+      "condition": {
+        "type": "minecraft:match_block",
+        "blocks": "additionaladditions:wisteria",
+        "state": {
+          "south": "true"
         }
-      ]
+      }
     },
     {
       "rolls": 1,
@@ -45,15 +41,13 @@
           "name": "additionaladditions:wisteria"
         }
       ],
-      "conditions": [
-        {
-          "condition": "minecraft:block_state_property",
-          "block": "additionaladditions:wisteria",
-          "properties": {
-            "east": "true"
-          }
+      "condition": {
+        "type": "minecraft:match_block",
+        "blocks": "additionaladditions:wisteria",
+        "state": {
+          "east": "true"
         }
-      ]
+      }
     },
     {
       "rolls": 1,
@@ -63,15 +57,13 @@
           "name": "additionaladditions:wisteria"
         }
       ],
-      "conditions": [
-        {
-          "condition": "minecraft:block_state_property",
-          "block": "additionaladditions:wisteria",
-          "properties": {
-            "west": "true"
-          }
+      "condition": {
+        "type": "minecraft:match_block",
+        "blocks": "additionaladditions:wisteria",
+        "state": {
+          "west": "true"
         }
-      ]
+      }
     },
     {
       "rolls": 1,
@@ -81,16 +73,13 @@
           "name": "additionaladditions:wisteria"
         }
       ],
-      "conditions": [
-        {
-          "condition": "minecraft:block_state_property",
-          "block": "additionaladditions:wisteria",
-          "properties": {
-            "up": "true"
-          }
+      "condition": {
+        "type": "minecraft:match_block",
+        "blocks": "additionaladditions:wisteria",
+        "state": {
+          "up": "true"
         }
-      ]
+      }
     }
   ]
 }
-

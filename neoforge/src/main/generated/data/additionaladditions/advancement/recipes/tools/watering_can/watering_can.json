@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "additionaladditions:watering_can/watering_can"
+        "recipes": "additionaladditions:watering_can/watering_can"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

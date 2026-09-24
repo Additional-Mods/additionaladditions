@@ -1,21 +1,25 @@
 package one.dqu.additionaladditions.core.datagen.template;
 
 import net.minecraft.core.Holder;
+import net.minecraft.core.component.predicates.PotionsPredicate;
 import net.minecraft.data.recipes.*;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStackTemplate;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.Potion;
+import net.minecraft.world.item.crafting.BrewingRecipe;
 import net.minecraft.world.item.crafting.CookingBookCategory;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.PotionIngredient;
 import net.minecraft.world.level.ItemLike;
 import one.dqu.additionaladditions.core.datagen.template.recipe.RecipeEntry;
 import one.dqu.additionaladditions.core.datagen.template.recipe.RecipeInput;
 import one.dqu.additionaladditions.core.datagen.template.recipe.SpecialRecipeBuilder;
-import one.dqu.additionaladditions.recipe.BrewingRecipe;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 public class Recipes {
     private Recipes() {
@@ -130,8 +134,10 @@ public class Recipes {
     // Brewing
 
     public static RecipeEntry brewing(Holder<Potion> potion, RecipeInput ingredient, int count) {
-        return new RecipeEntry((registries, result) -> new SpecialRecipeBuilder(
-                new BrewingRecipe(potion, ingredient.ingredient(registries), new ItemStackTemplate(result.asItem(), count))));
+        return new RecipeEntry((registries, result) -> new SpecialRecipeBuilder(new BrewingRecipe(
+                new PotionIngredient(Ingredient.of(Items.POTION, Items.SPLASH_POTION, Items.LINGERING_POTION), Optional.of(PotionsPredicate.ofPotion(potion))),
+                new PotionIngredient(ingredient.ingredient(registries), Optional.empty()),
+                new ItemStackTemplate(result.asItem(), count))));
     }
 
     public static RecipeEntry brewing(Holder<Potion> potion, ItemLike ingredient) {

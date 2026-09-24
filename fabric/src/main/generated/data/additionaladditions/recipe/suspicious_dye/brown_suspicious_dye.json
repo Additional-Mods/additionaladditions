@@ -1,8 +1,19 @@
 {
-  "type": "additionaladditions:brewing",
-  "ingredient": "additionaladditions:mudflower",
-  "potion": "minecraft:water",
-  "result": {
+  "type": "minecraft:brewing",
+  "input": {
+    "item": [
+      "minecraft:potion",
+      "minecraft:splash_potion",
+      "minecraft:lingering_potion"
+    ],
+    "potion_contents": {
+      "potions": "minecraft:water"
+    }
+  },
+  "output": {
     "id": "additionaladditions:brown_suspicious_dye"
+  },
+  "reagent": {
+    "item": "additionaladditions:mudflower"
   }
 }

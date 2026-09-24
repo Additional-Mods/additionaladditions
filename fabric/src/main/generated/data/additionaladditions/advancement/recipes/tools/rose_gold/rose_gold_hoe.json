@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "additionaladditions:rose_gold/rose_gold_hoe"
+        "recipes": "additionaladditions:rose_gold/rose_gold_hoe"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

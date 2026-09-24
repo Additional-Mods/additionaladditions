@@ -44,7 +44,7 @@ public class SnifferPlantsTests {
         ServerLevel level = ctx.getLevel();
         BlockPos abs = ctx.absolutePos(relPos);
         BlockState state = level.getBlockState(abs);
-        ((BonemealableBlock) state.getBlock()).performBonemeal(level, level.getRandom(), abs, state);
+        ((BonemealableBlock) state.getBlock()).performBonemeal(level, level.getRandom(), abs, state, BonemealSource.INTERACTION);
     }
 
     private static void assertGrown(GameTestHelper ctx, CropDef def) {

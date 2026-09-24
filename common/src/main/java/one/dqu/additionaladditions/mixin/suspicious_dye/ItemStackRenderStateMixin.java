@@ -8,24 +8,13 @@ import one.dqu.additionaladditions.feature.suspicious_dye.glint.GlintColorHolder
 import one.dqu.additionaladditions.feature.suspicious_dye.glint.GlintContext;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-/**
- * Stores the glint color on the render state and restores it into GlintContext before submission.
- * Also associates the color with quad lists since ItemRenderer doesn't have access to the ItemStack.
- */
 @Mixin(ItemStackRenderState.class)
 public class ItemStackRenderStateMixin implements GlintColorHolder {
-    @Shadow
-    private ItemStackRenderState.LayerRenderState[] layers;
-
-    @Shadow
-    private int activeLayerCount;
-
     @Unique
     private @Nullable DyeColor additionaladditions$glintColor;
 
@@ -45,20 +34,12 @@ public class ItemStackRenderStateMixin implements GlintColorHolder {
     }
 
     @Inject(method = "submit", at = @At("HEAD"))
-    private void restoreContext(PoseStack poseStack, SubmitNodeCollector submitNodeCollector, int i, int j, int k, CallbackInfo ci) {
-        DyeColor color = this.additionaladditions$glintColor;
-        GlintContext.setDyeColor(color);
-
-        if (color != null) {
-            for (int l = 0; l < this.activeLayerCount; l++) {
-                // since ItemRenderer doesn't get the ItemStack, associate color with quad list so it can be retrieved in ItemRendererMixin
-                GlintContext.setColorForQuads(this.layers[l].prepareQuadList(), color);
-            }
-        }
+    private void setContext(PoseStack poseStack, SubmitNodeCollector submitNodeCollector, int lightCoords, int overlayCoords, int outlineColor, CallbackInfo ci) {
+        GlintContext.set(this.additionaladditions$glintColor);
     }
 
     @Inject(method = "submit", at = @At("RETURN"))
-    private void clearContext(PoseStack poseStack, SubmitNodeCollector submitNodeCollector, int i, int j, int k, CallbackInfo ci) {
-        GlintContext.setDyeColor(null);
+    private void clearContext(PoseStack poseStack, SubmitNodeCollector submitNodeCollector, int lightCoords, int overlayCoords, int outlineColor, CallbackInfo ci) {
+        GlintContext.set(null);
     }
 }

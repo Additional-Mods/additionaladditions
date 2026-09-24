@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "additionaladditions:sniffer_plants/lime_dye_from_bulbus"
+        "recipes": "additionaladditions:sniffer_plants/lime_dye_from_bulbus"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

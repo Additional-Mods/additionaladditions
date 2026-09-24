@@ -2,15 +2,11 @@ package one.dqu.additionaladditions.recipe;
 
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
-import mezz.jei.api.constants.RecipeTypes;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.ingredient.IRecipeSlotDrawable;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.category.extensions.vanilla.crafting.ICraftingCategoryExtension;
-import mezz.jei.api.recipe.vanilla.IJeiBrewingRecipe;
-import mezz.jei.api.recipe.vanilla.IVanillaRecipeFactory;
-import mezz.jei.api.registration.IRecipeRegistration;
 import mezz.jei.api.registration.IVanillaCategoryExtensionRegistration;
 import mezz.jei.api.runtime.IIngredientManager;
 import mezz.jei.api.runtime.IJeiRuntime;
@@ -19,7 +15,6 @@ import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.*;
-import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.display.SlotDisplay;
 import one.dqu.additionaladditions.AdditionalAdditions;
@@ -56,11 +51,6 @@ public class JEICompat implements IModPlugin {
     }
 
     @Override
-    public void registerRecipes(IRecipeRegistration event) {
-        brewingRecipes(event);
-    }
-
-    @Override
     public void onRuntimeAvailable(IJeiRuntime jeiRuntime) {
         IIngredientManager manager = jeiRuntime.getIngredientManager();
 
@@ -78,34 +68,6 @@ public class JEICompat implements IModPlugin {
         }
     }
 
-    // BrewingRecipe
-    private void brewingRecipes(IRecipeRegistration event) {
-        if (!ModCompatibility.isClientSide()) return;
-
-        IVanillaRecipeFactory factory = event.getVanillaRecipeFactory();
-
-        ClientRecipeCache.onceAvailable(() -> {
-            List<IJeiBrewingRecipe> jeiRecipes = ClientRecipeCache.get(AAMisc.BREWING_RECIPE_TYPE.get())
-                    .stream()
-                    .map(holder -> {
-                        BrewingRecipe recipe = holder.value();
-                        Identifier id = holder.id().identifier();
-
-                        ItemStack input = PotionContents.createItemStack(Items.POTION, recipe.getPotion());
-                        List<ItemStack> ingredients = BuiltInRegistries.ITEM.stream()
-                                .map(ItemStack::new)
-                                .filter(recipe.getIngredient()::test)
-                                .toList();
-                        ItemStack output = recipe.getResult().create();
-
-                        return factory.createBrewingRecipe(ingredients, List.of(input), output, id);
-                    })
-                    .toList();
-
-            event.addRecipes(RecipeTypes.BREWING, jeiRecipes);
-        });
-    }
-
     private static class SuspiciousDyeExtension implements ICraftingCategoryExtension<SuspiciousDyeRecipe> {
         @Override
         public List<SlotDisplay> getIngredients(RecipeHolder<SuspiciousDyeRecipe> recipeHolder) {
@@ -119,7 +81,7 @@ public class JEICompat implements IModPlugin {
 
             return List.of(
                     new SlotDisplay.Composite(foilStacks),
-                    new SlotDisplay.TagSlotDisplay(AATags.SUSPICIOUS_DYES)
+                    new SlotDisplay.TagSlotDisplay(BuiltInRegistries.ITEM.getOrThrow(AATags.SUSPICIOUS_DYES))
             );
         }
 

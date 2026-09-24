@@ -21,7 +21,7 @@ public class RedstoneLampContent {
         return AAReg.block(TintedRedstoneLampBlock::new)
                 .props(p -> p
                         .mapColor(MapColor.TERRACOTTA_PURPLE)
-                        .pushReaction(PushReaction.NORMAL)
+                        .pushReaction(PushReaction.PUSH_PULL)
                         .sound(SoundType.GLASS)
                         .strength(0.3f))
                 .make("tinted_redstone_lamp");

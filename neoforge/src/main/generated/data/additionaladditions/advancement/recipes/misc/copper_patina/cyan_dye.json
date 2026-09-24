@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "additionaladditions:copper_patina/cyan_dye"
+        "recipes": "additionaladditions:copper_patina/cyan_dye"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

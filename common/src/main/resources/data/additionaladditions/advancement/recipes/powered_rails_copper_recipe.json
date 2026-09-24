@@ -14,7 +14,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "additionaladditions:powered_rails_copper_recipe"
+        "recipes": "additionaladditions:powered_rails_copper_recipe"
       }
     }
   },

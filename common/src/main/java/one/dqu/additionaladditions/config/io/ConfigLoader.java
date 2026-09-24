@@ -86,6 +86,20 @@ public class ConfigLoader {
     }
 
     /**
+     * Applies config received from the server. Returns false if the config version is incompatible.
+     */
+    public static boolean applyFromServer(Map<Identifier, JsonElement> configFiles) {
+        int version = readVersion(configFiles).version();
+        if (version != Config.VERSION.get().version()) {
+            AdditionalAdditions.LOGGER.warn("[{}] Received incompatible config version from server, disconnecting. (server: {}, client: {})", AdditionalAdditions.NAMESPACE, version, Config.VERSION.get().version());
+            return false;
+        }
+        apply(configFiles);
+        AdditionalAdditions.LOGGER.info("[{}] Loaded config from server", AdditionalAdditions.NAMESPACE);
+        return true;
+    }
+
+    /**
      * Applies the given config files to their respective ConfigProperty instances and notifies config observers.
      */
     public static void apply(Map<Identifier, JsonElement> configFiles) {

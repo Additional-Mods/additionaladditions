@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "additionaladditions:rose_gold/rose_gold_pickaxe"
+        "recipes": "additionaladditions:rose_gold/rose_gold_pickaxe"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

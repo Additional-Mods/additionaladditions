@@ -3,6 +3,7 @@ package one.dqu.additionaladditions.config.network;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import one.dqu.additionaladditions.AdditionalAdditions;
+import one.dqu.additionaladditions.config.ConfigProperty;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
@@ -12,6 +13,7 @@ import net.minecraft.resources.Identifier;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public record ConfigSyncS2CPayload(Map<Identifier, JsonElement> config) implements CustomPacketPayload {
     public static final Identifier ID = Identifier.fromNamespaceAndPath(AdditionalAdditions.NAMESPACE, "config_sync");
@@ -32,6 +34,11 @@ public record ConfigSyncS2CPayload(Map<Identifier, JsonElement> config) implemen
             ConfigSyncS2CPayload::config,
             ConfigSyncS2CPayload::new
     );
+
+    public static ConfigSyncS2CPayload create() {
+        return new ConfigSyncS2CPayload(ConfigProperty.getAll().stream()
+                .collect(Collectors.toMap(ConfigProperty::path, property -> property.serialize().getOrThrow())));
+    }
 
     @Override
     public Type<? extends CustomPacketPayload> type() {

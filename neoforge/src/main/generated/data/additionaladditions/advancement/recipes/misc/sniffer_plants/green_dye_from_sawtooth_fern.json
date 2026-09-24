@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "additionaladditions:sniffer_plants/green_dye_from_sawtooth_fern"
+        "recipes": "additionaladditions:sniffer_plants/green_dye_from_sawtooth_fern"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "additionaladditions:album/pink_album"
+        "recipes": "additionaladditions:album/pink_album"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

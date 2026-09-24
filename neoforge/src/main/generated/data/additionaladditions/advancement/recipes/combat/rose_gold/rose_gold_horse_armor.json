@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "additionaladditions:rose_gold/rose_gold_horse_armor"
+        "recipes": "additionaladditions:rose_gold/rose_gold_horse_armor"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "additionaladditions:sniffer_plants/brown_dye_from_mudflower"
+        "recipes": "additionaladditions:sniffer_plants/brown_dye_from_mudflower"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

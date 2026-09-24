@@ -1,10 +1,12 @@
 package one.dqu.additionaladditions.core.datagen;
 
-import net.minecraft.core.HolderLookup;
+import net.minecraft.advancements.Advancement;
+import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.MultiRegistryBootstrap;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.data.recipes.RecipeBuilder;
-import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
@@ -18,9 +20,25 @@ import one.dqu.additionaladditions.core.datagen.template.recipe.RecipeInput;
 import one.dqu.additionaladditions.registry.AAItems;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Set;
+
 public class AARecipeDatagenProvider extends RecipeProvider {
-    public AARecipeDatagenProvider(HolderLookup.Provider registries, RecipeOutput output) {
-        super(registries, output);
+    public AARecipeDatagenProvider(BootstrapContext<Recipe<?>> recipeOutput, BootstrapContext<Advancement> advancementOutput) {
+        super(recipeOutput, advancementOutput);
+    }
+
+    public static MultiRegistryBootstrap create() {
+        return new MultiRegistryBootstrap() {
+            @Override
+            public Set<ResourceKey<? extends Registry<?>>> requestedRegistries() {
+                return Set.of(Registries.RECIPE, Registries.ADVANCEMENT);
+            }
+
+            @Override
+            public void run(BootstrapGetter registries) {
+                new AARecipeDatagenProvider(registries.get(Registries.RECIPE), registries.get(Registries.ADVANCEMENT)).buildRecipes();
+            }
+        };
     }
 
     @Override

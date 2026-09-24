@@ -15,6 +15,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.BonemealSource;
 import net.minecraft.world.level.block.BonemealableBlock;
 import net.minecraft.world.level.block.FarmlandBlock;
 import net.minecraft.world.level.block.GrassBlock;
@@ -73,7 +74,7 @@ public class WateringCanItem extends Item {
         // watering
         if (waterLevel > 0 || player.isCreative()) {
             if (state.getBlock() instanceof BonemealableBlock fertilizable && !(state.getBlock() instanceof GrassBlock)) {
-                boolean canFertilize = fertilizable.isValidBonemealTarget(world, pos, state);
+                boolean canFertilize = fertilizable.isValidBonemealTarget(world, pos, state, BonemealSource.INTERACTION);
 
                 if (!canFertilize && !(stateBelow.getBlock() instanceof FarmlandBlock)) {
                     return InteractionResult.PASS;
@@ -85,8 +86,8 @@ public class WateringCanItem extends Item {
 
                 if (canFertilize) {
                     boolean shouldFertilize = world.random.nextFloat() < Config.WATERING_CAN.get().fertilizeChance();
-                    if (shouldFertilize && fertilizable.isBonemealSuccess(world, world.random, pos, state)) {
-                        fertilizable.performBonemeal((ServerLevel) world, world.random, pos, state);
+                    if (shouldFertilize && fertilizable.isBonemealSuccess(world, world.random, pos, state, BonemealSource.INTERACTION)) {
+                        fertilizable.performBonemeal((ServerLevel) world, world.random, pos, state, BonemealSource.INTERACTION);
                         world.playSound(null, pos, SoundEvents.BONE_MEAL_USE, SoundSource.BLOCKS);
 
                         if (player instanceof ServerPlayer serverPlayer) {

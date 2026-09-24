@@ -3,7 +3,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "additionaladditions:sniffer_plants/light_blue_dye_from_wisteria"
+        "recipes": "additionaladditions:sniffer_plants/light_blue_dye_from_wisteria"
       },
       "trigger": "minecraft:recipe_unlocked"
     },

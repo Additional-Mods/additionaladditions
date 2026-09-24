@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "additionaladditions:album/lime_album"
+        "recipes": "additionaladditions:album/lime_album"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

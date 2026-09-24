@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "additionaladditions:fried_egg/fried_egg_from_campfire_cooking"
+        "recipes": "additionaladditions:fried_egg/fried_egg_from_campfire_cooking"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

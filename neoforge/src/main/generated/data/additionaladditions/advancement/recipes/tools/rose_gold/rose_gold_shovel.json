@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "additionaladditions:rose_gold/rose_gold_shovel"
+        "recipes": "additionaladditions:rose_gold/rose_gold_shovel"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

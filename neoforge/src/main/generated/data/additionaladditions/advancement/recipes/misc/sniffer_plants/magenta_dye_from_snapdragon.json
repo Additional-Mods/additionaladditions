@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "additionaladditions:sniffer_plants/magenta_dye_from_snapdragon"
+        "recipes": "additionaladditions:sniffer_plants/magenta_dye_from_snapdragon"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

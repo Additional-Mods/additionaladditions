@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "additionaladditions:album/magenta_album"
+        "recipes": "additionaladditions:album/magenta_album"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
