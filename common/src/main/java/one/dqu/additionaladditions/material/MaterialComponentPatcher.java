@@ -1,13 +1,11 @@
 package one.dqu.additionaladditions.material;
 
-import net.minecraft.core.Holder;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.component.DataComponentMap;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.sounds.SoundEvent;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;
@@ -93,7 +91,7 @@ public class MaterialComponentPatcher {
     public static DataComponentMap humanoidProperties(ArmorMaterial material, ArmorType armorType) {
         DataComponentMap.Builder builder = DataComponentMap.builder();
 
-        builder.set(DataComponents.MAX_DAMAGE, armorType.getDurability(material.durability()));
+        builder.set(DataComponents.MAX_DAMAGE, material.durability());
         builder.set(DataComponents.MAX_STACK_SIZE, 1);
         builder.set(DataComponents.REPAIRABLE, repairable(material.repairIngredient()));
         builder.set(DataComponents.ENCHANTABLE, new Enchantable(material.enchantmentValue()));
@@ -108,35 +106,22 @@ public class MaterialComponentPatcher {
     }
 
     public static DataComponentMap animalProperties(ArmorMaterial material, HolderSet<EntityType<?>> holderSet) {
+        return animalProperties(material, false, holderSet);
+    }
+
+    public static DataComponentMap animalProperties(ArmorMaterial material, boolean bl, HolderSet<EntityType<?>> holderSet) {
         DataComponentMap.Builder builder = DataComponentMap.builder();
 
-        builder.set(DataComponents.MAX_DAMAGE, ArmorType.BODY.getDurability(material.durability()));
+        if (bl) {
+            builder.set(DataComponents.MAX_DAMAGE, material.durability());
+            builder.set(DataComponents.REPAIRABLE, repairable(material.repairIngredient()));
+        }
+
         builder.set(DataComponents.MAX_STACK_SIZE, 1);
-        builder.set(DataComponents.REPAIRABLE, repairable(material.repairIngredient()));
         builder.set(DataComponents.ATTRIBUTE_MODIFIERS, createAttributes(material, ArmorType.BODY));
 
         builder.set(DataComponents.EQUIPPABLE, Equippable.builder(EquipmentSlot.BODY)
                 .setEquipSound(material.equipSound())
-                .setAsset(material.assetId())
-                .setAllowedEntities(holderSet)
-                .build());
-
-        return builder.build();
-    }
-
-    public static DataComponentMap animalProperties(ArmorMaterial material, Holder<SoundEvent> holder, boolean bl, HolderSet<EntityType<?>> holderSet) {
-        DataComponentMap.Builder builder = DataComponentMap.builder();
-
-        if (bl) {
-            builder.set(DataComponents.MAX_DAMAGE, ArmorType.BODY.getDurability(material.durability()));
-            builder.set(DataComponents.MAX_STACK_SIZE, 1);
-            builder.set(DataComponents.REPAIRABLE, repairable(material.repairIngredient()));
-        }
-
-        builder.set(DataComponents.ATTRIBUTE_MODIFIERS, createAttributes(material, ArmorType.BODY));
-
-        builder.set(DataComponents.EQUIPPABLE, Equippable.builder(EquipmentSlot.BODY)
-                .setEquipSound(holder)
                 .setAsset(material.assetId())
                 .setAllowedEntities(holderSet)
                 .setDamageOnHurt(bl)

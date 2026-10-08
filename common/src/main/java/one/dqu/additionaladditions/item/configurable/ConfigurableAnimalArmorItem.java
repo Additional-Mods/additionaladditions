@@ -16,12 +16,12 @@ public class ConfigurableAnimalArmorItem extends AnimalArmorItem {
     private final Consumer<DataComponentMap.Builder> configurer;
 
     public ConfigurableAnimalArmorItem(ArmorMaterial material, BodyType type, Properties properties, Consumer<DataComponentMap.Builder> configurer) {
-        super(material, type, properties);
+        super(material, type, material.equipSound(), false, properties);
         this.configurer = configurer;
     }
 
     public ConfigurableAnimalArmorItem(AAMaterial material, BodyType type, Properties properties) {
-        super(material.getArmorMaterial(ArmorType.BODY), type, properties);
+        super(material.getArmorMaterial(ArmorType.BODY), type, material.getArmorMaterial(ArmorType.BODY).equipSound(), false, properties);
         this.configurer = builder -> material.applyFor(builder, ArmorType.BODY);
     }
 
