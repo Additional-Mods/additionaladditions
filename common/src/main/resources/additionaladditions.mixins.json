@@ -18,6 +18,7 @@
     "BlockTransformerMixin",
     "FileToIdConverterMixin",
     "InventoryChangeTriggerMixin",
+    "LivingEntityMixin",
     "MobMixin",
     "RedstoneWireBlockMixin",
     "ReloadableServerResourcesMixin",

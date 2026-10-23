@@ -218,4 +218,9 @@ public class Config {
             "powered_rails_copper_recipe", FeatureConfig.CODEC,
             new FeatureConfig(true)
     );
+    
+    public static final ConfigProperty<FeatureConfig> PLAYER_GLOW = new ConfigProperty<>(
+            "player_glow", FeatureConfig.CODEC,
+            new FeatureConfig(true)
+    );
 }
